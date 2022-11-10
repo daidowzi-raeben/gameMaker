@@ -39,6 +39,7 @@ export default {
     { src: '~plugins/LottieWebVue.js', ssr: false, mode: 'client' },
     { src: '~plugins/ApexCart.js', ssr: false, mode: 'client' },
     { src: '~plugins/ColorPicker.js', ssr: false, mode: 'client' },
+    { src: '~plugins/Vuedraggable.js', ssr: false, mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
