@@ -13,14 +13,13 @@
         {{ element.name }}
       </div>
     </draggable>
+    <div class="list-group-item mt-3">asd</div>
     {{ list }}
   </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
-  layout: 'index',
   data() {
     return {
       enabled: true,
@@ -38,14 +37,8 @@ export default {
     },
   },
   methods: {
-    add() {
-      this.list.push({ name: 'Juan ' + id, id: id++ })
-    },
-    replace() {
-      this.list = [{ name: 'Edgard', id: id++ }]
-    },
     checkMove(e) {
-      window.console.log('Future index: ' + e.draggedContext.futureIndex)
+      console.log('Future index: ' + e.draggedContext.futureIndex)
     },
   },
 }

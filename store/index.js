@@ -48,7 +48,6 @@ const createStore = () => {
         },
         actions: {
             ACTION_AXIOS_GET({ commit }, params) {
-                commit('LOADING_TRUE')
                 console.log('ACTION_AXIOS_GET', params)
                 axios
                     .get(process.env.VUE_APP_API, { params })
