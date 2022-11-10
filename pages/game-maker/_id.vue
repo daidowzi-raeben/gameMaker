@@ -1,10 +1,45 @@
 <template>
-  <div>asd</div>
+  <div id="gameMaker">
+    <div class="d-flex maker">
+      <div class="mobileDevice">
+        <div class="mobileDevice-warp">
+          <!-- 디바이스 미리보기 -->
+        </div>
+      </div>
+      <div class="scene">
+        <!-- 씬 -->
+        <div>
+          <ul>
+            <li v-for="(v, i) in SCENE" :key="i">
+              {{ v.title }} - {{ v.subTitle }}
+              <ul>
+                <li style="padding-left: 10px">asd</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <!-- 이벤트 -->
+        </div>
+      </div>
+      <div class="">asd</div>
+    </div>
+    <div></div>
+  </div>
 </template>
+
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
 export default {
   layout: 'maker-layout',
+  validate({ params }) {
+    return params.id
+  },
+  asyncData({ params }) {
+    return {
+      idx: params.id,
+    }
+  },
   data() {
     return { params: {} }
   },
@@ -12,8 +47,9 @@ export default {
     ...mapState(['LOGIN', 'LOADING', 'SCENE']),
   },
   mounted() {
-    this.params.type = 'user'
+    this.params.type = 'projectDetail'
     this.params.apiKey = process.env.API_KEY
+    console.log(this.idx)
     // this.ACTION_AXIOS_GET()
   },
   beforeDestroy() {},
