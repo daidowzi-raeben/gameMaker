@@ -110,6 +110,27 @@ export default {
             array: null,
           },
         ],
+        assets: [
+          {
+            code: 'A',
+            background: '이미지경로',
+            titleBackground: '이미지경로',
+            textBackground: '이미지경로',
+            people: [{ img: '이미지경로' }, { img: '이미지경로' }],
+          },
+          {
+            title: '2장',
+          },
+          {
+            title: '3장',
+          },
+          {
+            title: '4장',
+          },
+          {
+            title: '5장',
+          },
+        ],
       },
     }
   },
