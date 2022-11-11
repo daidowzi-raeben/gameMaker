@@ -61,6 +61,7 @@ export default {
     '@nuxtjs/device',
     'nuxt-socket-io',
     'vue2-editor/nuxt',
+    'cookie-universal-nuxt',
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

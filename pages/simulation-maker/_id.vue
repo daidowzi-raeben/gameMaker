@@ -6,17 +6,22 @@
           <!-- 디바이스 미리보기 -->
         </div>
       </div>
-      <div class="scene">
+      <div class="scene d-flex">
         <!-- 씬 -->
-        <div>
-          <ul>
-            <li v-for="(v, i) in SCENE" :key="i">
-              {{ v.title }} - {{ v.subTitle }}
-              <ul>
-                <li style="padding-left: 10px">asd</li>
-              </ul>
-            </li>
-          </ul>
+        <div class="scene-scenario box">
+          <div
+            v-for="(v, i) in SCENE"
+            :key="i"
+            class="item"
+            @click="onClickScenario"
+          >
+            {{ v.title }} - {{ v.subTitle }}
+          </div>
+        </div>
+        <div class="scene-round box">
+          <div v-for="(v, i) in SCENE" :key="i" class="item">
+            {{ v.title }} - {{ v.subTitle }}
+          </div>
         </div>
         <div>
           <!-- 이벤트 -->
@@ -60,6 +65,7 @@ export default {
     onChangeScene({ target }) {
       console.log(target.value)
     },
+    onClickScenario() {},
   },
 }
 </script>
@@ -77,6 +83,14 @@ export default {
   border-radius: 20px;
   overflow: hidden;
   &-warp {
+  }
+}
+.scene {
+  margin-left: 10px;
+  .box {
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    width: 200px;
   }
 }
 /* 360 * 640 */

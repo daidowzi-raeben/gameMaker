@@ -5,23 +5,27 @@
         <button @click="onClickProjectCreate">생성</button>
       </div>
       <div class="project-list">
-        <div
-          v-for="(v, i) in PROJECT_MANAGER.projectList"
-          :key="i"
-          class="item"
-          @click="onClickGotoProject(v.secret_code)"
-        >
-          <h3>{{ v.title }}</h3>
-          <p>{{ v.discription }}</p>
+        <div v-if="PROJECT_MANAGER && PROJECT_MANAGER.projectList">
+          <div
+            v-for="(v, i) in PROJECT_MANAGER.projectList"
+            :key="i"
+            class="item"
+            @click="onClickGotoProject(v.secret_code)"
+          >
+            <h3>{{ v.title }}</h3>
+            <p>{{ v.discription }}</p>
+          </div>
         </div>
+        <div v-else>첫 프로젝트를 등록해 보세요</div>
       </div>
     </div>
+    {{ IS_POST }}
     <ProjectCreate @dataReload="dataReload" />
   </div>
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import ProjectCreate from '~/components/modal/ProjectCreate'
 export default {
   components: {
@@ -33,19 +37,19 @@ export default {
   },
 
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'PROJECT_MANAGER']),
+    ...mapState(['LOGIN', 'LOADING', 'PROJECT_MANAGER', 'IS_POST']),
   },
   mounted() {
     this.params.type = 'project'
     this.params.apiKey = process.env.API_KEY
-    this.params.user_idx = this.LOGIN.user_idx
+    this.params.user_idx = this.$cookies.get('user_idx')
     this.ACTION_AXIOS_GET(this.params)
   },
   beforeDestroy() {},
   methods: {
     // ------------------------ INIT
-    ...mapActions(['ACTION_AXIOS_GET']),
-    ...mapMutations(['']),
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
+    // ...mapMutations(['']),
 
     // ------------------------ EVENT
     onChangeScene({ target }) {
@@ -53,16 +57,22 @@ export default {
     },
     // 프로젝트 이동
     onClickGotoProject(e) {
-      this.$router.push(`/game-maker/${e}`)
+      this.$router.push(`/simulation-maker/${e}`)
     },
     // 프로젝트 생성
     onClickProjectCreate() {
       this.$bvModal.show('ProjectCreate')
     },
     dataReload(e) {
-      console.log(e)
+      const frm = new FormData()
+      frm.append('type', 'projectInsert')
+      frm.append('title', e.title)
+      frm.append('discription', e.discription)
+      frm.append('user_idx', this.$cookies.get('user_idx'))
+      frm.append('apiKey', process.env.API_KEY)
+      this.ACTION_AXIOS_POST(frm, 'projectInsert')
       //   모달 닫고 데이터 리로드
-      this.$bvModal.hide('ProjectCreate')
+      //   this.$bvModal.hide('ProjectCreate')
     },
   },
 }

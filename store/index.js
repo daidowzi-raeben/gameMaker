@@ -10,12 +10,14 @@ Vue.use(Vuex)
 const createStore = () => {
     return new Store({
         state: {
+            API_KEY: 'ZFR4NUR3WnhyUVdBb0ExZDdMUGNDMWY3T25hV0pOWXhwQk0xZCtvV1E9',
             LOADING: true,
-            LOGIN: {
-                user_id: 'testUsers',
-                user_idx: '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b'
-            },
+            LOGIN: {},
             PROJECT_MANAGER: [],
+            IS_POST: false,
+            POST: {
+                PROJECT_MANAGER: false,
+            },
             SCENE: [
                 {
                     idx: '1', title: '1장', subTitle: '1', subScene: {
@@ -38,26 +40,86 @@ const createStore = () => {
             },
         },
         mutations: {
+            // 로딩
+            MUTATIONS_LOADING(state, payload) {
+                state.LOADING = false
+            },
+            // 로그인
+            MUTATIONS_LOGIN(state, payload) {
+                state.LOGIN = payload
+            },
             MUTATIONS_AXIOS_GET(state, payload) {
                 state.SCENE = payload
             },
             MUTATIONS_AXIOS_GET_PROJECT(state, payload) {
                 state.PROJECT_MANAGER = payload
             },
+            // 프로젝트 생성
+            MUTATIONS_AXIOS_POST_SUCCESS(state, payload) {
+                console.log('MUTATIONS_AXIOS_POST_PROJECT')
+                state.IS_POST = true
+            },
 
         },
         actions: {
+            ACTION_AXIOS_LOGIN({ commit }, params) {
+                this.$axios
+                    .post(process.env.VUE_APP_API, params, {
+                        header: {
+                            'Context-Type': 'multipart/form-data',
+                        },
+                    })
+                    .then((res) => {
+                        console.log(res.data)
+                        if (res.data.result === 'FALSE') {
+                            return alert('아이디 및 패스워드를 확인해 주세요.')
+                        }
+                        //   아이디 암호화
+                        this.$cookies.set('user_idx', res.data.login.user_idx, {
+                            path: '/',
+                            maxAge: 60 * 60 * 24 * 7,
+                        })
+                        //   이름
+                        this.$cookies.set('user_name', res.data.login.user_name, {
+                            path: '/',
+                            maxAge: 60 * 60 * 24 * 7,
+                        })
+                        commit('MUTATIONS_LOGIN', res.data)
+                    })
+                    .catch((res) => {
+                        console.log('AXIOS FALSE', res)
+                    })
+            },
             ACTION_AXIOS_GET({ commit }, params) {
                 console.log('ACTION_AXIOS_GET', params)
                 axios
                     .get(process.env.VUE_APP_API, { params })
                     .then((res) => {
+                        commit('MUTATIONS_LOADING', false)
                         console.log('ACTION_AXIOS_GET', res, params)
                         if (params.type === 'project') {
                             commit('MUTATIONS_AXIOS_GET_PROJECT', res.data)
                             return;
                         }
                         commit('MUTATIONS_AXIOS_GET', res.data)
+                    })
+                    .catch((res) => {
+                        console.error('ACTIONS_TEACHER_FALSE', res)
+                    })
+            },
+            ACTION_AXIOS_POST({ commit }, params, isType) {
+                console.log('ACTION_AXIOS_POST_PARAMS', params, isType)
+                axios
+                    .post(process.env.VUE_APP_API, params, {
+                        header: {
+                            'Context-Type': 'multipart/form-data',
+                        },
+                    })
+                    .then((res) => {
+                        commit('MUTATIONS_LOADING', false)
+                        console.log('MUTATIONS_AXIOS_POST_SUCCESS', res, params)
+                        commit('MUTATIONS_AXIOS_POST_SUCCESS', res.data)
+                        console.log('SUCCESS')
                     })
                     .catch((res) => {
                         console.error('ACTIONS_TEACHER_FALSE', res)

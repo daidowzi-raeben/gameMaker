@@ -1,10 +1,10 @@
 <template>
-  <b-modal id="ProjectCreate" size="lg" hide-footer hide-header>
+  <b-modal id="ProjectCreate" size="lg" hide-footer title="프로젝트 생성">
     <form>
-      프로젝트명<input /><br />
-      설명<input /><br />
+      프로젝트명<input v-model="formData.title" /><br />
+      설명<input v-model="formData.discription" /><br />
     </form>
-    <button @click="onSubmit">TEST</button>
+    <button @click="onSubmit">생성</button>
   </b-modal>
 </template>
 
@@ -18,7 +18,7 @@ export default {
   methods: {
     onSubmit() {
       // form 데이터 전달
-      this.$emit('dataReload', 'dataReload')
+      this.$emit('dataReload', this.formData)
     },
   },
 }

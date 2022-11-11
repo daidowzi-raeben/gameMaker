@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env DEVICE=pc PORT=3000 nuxt",
+    "start": "cross-env DEVICE=pc PORT=9001 nuxt",
     "mo-dev": "cross-env DEVICE=mo PORT=4000 nuxt",
     "mo-test": "browser-sync start --proxy 'localhost:4000' --files ['css/*.css', 'js/*.js', '*.vue'] --port '4001'",
     "admin-dev": "DEVICE=admin PORT=6000  nuxt",
@@ -25,6 +25,7 @@
     "apexcharts": "^3.35.4",
     "bootstrap-vue": "^2.22.0",
     "caniuse-lite": "^1.0.30001431",
+    "cookie-universal-nuxt": "^2.2.2",
     "core-js": "^3.19.3",
     "express": "^4.18.1",
     "http": "0.0.1-security",
