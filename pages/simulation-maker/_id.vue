@@ -17,6 +17,26 @@
           >
             {{ v.title }} - {{ v.subTitle }}
           </div>
+          <div>
+            <div v-if="isBtn === false" @click="isBtn = true">
+              <button>추가 +</button>
+            </div>
+            <div v-else>
+              <div>
+                <input v-model="insert.title" placeholder="제목 ex) 제 1장" />
+              </div>
+              <div>
+                <input
+                  v-model="insert.subTitle"
+                  placeholder="부제 ex) 흔들리는 꽃들 속에서"
+                />
+              </div>
+              <div>
+                <button @click="isBtn = false">저장</button>
+                <button @click="isBtn = false">X</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="scene-round box">
           <div v-for="(v, i) in SCENE" :key="i" class="item">
@@ -46,7 +66,7 @@ export default {
     }
   },
   data() {
-    return { params: {} }
+    return { params: {}, insert: {}, isBtn: false }
   },
   computed: {
     ...mapState(['LOGIN', 'LOADING', 'SCENE']),
@@ -71,6 +91,9 @@ export default {
 </script>
 
 <style lang="scss">
+input {
+  border: 1px solid #ddd;
+}
 #gameMaker {
   min-width: 1200px;
   width: 1200px;

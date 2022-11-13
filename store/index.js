@@ -54,10 +54,16 @@ const createStore = () => {
             MUTATIONS_AXIOS_GET_PROJECT(state, payload) {
                 state.PROJECT_MANAGER = payload
             },
-            // 프로젝트 생성
+
+            // POST 성공
             MUTATIONS_AXIOS_POST_SUCCESS(state, payload) {
                 console.log('MUTATIONS_AXIOS_POST_PROJECT')
                 state.IS_POST = true
+            },
+            // POST 성공
+            MUTATIONS_AXIOS_POST_INIT(state) {
+                console.log('MUTATIONS_AXIOS_POST_INIT')
+                state.IS_POST = false
             },
 
         },

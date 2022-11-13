@@ -19,6 +19,7 @@ export default {
     onSubmit() {
       // form 데이터 전달
       this.$emit('dataReload', this.formData)
+      this.formData = {}
     },
   },
 }

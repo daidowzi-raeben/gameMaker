@@ -1,5 +1,6 @@
 <template>
   <div id="projectManager">
+    {{ IS_POST }}
     <div class="project">
       <div class="project-create">
         <button @click="onClickProjectCreate">생성</button>
@@ -19,13 +20,12 @@
         <div v-else>첫 프로젝트를 등록해 보세요</div>
       </div>
     </div>
-    {{ IS_POST }}
     <ProjectCreate @dataReload="dataReload" />
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
 import ProjectCreate from '~/components/modal/ProjectCreate'
 export default {
   components: {
@@ -35,9 +35,20 @@ export default {
   data() {
     return { params: {} }
   },
-
   computed: {
     ...mapState(['LOGIN', 'LOADING', 'PROJECT_MANAGER', 'IS_POST']),
+  },
+  watch: {
+    IS_POST: {
+      handler(value) {
+        console.log(value)
+        if (value === true) {
+          this.ACTION_AXIOS_GET(this.params)
+          this.MUTATIONS_AXIOS_POST_INIT()
+        }
+      },
+      immediate: true,
+    },
   },
   mounted() {
     this.params.type = 'project'
@@ -49,7 +60,7 @@ export default {
   methods: {
     // ------------------------ INIT
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
-    // ...mapMutations(['']),
+    ...mapMutations(['MUTATIONS_AXIOS_POST_INIT']),
 
     // ------------------------ EVENT
     onChangeScene({ target }) {
@@ -72,7 +83,7 @@ export default {
       frm.append('apiKey', process.env.API_KEY)
       this.ACTION_AXIOS_POST(frm, 'projectInsert')
       //   모달 닫고 데이터 리로드
-      //   this.$bvModal.hide('ProjectCreate')
+      this.$bvModal.hide('ProjectCreate')
     },
   },
 }
