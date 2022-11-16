@@ -26,7 +26,7 @@
                 <input v-model="insert.title" placeholder="제목 ex) 제 1장" />
               </div>
               <div>
-                <input
+                <input2270
                   v-model="insert.subTitle"
                   placeholder="부제 ex) 흔들리는 꽃들 속에서"
                 />
