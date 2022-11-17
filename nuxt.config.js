@@ -25,13 +25,16 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    '~/assets/reset.scss',
+    '~/assets/common.scss',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~plugins/BootstrapVue.js', ssr: false, mode: 'client' },
     { src: '~plugins/MomentVue.js', ssr: false, mode: 'client' },
-    { src: '~plugins/AwesomeSwiper.js', ssr: false, mode: 'client' },
+    // { src: '~plugins/AwesomeSwiper.js', ssr: false, mode: 'client' },
     { src: '~plugins/Vcaledar.js', ssr: false, mode: 'client' },
     { src: '~plugins/HtmlEditor.js', ssr: false, mode: 'client' },
     { src: '~plugins/filters.js', ssr: false, mode: 'client' },
