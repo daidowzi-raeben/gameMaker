@@ -3,6 +3,9 @@
     <div class="header">
       <div class="header-wrap">
         <div class="header-logo"><a href="#"></a></div>
+        <button type="button" class="menu-btn" :class="{active:isMenuActive}" @click="onMenuActive"><i class="fa-solid fa-bars"></i></button>
+        <button type="button" class="close-btn" @click="onMenuActive">&times;</button>
+        <div class="dim"></div>
         <ul class="header-menu">
           <li class="header-menu--item"><a href="#">프로젝트 Koo</a></li>
           <li class="header-menu--item"><a href="#">공유</a></li>
@@ -24,6 +27,16 @@
 <script>
 export default {
   name: 'IndexLayout',
+  data(){
+    return{
+      isMenuActive: false,
+    };
+  },
+  methods: {
+    onMenuActive() {
+      this.isMenuActive = !this.isMenuActive;
+    },
+  },
 }
 </script>
 

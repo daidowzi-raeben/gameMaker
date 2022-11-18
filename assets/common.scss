@@ -11,6 +11,7 @@
   height:70px;
   width:100vw;
   position:fixed;
+  z-index: 100;
   left:0;
   top:0;
   border-top:5px solid $colPrimary;
@@ -21,6 +22,73 @@
     align-items: center;
     max-width: $pc;
     margin:0 auto;
+    .menu-btn, .close-btn{
+      display:none;
+    }
+    @media (max-width: 1500px) {
+      width:100%;
+      padding:0 50px 0 30px;
+    }
+    @media (max-width: 1000px) {
+      width:100%;
+      padding:0;
+      justify-content: center;
+      .close-btn, .menu-btn{
+        display:block;
+        position:absolute;
+        right:25px;
+        top:15px;
+      }
+      .close-btn{
+        font-size:2.5rem;
+        top:12px;
+        right:22px;
+        z-index: 1;
+        display:none;
+      }
+      .menu-btn{
+        font-size:2rem;
+        &.active ~ .header-menu{
+          right:0;
+        }
+        &.active ~ .close-btn{
+          display:block;
+        }
+        &.active ~ .dim{
+          width:100vw;
+          height:100vh;
+          background-color:rgba(0,0,0,.5);
+          position:absolute;
+          left:0;
+          top:0;
+        }
+      }
+      .header-menu{
+        position: fixed;
+        width: 100vw;
+        top: 0;
+        flex-direction: column;
+        right:-100vw;
+        transition:right .3s;
+        &--item{
+          position:relative;
+          z-index: 1;
+          background:#fff;
+          width:100%;
+          text-align: center;
+          margin:0;
+          padding:10px 0;
+          border-bottom: 1px solid #f5f5f5;
+          &:first-child{
+            padding-top:30px;
+            border-top:5px solid $colPrimary;
+          }
+          &:last-child{
+            padding-bottom:30px;
+          }
+        }
+      }
+    }
   }
   &-logo{
     a{
@@ -35,8 +103,10 @@
     &--item{
       margin-left:100px;
       a{
+        font-size:1.6rem;
         color:$textCol1;
         transition:color .3s;
+        white-space: nowrap;
         &:hover{
           color:$colPrimary;
         }
@@ -56,17 +126,17 @@
     text-align: center;
     position:relative;
     &--tit{
-      font-size:30px;
+      font-size:3rem;
       .sub{
         color:$colPrimary;
-        font-size:20px;
+        font-size:2rem;
         font-weight: 300;
         margin-top:8px;
       }
     }
     &--sub{
       color:$textCol2;
-      font-size:20px;
+      font-size:2rem;
       font-weight: 300;
       margin-top:36px;
     }
@@ -77,7 +147,7 @@
       align-items: center;
       justify-content: center;
       border-radius: 5px;
-      font-size:30px;
+      font-size:3rem;
       color:#fff !important;
       background-color:$colPrimary;
       font-weight: 300;
@@ -96,6 +166,7 @@
           height:150px;
           background:#888;
           left:50%;
+          bottom:50px;
           &:after{
             content:"";
             display:block;
@@ -136,6 +207,47 @@
         }
       }
     }
+    @media (max-width: $mobile) {
+      padding:0 10vw;
+      &--sub{
+        word-break: keep-all;
+      }
+      &--button{
+        max-width:250px;
+        max-height:70px;
+        width:60vw;
+        height: 20vw;
+        font-size:2.5rem;
+        margin:10vw auto 20vw;
+      }
+      &--shape{
+        div{
+          &.line{
+            height: 20vw;
+          }
+          &.circle{
+            &-1{
+              width:40vw;
+              height:40vw;
+              left:10vw;
+              top:10vw;
+            }
+            &-2{
+              width:30vw;
+              height:30vw;
+              left:45vw;
+              top:25vw;
+            }
+            &-3{
+              width:50vw;
+              height:50vw;
+              left:16vw;
+              top:40vw;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -148,5 +260,6 @@
     text-align: center;
     padding:20px 0;
     font-weight: 300;
+    font-size:1.6rem;
   }
 }

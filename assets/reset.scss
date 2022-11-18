@@ -52,7 +52,10 @@ html, body {
 }
 
 html{
-	font-size: 10px;
+	font-size: 10px !important;
+  @media (max-width: $mobile) {
+    font-size: 9px !important;
+  }
 }
 
 /* HTML5 display-role reset for older browsers */
