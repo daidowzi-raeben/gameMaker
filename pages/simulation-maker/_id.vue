@@ -1,5 +1,6 @@
 <template>
   <div id="gameMaker">
+    <div class="preview"></div>
     <CutInsert />
   </div>
 </template>
