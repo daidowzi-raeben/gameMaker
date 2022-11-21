@@ -1,6 +1,7 @@
 <template>
   <div id="gameMaker">
-    <div class="d-flex maker">
+    <CutInsert />
+    <div v-if="false" class="d-flex maker">
       <div class="mobileDevice">
         <div class="mobileDevice-warp">
           <!-- 디바이스 미리보기 -->
@@ -55,7 +56,11 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
+import CutInsert from '~/components/simulation-maker/CutInsert.vue'
 export default {
+  components: {
+    CutInsert,
+  },
   layout: 'maker-layout',
   validate({ params }) {
     return params.id
@@ -65,6 +70,7 @@ export default {
       idx: params.id,
     }
   },
+
   data() {
     return { params: {}, insert: {}, isBtn: false }
   },
