@@ -7,11 +7,11 @@
         <button type="button" class="close-btn" @click="onMenuActive">&times;</button>
         <div class="dim"></div>
         <ul class="header-menu">
-          <li class="header-menu--item"><a href="#">프로젝트 Koo</a></li>
-          <li class="header-menu--item"><a href="#">공유</a></li>
-          <li class="header-menu--item"><a href="#">이용방법</a></li>
-          <li class="header-menu--item"><a href="#">금액</a></li>
-          <li class="header-menu--item"><a href="#">로그인</a></li>
+          <li class="header-menu--item"><nuxt-link to="">프로젝트 Koo</nuxt-link></li>
+          <li class="header-menu--item"><nuxt-link to="">공유</nuxt-link></li>
+          <li class="header-menu--item"><nuxt-link to="">이용방법</nuxt-link></li>
+          <li class="header-menu--item"><nuxt-link to="">금액</nuxt-link></li>
+          <li class="header-menu--item"><nuxt-link to="">로그인</nuxt-link></li>
         </ul>
       </div>
     </div>
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     onMenuActive() {
-      this.isMenuActive = !this.isMenuActive;
+      this.isMenuActive = !this.isMenuActive
     },
   },
 }

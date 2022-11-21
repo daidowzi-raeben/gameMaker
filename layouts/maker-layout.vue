@@ -1,8 +1,13 @@
 <template>
   <div>
-    <header>header</header>
+    <header class="maker-header">
+      <nuxt-link to="">나가기</nuxt-link>
+      <button type="button">모달</button>
+    </header>
     <Nuxt />
-    <footer>footer</footer>
+    <footer class="footer">
+      <div class="footer-wrap">ⓒ project Koo</div>
+    </footer>
   </div>
 </template>
 
@@ -11,5 +16,5 @@ export default {}
 </script>
 
 <style lang="scss">
-@import '~/assets/common.scss';
+  @import '~/assets/maker.scss';
 </style>
