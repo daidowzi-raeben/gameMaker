@@ -3,17 +3,17 @@
     <div class="maker-wrap">
       <div class="maker-left">
         <div class="preview">
-          <div class="preview-tit">미리보기</div>
+          <div class="preview-tit">미리보기 {{ cutCode }}</div>
           <div class="preview-img">
-            <img src="https://img.lovepik.com/background/20211102/medium/lovepik-banff-national-park-mobile-wallpaper-canada-background-image_400706001.jpg" alt="" class="background" />
-            <img src="https://cdn.pixabay.com/photo/2013/07/12/13/27/man-147091_960_720.png" alt="" class="character" />
+            <img :src="tempData.bg" alt="" class="background" />
+            <img :src="tempData.cr" alt="" class="character" />
             <div class="dialogue">
               <span class="name">김채은</span>
-              <p class="text">
-                대사내용<br />
-                대사내용<br />
-                대사내용
-              </p>
+              <p
+                ref="myLoadText"
+                class="text"
+                style="white-space: pre-line"
+              ></p>
             </div>
             <img src="~/static/images/mockup.png" alt="" class="mockup" />
           </div>
@@ -22,23 +22,43 @@
           <div class="asset-tit">등록된 에셋</div>
           <div class="asset-wrap">
             <div class="asset-tab">
-              <button type="button" class="asset-tab--tit" :class="{active:assetTab==1}" @click="assetTab=1">배경</button>
-              <button type="button" class="asset-tab--tit" :class="{active:assetTab==2}" @click="assetTab=2">캐릭터</button>
-              <button type="button" class="asset-tab--tit" :class="{active:assetTab==3}" @click="assetTab=3">사운드</button>
+              <button
+                type="button"
+                class="asset-tab--tit"
+                :class="{ active: assetTab == 1 }"
+                @click="assetTab = 1"
+              >
+                배경
+              </button>
+              <button
+                type="button"
+                class="asset-tab--tit"
+                :class="{ active: assetTab == 2 }"
+                @click="assetTab = 2"
+              >
+                캐릭터
+              </button>
+              <button
+                type="button"
+                class="asset-tab--tit"
+                :class="{ active: assetTab == 3 }"
+                @click="assetTab = 3"
+              >
+                사운드
+              </button>
             </div>
-            <div v-show="assetTab==1" class="asset-tab--con">
-              배경에셋
-            </div>
-            <div v-show="assetTab==2" class="asset-tab--con" >
-              캐릭터에셋
-            </div>
-            <div v-show="assetTab==3" class="asset-tab--con">
-              사운드에셋
-            </div>
+            <div v-show="assetTab == 1" class="asset-tab--con">배경에셋</div>
+            <div v-show="assetTab == 2" class="asset-tab--con">캐릭터에셋</div>
+            <div v-show="assetTab == 3" class="asset-tab--con">사운드에셋</div>
           </div>
         </div>
       </div>
-      <CutInsert />
+      <CutInsert
+        @myLoadBgImage="myLoadBgImage"
+        @myLoadCrImage="myLoadCrImage"
+        @myLoadText="myLoadText"
+        @myLoadFocus="myLoadFocus"
+      />
     </div>
   </div>
 </template>
@@ -64,6 +84,12 @@ export default {
     return {
       params: {},
       assetTab: 1,
+      tempData: {
+        bg: 'https://img.lovepik.com/background/20211102/medium/lovepik-banff-national-park-mobile-wallpaper-canada-background-image_400706001.jpg',
+        cr: 'https://cdn.pixabay.com/photo/2013/07/12/13/27/man-147091_960_720.png',
+        text: '',
+      },
+      cutCode: '',
     }
   },
   computed: {
@@ -79,6 +105,24 @@ export default {
   methods: {
     ...mapActions(['ACTION_AXIOS_GET']),
     ...mapMutations(['']),
+
+    myLoadBgImage(e) {
+      console.log('myLoadBgImage', e)
+      this.tempData.bg = e
+    },
+    myLoadCrImage(e) {
+      console.log('myLoadCrImage', e)
+      this.tempData.cr = e
+    },
+    myLoadText(e) {
+      this.tempData.text = e
+      this.$refs.myLoadText.innerText = e
+    },
+    myLoadFocus(e) {
+      // console.log('myLoadFocus', e)
+      this.cutCode = e
+      // return e
+    },
   },
 }
 </script>
