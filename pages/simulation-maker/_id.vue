@@ -94,7 +94,7 @@ export default {
       tempData: {
         bg: 'https://img.lovepik.com/background/20211102/medium/lovepik-banff-national-park-mobile-wallpaper-canada-background-image_400706001.jpg',
         cr: 'https://cdn.pixabay.com/photo/2013/07/12/13/27/man-147091_960_720.png',
-        crName: '이름선택해라',
+        crName: '',
         text: '',
         effect: '',
       },

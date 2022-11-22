@@ -66,6 +66,11 @@ const createStore = () => {
                 console.log('MUTATIONS_AXIOS_POST_INIT')
                 state.IS_POST = false
             },
+            MUTATIONS_SCENE_DATA(state, payload) {
+                state.SCENE_DATA = []
+                console.log('MUTATIONS_SCENE_DATA', payload)
+                state.SCENE_DATA = payload
+            }
 
         },
         actions: {

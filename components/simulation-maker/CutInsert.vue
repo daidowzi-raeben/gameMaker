@@ -1,6 +1,6 @@
 <template>
   <div class="maker-right">
-    {{ sceneData }}
+    {{ tempInputData }}
     <div
       v-for="(cut, idx) in cuts"
       :ref="`cut${idx}`"
@@ -282,7 +282,7 @@
 
 <script>
 // SCENE_DATA
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data() {
     return {
@@ -323,6 +323,14 @@ export default {
   computed: {
     ...mapState(['LOGIN', 'LOADING', 'SCENE_DATA']),
   },
+  // watch: {
+  //   tempInputData: {
+  //     handler(value) {
+  //       console.log('===========> watch tempInputData', value)
+  //     },
+  //     immediate: true,
+  //   },
+  // },
   mounted() {
     for (let i = 1; i < 19; i++) {
       this.tempData.bg = [
@@ -344,6 +352,7 @@ export default {
     // this.tempInputData = [...this.tempInputData]
   },
   methods: {
+    ...mapMutations(['MUTATIONS_SCENE_DATA']),
     onClickCutAdd() {
       this.cutIndex++
       this.cuts.push({
@@ -406,6 +415,7 @@ export default {
         effect: '',
       }
       console.log(this.sceneData)
+      this.MUTATIONS_SCENE_DATA(this.tempInputData)
     },
     // 컷 활성화
     onClickFocus(e) {
