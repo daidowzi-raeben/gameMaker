@@ -6,9 +6,14 @@
           <div class="preview-tit">미리보기 {{ cutCode }}</div>
           <div class="preview-img">
             <img :src="tempData.bg" alt="" class="background" />
-            <img :src="tempData.cr" alt="" class="character" />
+            <img
+              ref="characterImage"
+              :src="tempData.cr"
+              alt=""
+              class="character"
+            />
             <div class="dialogue">
-              <span class="name">김채은</span>
+              <span class="name">{{ tempData.crName }}</span>
               <p
                 ref="myLoadText"
                 class="text"
@@ -56,8 +61,10 @@
       <CutInsert
         @myLoadBgImage="myLoadBgImage"
         @myLoadCrImage="myLoadCrImage"
+        @myLoadCrName="myLoadCrName"
         @myLoadText="myLoadText"
         @myLoadFocus="myLoadFocus"
+        @myLoadEffect="myLoadEffect"
       />
     </div>
   </div>
@@ -87,7 +94,9 @@ export default {
       tempData: {
         bg: 'https://img.lovepik.com/background/20211102/medium/lovepik-banff-national-park-mobile-wallpaper-canada-background-image_400706001.jpg',
         cr: 'https://cdn.pixabay.com/photo/2013/07/12/13/27/man-147091_960_720.png',
+        crName: '이름선택해라',
         text: '',
+        effect: '',
       },
       cutCode: '',
     }
@@ -110,6 +119,10 @@ export default {
       console.log('myLoadBgImage', e)
       this.tempData.bg = e
     },
+    myLoadCrName(e) {
+      console.log('myLoadCrName', e)
+      this.tempData.crName = e
+    },
     myLoadCrImage(e) {
       console.log('myLoadCrImage', e)
       this.tempData.cr = e
@@ -122,6 +135,14 @@ export default {
       // console.log('myLoadFocus', e)
       this.cutCode = e
       // return e
+    },
+    myLoadEffect(e) {
+      if (e === 'vibration') {
+        this.$refs.characterImage.classList.add(e)
+        setTimeout(() => {
+          this.$refs.characterImage.classList.remove(e)
+        }, 400)
+      }
     },
   },
 }

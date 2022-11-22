@@ -28,10 +28,11 @@ const createStore = () => {
                 { idx: '3', title: '3장', subTitle: '3' },
                 { idx: '4', title: '4장', subTitle: '4' },
                 { idx: '5', title: '5장', subTitle: '5' },
-            ]
+            ],
+            SCENE_DATA: []
         },
         getters: {
-            LOGIN_TEACHER(state) {
+            GETTER_SCENE_DATA(state) {
                 if (typeof window !== 'undefined') {
                     return localStorage.getItem('TEACHER')
                         ? (state.LOGIN = JSON.parse(localStorage.getItem('TEACHER')))

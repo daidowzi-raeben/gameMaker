@@ -1,5 +1,6 @@
 <template>
   <div class="maker-right">
+    {{ sceneData }}
     <div
       v-for="(cut, idx) in cuts"
       :ref="`cut${idx}`"
@@ -41,7 +42,11 @@
         <div class="input-wrap">
           <label class="input-label">배경이미지</label>
           <div class="input-con">
-            <select class="input-select" @change="onChangePreviewBg">
+            <select
+              class="input-select"
+              @change="onChangePreviewBg"
+              @blur="onBlurUpdate(idx)"
+            >
               <option v-for="(v, i) in tempData.bg" :key="i" :value="v.path">
                 {{ v.name }}
               </option>
@@ -51,7 +56,11 @@
         <div class="input-wrap">
           <label class="input-label">캐릭터이미지</label>
           <div class="input-con">
-            <select class="input-select" @change="onChangePreviewCr">
+            <select
+              class="input-select"
+              @change="onChangePreviewCr"
+              @blur="onBlurUpdate(idx)"
+            >
               <option v-for="(v, i) in tempData.cr" :key="i" :value="v.path">
                 {{ v.name }}
               </option>
@@ -61,17 +70,25 @@
         <div class="input-wrap">
           <label class="input-label">캐릭터애니메이션</label>
           <div class="input-con">
-            <select class="input-select">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
+            <select
+              class="input-select"
+              @change="onChangePreviewEffect"
+              @blur="onBlurUpdate(idx)"
+            >
+              <option
+                v-for="(v, i) in tempData.effect"
+                :key="i"
+                :value="v.effect"
+              >
+                {{ v.text }}
+              </option>
             </select>
           </div>
         </div>
         <div class="input-wrap">
           <label class="input-label">사운드</label>
           <div class="input-con">
-            <select class="input-select">
+            <select class="input-select" @blur="onBlurUpdate(idx)">
               <option>선택</option>
               <option>선택</option>
               <option>선택</option>
@@ -85,6 +102,7 @@
               class="input-textarea"
               rows="2"
               @input="onChangePreviewText"
+              @blur="onBlurUpdate(idx)"
             ></textarea>
           </div>
         </div>
@@ -263,6 +281,8 @@
 </template>
 
 <script>
+// SCENE_DATA
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -276,9 +296,32 @@ export default {
       tempData: {
         bg: [],
         cr: [],
+        crName: [],
         text: '',
+        effect: [
+          {
+            effect: '',
+            text: '없음',
+          },
+          {
+            effect: 'vibration',
+            text: '흔들림',
+          },
+        ],
       },
+      cutCode: '',
+      tempInputData: {
+        bg: [],
+        cr: [],
+        crName: [],
+        text: [],
+        effect: [],
+      }, // input data bind
+      sceneData: [],
     }
+  },
+  computed: {
+    ...mapState(['LOGIN', 'LOADING', 'SCENE_DATA']),
   },
   mounted() {
     for (let i = 1; i < 19; i++) {
@@ -297,6 +340,8 @@ export default {
         },
       ]
     }
+    this.sceneData = [...this.sceneData]
+    // this.tempInputData = [...this.tempInputData]
   },
   methods: {
     onClickCutAdd() {
@@ -305,16 +350,16 @@ export default {
         index: this.cutIndex,
         type: this.cutIndex + '_1',
       })
-      this.$emit(
-        'myLoadBgImage',
-        'https://img.lovepik.com/background/20211102/medium/lovepik-banff-national-park-mobile-wallpaper-canada-background-image_400706001.jpg'
-      )
-      this.$emit(
-        'myLoadCrImage',
-        'https://cdn.pixabay.com/photo/2013/07/12/13/27/man-147091_960_720.png'
-      )
-      this.$emit('myLoadText', '')
-      this.$emit('myLoadFocus', `CUT CODE : ${this.cutIndex}`)
+      //   this.$emit(
+      //     'myLoadBgImage',
+      //     'https://img.lovepik.com/background/20211102/medium/lovepik-banff-national-park-mobile-wallpaper-canada-background-image_400706001.jpg'
+      //   )
+      //   this.$emit(
+      //     'myLoadCrImage',
+      //     'https://cdn.pixabay.com/photo/2013/07/12/13/27/man-147091_960_720.png'
+      //   )
+      //   this.$emit('myLoadText', '')
+      //   this.$emit('myLoadFocus', `CUT CODE : ${this.cutIndex}`)
       console.log(this.cutIndex)
     },
     cutDelete(idx) {
@@ -326,20 +371,73 @@ export default {
     onChangePreviewBg({ target }) {
       console.log(target.value)
       this.$emit('myLoadBgImage', target.value)
+      this.tempInputData.bg[this.cutCode] = target.value
+      console.log('tempInputData', this.tempInputData)
     },
     // 캐릭터 이미지 전송
     onChangePreviewCr({ target }) {
       console.log(target.value)
+      console.log(target.options[target.selectedIndex].text)
+      this.tempInputData.cr[this.cutCode] = target.value
       this.$emit('myLoadCrImage', target.value)
+      this.$emit('myLoadCrName', target.options[target.selectedIndex].text)
+      console.log('tempInputData', this.tempInputData)
     },
     // 대사 전송
     onChangePreviewText({ target }) {
       console.log(target.value)
+      this.tempInputData.text[this.cutCode] = target.value
       this.$emit('myLoadText', target.value)
+      console.log('tempInputData', this.tempInputData)
+    },
+    // 효과 전송
+    onChangePreviewEffect({ target }) {
+      console.log(target.value)
+      this.tempInputData.effect[this.cutCode] = target.value
+      this.$emit('myLoadEffect', target.value)
+      console.log('tempInputData', this.tempInputData)
+    },
+    onBlurUpdate(e) {
+      console.log('onBlurPreview')
+      this.sceneData[e] = {
+        bg: '',
+        cr: '',
+        text: '',
+        effect: '',
+      }
+      console.log(this.sceneData)
     },
     // 컷 활성화
     onClickFocus(e) {
       console.log(e)
+      // cutCode 갱신
+      this.cutCode = e
+
+      // 컷 데이터 갱신
+      this.$emit(
+        'myLoadBgImage',
+        this.tempInputData.bg[this.cutCode] === undefined
+          ? ''
+          : this.tempInputData.bg[this.cutCode]
+      )
+      this.$emit(
+        'myLoadCrImage',
+        this.tempInputData.cr[this.cutCode] === undefined
+          ? ''
+          : this.tempInputData.cr[this.cutCode]
+      )
+      this.$emit(
+        'myLoadText',
+        this.tempInputData.text[this.cutCode] === undefined
+          ? ''
+          : this.tempInputData.text[this.cutCode]
+      )
+      this.$emit(
+        'myLoadEffect',
+        this.tempInputData.effect[this.cutCode] === undefined
+          ? ''
+          : this.tempInputData.effect[this.cutCode]
+      )
 
       // 포커스 이동 시 저장
 
@@ -348,9 +446,9 @@ export default {
 
       //   active border remove
       Object.entries(this.$refs).forEach((v, i) => {
-        // if (v[0].includes('cut') === true) {
-        this.$refs[v[0]][0].style = 'border: unset'
-        // }
+        if (v[0].includes('cut') === true) {
+          this.$refs[v[0]][0].style = 'border: unset'
+        }
       })
       this.$refs[`cut${e}`][0].style = 'border:1px solid red'
     },
@@ -358,4 +456,17 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.vibration {
+  animation: vibration 0.1s infinite;
+  -webkit-animation: vibration 0.1s infinite;
+}
+@keyframes vibration {
+  from {
+    transform: rotate(1deg);
+  }
+  to {
+    transform: rotate(-1deg);
+  }
+}
+</style>
