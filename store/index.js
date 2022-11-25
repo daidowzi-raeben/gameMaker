@@ -69,6 +69,11 @@ const createStore = () => {
             MUTATIONS_SCENE_DATA(state, payload) {
                 state.SCENE_DATA = []
                 console.log('MUTATIONS_SCENE_DATA', payload)
+                Object.entries(payload).forEach((v, i) => {
+
+                    console.log('MUTATIONS_SCENE_DATA ==== >', v[0], i)
+
+                })
                 state.SCENE_DATA = payload
             }
 

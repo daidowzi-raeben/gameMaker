@@ -1,6 +1,6 @@
 <template>
   <div class="maker-right">
-    {{ tempInputData }}
+    {{ SCENE_DATA }}
     <div
       v-for="(cut, idx) in cuts"
       :ref="`cut${idx}`"
@@ -388,6 +388,8 @@ export default {
       console.log(target.value)
       console.log(target.options[target.selectedIndex].text)
       this.tempInputData.cr[this.cutCode] = target.value
+      this.tempInputData.crName[this.cutCode] =
+        target.options[target.selectedIndex].text
       this.$emit('myLoadCrImage', target.value)
       this.$emit('myLoadCrName', target.options[target.selectedIndex].text)
       console.log('tempInputData', this.tempInputData)
@@ -427,25 +429,31 @@ export default {
       this.$emit(
         'myLoadBgImage',
         this.tempInputData.bg[this.cutCode] === undefined
-          ? ''
+          ? (this.tempInputData.bg[this.cutCode] = null)
           : this.tempInputData.bg[this.cutCode]
       )
       this.$emit(
         'myLoadCrImage',
         this.tempInputData.cr[this.cutCode] === undefined
-          ? ''
+          ? (this.tempInputData.cr[this.cutCode] = null)
           : this.tempInputData.cr[this.cutCode]
+      )
+      this.$emit(
+        'myLoadCrNameImage',
+        this.tempInputData.crName[this.cutCode] === undefined
+          ? (this.tempInputData.crName[this.cutCode] = null)
+          : this.tempInputData.crName[this.cutCode]
       )
       this.$emit(
         'myLoadText',
         this.tempInputData.text[this.cutCode] === undefined
-          ? ''
+          ? (this.tempInputData.text[this.cutCode] = null)
           : this.tempInputData.text[this.cutCode]
       )
       this.$emit(
         'myLoadEffect',
         this.tempInputData.effect[this.cutCode] === undefined
-          ? ''
+          ? (this.tempInputData.effect[this.cutCode] = null)
           : this.tempInputData.effect[this.cutCode]
       )
 

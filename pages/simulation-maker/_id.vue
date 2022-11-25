@@ -1,7 +1,7 @@
 <template>
   <div id="gameMaker">
     <div class="maker-wrap">
-      <div class="maker-left">
+      <div class="maker-left" style="display: none">
         <div class="preview">
           <div class="preview-tit">미리보기 {{ cutCode }}</div>
           <div class="preview-img">
