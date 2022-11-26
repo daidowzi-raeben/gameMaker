@@ -2,6 +2,61 @@
   <div id="gameMaker">
     <div class="maker-wrap">
       <div class="maker-left">
+        <ul class="scenario-list">
+          <li 
+            v-for="(scen, idx) in scens" :key="idx" 
+            class="scenario-list--item" 
+            :class="{'active':scen.active==true}"
+          >
+            <span class="scenario-tit">
+              {{scen.tit}}
+              <button type="button" class="scenario-modi" @click="titleModi(`${idx}`)"></button>
+              <button type="button" class="chapter-add" @click="chapterAdd(`${idx}`)">+</button>
+            </span>
+            <button class="scenario-list--toggle" :class="{'active':scen.fold==true}" @click="toggleScenario(`${idx}`)"></button>
+            <input 
+              v-show="scen.modi==true" 
+              v-model="scen.tit" 
+              type="text" class="scenario-input" 
+              maxlength="15"
+              @blur="titleChange(`${idx}`, $event)"
+              @keyup.enter="titleChange(`${idx}`, $event)"
+            />
+            <ul v-show-slide="scen.fold" class="chapter-list">
+              <li 
+                v-for="(chapter, idx2) in scen.chapters" :key="idx2" 
+                class="chapter-list--item"
+              >
+                <span class="chapter-tit">
+                  {{chapter.tit}}
+                  <button type="button" class="chapter-modi" @click="titleModi(`${idx}`, `${idx2}`)"></button>
+                  <button type="button" class="chapter-del"></button>
+                </span>
+                <input 
+                  v-show="chapter.modi==true" 
+                  v-model="chapter.tit" 
+                  type="text" class="chapter-input" 
+                  maxlength="15"
+                  @blur="titleChange(`${idx}`, $event, `${idx2}`)"
+                  @keyup.enter="titleChange(`${idx}`, $event, `${idx2}`)"
+                />
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <button type="button" class="scenario-add" @click="scenarioAdd"></button>
+      </div>
+      <CutInsert
+        @myLoadBgImage="myLoadBgImage"
+        @myLoadCrImage="myLoadCrImage"
+        @myLoadCrName="myLoadCrName"
+        @myLoadText="myLoadText"
+        @myLoadFocus="myLoadFocus"
+        @myLoadEffect="myLoadEffect"
+      />
+    </div>
+    <!-- <div class="maker-wrap">
+      <div class="maker-left">
         <div class="preview">
           <div class="preview-tit">미리보기 {{ cutCode }}</div>
           <div class="preview-img">
@@ -66,13 +121,16 @@
         @myLoadFocus="myLoadFocus"
         @myLoadEffect="myLoadEffect"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import VShowSlide from 'v-show-slide'
 import { mapActions, mapState, mapMutations } from 'vuex'
 import CutInsert from '~/components/simulation-maker/CutInsert.vue'
+Vue.use(VShowSlide)
 export default {
   components: {
     CutInsert,
@@ -86,7 +144,6 @@ export default {
       idx: params.id,
     }
   },
-
   data() {
     return {
       params: {},
@@ -98,6 +155,38 @@ export default {
         text: '',
         effect: '',
       },
+      scens: [{
+        tit: '시나리오제목1',
+        fold: true,
+        modi: false,
+        active: true,
+        chapters: [{
+          tit: '챕터제목1',
+          modi: false,
+        },
+        {
+          tit: '챕터제목2',
+          modi: false,
+        }]
+      },
+      {
+        tit: '시나리오제목2',
+        fold: false,
+        modi: false,
+        active: false,
+        chapters: [{
+          tit: '챕터제목1',
+          modi: false,
+        },
+        {
+          tit: '챕터제목2',
+          modi: false,
+        },
+        {
+          tit: '챕터제목3',
+          modi: false,
+        }]
+      }],
       cutCode: '',
     }
   },
@@ -143,6 +232,37 @@ export default {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
       }
+    },
+    toggleScenario(idx) {
+      this.scens[idx].fold = !this.scens[idx].fold
+    },
+    titleModi(idx, idx2){
+      typeof(idx2) === 'undefined' ? this.scens[idx].modi = true : this.scens[idx].chapters[idx2].modi = true
+    },
+    titleChange(idx, e, idx2) {
+      if(typeof(idx2) === 'undefined'){
+        this.scens[idx].tit = e.target.value
+        this.scens[idx].modi = false
+      }
+      else{
+        this.scens[idx].chapters[idx2].tit = e.target.value
+        this.scens[idx].chapters[idx2].modi = false
+      }
+    },
+    scenarioAdd() {
+      this.scens.push({
+        tit: '시나리오제목',
+        fold: false,
+        modi: false,
+        active: false,
+        chapters: []
+      })
+    },
+    chapterAdd(idx) {
+      this.scens[idx].chapters.push({
+        tit: '챕터제목',
+        modi: false,
+      })
     },
   },
 }
