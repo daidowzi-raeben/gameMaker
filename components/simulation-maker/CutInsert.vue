@@ -59,7 +59,8 @@
             <button type="button" class="tab-list--btn">이지안</button>
           </div>
           <div class="insert-wrap">
-            <textarea placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다. 인물의 대화를 입력해 주세요" rows="5"></textarea>
+            <textarea placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다.
+인물의 대화를 입력해 주세요" rows="5"></textarea>
           </div>
         </div>
       </div>
@@ -72,14 +73,14 @@
         <button type="button" class="fold-btn">접기</button>
       </div>
       <ul class="cut-list">
-        <li class="cut-item">
+        <li class="cut-list--item">
           <div class="tit">CUT 10</div>
           <ul class="preview-list">
             <li class="preview-list--item">
-              <img src="" alt="" />
+              <img src="https://img.seoul.co.kr/img/upload/2017/10/07/SSI_20171007154542_O2.jpg" alt="" />
             </li>
             <li class="preview-list--item">
-              <img src="" alt="" />
+              <img src="https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg" alt="" />
             </li>
             <li class="preview-list--item">
               흔들
@@ -93,8 +94,10 @@
             <span class="badge text-bg-red">이지안</span><br />
             <span class="badge text-bg-pink">이벤트</span>
             <span class="text">시나리오 1장</span>
+            <span class="text">챕터1</span>
+            <span class="text">CUT 5</span>
           </div>
-          <div class="text">
+          <div class="text-preview">
             안녕? 대사를 치면 여기에도 미리보기 노출이 될거에요
             width는 작업해 보고 잡을 예정이고 여긴 줄바꿈이 없어요
             시나리오 1장 글시는 5차 제한으로 ... 처리!
