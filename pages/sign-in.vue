@@ -1,11 +1,5 @@
 <template>
   <div>
-    <form @submit.prevent="onSubmit">
-      아이디<input v-model="login.id" required /><br />
-      패스워드<input v-model="login.pw" required /><br />
-      <button @click.prevent="onSubmit">로그인</button>
-    </form>
-    {{ LOGIN }}
     <div class="header type2">
       <div class="header-wrap">
         <div class="header-logo"><a href="#"></a></div>
