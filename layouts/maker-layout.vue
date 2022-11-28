@@ -41,8 +41,10 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 import ScenarioInsert from '~/components/simulation-maker/ScenarioInsert'
 import JsonDatapreview from '~/components/modal/JsonDatapreview'
+import { kooLogin } from '~/config/util'
 export default {
   components: {
     ScenarioInsert,
@@ -51,15 +53,45 @@ export default {
   data() {
     return {
       activeManu: 1,
+      stateLogin: [],
     }
   },
+  computed: {
+    ...mapState(['LOGIN', 'LOADING']),
+  },
+  watch: {
+    LOGIN: {
+      handler(value) {
+        console.log(value)
+        console.log('SUCCESS')
+        // 로그인 성공 시 페이지 이동
+      },
+      immediate: true,
+    },
+  },
   mounted() {
+    // 로그인 체크
+    this.stateLogin = [
+      ...this.stateLogin,
+      {
+        user_idx: kooLogin('user_idx'),
+        user_name: kooLogin('user_name'),
+      },
+    ]
+    if (kooLogin('user_idx') && kooLogin('user_name')) {
+      this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
+    } else {
+      this.$router.push('/sign-in')
+    }
+
     window.addEventListener('beforeunload', this.unLoadEvent)
   },
   beforeUnmount() {
     window.removeEventListener('beforeunload', this.unLoadEvent)
   },
   methods: {
+    ...mapMutations(['MUTATIONS_LOGIN_CHECK']),
+
     // 페이지 이탈 경고
     unLoadEvent(event) {
       event.preventDefault()
