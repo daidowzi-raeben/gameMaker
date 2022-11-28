@@ -2,15 +2,20 @@
   <div>
     <header class="maker-header">
       <ul class="maker-header--menu">
-        <li v-for="menu in 7" :key="menu" class="item" :class="{'active':activeManu==menu}">
+        <li
+          v-for="menu in 7"
+          :key="menu"
+          class="item"
+          :class="{ active: activeManu == menu }"
+        >
           <button type="button" :class="`icon icon-${menu}`">
-            <span v-if="menu==1" class="icon-txt">스토리</span>
-            <span v-else-if="menu==2" class="icon-txt">인트로</span>
-            <span v-else-if="menu==3" class="icon-txt">엔딩</span>
-            <span v-else-if="menu==4" class="icon-txt">인물설정</span>
-            <span v-else-if="menu==5" class="icon-txt">UI설정</span>
-            <span v-else-if="menu==6" class="icon-txt">에셋관리</span>
-            <span v-else-if="menu==7" class="icon-txt">프로젝트설정</span>
+            <span v-if="menu == 1" class="icon-txt">스토리</span>
+            <span v-else-if="menu == 2" class="icon-txt">인트로</span>
+            <span v-else-if="menu == 3" class="icon-txt">엔딩</span>
+            <span v-else-if="menu == 4" class="icon-txt">인물설정</span>
+            <span v-else-if="menu == 5" class="icon-txt">UI설정</span>
+            <span v-else-if="menu == 6" class="icon-txt">에셋관리</span>
+            <span v-else-if="menu == 7" class="icon-txt">프로젝트설정</span>
           </button>
         </li>
       </ul>
@@ -45,7 +50,18 @@ export default {
       activeManu: 1,
     }
   },
+  mounted() {
+    window.addEventListener('beforeunload', this.unLoadEvent)
+  },
+  beforeUnmount() {
+    window.removeEventListener('beforeunload', this.unLoadEvent)
+  },
   methods: {
+    // 페이지 이탈 경고
+    unLoadEvent(event) {
+      event.preventDefault()
+      event.returnValue = ''
+    },
     scenarioInsert(e) {
       console.log(e)
     },

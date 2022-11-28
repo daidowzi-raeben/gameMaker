@@ -11,6 +11,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import { kooLogin } from '~/config/util'
 export default {
   data() {
     return {
@@ -23,7 +24,9 @@ export default {
   computed: {
     ...mapState(['LOGIN', 'LOADING']),
   },
-  mounted() {},
+  mounted() {
+    console.log(kooLogin('user_idx'))
+  },
   methods: {
     // ------------------------ INIT
     ...mapActions(['ACTION_AXIOS_LOGIN']),
