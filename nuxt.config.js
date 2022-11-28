@@ -34,7 +34,7 @@ export default {
   plugins: [
     { src: '~plugins/BootstrapVue.js', ssr: false, mode: 'client' },
     { src: '~plugins/MomentVue.js', ssr: false, mode: 'client' },
-    // { src: '~plugins/AwesomeSwiper.js', ssr: false, mode: 'client' },
+    { src: '~plugins/AwesomeSwiper.js', ssr: false, mode: 'client' },
     { src: '~plugins/Vcaledar.js', ssr: false, mode: 'client' },
     { src: '~plugins/HtmlEditor.js', ssr: false, mode: 'client' },
     { src: '~plugins/filters.js', ssr: false, mode: 'client' },
@@ -43,6 +43,7 @@ export default {
     { src: '~plugins/ApexCart.js', ssr: false, mode: 'client' },
     { src: '~plugins/ColorPicker.js', ssr: false, mode: 'client' },
     { src: '~plugins/Vuedraggable.js', ssr: false, mode: 'client' },
+    { src: '~plugins/VShowSlide.js', ssr: false, mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

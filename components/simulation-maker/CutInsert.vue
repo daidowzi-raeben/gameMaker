@@ -19,6 +19,11 @@
         <div class="setting-tit">화면 설정</div>
         <div class="setting-scen--list">
           <label class="label">배경</label>
+          <swiper :modules="modules" :pagination="{ clickable: true }">
+            <swiper-slide>Slide 1</swiper-slide>
+            <swiper-slide>Slide 2</swiper-slide>
+            <swiper-slide>Slide 3</swiper-slide>
+          </swiper>
           <ul class="list">
             <li class="list-item"></li>
             <li class="list-item"></li>
@@ -386,6 +391,8 @@
 // SCENE_DATA
 import { mapState, mapMutations } from 'vuex'
 export default {
+  components:{
+  },
   data() {
     return {
       cutIndex: 0,

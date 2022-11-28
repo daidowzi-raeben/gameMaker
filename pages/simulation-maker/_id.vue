@@ -4,44 +4,47 @@
       <div class="maker-left">
         <ul class="scenario-list">
           <li
-            v-for="(scen, idx) in scens"
-            :key="idx"
+            v-for="(scenarioList, index) in scenarioLists"
+            :key="index"
+            :ref="`scenarioList${index}`"
             class="scenario-list--item"
-            :class="{ active: scen.active == true }"
+            :class="{ active: scenarioList.active === true }"
           >
             <span class="scenario-tit">
-              {{ scen.tit }}
+              {{ scenarioList.tit }}
               <button
                 type="button"
                 class="scenario-modi"
-                @click="titleModi(`${idx}`)"
+                @click="onClickTitleModi(`${index}`)"
               ></button>
               <button
                 type="button"
                 class="chapter-add"
-                @click="chapterAdd(`${idx}`)"
+                @click="onClickChapterAdd(`${index}`)"
               >
                 +
               </button>
+              <button type="button" class="scenario-del" @click="onClickDeleteList(index)"></button>
             </span>
             <button
               class="scenario-list--toggle"
-              :class="{ active: scen.fold == true }"
-              @click="toggleScenario(`${idx}`)"
+              :class="{ active: scenarioList.fold === true }"
+              @click="onClickToggleScenario(`${index}`)"
             ></button>
             <input
-              v-show="scen.modi == true"
-              v-model="scen.tit"
+              v-show="scenarioList.modi === true"
+              :ref="`scenarioModiInput${index}`"
+              v-model="scenarioList.tit"
               type="text"
               class="scenario-input"
               maxlength="15"
-              @blur="titleChange(`${idx}`, $event)"
-              @keyup.enter="titleChange(`${idx}`, $event)"
+              @blur="onEnterTitleChange(`${index}`, $event)"
+              @keyup.enter="onEnterTitleChange(`${index}`, $event)"
             />
-            {{ scen.chapters }}
-            <ul v-show-slide="scen.fold" class="chapter-list">
+            <!-- {{ scen.chapters }} -->
+            <ul v-show-slide="scenarioList.fold" class="chapter-list">
               <draggable
-                :list="scen.chapters"
+                :list="scenarioList.chapters"
                 :disabled="!enabled"
                 class="list-group"
                 ghost-class="ghost"
@@ -50,8 +53,9 @@
                 @end="dragging = false"
               >
                 <li
-                  v-for="(chapter, idx2) in scen.chapters"
-                  :key="idx2"
+                  v-for="(chapter, index2) in scenarioList.chapters"
+                  :key="index2"
+                  :ref="`chapterList${index}_${index2}`"
                   class="chapter-list--item"
                 >
                   <span class="chapter-tit">
@@ -59,18 +63,19 @@
                     <button
                       type="button"
                       class="chapter-modi"
-                      @click="titleModi(`${idx}`, `${idx2}`)"
+                      @click="onClickTitleModi(`${index}`, `${index2}`)"
                     ></button>
-                    <button type="button" class="chapter-del"></button>
+                    <button type="button" class="chapter-del" @click="onClickDeleteList(index, index2)"></button>
                   </span>
                   <input
-                    v-show="chapter.modi == true"
+                    v-show="chapter.modi === true"
+                    :ref="`chapterListModiInput${index}_${index2}`"
                     v-model="chapter.tit"
                     type="text"
                     class="chapter-input"
                     maxlength="15"
-                    @blur="titleChange(`${idx}`, $event, `${idx2}`)"
-                    @keyup.enter="titleChange(`${idx}`, $event, `${idx2}`)"
+                    @blur="onEnterTitleChange(`${index}`, $event, `${index2}`)"
+                    @keyup.enter="onEnterTitleChange(`${index}`, $event, `${index2}`)"
                   />
                 </li>
               </draggable>
@@ -80,7 +85,7 @@
         <button
           type="button"
           class="scenario-add"
-          @click="scenarioAdd"
+          @click="onClickScenarioAdd"
         ></button>
       </div>
       <CutInsert
@@ -163,11 +168,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VShowSlide from 'v-show-slide'
 import { mapActions, mapState, mapMutations } from 'vuex'
 import CutInsert from '~/components/simulation-maker/CutInsert.vue'
-Vue.use(VShowSlide)
 export default {
   components: {
     CutInsert,
@@ -194,7 +196,7 @@ export default {
         text: '',
         effect: '',
       },
-      scens: [
+      scenarioLists: [
         {
           tit: '시나리오제목1',
           fold: true,
@@ -285,37 +287,51 @@ export default {
         }, 400)
       }
     },
-    toggleScenario(idx) {
-      this.scens[idx].fold = !this.scens[idx].fold
+    onClickToggleScenario(idx) {
+      this.scenarioLists[idx].fold = !this.scenarioLists[idx].fold
     },
-    titleModi(idx, idx2) {
-      typeof idx2 === 'undefined'
-        ? (this.scens[idx].modi = true)
-        : (this.scens[idx].chapters[idx2].modi = true)
+    onClickTitleModi(idx, idx2) {
+        if(typeof idx2 === 'undefined'){
+          this.scenarioLists[idx].modi = true
+          this.$nextTick(function() {
+            this.$refs[`scenarioModiInput${idx}`][0].focus()
+          });
+        }
+        else{
+          this.scenarioLists[idx].chapters[idx2].modi = true
+          this.$nextTick(function() {
+            this.$refs[`chapterListModiInput${idx}_${idx2}`][0].focus()
+          });
+        }
     },
-    titleChange(idx, e, idx2) {
+    onEnterTitleChange(idx, e, idx2) {
       if (typeof idx2 === 'undefined') {
-        this.scens[idx].tit = e.target.value
-        this.scens[idx].modi = false
+        this.scenarioLists[idx].tit = e.target.value
+        this.scenarioLists[idx].modi = false
       } else {
-        this.scens[idx].chapters[idx2].tit = e.target.value
-        this.scens[idx].chapters[idx2].modi = false
+        this.scenarioLists[idx].chapters[idx2].tit = e.target.value
+        this.scenarioLists[idx].chapters[idx2].modi = false
       }
     },
-    scenarioAdd() {
-      this.scens.push({
+    onClickScenarioAdd() {
+      this.scenarioLists.push({
         tit: '시나리오제목',
-        fold: false,
+        fold: true,
         modi: false,
         active: false,
         chapters: [],
       })
     },
-    chapterAdd(idx) {
-      this.scens[idx].chapters.push({
+    onClickChapterAdd(idx) {
+      this.scenarioLists[idx].chapters.push({
         tit: '챕터제목',
         modi: false,
       })
+    },
+    onClickDeleteList(idx, idx2) {
+      typeof idx2 === 'undefined'
+        ? (this.$refs[`scenarioList${idx}`][0].remove())
+        : (this.$refs[`chapterList${idx}_${idx2}`][0].remove())
     },
   },
 }

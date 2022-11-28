@@ -78,11 +78,11 @@ export default {
         user_name: kooLogin('user_name'),
       },
     ]
-    if (kooLogin('user_idx') && kooLogin('user_name')) {
-      this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
-    } else {
-      this.$router.push('/sign-in')
-    }
+    // if (kooLogin('user_idx') && kooLogin('user_name')) {
+    //   this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
+    // } else {
+    //   this.$router.push('/sign-in')
+    // }
 
     window.addEventListener('beforeunload', this.unLoadEvent)
   },
