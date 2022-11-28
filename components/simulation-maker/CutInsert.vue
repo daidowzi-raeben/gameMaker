@@ -16,25 +16,32 @@
     </div>
     <div class="setting">
       <div class="setting-scen">
-        <div class="setting-tit">화면 설정</div>
+        <div class="setting-tit">
+          화면 설정
+          <label class="input-check">
+            <input type="checkbox" />
+            <span class="check-text">흔들림</span>
+          </label>
+        </div>
         <div class="setting-scen--list">
           <label class="label">배경</label>
-          <swiper :modules="modules" :pagination="{ clickable: true }">
-            <swiper-slide>Slide 1</swiper-slide>
-            <swiper-slide>Slide 2</swiper-slide>
-            <swiper-slide>Slide 3</swiper-slide>
+          <swiper :options="swiperOption" class="list">
+            <swiper-slide v-for="(v, i) in temp" :key="i" class="list-item">
+              {{ v.a }}
+            </swiper-slide>
+            <div slot="button-prev" class="swiper-button-prev"></div>
+            <div slot="button-next" class="swiper-button-next"></div>
           </swiper>
-          <ul class="list">
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-          </ul>
         </div>
         <div class="setting-scen--list">
           <label class="label">인물</label>
-          <ul class="list">
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-          </ul>
+          <swiper :options="swiperOption" class="list">
+            <swiper-slide v-for="(v, i) in temp" :key="i" class="list-item">
+              {{ v.a }}
+            </swiper-slide>
+            <div slot="button-prev" class="swiper-button-prev"></div>
+            <div slot="button-next" class="swiper-button-next"></div>
+          </swiper>
         </div>
       </div>
       <div class="setting-talk">
@@ -54,20 +61,61 @@
             <textarea
               placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다.
 인물의 대화를 입력해 주세요"
-              rows="5"
+              rows="3"
             ></textarea>
+            <div class="insert-set">
+              <button type="button" class="btn sound">사운드 설정</button>
+              <div class="set sound-set"></div>
+              <button v-show="!pointSettingShow" type="button" class="btn point" @click="onClickPointSetting('set')">포인트 설정</button>
+              <div v-show="pointSettingShow" class="set point-set">
+                <select class="input-select">
+                  <option>이지안</option>
+                  <option>하린</option>
+                  <option>안보나</option>
+                  <option>권시아</option>
+                </select>
+                <input type="number" class="input-number" />
+                <span class="text">포인트</span>
+                <select class="input-select">
+                  <option>증가</option>
+                  <option>감소</option>
+                </select>
+                <button type="button" class="save" @click="onClickPointSetting('save')">저장</button>
+              </div>
+              <button v-show="!scenarioSettingShow" type="button" class="btn scenario" @click="onClickScenarioSetting('set')">시나리오 연결</button>
+              <div v-show="scenarioSettingShow" class="set scenario-set">
+                <select class="input-select">
+                  <option>시나리오1</option>
+                  <option>시나리오2</option>
+                </select>
+                <select class="input-select">
+                  <option>챕터2</option>
+                  <option>챕터2</option>
+                </select>
+                <select class="input-select">
+                  <option>선택안함</option>
+                  <option>CUT1</option>
+                  <option>CUT2</option>
+                </select>
+                <button type="button" class="save" @click="onClickScenarioSetting('save')">저장</button>
+              </div>
+            </div>
           </div>
+          <button type="button" class="cut-add"></button>
         </div>
       </div>
     </div>
     <div class="right"></div>
-    <div class="cut">
+    <div class="cut" :class="{ fold: cutListShow === false }">
       <div class="cut-tit">
         <span class="scenario">시나리오 1장</span>
         <span class="chapter">챕터 1</span>
-        <button type="button" class="fold-btn">접기</button>
+        <button type="button" class="fold-btn" @click="cutListShow = !cutListShow">
+          <span v-if="cutListShow" class="text">접기</span>
+          <span v-else class="text">펼치기</span>
+        </button>
       </div>
-      <ul class="cut-list">
+      <ul v-show-slide="cutListShow" class="cut-list">
         <li class="cut-list--item">
           <div class="tit">CUT 10</div>
           <ul class="preview-list">
@@ -427,6 +475,20 @@ export default {
         effect: [],
       }, // input data bind
       sceneData: [],
+      swiperOption: {
+        loop: false,
+        slidesPerView: 13,
+        slidesPerGroup: 13,
+        spaceBetween:7,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      },
+      temp: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 6 }, { a: 7 }, { a: 8 }, { a: 9 }, { a: 10 }, { a: 11 }, { a: 12 }, { a: 13 }, { a: 14 }, { a: 15 }, { a: 16 }],
+      cutListShow:false,
+      pointSettingShow:false,
+      scenarioSettingShow:false,
     }
   },
   computed: {
@@ -578,6 +640,16 @@ export default {
         }
       })
       this.$refs[`cut${e}`][0].style = 'border:1px solid red'
+    },
+    onClickPointSetting(type){
+      this.pointSettingShow = true
+      this.scenarioSettingShow = false
+      if(type==='save') this.pointSettingShow = false
+    },
+    onClickScenarioSetting(type){
+      this.pointSettingShow = false
+      this.scenarioSettingShow = true
+      if(type==='save') this.scenarioSettingShow = false
     },
   },
 }

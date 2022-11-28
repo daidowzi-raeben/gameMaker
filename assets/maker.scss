@@ -63,7 +63,6 @@
     background-color: #2f2f2f;
     width:240px;
     height: calc(100vh - 80px);
-    min-height: 990px;
     overflow-y:auto;
     &::-webkit-scrollbar {
       width: 8px;
@@ -205,7 +204,7 @@
     }
     .preview{
       min-width:365px;
-      height:680px;
+      height:calc(100% - 55px);
       background:#fff;
       border-radius: 10px;
       display:flex;
@@ -225,7 +224,7 @@
     }
     .setting{
       min-width:900px;
-      height:680px;
+      height:calc(100% - 55px);
       background:#fff;
       border-radius: 10px;
       margin:0 10px;
@@ -243,12 +242,33 @@
           .list{
             display:flex;
             margin:0;
+            width:calc(100% - 46px);
+            padding:0 30px;
             &-item{
               width:50px;
               height:50px;
               border-radius: 10px;
               border:1px solid #ddd;
-              margin-right:10px;
+              display:flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.2rem;
+            }
+            .swiper-button-prev{
+              background-image:url(~/static/images/icon/arrow_left.svg);
+              background-size:12px;
+              background-color:#fff;
+              left:0;
+              padding: 30px 0;
+              top: 17px;
+            }
+            .swiper-button-next{
+              background-image:url(~/static/images/icon/arrow_right.svg);
+              background-size:12px;
+              background-color:#fff;
+              right:0;
+              padding: 30px 0;
+              top: 17px;
             }
           }
         }
@@ -267,7 +287,7 @@
             margin-right:35px;
             &.active{
               color:$colPrimary;
-              font-weight: 600;
+              font-weight: 500;
             }
           }
           &.type2{
@@ -291,17 +311,70 @@
             }
           }
         }
-        .insert-wrap{
-          textarea{
-            resize: none;
-            font-size:1.4rem;
-            padding:10px;
+        .insert{
+          &-wrap{
+            margin-top:25px;
+            padding:10px 10px 50px 10px;
             border-radius: 5px;
             border:1px solid #ccc;
+            position:relative;
+            textarea{
+              resize: none;
+              font-size:1.4rem;
+              width:100%;
+              &::placeholder{
+                color:#ccc;
+              }
+            }
+          }
+          &-set{
+            position:absolute;
+            right:0;
+            bottom:5px;
+            display:flex;
             width:100%;
-            margin-top:10px;
-            &::placeholder{
-              color:#ccc;
+            justify-content: end;
+            padding:10px;
+            .btn{
+              width:116px;
+              height:34px;
+              color:#fff;
+              border-radius: 5px;
+              font-size:1.4rem;
+              font-weight: 300;
+              margin:0 7px;
+              outline: none;
+              &.sound{
+                background-color:$colPrimary;
+              }
+              &.point{
+                background-color:$colPink;
+              }
+              &.scenario{
+                background-color:$colBlue;
+              }
+            }
+            .set{
+              display:flex;
+              font-size:1.4rem;
+              align-items: center;
+              & > *{
+                margin:0 3px;
+              }
+              .save{
+                width:116px;
+                height:34px;
+                color:#fff;
+                border-radius: 5px;
+                font-weight: 300;
+                outline: none;
+                background-color:$colPink;
+              }
+              &.scenario-set{
+                .save{
+                  background-color:$colBlue;
+                }
+              }
             }
           }
         }
@@ -315,19 +388,20 @@
     }
     .right{
       width:380px;
-      height:960px;
+      height:100%;
       background:#fff;
       border-radius: 10px;
     }
     .cut{
       width:1275px;
-      height:270px;
-      position:absolute;
-      left:10px;
-      top:700px;
+      position:fixed;
+      left:250px;
+      bottom:0;
       background:#fff;
-      border-radius: 10px;
+      border-radius: 10px 10px 0 0;
       padding:15px;
+      box-shadow: 0 0 10px rgba(0,0,0,.2);
+      transition:all .3s;
       &-tit{
         position:relative;
         font-size:1.6rem;
@@ -346,15 +420,18 @@
         .fold-btn{
           position:absolute;
           right:2px;
-          top:2px;
-          font-size:1.4rem;
-          color:#1E3BB3;
+          top:0;
+          .text{
+            font-size:1.4rem;
+            color:#1E3BB3;
+          }
         }
       }
       &-list{
+        margin:0;
         &--item{
           border-right: 1px dashed #eee;
-          margin:10px 0;
+          margin:15px 0 5px;
           padding:0 10px;
           width:300px;
           .tit{
@@ -435,6 +512,25 @@
             text-overflow:ellipsis;
             height:68px;
             margin-top:5px;
+            font-weight: 300;
+          }
+        }
+      }
+      &-add{
+        width:27px;
+        height:27px;
+        background:url(~/static/images/icon/add_color.svg)no-repeat center;
+        margin:20px auto;
+        display:block;
+      }
+      &.fold{
+        background:#84ACE9;
+        padding:15px 15px 0 15px;
+        box-shadow: none;
+        .cut-tit{
+          border-bottom:none;
+          .scenario, .chapter, .fold-btn .text{
+            color:#fff;
             font-weight: 300;
           }
         }
@@ -658,21 +754,27 @@
     }
   }
   &-select{
-    background:#eee;
+    height:34px;
+    background:#fff;
+    border:1px solid #ccc;
     font-size:1.4rem;
     padding:5px 30px 5px 10px;
-    min-width:150px;
-    background-image:url('~/static/images/icon/triangle.png');
+    min-width:50px;
+    border-radius: 5px;
+    background-image:url('~/static/images/icon/select_arrow.svg');
     background-repeat: no-repeat;
     background-size:10px;
     background-position:calc(100% - 10px) center;
     outline: none;
   }
   &-text, &-number, &-textarea{
-    background:#eee;
+    background:#fff;
+    border:1px solid #ccc;
     padding:5px 10px;
     font-size:1.4rem;
     outline: none;
+    border-radius: 5px;
+    height:34px;
   }
   &-textarea{
     resize: none;
