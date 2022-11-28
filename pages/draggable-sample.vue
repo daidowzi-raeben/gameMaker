@@ -9,7 +9,7 @@
       @start="dragging = true"
       @end="dragging = false"
     >
-      <div v-for="element in list" :key="element.name" class="list-group-item">
+      <div v-for="(element, i) in list" :key="i" class="list-group-item">
         {{ element.name }}
       </div>
     </draggable>

@@ -1,6 +1,108 @@
 <template>
   <div class="maker-right">
-    {{ SCENE_DATA }}
+    <div class="preview">
+      <div class="preview-img">
+        <img :src="tempData.bg" alt="" class="background" />
+        <img ref="characterImage" :src="tempData.cr" alt="" class="character" />
+        <div class="dialogue">
+          <span class="name">{{ tempData.crName }}</span>
+          <p ref="myLoadText" class="text" style="white-space: pre-line"></p>
+        </div>
+        <img src="~/static/images/mockup.png" alt="" class="mockup" />
+      </div>
+      <div class="preview-save">
+        마지막 저장 <span class="time">22.11.22 17:20:20</span>
+      </div>
+    </div>
+    <div class="setting">
+      <div class="setting-scen">
+        <div class="setting-tit">화면 설정</div>
+        <div class="setting-scen--list">
+          <label class="label">배경</label>
+          <ul class="list">
+            <li class="list-item"></li>
+            <li class="list-item"></li>
+          </ul>
+        </div>
+        <div class="setting-scen--list">
+          <label class="label">인물</label>
+          <ul class="list">
+            <li class="list-item"></li>
+            <li class="list-item"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="setting-talk">
+        <div class="setting-tit">대화 설정</div>
+        <div class="tab-list">
+          <button type="button" class="tab-list--btn active">대사</button>
+          <button type="button" class="tab-list--btn">나레이션</button>
+          <button type="button" class="tab-list--btn">객관식</button>
+          <button type="button" class="tab-list--btn">주관식</button>
+        </div>
+        <div class="tab-con">
+          <div class="tab-list type2">
+            <button type="button" class="tab-list--btn active">주인공</button>
+            <button type="button" class="tab-list--btn">이지안</button>
+          </div>
+          <div class="insert-wrap">
+            <textarea
+              placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다.
+인물의 대화를 입력해 주세요"
+              rows="5"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right"></div>
+    <div class="cut">
+      <div class="cut-tit">
+        <span class="scenario">시나리오 1장</span>
+        <span class="chapter">챕터 1</span>
+        <button type="button" class="fold-btn">접기</button>
+      </div>
+      <ul class="cut-list">
+        <li class="cut-list--item">
+          <div class="tit">CUT 10</div>
+          <ul class="preview-list">
+            <li class="preview-list--item">
+              <img
+                src="https://img.seoul.co.kr/img/upload/2017/10/07/SSI_20171007154542_O2.jpg"
+                alt=""
+              />
+            </li>
+            <li class="preview-list--item">
+              <img
+                src="https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg"
+                alt=""
+              />
+            </li>
+            <li class="preview-list--item">흔들</li>
+            <li class="preview-list--item">SD</li>
+          </ul>
+          <div class="state">
+            <span class="badge text-bg-primary">일반대사</span>
+            <span class="badge text-bg-red">이지안</span><br />
+            <span class="badge text-bg-pink">이벤트</span>
+            <span class="text">시나리오 1장</span>
+            <span class="text">챕터1</span>
+            <span class="text">CUT 5</span>
+          </div>
+          <div class="text-preview">
+            안녕? 대사를 치면 여기에도 미리보기 노출이 될거에요 width는 작업해
+            보고 잡을 예정이고 여긴 줄바꿈이 없어요 시나리오 1장 글시는 5차
+            제한으로 ... 처리! 여긴 최대 4줄까지 출력 안녕? 대사를 치면 여기에도
+            미리보기 노출이 될거에요 width는 작업해 보고 잡을 예정이고 여긴
+            줄바꿈이 없어요 시나리오 1장 글시는 5차 제한으로 ... 처리! 여긴 최대
+            4줄까지 출력
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- <div class="maker-right">
+    {{ sceneData }}
     <div
       v-for="(cut, idx) in cuts"
       :ref="`cut${idx}`"
@@ -277,7 +379,7 @@
     <button type="button" class="btn-add" @click="onClickCutAdd()">
       + 컷 추가하기
     </button>
-  </div>
+  </div> -->
 </template>
 
 <script>
