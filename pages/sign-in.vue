@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
   data() {
@@ -19,17 +19,37 @@ export default {
         id: '',
         pw: '',
       },
+      stateLogin: [],
     }
   },
   computed: {
     ...mapState(['LOGIN', 'LOADING']),
   },
+  watch: {
+    LOGIN: {
+      handler(value) {
+        console.log(value)
+        console.log('SUCCESS')
+        // 로그인 성공 시 페이지 이동
+      },
+      immediate: true,
+    },
+  },
   mounted() {
-    console.log(kooLogin('user_idx'))
+    this.stateLogin = [
+      ...this.stateLogin,
+      {
+        user_idx: kooLogin('user_idx'),
+        user_name: kooLogin('user_name'),
+      },
+    ]
+    if (kooLogin('user_idx') && kooLogin('user_name'))
+      this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
   },
   methods: {
     // ------------------------ INIT
     ...mapActions(['ACTION_AXIOS_LOGIN']),
+    ...mapMutations(['MUTATIONS_LOGIN_CHECK']),
 
     onSubmit() {
       if (!this.login.id && !this.login.pw)

@@ -51,6 +51,7 @@ export default {
     },
   },
   mounted() {
+    this.MUTATIONS_AXIOS_POST_INIT()
     this.params.type = 'project'
     this.params.apiKey = process.env.API_KEY
     this.params.user_idx = this.$cookies.get('user_idx')

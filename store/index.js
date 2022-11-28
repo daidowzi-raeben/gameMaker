@@ -39,6 +39,9 @@ const createStore = () => {
                         : (state.LOGIN = '')
                 }
             },
+            // GETTER_LOGIN_CHECK(state, payload) {
+            //     console.log('GETTER_LOGIN_CHECK', payload)
+            // },
         },
         mutations: {
             // 로딩
@@ -48,6 +51,11 @@ const createStore = () => {
             // 로그인
             MUTATIONS_LOGIN(state, payload) {
                 state.LOGIN = payload
+            },
+            MUTATIONS_LOGIN_CHECK(state, payload) {
+                console.log('MUTATIONS_LOGIN_CHECK', payload)
+                state.LOGIN = payload
+
             },
             MUTATIONS_AXIOS_GET(state, payload) {
                 state.SCENE = payload
