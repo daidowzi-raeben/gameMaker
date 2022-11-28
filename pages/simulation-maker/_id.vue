@@ -251,7 +251,7 @@ export default {
   methods: {
     ...mapActions(['ACTION_AXIOS_GET']),
     ...mapMutations(['']),
-
+    // 드래그 데이터 갱신
     checkMove(e) {
       console.log('Future index: ' + e.draggedContext.futureIndex)
     },
