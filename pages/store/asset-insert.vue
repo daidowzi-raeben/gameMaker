@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  layout: 'default-index',
   data() {
     return {
       preview: {
