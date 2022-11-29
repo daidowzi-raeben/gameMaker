@@ -35,7 +35,6 @@
           <button class="login-button" @click.prevent="onSubmit">로그인</button>
         </form>
       </div>
-      {{ LOGIN }}
     </div>
   </div>
 </template>

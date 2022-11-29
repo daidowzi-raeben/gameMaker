@@ -1,6 +1,105 @@
 <template>
   <div id="projectManager">
-    <div class="project"></div>
+    <div class="project-wrap">
+      <div class="card-wrap">
+        <div class="card-tit"><nuxt-link to="">Visual Novel</nuxt-link></div>
+        <swiper :options="swiperOptionCol4" class="card-list project-list">
+          <swiper-slide v-for="(v, i) in 4" :key="i" class="card-list--item project-list--item">
+            <nuxt-link to="">
+              <div class="top">
+                <span class="date">최근 수정일<span class="num">22.12.12</span></span>
+                <div class="badge-wrap">
+                  <span class="badge red">인트로</span>
+                  <span class="badge blue">엔딩</span>
+                  <span class="badge green">배포완료</span>
+                </div>
+              </div>
+              <div class="tit">나의 첫 프로젝트 프로젝트명은 두줄까지만 지원합니다 두줄이 넘어가면 말줄임으로 표시될거예요</div>
+              <div class="info">프로젝트 설명이 들어갑니다. 프로젝트 설명은 세줄까지만 지원합니다. 세줄이 넘어가면 말줄임으로 표시될거예요 세줄 세줄 세줄 세줄 세줄 세줄 세줄 세줄 세줄</div>
+              <ul class="state-list">
+                <li class="state-list--item">
+                  <label class="label">인물</label>
+                  <span class="num">3</span>
+                </li>
+                <li class="state-list--item">
+                  <label class="label">에셋</label>
+                  <span class="num">10,904</span>
+                </li>
+                <li class="state-list--item">
+                  <label class="label">스토리</label>
+                  <span class="num">20-30</span>
+                </li>
+              </ul>
+            </nuxt-link>
+          </swiper-slide>
+          <swiper-slide class="card-list--item project-list--item">
+            <nuxt-link to="">
+              <div class="top">
+                <span class="date">최근 수정일<span class="num">22.12.12</span></span>
+                <div class="badge-wrap">
+                  <span class="badge red">인트로</span>
+                  <span class="badge">엔딩</span>
+                  <span class="badge">배포전</span>
+                </div>
+              </div>
+              <div class="tit">나의 첫 프로젝트</div>
+              <div class="info">프로젝트 설명이 들어갑니다.</div>
+              <ul class="state-list">
+                <li class="state-list--item">
+                  <label class="label">인물</label>
+                  <span class="num">3</span>
+                </li>
+                <li class="state-list--item">
+                  <label class="label">에셋</label>
+                  <span class="num">10,904</span>
+                </li>
+                <li class="state-list--item">
+                  <label class="label">스토리</label>
+                  <span class="num">20-30</span>
+                </li>
+              </ul>
+            </nuxt-link>
+          </swiper-slide>
+          <swiper-slide class="card-list--item project-list--item add">
+            <button type="button" class="add-btn">
+              새로운 프로젝트를<br />추가해 보세요
+            </button>
+          </swiper-slide>
+        </swiper>
+      </div>
+      <div class="card-wrap">
+        <div class="card-tit"><nuxt-link to="">Asset Store</nuxt-link></div>
+        <swiper :options="swiperOptionCol7" class="card-list">
+          <swiper-slide v-for="(v, i) in 10" :key="i" class="card-list--item">
+            <nuxt-link to=""></nuxt-link>
+          </swiper-slide>
+        </swiper>
+      </div>
+      <div class="card-wrap type2">
+        <div class="left">
+          <div class="card-tit"><nuxt-link to="">Notice</nuxt-link></div>
+          <ul class="tit-list">
+            <li v-for="(v, i) in 5" :key="i" class="tit-list--item">
+              <nuxt-link to="">
+                <span class="tit">title</span>
+                <span class="date">22.11.11</span>
+              </nuxt-link>
+            </li>
+          </ul>
+        </div>
+        <div class="right">
+          <div class="card-tit"><nuxt-link to="">Notice</nuxt-link></div>
+          <ul class="tit-list">
+            <li v-for="(v, i) in 2" :key="i" class="tit-list--item">
+              <nuxt-link to="">
+                <span class="tit">title</span>
+                <span class="date">22.11.11</span>
+              </nuxt-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <ProjectCreate @dataReload="dataReload" />
   </div>
   <!-- <div id="projectManager">
@@ -37,7 +136,22 @@ export default {
   },
   layout: 'default-index',
   data() {
-    return { params: {} }
+    return {
+      params: {},
+      swiperOptionCol4: {
+        loop: false,
+        slidesPerView: 4,
+        slidesPerGroup: 4,
+        spaceBetween:20,
+      },
+      swiperOptionCol7: {
+        loop: false,
+        slidesPerView: 7,
+        slidesPerGroup: 7,
+        spaceBetween:15,
+      },
+      temp: [1,2,3,4,5,6,7,8,9],
+    }
   },
   computed: {
     ...mapState(['LOGIN', 'LOADING', 'PROJECT_MANAGER', 'IS_POST']),
@@ -95,19 +209,4 @@ export default {
 </script>
 
 <style lang="scss">
-#gameMaker {
-  min-width: 1200px;
-  width: 1200px;
-  margin: 0 auto;
-}
-.mobileDevice {
-  width: 360px;
-  height: 640px;
-  border: 2px solid #ccc;
-  border-radius: 20px;
-  overflow: hidden;
-  &-warp {
-  }
-}
-/* 360 * 640 */
 </style>
