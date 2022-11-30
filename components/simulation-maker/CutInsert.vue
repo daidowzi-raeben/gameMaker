@@ -25,7 +25,7 @@
         </div>
         <div class="setting-scen--list">
           <label class="label">배경</label>
-          <swiper :options="swiperOption" class="list">
+          <swiper :options="swiperOptionSelectImage" class="list">
             <swiper-slide v-for="(v, i) in temp" :key="i" class="list-item">
               {{ v.a }}
             </swiper-slide>
@@ -35,7 +35,7 @@
         </div>
         <div class="setting-scen--list">
           <label class="label">인물</label>
-          <swiper :options="swiperOption" class="list">
+          <swiper :options="swiperOptionSelectImage" class="list">
             <swiper-slide v-for="(v, i) in temp" :key="i" class="list-item">
               {{ v.a }}
             </swiper-slide>
@@ -47,62 +47,64 @@
       <div class="setting-talk">
         <div class="setting-tit">대화 설정</div>
         <div class="tab-list">
-          <button type="button" class="tab-list--btn active">대사</button>
-          <button type="button" class="tab-list--btn">나레이션</button>
-          <button type="button" class="tab-list--btn">객관식</button>
-          <button type="button" class="tab-list--btn">주관식</button>
+          <button type="button" class="tab-list--btn" :class="{active:cutType===1}" @click="onClickChangeCutType(1)">대사</button>
+          <button type="button" class="tab-list--btn" :class="{active:cutType===2}" @click="onClickChangeCutType(2)">나레이션</button>
+          <button type="button" class="tab-list--btn" :class="{active:cutType===3}" @click="onClickChangeCutType(3)">객관식</button>
+          <button type="button" class="tab-list--btn" :class="{active:cutType===4}" @click="onClickChangeCutType(4)">주관식</button>
         </div>
-        <div class="tab-con">
-          <div class="tab-list type2">
-            <button type="button" class="tab-list--btn active">주인공</button>
-            <button type="button" class="tab-list--btn">이지안</button>
-          </div>
-          <div class="insert-wrap">
-            <textarea
-              placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다.
+        <swiper v-show="cutType===1" :options="swiperOptionSelectCharacter" class="tab-list type2">
+          <swiper-slide v-for="(v, i) in 20" :key="i" class="tab-list--item">
+            <label class="radio">
+              <input type="radio" name="character" />
+              <span>주인공</span>
+            </label>
+          </swiper-slide>
+        </swiper>
+        <div v-show="cutType!==4" class="insert-wrap">
+          <textarea
+            placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다.
 인물의 대화를 입력해 주세요"
-              rows="3"
-            ></textarea>
-            <div class="insert-set">
-              <button type="button" class="btn sound">사운드 설정</button>
-              <div class="set sound-set"></div>
-              <button v-show="!pointSettingShow" type="button" class="btn point" @click="onClickPointSetting('set')">포인트 설정</button>
-              <div v-show="pointSettingShow" class="set point-set">
-                <select class="input-select">
-                  <option>이지안</option>
-                  <option>하린</option>
-                  <option>안보나</option>
-                  <option>권시아</option>
-                </select>
-                <input type="number" class="input-number" />
-                <span class="text">포인트</span>
-                <select class="input-select">
-                  <option>증가</option>
-                  <option>감소</option>
-                </select>
-                <button type="button" class="save" @click="onClickPointSetting('save')">저장</button>
-              </div>
-              <button v-show="!scenarioSettingShow" type="button" class="btn scenario" @click="onClickScenarioSetting('set')">시나리오 연결</button>
-              <div v-show="scenarioSettingShow" class="set scenario-set">
-                <select class="input-select">
-                  <option>시나리오1</option>
-                  <option>시나리오2</option>
-                </select>
-                <select class="input-select">
-                  <option>챕터2</option>
-                  <option>챕터2</option>
-                </select>
-                <select class="input-select">
-                  <option>선택안함</option>
-                  <option>CUT1</option>
-                  <option>CUT2</option>
-                </select>
-                <button type="button" class="save" @click="onClickScenarioSetting('save')">저장</button>
-              </div>
+            rows="3"
+          ></textarea>
+          <div class="insert-set">
+            <button type="button" class="btn sound">사운드 설정</button>
+            <div class="set sound-set"></div>
+            <button v-show="!pointSettingShow" type="button" class="btn point" @click="onClickPointSetting('set')">포인트 설정</button>
+            <div v-show="pointSettingShow" class="set point-set">
+              <select class="input-select">
+                <option>이지안</option>
+                <option>하린</option>
+                <option>안보나</option>
+                <option>권시아</option>
+              </select>
+              <input type="number" class="input-number" />
+              <span class="text">포인트</span>
+              <select class="input-select">
+                <option>증가</option>
+                <option>감소</option>
+              </select>
+              <button type="button" class="save" @click="onClickPointSetting('save')">저장</button>
+            </div>
+            <button v-show="!scenarioSettingShow" type="button" class="btn scenario" @click="onClickScenarioSetting('set')">시나리오 연결</button>
+            <div v-show="scenarioSettingShow" class="set scenario-set">
+              <select class="input-select">
+                <option>시나리오1</option>
+                <option>시나리오2</option>
+              </select>
+              <select class="input-select">
+                <option>챕터2</option>
+                <option>챕터2</option>
+              </select>
+              <select class="input-select">
+                <option>선택안함</option>
+                <option>CUT1</option>
+                <option>CUT2</option>
+              </select>
+              <button type="button" class="save" @click="onClickScenarioSetting('save')">저장</button>
             </div>
           </div>
-          <button type="button" class="cut-add"></button>
         </div>
+        <button v-show="cutType===3" type="button" class="cut-add"></button>
       </div>
     </div>
     <div class="right"></div>
@@ -475,7 +477,7 @@ export default {
         effect: [],
       }, // input data bind
       sceneData: [],
-      swiperOption: {
+      swiperOptionSelectImage: {
         loop: false,
         slidesPerView: 13,
         slidesPerGroup: 13,
@@ -485,10 +487,17 @@ export default {
           prevEl: '.swiper-button-prev',
         },
       },
+      swiperOptionSelectCharacter: {
+        loop: false,
+        slidesPerView: 16,
+        slidesPerGroup: 16,
+        spaceBetween:5,
+      },
       temp: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 6 }, { a: 7 }, { a: 8 }, { a: 9 }, { a: 10 }, { a: 11 }, { a: 12 }, { a: 13 }, { a: 14 }, { a: 15 }, { a: 16 }],
       cutListShow:false,
       pointSettingShow:false,
       scenarioSettingShow:false,
+      cutType:1,
     }
   },
   computed: {
@@ -651,6 +660,9 @@ export default {
       this.scenarioSettingShow = true
       if(type==='save') this.scenarioSettingShow = false
     },
+    onClickChangeCutType(type){
+      this.cutType = type
+    }
   },
 }
 </script>
