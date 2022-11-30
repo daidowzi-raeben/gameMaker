@@ -35,6 +35,11 @@ const createStore = () => {
             SCENE_CODE: null,
             CHAPTER_DATA: [],
             // 프리뷰 데이터
+            MAKER_AXIOS: {
+                bg: [],
+                cr: [],
+                su: [],
+            },
             PREVIEW: [{
                 img: {
                     bg: '',
