@@ -372,6 +372,17 @@
                 }
               }
             }
+            &:after{
+              content:"";
+              display:block;
+              width:50px;
+              height: 22px;
+              background:linear-gradient( to right, transparent, #fff );
+              position:absolute;
+              right:0;
+              top:0;
+              z-index: 1;
+            }
           }
         }
 
@@ -453,6 +464,14 @@
             }
           }
         }
+
+        .label{
+          height:0;
+          margin:-10px 10px 0;
+          font-size:1.6rem;
+          position: relative;
+          top:15px;
+        }
       }
 
       &-tit {
@@ -460,6 +479,21 @@
         padding-left: 20px;
         background: url(~/static/images/icon/setting.svg)no-repeat left center / 15px;
         margin-bottom: 15px;
+        display:flex;
+        .input-check{
+          .check-text{
+            font-size:1.1rem;
+            background-color:#D9D9D9;
+            padding:2px 10px;
+            border-radius: 5px;
+            color:$textCol2;
+            margin-left:10px;
+          }
+          input[type=checkbox]:checked + .check-text{
+            background-color:$colPink;
+            color:#fff;
+          }
+        }
       }
     }
 
@@ -518,8 +552,19 @@
         &--item {
           border-right: 1px dashed #eee;
           margin: 15px 0 5px;
-          padding: 0 10px;
+          padding: 0 15px;
           width: 300px;
+          position:relative;
+
+          .active-sign{
+            display:block;
+            width:30px;
+            height:30px;
+            background:url(~/static/images/icon/play.svg)no-repeat center;
+            position:absolute;
+            left:calc(50% - 15px);
+            top:-5px;
+          }
 
           .tit {
             font-size: 1.4rem;
@@ -600,7 +645,7 @@
           }
 
           .text-preview {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: $textCol2;
             display: -webkit-box;
             word-wrap: break-word;
@@ -608,9 +653,30 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            height: 68px;
+            height: 70px;
             margin-top: 5px;
             font-weight: 300;
+            .dot{
+              margin:0 3px;
+              display: inline-block;
+              width:3px;
+              height:3px;
+              border-radius: 50%;
+              background-color:#D9D9D9;
+              vertical-align: middle;
+            }
+            .red{
+              color:$colPink;
+              font-weight: 500;
+              width:18px;
+              display:inline-block;
+            }
+            .blue{
+              color:$colBlue;
+              font-weight: 500;
+              width:18px;
+              display:inline-block;
+            }
           }
         }
       }

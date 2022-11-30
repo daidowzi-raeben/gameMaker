@@ -52,7 +52,7 @@
           <button type="button" class="tab-list--btn" :class="{active:cutType===3}" @click="onClickChangeCutType(3)">객관식</button>
           <button type="button" class="tab-list--btn" :class="{active:cutType===4}" @click="onClickChangeCutType(4)">주관식</button>
         </div>
-        <swiper v-show="cutType===1" :options="swiperOptionSelectCharacter" class="tab-list type2">
+        <swiper v-if="cutType===1" :options="swiperOptionSelectCharacter" class="tab-list type2">
           <swiper-slide v-for="(v, i) in 20" :key="i" class="tab-list--item">
             <label class="radio">
               <input type="radio" name="character" />
@@ -60,10 +60,26 @@
             </label>
           </swiper-slide>
         </swiper>
-        <div v-show="cutType!==4" class="insert-wrap">
+        <label v-if="cutType===4" class="label">질문</label>
+        <div v-if="cutType===4" class="insert-wrap">
           <textarea
+            rows="3"
+          ></textarea>
+          <div class="insert-set">
+            <button type="button" class="btn sound">사운드 설정</button>
+            <div class="set sound-set"></div>
+          </div>
+        </div>
+        <label v-if="cutType===4" class="label">정답</label>
+        <div class="insert-wrap">
+          <textarea
+            v-if="cutType!==4"
             placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다.
 인물의 대화를 입력해 주세요"
+            rows="3"
+          ></textarea>
+          <textarea
+            v-else
             rows="3"
           ></textarea>
           <div class="insert-set">
@@ -104,7 +120,7 @@
             </div>
           </div>
         </div>
-        <button v-show="cutType===3" type="button" class="cut-add"></button>
+        <button v-if="cutType===3" type="button" class="cut-add"></button>
       </div>
     </div>
     <div class="right"></div>
@@ -117,8 +133,14 @@
           <span v-else class="text">펼치기</span>
         </button>
       </div>
-      <ul v-show-slide="cutListShow" class="cut-list">
-        <li class="cut-list--item">
+      <!-- <div>
+        <button @click="slideTo(1)">Slide 1</button>
+        <button @click="slideTo(50)">Slide 50</button>
+        <button @click="slideTo(100)">Slide 100</button>
+      </div> -->
+      <swiper v-show-slide="cutListShow" :options="swiperOptionCutList" class="cut-list">
+        <swiper-slide v-for="(v, i) in 100" :key="i" class="cut-list--item">
+          <span v-if="i===0" class="active-sign"></span>
           <div class="tit">CUT 10</div>
           <ul class="preview-list">
             <li class="preview-list--item">
@@ -144,7 +166,7 @@
             <span class="text">챕터1</span>
             <span class="text">CUT 5</span>
           </div>
-          <div class="text-preview">
+          <div v-if="i!==1 && i!==2" class="text-preview">
             안녕? 대사를 치면 여기에도 미리보기 노출이 될거에요 width는 작업해
             보고 잡을 예정이고 여긴 줄바꿈이 없어요 시나리오 1장 글시는 5차
             제한으로 ... 처리! 여긴 최대 4줄까지 출력 안녕? 대사를 치면 여기에도
@@ -152,8 +174,18 @@
             줄바꿈이 없어요 시나리오 1장 글시는 5차 제한으로 ... 처리! 여긴 최대
             4줄까지 출력
           </div>
-        </li>
-      </ul>
+          <div v-if="i===1" class="text-preview">
+            Q. 질문을하는데 1 <span class="dot"></span> 이지안+5<br />
+            Q. 질문을하는데 1 <span class="dot"></span> 이지안+5<br />
+            Q. 질문을하는데 1 <span class="dot"></span> 이지안+5
+          </div>
+          <div v-if="i===2" class="text-preview">
+            Q. 질문을하는데 1<br />
+            <span class="red">+5</span> 이지안<br />
+            <span class="blue">-5</span> 이지안
+          </div>
+        </swiper-slide>
+      </swiper>
     </div>
   </div>
   <!-- <div class="maker-right">
@@ -493,6 +525,11 @@ export default {
         slidesPerGroup: 16,
         spaceBetween:5,
       },
+      swiperOptionCutList: {
+        loop: false,
+        slidesPerView: 4,
+        slidesPerGroup: 4,
+      },
       temp: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 6 }, { a: 7 }, { a: 8 }, { a: 9 }, { a: 10 }, { a: 11 }, { a: 12 }, { a: 13 }, { a: 14 }, { a: 15 }, { a: 16 }],
       cutListShow:false,
       pointSettingShow:false,
@@ -662,6 +699,10 @@ export default {
     },
     onClickChangeCutType(type){
       this.cutType = type
+    },
+    slideTo(index) {
+      console.log(this.$refs.cutList)
+      this.$refs.cutList.slideTo(index - 1, 0)
     }
   },
 }
