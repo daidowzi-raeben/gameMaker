@@ -49,6 +49,7 @@ const createStore = () => {
                     type: '',
                     point: '',
                     pointCr: '',
+                    pointType: '',
                     su: '',
                     text: [],
                     cr: '',
