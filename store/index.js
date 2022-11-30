@@ -34,6 +34,25 @@ const createStore = () => {
             SCENE_DATA_INIT: [],
             SCENE_CODE: null,
             CHAPTER_DATA: [],
+            // 프리뷰 데이터
+            PREVIEW: [{
+                img: {
+                    bg: '',
+                    cr: '',
+                },
+                data: {
+                    type: '',
+                    point: '',
+                    pointCr: '',
+                    su: '',
+                    text: [],
+                    cr: '',
+                    effect: '',
+                    connect: '',
+                    code: ''
+                }
+            }],
+            MAKER_GNB: ''
 
         },
         getters: {
@@ -74,6 +93,12 @@ const createStore = () => {
             MUTATIONS_AXIOS_GET_PROJECT_DETAIL(state, payload) {
                 // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
                 state.SCENE_DATA = payload
+            },
+
+            // GNB LOAD
+            MUTATIONS_MAKER_GNB(state, payload) {
+                // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
+                state.MAKER_GNB = payload
             },
 
             // POST 성공

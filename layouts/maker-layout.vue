@@ -3,19 +3,17 @@
     <header class="maker-header">
       <ul class="maker-header--menu">
         <li
-          v-for="menu in 7"
-          :key="menu"
+          v-for="(menu, menuIndex) in gnb"
+          :key="menuIndex"
           class="item"
-          :class="{ active: activeManu == menu }"
+          :class="{ active: activeManu == menu.code }"
         >
-          <button type="button" :class="`icon icon-${menu}`">
-            <span v-if="menu == 1" class="icon-txt">스토리</span>
-            <span v-else-if="menu == 2" class="icon-txt">인트로</span>
-            <span v-else-if="menu == 3" class="icon-txt">엔딩</span>
-            <span v-else-if="menu == 4" class="icon-txt">인물설정</span>
-            <span v-else-if="menu == 5" class="icon-txt">UI설정</span>
-            <span v-else-if="menu == 6" class="icon-txt">에셋관리</span>
-            <span v-else-if="menu == 7" class="icon-txt">프로젝트설정</span>
+          <button
+            type="button"
+            :class="`icon icon-${menu.code}`"
+            @click="onClickGnbTo(menu.code)"
+          >
+            <span class="icon-txt">{{ menu.menu }} {{ MAKER_GNB }}</span>
           </button>
         </li>
       </ul>
@@ -54,10 +52,19 @@ export default {
     return {
       activeManu: 1,
       stateLogin: [],
+      gnb: [
+        { code: 1, menu: '스토리' },
+        { code: 2, menu: '인트로' },
+        { code: 3, menu: '엔딩' },
+        { code: 4, menu: '인물설정' },
+        { code: 5, menu: 'UI설정' },
+        { code: 6, menu: '에셋관리' },
+        { code: 7, menu: '프로젝트설정' },
+      ],
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'SCENE_CODE']),
+    ...mapState(['LOGIN', 'LOADING', 'SCENE_CODE', 'MAKER_GNB']),
   },
   watch: {
     LOGIN: {
@@ -90,7 +97,7 @@ export default {
     // window.removeEventListener('beforeunload', this.unLoadEvent)
   },
   methods: {
-    ...mapMutations(['MUTATIONS_LOGIN_CHECK']),
+    ...mapMutations(['MUTATIONS_LOGIN_CHECK', 'MUTATIONS_MAKER_GNB']),
 
     // 페이지 이탈 경고
     unLoadEvent(event) {
@@ -99,6 +106,9 @@ export default {
     },
     scenarioInsert(e) {
       console.log(e)
+    },
+    onClickGnbTo(e) {
+      this.MUTATIONS_MAKER_GNB(e)
     },
   },
 }
