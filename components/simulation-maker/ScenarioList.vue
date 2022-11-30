@@ -62,11 +62,10 @@
               class="chapter-list--item"
             >
               <span class="chapter-tit">
-                <span
-                  style="color: #fff; cursor: pointer"
-                  @click="onClickChapterTo(chapter.timestamp)"
-                  >{{ chapter.tit }}</span
-                >
+                <label @click="onClickChapterTo(chapter.timestamp)">
+                  <input type="radio" name="chapterTitle" />
+                  <span style="cursor: pointer">{{ chapter.tit }}</span>
+                </label>
                 <button
                   type="button"
                   class="chapter-modi"
@@ -178,7 +177,7 @@ export default {
       console.log('Future index: ' + e.draggedContext.futureIndex)
     },
     // 챕터 이동
-    onClickChapterTo(e) {
+    onClickChapterTo(e, t) {
       this.MUTATIONS_SCENE_CODE(e)
     },
     onClickToggleScenario(idx) {
@@ -238,36 +237,56 @@ export default {
       this.MUTATIONS_SCENE_DATA(this.scenarioLists)
     },
     onClickDeleteChapterList(timestamp, index) {
-      console.log(timestamp, index)
-      this.scenarioListsCopy = []
-      this.$nextTick(() => {
-        this.SCENE_DATA[index]?.chapters.forEach((e, i) => {
-          if (e.timestamp !== timestamp) {
-            console.log(e)
-            this.scenarioListsCopy[i] = this.SCENE_DATA[index]?.chapters[i]
-          }
+      if (confirm('삭제하시겠습니까?')) {
+        console.log(timestamp, index)
+        this.scenarioListsCopy = []
+        this.$nextTick(() => {
+          this.SCENE_DATA[index]?.chapters.forEach((e, i) => {
+            if (e.timestamp !== timestamp) {
+              console.log(e)
+              this.scenarioListsCopy[i] = this.SCENE_DATA[index]?.chapters[i]
+            }
+          })
+          this.chaptersListsCopy.chapters = this.scenarioListsCopy
+          this.chaptersListsCopy.arrIndex = index
+          console.log(this.chaptersListsCopy)
+          this.MUTATIONS_CHAPTER_DATA(this.chaptersListsCopy)
         })
-        this.chaptersListsCopy.chapters = this.scenarioListsCopy
-        this.chaptersListsCopy.arrIndex = index
-        console.log(this.chaptersListsCopy)
-        this.MUTATIONS_CHAPTER_DATA(this.chaptersListsCopy)
-      })
+      } else {
+        return false
+      }
     },
     onClickDeleteScenarioList(timestamp) {
-      this.scenarioListsCopy = []
-      console.log('SCENE_DATA', this.SCENE_DATA)
-      this.$nextTick(() => {
-        this.SCENE_DATA.forEach((e, i) => {
-          if (e.timestamp !== timestamp) {
-            console.log(e)
-            this.scenarioListsCopy[i] = this.SCENE_DATA[i]
-          }
+      if (confirm('삭제하시겠습니까?')) {
+        this.scenarioListsCopy = []
+        console.log('SCENE_DATA', this.SCENE_DATA)
+        this.$nextTick(() => {
+          this.SCENE_DATA.forEach((e, i) => {
+            if (e.timestamp !== timestamp) {
+              console.log(e)
+              this.scenarioListsCopy[i] = this.SCENE_DATA[i]
+            }
+          })
+          this.MUTATIONS_SCENE_DATA(this.scenarioListsCopy)
         })
-        this.MUTATIONS_SCENE_DATA(this.scenarioListsCopy)
-      })
+      } else {
+        return false
+      }
     },
   },
 }
 </script>
 
-<style></style>
+<style lang="scss">
+input[name='chapterTitle'] {
+  display: none;
+  + span {
+    color: #fff;
+  }
+  &:checked {
+    + span {
+      color: #efdc2c;
+    }
+  }
+}
+</style>
