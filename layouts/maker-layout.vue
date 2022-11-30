@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ SCENE_CODE }}
     <header class="maker-header">
       <ul class="maker-header--menu">
         <li
@@ -57,7 +58,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING']),
+    ...mapState(['LOGIN', 'LOADING', 'SCENE_CODE']),
   },
   watch: {
     LOGIN: {
@@ -78,16 +79,16 @@ export default {
         user_name: kooLogin('user_name'),
       },
     ]
-    // if (kooLogin('user_idx') && kooLogin('user_name')) {
-    //   this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
-    // } else {
-    //   this.$router.push('/sign-in')
-    // }
+    if (kooLogin('user_idx') && kooLogin('user_name')) {
+      this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
+    } else {
+      this.$router.push('/sign-in')
+    }
 
-    window.addEventListener('beforeunload', this.unLoadEvent)
+    // window.addEventListener('beforeunload', this.unLoadEvent)
   },
   beforeUnmount() {
-    window.removeEventListener('beforeunload', this.unLoadEvent)
+    // window.removeEventListener('beforeunload', this.unLoadEvent)
   },
   methods: {
     ...mapMutations(['MUTATIONS_LOGIN_CHECK']),

@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+export const timeStamp = function () {
+  const time = Date.now();
+  return time
+}
+
 export const kooLogin = function (cName) {
   console.log('hitoryBackhitoryBackhitoryBack')
   cName = cName + '=';

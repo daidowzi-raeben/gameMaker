@@ -1,93 +1,7 @@
 <template>
   <div id="gameMaker">
     <div class="maker-wrap">
-      <div class="maker-left">
-        <ul class="scenario-list">
-          <li
-            v-for="(scenarioList, index) in scenarioLists"
-            :key="index"
-            :ref="`scenarioList${index}`"
-            class="scenario-list--item"
-            :class="{ active: scenarioList.active === true }"
-          >
-            <span class="scenario-tit">
-              {{ scenarioList.tit }}
-              <button
-                type="button"
-                class="scenario-modi"
-                @click="onClickTitleModi(`${index}`)"
-              ></button>
-              <button
-                type="button"
-                class="chapter-add"
-                @click="onClickChapterAdd(`${index}`)"
-              >
-                +
-              </button>
-              <button type="button" class="scenario-del" @click="onClickDeleteList(index)"></button>
-            </span>
-            <button
-              class="scenario-list--toggle"
-              :class="{ active: scenarioList.fold === true }"
-              @click="onClickToggleScenario(`${index}`)"
-            ></button>
-            <input
-              v-show="scenarioList.modi === true"
-              :ref="`scenarioModiInput${index}`"
-              v-model="scenarioList.tit"
-              type="text"
-              class="scenario-input"
-              maxlength="15"
-              @blur="onEnterTitleChange(`${index}`, $event)"
-              @keyup.enter="onEnterTitleChange(`${index}`, $event)"
-            />
-            <!-- {{ scen.chapters }} -->
-            <ul v-show-slide="scenarioList.fold" class="chapter-list">
-              <draggable
-                :list="scenarioList.chapters"
-                :disabled="!enabled"
-                class="list-group"
-                ghost-class="ghost"
-                :move="checkMove"
-                @start="dragging = true"
-                @end="dragging = false"
-              >
-                <li
-                  v-for="(chapter, index2) in scenarioList.chapters"
-                  :key="index2"
-                  :ref="`chapterList${index}_${index2}`"
-                  class="chapter-list--item"
-                >
-                  <span class="chapter-tit">
-                    {{ chapter.tit }}
-                    <button
-                      type="button"
-                      class="chapter-modi"
-                      @click="onClickTitleModi(`${index}`, `${index2}`)"
-                    ></button>
-                    <button type="button" class="chapter-del" @click="onClickDeleteList(index, index2)"></button>
-                  </span>
-                  <input
-                    v-show="chapter.modi === true"
-                    :ref="`chapterListModiInput${index}_${index2}`"
-                    v-model="chapter.tit"
-                    type="text"
-                    class="chapter-input"
-                    maxlength="15"
-                    @blur="onEnterTitleChange(`${index}`, $event, `${index2}`)"
-                    @keyup.enter="onEnterTitleChange(`${index}`, $event, `${index2}`)"
-                  />
-                </li>
-              </draggable>
-            </ul>
-          </li>
-        </ul>
-        <button
-          type="button"
-          class="scenario-add"
-          @click="onClickScenarioAdd"
-        ></button>
-      </div>
+      <ScenarioList />
       <CutInsert
         @myLoadBgImage="myLoadBgImage"
         @myLoadCrImage="myLoadCrImage"
@@ -170,9 +84,11 @@
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
 import CutInsert from '~/components/simulation-maker/CutInsert.vue'
+import ScenarioList from '~/components/simulation-maker/ScenarioList.vue'
 export default {
   components: {
     CutInsert,
+    ScenarioList,
   },
   layout: 'maker-layout',
   validate({ params }) {
@@ -189,6 +105,7 @@ export default {
       enabled: true,
       dragging: false,
       assetTab: 1,
+      queryIndex: '',
       tempData: {
         bg: 'https://img.lovepik.com/background/20211102/medium/lovepik-banff-national-park-mobile-wallpaper-canada-background-image_400706001.jpg',
         cr: 'https://cdn.pixabay.com/photo/2013/07/12/13/27/man-147091_960_720.png',
@@ -196,67 +113,25 @@ export default {
         text: '',
         effect: '',
       },
-      scenarioLists: [
-        {
-          tit: '시나리오제목1',
-          fold: true,
-          modi: false,
-          active: true,
-          chapters: [
-            {
-              tit: '챕터제목1',
-              modi: false,
-            },
-            {
-              tit: '챕터제목2',
-              modi: false,
-            },
-          ],
-        },
-        {
-          tit: '시나리오제목2',
-          fold: false,
-          modi: false,
-          active: false,
-          chapters: [
-            {
-              tit: '챕터제목1',
-              modi: false,
-            },
-            {
-              tit: '챕터제목2',
-              modi: false,
-            },
-            {
-              tit: '챕터제목3',
-              modi: false,
-            },
-          ],
-        },
-      ],
+
       cutCode: '',
     }
   },
   computed: {
     ...mapState(['LOGIN', 'LOADING', 'SCENE']),
-    draggingInfo() {
-      return this.dragging ? 'under drag' : ''
-    },
   },
   mounted() {
+    this.queryIndex = this.idx
     this.params.type = 'projectDetail'
     this.params.apiKey = process.env.API_KEY
     console.log(this.idx)
+    this.MUTATIONS_PROJECT(this.queryIndex)
     // this.ACTION_AXIOS_GET()
   },
   beforeDestroy() {},
   methods: {
     ...mapActions(['ACTION_AXIOS_GET']),
-    ...mapMutations(['']),
-    // 드래그 데이터 갱신
-    checkMove(e) {
-      console.log('Future index: ' + e.draggedContext.futureIndex)
-    },
+    ...mapMutations(['MUTATIONS_PROJECT']),
 
     myLoadBgImage(e) {
       console.log('myLoadBgImage', e)
@@ -286,52 +161,6 @@ export default {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
       }
-    },
-    onClickToggleScenario(idx) {
-      this.scenarioLists[idx].fold = !this.scenarioLists[idx].fold
-    },
-    onClickTitleModi(idx, idx2) {
-        if(typeof idx2 === 'undefined'){
-          this.scenarioLists[idx].modi = true
-          this.$nextTick(function() {
-            this.$refs[`scenarioModiInput${idx}`][0].focus()
-          });
-        }
-        else{
-          this.scenarioLists[idx].chapters[idx2].modi = true
-          this.$nextTick(function() {
-            this.$refs[`chapterListModiInput${idx}_${idx2}`][0].focus()
-          });
-        }
-    },
-    onEnterTitleChange(idx, e, idx2) {
-      if (typeof idx2 === 'undefined') {
-        this.scenarioLists[idx].tit = e.target.value
-        this.scenarioLists[idx].modi = false
-      } else {
-        this.scenarioLists[idx].chapters[idx2].tit = e.target.value
-        this.scenarioLists[idx].chapters[idx2].modi = false
-      }
-    },
-    onClickScenarioAdd() {
-      this.scenarioLists.push({
-        tit: '시나리오제목',
-        fold: true,
-        modi: false,
-        active: false,
-        chapters: [],
-      })
-    },
-    onClickChapterAdd(idx) {
-      this.scenarioLists[idx].chapters.push({
-        tit: '챕터제목',
-        modi: false,
-      })
-    },
-    onClickDeleteList(idx, idx2) {
-      typeof idx2 === 'undefined'
-        ? (this.$refs[`scenarioList${idx}`][0].remove())
-        : (this.$refs[`chapterList${idx}_${idx2}`][0].remove())
     },
   },
 }
