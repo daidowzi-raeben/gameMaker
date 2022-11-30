@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ SCENE_CODE }}
     <header class="maker-header">
       <ul class="maker-header--menu">
         <li

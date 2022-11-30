@@ -33,7 +33,8 @@ const createStore = () => {
             SCENE_DATA: [],
             SCENE_DATA_INIT: [],
             SCENE_CODE: null,
-            CHAPTER_DATA: []
+            CHAPTER_DATA: [],
+
         },
         getters: {
             GETTER_SCENE_DATA(state) {
