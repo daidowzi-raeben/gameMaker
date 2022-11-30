@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ SCENE_CODE }}
     <header class="maker-header">
       <ul class="maker-header--menu">
         <li
@@ -57,7 +58,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING']),
+    ...mapState(['LOGIN', 'LOADING', 'SCENE_CODE']),
   },
   watch: {
     LOGIN: {

@@ -15,6 +15,7 @@ const createStore = () => {
             LOGIN: {},
             PROJECT_MANAGER: [],
             IS_POST: false,
+            PROJECT_ID: '',
             POST: {
                 PROJECT_MANAGER: false,
             },
@@ -29,7 +30,10 @@ const createStore = () => {
                 { idx: '4', title: '4장', subTitle: '4' },
                 { idx: '5', title: '5장', subTitle: '5' },
             ],
-            SCENE_DATA: []
+            SCENE_DATA: [],
+            SCENE_DATA_INIT: [],
+            SCENE_CODE: null,
+            CHAPTER_DATA: []
         },
         getters: {
             GETTER_SCENE_DATA(state) {
@@ -63,6 +67,13 @@ const createStore = () => {
             MUTATIONS_AXIOS_GET_PROJECT(state, payload) {
                 state.PROJECT_MANAGER = payload
             },
+            MUTATIONS_PROJECT(state, payload) {
+                state.PROJECT_ID = payload
+            },
+            MUTATIONS_AXIOS_GET_PROJECT_DETAIL(state, payload) {
+                // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
+                state.SCENE_DATA = payload
+            },
 
             // POST 성공
             MUTATIONS_AXIOS_POST_SUCCESS(state, payload) {
@@ -75,14 +86,31 @@ const createStore = () => {
                 state.IS_POST = false
             },
             MUTATIONS_SCENE_DATA(state, payload) {
-                state.SCENE_DATA = []
-                console.log('MUTATIONS_SCENE_DATA', payload)
-                Object.entries(payload).forEach((v, i) => {
-
-                    console.log('MUTATIONS_SCENE_DATA ==== >', v[0], i)
-
-                })
-                state.SCENE_DATA = payload
+                let payLoad = []
+                payLoad = payload.filter(function (item) {
+                    return item !== null && item !== undefined && item !== '';
+                });
+                console.log('MUTATIONS_SCENE_DATA', payLoad)
+                state.SCENE_DATA = payLoad;
+            },
+            MUTATIONS_CHAPTER_DATA(state, payload) {
+                // CHAPTER_DATA
+                let payLoad = []
+                payLoad = payload?.chapters?.filter(function (item) {
+                    return item !== null && item !== undefined && item !== '';
+                });
+                console.log('MUTATIONS_CHAPTER_DATA', payLoad)
+                // console.log('state.SCENE_DATA[payload.arrIndex].chapters', state.SCENE_DATA[payload.arrIndex].chapters)
+                console.log('state.SCENE_DATA[0]', state.SCENE_DATA[payload.arrIndex].chapters)
+                state.SCENE_DATA[payload.arrIndex].chapters = payLoad;
+            },
+            // 데이터 재정렬
+            MUTATIONS_SCENE_DATA_RELOAD(state, payload) {
+                state.SCENE_DATA = payload;
+            },
+            // 데이터 코드
+            MUTATIONS_SCENE_CODE(state, payload) {
+                state.SCENE_CODE = payload;
             }
 
         },
@@ -126,6 +154,12 @@ const createStore = () => {
                             commit('MUTATIONS_AXIOS_GET_PROJECT', res.data)
                             return;
                         }
+                        if (params.type === 'scenarioDetail') {
+                            console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL')
+                            commit('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', res.data)
+                            return;
+                        }
+
                         commit('MUTATIONS_AXIOS_GET', res.data)
                     })
                     .catch((res) => {
@@ -144,6 +178,7 @@ const createStore = () => {
                         commit('MUTATIONS_LOADING', false)
                         console.log('MUTATIONS_AXIOS_POST_SUCCESS', res, params)
                         commit('MUTATIONS_AXIOS_POST_SUCCESS', res.data)
+
                         console.log('SUCCESS')
                     })
                     .catch((res) => {
