@@ -58,7 +58,8 @@ const createStore = () => {
                     code: ''
                 }
             }],
-            MAKER_GNB: ''
+            MAKER_GNB: '',
+            ASSETS: []
 
         },
         getters: {
@@ -143,6 +144,10 @@ const createStore = () => {
             // 데이터 코드
             MUTATIONS_SCENE_CODE(state, payload) {
                 state.SCENE_CODE = payload;
+            },
+            // 나의 에셋 로드
+            MUTATIONS_AXIOS_GET_ASSETS_PROJECT(state, payload) {
+                state.ASSETS = payload;
             }
 
         },
@@ -184,6 +189,10 @@ const createStore = () => {
                         console.log('ACTION_AXIOS_GET', res, params)
                         if (params.type === 'project') {
                             commit('MUTATIONS_AXIOS_GET_PROJECT', res.data)
+                            return;
+                        }
+                        if (params.type === 'assetsProject') {
+                            commit('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
                             return;
                         }
                         if (params.type === 'scenarioDetail') {
