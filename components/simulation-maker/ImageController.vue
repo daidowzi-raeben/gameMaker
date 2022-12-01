@@ -11,7 +11,13 @@
       <label class="label">배경</label>
       <swiper :options="swiperOptionSelectImage" class="list">
         <swiper-slide v-for="(v, i) in ASSETS.bg" :key="i" class="list-item">
-          <img :src="v.path" width="50" @click="onClickBgImage(v.path)" />
+          <label class="label" @change="onClickBgImage(v.path)">
+            <input type="radio" name="bgCheck" />
+            <span class="img-wrap">
+              <img :src="v.path" />
+            </span>
+
+          </label>
         </swiper-slide>
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>
@@ -21,7 +27,12 @@
       <label class="label">인물</label>
       <swiper :options="swiperOptionSelectImage" class="list">
         <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item">
-          <img :src="v.path" width="50" @click="onClickCrImage(v.path)" />
+          <label class="label top" >
+            <input type="radio" name="crCheck" @change="onClickCrImage(v.path)" />
+            <span class="img-wrap">
+              <img :src="v.path" />
+            </span>
+          </label>
         </swiper-slide>
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>

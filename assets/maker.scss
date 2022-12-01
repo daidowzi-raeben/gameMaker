@@ -230,7 +230,7 @@
     display: flex;
     position: relative;
 
-    .cut-insert{
+    .insert{
       display:flex;
       width: calc(100% - 365px);
       position: relative;
@@ -276,11 +276,37 @@
       background: #fff;
       border-radius: 10px;
       margin: 0 10px;
+      & > div{
+        padding: 15px 25px 10px 25px;
+        border-bottom: 1px solid #eee;
+        &:last-child{
+          border-bottom:none;
+        }
+      }
+
+      &-tit {
+        font-size: 1.8rem;
+        padding-left: 20px;
+        background: url(~/static/images/icon/setting.svg)no-repeat left center / 15px;
+        margin-bottom: 15px;
+        display:flex;
+        .input-check{
+          .check-text{
+            font-size:1.1rem;
+            background-color:#D9D9D9;
+            padding:2px 10px;
+            border-radius: 5px;
+            color:$textCol2;
+            margin-left:10px;
+          }
+          input[type=checkbox]:checked + .check-text{
+            background-color:$colPink;
+            color:#fff;
+          }
+        }
+      }
 
       &-scen {
-        border-bottom: 1px solid #eee;
-        padding: 15px 25px 10px 25px;
-
         &--list {
           display: flex;
           align-items: center;
@@ -289,25 +315,68 @@
           .label {
             font-size: 1.4rem;
             margin: 0 20px 0 0;
+            white-space: nowrap;
           }
 
           .list {
             display: flex;
             margin: 0;
-            width: 804px;
+            width: 800px;
             padding: 0 30px;
-
             &-item {
-              width: 50px;
-              height: 50px;
-              border-radius: 10px;
-              border: 1px solid #ddd;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-size: 1.2rem;
-              overflow: hidden;
-              cursor: pointer;
+              .label{
+                cursor: pointer;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                position:relative;
+                z-index: 1;
+                .img-wrap{
+                  display: block;
+                  position:absolute;
+                  width:100%;
+                  height:100%;
+                  left:0;
+                  top:0;
+                  border: 1px solid #ddd;
+                  z-index: 1;
+                  border-radius: 10px;
+                  overflow: hidden;
+                  img{
+                    width:50px;
+                  }
+                }
+                input[type=radio]{
+                  appearance: none;
+                  width: 0;
+                  height: 0;
+                  position: absolute;
+                  &:checked ~ .img-wrap{
+                    border:2px solid $colPrimary;
+                    img{
+                      position:relative;
+                      left:-1px;
+                      top:-1px;
+                    }
+                    &:after{
+                      content:"";
+                      display:block;
+                      width:100%;
+                      height:100%;
+                      position:absolute;
+                      left:0;
+                      top:0;
+                      background-color:rgba(255, 255, 255, .6);
+                    }
+                  }
+                }
+                &.top{
+                  align-items: flex-start;
+                }
+              }
               &.active{
                 border:2px solid $colPrimary;
                 &:after{
@@ -348,8 +417,6 @@
       }
 
       &-talk {
-        padding: 15px 25px 10px 25px;
-
         .tab-list {
           width: 900px;
           position: relative;
@@ -499,27 +566,103 @@
         }
       }
 
-      &-tit {
-        font-size: 1.8rem;
-        padding-left: 20px;
-        background: url(~/static/images/icon/setting.svg)no-repeat left center / 15px;
-        margin-bottom: 15px;
-        display:flex;
-        .input-check{
-          .check-text{
-            font-size:1.1rem;
-            background-color:#D9D9D9;
-            padding:2px 10px;
-            border-radius: 5px;
-            color:$textCol2;
-            margin-left:10px;
+      &-copy{
+        .input-text{
+          width:100%;
+          height:38px;
+          margin-bottom:10px;
+        }
+      }
+
+      &-logo{
+        .input-wrap{
+          margin-bottom:10px;
+          .input-select{
+            min-width:114px;
+            height:38px;
           }
-          input[type=checkbox]:checked + .check-text{
-            background-color:$colPink;
-            color:#fff;
+          .input-text{
+            width:calc(100% - 250px);
+            margin:0 10px;
+            height:38px;
+          }
+          .input-file{
+            margin-bottom:0;
+            .btn, & ~ .btn{
+              height:38px;
+            }
           }
         }
       }
+
+      &-terms{
+        .input-wrap{
+          align-items: center;
+          margin-bottom:10px;
+          .input-select{
+            height:38px;
+            min-width: 114px;
+          }
+          .text{
+            font-size:1.4rem;
+            margin:0 5px;
+            &.red{
+              color:$colPink;
+              margin-left:15px;
+            }
+            &.blue{
+              color:$colBlue;
+              margin-left:15px;
+            }
+          }
+        }
+      }
+
+      &-profile{
+        .input-wrap{
+          margin-bottom:10px;
+          .input-select{
+            min-width: 114px;
+            height: 38px;
+          }
+          .input-text{
+            width:270px;
+            height: 38px;
+            margin-left:10px;
+          }
+        }
+        .textarea-wrap{
+          border:1px solid #ddd;
+          border-radius: 5px;
+          position:relative;
+          padding:10px 10px 60px;
+          .input-textarea{
+            width:100%;
+            border:none;
+            padding:0;
+          }
+          .insert-set{
+            position:absolute;
+            right:0;
+            bottom:5px;
+            padding:10px;
+            display: flex;
+            justify-content: flex-end;
+          }
+          .btn.sound{
+            width: 116px;
+            height: 34px;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin: 0 7px;
+            outline: none;
+            background-color: $colPrimary;
+          }
+        }
+      }
+
     }
 
     .right {
@@ -607,11 +750,16 @@
           .active-sign{
             display:block;
             width:30px;
-            height:30px;
-            background:url(~/static/images/icon/play.svg)no-repeat center;
+            height:22px;
+            border-radius: 5px;
+            background-color: #fff;
+            background-image:url(~/static/images/icon/play.svg);
+            background-repeat: no-repeat;
+            background-position: center;
             position:absolute;
             left:calc(50% - 15px);
-            top:-5px;
+            top:-10px;
+            z-index: 2;
           }
 
           .tit {
@@ -726,6 +874,73 @@
               display:inline-block;
             }
           }
+
+          .image-list{
+            width:100%;
+            height:213px;
+            position:relative;
+            border-radius: 10px;
+            overflow: hidden;
+            img{
+              width:100%;
+              position:absolute;
+              left:0;
+              top: 50%;
+              transform: translateY(-50%);
+              &.top{
+                top:0;
+                transform: none;
+              }
+            }
+            &:after{
+              content:"";
+              display:block;
+              width:100%;
+              height:100%;
+              position:absolute;
+              left:0;
+              top:0;
+              background-color: rgba(0, 0, 0, .7);
+            }
+            &--top{
+              position:absolute;
+              z-index: 1;
+              padding:13px;
+              left:0;
+              top:0;
+              .name, .text{
+                color:#fff;
+                font-size:1.2rem;
+                font-weight: 300;
+              }
+              .name{
+                font-size:1.4rem;
+                font-weight: 500;
+                margin-right:10px;
+              }
+            }
+            &--con{
+              position:absolute;
+              z-index: 1;
+              color:#fff;
+              left:0;
+              top:35px;
+              padding:13px;
+              font-size:1.2rem;
+              font-weight: 300;
+              display: -webkit-box;
+              word-wrap: break-word;
+              -webkit-line-clamp: 4;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              height: 83px;
+            }
+          }
+
+          &.type2{
+            padding:0 5px;
+          }
         }
       }
 
@@ -766,9 +981,10 @@
 
   &-img {
     width: 290px;
-    height: 570px;
+    height: 588px;
     position: relative;
-    margin: 10px auto;
+    margin: 0 auto;
+    overflow: hidden;
 
     img {
       width: 100%;
@@ -779,7 +995,7 @@
 
     .background {
       width: calc(100% - 20px);
-      height: 100%;
+      height: calc(100% - 20px);
       border-radius: 30px;
       overflow: hidden;
       top: 10px;
@@ -795,7 +1011,7 @@
     .dialogue {
       position: absolute;
       left: 10%;
-      bottom: 5px;
+      bottom: 25px;
       background-color: rgba(255, 255, 255, .8);
       width: 80%;
       border-radius: 10px;
@@ -1022,6 +1238,33 @@
     outline: none;
   }
 
+  &-file{
+    input[type=file]{
+      appearance: none;
+      width:0;
+      height:0;
+      position: absolute;
+    }
+    .btn, & ~ .btn{
+      width:116px;
+      font-size:1.4rem;
+      background-color:$colPrimary;
+      color:#fff;
+      font-weight: 300;
+      border-radius: 5px;
+      height:34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover{
+        color:#fff;
+      }
+    }
+    & ~ .delete{
+      background-color:$colPink;
+    }
+  }
+
   &-text,
   &-number,
   &-textarea {
@@ -1032,10 +1275,15 @@
     outline: none;
     border-radius: 5px;
     height: 34px;
+    &::placeholder{
+      color:#ccc;
+      font-weight: 300;
+    }
   }
 
   &-textarea {
     resize: none;
+    height: auto;
   }
 
   &-text {

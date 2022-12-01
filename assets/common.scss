@@ -457,6 +457,174 @@
         min-height: 200px;
       }
     }
+    &.asset{
+      .card-list--item{
+        padding:0;
+        overflow:hidden;
+        position:relative;
+        height: 320px;
+        img{
+          width:100%;
+          position:absolute;
+          left:0;
+          top:50%;
+          transform: translateY(-50%);
+          z-index: 1;
+        }
+        .like{
+          width:30px;
+          height:30px;
+          border-radius: 5px;
+          position:absolute;
+          right:10px;
+          top:10px;
+          background-color:rgba(0,0,0,.7);
+          z-index: 2;
+          cursor: pointer;
+          input[type=checkbox]{
+            appearance: none;
+            width:0;
+            height:0;
+            position: absolute;
+            &:checked ~ .icon{
+              background:url(~/static/images/icon/heart_fill.svg)no-repeat center;
+            }
+          }
+          .icon{
+            display:block;
+            width:100%;
+            height: 100%;
+            background:url(~/static/images/icon/heart.svg)no-repeat center;
+          }
+        }
+        .info{
+          position:absolute;
+          left:0;
+          bottom:0;
+          z-index: 2;
+          background-color:rgba(0,0,0,.7);
+          padding:15px;
+          .category{
+            color:#fff;
+            font-weight: 300;
+            font-size:1.2rem;
+          }
+          .text{
+            color:#fff;
+            font-size:1.6rem;
+            display: -webkit-box;
+            word-wrap: break-word;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 47px;
+          }
+          .bottom{
+            display:flex;
+            justify-content: space-between;
+            margin-top:10px;
+            .price{
+              color:$colSub;
+              font-size:1.2rem;
+              background:url(~/static/images/icon/C.svg)no-repeat left center;
+              padding-left:15px;
+              &.free{
+                padding-left:0;
+                background:none;
+              }
+            }
+            .cart{
+              input[type=checkbox]{
+                appearance: none;
+                width:0;
+                height:0;
+                position: absolute;
+                &:checked ~ .icon{
+                  background:url(~/static/images/icon/cart_fill.svg)no-repeat center;
+                }
+              }
+              .icon{
+                cursor: pointer;
+                display:block;
+                width:16px;
+                height: 16px;
+                background:url(~/static/images/icon/cart.svg)no-repeat center;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.theme{
+      .card-list--item{
+        padding:0;
+        border:none;
+        overflow:hidden;
+        a{
+          min-height: auto;
+          width:100%;
+          padding:30px;
+          text-align: center;
+          color:#fff;
+          font-size:1.6rem;
+          background-color: $colPrimary;
+        }
+      }
+    }
+  }
+}
+
+.top-search{
+  margin:70px auto;
+  text-align: center;
+  &--tit{
+    font-size:4rem;
+  }
+  .search-wrap{
+    position:relative;
+    max-width:475px;
+    width:100%;
+    margin: 20px auto 15px;
+    .input{
+      width: 100%;
+      height: 45px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1.4rem;
+      padding: 0 50px 0 15px;
+      outline: none;
+    }
+    .search-btn{
+      width: 16px;
+      height: 16px;
+      background: url(~/static/images/icon/search.svg) no-repeat center;
+      position: absolute;
+      right: 16px;
+      top: 15px;
+    }
+  }
+  .hash-list{
+    display:flex;
+    max-width:475px;
+    width:100%;
+    margin: 0 auto;
+    &--item{
+      margin-right: 5px;
+      a{
+        display:inline-block;
+        padding:4px 10px 5px;
+        font-size:1.2rem;
+        color:#fff;
+        background-color: $textCol2;
+        border-radius: 20px;
+        font-weight: 300;
+        &:before{
+          content:"#"
+        }
+      }
+    }
   }
 }
 

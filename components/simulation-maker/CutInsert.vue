@@ -48,9 +48,9 @@
             :key="i"
             class="tab-list--item"
           >
-            <label class="radio">
+            <label class="radio" @change="onCiickDataCr(v.name)">
               <input type="radio" name="character" :value="v.idx" />
-              <span @click="onCiickDataCr(v.name)">{{ v.name }}</span>
+              <span>{{ v.name }}</span>
             </label>
           </swiper-slide>
           <div class="swiper-scrollbar"></div>
