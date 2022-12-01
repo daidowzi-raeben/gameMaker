@@ -118,7 +118,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'SCENE']),
+    ...mapState(['LOGIN', 'LOADING', 'SCENE', 'MAKER_GNB']),
   },
   mounted() {
     this.queryIndex = this.idx

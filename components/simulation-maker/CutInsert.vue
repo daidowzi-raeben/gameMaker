@@ -1,19 +1,6 @@
 <template>
   <div class="maker-right">
-    <div class="preview">
-      <div class="preview-img">
-        <img :src="tempData.bg" alt="" class="background" />
-        <img ref="characterImage" :src="tempData.cr" alt="" class="character" />
-        <div class="dialogue">
-          <span class="name">{{ tempData.crName }}</span>
-          <p ref="myLoadText" class="text" style="white-space: pre-line"></p>
-        </div>
-        <img src="~/static/images/mockup.png" alt="" class="mockup" />
-      </div>
-      <div class="preview-save">
-        마지막 저장 <span class="time">22.11.22 17:20:20</span>
-      </div>
-    </div>
+    <PreviewApp />
     <div class="setting">
       <ImageController />
       <div class="setting-talk">
@@ -221,294 +208,17 @@
       </swiper>
     </div>
   </div>
-  <!-- <div class="maker-right">
-    {{ sceneData }}
-    <div
-      v-for="(cut, idx) in cuts"
-      :ref="`cut${idx}`"
-      :key="idx"
-      class="cutinsert-wrap"
-      @click="onClickFocus(idx)"
-    >
-      <div>CUT CODE : CUT {{ idx }} (컷 코드는 차후 생성 예정)</div>
-      <div class="cutinsert-top">
-        <label class="input-radio" @click="cut.type = cut.index + '_1'">
-          <input
-            type="radio"
-            :name="`type${idx}`"
-            :checked="`${cut.type}` === `${cut.index}_1`"
-          />
-          <span class="check radio"></span>
-          <span class="text">일반 대사</span>
-        </label>
-        <label class="input-radio" @click="cut.type = cut.index + '_2'">
-          <input
-            type="radio"
-            :name="`type${idx}`"
-            :checked="`${cut.type}` === `${cut.index}_2`"
-          />
-          <span class="check radio"></span>
-          <span class="text">객관식 선택지</span>
-        </label>
-        <label class="input-radio" @click="cut.type = cut.index + '_3'">
-          <input
-            type="radio"
-            :name="`type${idx}`"
-            :checked="`${cut.type}` === `${cut.index}_3`"
-          />
-          <span class="check radio"></span>
-          <span class="text">주관식 선택지</span>
-        </label>
-      </div>
-      <div v-if="`${cut.type}` === `${cut.index}` + '_1'" class="cutinsert-con">
-        <div class="input-wrap">
-          <label class="input-label">배경이미지</label>
-          <div class="input-con">
-            <select
-              class="input-select"
-              @change="onChangePreviewBg"
-              @blur="onBlurUpdate(idx)"
-            >
-              <option v-for="(v, i) in tempData.bg" :key="i" :value="v.path">
-                {{ v.name }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">캐릭터이미지</label>
-          <div class="input-con">
-            <select
-              class="input-select"
-              @change="onChangePreviewCr"
-              @blur="onBlurUpdate(idx)"
-            >
-              <option v-for="(v, i) in tempData.cr" :key="i" :value="v.path">
-                {{ v.name }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">캐릭터애니메이션</label>
-          <div class="input-con">
-            <select
-              class="input-select"
-              @change="onChangePreviewEffect"
-              @blur="onBlurUpdate(idx)"
-            >
-              <option
-                v-for="(v, i) in tempData.effect"
-                :key="i"
-                :value="v.effect"
-              >
-                {{ v.text }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">사운드</label>
-          <div class="input-con">
-            <select class="input-select" @blur="onBlurUpdate(idx)">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">대사</label>
-          <div class="input-con">
-            <textarea
-              class="input-textarea"
-              rows="2"
-              @input="onChangePreviewText"
-              @blur="onBlurUpdate(idx)"
-            ></textarea>
-          </div>
-        </div>
-      </div>
-      <div v-if="`${cut.type}` === `${cut.index}` + '_2'" class="cutinsert-con">
-        <div class="input-wrap">
-          <label class="input-label">배경이미지</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">캐릭터이미지</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">캐릭터애니메이션</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">사운드</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">항목</label>
-          <div class="input-con">
-            <div class="line">
-              <input type="text" class="input-text" />
-            </div>
-            <div class="line">
-              <select class="input-select">
-                <option>캐릭터선택</option>
-                <option>선택</option>
-                <option>선택</option>
-              </select>
-              <label class="input-label">호감도변화</label>
-              <input type="number" class="input-number" value="0" />
-            </div>
-          </div>
-          <div class="input-con">
-            <div class="line">
-              <input type="text" class="input-text" />
-            </div>
-            <div class="line">
-              <select class="input-select">
-                <option>캐릭터선택</option>
-                <option>선택</option>
-                <option>선택</option>
-              </select>
-              <label class="input-label">호감도변화</label>
-              <input type="number" class="input-number" value="0" />
-            </div>
-          </div>
-          <div class="input-con">
-            <div class="line">
-              <input type="text" class="input-text" />
-            </div>
-            <div class="line">
-              <select class="input-select">
-                <option>캐릭터선택</option>
-                <option>선택</option>
-                <option>선택</option>
-              </select>
-              <label class="input-label">호감도변화</label>
-              <input type="number" class="input-number" value="0" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div v-if="`${cut.type}` === `${cut.index}` + '_3'" class="cutinsert-con">
-        <div class="input-wrap">
-          <label class="input-label">배경이미지</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">캐릭터이미지</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">캐릭터애니메이션</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">사운드</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">질문</label>
-          <div class="input-con">
-            <input type="text" class="input-text" />
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">답</label>
-          <div class="input-con">
-            <input type="text" class="input-text" />
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">정답호감도</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>캐릭터선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-            <input type="number" class="input-number" value="0" />
-          </div>
-        </div>
-        <div class="input-wrap">
-          <label class="input-label">오답호감도</label>
-          <div class="input-con">
-            <select class="input-select">
-              <option>캐릭터선택</option>
-              <option>선택</option>
-              <option>선택</option>
-            </select>
-            <input type="number" class="input-number" value="0" />
-          </div>
-        </div>
-      </div>
-      <button type="button" class="btn-delete" @click="cutDelete(idx)">
-        삭제
-      </button>
-    </div>
-    <button type="button" class="btn-add" @click="onClickCutAdd()">
-      + 컷 추가하기
-    </button>
-  </div> -->
 </template>
 
 <script>
 // SCENE_DATA
 import { mapState, mapMutations } from 'vuex'
 import ImageController from './ImageController.vue'
+import PreviewApp from './PreviewApp.vue'
 export default {
   components: {
     ImageController,
+    PreviewApp,
   },
   data() {
     return {
@@ -519,22 +229,7 @@ export default {
           type: '0_1',
         },
       ],
-      tempData: {
-        bg: [],
-        cr: [],
-        crName: [],
-        text: '',
-        effect: [
-          {
-            effect: '',
-            text: '없음',
-          },
-          {
-            effect: 'vibration',
-            text: '흔들림',
-          },
-        ],
-      },
+
       cutCode: '',
       tempInputData: {
         bg: [],
@@ -564,7 +259,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'SCENE_DATA']),
+    ...mapState(['LOGIN', 'LOADING', 'SCENE_DATA', 'SCENE_CODE']),
   },
   // watch: {
   //   tempInputData: {
@@ -575,24 +270,14 @@ export default {
   //   },
   // },
   mounted() {
-    for (let i = 1; i < 19; i++) {
-      this.tempData.bg = [
-        ...this.tempData.bg,
-        {
-          name: `이미지${i}`,
-          path: `${process.env.VUE_APP_IMAGE}/bg/${i}.jpg`,
-        },
-      ]
-      this.tempData.cr = [
-        ...this.tempData.cr,
-        {
-          name: `이미지${i}`,
-          path: `${process.env.VUE_APP_IMAGE}/cr/${i}.png`,
-        },
-      ]
-    }
-    this.sceneData = [...this.sceneData]
-    // this.tempInputData = [...this.tempInputData]
+    // this.$nextTick(() => {
+    //   this.SCENE_DATA.forEach((e, i) => {
+    //     e.chapters.forEach((v, k) => {
+    //       console.log('=================', v)
+    //     })
+    //   })
+    // })
+    console.log(this.SCENE_CODE)
   },
   methods: {
     ...mapMutations(['MUTATIONS_SCENE_DATA']),

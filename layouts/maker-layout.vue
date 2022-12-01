@@ -13,7 +13,7 @@
             :class="`icon icon-${menu.code}`"
             @click="onClickGnbTo(menu.code)"
           >
-            <span class="icon-txt">{{ menu.menu }} {{ MAKER_GNB }}</span>
+            <span class="icon-txt">{{ menu.menu }}</span>
           </button>
         </li>
       </ul>
