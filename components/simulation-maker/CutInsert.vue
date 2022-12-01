@@ -1,6 +1,5 @@
 <template>
-  <div class="maker-right">
-    <PreviewApp />
+  <div class="cut-insert">
     <div class="setting">
       <ImageController />
       <div class="setting-talk">
@@ -135,7 +134,9 @@
         <button v-if="cutType === 3" type="button" class="cut-add"></button>
       </div>
     </div>
-    <div class="right"></div>
+    <div class="right" :class="{ fold: rightContentShow === true }">
+      <button type="button" class="btn-fold" :class="{ active: rightContentShow === true }" @click="onClickRightContentShow()"></button>
+    </div>
     <div class="cut" :class="{ fold: cutListShow === false }">
       <div class="cut-tit">
         <span class="scenario">시나리오 1장</span>
@@ -214,11 +215,9 @@
 // SCENE_DATA
 import { mapState, mapMutations } from 'vuex'
 import ImageController from './ImageController.vue'
-import PreviewApp from './PreviewApp.vue'
 export default {
   components: {
     ImageController,
-    PreviewApp,
   },
   data() {
     return {
@@ -256,6 +255,7 @@ export default {
       pointSettingShow: false,
       scenarioSettingShow: false,
       cutType: 1,
+      rightContentShow: false,
     }
   },
   computed: {
@@ -415,6 +415,9 @@ export default {
       console.log(this.$refs.cutList)
       this.$refs.cutList.slideTo(index - 1, 0)
     },
+    onClickRightContentShow(){
+      this.rightContentShow = !this.rightContentShow
+    }
   },
 }
 </script>

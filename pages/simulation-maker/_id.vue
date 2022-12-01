@@ -2,14 +2,17 @@
   <div id="gameMaker">
     <div class="maker-wrap">
       <ScenarioList />
-      <CutInsert
-        @myLoadBgImage="myLoadBgImage"
-        @myLoadCrImage="myLoadCrImage"
-        @myLoadCrName="myLoadCrName"
-        @myLoadText="myLoadText"
-        @myLoadFocus="myLoadFocus"
-        @myLoadEffect="myLoadEffect"
-      />
+      <div class="maker-right">
+        <PreviewApp />
+        <CutInsert
+          @myLoadBgImage="myLoadBgImage"
+          @myLoadCrImage="myLoadCrImage"
+          @myLoadCrName="myLoadCrName"
+          @myLoadText="myLoadText"
+          @myLoadFocus="myLoadFocus"
+          @myLoadEffect="myLoadEffect"
+        />
+      </div>
     </div>
     <!-- <div class="maker-wrap">
       <div class="maker-left">
@@ -85,10 +88,12 @@
 import { mapActions, mapState, mapMutations } from 'vuex'
 import CutInsert from '~/components/simulation-maker/CutInsert.vue'
 import ScenarioList from '~/components/simulation-maker/ScenarioList.vue'
+import PreviewApp from '~/components/simulation-maker/PreviewApp.vue'
 export default {
   components: {
     CutInsert,
     ScenarioList,
+    PreviewApp,
   },
   layout: 'maker-layout',
   validate({ params }) {
