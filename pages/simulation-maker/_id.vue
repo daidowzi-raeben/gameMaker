@@ -5,6 +5,7 @@
       <div class="maker-right">
         <PreviewApp />
         <CutInsert
+          v-if="!MAKER_GNB || MAKER_GNB === 1"
           @myLoadBgImage="myLoadBgImage"
           @myLoadCrImage="myLoadCrImage"
           @myLoadCrName="myLoadCrName"
@@ -12,6 +13,12 @@
           @myLoadFocus="myLoadFocus"
           @myLoadEffect="myLoadEffect"
         />
+        <IntroInsert v-if="MAKER_GNB === 2" />
+        <EndingInsert v-if="MAKER_GNB === 3" />
+        <CharacterInsert v-if="MAKER_GNB === 4" />
+        <UiPreInsert v-if="MAKER_GNB === 5" />
+        <AssetsInsert v-if="MAKER_GNB === 6" />
+        <SetupInsert v-if="MAKER_GNB === 7" />
       </div>
     </div>
     <!-- <div class="maker-wrap">
@@ -89,11 +96,23 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 import CutInsert from '~/components/simulation-maker/CutInsert.vue'
 import ScenarioList from '~/components/simulation-maker/ScenarioList.vue'
 import PreviewApp from '~/components/simulation-maker/PreviewApp.vue'
+import IntroInsert from '~/components/simulation-maker/IntroInsert.vue'
+import EndingInsert from '~/components/simulation-maker/EndingInsert.vue'
+import CharacterInsert from '~/components/simulation-maker/CharacterInsert.vue'
+import UiPreInsert from '~/components/simulation-maker/UiPreInsert.vue'
+import AssetsInsert from '~/components/simulation-maker/AssetsInsert.vue'
+import SetupInsert from '~/components/simulation-maker/SetupInsert.vue'
 export default {
   components: {
     CutInsert,
     ScenarioList,
     PreviewApp,
+    IntroInsert,
+    EndingInsert,
+    CharacterInsert,
+    UiPreInsert,
+    AssetsInsert,
+    SetupInsert,
   },
   layout: 'maker-layout',
   validate({ params }) {
@@ -123,7 +142,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'SCENE', 'MAKER_GNB']),
+    ...mapState(['LOGIN', 'LOADING', 'SCENE', 'MAKER_GNB', 'SCENE_CODE']),
   },
   mounted() {
     this.queryIndex = this.idx
