@@ -61,7 +61,7 @@ const createStore = () => {
                     code: ''
                 }
             },
-            MAKER_GNB: '',
+            MAKER_GNB: 1,
             ASSETS: [],
             SCENE_INDEX: null,
             CHAPTER_INDEX: null,

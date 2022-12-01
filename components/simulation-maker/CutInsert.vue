@@ -1,5 +1,5 @@
 <template>
-  <div class="cut-insert">
+  <div class="insert">
     <div class="setting">
       <ImageController />
       <div class="setting-talk">

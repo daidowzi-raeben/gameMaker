@@ -2,7 +2,7 @@
   <div class="setting-scen">
     <div class="setting-tit">
       화면 설정
-      <label class="input-check">
+      <label v-if="MAKER_GNB===1 || MAKER_GNB===3" class="input-check">
         <input ref="effectChecked" type="checkbox" value="vibration" />
         <span class="check-text" @click="onClickEffect()">흔들림</span>
       </label>
@@ -17,7 +17,7 @@
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
     </div>
-    <div class="setting-scen--list">
+    <div v-if="MAKER_GNB===1 || MAKER_GNB===4" class="setting-scen--list">
       <label class="label">인물</label>
       <swiper :options="swiperOptionSelectImage" class="list">
         <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item">
@@ -58,6 +58,7 @@ export default {
       'ASSETS',
       'PROJECT_ID',
       'PREVIEW',
+      'MAKER_GNB',
     ]),
   },
   mounted() {
