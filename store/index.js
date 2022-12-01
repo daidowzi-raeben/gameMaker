@@ -178,6 +178,10 @@ const createStore = () => {
             MUTATIONS_ASSETS_EFFECT(state, payload) {
                 state.PREVIEW.data.effect = payload;
             },
+            // 대사인물
+            MUTATIONS_ASSETS_DATA_CR(state, payload) {
+                state.PREVIEW.data.cr = payload;
+            },
 
         },
         actions: {

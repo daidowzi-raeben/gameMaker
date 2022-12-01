@@ -1,6 +1,6 @@
 <template>
   <div class="preview">
-    <div class="preview-img">
+    <div v-if="PREVIEW" class="preview-img">
       <img
         v-if="PREVIEW.img.bg"
         :src="PREVIEW.img.bg"
@@ -16,7 +16,7 @@
         :class="PREVIEW.data.effect"
       />
       <div class="dialogue">
-        <span class="name">{{ tempData.crName }}</span>
+        <span v-if="PREVIEW.data.cr" class="name">{{ PREVIEW.data.cr }}</span>
         <p ref="myLoadText" class="text" style="white-space: pre-line"></p>
       </div>
       <img src="~/static/images/mockup.png" alt="" class="mockup" />

@@ -50,7 +50,7 @@
           >
             <label class="radio">
               <input type="radio" name="character" :value="v.idx" />
-              <span>{{ v.name }}</span>
+              <span @click="onCiickDataCr(v.name)">{{ v.name }}</span>
             </label>
           </swiper-slide>
           <div class="swiper-scrollbar"></div>
@@ -266,7 +266,7 @@ export default {
         slidesPerGroup: 16,
         spaceBetween: 5,
         mousewheel: {
-          draggable:true
+          draggable: true,
         },
       },
       swiperOptionCutList: {
@@ -304,7 +304,7 @@ export default {
     console.log(this.SCENE_CODE)
   },
   methods: {
-    ...mapMutations(['MUTATIONS_SCENE_DATA']),
+    ...mapMutations(['MUTATIONS_SCENE_DATA', 'MUTATIONS_ASSETS_DATA_CR']),
     onClickCutAdd() {
       this.cutIndex++
       this.cuts.push({
@@ -328,100 +328,11 @@ export default {
       console.log(idx)
       this.$refs[`cut${idx}`][0].remove()
     },
-    // 배경 전송
-    onChangePreviewBg({ target }) {
-      console.log(target.value)
-      this.$emit('myLoadBgImage', target.value)
-      this.tempInputData.bg[this.cutCode] = target.value
-      console.log('tempInputData', this.tempInputData)
-    },
-    // 캐릭터 이미지 전송
-    onChangePreviewCr({ target }) {
-      console.log(target.value)
-      console.log(target.options[target.selectedIndex].text)
-      this.tempInputData.cr[this.cutCode] = target.value
-      this.tempInputData.crName[this.cutCode] =
-        target.options[target.selectedIndex].text
-      this.$emit('myLoadCrImage', target.value)
-      this.$emit('myLoadCrName', target.options[target.selectedIndex].text)
-      console.log('tempInputData', this.tempInputData)
-    },
-    // 대사 전송
-    onChangePreviewText({ target }) {
-      console.log(target.value)
-      this.tempInputData.text[this.cutCode] = target.value
-      this.$emit('myLoadText', target.value)
-      console.log('tempInputData', this.tempInputData)
-    },
-    // 효과 전송
-    onChangePreviewEffect({ target }) {
-      console.log(target.value)
-      this.tempInputData.effect[this.cutCode] = target.value
-      this.$emit('myLoadEffect', target.value)
-      console.log('tempInputData', this.tempInputData)
-    },
-    onBlurUpdate(e) {
-      console.log('onBlurPreview')
-      this.sceneData[e] = {
-        bg: '',
-        cr: '',
-        text: '',
-        effect: '',
-      }
-      console.log(this.sceneData)
-      this.MUTATIONS_SCENE_DATA(this.tempInputData)
-    },
-    // 컷 활성화
-    onClickFocus(e) {
+    onCiickDataCr(e) {
       console.log(e)
-      // cutCode 갱신
-      this.cutCode = e
-
-      // 컷 데이터 갱신
-      this.$emit(
-        'myLoadBgImage',
-        this.tempInputData.bg[this.cutCode] === undefined
-          ? (this.tempInputData.bg[this.cutCode] = null)
-          : this.tempInputData.bg[this.cutCode]
-      )
-      this.$emit(
-        'myLoadCrImage',
-        this.tempInputData.cr[this.cutCode] === undefined
-          ? (this.tempInputData.cr[this.cutCode] = null)
-          : this.tempInputData.cr[this.cutCode]
-      )
-      this.$emit(
-        'myLoadCrNameImage',
-        this.tempInputData.crName[this.cutCode] === undefined
-          ? (this.tempInputData.crName[this.cutCode] = null)
-          : this.tempInputData.crName[this.cutCode]
-      )
-      this.$emit(
-        'myLoadText',
-        this.tempInputData.text[this.cutCode] === undefined
-          ? (this.tempInputData.text[this.cutCode] = null)
-          : this.tempInputData.text[this.cutCode]
-      )
-      this.$emit(
-        'myLoadEffect',
-        this.tempInputData.effect[this.cutCode] === undefined
-          ? (this.tempInputData.effect[this.cutCode] = null)
-          : this.tempInputData.effect[this.cutCode]
-      )
-
-      // 포커스 이동 시 저장
-
-      //   컷 코드 전송
-      this.$emit('myLoadFocus', `CUT CODE : ${e}`)
-
-      //   active border remove
-      Object.entries(this.$refs).forEach((v, i) => {
-        if (v[0].includes('cut') === true) {
-          this.$refs[v[0]][0].style = 'border: unset'
-        }
-      })
-      this.$refs[`cut${e}`][0].style = 'border:1px solid red'
+      this.MUTATIONS_ASSETS_DATA_CR(e)
     },
+
     onClickPointSetting(type) {
       this.pointSettingShow = true
       this.scenarioSettingShow = false
