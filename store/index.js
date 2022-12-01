@@ -54,7 +54,7 @@ const createStore = () => {
                     pointCr: '',
                     pointType: '',
                     su: '',
-                    text: [],
+                    text: '',
                     cr: '',
                     effect: '',
                     connect: '',
@@ -181,6 +181,11 @@ const createStore = () => {
             // 대사인물
             MUTATIONS_ASSETS_DATA_CR(state, payload) {
                 state.PREVIEW.data.cr = payload;
+            },
+            // 대사
+            MUTATIONS_ASSETS_DATA_TEXT(state, payload) {
+                console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)
+                state.PREVIEW.data.text = payload;
             },
 
         },

@@ -70,6 +70,7 @@
             placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다.
 인물의 대화를 입력해 주세요"
             rows="3"
+            @input="onInputDataText"
           ></textarea>
           <textarea v-else rows="3"></textarea>
           <div class="insert-set">
@@ -304,7 +305,11 @@ export default {
     console.log(this.SCENE_CODE)
   },
   methods: {
-    ...mapMutations(['MUTATIONS_SCENE_DATA', 'MUTATIONS_ASSETS_DATA_CR']),
+    ...mapMutations([
+      'MUTATIONS_SCENE_DATA',
+      'MUTATIONS_ASSETS_DATA_CR',
+      'MUTATIONS_ASSETS_DATA_TEXT',
+    ]),
     onClickCutAdd() {
       this.cutIndex++
       this.cuts.push({
@@ -352,6 +357,9 @@ export default {
     },
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
+    },
+    onInputDataText({ target }) {
+      this.MUTATIONS_ASSETS_DATA_TEXT(target.value)
     },
   },
 }

@@ -17,7 +17,9 @@
       />
       <div class="dialogue">
         <span v-if="PREVIEW.data.cr" class="name">{{ PREVIEW.data.cr }}</span>
-        <p ref="myLoadText" class="text" style="white-space: pre-line"></p>
+        <p ref="myLoadText" class="text" style="white-space: pre-line">
+          {{ PREVIEW.data.text }}
+        </p>
       </div>
       <img src="~/static/images/mockup.png" alt="" class="mockup" />
     </div>
