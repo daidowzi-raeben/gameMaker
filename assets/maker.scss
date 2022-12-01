@@ -294,7 +294,7 @@
           .list {
             display: flex;
             margin: 0;
-            width: calc(100% - 46px);
+            width: 804px;
             padding: 0 30px;
 
             &-item {
@@ -307,6 +307,23 @@
               justify-content: center;
               font-size: 1.2rem;
               overflow: hidden;
+              cursor: pointer;
+              &.active{
+                border:2px solid $colPrimary;
+                &:after{
+                  content:"";
+                  display:block;
+                  width:100%;
+                  height:100%;
+                  position:absolute;
+                  left:0;
+                  top:0;
+                  background-color:rgba(255, 255, 255, .7);
+                }
+              }
+              &.top{
+                align-items: flex-start;
+              }
             }
 
             .swiper-button-prev {
@@ -334,7 +351,7 @@
         padding: 15px 25px 10px 25px;
 
         .tab-list {
-          width: calc(100% + 50px);
+          width: 900px;
           position: relative;
           left: -25px;
           padding: 0 25px 10px;
@@ -357,6 +374,7 @@
               position: relative;
               .radio{
                 cursor: pointer;
+                white-space: nowrap;
                 input[type=radio]{
                   appearance: none;
                   width:0;

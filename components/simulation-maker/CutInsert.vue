@@ -49,6 +49,7 @@
               <span>주인공</span>
             </label>
           </swiper-slide>
+          <div class="swiper-scrollbar"></div>
         </swiper>
         <label v-if="cutType === 4" class="label">질문</label>
         <div v-if="cutType === 4" class="insert-wrap">
@@ -240,10 +241,14 @@ export default {
       sceneData: [],
 
       swiperOptionSelectCharacter: {
+        allowTouchMove: false,
         loop: false,
         slidesPerView: 16,
         slidesPerGroup: 16,
         spaceBetween: 5,
+        mousewheel: {
+          draggable:true
+        },
       },
       swiperOptionCutList: {
         loop: false,

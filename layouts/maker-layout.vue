@@ -6,7 +6,7 @@
           v-for="(menu, menuIndex) in gnb"
           :key="menuIndex"
           class="item"
-          :class="{ active: activeManu == menu.code }"
+          :class="{ active: activeMenu == menu.code }"
         >
           <button
             type="button"
@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      activeManu: 1,
+      activeMenu: 1,
       stateLogin: [],
       gnb: [
         { code: 1, menu: '스토리' },
@@ -109,6 +109,7 @@ export default {
     },
     onClickGnbTo(e) {
       this.MUTATIONS_MAKER_GNB(e)
+      this.activeMenu = e
     },
   },
 }

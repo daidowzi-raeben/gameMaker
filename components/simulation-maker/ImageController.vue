@@ -20,7 +20,7 @@
     <div class="setting-scen--list">
       <label class="label">인물</label>
       <swiper :options="swiperOptionSelectImage" class="list">
-        <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item">
+        <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item top">
           <img :src="v.path" width="50" />
         </swiper-slide>
         <div slot="button-prev" class="swiper-button-prev"></div>
