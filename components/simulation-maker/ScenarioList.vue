@@ -62,7 +62,9 @@
               class="chapter-list--item"
             >
               <span class="chapter-tit">
-                <label @click="onClickChapterTo(chapter.timestamp)">
+                <label
+                  @click="onClickChapterTo(chapter.timestamp, index, index2)"
+                >
                   <input type="radio" name="chapterTitle" />
                   <span style="cursor: pointer">{{ chapter.tit }}</span>
                 </label>
@@ -167,6 +169,8 @@ export default {
       'MUTATIONS_CHAPTER_DATA',
       'MUTATIONS_SCENE_DATA_RELOAD',
       'MUTATIONS_SCENE_CODE',
+      'MUTATIONS_SCENE_INDEX',
+      'MUTATIONS_CHAPTER_INDEX',
     ]),
     onSubmit() {
       // form 데이터 전달
@@ -177,8 +181,10 @@ export default {
       console.log('Future index: ' + e.draggedContext.futureIndex)
     },
     // 챕터 이동
-    onClickChapterTo(e, t) {
+    onClickChapterTo(e, i, i2) {
       this.MUTATIONS_SCENE_CODE(e)
+      this.MUTATIONS_SCENE_INDEX(i)
+      this.MUTATIONS_CHAPTER_INDEX(i2)
     },
     onClickToggleScenario(idx) {
       this.scenarioLists[idx].fold = !this.scenarioLists[idx].fold

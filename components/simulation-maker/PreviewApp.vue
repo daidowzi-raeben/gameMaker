@@ -1,8 +1,20 @@
 <template>
   <div class="preview">
     <div class="preview-img">
-      <img :src="tempData.bg" alt="" class="background" />
-      <img ref="characterImage" :src="tempData.cr" alt="" class="character" />
+      <img
+        v-if="PREVIEW.img.bg"
+        :src="PREVIEW.img.bg"
+        alt=""
+        class="background"
+      />
+      <img
+        v-if="PREVIEW.img.cr"
+        ref="characterImage"
+        :src="PREVIEW.img.cr"
+        alt=""
+        class="character"
+        :class="PREVIEW.data.effect"
+      />
       <div class="dialogue">
         <span class="name">{{ tempData.crName }}</span>
         <p ref="myLoadText" class="text" style="white-space: pre-line"></p>
@@ -40,9 +52,16 @@ export default {
     }
   },
   computed: {
-    ...mapState(['SCENE_CODE']),
+    ...mapState(['SCENE_CODE', 'PREVIEW']),
   },
   watch: {
+    'PREVIEW.data.effect': {
+      handler(value) {
+        setTimeout(() => {
+          this.$refs.characterImage.classList.remove('vibration')
+        }, 400)
+      },
+    },
     SCENE_CODE: {
       handler(value) {
         console.log('SCENE_CODE 변경 === ', value)
@@ -81,5 +100,17 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.vibration {
+  animation: vibration 0.1s infinite;
+  -webkit-animation: vibration 0.1s infinite;
+}
+@keyframes vibration {
+  from {
+    transform: rotate(1deg);
+  }
+  to {
+    transform: rotate(-1deg);
+  }
+}
 </style>

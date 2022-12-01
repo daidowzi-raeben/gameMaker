@@ -3,15 +3,15 @@
     <div class="setting-tit">
       화면 설정
       <label class="input-check">
-        <input type="checkbox" />
-        <span class="check-text">흔들림</span>
+        <input ref="effectChecked" type="checkbox" value="vibration" />
+        <span class="check-text" @click="onClickEffect()">흔들림</span>
       </label>
     </div>
     <div v-if="ASSETS" class="setting-scen--list">
       <label class="label">배경</label>
       <swiper :options="swiperOptionSelectImage" class="list">
         <swiper-slide v-for="(v, i) in ASSETS.bg" :key="i" class="list-item">
-          <img :src="v.path" width="50" />
+          <img :src="v.path" width="50" @click="onClickBgImage(v.path)" />
         </swiper-slide>
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>
@@ -20,8 +20,8 @@
     <div class="setting-scen--list">
       <label class="label">인물</label>
       <swiper :options="swiperOptionSelectImage" class="list">
-        <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item top">
-          <img :src="v.path" width="50" />
+        <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item">
+          <img :src="v.path" width="50" @click="onClickCrImage(v.path)" />
         </swiper-slide>
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>
@@ -38,6 +38,7 @@ export default {
     return {
       params: {},
       swiperOptionSelectImage: {
+        allowTouchMove: false,
         loop: false,
         slidesPerView: 13,
         slidesPerGroup: 13,
@@ -47,28 +48,17 @@ export default {
           prevEl: '.swiper-button-prev',
         },
       },
-      temp: [
-        { a: 1 },
-        { a: 2 },
-        { a: 3 },
-        { a: 4 },
-        { a: 5 },
-        { a: 6 },
-        { a: 7 },
-        { a: 8 },
-        { a: 9 },
-        { a: 10 },
-        { a: 11 },
-        { a: 12 },
-        { a: 13 },
-        { a: 14 },
-        { a: 15 },
-        { a: 16 },
-      ],
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'IS_POST', 'ASSETS', 'PROJECT_ID']),
+    ...mapState([
+      'LOGIN',
+      'LOADING',
+      'IS_POST',
+      'ASSETS',
+      'PROJECT_ID',
+      'PREVIEW',
+    ]),
   },
   mounted() {
     this.$nextTick(() => {
@@ -81,7 +71,24 @@ export default {
   },
   methods: {
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
-    ...mapMutations(['']),
+    ...mapMutations([
+      'MUTATIONS_ASSETS_BG',
+      'MUTATIONS_ASSETS_CR',
+      'MUTATIONS_ASSETS_EFFECT',
+    ]),
+    onClickBgImage(e) {
+      this.MUTATIONS_ASSETS_BG(e)
+    },
+    onClickCrImage(e) {
+      this.MUTATIONS_ASSETS_CR(e)
+    },
+    onClickEffect() {
+      if (this.$refs.effectChecked.checked === false) {
+        this.MUTATIONS_ASSETS_EFFECT(this.$refs.effectChecked.value)
+      } else {
+        this.MUTATIONS_ASSETS_EFFECT('')
+      }
+    },
   },
 }
 </script>

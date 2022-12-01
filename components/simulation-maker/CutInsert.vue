@@ -39,14 +39,18 @@
           </button>
         </div>
         <swiper
-          v-if="cutType === 1"
+          v-if="ASSETS && ASSETS.crList"
           :options="swiperOptionSelectCharacter"
           class="tab-list type2"
         >
-          <swiper-slide v-for="(v, i) in 20" :key="i" class="tab-list--item">
+          <swiper-slide
+            v-for="(v, i) in ASSETS.crList"
+            :key="i"
+            class="tab-list--item"
+          >
             <label class="radio">
-              <input type="radio" name="character" />
-              <span>주인공</span>
+              <input type="radio" name="character" :value="v.idx" />
+              <span>{{ v.name }}</span>
             </label>
           </swiper-slide>
           <div class="swiper-scrollbar"></div>
@@ -80,11 +84,13 @@
               포인트 설정
             </button>
             <div v-show="pointSettingShow" class="set point-set">
-              <select class="input-select">
-                <option>이지안</option>
-                <option>하린</option>
-                <option>안보나</option>
-                <option>권시아</option>
+              <select v-if="ASSETS && ASSETS.crList" class="input-select">
+                <option v-for="(v, i) in ASSETS.crList" :key="i">
+                  {{ v.name }}
+                </option>
+              </select>
+              <select v-else disabled class="input-select">
+                <option>캐릭터 없음</option>
               </select>
               <input type="number" class="input-number" />
               <span class="text">포인트</span>
@@ -109,9 +115,17 @@
               시나리오 연결
             </button>
             <div v-show="scenarioSettingShow" class="set scenario-set">
-              <select class="input-select">
-                <option>시나리오1</option>
-                <option>시나리오2</option>
+              <select v-if="SCENE_DATA" class="input-select">
+                <option
+                  v-for="(v, i) in SCENE_DATA"
+                  :key="i"
+                  :value="v.timestamp"
+                >
+                  {{ v.tit }}
+                </option>
+              </select>
+              <select v-else disabled class="input-select">
+                <option>시나리오 없음</option>
               </select>
               <select class="input-select">
                 <option>챕터2</option>
@@ -136,7 +150,12 @@
       </div>
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
-      <button type="button" class="btn-fold" :class="{ active: rightContentShow === true }" @click="onClickRightContentShow()"></button>
+      <button
+        type="button"
+        class="btn-fold"
+        :class="{ active: rightContentShow === true }"
+        @click="onClickRightContentShow()"
+      ></button>
     </div>
     <div class="cut" :class="{ fold: cutListShow === false }">
       <div class="cut-tit">
@@ -264,7 +283,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'SCENE_DATA', 'SCENE_CODE']),
+    ...mapState(['LOGIN', 'LOADING', 'SCENE_DATA', 'SCENE_CODE', 'ASSETS']),
   },
   // watch: {
   //   tempInputData: {
@@ -420,24 +439,12 @@ export default {
       console.log(this.$refs.cutList)
       this.$refs.cutList.slideTo(index - 1, 0)
     },
-    onClickRightContentShow(){
+    onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
-    }
+    },
   },
 }
 </script>
 
 <style>
-.vibration {
-  animation: vibration 0.1s infinite;
-  -webkit-animation: vibration 0.1s infinite;
-}
-@keyframes vibration {
-  from {
-    transform: rotate(1deg);
-  }
-  to {
-    transform: rotate(-1deg);
-  }
-}
 </style>

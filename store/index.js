@@ -31,6 +31,7 @@ const createStore = () => {
                 { idx: '5', title: '5장', subTitle: '5' },
             ],
             SCENE_DATA: [],
+            SCENE_DATA_CHARACTER: [],
             SCENE_DATA_INIT: [],
             SCENE_CODE: null,
             CHAPTER_DATA: [],
@@ -40,7 +41,9 @@ const createStore = () => {
                 cr: [],
                 su: [],
             },
-            PREVIEW: [{
+            PREVIEW: {
+                s_code: '',
+                c_code: '',
                 img: {
                     bg: '',
                     cr: '',
@@ -57,9 +60,11 @@ const createStore = () => {
                     connect: '',
                     code: ''
                 }
-            }],
+            },
             MAKER_GNB: '',
-            ASSETS: []
+            ASSETS: [],
+            SCENE_INDEX: null,
+            CHAPTER_INDEX: null,
 
         },
         getters: {
@@ -100,6 +105,10 @@ const createStore = () => {
             MUTATIONS_AXIOS_GET_PROJECT_DETAIL(state, payload) {
                 // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
                 state.SCENE_DATA = payload
+            },
+            MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER(state, payload) {
+                // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
+                state.SCENE_DATA_CHARACTER = payload
             },
 
             // GNB LOAD
@@ -145,10 +154,30 @@ const createStore = () => {
             MUTATIONS_SCENE_CODE(state, payload) {
                 state.SCENE_CODE = payload;
             },
+            MUTATIONS_SCENE_INDEX(state, payload) {
+                state.SCENE_INDEX = payload;
+            },
+            MUTATIONS_CHAPTER_INDEX(state, payload) {
+                state.CHAPTER_INDEX = payload;
+            },
             // 나의 에셋 로드
             MUTATIONS_AXIOS_GET_ASSETS_PROJECT(state, payload) {
                 state.ASSETS = payload;
-            }
+            },
+
+            //  ------------------- 프리뷰 데이터 바인딩
+            // 배경
+            MUTATIONS_ASSETS_BG(state, payload) {
+                state.PREVIEW.img.bg = payload;
+            },
+            // 인물
+            MUTATIONS_ASSETS_CR(state, payload) {
+                state.PREVIEW.img.cr = payload;
+            },
+            // 효과
+            MUTATIONS_ASSETS_EFFECT(state, payload) {
+                state.PREVIEW.data.effect = payload;
+            },
 
         },
         actions: {
@@ -193,6 +222,7 @@ const createStore = () => {
                         }
                         if (params.type === 'assetsProject') {
                             commit('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
+                            // commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
                             return;
                         }
                         if (params.type === 'scenarioDetail') {
@@ -200,6 +230,11 @@ const createStore = () => {
                             commit('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', res.data)
                             return;
                         }
+                        // if (params.type === 'scenarioDetail') {
+                        //     console.log('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER')
+                        //     commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
+                        //     return;
+                        // }
 
                         commit('MUTATIONS_AXIOS_GET', res.data)
                     })
