@@ -97,7 +97,11 @@ export default {
     // window.removeEventListener('beforeunload', this.unLoadEvent)
   },
   methods: {
-    ...mapMutations(['MUTATIONS_LOGIN_CHECK', 'MUTATIONS_MAKER_GNB']),
+    ...mapMutations([
+      'MUTATIONS_LOGIN_CHECK',
+      'MUTATIONS_MAKER_GNB',
+      'MUTATIONS_ASSETS_INIT',
+    ]),
 
     // 페이지 이탈 경고
     unLoadEvent(event) {
@@ -108,6 +112,7 @@ export default {
       console.log(e)
     },
     onClickGnbTo(e) {
+      this.MUTATIONS_ASSETS_INIT()
       this.MUTATIONS_MAKER_GNB(e)
       this.activeMenu = e
     },

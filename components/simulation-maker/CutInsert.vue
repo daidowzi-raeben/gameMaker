@@ -1,5 +1,20 @@
 <template>
   <div class="insert">
+    <div
+      v-if="!SCENE_CODE"
+      style="
+        background: #000;
+        width: 500px;
+        height: 500px;
+        right: 0;
+        position: absolute;
+        z-index: 999;
+        color: #fff;
+        font-size: 20px;
+      "
+    >
+      챕터를 선택하세요
+    </div>
     <div class="setting">
       <ImageController />
       <div class="setting-talk">
@@ -39,17 +54,21 @@
           </button>
         </div>
         <swiper
-          v-if="ASSETS && ASSETS.crList"
+          v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
           :options="swiperOptionSelectCharacter"
           class="tab-list type2"
         >
           <swiper-slide
-            v-for="(v, i) in ASSETS.crList"
+            v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
             :key="i"
             class="tab-list--item"
           >
             <label class="radio" @change="onCiickDataCr(v.name)">
-              <input type="radio" name="character" :value="v.idx" />
+              <input
+                type="radio"
+                name="character"
+                :value="SCENE_DATA_CHARACTER.idx[i]"
+              />
               <span>{{ v.name }}</span>
             </label>
           </swiper-slide>
@@ -71,6 +90,7 @@
 인물의 대화를 입력해 주세요"
             rows="3"
             @input="onInputDataText"
+            @keydown.tab="onSubmitCutData"
           ></textarea>
           <textarea v-else rows="3"></textarea>
           <div class="insert-set">
@@ -284,7 +304,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'SCENE_DATA', 'SCENE_CODE', 'ASSETS']),
+    ...mapState([
+      'LOGIN',
+      'LOADING',
+      'SCENE_DATA',
+      'SCENE_CODE',
+      'ASSETS',
+      'SCENE_DATA_CHARACTER',
+    ]),
   },
   // watch: {
   //   tempInputData: {
@@ -360,6 +387,9 @@ export default {
     },
     onInputDataText({ target }) {
       this.MUTATIONS_ASSETS_DATA_TEXT(target.value)
+    },
+    onSubmitCutData() {
+      console.log('onSubmitCutData')
     },
   },
 }

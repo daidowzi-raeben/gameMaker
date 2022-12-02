@@ -32,8 +32,8 @@ const createStore = () => {
             ],
             SCENE_DATA: [],
             SCENE_DATA_CHARACTER: [],
+            SCENE_DATA_CHARACTER_INIT: [],
             SCENE_DATA_INIT: [],
-            SCENE_CODE: null,
             CHAPTER_DATA: [],
             // 프리뷰 데이터
             MAKER_AXIOS: {
@@ -61,10 +61,31 @@ const createStore = () => {
                     code: ''
                 }
             },
+            PREVIEW_INTRO: {
+                copyright: '',
+                logo: '',
+                position: '',
+            },
+            PREVIEW_ENDING: [
+                {
+                    name: '',
+                    upPoint: '',
+                    upUnit: '',
+                    downPoint: '',
+                    downUnit: '',
+                }
+            ],
+            // 챕터 코드
+            SCENE_CODE: null,
+            // 인물코드
+            CHAPTER_CODE: null,
             MAKER_GNB: 1,
             ASSETS: [],
             SCENE_INDEX: null,
             CHAPTER_INDEX: null,
+            CHAPTER_LIST: [],
+            CHAPTER_DEATILE: [],
+            CHAPTER_DEATILE_IDX: ''
 
         },
         getters: {
@@ -164,8 +185,36 @@ const createStore = () => {
             MUTATIONS_AXIOS_GET_ASSETS_PROJECT(state, payload) {
                 state.ASSETS = payload;
             },
+            // 캐릭터 리스트
+            MUTATIONS_AXIOS_GET_CHAPTER_LIST(state, payload) {
+                state.CHAPTER_LIST = payload;
+            },
 
             //  ------------------- 프리뷰 데이터 바인딩
+            // 통신용 데이터 변환
+            MUTATIONS_ASSETS_GET_DATA(state, payload) {
+                state.CHAPTER_DEATILE = payload.jsonData;
+                state.CHAPTER_DEATILE_IDX = payload.idx;
+                state.PREVIEW.img.bg = payload.jsonData.bg;
+                state.PREVIEW.img.cr = payload.jsonData.cr;
+                console.log(payload)
+            },
+            // 데이터초기화
+            MUTATIONS_ASSETS_INIT(state, payload) {
+                state.PREVIEW.img.bg = '';
+                state.PREVIEW.img.cr = '';
+                state.PREVIEW.data.cr = '';
+                state.PREVIEW.data.effect = '';
+                state.PREVIEW.data.text = '';
+                state.SCENE_CODE = ''
+            },
+            // 인물 데이터 초기화
+            MUTATIONS_CHAPTER_DEATILE_INIT(state, payload) {
+                state.CHAPTER_DEATILE = []
+                state.CHAPTER_DEATILE_IDX = ''
+                state.PREVIEW.img.bg = '';
+                state.PREVIEW.img.cr = '';
+            },
             // 배경
             MUTATIONS_ASSETS_BG(state, payload) {
                 state.PREVIEW.img.bg = payload;
@@ -234,11 +283,26 @@ const createStore = () => {
                             // commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
                             return;
                         }
+                        if (params.type === 'characterList') {
+                            commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
+                            commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
+                            return;
+                        }
                         if (params.type === 'scenarioDetail') {
                             console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL')
                             commit('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', res.data)
                             return;
                         }
+                        if (params.type === 'chaterDetail') {
+                            console.log('MUTATIONS_ASSETS_GET_DATA', res.data)
+                            commit('MUTATIONS_ASSETS_GET_DATA', res.data)
+                            return;
+                        }
+                        // if (params.type === 'characterList') {
+                        //     console.log('MUTATIONS_AXIOS_GET_CHAPTER_LIST', res.data)
+                        //     commit('MUTATIONS_AXIOS_GET_CHAPTER_LIST', res.data)
+                        //     return;
+                        // }
                         // if (params.type === 'scenarioDetail') {
                         //     console.log('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER')
                         //     commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)

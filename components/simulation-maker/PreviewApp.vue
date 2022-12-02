@@ -30,27 +30,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { kooLogin } from '~/config/util'
 export default {
   data() {
     return {
       sceneData: [],
-      tempData: {
-        bg: [],
-        cr: [],
-        crName: [],
-        text: '',
-        effect: [
-          {
-            effect: '',
-            text: '없음',
-          },
-          {
-            effect: 'vibration',
-            text: '흔들림',
-          },
-        ],
-      },
+      params: {},
     }
   },
   computed: {
@@ -64,40 +50,28 @@ export default {
         }, 400)
       },
     },
-    SCENE_CODE: {
+    PREVIEW: {
       handler(value) {
-        console.log('SCENE_CODE 변경 === ', value)
-        //   console.log('watch ==========>', value)
-        //   this.scenarioLists = this.SCENE_DATA
-        //   this.params.type = 'scenarioInsert'
-        //   this.params.data = JSON.stringify(value)
-        //   this.params.secretKey = this.PROJECT_ID
-        //   this.params.user_idx = this.user_idx
-        //   this.params.apiKey = process.env.API_KEY
-        //   this.ACTION_AXIOS_GET(this.params)
+        // chaterInsert
+        console.log(value)
       },
-      immediate: true,
     },
+    // SCENE_CODE: {
+    //   handler(value) {
+    //     if (value) {
+
+    //     }
+    //   },
+    //   immediate: true,
+    // },
   },
   mounted() {
-    for (let i = 1; i < 19; i++) {
-      this.tempData.bg = [
-        ...this.tempData.bg,
-        {
-          name: `이미지${i}`,
-          path: `${process.env.VUE_APP_IMAGE}/bg/${i}.jpg`,
-        },
-      ]
-      this.tempData.cr = [
-        ...this.tempData.cr,
-        {
-          name: `이미지${i}`,
-          path: `${process.env.VUE_APP_IMAGE}/cr/${i}.png`,
-        },
-      ]
-    }
-    this.sceneData = [...this.sceneData]
-    // this.tempInputData = [...this.tempInputData]
+    this.$nextTick(() => {
+      this.user_idx = kooLogin('user_idx')
+    })
+  },
+  method: {
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
   },
 }
 </script>

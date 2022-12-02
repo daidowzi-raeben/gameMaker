@@ -1,8 +1,8 @@
 <template>
   <div class="maker-left">
-    <ul v-if="SCENE_DATA" class="scenario-list">
+    <ul class="scenario-list">
       <li
-        v-for="(scenarioList, index) in SCENE_DATA"
+        v-for="(scenarioList, index) in SCENE_DATA_CHARACTER_temp"
         :key="index"
         :ref="`scenarioList${index}`"
         class="scenario-list--item"
@@ -10,42 +10,18 @@
         :title="scenarioList.tit"
       >
         <span :ref="`scenarioTitle${index}`" class="scenario-tit">
-          {{ scenarioList.tit }}
-          <button
-            type="button"
-            class="scenario-modi"
-            @click="onClickTitleModi(`${index}`)"
-          ></button>
-          <button
-            type="button"
-            class="chapter-add"
-            @click="onClickChapterAdd(`${index}`)"
-          >
-            +
-          </button>
-          <button
-            type="button"
-            class="scenario-del"
-            @click="onClickDeleteScenarioList(scenarioList.timestamp)"
-          ></button>
+          {{ scenarioList.name }}
         </span>
-        <button
-          class="scenario-list--toggle"
-          :class="{ active: scenarioList.fold === true }"
-          @click="onClickToggleScenario(`${index}`)"
-        ></button>
-        <input
-          v-show="scenarioList.modi === true"
-          :ref="`scenarioModiInput${index}`"
-          v-model="scenarioList.tit"
-          type="text"
-          class="scenario-input"
-          maxlength="15"
-          @blur="onEnterTitleChange(`${index}`, $event)"
-          @keyup.enter="onEnterTitleChange(`${index}`, $event)"
-        />
         <!-- {{ scen.chapters }} -->
-        <ul v-show-slide="scenarioList.fold" class="chapter-list">
+        <ul
+          v-if="
+            SCENE_DATA_CHARACTER &&
+            SCENE_DATA_CHARACTER.jsonData &&
+            SCENE_DATA_CHARACTER.idx
+          "
+          v-show-slide="scenarioList.fold"
+          class="chapter-list"
+        >
           <draggable
             :list="scenarioList.chapters"
             :disabled="!enabled"
@@ -56,27 +32,24 @@
             @end="dragging = false"
           >
             <li
-              v-for="(chapter, index2) in scenarioList.chapters"
+              v-for="(chapter, index2) in SCENE_DATA_CHARACTER.jsonData"
               :key="index2"
               :ref="`chapterList${index}_${index2}`"
               class="chapter-list--item"
             >
               <span class="chapter-tit">
                 <label
-                  @click="onClickChapterTo(chapter.timestamp, index, index2)"
+                  @click="onClickChapterTo(SCENE_DATA_CHARACTER.idx[index2])"
                 >
                   <input type="radio" name="chapterTitle" />
-                  <span style="cursor: pointer">{{ chapter.tit }}</span>
+                  <span style="cursor: pointer">{{ chapter.name }}</span>
                 </label>
                 <button
                   type="button"
-                  class="chapter-modi"
-                  @click="onClickTitleModi(`${index}`, `${index2}`)"
-                ></button>
-                <button
-                  type="button"
                   class="chapter-del"
-                  @click="onClickDeleteChapterList(chapter.timestamp, index)"
+                  @click="
+                    onClickDeleteChapterList(SCENE_DATA_CHARACTER.idx[index2])
+                  "
                 ></button>
               </span>
               <input
@@ -120,16 +93,26 @@ export default {
       paramsInit: {},
       paramsData: {},
       user_idx: '',
+      SCENE_DATA_CHARACTER_temp: [
+        {
+          name: '인물 목록',
+          fold: true,
+          modi: false,
+          active: false,
+          chapters: [],
+        },
+      ],
+      paramsDetail: {},
     }
   },
   computed: {
     ...mapState([
       'LOGIN',
       'LOADING',
-      'SCENE_DATA',
+      'SCENE_DATA_CHARACTER',
       'IS_POST',
       'PROJECT_ID',
-      'SCENE_DATA_INIT',
+      'SCENE_DATA_CHARACTER_INIT',
       'SCENE_CODE',
     ]),
     draggingInfo() {
@@ -137,18 +120,21 @@ export default {
     },
   },
   watch: {
-    SCENE_DATA: {
+    SCENE_DATA_CHARACTER: {
       handler(value) {
-        if (value.length > 0 && this.SCENE_DATA_INIT !== this.SCENE_DATA) {
-          console.log('watch ==========>', value)
-          this.scenarioLists = this.SCENE_DATA
-          this.params.type = 'scenarioInsert'
-          this.params.data = JSON.stringify(value)
-          this.params.secretKey = this.PROJECT_ID
-          this.params.user_idx = this.user_idx
-          this.params.apiKey = process.env.API_KEY
-          this.ACTION_AXIOS_GET(this.params)
-        }
+        // if (
+        //   value.length > 0 &&
+        //   this.SCENE_DATA_CHARACTER_INIT !== this.SCENE_DATA_CHARACTER
+        // ) {
+        //   console.log('watch ==========>', value)
+        //   this.scenarioLists = this.SCENE_DATA_CHARACTER
+        //   this.params.type = 'scenarioInsert'
+        //   this.params.data = JSON.stringify(value)
+        //   this.params.secretKey = this.PROJECT_ID
+        //   this.params.user_idx = this.user_idx
+        //   this.params.apiKey = process.env.API_KEY
+        //   this.ACTION_AXIOS_GET(this.params)
+        // }
       },
       immediate: true,
     },
@@ -156,22 +142,24 @@ export default {
   mounted() {
     // console.log(time)
     this.$nextTick(() => {
-      this.user_idx = kooLogin('user_idx')
-      this.paramsInit.type = 'scenarioDetail'
-      this.paramsInit.secretKey = this.PROJECT_ID
-      this.paramsInit.apiKey = process.env.API_KEY
-      this.ACTION_AXIOS_GET(this.paramsInit)
+      //   this.user_idx = kooLogin('user_idx')
+      //   this.paramsInit.type = 'characterList'
+      //   this.paramsInit.user_idx = this.user_idx
+      //   this.paramsInit.secretKey = this.PROJECT_ID
+      //   this.paramsInit.apiKey = process.env.API_KEY
+      //   this.ACTION_AXIOS_GET(this.paramsInit)
     })
   },
   methods: {
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     ...mapMutations([
-      'MUTATIONS_SCENE_DATA',
+      'MUTATIONS_SCENE_DATA_CHARACTER',
       'MUTATIONS_CHAPTER_DATA',
-      'MUTATIONS_SCENE_DATA_RELOAD',
+      'MUTATIONS_SCENE_DATA_CHARACTER_RELOAD',
       'MUTATIONS_SCENE_CODE',
       'MUTATIONS_SCENE_INDEX',
       'MUTATIONS_CHAPTER_INDEX',
+      'MUTATIONS_CHAPTER_DEATILE_INIT',
     ]),
     onSubmit() {
       // form 데이터 전달
@@ -182,18 +170,13 @@ export default {
       console.log('Future index: ' + e.draggedContext.futureIndex)
     },
     // 챕터 이동
-    onClickChapterTo(e, i, i2) {
-      this.MUTATIONS_SCENE_CODE(e)
-      this.MUTATIONS_SCENE_INDEX(i)
-      this.MUTATIONS_CHAPTER_INDEX(i2)
-      //   this.scenarioLists = this.SCENE_DATA
-      this.paramsData.type = 'chaterDetail'
-      // this.params.data = JSON.stringify(value)
-      this.paramsData.secretKey = this.PROJECT_ID
-      this.paramsData.user_idx = this.user_idx
-      this.paramsData.apiKey = process.env.API_KEY
-      this.paramsData.previewData = JSON.stringify(this.PREVIEW)
-      this.ACTION_AXIOS_GET(this.paramsData)
+    onClickChapterTo(e) {
+      this.paramsDetail.type = 'chaterDetail'
+      this.paramsDetail.user_idx = this.user_idx
+      this.paramsDetail.idx = e
+      this.paramsDetail.secretKey = this.PROJECT_ID
+      this.paramsDetail.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.paramsDetail)
     },
     onClickToggleScenario(idx) {
       this.scenarioLists[idx].fold = !this.scenarioLists[idx].fold
@@ -219,70 +202,50 @@ export default {
         this.scenarioLists[idx].chapters[idx2].tit = e.target.value
         this.scenarioLists[idx].chapters[idx2].modi = false
       }
-      this.MUTATIONS_SCENE_DATA_RELOAD(this.scenarioLists)
+      this.MUTATIONS_SCENE_DATA_CHARACTER_RELOAD(this.scenarioLists)
     },
     onClickScenarioAdd() {
-      const time = Date.now()
       // user_idx: kooLogin('user_idx')
       console.log(kooLogin('user_idx'))
-      this.scenarioLists = [
-        ...this.scenarioLists,
-        {
-          tit: '추가된 시나리오',
-          timestamp: time,
-          fold: true,
-          modi: false,
-          active: false,
-          chapters: [],
-        },
-      ]
-
-      this.MUTATIONS_SCENE_DATA(this.scenarioLists)
+      this.MUTATIONS_CHAPTER_DEATILE_INIT()
     },
     onClickChapterAdd(idx) {
       const time = Date.now()
       this.scenarioLists[idx].chapters = [
         ...this.scenarioLists[idx].chapters,
         {
-          tit: '추가된 챕터',
+          tit: '챕터제목',
           modi: false,
           timestamp: time,
         },
       ]
-      this.MUTATIONS_SCENE_DATA(this.scenarioLists)
+      this.MUTATIONS_SCENE_DATA_CHARACTER(this.scenarioLists)
     },
-    onClickDeleteChapterList(timestamp, index) {
+    onClickDeleteChapterList(e) {
       if (confirm('삭제하시겠습니까?')) {
-        console.log(timestamp, index)
-        this.scenarioListsCopy = []
-        this.$nextTick(() => {
-          this.SCENE_DATA[index]?.chapters.forEach((e, i) => {
-            if (e.timestamp !== timestamp) {
-              console.log(e)
-              this.scenarioListsCopy[i] = this.SCENE_DATA[index]?.chapters[i]
-            }
-          })
-          this.chaptersListsCopy.chapters = this.scenarioListsCopy
-          this.chaptersListsCopy.arrIndex = index
-          console.log(this.chaptersListsCopy)
-          this.MUTATIONS_CHAPTER_DATA(this.chaptersListsCopy)
-        })
-      } else {
-        return false
+        console.log(e)
+        this.user_idx = kooLogin('user_idx')
+        this.paramsInit.type = 'characterList'
+        this.paramsInit.user_idx = this.user_idx
+        this.paramsInit.idx = e
+        this.paramsInit.mode = 'del'
+        this.paramsInit.secretKey = this.PROJECT_ID
+        this.paramsInit.apiKey = process.env.API_KEY
+        this.ACTION_AXIOS_GET(this.paramsInit)
       }
     },
     onClickDeleteScenarioList(timestamp) {
       if (confirm('삭제하시겠습니까?')) {
         this.scenarioListsCopy = []
-        console.log('SCENE_DATA', this.SCENE_DATA)
+        console.log('SCENE_DATA_CHARACTER', this.SCENE_DATA_CHARACTER)
         this.$nextTick(() => {
-          this.SCENE_DATA.forEach((e, i) => {
+          this.SCENE_DATA_CHARACTER.forEach((e, i) => {
             if (e.timestamp !== timestamp) {
               console.log(e)
-              this.scenarioListsCopy[i] = this.SCENE_DATA[i]
+              this.scenarioListsCopy[i] = this.SCENE_DATA_CHARACTER[i]
             }
           })
-          this.MUTATIONS_SCENE_DATA(this.scenarioListsCopy)
+          this.MUTATIONS_SCENE_DATA_CHARACTER(this.scenarioListsCopy)
         })
       } else {
         return false

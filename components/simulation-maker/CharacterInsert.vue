@@ -5,22 +5,51 @@
       <div class="setting-profile">
         <div class="setting-tit">프로필 설정</div>
         <div class="input-wrap">
-          <select class="input-select">
-            <option>TOP</option>
+          <select ref="profilePosition" class="input-select">
+            <option value="top">TOP</option>
+            <option value="bottom">BOTTOM</option>
           </select>
-          <input type="text" class="input-text" placeholder="인물의 이름을 입력하세요" />
+          <input
+            type="text"
+            class="input-text"
+            placeholder="인물의 이름을 입력하세요"
+            :value="
+              CHAPTER_DEATILE && CHAPTER_DEATILE_IDX ? CHAPTER_DEATILE.name : ''
+            "
+            @input="onInputName"
+          />
         </div>
         <div class="textarea-wrap">
-          <textarea rows="10" placeholder="인물의 프로필을 입력하세요" class="input-textarea"></textarea>
+          <textarea
+            rows="10"
+            placeholder="인물의 프로필을 입력하세요"
+            class="input-textarea"
+            :value="
+              CHAPTER_DEATILE && CHAPTER_DEATILE_IDX
+                ? CHAPTER_DEATILE.profile
+                : ''
+            "
+            @input="onInputProfile"
+          ></textarea>
           <div class="insert-set">
             <button type="button" class="btn sound">사운드 설정</button>
             <div class="set sound-set"></div>
           </div>
         </div>
+        <div class="text-center">
+          <button style="font-size: 20px" @click="onSubmit">
+            {{ CHAPTER_DEATILE_IDX ? '수정하기' : '추가하기' }}
+          </button>
+        </div>
       </div>
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
-      <button type="button" class="btn-fold" :class="{ active: rightContentShow === true }" @click="onClickRightContentShow()"></button>
+      <button
+        type="button"
+        class="btn-fold"
+        :class="{ active: rightContentShow === true }"
+        @click="onClickRightContentShow()"
+      ></button>
     </div>
     <div class="cut" :class="{ fold: cutListShow === false }">
       <div class="cut-tit">
@@ -35,24 +64,30 @@
         </button>
       </div>
       <swiper
+        v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
         v-show-slide="cutListShow"
         :options="swiperOptionCutList"
         class="cut-list"
       >
-        <swiper-slide v-for="(v, i) in 20" :key="i" class="cut-list--item type2">
-          <span v-if="i === 0" class="active-sign"></span>
+        <swiper-slide
+          v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
+          :key="i"
+          class="cut-list--item type2"
+        >
+          <span
+            v-if="
+              CHAPTER_DEATILE_IDX &&
+              SCENE_DATA_CHARACTER.idx[i] === CHAPTER_DEATILE_IDX
+            "
+            class="active-sign"
+          ></span>
           <div class="image-list">
-            <img src="https://thumb.ac-illust.com/57/57343bb539c05219a995feb43195acf2_w.jpeg" alt="" class="top" />
+            <img v-if="v.cr" :src="v.cr" alt="" class="top" />
             <div class="image-list--top">
-              <strong class="name">이지안</strong>
+              <strong class="name">{{ v.name }}</strong>
             </div>
             <div class="image-list--con">
-              안녕? 대사를 치면 여기에도 미리보기 노출이 될거에요 width는 작업해
-              보고 잡을 예정이고 여긴 줄바꿈이 없어요 시나리오 1장 글시는 5차
-              제한으로 ... 처리! 여긴 최대 4줄까지 출력 안녕? 대사를 치면 여기에도
-              미리보기 노출이 될거에요 width는 작업해 보고 잡을 예정이고 여긴
-              줄바꿈이 없어요 시나리오 1장 글시는 5차 제한으로 ... 처리! 여긴 최대
-              4줄까지 출력
+              {{ v.profile }}
             </div>
           </div>
         </swiper-slide>
@@ -62,7 +97,9 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex'
 import ImageController from './ImageController.vue'
+import { kooLogin } from '~/config/util'
 export default {
   components: {
     ImageController,
@@ -78,22 +115,93 @@ export default {
         slidesPerView: 4,
         slidesPerGroup: 4,
       },
+      characterData: {},
+      user_idx: '',
+      paramsData: {},
+      paramsInit: {},
     }
   },
+  PREVIEW: {
+    handler(value) {
+      // chaterInsert
+      console.log('CharacterInsert', value)
+    },
+  },
+  computed: {
+    ...mapState([
+      'SCENE_CODE',
+      'PREVIEW',
+      'ASSETS',
+      'PROJECT_ID',
+      'CHAPTER_DEATILE_IDX',
+      'CHAPTER_DEATILE',
+      'SCENE_DATA_CHARACTER',
+    ]),
+  },
+  mounted() {
+    // console.log(time)
+    this.$nextTick(() => {
+      this.user_idx = kooLogin('user_idx')
+      // this.paramsInit.type = 'scenarioDetail'
+      // this.paramsInit.secretKey = this.PROJECT_ID
+      // this.paramsInit.apiKey = process.env.API_KEY
+      // this.ACTION_AXIOS_GET(this.paramsInit)
+    })
+  },
   methods: {
+    ...mapMutations(['MUTATIONS_ASSETS_INIT']),
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
     },
-    onChangeFileInput(e){
+    onChangeFileInput(e) {
       this.isFileInsert = true
       this.fileInsertName = e.target.files[0].name
     },
-    onClickFileDelete(){
+    onClickFileDelete() {
       this.isFileInsert = false
       this.fileInsertName = ''
       this.$refs.logoFile.value = ''
-    }
-  }
+    },
+    onInputProfile({ target }) {
+      this.characterData.profile = target.value
+    },
+    onInputName({ target }) {
+      this.characterData.name = target.value
+    },
+    onSubmit() {
+      if (this.CHAPTER_DEATILE_IDX) {
+        this.paramsData.mode = 'update'
+        this.paramsData.idx = this.CHAPTER_DEATILE_IDX
+        if (!this.characterData?.profile) {
+          this.characterData.profile = this.CHAPTER_DEATILE.profile
+        }
+        if (!this.characterData?.name) {
+          this.characterData.name = this.CHAPTER_DEATILE.name
+        }
+      }
+      this.characterData.bg = this.PREVIEW.img.bg
+      this.characterData.cr = this.PREVIEW.img.cr
+      this.characterData.position = this.$refs.profilePosition.value
+      this.paramsData.type = 'characterInsert'
+      this.paramsData.secretKey = this.PROJECT_ID
+      this.paramsData.user_idx = this.user_idx
+      this.paramsData.apiKey = process.env.API_KEY
+      this.paramsData.previewData = JSON.stringify(this.characterData)
+      this.ACTION_AXIOS_GET(this.paramsData)
+
+      // this.MUTATIONS_ASSETS_INIT()
+      // 리스트 초기화
+      this.$nextTick(() => {
+        this.user_idx = kooLogin('user_idx')
+        this.paramsInit.type = 'characterList'
+        this.paramsInit.user_idx = this.user_idx
+        this.paramsInit.secretKey = this.PROJECT_ID
+        this.paramsInit.apiKey = process.env.API_KEY
+        this.ACTION_AXIOS_GET(this.paramsInit)
+      })
+    },
+  },
 }
 </script>
 

@@ -1,7 +1,8 @@
 <template>
   <div id="gameMaker">
     <div class="maker-wrap">
-      <ScenarioList />
+      <ScenarioList v-if="MAKER_GNB !== 4" />
+      <CharacterList v-if="MAKER_GNB === 4" />
       <div class="maker-right">
         <PreviewApp />
         <CutInsert
@@ -36,8 +37,10 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
-import CutInsert from '~/components/simulation-maker/CutInsert.vue'
+import { kooLogin } from '~/config/util'
 import ScenarioList from '~/components/simulation-maker/ScenarioList.vue'
+import CharacterList from '~/components/simulation-maker/CharacterList.vue'
+import CutInsert from '~/components/simulation-maker/CutInsert.vue'
 import PreviewApp from '~/components/simulation-maker/PreviewApp.vue'
 import IntroInsert from '~/components/simulation-maker/IntroInsert.vue'
 import EndingInsert from '~/components/simulation-maker/EndingInsert.vue'
@@ -47,8 +50,9 @@ import AssetsInsert from '~/components/simulation-maker/AssetsInsert.vue'
 import SetupInsert from '~/components/simulation-maker/SetupInsert.vue'
 export default {
   components: {
-    CutInsert,
     ScenarioList,
+    CharacterList,
+    CutInsert,
     PreviewApp,
     IntroInsert,
     EndingInsert,
@@ -82,6 +86,7 @@ export default {
       },
 
       cutCode: '',
+      paramsCharacter: {},
     }
   },
   computed: {
@@ -93,6 +98,13 @@ export default {
     this.params.apiKey = process.env.API_KEY
     console.log(this.idx)
     this.MUTATIONS_PROJECT(this.queryIndex)
+
+    this.user_idx = kooLogin('user_idx')
+    this.paramsCharacter.type = 'characterList'
+    this.paramsCharacter.user_idx = this.user_idx
+    this.paramsCharacter.secretKey = this.idx
+    this.paramsCharacter.apiKey = process.env.API_KEY
+    this.ACTION_AXIOS_GET(this.paramsCharacter)
     // this.ACTION_AXIOS_GET()
   },
   beforeDestroy() {},
