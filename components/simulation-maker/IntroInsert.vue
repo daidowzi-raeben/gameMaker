@@ -22,6 +22,7 @@
       <div class="setting-copy">
         <div class="setting-tit">저작권 설정</div>
         <input
+          v-model="intro.copy"
           type="text"
           placeholder="2022 (C) 프로젝트이름"
           class="input-text"
@@ -30,7 +31,7 @@
       <div class="setting-logo">
         <div class="setting-tit">로고 등록</div>
         <div class="input-wrap">
-          <select class="input-select">
+          <select v-model="intro.position" class="input-select">
             <option>TOP</option>
           </select>
           <input
@@ -40,7 +41,12 @@
             readonly
           />
           <label class="input-file">
-            <input ref="logoFile" type="file" @change="onChangeFileInput" />
+            <input
+              id="logoFile"
+              ref="logoFile"
+              type="file"
+              @change="onChangeFileInput"
+            />
             <span v-if="isFileInsert === false" class="btn">이미지 등록</span>
           </label>
           <span
@@ -67,7 +73,9 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex'
 import ImageController from './ImageController.vue'
+import { kooLogin } from '~/config/util'
 export default {
   components: {
     ImageController,
@@ -78,9 +86,33 @@ export default {
       isFileInsert: false,
       fileInsertName: '',
       intro: {},
+      paramsInit: {},
     }
   },
+  computed: {
+    ...mapState(['SCENE_CODE', 'PREVIEW', 'PROJECT_ID', 'IS_POST']),
+  },
+  watch: {
+    IS_POST: {
+      handler(value) {
+        console.log('watch', value)
+        this.MUTATIONS_AXIOS_POST_INIT()
+      },
+      immediate: false,
+    },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.paramsInit.user_idx = kooLogin('user_idx')
+      this.paramsInit.type = 'introList'
+      this.paramsInit.secretKey = this.PROJECT_ID
+      this.paramsInit.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.paramsInit)
+    })
+  },
   methods: {
+    ...mapMutations(['MUTATIONS_ASSETS_INIT', 'MUTATIONS_AXIOS_POST_INIT']),
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
     },
@@ -94,13 +126,16 @@ export default {
       this.$refs.logoFile.value = ''
     },
     onSubmit() {
-      //      const frm = new FormData()
-      //   frm.append('type', 'projectInsert')
-      //   frm.append('title', e.title)
-      //   frm.append('discription', e.discription)
-      //   frm.append('user_idx', this.$cookies.get('user_idx'))
-      //   frm.append('apiKey', process.env.API_KEY)
-      //   this.ACTION_AXIOS_POST(frm, 'projectInsert')
+      this.intro.bg = this.PREVIEW.img.bg
+      const frm = new FormData()
+      const photoFile = document.getElementById('logoFile')
+      frm.append('logoFile', photoFile.files[0])
+      frm.append('type', 'introInsert')
+      frm.append('secretKey', this.PROJECT_ID)
+      frm.append('previewData', JSON.stringify(this.intro))
+      frm.append('apiKey', process.env.API_KEY)
+      frm.append('user_idx', kooLogin('user_idx'))
+      this.ACTION_AXIOS_POST(frm)
     },
   },
 }

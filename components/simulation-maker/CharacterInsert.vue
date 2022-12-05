@@ -200,6 +200,7 @@ export default {
         this.paramsInit.apiKey = process.env.API_KEY
         this.ACTION_AXIOS_GET(this.paramsInit)
       })
+      alert('추가되었습니다')
     },
   },
 }

@@ -150,7 +150,7 @@ export default {
           this.ACTION_AXIOS_GET(this.params)
         }
       },
-      immediate: true,
+      immediate: false,
     },
   },
   mounted() {
