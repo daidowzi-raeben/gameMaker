@@ -31,6 +31,8 @@ const createStore = () => {
                 { idx: '5', title: '5장', subTitle: '5' },
             ],
             SCENE_DATA: [],
+            CUT_DATA: [],
+            CUT_LIST: [],
             SCENE_DATA_CHARACTER: [],
             SCENE_DATA_CHARACTER_INIT: [],
             SCENE_DATA_INIT: [],
@@ -131,6 +133,10 @@ const createStore = () => {
                 // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
                 state.SCENE_DATA_CHARACTER = payload
             },
+            MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL(state, payload) {
+                // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
+                state.SCENE_DATA_CHARACTER = payload
+            },
 
             // GNB LOAD
             MUTATIONS_MAKER_GNB(state, payload) {
@@ -189,6 +195,10 @@ const createStore = () => {
             MUTATIONS_AXIOS_GET_CHAPTER_LIST(state, payload) {
                 state.CHAPTER_LIST = payload;
             },
+            // 컷 데이터
+            MUTATIONS_CUT_GET_DATA(state, payload) {
+                state.CUT_DATA = payload;
+            },
 
             //  ------------------- 프리뷰 데이터 바인딩
             // 통신용 데이터 변환
@@ -235,6 +245,29 @@ const createStore = () => {
             MUTATIONS_ASSETS_DATA_TEXT(state, payload) {
                 console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)
                 state.PREVIEW.data.text = payload;
+            },
+            // 컷 리스트
+            MUTATIONS_CUT_LIST_GET_DATA(state, payload) {
+                console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)
+                state.CUT_LIST = payload;
+                if (state.CUT_LIST && state.CUT_LIST.jsonData && state.CUT_LIST.jsonData.length > 0) {
+                    state.PREVIEW.img.bg = state.CUT_LIST.jsonData[0].bg
+                    state.PREVIEW.img.cr = state.CUT_LIST.jsonData[0].cr
+                    state.PREVIEW.data.cr = state.CUT_LIST.jsonData[0].crName
+                    state.PREVIEW.data.effect = state.CUT_LIST.jsonData[0].effect
+                    state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text
+                }
+            },
+            // 컷 리스트 변환
+            MUTATIONS_CUT_LIST_GET_DATA_DETAIL(state, payload) {
+                console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)
+                if (state.CUT_LIST && state.CUT_LIST.jsonData && state.CUT_LIST.jsonData.length > 0) {
+                    state.PREVIEW.img.bg = state.CUT_LIST.jsonData[payload].bg
+                    state.PREVIEW.img.cr = state.CUT_LIST.jsonData[payload].cr
+                    state.PREVIEW.data.cr = state.CUT_LIST.jsonData[payload].crName
+                    state.PREVIEW.data.effect = state.CUT_LIST.jsonData[payload].effect
+                    state.PREVIEW.data.text = state.CUT_LIST.jsonData[payload].text
+                }
             },
 
         },
@@ -288,14 +321,29 @@ const createStore = () => {
                             commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
                             return;
                         }
+                        if (params.type === 'characterDetail') {
+                            console.log('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL', res.data)
+                            commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL', res.data)
+                            return;
+                        }
                         if (params.type === 'scenarioDetail') {
                             console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL')
                             commit('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', res.data)
                             return;
                         }
-                        if (params.type === 'chaterDetail') {
+                        if (params.type === 'characterDetail') {
                             console.log('MUTATIONS_ASSETS_GET_DATA', res.data)
                             commit('MUTATIONS_ASSETS_GET_DATA', res.data)
+                            return;
+                        }
+                        if (params.type === 'cutInsert') {
+                            console.log('MUTATIONS_CUT_GET_DATA', res.data)
+                            commit('MUTATIONS_CUT_GET_DATA', res.data)
+                            return;
+                        }
+                        if (params.type === 'cutList') {
+                            console.log('MUTATIONS_CUT_LIST_GET_DATA', res.data)
+                            commit('MUTATIONS_CUT_LIST_GET_DATA', res.data)
                             return;
                         }
                         // if (params.type === 'characterList') {

@@ -1,7 +1,8 @@
 <template>
   <div id="gameMaker">
     <div class="maker-wrap">
-      <ScenarioList v-if="MAKER_GNB !== 4" />
+      <ScenarioList v-if="MAKER_GNB === 1" />
+      <IntroList v-if="MAKER_GNB === 2" />
       <CharacterList v-if="MAKER_GNB === 4" />
       <div class="maker-right">
         <PreviewApp />
@@ -39,6 +40,7 @@
 import { mapActions, mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 import ScenarioList from '~/components/simulation-maker/ScenarioList.vue'
+import IntroList from '~/components/simulation-maker/IntroList.vue'
 import CharacterList from '~/components/simulation-maker/CharacterList.vue'
 import CutInsert from '~/components/simulation-maker/CutInsert.vue'
 import PreviewApp from '~/components/simulation-maker/PreviewApp.vue'
@@ -51,6 +53,7 @@ import SetupInsert from '~/components/simulation-maker/SetupInsert.vue'
 export default {
   components: {
     ScenarioList,
+    IntroList,
     CharacterList,
     CutInsert,
     PreviewApp,

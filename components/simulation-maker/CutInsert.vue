@@ -89,6 +89,7 @@
             placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다.
 인물의 대화를 입력해 주세요"
             rows="3"
+            :value="PREVIEW.data.text"
             @input="onInputDataText"
             @keydown.tab="onSubmitCutData"
           ></textarea>
@@ -197,46 +198,44 @@
         <button @click="slideTo(100)">Slide 100</button>
       </div> -->
       <swiper
+        v-if="CUT_LIST"
         v-show-slide="cutListShow"
         :options="swiperOptionCutList"
         class="cut-list"
       >
-        <swiper-slide v-for="(v, i) in 100" :key="i" class="cut-list--item">
-          <span v-if="i === 0" class="active-sign"></span>
-          <div class="tit">CUT 10</div>
-          <ul class="preview-list">
-            <li class="preview-list--item">
-              <img
-                src="https://img.seoul.co.kr/img/upload/2017/10/07/SSI_20171007154542_O2.jpg"
-                alt=""
-              />
-            </li>
-            <li class="preview-list--item">
-              <img
-                src="https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg"
-                alt=""
-              />
-            </li>
-            <li class="preview-list--item">흔들</li>
-            <li class="preview-list--item">SD</li>
-          </ul>
-          <div class="state">
-            <span class="badge text-bg-primary">일반대사</span>
-            <span class="badge text-bg-red">이지안</span><br />
-            <span class="badge text-bg-pink">이벤트</span>
-            <span class="text">시나리오 1장</span>
-            <span class="text">챕터1</span>
-            <span class="text">CUT 5</span>
-          </div>
-          <div v-if="i !== 1 && i !== 2" class="text-preview">
-            안녕? 대사를 치면 여기에도 미리보기 노출이 될거에요 width는 작업해
-            보고 잡을 예정이고 여긴 줄바꿈이 없어요 시나리오 1장 글시는 5차
-            제한으로 ... 처리! 여긴 최대 4줄까지 출력 안녕? 대사를 치면 여기에도
-            미리보기 노출이 될거에요 width는 작업해 보고 잡을 예정이고 여긴
-            줄바꿈이 없어요 시나리오 1장 글시는 5차 제한으로 ... 처리! 여긴 최대
-            4줄까지 출력
-          </div>
-          <div v-if="i === 1" class="text-preview">
+        <swiper-slide
+          v-for="(v, i) in CUT_LIST.jsonData"
+          :key="i"
+          class="cut-list--item"
+        >
+          <div @click="onClickCutPush(i)">
+            <span v-if="i === 0" class="active-sign"></span>
+            <div class="tit">{{ CUT_LIST.jsonData.length - i }} CUT</div>
+            <ul class="preview-list">
+              <li class="preview-list--item">
+                <img :src="v.cr" alt="" />
+              </li>
+              <li class="preview-list--item">
+                <img :src="v.bg" alt="" />
+              </li>
+              <li v-if="v.effect === 'vibration'" class="preview-list--item">
+                흔들
+              </li>
+              <li class="preview-list--item">SD</li>
+            </ul>
+            <div class="state">
+              <span class="badge text-bg-primary">일반대사</span>
+              <span class="badge text-bg-red">{{ v.crName }}</span
+              ><br />
+              <span class="badge text-bg-pink">이벤트</span>
+              <span class="text">시나리오 1장</span>
+              <span class="text">챕터1</span>
+              <span class="text">CUT 5</span>
+            </div>
+            <div class="text-preview">
+              {{ v.text }}
+            </div>
+            <!-- <div v-if="i === 1" class="text-preview">
             Q. 질문을하는데 1 <span class="dot"></span> 이지안+5<br />
             Q. 질문을하는데 1 <span class="dot"></span> 이지안+5<br />
             Q. 질문을하는데 1 <span class="dot"></span> 이지안+5
@@ -245,6 +244,7 @@
             Q. 질문을하는데 1<br />
             <span class="red">+5</span> 이지안<br />
             <span class="blue">-5</span> 이지안
+          </div> -->
           </div>
         </swiper-slide>
       </swiper>
@@ -254,14 +254,18 @@
 
 <script>
 // SCENE_DATA
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import ImageController from './ImageController.vue'
+import { kooLogin } from '~/config/util'
 export default {
   components: {
     ImageController,
   },
   data() {
     return {
+      params: {},
+      paramsPreview: {},
+      paramsList: {},
       cutIndex: 0,
       cuts: [
         {
@@ -311,6 +315,9 @@ export default {
       'SCENE_CODE',
       'ASSETS',
       'SCENE_DATA_CHARACTER',
+      'PREVIEW',
+      'PROJECT_ID',
+      'CUT_LIST',
     ]),
   },
   // watch: {
@@ -322,6 +329,7 @@ export default {
   //   },
   // },
   mounted() {
+    // cutList
     // this.$nextTick(() => {
     //   this.SCENE_DATA.forEach((e, i) => {
     //     e.chapters.forEach((v, k) => {
@@ -329,14 +337,23 @@ export default {
     //     })
     //   })
     // })
-    console.log(this.SCENE_CODE)
+    if (this.SCENE_CODE) {
+      this.paramsList.gc_timestamp = this.SCENE_CODE
+      this.paramsList.type = 'cutList'
+      this.paramsList.secretKey = this.PROJECT_ID
+      this.paramsList.user_idx = kooLogin('user_idx')
+      this.paramsList.apiKey = process.env.API_KEY
+      console.log(this.SCENE_CODE)
+    }
   },
   methods: {
     ...mapMutations([
       'MUTATIONS_SCENE_DATA',
       'MUTATIONS_ASSETS_DATA_CR',
       'MUTATIONS_ASSETS_DATA_TEXT',
+      'MUTATIONS_CUT_LIST_GET_DATA_DETAIL',
     ]),
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
       this.cutIndex++
       this.cuts.push({
@@ -389,7 +406,25 @@ export default {
       this.MUTATIONS_ASSETS_DATA_TEXT(target.value)
     },
     onSubmitCutData() {
-      console.log('onSubmitCutData')
+      this.params.type = 'cutInsert'
+      this.params.secretKey = this.PROJECT_ID
+      this.params.user_idx = kooLogin('user_idx')
+      this.params.apiKey = process.env.API_KEY
+      this.params.s_code = this.SCENE_CODE
+      this.paramsPreview.cutType = this.cutType
+      this.paramsPreview.code = this.SCENE_CODE
+      this.paramsPreview.bg = this.PREVIEW.img.bg
+      this.paramsPreview.cr = this.PREVIEW.img.cr
+      this.paramsPreview.crName = this.PREVIEW.data.cr
+      this.paramsPreview.effect = this.PREVIEW.data.effect
+      this.paramsPreview.text = this.PREVIEW.data.text
+      this.params.previewData = JSON.stringify(this.paramsPreview)
+      console.log('onSubmitCutData', this.params)
+      this.ACTION_AXIOS_GET(this.params)
+    },
+    onClickCutPush(e) {
+      console.log(e)
+      this.MUTATIONS_CUT_LIST_GET_DATA_DETAIL(e)
     },
   },
 }

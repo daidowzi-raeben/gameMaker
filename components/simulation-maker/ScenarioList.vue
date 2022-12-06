@@ -187,12 +187,13 @@ export default {
       this.MUTATIONS_SCENE_INDEX(i)
       this.MUTATIONS_CHAPTER_INDEX(i2)
       //   this.scenarioLists = this.SCENE_DATA
-      this.paramsData.type = 'chaterDetail'
+      this.paramsData.type = 'cutList'
       // this.params.data = JSON.stringify(value)
       this.paramsData.secretKey = this.PROJECT_ID
       this.paramsData.user_idx = this.user_idx
       this.paramsData.apiKey = process.env.API_KEY
-      this.paramsData.previewData = JSON.stringify(this.PREVIEW)
+      this.paramsData.gc_timestamp = this.SCENE_CODE
+      // this.paramsData.previewData = JSON.stringify(this.PREVIEW)
       this.ACTION_AXIOS_GET(this.paramsData)
     },
     onClickToggleScenario(idx) {

@@ -2,8 +2,13 @@
   <div class="setting-scen">
     <div class="setting-tit">
       화면 설정
-      <label v-if="MAKER_GNB===1 || MAKER_GNB===3" class="input-check">
-        <input ref="effectChecked" type="checkbox" value="vibration" />
+      <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
+        <input
+          ref="effectChecked"
+          type="checkbox"
+          value="vibration"
+          :checked="PREVIEW.data.effect === 'vibration' ? true : false"
+        />
         <span class="check-text" @click="onClickEffect()">흔들림</span>
       </label>
     </div>
@@ -16,19 +21,22 @@
             <span class="img-wrap">
               <img :src="v.path" />
             </span>
-
           </label>
         </swiper-slide>
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
     </div>
-    <div v-if="MAKER_GNB===1 || MAKER_GNB===4" class="setting-scen--list">
+    <div v-if="MAKER_GNB === 1 || MAKER_GNB === 4" class="setting-scen--list">
       <label class="label">인물</label>
       <swiper :options="swiperOptionSelectImage" class="list">
         <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item">
-          <label class="label top" >
-            <input type="radio" name="crCheck" @change="onClickCrImage(v.path)" />
+          <label class="label top">
+            <input
+              type="radio"
+              name="crCheck"
+              @change="onClickCrImage(v.path)"
+            />
             <span class="img-wrap">
               <img :src="v.path" />
             </span>

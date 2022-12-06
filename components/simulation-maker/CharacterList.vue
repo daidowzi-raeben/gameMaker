@@ -142,7 +142,7 @@ export default {
   mounted() {
     // console.log(time)
     this.$nextTick(() => {
-      //   this.user_idx = kooLogin('user_idx')
+      this.user_idx = kooLogin('user_idx')
       //   this.paramsInit.type = 'characterList'
       //   this.paramsInit.user_idx = this.user_idx
       //   this.paramsInit.secretKey = this.PROJECT_ID
@@ -171,7 +171,8 @@ export default {
     },
     // 챕터 이동
     onClickChapterTo(e) {
-      this.paramsDetail.type = 'chaterDetail'
+      console.log(e)
+      this.paramsDetail.type = 'characterDetail'
       this.paramsDetail.user_idx = this.user_idx
       this.paramsDetail.idx = e
       this.paramsDetail.secretKey = this.PROJECT_ID

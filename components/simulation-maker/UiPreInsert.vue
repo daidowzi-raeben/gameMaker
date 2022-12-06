@@ -1,5 +1,7 @@
 <template>
-  <div>asd</div>
+  <div class="insert">
+    <div class="setting">ㅁㄴㅇ</div>
+  </div>
 </template>
 
 <script>
