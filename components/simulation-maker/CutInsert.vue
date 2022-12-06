@@ -2,16 +2,7 @@
   <div class="insert">
     <div
       v-if="!SCENE_CODE"
-      style="
-        background: #000;
-        width: 500px;
-        height: 500px;
-        right: 0;
-        position: absolute;
-        z-index: 999;
-        color: #fff;
-        font-size: 20px;
-      "
+      class="insert-dim"
     >
       챕터를 선택하세요
     </div>

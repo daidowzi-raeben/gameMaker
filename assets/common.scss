@@ -431,6 +431,21 @@
         margin-right:0;
       }
     }
+    .swiper-container{
+      padding-top:50px;
+      margin-top:-50px;
+    }
+    .swiper-button-prev{
+      left:auto;
+      right:30px;
+      top:20px;
+      background:url(~/static/images/icon/arrow_left.svg)no-repeat center / 15px;
+    }
+    .swiper-button-next{
+      right:0;
+      top:20px;
+      background:url(~/static/images/icon/arrow_right.svg)no-repeat center / 15px;
+    }
   }
   &-tit{
     margin-bottom:20px;

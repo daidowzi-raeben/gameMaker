@@ -234,6 +234,20 @@
       display:flex;
       width: calc(100% - 365px);
       position: relative;
+      &-dim{
+        position:fixed;
+        right:0;
+        bottom:0;
+        z-index: 100;
+        width:calc(100vw - 250px);
+        height:calc(100vh - 80px);
+        background-color: rgba(0, 0, 0, .5);
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        font-size:2rem;
+        color:#fff;
+      }
     }
 
     .btn-add {
@@ -705,6 +719,7 @@
       border-radius: 10px 10px 0 0;
       padding: 15px;
       box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+      z-index: 5;
 
       &-tit {
         position: relative;
@@ -746,6 +761,7 @@
           padding: 0 15px;
           width: 300px;
           position:relative;
+          cursor: pointer;
 
           .active-sign{
             display:block;
@@ -956,6 +972,7 @@
         background: #84ACE9;
         padding: 15px 15px 0 15px;
         box-shadow: none;
+        transition:background-color 0.2s .3s;
 
         .cut-tit {
           border-bottom: none;
@@ -985,12 +1002,24 @@
     position: relative;
     margin: 0 auto;
     overflow: hidden;
+    &:after{
+      content:"";
+      display:block;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+      border-radius: 30px;
+      position:absolute;
+      top: 10px;
+      left: 10px;
+      background:#000;
+    }
 
     img {
       width: 100%;
       position: absolute;
       left: 0;
       top: 0;
+      z-index: 1;
     }
 
     .background {
@@ -1003,33 +1032,50 @@
     }
 
     .character {
-      width: 180px;
-      left: calc(50% - 90px);
-      top: 100px;
+      width: 260px;
+      left: 16px;
+      top: unset;
+      bottom: 11px;
+      &-2{
+        .character:first-child{
+          left:-60px;
+        }
+        .character:last-child{
+          left:unset;
+          right:-60px;
+        }
+      }
     }
 
     .dialogue {
       position: absolute;
       left: 10%;
-      bottom: 25px;
+      bottom: 30px;
       background-color: rgba(255, 255, 255, .8);
       width: 80%;
       border-radius: 10px;
       padding: 22px 15px 15px;
       font-size: 1.4rem;
+      height:120px;
+      box-shadow: 0 8px rgba(0, 0, 0, .5);
+      z-index: 2;
 
       .name {
-        font-weight: 600;
-        background-color: #fff;
-        padding: 2px 10px;
+        font-weight: 500;
+        background-color: #222;
+        padding: 3px 0 4px;
+        width:100px;
+        text-align: center;
         border-radius: 10px;
         position: absolute;
         left: 0;
-        top: -10px;
+        top: -13px;
+        color:#fff;
       }
 
       .text {
         margin: 0;
+        white-space: pre-line;
       }
     }
 

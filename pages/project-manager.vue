@@ -65,6 +65,8 @@
               새로운 프로젝트를<br />추가해 보세요
             </button>
           </swiper-slide>
+          <div slot="button-prev" class="swiper-button-prev"></div>
+          <div slot="button-next" class="swiper-button-next"></div>
         </swiper>
       </div>
       <div class="card-wrap">
@@ -73,6 +75,8 @@
           <swiper-slide v-for="(v, i) in 10" :key="i" class="card-list--item">
             <nuxt-link to=""></nuxt-link>
           </swiper-slide>
+          <div slot="button-prev" class="swiper-button-prev"></div>
+          <div slot="button-next" class="swiper-button-next"></div>
         </swiper>
       </div>
       <div class="card-wrap type2">
@@ -143,12 +147,20 @@ export default {
         slidesPerView: 4,
         slidesPerGroup: 4,
         spaceBetween:20,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       },
       swiperOptionCol7: {
         loop: false,
         slidesPerView: 7,
         slidesPerGroup: 7,
         spaceBetween:15,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       },
       temp: [1,2,3,4,5,6,7,8,9],
     }

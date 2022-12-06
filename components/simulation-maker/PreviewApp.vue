@@ -7,17 +7,37 @@
         alt=""
         class="background"
       />
-      <img
-        v-if="PREVIEW.img.cr"
-        ref="characterImage"
-        :src="PREVIEW.img.cr"
-        alt=""
-        class="character"
-        :class="PREVIEW.data.effect"
-      />
+      <div v-if="PREVIEW.img.cr" class="character-1">
+        <img
+          v-if="PREVIEW.img.cr"
+          ref="characterImage"
+          :src="PREVIEW.img.cr"
+          alt=""
+          class="character"
+          :class="PREVIEW.data.effect"
+        />
+      </div>
+      <div v-else-if="!PREVIEW.img.cr" class="character-2">
+        <img
+          v-if="PREVIEW.img.cr"
+          ref="characterImage"
+          :src="PREVIEW.img.cr"
+          alt=""
+          class="character"
+          :class="PREVIEW.data.effect"
+        />
+        <img
+          v-if="PREVIEW.img.cr"
+          ref="characterImage"
+          :src="PREVIEW.img.cr"
+          alt=""
+          class="character"
+          :class="PREVIEW.data.effect"
+        />
+      </div>
       <div class="dialogue">
         <span v-if="PREVIEW.data.cr" class="name">{{ PREVIEW.data.cr }}</span>
-        <p ref="myLoadText" class="text" style="white-space: pre-line">
+        <p ref="myLoadText" class="text">
           {{ PREVIEW.data.text }}
         </p>
       </div>
