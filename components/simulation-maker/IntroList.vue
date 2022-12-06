@@ -1,6 +1,6 @@
 <template>
   <div class="maker-left">
-    <ul v-if="SCENE_DATA" class="scenario-list">
+    <ul class="scenario-list">
       <li class="scenario-list--item active">
         <span class="scenario-tit"> 인트로 </span>
         <!-- {{ scen.chapters }} -->

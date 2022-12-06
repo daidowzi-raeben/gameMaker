@@ -106,8 +106,14 @@
               포인트 설정
             </button>
             <div v-show="pointSettingShow" class="set point-set">
-              <select v-if="ASSETS && ASSETS.crList" class="input-select">
-                <option v-for="(v, i) in ASSETS.crList" :key="i">
+              <select
+                v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
+                class="input-select"
+              >
+                <option
+                  v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
+                  :key="i"
+                >
                   {{ v.name }}
                 </option>
               </select>
