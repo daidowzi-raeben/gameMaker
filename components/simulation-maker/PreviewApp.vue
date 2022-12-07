@@ -7,7 +7,7 @@
         alt=""
         class="background"
       />
-      <div v-if="PREVIEW.img.cr" class="character-1">
+      <div v-if="PREVIEW.img.cr && !PREVIEW.img.cr2" class="character-1">
         <img
           v-if="PREVIEW.img.cr"
           ref="characterImage"
@@ -17,7 +17,7 @@
           :class="PREVIEW.data.effect"
         />
       </div>
-      <div v-else-if="!PREVIEW.img.cr" class="character-2">
+      <div v-if="PREVIEW.img.cr2" class="character-2">
         <img
           v-if="PREVIEW.img.cr"
           ref="characterImage"
@@ -27,19 +27,19 @@
           :class="PREVIEW.data.effect"
         />
         <img
-          v-if="PREVIEW.img.cr"
+          v-if="PREVIEW.img.cr2"
           ref="characterImage"
-          :src="PREVIEW.img.cr"
+          :src="PREVIEW.img.cr2"
           alt=""
           class="character"
-          :class="PREVIEW.data.effect"
+          :class="PREVIEW.data.effect2"
         />
       </div>
       <div class="dialogue">
         <span v-if="PREVIEW.data.cr" class="name">{{ PREVIEW.data.cr }}</span>
-        <p ref="myLoadText" class="text">
-          {{ PREVIEW.data.text }}
-        </p>
+        <!-- prettier-ignore-start -->
+        <p ref="myLoadText" class="text">{{ PREVIEW.data.text }}</p>
+        <!-- prettier-ignore-end -->
       </div>
       <img src="~/static/images/mockup.png" alt="" class="mockup" />
     </div>

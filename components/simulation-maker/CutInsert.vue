@@ -1,11 +1,6 @@
 <template>
   <div class="insert">
-    <div
-      v-if="!SCENE_CODE"
-      class="insert-dim"
-    >
-      챕터를 선택하세요
-    </div>
+    <div v-if="!SCENE_CODE" class="insert-dim">챕터를 선택하세요</div>
     <div class="setting">
       <ImageController />
       <div class="setting-talk">
@@ -348,7 +343,8 @@ export default {
       'MUTATIONS_SCENE_DATA',
       'MUTATIONS_ASSETS_DATA_CR',
       'MUTATIONS_ASSETS_DATA_TEXT',
-      'MUTATIONS_CUT_LIST_GET_DATA_DETAIL',
+      'MUTATIONS_CHAPTER_DEATILE_INIT',
+      'MUTATIONS_ASSETS_INIT',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
@@ -400,6 +396,13 @@ export default {
       this.rightContentShow = !this.rightContentShow
     },
     onInputDataText({ target }) {
+      // this.onWatchTextRowLimit(target.value)
+      const row = target.value.split('\n').length
+      if (row > 3) {
+        const modifiedText = target.value.split('\n').slice(0, 3)
+        target.value = modifiedText.join('\n')
+        return alert('대사는 세줄까지 입력 할 수 있습니다')
+      }
       this.MUTATIONS_ASSETS_DATA_TEXT(target.value)
     },
     onSubmitCutData() {
@@ -412,17 +415,20 @@ export default {
       this.paramsPreview.code = this.SCENE_CODE
       this.paramsPreview.bg = this.PREVIEW.img.bg
       this.paramsPreview.cr = this.PREVIEW.img.cr
+      this.paramsPreview.cr2 = this.PREVIEW.img.cr2
       this.paramsPreview.crName = this.PREVIEW.data.cr
       this.paramsPreview.effect = this.PREVIEW.data.effect
       this.paramsPreview.text = this.PREVIEW.data.text
       this.params.previewData = JSON.stringify(this.paramsPreview)
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)
+      this.MUTATIONS_CHAPTER_DEATILE_INIT()
     },
     onClickCutPush(e) {
       console.log(e)
       this.MUTATIONS_CUT_LIST_GET_DATA_DETAIL(e)
     },
+    onWatchTextRowLimit(e) {},
   },
 }
 </script>

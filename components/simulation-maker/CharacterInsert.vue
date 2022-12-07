@@ -31,9 +31,8 @@
             "
             @input="onInputProfile"
           ></textarea>
-          <div class="insert-set">
-            <button type="button" class="btn sound">사운드 설정</button>
-            <div class="set sound-set"></div>
+          <div class="insert-wrap">
+            <ScenarioSelect />
           </div>
         </div>
         <div class="text-center">
@@ -98,11 +97,13 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-import ImageController from './ImageController.vue'
+import ImageController from '~/components/simulation-maker/ImageController.vue'
+import ScenarioSelect from '~/components/modules/ScenarioSelect.vue'
 import { kooLogin } from '~/config/util'
 export default {
   components: {
     ImageController,
+    ScenarioSelect,
   },
   data() {
     return {
@@ -135,6 +136,7 @@ export default {
       'PROJECT_ID',
       'CHAPTER_DEATILE_IDX',
       'CHAPTER_DEATILE',
+      'SCENE_DATA',
       'SCENE_DATA_CHARACTER',
     ]),
   },
@@ -149,8 +151,9 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['MUTATIONS_ASSETS_INIT']),
+    ...mapMutations(['MUTATIONS_ASSETS_INIT', 'MUTAIONS_SAVE']),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
+
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
     },
@@ -192,15 +195,15 @@ export default {
 
       // this.MUTATIONS_ASSETS_INIT()
       // 리스트 초기화
-      this.$nextTick(() => {
-        this.user_idx = kooLogin('user_idx')
-        this.paramsInit.type = 'characterList'
-        this.paramsInit.user_idx = this.user_idx
-        this.paramsInit.secretKey = this.PROJECT_ID
-        this.paramsInit.apiKey = process.env.API_KEY
-        this.ACTION_AXIOS_GET(this.paramsInit)
-      })
-      alert('추가되었습니다')
+      // await this.$nextTick(() => {
+      //   this.user_idx = kooLogin('user_idx')
+      //   this.paramsInit.type = 'characterList'
+      //   this.paramsInit.user_idx = this.user_idx
+      //   this.paramsInit.secretKey = this.PROJECT_ID
+      //   this.paramsInit.apiKey = process.env.API_KEY
+      //   this.ACTION_AXIOS_GET(this.paramsInit)
+      //   this.MUTAIONS_SAVE()
+      // })
     },
   },
 }

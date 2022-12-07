@@ -46,6 +46,25 @@
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
     </div>
+    <div v-if="MAKER_GNB === 1" class="setting-scen--list">
+      <label class="label">인물2</label>
+      <swiper :options="swiperOptionSelectImage" class="list">
+        <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item">
+          <label class="label top">
+            <input
+              type="radio"
+              name="crCheck2"
+              @change="onClickCrImage2(v.path)"
+            />
+            <span class="img-wrap">
+              <img :src="v.path" />
+            </span>
+          </label>
+        </swiper-slide>
+        <div slot="button-prev" class="swiper-button-prev"></div>
+        <div slot="button-next" class="swiper-button-next"></div>
+      </swiper>
+    </div>
   </div>
 </template>
 
@@ -94,6 +113,7 @@ export default {
     ...mapMutations([
       'MUTATIONS_ASSETS_BG',
       'MUTATIONS_ASSETS_CR',
+      'MUTATIONS_ASSETS_CR2',
       'MUTATIONS_ASSETS_EFFECT',
     ]),
     onClickBgImage(e) {
@@ -101,6 +121,9 @@ export default {
     },
     onClickCrImage(e) {
       this.MUTATIONS_ASSETS_CR(e)
+    },
+    onClickCrImage2(e) {
+      this.MUTATIONS_ASSETS_CR2(e)
     },
     onClickEffect() {
       if (this.$refs.effectChecked.checked === false) {

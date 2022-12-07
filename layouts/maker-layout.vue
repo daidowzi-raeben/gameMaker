@@ -35,6 +35,11 @@
     <Nuxt />
     <ScenarioInsert @scenarioInsert="scenarioInsert" />
     <JsonDatapreview />
+    <div style="position: fixed; top: 0">
+      <b-alert :show="alertSave" dismissible variant="warning">
+        저장되었습니다.
+      </b-alert>
+    </div>
   </div>
 </template>
 
@@ -64,7 +69,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'SCENE_CODE', 'MAKER_GNB']),
+    ...mapState(['LOGIN', 'LOADING', 'SCENE_CODE', 'MAKER_GNB', 'alertSave']),
   },
   watch: {
     LOGIN: {

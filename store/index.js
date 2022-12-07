@@ -12,6 +12,7 @@ const createStore = () => {
         state: {
             API_KEY: 'ZFR4NUR3WnhyUVdBb0ExZDdMUGNDMWY3T25hV0pOWXhwQk0xZCtvV1E9',
             LOADING: true,
+            alertSave: 0,
             LOGIN: {},
             PROJECT_MANAGER: [],
             IS_POST: false,
@@ -49,6 +50,7 @@ const createStore = () => {
                 img: {
                     bg: '',
                     cr: '',
+                    cr2: '',
                 },
                 data: {
                     type: '',
@@ -106,6 +108,12 @@ const createStore = () => {
             // 로딩
             MUTATIONS_LOADING(state, payload) {
                 state.LOADING = false
+            },
+            MUTAIONS_SAVE(state) {
+                state.alertSave = 3
+                setTimeout(() => {
+                    state.alertSave = 0
+                }, 3000);
             },
             // 로그인
             MUTATIONS_LOGIN(state, payload) {
@@ -207,12 +215,14 @@ const createStore = () => {
                 state.CHAPTER_DEATILE_IDX = payload.idx;
                 state.PREVIEW.img.bg = payload.jsonData.bg;
                 state.PREVIEW.img.cr = payload.jsonData.cr;
+                state.PREVIEW.img.cr2 = payload.jsonData.cr2;
                 console.log(payload)
             },
             // 데이터초기화
             MUTATIONS_ASSETS_INIT(state, payload) {
                 state.PREVIEW.img.bg = '';
                 state.PREVIEW.img.cr = '';
+                state.PREVIEW.img.cr2 = '';
                 state.PREVIEW.data.cr = '';
                 state.PREVIEW.data.effect = '';
                 state.PREVIEW.data.text = '';
@@ -224,6 +234,7 @@ const createStore = () => {
                 state.CHAPTER_DEATILE_IDX = ''
                 state.PREVIEW.img.bg = '';
                 state.PREVIEW.img.cr = '';
+                state.PREVIEW.img.cr2 = '';
             },
             // 배경
             MUTATIONS_ASSETS_BG(state, payload) {
@@ -232,6 +243,9 @@ const createStore = () => {
             // 인물
             MUTATIONS_ASSETS_CR(state, payload) {
                 state.PREVIEW.img.cr = payload;
+            },
+            MUTATIONS_ASSETS_CR2(state, payload) {
+                state.PREVIEW.img.cr2 = payload;
             },
             // 효과
             MUTATIONS_ASSETS_EFFECT(state, payload) {
@@ -248,15 +262,16 @@ const createStore = () => {
             },
             // 컷 리스트
             MUTATIONS_CUT_LIST_GET_DATA(state, payload) {
-                console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)
-                state.CUT_LIST = payload;
+                console.log('MUTATIONS_CUT_LIST_GET_DATA', payload)
                 if (state.CUT_LIST && state.CUT_LIST.jsonData && state.CUT_LIST.jsonData.length > 0) {
                     state.PREVIEW.img.bg = state.CUT_LIST.jsonData[0].bg
                     state.PREVIEW.img.cr = state.CUT_LIST.jsonData[0].cr
+                    state.PREVIEW.img.cr2 = state.CUT_LIST.jsonData[0].cr2
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[0].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[0].effect
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text
                 }
+                state.CUT_LIST = payload;
             },
             // 컷 리스트 변환
             MUTATIONS_CUT_LIST_GET_DATA_DETAIL(state, payload) {
@@ -316,16 +331,16 @@ const createStore = () => {
                             // commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
                             return;
                         }
-                        if (params.type === 'characterList') {
+                        if (params.type === 'characterList' || params.type === 'characterInsert') {
                             commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
                             commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
                             return;
                         }
-                        if (params.type === 'characterDetail') {
-                            console.log('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL', res.data)
-                            commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL', res.data)
-                            return;
-                        }
+                        // if (params.type === 'characterDetail') {
+                        //     console.log('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL', res.data)
+                        //     commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL', res.data)
+                        //     return;
+                        // }
                         if (params.type === 'scenarioDetail') {
                             console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL')
                             commit('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', res.data)
@@ -337,8 +352,8 @@ const createStore = () => {
                             return;
                         }
                         if (params.type === 'cutInsert') {
-                            console.log('MUTATIONS_CUT_GET_DATA', res.data)
-                            commit('MUTATIONS_CUT_GET_DATA', res.data)
+                            console.log('MUTATIONS_CUT_LIST_GET_DATA', res.data)
+                            commit('MUTATIONS_CUT_LIST_GET_DATA', res.data)
                             return;
                         }
                         if (params.type === 'cutList') {
