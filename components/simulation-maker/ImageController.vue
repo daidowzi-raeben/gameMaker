@@ -49,6 +49,12 @@
     <div v-if="MAKER_GNB === 1" class="setting-scen--list">
       <label class="label">인물2</label>
       <swiper :options="swiperOptionSelectImage" class="list">
+        <swiper-slide class="list-item">
+          <label class="label top">
+            <input type="radio" name="crCheck2" @change="onClickCrImage2('')" />
+            <span class="img-wrap"> 없음 </span>
+          </label>
+        </swiper-slide>
         <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item">
           <label class="label top">
             <input

@@ -1,10 +1,11 @@
 <template>
   <div class="insert">
+    {{ CUT_CODE }}
     <div v-if="!SCENE_CODE" class="insert-dim">챕터를 선택하세요</div>
     <div class="setting">
       <ImageController />
       <div class="setting-talk">
-        <div class="setting-tit">대화 설정</div>
+        <div class="setting-tit">대화 설정 {{ CUT_CODE }}</div>
         <div class="tab-list">
           <button
             type="button"
@@ -77,7 +78,6 @@
             rows="3"
             :value="PREVIEW.data.text"
             @input="onInputDataText"
-            @keydown.tab="onSubmitCutData"
           ></textarea>
           <textarea v-else rows="3"></textarea>
           <div class="insert-set">
@@ -161,6 +161,15 @@
           </div>
         </div>
         <button v-if="cutType === 3" type="button" class="cut-add"></button>
+      </div>
+      <div class="text-center">
+        <button @click="onSubmitCutData">저장</button>
+        <button
+          v-if="CUT_LIST.idx && CUT_LIST.idx.length > 0"
+          @click="onSubmitCutDataAdd"
+        >
+          다음컷에 추가
+        </button>
       </div>
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
@@ -297,6 +306,8 @@ export default {
       scenarioSettingShow: false,
       cutType: 1,
       rightContentShow: false,
+      cutData: [],
+      rowIdx: [],
     }
   },
   computed: {
@@ -310,6 +321,7 @@ export default {
       'PREVIEW',
       'PROJECT_ID',
       'CUT_LIST',
+      'CUT_CODE',
     ]),
   },
   // watch: {
@@ -345,6 +357,7 @@ export default {
       'MUTATIONS_ASSETS_DATA_TEXT',
       'MUTATIONS_CHAPTER_DEATILE_INIT',
       'MUTATIONS_ASSETS_INIT',
+      'MUTATIONS_CUT_LIST_GET_DATA_DETAIL',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
@@ -405,8 +418,35 @@ export default {
       }
       this.MUTATIONS_ASSETS_DATA_TEXT(target.value)
     },
+    onSubmitCutDataAdd() {
+      this.rowIdx = this.CUT_LIST.idx
+      // rowIdx.reverse()
+      this.rowIdx.splice(this.CUT_CODE, 0, 'ADD')
+      console.log(this.CUT_CODE, this.rowIdx)
+    },
     onSubmitCutData() {
+      // this.paramsPreview.cutType = this.cutType
+      // this.paramsPreview.code = this.SCENE_CODE
+      // this.paramsPreview.bg = this.PREVIEW.img.bg
+      // this.paramsPreview.cr = this.PREVIEW.img.cr
+      // this.paramsPreview.cr2 = this.PREVIEW.img.cr2
+      // this.paramsPreview.crName = this.PREVIEW.data.cr
+      // this.paramsPreview.effect = this.PREVIEW.data.effect
+      // this.paramsPreview.text = this.PREVIEW.data.text
+
+      // this.cutData = this.CUT_LIST.jsonData
+      // this.cutData.push(this.paramsPreview)
+      // console.log(JSON.stringify(this.cutData))
+      console.log(
+        'this.CUT_LIST.idx',
+        this.CUT_LIST,
+        this.CUT_LIST.idx,
+        this.SCENE_CODE
+      )
       this.params.type = 'cutInsert'
+      if (this.CUT_LIST.idx) {
+        this.params.idxRow = JSON.stringify(this.CUT_LIST.idx)
+      }
       this.params.secretKey = this.PROJECT_ID
       this.params.user_idx = kooLogin('user_idx')
       this.params.apiKey = process.env.API_KEY
@@ -418,11 +458,11 @@ export default {
       this.paramsPreview.cr2 = this.PREVIEW.img.cr2
       this.paramsPreview.crName = this.PREVIEW.data.cr
       this.paramsPreview.effect = this.PREVIEW.data.effect
-      this.paramsPreview.text = this.PREVIEW.data.text
+      this.paramsPreview.text = this.PREVIEW.data.text.replaceAll('\n', '||n')
       this.params.previewData = JSON.stringify(this.paramsPreview)
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)
-      this.MUTATIONS_CHAPTER_DEATILE_INIT()
+      // this.MUTATIONS_CHAPTER_DEATILE_INIT()
     },
     onClickCutPush(e) {
       console.log(e)

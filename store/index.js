@@ -83,6 +83,8 @@ const createStore = () => {
             SCENE_CODE: null,
             // 인물코드
             CHAPTER_CODE: null,
+            // 컷코드
+            CUT_CODE: null,
             MAKER_GNB: 1,
             ASSETS: [],
             SCENE_INDEX: null,
@@ -258,30 +260,32 @@ const createStore = () => {
             // 대사
             MUTATIONS_ASSETS_DATA_TEXT(state, payload) {
                 console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)
-                state.PREVIEW.data.text = payload;
+                state.PREVIEW.data.text = payload.replaceAll('||n', '\n');
             },
             // 컷 리스트
             MUTATIONS_CUT_LIST_GET_DATA(state, payload) {
                 console.log('MUTATIONS_CUT_LIST_GET_DATA', payload)
+                state.CUT_LIST = payload;
                 if (state.CUT_LIST && state.CUT_LIST.jsonData && state.CUT_LIST.jsonData.length > 0) {
                     state.PREVIEW.img.bg = state.CUT_LIST.jsonData[0].bg
                     state.PREVIEW.img.cr = state.CUT_LIST.jsonData[0].cr
                     state.PREVIEW.img.cr2 = state.CUT_LIST.jsonData[0].cr2
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[0].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[0].effect
-                    state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text
+                    state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text.replaceAll('||n', '\n')
+                    state.CUT_CODE = 0
                 }
-                state.CUT_LIST = payload;
             },
             // 컷 리스트 변환
             MUTATIONS_CUT_LIST_GET_DATA_DETAIL(state, payload) {
                 console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)
+                state.CUT_CODE = payload
                 if (state.CUT_LIST && state.CUT_LIST.jsonData && state.CUT_LIST.jsonData.length > 0) {
                     state.PREVIEW.img.bg = state.CUT_LIST.jsonData[payload].bg
                     state.PREVIEW.img.cr = state.CUT_LIST.jsonData[payload].cr
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[payload].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[payload].effect
-                    state.PREVIEW.data.text = state.CUT_LIST.jsonData[payload].text
+                    state.PREVIEW.data.text = state.CUT_LIST.jsonData[payload].text.replaceAll('||n', '\n')
                 }
             },
 
