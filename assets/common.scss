@@ -21,6 +21,46 @@
   margin-top:70px;
 }
 
+.button{
+  font-size:1.4rem;
+  padding:5px 10px;
+  border-radius: 5px;
+  margin:0 5px;
+  transition:background-color .3s;
+  &.lg{
+    font-size:1.6rem;
+    padding:10px 20px;
+  }
+}
+
+.btn{
+  &-primary{
+    background-color:$colPrimary !important;
+    color:#fff;
+    &:hover{
+      background-color:$colPrimaryHover !important;
+    }
+  }
+  &-pink{
+    background:$colPink;
+    color:#fff;
+    &:hover{
+      background-color:$colPinkHover;
+    }
+  }
+  &-blue{
+    background:$colBlue;
+    color:#fff;
+    &:hover{
+      background-color:$colBlueHover;
+    }
+  }
+  &-grey{
+    background:$textCol2;
+    color:#fff;
+  }
+}
+
 .header{
   height:70px;
   width:100vw;

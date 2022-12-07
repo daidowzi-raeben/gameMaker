@@ -453,6 +453,8 @@
             .tab-list--item {
               font-size: 1.4rem;
               position: relative;
+              width:auto !important;
+              margin-right:20px;
               .radio{
                 cursor: pointer;
                 white-space: nowrap;
@@ -1076,6 +1078,8 @@
       .text {
         margin: 0;
         white-space: pre-line;
+        width:200px;
+        word-break: break-all;
       }
     }
 

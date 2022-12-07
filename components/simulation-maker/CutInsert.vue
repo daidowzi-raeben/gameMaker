@@ -163,9 +163,10 @@
         <button v-if="cutType === 3" type="button" class="cut-add"></button>
       </div>
       <div class="text-center">
-        <button @click="onSubmitCutData">저장</button>
+        <button class="button lg btn-primary" @click="onSubmitCutData">저장</button>
         <button
           v-if="CUT_LIST.idx && CUT_LIST.idx.length > 0"
+          class="button lg btn-blue"
           @click="onSubmitCutDataAdd"
         >
           다음컷에 추가
@@ -288,9 +289,8 @@ export default {
       swiperOptionSelectCharacter: {
         allowTouchMove: false,
         loop: false,
-        slidesPerView: 16,
-        slidesPerGroup: 16,
-        spaceBetween: 5,
+        slidesPerView: 'auto',
+        slidesPerGroup: 4,
         mousewheel: {
           draggable: true,
         },
