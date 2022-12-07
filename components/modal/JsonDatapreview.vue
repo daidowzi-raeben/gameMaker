@@ -1,6 +1,6 @@
 <template>
   <b-modal id="JsonDatapreview" size="lg" hide-footer title="Json 미리보기">
-    {{ JSON.stringify(SCENE_DATA) }}
+    <!-- {{ JSON.stringify(SCENE_DATA) }} -->
   </b-modal>
 </template>
 
