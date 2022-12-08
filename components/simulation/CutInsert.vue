@@ -71,12 +71,18 @@
         <label v-if="cutType === 4" class="label">정답</label>
         <div class="insert-wrap">
           <textarea
-            v-if="cutType !== 4"
-            placeholder="TAB 키를 눌러 대사를 바로 추가할 수 있습니다.
-인물의 대화를 입력해 주세요"
+            v-if="cutType === 1"
+            placeholder="인물의 대화를 입력해 주세요"
             rows="3"
             :value="PREVIEW.data.text"
             @input="onInputDataText"
+          ></textarea>
+          <textarea
+            v-if="cutType === 2"
+            placeholder="인물의 대화를 입력해 주세요"
+            rows="3"
+            :value="PREVIEW.data.narration"
+            @input="onInputDataNarration"
           ></textarea>
           <textarea v-else rows="3"></textarea>
           <div class="insert-set">
@@ -361,6 +367,8 @@ export default {
       'MUTATIONS_CUT_LIST_GET_DATA_DETAIL',
       'MUTATIONS_CUT_LIST_FIRST',
       'MUTATIONS_CUT_LIST_ADD',
+      'MUTATIONS_ASSETS_INIT_TEXT',
+      'MUTATIONS_ASSETS_DATA_NARRATION',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
@@ -402,6 +410,7 @@ export default {
       if (type === 'save') this.scenarioSettingShow = false
     },
     onClickChangeCutType(type) {
+      this.MUTATIONS_ASSETS_INIT_TEXT()
       this.cutType = type
     },
     slideTo(index) {
@@ -411,6 +420,7 @@ export default {
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
     },
+    // 대사
     onInputDataText({ target }) {
       // this.onWatchTextRowLimit(target.value)
       const row = target.value.split('\n').length
@@ -420,6 +430,17 @@ export default {
         return alert('대사는 세줄까지 입력 할 수 있습니다')
       }
       this.MUTATIONS_ASSETS_DATA_TEXT(target.value)
+    },
+    // 나레이션
+    onInputDataNarration({ target }) {
+      // this.onWatchTextRowLimit(target.value)
+      const row = target.value.split('\n').length
+      if (row > 3) {
+        const modifiedText = target.value.split('\n').slice(0, 3)
+        target.value = modifiedText.join('\n')
+        return alert('대사는 세줄까지 입력 할 수 있습니다')
+      }
+      this.MUTATIONS_ASSETS_DATA_NARRATION(target.value)
     },
     onSubmitCutDataAdd() {
       this.rowIdx = this.CUT_LIST.idx
@@ -441,6 +462,10 @@ export default {
       this.paramsPreview.crName = this.PREVIEW.data.cr
       this.paramsPreview.effect = this.PREVIEW.data.effect
       this.paramsPreview.text = this.PREVIEW.data.text.replaceAll('\n', '||n')
+      this.paramsPreview.narration = this.PREVIEW.data.narration.replaceAll(
+        '\n',
+        '||n'
+      )
       this.params.previewData = JSON.stringify(this.paramsPreview)
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)
@@ -483,6 +508,10 @@ export default {
       this.paramsPreview.crName = this.PREVIEW.data.cr
       this.paramsPreview.effect = this.PREVIEW.data.effect
       this.paramsPreview.text = this.PREVIEW.data.text.replaceAll('\n', '||n')
+      this.paramsPreview.narration = this.PREVIEW.data.narration.replaceAll(
+        '\n',
+        '||n'
+      )
       this.params.previewData = JSON.stringify(this.paramsPreview)
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)

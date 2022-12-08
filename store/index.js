@@ -59,6 +59,9 @@ const createStore = () => {
                     pointType: '',
                     su: '',
                     text: '',
+                    narration: '',
+                    questions: {},
+                    answer: '',
                     cr: '',
                     effect: '',
                     connect: '',
@@ -244,6 +247,10 @@ const createStore = () => {
                 state.PREVIEW.img.cr = '';
                 state.PREVIEW.img.cr2 = '';
             },
+            // 대사 초기화
+            MUTATIONS_ASSETS_INIT_TEXT(state, payload) {
+                state.PREVIEW.data.text = '';
+            },
             // 배경
             MUTATIONS_ASSETS_BG(state, payload) {
                 state.PREVIEW.img.bg = payload;
@@ -267,6 +274,12 @@ const createStore = () => {
             MUTATIONS_ASSETS_DATA_TEXT(state, payload) {
                 console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)
                 state.PREVIEW.data.text = payload.replaceAll('||n', '\n');
+            },
+            // 나레이션
+            MUTATIONS_ASSETS_DATA_NARRATION(state, payload) {
+
+                console.log('MUTATIONS_ASSETS_DATA_NARRATION', payload)
+                state.PREVIEW.data.narration = payload.replaceAll('||n', '\n');
             },
             // 컷 리스트
             MUTATIONS_CUT_LIST_GET_DATA(state, payload) {

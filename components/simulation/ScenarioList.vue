@@ -151,6 +151,7 @@ export default {
         }
       },
       immediate: false,
+      deep: true,
     },
   },
   mounted() {
@@ -288,6 +289,15 @@ export default {
       } else {
         return false
       }
+    },
+    updateList() {
+      this.scenarioLists = this.SCENE_DATA
+      this.params.type = 'scenarioInsert'
+      this.params.data = JSON.stringify(this.scenarioLists)
+      this.params.secretKey = this.PROJECT_ID
+      this.params.user_idx = this.user_idx
+      this.params.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.params)
     },
   },
 }
