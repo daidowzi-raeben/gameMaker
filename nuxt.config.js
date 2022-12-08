@@ -1,5 +1,5 @@
 // import path from 'path'
-// import colors from 'vuetify/es5/util/colors'
+import colors from 'vuetify/es5/util/colors'
 // import dotenv from 'dotenv'
 // import {DIR_CONFIG} from './config/dirConfig'
 // import { CONST_ENV_TYPE } from './config/envConfig'
@@ -8,6 +8,9 @@ require('dotenv').config()
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  generate: {
+    fallback: true
+  },
   head: {
     titleTemplate: '%s - MAKER',
     title: 'MAKER',
@@ -34,14 +37,14 @@ export default {
   plugins: [
     { src: '~plugins/BootstrapVue.js', ssr: false, mode: 'client' },
     { src: '~plugins/MomentVue.js', ssr: false, mode: 'client' },
-    // { src: '~plugins/AwesomeSwiper.js', ssr: false, mode: 'client' },
-    // { src: '~plugins/Vcaledar.js', ssr: false, mode: 'client' },
+    { src: '~plugins/AwesomeSwiper.js', ssr: false, mode: 'client' },
+    { src: '~plugins/Vcaledar.js', ssr: false, mode: 'client' },
     { src: '~plugins/HtmlEditor.js', ssr: false, mode: 'client' },
     { src: '~plugins/filters.js', ssr: false, mode: 'client' },
-    // { src: '~plugins/QrCode.js', ssr: false, mode: 'client' },
-    // { src: '~plugins/LottieWebVue.js', ssr: false, mode: 'client' },
-    // { src: '~plugins/ApexCart.js', ssr: false, mode: 'client' },
-    // { src: '~plugins/ColorPicker.js', ssr: false, mode: 'client' },
+    { src: '~plugins/QrCode.js', ssr: false, mode: 'client' },
+    { src: '~plugins/LottieWebVue.js', ssr: false, mode: 'client' },
+    { src: '~plugins/ApexCart.js', ssr: false, mode: 'client' },
+    { src: '~plugins/ColorPicker.js', ssr: false, mode: 'client' },
     { src: '~plugins/Vuedraggable.js', ssr: false, mode: 'client' },
     { src: '~plugins/VShowSlide.js', ssr: false, mode: 'client' },
   ],
@@ -54,7 +57,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
-    // '@nuxtjs/vuetify',
+    '@nuxtjs/vuetify',
     '@nuxtjs/dotenv',
   ],
 
@@ -63,9 +66,9 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/device',
-    // 'nuxt-socket-io',
-    // 'vue2-editor/nuxt',
-    // 'cookie-universal-nuxt',
+    'nuxt-socket-io',
+    'vue2-editor/nuxt',
+    'cookie-universal-nuxt',
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -74,27 +77,26 @@ export default {
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
-  // vuetify: {
-  //   customVariables: ['~/assets/variables.scss'],
-  //   theme: {
-  //     dark: true,
-  //     themes: {
-  //       dark: {
-  //         primary: colors.blue.darken2,
-  //         accent: colors.grey.darken3,
-  //         secondary: colors.amber.darken3,
-  //         info: colors.teal.lighten1,
-  //         warning: colors.amber.base,
-  //         error: colors.deepOrange.accent4,
-  //         success: colors.green.accent3,
-  //       },
-  //     },
-  //   },
-  // },
+  vuetify: {
+    customVariables: ['~/assets/variables.scss'],
+    theme: {
+      dark: true,
+      themes: {
+        dark: {
+          primary: colors.blue.darken2,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3,
+        },
+      },
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    maxChunkSize: 500000,
     html: {
       minify: {
         collapseWhitespace: true, // as @dario30186 mentioned
@@ -107,19 +109,5 @@ export default {
     layouts: 'layouts'
   },
   ssr: true,
-  generate: {
-    dir: 'dist',
-  },
-  extend(config, { isDev, isClient }) {
-    // ..
-    config.module.rules.push({
-      test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-      loader: 'file-loader'
-    })
-    // Sets webpack's mode to development if `isDev` is true.
-    if (isDev) {
-      config.mode = 'development'
-    }
-  }
   // server: { port: process.env.PORT, host: '0.0.0.0' },
 }

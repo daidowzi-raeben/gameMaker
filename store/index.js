@@ -153,6 +153,12 @@ const createStore = () => {
                 // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
                 state.MAKER_GNB = payload
             },
+            MUTATIONS_CUT_LIST_FIRST(state, payload) {
+                state.CUT_LIST.idx = ["@@"]
+            },
+            MUTATIONS_CUT_LIST_ADD(state, payload) {
+                // state.CUT_LIST.idx = state.CUT_LIST.idx.unshift('"@@')
+            },
 
             // POST 성공
             MUTATIONS_AXIOS_POST_SUCCESS(state, payload) {
@@ -273,8 +279,15 @@ const createStore = () => {
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[0].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[0].effect
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text.replaceAll('||n', '\n')
-                    state.CUT_CODE = 0
+                } else {
+                    state.PREVIEW.img.bg = ''
+                    state.PREVIEW.img.cr = ''
+                    state.PREVIEW.img.cr2 = ''
+                    state.PREVIEW.data.cr = ''
+                    state.PREVIEW.data.effect = ''
+                    state.PREVIEW.data.text = ''
                 }
+                state.CUT_CODE = 0
             },
             // 컷 리스트 변환
             MUTATIONS_CUT_LIST_GET_DATA_DETAIL(state, payload) {

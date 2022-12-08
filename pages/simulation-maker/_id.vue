@@ -39,17 +39,17 @@
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
-import ScenarioList from '~/components/simulation-maker/ScenarioList.vue'
-import IntroList from '~/components/simulation-maker/IntroList.vue'
-import CharacterList from '~/components/simulation-maker/CharacterList.vue'
-import CutInsert from '~/components/simulation-maker/CutInsert.vue'
-import PreviewApp from '~/components/simulation-maker/PreviewApp.vue'
-import IntroInsert from '~/components/simulation-maker/IntroInsert.vue'
-import EndingInsert from '~/components/simulation-maker/EndingInsert.vue'
-import CharacterInsert from '~/components/simulation-maker/CharacterInsert.vue'
-import UiPreInsert from '~/components/simulation-maker/UiPreInsert.vue'
-import AssetsInsert from '~/components/simulation-maker/AssetsInsert.vue'
-import SetupInsert from '~/components/simulation-maker/SetupInsert.vue'
+import ScenarioList from '~/components/simulation/ScenarioList.vue'
+import IntroList from '~/components/simulation/IntroList.vue'
+import CharacterList from '~/components/simulation/CharacterList.vue'
+import CutInsert from '~/components/simulation/CutInsert.vue'
+import PreviewApp from '~/components/simulation/PreviewApp.vue'
+import IntroInsert from '~/components/simulation/IntroInsert.vue'
+import EndingInsert from '~/components/simulation/EndingInsert.vue'
+import CharacterInsert from '~/components/simulation/CharacterInsert.vue'
+import UiPreInsert from '~/components/simulation/UiPreInsert.vue'
+import AssetsInsert from '~/components/simulation/AssetsInsert.vue'
+import SetupInsert from '~/components/simulation/SetupInsert.vue'
 export default {
   name: 'SimulationMakerMain',
   components: {
