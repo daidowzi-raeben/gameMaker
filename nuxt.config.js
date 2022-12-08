@@ -63,9 +63,9 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/device',
-    'nuxt-socket-io',
-    'vue2-editor/nuxt',
-    'cookie-universal-nuxt',
+    // 'nuxt-socket-io',
+    // 'vue2-editor/nuxt',
+    // 'cookie-universal-nuxt',
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -94,6 +94,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    maxChunkSize: 500000,
     html: {
       minify: {
         collapseWhitespace: true, // as @dario30186 mentioned
@@ -106,5 +107,8 @@ export default {
     layouts: 'layouts'
   },
   ssr: true,
+  generate: {
+    dir: 'dist',
+  },
   // server: { port: process.env.PORT, host: '0.0.0.0' },
 }

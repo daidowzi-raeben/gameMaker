@@ -51,6 +51,7 @@ import UiPreInsert from '~/components/simulation-maker/UiPreInsert.vue'
 import AssetsInsert from '~/components/simulation-maker/AssetsInsert.vue'
 import SetupInsert from '~/components/simulation-maker/SetupInsert.vue'
 export default {
+  name: 'SimulationMakerMain',
   components: {
     ScenarioList,
     IntroList,
