@@ -97,7 +97,7 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-import ImageController from '~/components/simulation-maker/ImageController.vue'
+import ImageController from '~/components/simulation/ImageController.vue'
 import ScenarioSelect from '~/components/modules/ScenarioSelect.vue'
 import { kooLogin } from '~/config/util'
 export default {

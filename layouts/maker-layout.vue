@@ -45,7 +45,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import ScenarioInsert from '~/components/simulation-maker/ScenarioInsert'
+import ScenarioInsert from '~/components/simulation/ScenarioInsert'
 import JsonDatapreview from '~/components/modal/JsonDatapreview'
 import { kooLogin } from '~/config/util'
 export default {
