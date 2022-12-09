@@ -66,14 +66,14 @@ export default {
     SetupInsert,
   },
   layout: 'maker-layout',
-  validate({ params }) {
-    return params.id
-  },
-  asyncData({ params }) {
-    return {
-      idx: params.id,
-    }
-  },
+  // validate({ params }) {
+  //   return params.id
+  // },
+  // asyncData({ params }) {
+  //   return {
+  //     idx: params.id,
+  //   }
+  // },
   data() {
     return {
       params: {},
@@ -97,16 +97,16 @@ export default {
     ...mapState(['LOGIN', 'LOADING', 'SCENE', 'MAKER_GNB', 'SCENE_CODE']),
   },
   mounted() {
-    this.queryIndex = this.idx
+    this.queryIndex = this.$route.query.projectKey
     this.params.type = 'projectDetail'
     this.params.apiKey = process.env.API_KEY
-    console.log(this.idx)
+    console.log(this.$route.query.projectKey)
     this.MUTATIONS_PROJECT(this.queryIndex)
 
     this.user_idx = kooLogin('user_idx')
     this.paramsCharacter.type = 'characterList'
     this.paramsCharacter.user_idx = this.user_idx
-    this.paramsCharacter.secretKey = this.idx
+    this.paramsCharacter.secretKey = this.$route.query.projectKey
     this.paramsCharacter.apiKey = process.env.API_KEY
     this.ACTION_AXIOS_GET(this.paramsCharacter)
     // this.ACTION_AXIOS_GET()

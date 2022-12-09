@@ -16,6 +16,7 @@ const createStore = () => {
             LOGIN: {},
             PROJECT_MANAGER: [],
             IS_POST: false,
+            cutType: 1,
             PROJECT_ID: '',
             POST: {
                 PROJECT_MANAGER: false,
@@ -57,7 +58,7 @@ const createStore = () => {
                     point: '',
                     pointCr: '',
                     pointType: '',
-                    su: '',
+                    sound: '',
                     text: '',
                     narration: '',
                     questions: {},
@@ -94,7 +95,8 @@ const createStore = () => {
             CHAPTER_INDEX: null,
             CHAPTER_LIST: [],
             CHAPTER_DEATILE: [],
-            CHAPTER_DEATILE_IDX: ''
+            CHAPTER_DEATILE_IDX: '',
+            SAVE_DATETIME: null
 
         },
         getters: {
@@ -229,6 +231,10 @@ const createStore = () => {
                 state.PREVIEW.img.cr2 = payload.jsonData.cr2;
                 console.log(payload)
             },
+            // 저장시간 초기화
+            MUTATIONS_SAVE_DATETIME_INIT(state, payload) {
+                state.SAVE_DATETIME = null
+            },
             // 데이터초기화
             MUTATIONS_ASSETS_INIT(state, payload) {
                 state.PREVIEW.img.bg = '';
@@ -287,11 +293,14 @@ const createStore = () => {
                 state.CUT_LIST = payload;
                 if (state.CUT_LIST && state.CUT_LIST.jsonData && state.CUT_LIST.jsonData.length > 0) {
                     state.PREVIEW.img.bg = state.CUT_LIST.jsonData[0].bg
+                    state.cutType = state.CUT_LIST.jsonData[0].cutType
                     state.PREVIEW.img.cr = state.CUT_LIST.jsonData[0].cr
                     state.PREVIEW.img.cr2 = state.CUT_LIST.jsonData[0].cr2
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[0].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[0].effect
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text.replaceAll('||n', '\n')
+                    state.PREVIEW.data.narration = state.CUT_LIST.jsonData[0].narration.replaceAll('||n', '\n')
+                    state.SAVE_DATETIME = state.CUT_LIST.datetime_modify
                 } else {
                     state.PREVIEW.img.bg = ''
                     state.PREVIEW.img.cr = ''
@@ -299,6 +308,7 @@ const createStore = () => {
                     state.PREVIEW.data.cr = ''
                     state.PREVIEW.data.effect = ''
                     state.PREVIEW.data.text = ''
+                    state.cutType = 1
                 }
                 state.CUT_CODE = 0
             },
@@ -309,11 +319,17 @@ const createStore = () => {
                 if (state.CUT_LIST && state.CUT_LIST.jsonData && state.CUT_LIST.jsonData.length > 0) {
                     state.PREVIEW.img.bg = state.CUT_LIST.jsonData[payload].bg
                     state.PREVIEW.img.cr = state.CUT_LIST.jsonData[payload].cr
+                    state.PREVIEW.img.cr2 = state.CUT_LIST.jsonData[payload].cr2
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[payload].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[payload].effect
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[payload].text.replaceAll('||n', '\n')
+                    state.PREVIEW.data.narration = state.CUT_LIST.jsonData[payload].narration.replaceAll('||n', '\n')
+                    state.cutType = state.CUT_LIST.jsonData[payload].cutType
                 }
             },
+            MUTATIONS_CUT_TYPE(state, payload) {
+                state.cutType = payload
+            }
 
         },
         actions: {

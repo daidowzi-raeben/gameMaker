@@ -15,9 +15,24 @@
     <div v-if="ASSETS" class="setting-scen--list">
       <label class="label">배경</label>
       <swiper :options="swiperOptionSelectImage" class="list">
+        <swiper-slide class="list-item">
+          <label class="label top">
+            <input
+              type="radio"
+              name="bgCheck"
+              :checked="PREVIEW.img.bg === '' ? true : false"
+              @change="onClickCrImage('')"
+            />
+            <span class="img-wrap"> 없음 </span>
+          </label>
+        </swiper-slide>
         <swiper-slide v-for="(v, i) in ASSETS.bg" :key="i" class="list-item">
           <label class="label" @change="onClickBgImage(v.path)">
-            <input type="radio" name="bgCheck" />
+            <input
+              type="radio"
+              name="bgCheck"
+              :checked="PREVIEW.img.bg === v.path ? true : false"
+            />
             <span class="img-wrap">
               <img :src="v.path" />
             </span>
@@ -32,7 +47,12 @@
       <swiper :options="swiperOptionSelectImage" class="list">
         <swiper-slide class="list-item">
           <label class="label top">
-            <input type="radio" name="crCheck" @change="onClickCrImage('')" />
+            <input
+              type="radio"
+              name="crCheck"
+              :checked="PREVIEW.img.cr === '' ? true : false"
+              @change="onClickCrImage('')"
+            />
             <span class="img-wrap"> 없음 </span>
           </label>
         </swiper-slide>
@@ -41,6 +61,7 @@
             <input
               type="radio"
               name="crCheck"
+              :checked="PREVIEW.img.cr === v.path ? true : false"
               @change="onClickCrImage(v.path)"
             />
             <span class="img-wrap">
@@ -57,7 +78,12 @@
       <swiper :options="swiperOptionSelectImage" class="list">
         <swiper-slide class="list-item">
           <label class="label top">
-            <input type="radio" name="crCheck2" @change="onClickCrImage2('')" />
+            <input
+              type="radio"
+              name="crCheck2"
+              :checked="PREVIEW.img.cr2 === '' ? true : false"
+              @change="onClickCrImage2('')"
+            />
             <span class="img-wrap"> 없음 </span>
           </label>
         </swiper-slide>
@@ -66,6 +92,7 @@
             <input
               type="radio"
               name="crCheck2"
+              :checked="PREVIEW.img.cr2 === v.path ? true : false"
               @change="onClickCrImage2(v.path)"
             />
             <span class="img-wrap">

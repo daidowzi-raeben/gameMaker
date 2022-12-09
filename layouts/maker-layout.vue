@@ -36,7 +36,10 @@
     <ScenarioInsert @scenarioInsert="scenarioInsert" />
     <JsonDatapreview />
     <div style="position: fixed; top: 0">
-      <b-alert :show="alertSave" dismissible variant="warning">
+      <!-- <b-alert :show="alertSave" dismissible variant="warning">
+        저장되었습니다.
+      </b-alert> -->
+      <b-alert show="10000" dismissible variant="warning">
         저장되었습니다.
       </b-alert>
     </div>

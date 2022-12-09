@@ -4,7 +4,7 @@
     <div class="setting">
       <ImageController />
       <div class="setting-talk">
-        <div class="setting-tit">대화 설정 {{ CUT_CODE }}</div>
+        <div class="setting-tit">대화 설정 {{ SCENE_INDEX }}</div>
         <div class="tab-list">
           <button
             type="button"
@@ -40,19 +40,24 @@
           </button>
         </div>
         <swiper
-          v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
+          v-if="
+            SCENE_DATA_CHARACTER &&
+            SCENE_DATA_CHARACTER.jsonData &&
+            cutType === 1
+          "
           :options="swiperOptionSelectCharacter"
           class="tab-list type2"
         >
           <swiper-slide
             v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
-            :key="i"
+            :key="'SCENE_DATA_CHARACTER' + i"
             class="tab-list--item"
           >
             <label class="radio" @change="onCiickDataCr(v.name)">
               <input
                 type="radio"
                 name="character"
+                :checked="v.name === PREVIEW.data.cr"
                 :value="SCENE_DATA_CHARACTER.idx[i]"
               />
               <span>{{ v.name }}</span>
@@ -79,12 +84,19 @@
           ></textarea>
           <textarea
             v-if="cutType === 2"
-            placeholder="인물의 대화를 입력해 주세요"
+            placeholder="나레이션을 입력해 주세요"
             rows="3"
             :value="PREVIEW.data.narration"
             @input="onInputDataNarration"
           ></textarea>
-          <textarea v-else rows="3"></textarea>
+          <!-- <textarea
+            v-if="cutType === 3"
+            placeholder="객관식의 답변을 작성해 주세요"
+            rows="3"
+            :value="PREVIEW.data.narration"
+            @input="onInputDataNarration"
+          ></textarea> -->
+          <!-- <textarea v-else rows="3"></textarea> -->
           <div class="insert-set">
             <button type="button" class="btn sound">사운드 설정</button>
             <div class="set sound-set"></div>
@@ -103,7 +115,7 @@
               >
                 <option
                   v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
-                  :key="i"
+                  :key="'SCENE_DATA_CHARACTER' + i"
                 >
                   {{ v.name }}
                 </option>
@@ -122,7 +134,7 @@
                 class="save"
                 @click="onClickPointSetting('save')"
               >
-                저장
+                추가
               </button>
             </div>
             <button
@@ -134,7 +146,7 @@
               시나리오 연결
             </button>
             <div v-show="scenarioSettingShow" class="set scenario-set">
-              <select v-if="SCENE_DATA" class="input-select">
+              <!-- <select v-if="SCENE_DATA" class="input-select">
                 <option
                   v-for="(v, i) in SCENE_DATA"
                   :key="i"
@@ -149,11 +161,21 @@
               <select class="input-select">
                 <option>챕터2</option>
                 <option>챕터2</option>
-              </select>
-              <select class="input-select">
-                <option>선택안함</option>
-                <option>CUT1</option>
-                <option>CUT2</option>
+              </select> 
+              eventCut-->
+              <select
+                v-if="CUT_LIST && CUT_LIST.jsonData"
+                class="input-select"
+                :value="eventCut"
+              >
+                <option :value="''">선택안함</option>
+                <option
+                  v-for="(v, i) in CUT_LIST.jsonData"
+                  :key="CUT_LIST.idx[i]"
+                  :value="CUT_LIST.idx[i]"
+                >
+                  {{ CUT_LIST.jsonData.length - i }}
+                </option>
               </select>
               <button
                 type="button"
@@ -168,8 +190,15 @@
         <button v-if="cutType === 3" type="button" class="cut-add"></button>
       </div>
       <div class="text-center">
-        <button class="button lg btn-primary" @click="onSubmitCutData">
-          저장
+        <button
+          v-if="CUT_CODE === 0"
+          class="button lg btn-primary"
+          @click="onSubmitCutData"
+        >
+          대사 추가
+        </button>
+        <button class="button lg btn-grey" @click="onSubmitCutDataUpdate">
+          수정
         </button>
         <button
           v-if="CUT_LIST.idx && CUT_LIST.idx.length > 0 && CUT_CODE > 0"
@@ -190,8 +219,14 @@
     </div>
     <div class="cut" :class="{ fold: cutListShow === false }">
       <div class="cut-tit">
-        <span class="scenario">시나리오 1장</span>
-        <span class="chapter">챕터 1</span>
+        <span v-if="SCENE_INDEX !== null" class="scenario">{{
+          SCENE_DATA[SCENE_INDEX].tit
+        }}</span>
+        <span
+          v-if="SCENE_INDEX !== null && CHAPTER_INDEX !== null"
+          class="chapter"
+          >{{ SCENE_DATA[SCENE_INDEX].chapters[CHAPTER_INDEX].tit }}</span
+        >
         <button
           type="button"
           class="fold-btn"
@@ -214,35 +249,54 @@
       >
         <swiper-slide
           v-for="(v, i) in CUT_LIST.jsonData"
-          :key="i"
+          :key="'cutList' + i"
           class="cut-list--item"
         >
           <div @click="onClickCutPush(i)">
-            <span v-if="i === 0" class="active-sign"></span>
+            <span v-if="i === CUT_CODE" class="active-sign"></span>
             <div class="tit">{{ CUT_LIST.jsonData.length - i }} CUT</div>
             <ul class="preview-list">
               <li class="preview-list--item">
-                <img :src="v.cr" alt="" />
+                <img v-if="v.cr" :src="v.cr" alt="" />
               </li>
               <li class="preview-list--item">
-                <img :src="v.bg" alt="" />
+                <img v-if="v.cr2" :src="v.cr2" alt="" />
+              </li>
+              <li class="preview-list--item">
+                <img v-if="v.bg" :src="v.bg" alt="" />
               </li>
               <li v-if="v.effect === 'vibration'" class="preview-list--item">
                 흔들
               </li>
-              <li class="preview-list--item">SD</li>
+              <li v-if="v.sound" class="preview-list--item">SD</li>
             </ul>
             <div class="state">
-              <span class="badge text-bg-primary">일반대사</span>
-              <span class="badge text-bg-red">{{ v.crName }}</span
+              <span v-if="v.cutType === 1" class="badge text-bg-primary"
+                >일반대사</span
+              >
+              <span v-if="v.cutType === 2" class="badge text-bg-primary"
+                >나레이션</span
+              >
+              <span v-if="v.cutType === 3" class="badge text-bg-primary"
+                >객관식</span
+              >
+              <span v-if="v.cutType === 4" class="badge text-bg-primary"
+                >주관식</span
+              >
+              <span v-if="v.cutType === 1" class="badge text-bg-red">{{
+                v.crName
+              }}</span
               ><br />
               <span class="badge text-bg-pink">이벤트</span>
               <span class="text">시나리오 1장</span>
               <span class="text">챕터1</span>
               <span class="text">CUT 5</span>
             </div>
-            <div class="text-preview">
+            <div v-if="v.cutType === 1" class="text-preview">
               {{ v.text }}
+            </div>
+            <div v-if="v.cutType === 2" class="text-preview">
+              {{ v.narration }}
             </div>
             <!-- <div v-if="i === 1" class="text-preview">
             Q. 질문을하는데 1 <span class="dot"></span> 이지안+5<br />
@@ -276,6 +330,7 @@ export default {
       paramsPreview: {},
       paramsList: {},
       cutIndex: 0,
+      eventCut: 3,
       cuts: [
         {
           index: 0,
@@ -311,7 +366,7 @@ export default {
       cutListShow: false,
       pointSettingShow: false,
       scenarioSettingShow: false,
-      cutType: 1,
+      // cutType: 1,
       rightContentShow: false,
       cutData: [],
       rowIdx: [],
@@ -323,11 +378,14 @@ export default {
       'LOADING',
       'SCENE_DATA',
       'SCENE_CODE',
+      'SCENE_INDEX',
+      'CHAPTER_INDEX',
       'ASSETS',
       'SCENE_DATA_CHARACTER',
       'PREVIEW',
       'PROJECT_ID',
       'CUT_LIST',
+      'cutType',
       'CUT_CODE',
     ]),
   },
@@ -369,6 +427,7 @@ export default {
       'MUTATIONS_CUT_LIST_ADD',
       'MUTATIONS_ASSETS_INIT_TEXT',
       'MUTATIONS_ASSETS_DATA_NARRATION',
+      'MUTATIONS_CUT_TYPE',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
@@ -410,8 +469,8 @@ export default {
       if (type === 'save') this.scenarioSettingShow = false
     },
     onClickChangeCutType(type) {
-      this.MUTATIONS_ASSETS_INIT_TEXT()
-      this.cutType = type
+      // this.MUTATIONS_ASSETS_INIT_TEXT()
+      this.MUTATIONS_CUT_TYPE(type)
     },
     slideTo(index) {
       console.log(this.$refs.cutList)
@@ -438,7 +497,7 @@ export default {
       if (row > 3) {
         const modifiedText = target.value.split('\n').slice(0, 3)
         target.value = modifiedText.join('\n')
-        return alert('대사는 세줄까지 입력 할 수 있습니다')
+        return alert('나레이션은 세줄까지 입력 할 수 있습니다')
       }
       this.MUTATIONS_ASSETS_DATA_NARRATION(target.value)
     },
@@ -454,21 +513,10 @@ export default {
       this.params.user_idx = kooLogin('user_idx')
       this.params.apiKey = process.env.API_KEY
       this.params.s_code = this.SCENE_CODE
-      this.paramsPreview.cutType = this.cutType
-      this.paramsPreview.code = this.SCENE_CODE
-      this.paramsPreview.bg = this.PREVIEW.img.bg
-      this.paramsPreview.cr = this.PREVIEW.img.cr
-      this.paramsPreview.cr2 = this.PREVIEW.img.cr2
-      this.paramsPreview.crName = this.PREVIEW.data.cr
-      this.paramsPreview.effect = this.PREVIEW.data.effect
-      this.paramsPreview.text = this.PREVIEW.data.text.replaceAll('\n', '||n')
-      this.paramsPreview.narration = this.PREVIEW.data.narration.replaceAll(
-        '\n',
-        '||n'
-      )
-      this.params.previewData = JSON.stringify(this.paramsPreview)
+      this.update()
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)
+      this.cutListShow = true
     },
     onSubmitCutData() {
       // this.paramsPreview.cutType = this.cutType
@@ -500,6 +548,50 @@ export default {
       this.params.user_idx = kooLogin('user_idx')
       this.params.apiKey = process.env.API_KEY
       this.params.s_code = this.SCENE_CODE
+      this.update()
+      console.log('onSubmitCutData', this.params)
+      this.ACTION_AXIOS_GET(this.params)
+      // this.MUTATIONS_CHAPTER_DEATILE_INIT()
+      this.cutListShow = true
+    },
+    onSubmitCutDataUpdate() {
+      // this.paramsPreview.cutType = this.cutType
+      // this.paramsPreview.code = this.SCENE_CODE
+      // this.paramsPreview.bg = this.PREVIEW.img.bg
+      // this.paramsPreview.cr = this.PREVIEW.img.cr
+      // this.paramsPreview.cr2 = this.PREVIEW.img.cr2
+      // this.paramsPreview.crName = this.PREVIEW.data.cr
+      // this.paramsPreview.effect = this.PREVIEW.data.effect
+      // this.paramsPreview.text = this.PREVIEW.data.text
+
+      // this.cutData = this.CUT_LIST.jsonData
+      // this.cutData.push(this.paramsPreview)
+      // console.log(JSON.stringify(this.cutData))
+      console.log(
+        'this.CUT_LIST.idx',
+        this.CUT_LIST,
+        this.CUT_LIST.idx,
+        this.SCENE_CODE
+      )
+      this.params.type = 'cutInsert'
+      this.params.mode = 'update'
+      this.params.idx = this.CUT_LIST.idx[this.CUT_CODE]
+      this.params.secretKey = this.PROJECT_ID
+      this.params.user_idx = kooLogin('user_idx')
+      this.params.apiKey = process.env.API_KEY
+      this.params.s_code = this.SCENE_CODE
+      this.update()
+      console.log('onSubmitCutData', this.params)
+      this.ACTION_AXIOS_GET(this.params)
+      // this.MUTATIONS_CHAPTER_DEATILE_INIT()
+      this.cutListShow = true
+    },
+    onClickCutPush(e) {
+      console.log(e)
+      this.MUTATIONS_CUT_LIST_GET_DATA_DETAIL(e)
+    },
+    onWatchTextRowLimit(e) {},
+    update() {
       this.paramsPreview.cutType = this.cutType
       this.paramsPreview.code = this.SCENE_CODE
       this.paramsPreview.bg = this.PREVIEW.img.bg
@@ -513,15 +605,7 @@ export default {
         '||n'
       )
       this.params.previewData = JSON.stringify(this.paramsPreview)
-      console.log('onSubmitCutData', this.params)
-      this.ACTION_AXIOS_GET(this.params)
-      // this.MUTATIONS_CHAPTER_DEATILE_INIT()
     },
-    onClickCutPush(e) {
-      console.log(e)
-      this.MUTATIONS_CUT_LIST_GET_DATA_DETAIL(e)
-    },
-    onWatchTextRowLimit(e) {},
   },
 }
 </script>

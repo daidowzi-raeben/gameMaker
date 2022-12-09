@@ -173,6 +173,7 @@ export default {
       'MUTATIONS_SCENE_CODE',
       'MUTATIONS_SCENE_INDEX',
       'MUTATIONS_CHAPTER_INDEX',
+      'MUTATIONS_SAVE_DATETIME_INIT',
     ]),
     onSubmit() {
       // form 데이터 전달
@@ -184,6 +185,7 @@ export default {
     },
     // 챕터 이동
     onClickChapterTo(e, i, i2) {
+      this.MUTATIONS_SAVE_DATETIME_INIT()
       this.MUTATIONS_SCENE_CODE(e)
       this.MUTATIONS_SCENE_INDEX(i)
       this.MUTATIONS_CHAPTER_INDEX(i2)

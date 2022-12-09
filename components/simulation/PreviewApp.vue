@@ -38,13 +38,21 @@
       <div class="dialogue">
         <span v-if="PREVIEW.data.cr" class="name">{{ PREVIEW.data.cr }}</span>
         <!-- prettier-ignore-start -->
-        <p ref="myLoadText" class="text">{{ PREVIEW.data.text }}</p>
+        <p v-if="cutType === 1" ref="myLoadText" class="text">
+          {{ PREVIEW.data.text }}
+        </p>
+        <p v-if="cutType === 2" ref="myLoadText" class="text">
+          {{ PREVIEW.data.narration }}
+        </p>
         <!-- prettier-ignore-end -->
       </div>
       <img src="~/static/images/mockup.png" alt="" class="mockup" />
     </div>
     <div class="preview-save">
-      마지막 저장 <span class="time">{{ SCENE_CODE }}</span>
+      마지막 저장
+      <span v-if="SAVE_DATETIME" class="time">{{
+        SAVE_DATETIME | moment('YY.MM.DD h:mm:ss')
+      }}</span>
     </div>
   </div>
 </template>
@@ -60,7 +68,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['SCENE_CODE', 'PREVIEW']),
+    ...mapState(['SCENE_CODE', 'PREVIEW', 'cutType', 'SAVE_DATETIME']),
   },
   watch: {
     'PREVIEW.data.effect': {
