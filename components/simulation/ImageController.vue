@@ -4,12 +4,43 @@
       화면 설정
       <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
         <input
-          ref="effectChecked"
           type="checkbox"
-          value="vibration"
           :checked="PREVIEW.data.effect === 'vibration' ? true : false"
+          @change="onClickEffect('vibration')"
         />
-        <span class="check-text" @click="onClickEffect()">흔들림</span>
+        <span class="check-text">흔들림</span>
+      </label>
+      <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
+        <input
+          type="checkbox"
+          :checked="PREVIEW.data.effect === 'fade' ? true : false"
+          @change="onClickEffect('fade')"
+        />
+        <span class="check-text">서서히</span>
+      </label>
+      <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
+        <input
+          type="checkbox"
+          :checked="PREVIEW.data.effect === 'right' ? true : false"
+          @change="onClickEffect('right')"
+        />
+        <span class="check-text">오른쪽에서</span>
+      </label>
+      <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
+        <input
+          type="checkbox"
+          :checked="PREVIEW.data.effect === 'left' ? true : false"
+          @change="onClickEffect('left')"
+        />
+        <span class="check-text">왼쪽에서</span>
+      </label>
+      <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
+        <input
+          type="checkbox"
+          :checked="PREVIEW.data.effect === 'bottom' ? true : false"
+          @change="onClickEffect('bottom')"
+        />
+        <span class="check-text">아래에서</span>
       </label>
     </div>
     <div v-if="ASSETS" class="setting-scen--list">
@@ -164,11 +195,24 @@ export default {
     onClickCrImage2(e) {
       this.MUTATIONS_ASSETS_CR2(e)
     },
-    onClickEffect() {
-      if (this.$refs.effectChecked.checked === false) {
-        this.MUTATIONS_ASSETS_EFFECT(this.$refs.effectChecked.value)
-      } else {
-        this.MUTATIONS_ASSETS_EFFECT('')
+    onClickEffect(type) {
+      this.PREVIEW.data.effect === type ? this.MUTATIONS_ASSETS_EFFECT('') : this.PREVIEW.data.effect = type
+      switch(type){
+        case 'vibration':
+          this.MUTATIONS_ASSETS_EFFECT('vibration')
+        break;
+        case 'fade':
+          this.MUTATIONS_ASSETS_EFFECT('fade')
+        break;
+        case 'left':
+          this.MUTATIONS_ASSETS_EFFECT('left')
+        break;
+        case 'right':
+          this.MUTATIONS_ASSETS_EFFECT('rigth')
+        break;
+        case 'bottom':
+          this.MUTATIONS_ASSETS_EFFECT('bottom')
+        break;
       }
     },
   },

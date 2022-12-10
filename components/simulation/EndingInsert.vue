@@ -59,6 +59,8 @@
             </div>
           </div>
         </swiper-slide>
+        <div slot="button-prev" class="swiper-button-prev"></div>
+        <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
     </div>
   </div>
@@ -80,6 +82,10 @@ export default {
         loop: false,
         slidesPerView: 4,
         slidesPerGroup: 4,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       },
     }
   },

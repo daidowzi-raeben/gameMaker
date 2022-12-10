@@ -1,6 +1,7 @@
 <template>
   <div class="insert">
     <div class="setting">
+      <button type="button" class="button btn-pink delete-btn">삭제</button>
       <ImageController />
       <div class="setting-profile">
         <div class="setting-tit">프로필 설정</div>
@@ -90,6 +91,8 @@
             </div>
           </div>
         </swiper-slide>
+        <div slot="button-prev" class="swiper-button-prev"></div>
+        <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
     </div>
   </div>
@@ -115,6 +118,10 @@ export default {
         loop: false,
         slidesPerView: 4,
         slidesPerGroup: 4,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       },
       characterData: {},
       user_idx: '',

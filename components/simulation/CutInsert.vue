@@ -2,6 +2,7 @@
   <div class="insert">
     <div v-if="!SCENE_CODE" class="insert-dim">챕터를 선택하세요</div>
     <div class="setting">
+      <button type="button" class="button btn-pink delete-btn">삭제</button>
       <ImageController />
       <div class="setting-talk">
         <div class="setting-tit">대화 설정 {{ SCENE_INDEX }}</div>
@@ -161,7 +162,7 @@
               <select class="input-select">
                 <option>챕터2</option>
                 <option>챕터2</option>
-              </select> 
+              </select>
               eventCut-->
               <select
                 v-if="CUT_LIST && CUT_LIST.jsonData"
@@ -266,7 +267,19 @@
                 <img v-if="v.bg" :src="v.bg" alt="" />
               </li>
               <li v-if="v.effect === 'vibration'" class="preview-list--item">
-                흔들
+                흔들림
+              </li>
+              <li v-if="v.effect === 'fade'" class="preview-list--item">
+                서서히
+              </li>
+              <li v-if="v.effect === 'right'" class="preview-list--item">
+                오른쪽
+              </li>
+              <li v-if="v.effect === 'left'" class="preview-list--item">
+                왼쪽
+              </li>
+              <li v-if="v.effect === 'bottom'" class="preview-list--item">
+                아래
               </li>
               <li v-if="v.sound" class="preview-list--item">SD</li>
             </ul>
@@ -310,6 +323,8 @@
           </div> -->
           </div>
         </swiper-slide>
+        <div slot="button-prev" class="swiper-button-prev"></div>
+        <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
     </div>
   </div>
@@ -361,6 +376,10 @@ export default {
         loop: false,
         slidesPerView: 4,
         slidesPerGroup: 4,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       },
 
       cutListShow: false,

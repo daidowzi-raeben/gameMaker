@@ -5,7 +5,6 @@
       <IntroList v-if="MAKER_GNB === 2" />
       <CharacterList v-if="MAKER_GNB === 4" />
       <div class="maker-right">
-        <button type="button" class="button btn-pink delete-btn">삭제</button>
         <PreviewApp />
         <CutInsert
           v-if="!MAKER_GNB || MAKER_GNB === 1"
@@ -140,6 +139,30 @@ export default {
     },
     myLoadEffect(e) {
       if (e === 'vibration') {
+        this.$refs.characterImage.classList.add(e)
+        setTimeout(() => {
+          this.$refs.characterImage.classList.remove(e)
+        }, 400)
+      }
+      else if (e === 'fade') {
+        this.$refs.characterImage.classList.add(e)
+        setTimeout(() => {
+          this.$refs.characterImage.classList.remove(e)
+        }, 400)
+      }
+      else if (e === 'left') {
+        this.$refs.characterImage.classList.add(e)
+        setTimeout(() => {
+          this.$refs.characterImage.classList.remove(e)
+        }, 400)
+      }
+      else if (e === 'right') {
+        this.$refs.characterImage.classList.add(e)
+        setTimeout(() => {
+          this.$refs.characterImage.classList.remove(e)
+        }, 400)
+      }
+      else if (e === 'bottom') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)

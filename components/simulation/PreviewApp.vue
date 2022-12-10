@@ -1,5 +1,6 @@
 <template>
   <div class="preview">
+    <div class="preview-tit">1CUT</div>
     <div v-if="PREVIEW" class="preview-img">
       <img
         v-if="PREVIEW.img.bg"
@@ -68,7 +69,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['SCENE_CODE', 'PREVIEW', 'cutType', 'SAVE_DATETIME']),
+    ...mapState(['SCENE_CODE', 'PREVIEW', 'cutType', 'SAVE_DATETIME', 'CUT_LIST']),
   },
   watch: {
     'PREVIEW.data.effect': {
@@ -109,12 +110,60 @@ export default {
   animation: vibration 0.1s infinite;
   -webkit-animation: vibration 0.1s infinite;
 }
+.fade {
+  animation: fade 0.3s forwards;
+  -webkit-animation: fade 0.3s forwards;
+}
+.left {
+  animation: left 0.3s forwards;
+  -webkit-animation: left 0.3s forwards;
+}
+.right {
+  animation: right 0.3s forwards;
+  -webkit-animation: right 0.3s forwards;
+}
+.bottom {
+  animation: bottom 0.3s forwards;
+  -webkit-animation: bottom 0.3s forwards;
+}
 @keyframes vibration {
   from {
     transform: rotate(1deg);
   }
   to {
     transform: rotate(-1deg);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes left {
+  from {
+    transform:translateX(-50%);
+  }
+  to {
+    transform:translateX(0);
+  }
+}
+@keyframes right {
+  from {
+    transform:translateX(50%);
+  }
+  to {
+    transform:translateX(0);
+  }
+}
+@keyframes bottom {
+  from {
+    transform:translateY(-50%);
+  }
+  to {
+    transform:translateY(0);
   }
 }
 </style>

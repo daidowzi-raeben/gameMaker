@@ -10,7 +10,7 @@
         :title="scenarioList.tit"
       >
         <span :ref="`scenarioTitle${index}`" class="scenario-tit">
-          {{ scenarioList.tit }}
+          <span class="text">{{ scenarioList.tit }}</span>
           <button
             type="button"
             class="scenario-modi"
@@ -72,6 +72,10 @@
                   type="button"
                   class="chapter-modi"
                   @click="onClickTitleModi(`${index}`, `${index2}`)"
+                ></button>
+                <button
+                  type="button"
+                  class="chapter-sound"
                 ></button>
                 <button
                   type="button"

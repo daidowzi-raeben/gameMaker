@@ -43,7 +43,7 @@
   }
   &-pink{
     background:$colPink;
-    color:#fff;
+    color:#fff !important;
     &:hover{
       background-color:$colPinkHover;
     }
@@ -58,6 +58,9 @@
   &-grey{
     background:$textCol2;
     color:#fff;
+    &:hover{
+      background-color:$textCol2Hover;
+    }
   }
 }
 
