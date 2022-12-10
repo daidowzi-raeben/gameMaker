@@ -35,7 +35,7 @@
     <Nuxt />
     <ScenarioInsert @scenarioInsert="scenarioInsert" />
     <JsonDatapreview />
-    <div style="position: fixed; top: 0">
+    <div class="popup-toast">
       <!-- <b-alert :show="alertSave" dismissible variant="warning">
         저장되었습니다.
       </b-alert> -->

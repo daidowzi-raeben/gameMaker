@@ -23,7 +23,7 @@
               :checked="PREVIEW.img.bg === '' ? true : false"
               @change="onClickCrImage('')"
             />
-            <span class="img-wrap"> 없음 </span>
+            <span class="img-wrap no-image"></span>
           </label>
         </swiper-slide>
         <swiper-slide v-for="(v, i) in ASSETS.bg" :key="i" class="list-item">
@@ -53,7 +53,7 @@
               :checked="PREVIEW.img.cr === '' ? true : false"
               @change="onClickCrImage('')"
             />
-            <span class="img-wrap"> 없음 </span>
+            <span class="img-wrap no-image"></span>
           </label>
         </swiper-slide>
         <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item">
@@ -84,7 +84,7 @@
               :checked="PREVIEW.img.cr2 === '' ? true : false"
               @change="onClickCrImage2('')"
             />
-            <span class="img-wrap"> 없음 </span>
+            <span class="img-wrap no-image"></span>
           </label>
         </swiper-slide>
         <swiper-slide v-for="(v, i) in ASSETS.cr" :key="i" class="list-item">

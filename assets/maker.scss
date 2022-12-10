@@ -230,6 +230,12 @@
     display: flex;
     position: relative;
 
+    .delete-btn{
+      position:absolute;
+      right:10px;
+      top:10px;
+    }
+
     .insert{
       display:flex;
       width: calc(100% - 365px);
@@ -330,6 +336,7 @@
             font-size: 1.4rem;
             margin: 0 20px 0 0;
             white-space: nowrap;
+            width:30px;
           }
 
           .list {
@@ -361,6 +368,9 @@
                   overflow: hidden;
                   img{
                     width:50px;
+                  }
+                  &.no-image{
+                    background:url(~/static/images/icon/people.svg) no-repeat center / 24px;
                   }
                 }
                 input[type=radio]{
@@ -959,6 +969,10 @@
           &.type2{
             padding:0 5px;
           }
+        }
+
+        .swiper-wrapper{
+          height:216px;
         }
       }
 

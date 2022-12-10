@@ -5,6 +5,7 @@
       <IntroList v-if="MAKER_GNB === 2" />
       <CharacterList v-if="MAKER_GNB === 4" />
       <div class="maker-right">
+        <button type="button" class="button btn-pink delete-btn">삭제</button>
         <PreviewApp />
         <CutInsert
           v-if="!MAKER_GNB || MAKER_GNB === 1"
