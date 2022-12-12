@@ -102,7 +102,11 @@ const createStore = () => {
             CHAPTER_LIST: [],
             CHAPTER_DEATILE: [],
             CHAPTER_DEATILE_IDX: '',
-            SAVE_DATETIME: null
+            SAVE_DATETIME: null,
+            ASSETS_STORE: {
+                crList: [],
+                detail: {}
+            }
 
         },
         getters: {
@@ -122,6 +126,16 @@ const createStore = () => {
             MUTATIONS_LOADING(state, payload) {
                 state.LOADING = false
             },
+
+
+            MUTATIONS_STORE_CRLIST(state, payload) {
+                state.ASSETS_STORE.crList = payload
+            },
+            MUTATIONS_STORE_DETAIL(state, payload) {
+                state.ASSETS_STORE.detail = payload
+            },
+
+
             MUTAIONS_SAVE(state) {
                 state.alertSave = 3
                 setTimeout(() => {
@@ -439,6 +453,16 @@ const createStore = () => {
                         if (params.type === 'cutList') {
                             console.log('MUTATIONS_CUT_LIST_GET_DATA', res.data)
                             commit('MUTATIONS_CUT_LIST_GET_DATA', res.data)
+                            return;
+                        }
+                        if (params.type === 'assetsList') {
+                            console.log('MUTATIONS_STORE_CRLIST', res.data)
+                            commit('MUTATIONS_STORE_CRLIST', res.data)
+                            return;
+                        }
+                        if (params.type === 'assetsDetail') {
+                            console.log('MUTATIONS_STORE_DETAIL', res.data)
+                            commit('MUTATIONS_STORE_DETAIL', res.data)
                             return;
                         }
                         // if (params.type === 'characterList') {

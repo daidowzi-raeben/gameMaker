@@ -16,22 +16,30 @@
       <div class="card-wrap">
         <div class="card-tit"><nuxt-link to="">무료 에셋</nuxt-link></div>
         <swiper :options="swiperOptionCol7" class="card-list asset">
-          <swiper-slide v-for="(v, i) in 10" :key="i" class="card-list--item">
-            <img src="https://lwi.nexon.com/maplestory/mobile/29E0ECE19C0FD827/media/thumb_03.jpg" alt="" />
-            <label class="like">
-              <input type="checkbox" :checked="i===1" />
-              <span class="icon"></span>
-            </label>
-            <div class="info">
-              <div class="category">BACKGROUND</div>
-              <div class="text">배경을 만들어보았어요 설명은 두줄까지 노출이 됩니다</div>
-              <div class="bottom">
-                <span v-if="i===1" class="price">12,300</span>
-                <span v-else class="price free">FREE</span>
-                <label class="cart">
-                  <input type="checkbox" :checked="i===1" />
-                  <span class="icon"></span>
-                </label>
+          <swiper-slide
+            v-for="(v, i) in ASSETS_STORE.crList"
+            :key="i"
+            class="card-list--item"
+          >
+            <div @click="onClickAssetsDetail(v.code)">
+              <img :src="v.path" alt="" />
+              <label class="like">
+                <input type="checkbox" :checked="i === 1" />
+                <span class="icon"></span>
+              </label>
+              <div class="info">
+                <div class="category">
+                  {{ v.kind === 'C' ? 'CHARACTER' : 'BACKGROUnD' }}
+                </div>
+                <div class="text">{{ v.gas_name }}</div>
+                <div class="bottom">
+                  <span v-if="v.price !== 'F'" class="price">12,300</span>
+                  <span v-else class="price free">FREE</span>
+                  <label class="cart">
+                    <input type="checkbox" :checked="i === 1" />
+                    <span class="icon"></span>
+                  </label>
+                </div>
               </div>
             </div>
           </swiper-slide>
@@ -66,18 +74,24 @@ export default {
         loop: false,
         slidesPerView: 5,
         slidesPerGroup: 5,
-        spaceBetween:20,
+        spaceBetween: 20,
       },
       swiperOptionCol7: {
         loop: false,
         slidesPerView: 7,
         slidesPerGroup: 7,
-        spaceBetween:15,
+        spaceBetween: 15,
       },
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'PROJECT_MANAGER', 'IS_POST']),
+    ...mapState([
+      'LOGIN',
+      'LOADING',
+      'PROJECT_MANAGER',
+      'IS_POST',
+      'ASSETS_STORE',
+    ]),
   },
   watch: {
     IS_POST: {
@@ -93,9 +107,10 @@ export default {
   },
   mounted() {
     this.MUTATIONS_AXIOS_POST_INIT()
-    this.params.type = 'project'
+    this.params.type = 'assetsList'
+    this.params.mode = 'cr'
     this.params.apiKey = process.env.API_KEY
-    this.params.user_idx = this.$cookies.get('user_idx')
+    // this.params.user_idx = this.$cookies.get('user_idx')
     this.ACTION_AXIOS_GET(this.params)
   },
   beforeDestroy() {},
@@ -126,6 +141,10 @@ export default {
       this.ACTION_AXIOS_POST(frm, 'projectInsert')
       //   모달 닫고 데이터 리로드
       this.$bvModal.hide('ProjectCreate')
+    },
+    onClickAssetsDetail(e) {
+      console.log(e)
+      this.$router.push(`/store/detail?asId=${e}`)
     },
   },
 }
