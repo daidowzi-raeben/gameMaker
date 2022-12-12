@@ -5,7 +5,7 @@
       <button type="button" class="button btn-pink delete-btn">삭제</button>
       <ImageController />
       <div class="setting-talk">
-        <div class="setting-tit">대화 설정 {{ CUT_CODE }}</div>
+        <div class="setting-tit">대화 설정</div>
         <div class="tab-list">
           <button
             type="button"
@@ -64,7 +64,8 @@
               <span>{{ v.name }}</span>
             </label>
           </swiper-slide>
-          <div class="swiper-scrollbar"></div>
+          <div slot="button-prev" class="swiper-button-prev"></div>
+          <div slot="button-next" class="swiper-button-next"></div>
         </swiper>
         <label v-if="cutType === 4" class="label">질문</label>
         <div v-if="cutType === 4" class="insert-wrap">
@@ -100,29 +101,48 @@
             :value="PREVIEW.data.narration"
             @input="onInputDataNarration"
           ></textarea>
-          <textarea
+          <input
             v-if="cutType === 3"
-            placeholder="객관식의 답변을 작성해 주세요"
-            rows="3"
+            type="text"
+            placeholder="객관식 선택 문항을 작성해 주세요"
+            class="input-text"
             :value="PREVIEW.data.questions.text[0]"
             @input="onInputDataQuestions(0, $event)"
-          ></textarea>
-          <textarea
+          />
+          <input
             v-if="cutType === 3"
-            placeholder="객관식의 답변을 작성해 주세요"
-            rows="3"
+            type="text"
+            placeholder="객관식 선택 문항을 작성해 주세요"
+            class="input-text"
             :value="PREVIEW.data.questions.text[1]"
             @input="onInputDataQuestions(1, $event)"
-          ></textarea>
-          <textarea
+          />
+          <input
             v-if="cutType === 3"
-            placeholder="객관식의 답변을 작성해 주세요"
-            rows="3"
+            type="text"
+            placeholder="객관식 선택 문항을 작성해 주세요"
+            class="input-text"
             :value="PREVIEW.data.questions.text[2]"
             @input="onInputDataQuestions(2, $event)"
-          ></textarea>
+          />
           <!-- <textarea v-else rows="3"></textarea> -->
           <div class="insert-set">
+            <button v-show="(!timerSettingShow && cutType === 3) || (!timerSettingShow && cutType === 4)" type="button" class="btn timer" @click="onClickTimerSetting">타이머 설정</button>
+            <div v-show="timerSettingShow" class="set timer-set">
+              <select class="input-select">
+                <option>5초</option>
+                <option>10초</option>
+                <option>15초</option>
+                <option>20초</option>
+              </select>
+              <button
+                type="button"
+                class="save"
+                @click="onClickTimerSetting('save')"
+              >
+                닫기
+              </button>
+            </div>
             <button type="button" class="btn sound">사운드 설정</button>
             <div class="set sound-set"></div>
             <button
@@ -275,7 +295,7 @@
             </div>
           </div>
         </div>
-        <button v-if="cutType === 3" type="button" class="cut-add"></button>
+        <!-- <button v-if="cutType === 3" type="button" class="cut-add"></button> -->
       </div>
       <div class="text-center">
         <button
@@ -466,6 +486,10 @@ export default {
         mousewheel: {
           draggable: true,
         },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       },
       swiperOptionCutList: {
         loop: false,
@@ -480,6 +504,7 @@ export default {
       cutListShow: false,
       pointSettingShow: false,
       scenarioSettingShow: false,
+      timerSettingShow:false,
       // cutType: 1,
       rightContentShow: false,
       cutData: [],
@@ -582,12 +607,20 @@ export default {
     onClickPointSetting(type) {
       this.pointSettingShow = true
       this.scenarioSettingShow = false
+      this.timerSettingShow = false
       if (type === 'save') this.pointSettingShow = false
     },
     onClickScenarioSetting(type) {
       this.pointSettingShow = false
       this.scenarioSettingShow = true
+      this.timerSettingShow = false
       if (type === 'save') this.scenarioSettingShow = false
+    },
+    onClickTimerSetting(type) {
+      this.pointSettingShow = false
+      this.scenarioSettingShow = false
+      this.timerSettingShow = true
+      if (type === 'save') this.timerSettingShow = false
     },
     onClickChangeCutType(type) {
       // this.MUTATIONS_ASSETS_INIT_TEXT()

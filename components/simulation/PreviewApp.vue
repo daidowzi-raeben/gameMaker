@@ -1,6 +1,6 @@
 <template>
   <div class="preview">
-    <div class="preview-tit">1CUT</div>
+    <div v-if="MAKER_GNB === 1" class="preview-tit">{{(CUT_LIST.jsonData.length - CUT_CODE)}} CUT</div>
     <div v-if="PREVIEW" class="preview-img">
       <img
         v-if="PREVIEW.img.bg"
@@ -36,6 +36,15 @@
           :class="PREVIEW.data.effect2"
         />
       </div>
+      <!-- <div class="answer answer-multiple">
+        <button type="button" class="btn">객관식1</button>
+        <button type="button" class="btn">객관식2</button>
+        <button type="button" class="btn">객관식3</button>
+      </div> -->
+      <!-- <div class="answer answer-subjective">
+        <div class="text">주관식 질문</div>
+        <input type="text" class="input-text" placeholder="주관식 답변을 입력해주세요" />
+      </div> -->
       <div class="dialogue">
         <span v-if="PREVIEW.data.cr" class="name">{{ PREVIEW.data.cr }}</span>
         <!-- prettier-ignore-start -->
@@ -69,7 +78,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['SCENE_CODE', 'PREVIEW', 'cutType', 'SAVE_DATETIME', 'CUT_LIST']),
+    ...mapState(['SCENE_CODE', 'PREVIEW', 'cutType', 'SAVE_DATETIME', 'CUT_LIST', 'CUT_CODE', 'MAKER_GNB']),
   },
   watch: {
     'PREVIEW.data.effect': {
@@ -111,20 +120,20 @@ export default {
   -webkit-animation: vibration 0.1s infinite;
 }
 .fade {
-  animation: fade 0.3s forwards;
-  -webkit-animation: fade 0.3s forwards;
+  animation: fade 0.5s forwards;
+  -webkit-animation: fade 0.5s forwards;
 }
 .left {
-  animation: left 0.3s forwards;
-  -webkit-animation: left 0.3s forwards;
+  animation: left 0.5s forwards;
+  -webkit-animation: left 0.5s forwards;
 }
 .right {
-  animation: right 0.3s forwards;
-  -webkit-animation: right 0.3s forwards;
+  animation: right 0.5s forwards;
+  -webkit-animation: right 0.5s forwards;
 }
 .bottom {
-  animation: bottom 0.3s forwards;
-  -webkit-animation: bottom 0.3s forwards;
+  animation: bottom 0.5s forwards;
+  -webkit-animation: bottom 0.5s forwards;
 }
 @keyframes vibration {
   from {
@@ -144,7 +153,7 @@ export default {
 }
 @keyframes left {
   from {
-    transform:translateX(-50%);
+    transform:translateX(-100%);
   }
   to {
     transform:translateX(0);
@@ -152,7 +161,7 @@ export default {
 }
 @keyframes right {
   from {
-    transform:translateX(50%);
+    transform:translateX(100%);
   }
   to {
     transform:translateX(0);
@@ -160,7 +169,7 @@ export default {
 }
 @keyframes bottom {
   from {
-    transform:translateY(-50%);
+    transform:translateY(100%);
   }
   to {
     transform:translateY(0);
