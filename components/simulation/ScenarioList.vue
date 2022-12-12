@@ -73,10 +73,7 @@
                   class="chapter-modi"
                   @click="onClickTitleModi(`${index}`, `${index2}`)"
                 ></button>
-                <button
-                  type="button"
-                  class="chapter-sound"
-                ></button>
+                <button type="button" class="chapter-sound"></button>
                 <button
                   type="button"
                   class="chapter-del"
@@ -105,13 +102,18 @@
       class="scenario-add"
       @click="onClickScenarioAdd"
     ></button>
+    <ChapterSoundUpload />
   </div>
 </template>
 
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
+import ChapterSoundUpload from '~/components/modal/ChapterSoundUpload.vue'
 export default {
+  components: {
+    ChapterSoundUpload,
+  },
   data() {
     return {
       enabled: true,

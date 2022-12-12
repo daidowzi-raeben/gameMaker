@@ -61,7 +61,13 @@ const createStore = () => {
                     sound: '',
                     text: '',
                     narration: '',
-                    questions: {},
+                    questions: {
+                        text: [
+                            '',
+                            '',
+                            '',
+                        ]
+                    },
                     answer: '',
                     cr: '',
                     effect: '',
@@ -139,6 +145,15 @@ const createStore = () => {
             },
             MUTATIONS_PROJECT(state, payload) {
                 state.PROJECT_ID = payload
+            },
+            MUTATIONS_PREVIEW_POINT(state, payload) {
+                state.PREVIEW.data.point = payload
+            },
+            MUTATIONS_PREVIEW_POINT_CR(state, payload) {
+                state.PREVIEW.data.pointCr = payload
+            },
+            MUTATIONS_PREVIEW_POINT_TYPE(state, payload) {
+                state.PREVIEW.data.pointType = payload
             },
             MUTATIONS_AXIOS_GET_PROJECT_DETAIL(state, payload) {
                 // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
@@ -281,11 +296,23 @@ const createStore = () => {
                 console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)
                 state.PREVIEW.data.text = payload.replaceAll('||n', '\n');
             },
-            // 나레이션
+            // 나레이션
             MUTATIONS_ASSETS_DATA_NARRATION(state, payload) {
 
                 console.log('MUTATIONS_ASSETS_DATA_NARRATION', payload)
                 state.PREVIEW.data.narration = payload.replaceAll('||n', '\n');
+            },
+            // 객관식
+            MUTATIONS_ASSETS_DATA_QUESTIONS(state, payload) {
+
+                console.log('MUTATIONS_ASSETS_DATA_NARRATION', payload)
+                state.PREVIEW.data.questions.text = payload
+            },
+            // 주관식
+            MUTATIONS_ASSETS_DATA_ANSWER(state, payload) {
+
+                console.log('MUTATIONS_ASSETS_DATA_NARRATION', payload)
+                state.PREVIEW.data.answer = payload
             },
             // 컷 리스트
             MUTATIONS_CUT_LIST_GET_DATA(state, payload) {
@@ -300,6 +327,7 @@ const createStore = () => {
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[0].effect
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text.replaceAll('||n', '\n')
                     state.PREVIEW.data.narration = state.CUT_LIST.jsonData[0].narration.replaceAll('||n', '\n')
+                    state.PREVIEW.data.questions.text = state.CUT_LIST.jsonData[0].questionsText
                     state.SAVE_DATETIME = state.CUT_LIST.datetime_modify
                 } else {
                     state.PREVIEW.img.bg = ''
@@ -308,6 +336,12 @@ const createStore = () => {
                     state.PREVIEW.data.cr = ''
                     state.PREVIEW.data.effect = ''
                     state.PREVIEW.data.text = ''
+                    state.PREVIEW.data.narration = ''
+                    state.PREVIEW.data.questions.text = [
+                        '',
+                        '',
+                        '',
+                    ]
                     state.cutType = 1
                 }
                 state.CUT_CODE = 0

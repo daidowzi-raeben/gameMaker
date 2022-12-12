@@ -50,6 +50,7 @@
         :class="{ active: rightContentShow === true }"
         @click="onClickRightContentShow()"
       ></button>
+      <div>가이드</div>
     </div>
     <div class="cut" :class="{ fold: cutListShow === false }">
       <div class="cut-tit">

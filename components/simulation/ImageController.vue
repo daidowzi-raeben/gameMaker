@@ -196,23 +196,25 @@ export default {
       this.MUTATIONS_ASSETS_CR2(e)
     },
     onClickEffect(type) {
-      this.PREVIEW.data.effect === type ? this.MUTATIONS_ASSETS_EFFECT('') : this.PREVIEW.data.effect = type
-      switch(type){
+      this.PREVIEW.data.effect === type
+        ? this.MUTATIONS_ASSETS_EFFECT('')
+        : (this.PREVIEW.data.effect = type)
+      switch (type) {
         case 'vibration':
           this.MUTATIONS_ASSETS_EFFECT('vibration')
-        break;
+          break
         case 'fade':
           this.MUTATIONS_ASSETS_EFFECT('fade')
-        break;
+          break
         case 'left':
           this.MUTATIONS_ASSETS_EFFECT('left')
-        break;
+          break
         case 'right':
-          this.MUTATIONS_ASSETS_EFFECT('rigth')
-        break;
+          this.MUTATIONS_ASSETS_EFFECT('right')
+          break
         case 'bottom':
           this.MUTATIONS_ASSETS_EFFECT('bottom')
-        break;
+          break
       }
     },
   },
