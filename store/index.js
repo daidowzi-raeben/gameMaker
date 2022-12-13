@@ -68,6 +68,27 @@ const createStore = () => {
                             '',
                         ]
                     },
+                    questionsTimer: null,
+                    subjectiveQuestion: '',
+                    questionsPoint: [{
+                        pointType: null,
+                        pointCr: null,
+                        point: null,
+                        nextBtn: null
+                    },
+                    {
+                        pointType: null,
+                        pointCr: null,
+                        point: null,
+                        nextBtn: null
+                    },
+                    {
+                        pointType: null,
+                        pointCr: null,
+                        point: null,
+                        nextBtn: null
+
+                    }],
                     answer: '',
                     cr: '',
                     effect: '',
@@ -87,6 +108,8 @@ const createStore = () => {
                     upUnit: '',
                     downPoint: '',
                     downUnit: '',
+                    gotoBtn: [],
+                    cut: []
                 }
             ],
             // 챕터 코드
@@ -163,11 +186,17 @@ const createStore = () => {
             MUTATIONS_PREVIEW_POINT(state, payload) {
                 state.PREVIEW.data.point = payload
             },
+            MUTATIONS_PREVIEW_TIMER(state, payload) {
+                state.PREVIEW.data.questionsTimer = payload
+            },
             MUTATIONS_PREVIEW_POINT_CR(state, payload) {
                 state.PREVIEW.data.pointCr = payload
             },
             MUTATIONS_PREVIEW_POINT_TYPE(state, payload) {
                 state.PREVIEW.data.pointType = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT(state, payload) {
+                state.PREVIEW.data.questionsPoint = payload
             },
             MUTATIONS_AXIOS_GET_PROJECT_DETAIL(state, payload) {
                 // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
@@ -273,6 +302,26 @@ const createStore = () => {
                 state.PREVIEW.data.effect = '';
                 state.PREVIEW.data.text = '';
                 state.SCENE_CODE = ''
+                state.PREVIEW.data.questionsPoint = [
+                    {
+                        pointType: null,
+                        pointCr: null,
+                        point: null,
+                        nextBtn: null,
+                    },
+                    {
+                        pointType: null,
+                        pointCr: null,
+                        point: null,
+                        nextBtn: null,
+                    },
+                    {
+                        pointType: null,
+                        pointCr: null,
+                        point: null,
+                        nextBtn: null,
+                    },
+                ]
             },
             // 인물 데이터 초기화
             MUTATIONS_CHAPTER_DEATILE_INIT(state, payload) {
@@ -322,7 +371,13 @@ const createStore = () => {
                 console.log('MUTATIONS_ASSETS_DATA_NARRATION', payload)
                 state.PREVIEW.data.questions.text = payload
             },
-            // 주관식
+            // 주관식 질문
+            MUTATIONS_ASSETS_DATA_SUBJECTIVE(state, payload) {
+
+                console.log('subjectiveQuestion', payload)
+                state.PREVIEW.data.subjectiveQuestion = payload
+            },
+            // 주관식 답
             MUTATIONS_ASSETS_DATA_ANSWER(state, payload) {
 
                 console.log('MUTATIONS_ASSETS_DATA_NARRATION', payload)
@@ -342,6 +397,9 @@ const createStore = () => {
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text.replaceAll('||n', '\n')
                     state.PREVIEW.data.narration = state.CUT_LIST.jsonData[0].narration.replaceAll('||n', '\n')
                     state.PREVIEW.data.questions.text = state.CUT_LIST.jsonData[0].questionsText
+                    state.PREVIEW.data.questionsPoint = state.CUT_LIST.jsonData[0].questionsPoint
+                    state.PREVIEW.data.questionsTimer = state.CUT_LIST.jsonData[0].questionsTimer
+                    state.PREVIEW.data.subjectiveQuestion = state.CUT_LIST.jsonData[0].subjectiveQuestion
                     state.SAVE_DATETIME = state.CUT_LIST.datetime_modify
                 } else {
                     state.PREVIEW.img.bg = ''
@@ -351,12 +409,34 @@ const createStore = () => {
                     state.PREVIEW.data.effect = ''
                     state.PREVIEW.data.text = ''
                     state.PREVIEW.data.narration = ''
+                    state.PREVIEW.data.questionsTimer = null
+                    state.PREVIEW.data.subjectiveQuestion = ''
                     state.PREVIEW.data.questions.text = [
                         '',
                         '',
                         '',
                     ]
                     state.cutType = 1
+                    state.PREVIEW.data.questionsPoint = [
+                        {
+                            pointType: null,
+                            pointCr: null,
+                            point: null,
+                            nextBtn: null,
+                        },
+                        {
+                            pointType: null,
+                            pointCr: null,
+                            point: null,
+                            nextBtn: null,
+                        },
+                        {
+                            pointType: null,
+                            pointCr: null,
+                            point: null,
+                            nextBtn: null,
+                        },
+                    ]
                 }
                 state.CUT_CODE = 0
             },
@@ -372,6 +452,9 @@ const createStore = () => {
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[payload].effect
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[payload].text.replaceAll('||n', '\n')
                     state.PREVIEW.data.narration = state.CUT_LIST.jsonData[payload].narration.replaceAll('||n', '\n')
+                    state.PREVIEW.data.questionsPoint = state.CUT_LIST.jsonData[payload].questionsPoint
+                    state.PREVIEW.data.questionsTimer = state.CUT_LIST.jsonData[payload].questionsTimer
+                    state.PREVIEW.data.subjectiveQuestion = state.CUT_LIST.jsonData[payload].subjectiveQuestion
                     state.cutType = state.CUT_LIST.jsonData[payload].cutType
                 }
             },

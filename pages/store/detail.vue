@@ -80,7 +80,11 @@ export default {
     onChangeDel(e, key) {
       console.log(this.$refs[`addImage${key}`][0].remove())
     },
-    onClickButAssets() {},
+    onClickButAssets() {
+      if (!this.$cookies.get('user_idx')) {
+        return alert('로그인 후 이용 가능합니다')
+      }
+    },
   },
 }
 </script>

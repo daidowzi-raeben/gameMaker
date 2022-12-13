@@ -1,6 +1,8 @@
 <template>
   <div class="preview">
-    <div v-if="MAKER_GNB === 1" class="preview-tit">{{(CUT_LIST.jsonData.length - CUT_CODE)}} CUT</div>
+    <div v-if="MAKER_GNB === 1 && CUT_LIST.jsonData" class="preview-tit">
+      {{ CUT_LIST.jsonData.length - CUT_CODE }} CUT
+    </div>
     <div v-if="PREVIEW" class="preview-img">
       <img
         v-if="PREVIEW.img.bg"
@@ -78,7 +80,15 @@ export default {
     }
   },
   computed: {
-    ...mapState(['SCENE_CODE', 'PREVIEW', 'cutType', 'SAVE_DATETIME', 'CUT_LIST', 'CUT_CODE', 'MAKER_GNB']),
+    ...mapState([
+      'SCENE_CODE',
+      'PREVIEW',
+      'cutType',
+      'SAVE_DATETIME',
+      'CUT_LIST',
+      'CUT_CODE',
+      'MAKER_GNB',
+    ]),
   },
   watch: {
     'PREVIEW.data.effect': {
@@ -153,26 +163,26 @@ export default {
 }
 @keyframes left {
   from {
-    transform:translateX(-100%);
+    transform: translateX(-100%);
   }
   to {
-    transform:translateX(0);
+    transform: translateX(0);
   }
 }
 @keyframes right {
   from {
-    transform:translateX(100%);
+    transform: translateX(100%);
   }
   to {
-    transform:translateX(0);
+    transform: translateX(0);
   }
 }
 @keyframes bottom {
   from {
-    transform:translateY(100%);
+    transform: translateY(100%);
   }
   to {
-    transform:translateY(0);
+    transform: translateY(0);
   }
 }
 </style>
