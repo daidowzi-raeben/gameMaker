@@ -1,9 +1,9 @@
 <template>
-  <div class="preview">
+  <div class="preview" :class="{ bottomnone : MAKER_GNB === 5 }">
     <div v-if="MAKER_GNB === 1 && CUT_LIST.jsonData" class="preview-tit">
       {{ CUT_LIST.jsonData.length - CUT_CODE }} CUT
     </div>
-    <div v-if="PREVIEW" class="preview-img">
+    <div v-if="PREVIEW && MAKER_GNB !== 5" class="preview-img">
       <img
         v-if="PREVIEW.img.bg"
         :src="PREVIEW.img.bg"
@@ -57,6 +57,15 @@
           {{ PREVIEW.data.narration }}
         </p>
         <!-- prettier-ignore-end -->
+      </div>
+      <img src="~/static/images/mockup.png" alt="" class="mockup" />
+    </div>
+    <div v-if="(PREVIEW && MAKER_GNB === 5)" class="preview-img">
+      <div class="dialogue">
+        <span class="name">메인 색상</span>
+        <p class="text">
+          창 색상
+        </p>
       </div>
       <img src="~/static/images/mockup.png" alt="" class="mockup" />
     </div>

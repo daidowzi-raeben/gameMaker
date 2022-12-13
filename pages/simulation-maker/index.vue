@@ -3,6 +3,7 @@
     <div class="maker-wrap">
       <ScenarioList v-if="MAKER_GNB === 1" />
       <IntroList v-if="MAKER_GNB === 2" />
+      <UIList v-if="MAKER_GNB === 5" />
       <CharacterList v-if="MAKER_GNB === 4" />
       <div class="maker-right">
         <PreviewApp />
@@ -41,6 +42,7 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 import ScenarioList from '~/components/simulation/ScenarioList.vue'
 import IntroList from '~/components/simulation/IntroList.vue'
+import UIList from '~/components/simulation/UIList.vue'
 import CharacterList from '~/components/simulation/CharacterList.vue'
 import CutInsert from '~/components/simulation/CutInsert.vue'
 import PreviewApp from '~/components/simulation/PreviewApp.vue'
@@ -55,6 +57,7 @@ export default {
   components: {
     ScenarioList,
     IntroList,
+    UIList,
     CharacterList,
     CutInsert,
     PreviewApp,

@@ -327,13 +327,17 @@
 
     .preview {
       min-width: 365px;
-      height: calc(100% - 55px);
+      height: calc(100vh - 155px);
       background: #fff;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
+      &.bottomnone{
+        height:calc(100vh - 100px);
+      }
 
       &-save {
         font-size: 1.2rem;
@@ -349,12 +353,18 @@
     }
 
     .setting {
+      min-width: 900px;
       width: 900px;
-      height: calc(100% - 55px);
+      height: calc(100vh - 155px);
       background: #fff;
       border-radius: 10px;
       margin: 0 10px;
       position:relative;
+      overflow-y: auto;
+      overflow-x:hidden;
+      &.bottom-none{
+        height: calc(100vh - 100px);
+      }
       & > div{
         padding: 15px 25px 10px 25px;
         border-bottom: 1px solid #eee;
@@ -584,6 +594,7 @@
               display:block;
               margin-bottom:10px;
               width:100%;
+              border:none;
             }
 
             textarea {
@@ -774,10 +785,40 @@
         }
       }
 
+      &-color{
+        .vc-chrome{
+          margin-bottom:20px;
+        }
+      }
+
+      &-icon{
+        .input-select{
+          height:40px;
+          min-width: 200px;
+          margin-bottom:15px;
+        }
+      }
+
+      &-window{
+        .input-wrap{
+          margin-bottom:20px;
+          align-items: center;
+          .input-label{
+            width:100px;
+          }
+          .text{
+            font-size:1.2rem;
+            margin:0 5px;
+            &:nth-child(2){
+              margin-left:0;
+            }
+          }
+        }
+      }
     }
 
     .cut {
-      width: 1275px;
+      width: 1325px;
       position: fixed;
       left: 250px;
       bottom: 0;
@@ -786,6 +827,9 @@
       padding: 15px;
       box-shadow: 0 0 10px rgba(0, 0, 0, .2);
       z-index: 5;
+      @media (max-width: 2000px) {
+        width: 1275px;
+      }
 
       &-tit {
         position: relative;
@@ -1328,7 +1372,9 @@
 
   &-label {
     font-size: 1.4rem;
-    margin-right: 20px;
+    margin: 0 20px 0 0;
+    display: inline-flex;
+    align-items: center;
   }
 
   &-con {

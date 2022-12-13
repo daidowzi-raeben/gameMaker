@@ -79,30 +79,8 @@
             <div class="set sound-set"></div>
           </div> -->
         </div>
-        <label v-if="cutType === 4" class="label">정답</label>
-        <div class="insert-wrap">
-          <textarea
-            v-if="cutType === 4"
-            rows="3"
-            :value="PREVIEW.data.answer"
-            @input="onInputDatAnswer"
-          ></textarea>
-          <textarea
-            v-if="cutType === 1"
-            placeholder="인물의 대화를 입력해 주세요"
-            rows="3"
-            :value="PREVIEW.data.text"
-            @input="onInputDataText"
-          ></textarea>
-          <textarea
-            v-if="cutType === 2"
-            placeholder="나레이션을 입력해 주세요"
-            rows="3"
-            :value="PREVIEW.data.narration"
-            @input="onInputDataNarration"
-          ></textarea>
+        <div v-if="cutType === 3" class="insert-wrap">
           <input
-            v-if="cutType === 3"
             type="text"
             placeholder="객관식 선택 문항을 작성해 주세요"
             class="input-text"
@@ -110,8 +88,39 @@
             @input="onInputDataQuestions(0, $event)"
           />
           <!-- 객관식 버튼 1 -->
-          <div v-if="cutType === 3">
-            <!-- temp1.nextElementSibling.classList.toggle('aaa') -->
+          <!-- temp1.nextElementSibling.classList.toggle('aaa') -->
+          <div class="insert-set">
+            <button
+              v-show="
+                (!timerSettingShow && cutType === 3) ||
+                (!timerSettingShow && cutType === 4)
+              "
+              type="button"
+              class="btn timer"
+              @click="onClickTimerSetting"
+            >
+              타이머 설정
+            </button>
+            <div v-show="timerSettingShow" class="set timer-set">
+              <select
+                class="input-select"
+                :value="PREVIEW.data.questionsTimer"
+                @change="onChageQuestionsTimer"
+              >
+                <option :value="null">사용안함</option>
+                <option :value="5">5초</option>
+                <option :value="10">10초</option>
+                <option :value="15">15초</option>
+                <option :value="20">20초</option>
+              </select>
+              <button
+                type="button"
+                class="save"
+                @click="onClickTimerSetting('save')"
+              >
+                닫기
+              </button>
+            </div>
             <button
               v-show="!pointSettingShow"
               type="button"
@@ -196,8 +205,9 @@
               </button>
             </div>
           </div>
+        </div>
+        <div v-if="cutType === 3" class="insert-wrap">
           <input
-            v-if="cutType === 3"
             type="text"
             placeholder="객관식 선택 문항을 작성해 주세요"
             class="input-text"
@@ -205,7 +215,7 @@
             @input="onInputDataQuestions(1, $event)"
           />
           <!-- 객관식 버튼 2 -->
-          <div v-if="cutType === 3">
+          <div class="insert-set">
             <button
               v-show="!pointSettingShow"
               type="button"
@@ -290,8 +300,9 @@
               </button>
             </div>
           </div>
+        </div>
+        <div v-if="cutType === 3" class="insert-wrap">
           <input
-            v-if="cutType === 3"
             type="text"
             placeholder="객관식 선택 문항을 작성해 주세요"
             class="input-text"
@@ -299,7 +310,7 @@
             @input="onInputDataQuestions(2, $event)"
           />
           <!-- 객관식 버튼 3 -->
-          <div v-if="cutType === 3">
+          <div class="insert-set">
             <button
               v-show="!pointSettingShow"
               type="button"
@@ -384,7 +395,29 @@
               </button>
             </div>
           </div>
-          <!-- <textarea v-else rows="3"></textarea> -->
+        </div>
+        <label v-if="cutType === 4" class="label">정답</label>
+        <div v-if="(cutType !== 3)" class="insert-wrap">
+          <textarea
+            v-if="cutType === 4"
+            rows="3"
+            :value="PREVIEW.data.answer"
+            @input="onInputDatAnswer"
+          ></textarea>
+          <textarea
+            v-if="cutType === 1"
+            placeholder="인물의 대화를 입력해 주세요"
+            rows="3"
+            :value="PREVIEW.data.text"
+            @input="onInputDataText"
+          ></textarea>
+          <textarea
+            v-if="cutType === 2"
+            placeholder="나레이션을 입력해 주세요"
+            rows="3"
+            :value="PREVIEW.data.narration"
+            @input="onInputDataNarration"
+          ></textarea>
           <div class="insert-set">
             <button
               v-show="
@@ -417,9 +450,6 @@
                 닫기
               </button>
             </div>
-            <button type="button" class="btn sound">사운드 설정</button>
-            <div class="set sound-set"></div>
-
             <button
               v-show="!pointSettingShow && cutType === 1"
               type="button"
