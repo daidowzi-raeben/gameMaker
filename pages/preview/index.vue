@@ -1,6 +1,7 @@
 <template>
   <div class="preview-wrap">
     <div class="web-left">광고영역</div>
+    <div>수정하면 컨플릭 발생</div>
     <div class="preview" @click="nextGame">
       <div class="preview-img">
         <img v-if="inApp.bg" :src="inApp.bg" alt="" class="background" />
