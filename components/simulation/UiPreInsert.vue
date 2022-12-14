@@ -3,13 +3,13 @@
     <div class="setting bottom-none">
       <div class="setting-color">
         <div class="setting-tit">메인 색상 설정</div>
-        <Chrome :value="mainColor"></Chrome>
+        <Chrome v-model="colorPicker.mainColor"></Chrome>
       </div>
       <div class="setting-window">
         <div class="setting-tit">창 설정</div>
         <div class="input-wrap">
           <label class="input-label">창 색상</label>
-          <Chrome :value="windowColor"></Chrome>
+          <Chrome v-model="colorPicker.windowColor"></Chrome>
         </div>
         <div class="input-wrap">
           <label class="input-label">모서리 둥글게</label>
@@ -18,7 +18,7 @@
         </div>
         <div class="input-wrap">
           <label class="input-label">외곽선</label>
-          <Chrome :value="strokeColor"></Chrome>
+          <Chrome v-model="colorPicker.strokeColor"></Chrome>
         </div>
         <div class="input-wrap">
           <label class="input-label"></label>
@@ -27,7 +27,7 @@
         </div>
         <div class="input-wrap">
           <label class="input-label">그림자</label>
-          <Chrome :value="shadowColor"></Chrome>
+          <Chrome v-model="colorPicker.shadowColor"></Chrome>
         </div>
         <div class="input-wrap">
           <label class="input-label"></label>
@@ -39,7 +39,12 @@
       </div>
       <div class="setting-icon">
         <div class="setting-tit">아이콘 설정</div>
-        <select class="input-select">
+        <select
+          class="input-select"
+          :value="IN_APP_ICON"
+          @change="onChangeIconSetting"
+        >
+          <option :value="null">선택</option>
           <option>white line</option>
           <option>white fill</option>
           <option>black line</option>
@@ -59,44 +64,48 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 import { Chrome } from 'vue-color'
 export default {
   components: {
-    Chrome
+    Chrome,
   },
-  data () {
+  data() {
     return {
-      mainColor: {
-        hex: '#ffffff',
-        hsl: { h: 150, s: 0, l: 100, a: 1 },
-        hsv: { h: 150, s: 0, v: 100, a: 1 },
-        rgba: { r: 255, g: 255, b: 255, a: 1 },
-        a: 1
+      rightContentShow: false,
+      colorPicker: {
+        mainColor: {},
+        windowColor: {},
+        strokeColor: {},
+        shadowColor: {},
       },
-      windowColor: {
-        hex: '#ffffff',
-        hsl: { h: 150, s: 0, l: 100, a: 1 },
-        hsv: { h: 150, s: 0, v: 100, a: 1 },
-        rgba: { r: 255, g: 255, b: 255, a: 1 },
-        a: 1
-      },
-      strokeColor: {
-        hex: '#ffffff',
-        hsl: { h: 150, s: 0, l: 100, a: 1 },
-        hsv: { h: 150, s: 0, v: 100, a: 1 },
-        rgba: { r: 255, g: 255, b: 255, a: 1 },
-        a: 1
-      },
-      shadowColor: {
-        hex: '#000000',
-        hsl: { h: 150, s: 0, l: 0, a: 0.5 },
-        hsv: { h: 150, s: 0, v: 0, a: 0.5 },
-        rgba: { r: 0, g: 0, b: 0, a: 0.5 },
-        a: 0.5
-      }
     }
   },
+  computed: {
+    ...mapState(['UISetting', 'IN_APP_ICON']),
+  },
+  watch: {
+    colorPicker: {
+      handler(value) {
+        console.log('watch', value)
+        this.MUTATIONS_COLOR_PICKER(value)
+        if (this.UISetting) {
+          this.colorPicker = this.UISetting
+        }
+      },
+      immediate: false,
+      deep: true,
+    },
+  },
   methods: {
+    ...mapMutations(['MUTATIONS_COLOR_PICKER', 'MUTATIONS_IN_APP_ICON']),
+
+    updateColor() {
+      console.log(this.mainColor)
+    },
+    onChangeIconSetting({ target }) {
+      this.MUTATIONS_IN_APP_ICON(target.value)
+    },
   },
 }
 </script>

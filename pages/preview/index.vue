@@ -1,29 +1,103 @@
 <template>
   <div class="preview-wrap">
-    <div class="web-left">
-      광고영역
-      <img src="https://tpc.googlesyndication.com/simgad/7963746840698468726?sqp=4sqPyQQ7QjkqNxABHQAAtEIgASgBMAk4A0DwkwlYAWBfcAKAAQGIAQGdAQAAgD-oAQGwAYCt4gS4AV_FAS2ynT4&rs=AOga4qktp6Md3WpJlOGnQTottClhGQPkfg" alt="" />
-      <img src="https://tpc.googlesyndication.com/simgad/9782667108518387514?sqp=4sqPyQQ7QjkqNxABHQAAtEIgASgBMAk4A0DwkwlYAWBfcAKAAQGIAQGdAQAAgD-oAQGwAYCt4gS4AV_FAS2ynT4&rs=AOga4qmm_2oiUmbF8aFVcmndW5O2GCEjzA" alt="" />
-    </div>
-    <div class="preview">
+    <div class="web-left">광고영역</div>
+    <div class="preview" @click="nextGame">
       <div class="preview-img">
-        <img src="https://api.school-os.net/game/upload/bg/5.jpg" alt="" class="background" />
-        <div class="character-1"><img src="https://api.school-os.net/game/upload/cr/11.png" alt="" class="character right"></div>
-        <div class="dialogue">
-          <span class="name">익명이</span>
-          <p class="text">
-            익명이3 포인트가 5이상일때만 출력
-          </p>
+        <img :src="inApp.bg" alt="" class="background" />
+        <div class="character-1">
+          <img :src="inApp.cr" alt="" class="character right" />
         </div>
-        <img src="/_nuxt/static/images/mockup.png" alt="" class="mockup">
+        <div class="dialogue">
+          <span class="name">{{ inApp.crName }}</span>
+          <p class="text">{{ inApp.text }}</p>
+        </div>
+        <img src="/_nuxt/static/images/mockup.png" alt="" class="mockup" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import appData from '~/static/test.json'
 export default {
   name: 'PreviewIndex',
+  data() {
+    return {
+      game: [],
+      s: 0,
+      c: 0,
+      t: 0,
+      initBtn: '',
+      nextBtn: '',
+      inApp: {
+        bg: '',
+        cr: '',
+        cr2: '',
+        code: '',
+        text: '',
+        point: '',
+        answer: '',
+        crName: '',
+        effect: '',
+        cutType: 0,
+        pointCr: '',
+        narration: '',
+        pointType: '',
+        questions: {
+          text: ['', '', ''],
+        },
+        questionsText: [],
+        questionsPoint: [
+          {
+            point: null,
+            nextBtn: null,
+            pointCr: null,
+            pointType: null,
+          },
+          {
+            point: null,
+            nextBtn: null,
+            pointCr: null,
+            pointType: null,
+          },
+          {
+            point: null,
+            nextBtn: null,
+            pointCr: null,
+            pointType: null,
+          },
+        ],
+        questionsTimer: null,
+        subjectiveQuestion: '',
+      },
+    }
+  },
+  mounted() {
+    console.log(appData)
+    this.game = appData
+    // 첫 데이터 찾기
+
+    this.initBtn =
+      this.game.scenarioList[this.s].chapters[this.c].initBtn[this.t]
+
+    this.inApp =
+      this.game.scenarioList[this.s].chapters[this.c].cuts[this.initBtn].list
+  },
+  methods: {
+    nextGame() {
+      this.t++
+      // 컷 구분
+
+      this.updateGame()
+    },
+    updateGame() {
+      this.initBtn =
+        this.game.scenarioList[this.s].chapters[this.c].initBtn[this.t]
+
+      this.inApp =
+        this.game.scenarioList[this.s].chapters[this.c].cuts[this.initBtn].list
+    },
+  },
 }
 </script>
 

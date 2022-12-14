@@ -52,7 +52,7 @@
               type="radio"
               name="bgCheck"
               :checked="PREVIEW.img.bg === '' ? true : false"
-              @change="onClickCrImage('')"
+              @change="onClickBgImage('')"
             />
             <span class="img-wrap no-image"></span>
           </label>

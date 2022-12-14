@@ -1,8 +1,12 @@
 <template>
-  <div class="preview" :class="{ bottomnone : MAKER_GNB === 5 }">
+  <div class="preview" :class="{ bottomnone: MAKER_GNB === 5 }">
     <div v-if="MAKER_GNB === 1 && CUT_LIST.jsonData" class="preview-tit">
       {{ CUT_LIST.jsonData.length - CUT_CODE }} CUT
     </div>
+    <!-- 컬러피커 -->
+    <!-- <div v-if="MAKER_GNB === 5">
+      {{ UISetting }}
+    </div> -->
     <div v-if="PREVIEW && MAKER_GNB !== 5" class="preview-img">
       <img
         v-if="PREVIEW.img.bg"
@@ -60,12 +64,21 @@
       </div>
       <img src="~/static/images/mockup.png" alt="" class="mockup" />
     </div>
-    <div v-if="(PREVIEW && MAKER_GNB === 5)" class="preview-img">
-      <div class="dialogue">
-        <span class="name">메인 색상</span>
-        <p class="text">
-          창 색상
-        </p>
+    <div v-if="PREVIEW && MAKER_GNB === 5" class="preview-img">
+      <div
+        class="dialogue"
+        :style="
+          UISetting.windowColor ? `background:${UISetting.windowColor.hex}` : ''
+        "
+      >
+        <span
+          class="name"
+          :style="
+            UISetting.mainColor ? `background:${UISetting.mainColor.hex}` : ''
+          "
+          >메인 색상</span
+        >
+        <p class="text">창 색상</p>
       </div>
       <img src="~/static/images/mockup.png" alt="" class="mockup" />
     </div>
@@ -97,6 +110,7 @@ export default {
       'CUT_LIST',
       'CUT_CODE',
       'MAKER_GNB',
+      'UISetting',
     ]),
   },
   watch: {

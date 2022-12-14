@@ -6,7 +6,7 @@
           v-for="(menu, menuIndex) in gnb"
           :key="menuIndex"
           class="item"
-          :class="{ active: activeMenu == menu.code }"
+          :class="{ active: MAKER_GNB == menu.code }"
         >
           <button
             type="button"
@@ -43,6 +43,7 @@
         저장되었습니다.
       </b-alert>
     </div>
+    <LoadingContent v-show="LOADING === true" />
   </div>
 </template>
 
@@ -50,23 +51,24 @@
 import { mapState, mapMutations } from 'vuex'
 import ScenarioInsert from '~/components/simulation/ScenarioInsert'
 import JsonDatapreview from '~/components/modal/JsonDatapreview'
+import LoadingContent from '~/components/modules/LoadingContent'
 import { kooLogin } from '~/config/util'
 export default {
   components: {
     ScenarioInsert,
     JsonDatapreview,
+    LoadingContent,
   },
   data() {
     return {
-      activeMenu: 1,
       stateLogin: [],
       gnb: [
-        { code: 1, menu: '스토리' },
-        { code: 2, menu: '인트로' },
-        { code: 3, menu: '엔딩' },
-        { code: 4, menu: '인물설정' },
-        { code: 5, menu: 'UI설정' },
         { code: 6, menu: '에셋관리' },
+        { code: 5, menu: 'UI설정' },
+        { code: 4, menu: '인물설정' },
+        { code: 2, menu: '인트로' },
+        { code: 1, menu: '스토리' },
+        { code: 3, menu: '엔딩' },
         { code: 7, menu: '프로젝트설정' },
       ],
     }

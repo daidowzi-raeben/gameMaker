@@ -3,8 +3,9 @@
     <div class="maker-wrap">
       <ScenarioList v-if="MAKER_GNB === 1" />
       <IntroList v-if="MAKER_GNB === 2" />
-      <UIList v-if="MAKER_GNB === 5" />
       <CharacterList v-if="MAKER_GNB === 4" />
+      <UIList v-if="MAKER_GNB === 5" />
+      <AssetsList v-if="MAKER_GNB === 6" />
       <div class="maker-right">
         <PreviewApp />
         <CutInsert
@@ -41,6 +42,7 @@
 import { mapActions, mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 import ScenarioList from '~/components/simulation/ScenarioList.vue'
+import AssetsList from '~/components/simulation/AssetsList.vue'
 import IntroList from '~/components/simulation/IntroList.vue'
 import UIList from '~/components/simulation/UIList.vue'
 import CharacterList from '~/components/simulation/CharacterList.vue'
@@ -57,6 +59,7 @@ export default {
   components: {
     ScenarioList,
     IntroList,
+    AssetsList,
     UIList,
     CharacterList,
     CutInsert,
@@ -146,26 +149,22 @@ export default {
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
-      }
-      else if (e === 'fade') {
+      } else if (e === 'fade') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
-      }
-      else if (e === 'left') {
+      } else if (e === 'left') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
-      }
-      else if (e === 'right') {
+      } else if (e === 'right') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
-      }
-      else if (e === 'bottom') {
+      } else if (e === 'bottom') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)

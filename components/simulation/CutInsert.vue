@@ -67,6 +67,33 @@
           <div slot="button-prev" class="swiper-button-prev"></div>
           <div slot="button-next" class="swiper-button-next"></div>
         </swiper>
+        <swiper
+          v-if="
+            SCENE_DATA_CHARACTER &&
+            SCENE_DATA_CHARACTER.jsonData &&
+            cutType === 1
+          "
+          :options="swiperOptionSelectCharacter"
+          class="tab-list type2"
+        >
+          <swiper-slide
+            v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
+            :key="'SCENE_DATA_CHARACTER' + i"
+            class="tab-list--item"
+          >
+            <label class="radio" @change="onCiickDataCr(v.name)">
+              <input
+                type="radio"
+                name="character"
+                :checked="v.name === PREVIEW.data.cr"
+                :value="SCENE_DATA_CHARACTER.idx[i]"
+              />
+              <span>{{ v.name }}</span>
+            </label>
+          </swiper-slide>
+          <div slot="button-prev" class="swiper-button-prev"></div>
+          <div slot="button-next" class="swiper-button-next"></div>
+        </swiper>
         <label v-if="cutType === 4" class="label">질문</label>
         <div v-if="cutType === 4" class="insert-wrap">
           <textarea
@@ -397,7 +424,7 @@
           </div>
         </div>
         <label v-if="cutType === 4" class="label">정답</label>
-        <div v-if="(cutType !== 3)" class="insert-wrap">
+        <div v-if="cutType !== 3" class="insert-wrap">
           <textarea
             v-if="cutType === 4"
             rows="3"
@@ -462,12 +489,19 @@
               v-show="pointSettingShow && cutType === 1"
               class="set point-set"
             >
+              <!-- <select
+                class="input-select"
+                @change="dataPointUpdate('endType', $event)"
+              >
+                <option :value="null">컷</option>
+                <option value="ending">엔딩</option>
+              </select> -->
               <select
                 v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
                 class="input-select"
                 @change="dataPointUpdate('pointCr', $event)"
               >
-                <option :value="null">선택안함</option>
+                <option :value="null">인물</option>
                 <option
                   v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
                   :key="'SCENE_DATA_CHARACTER' + i"
@@ -902,6 +936,8 @@ export default {
       'MUTATIONS_PREVIEW_QUESTIONS_POINT',
       'MUTATIONS_PREVIEW_TIMER',
       'MUTATIONS_ASSETS_DATA_SUBJECTIVE',
+      'MUTATIONS_LOADING_INIT',
+      'MUTATIONS_PREVIEW_END_TYPE',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
@@ -1083,8 +1119,14 @@ export default {
       if (type === 'pointCr') this.MUTATIONS_PREVIEW_POINT_CR(e.target.value)
       if (type === 'pointType')
         this.MUTATIONS_PREVIEW_POINT_TYPE(e.target.value)
+      if (type === 'endType') this.MUTATIONS_PREVIEW_END_TYPE(e.target.value)
 
-      if (type !== 'point' && type !== 'pointCr' && type !== 'pointType') {
+      if (
+        type !== 'point' &&
+        type !== 'pointCr' &&
+        type !== 'pointType' &&
+        type !== 'endType'
+      ) {
         console.log('ARRAY')
         const typeParam = type.substr(0, type.length - 1)
         this.questionsPoint[type.substr(-1)][typeParam] = e.target.value
@@ -1105,6 +1147,7 @@ export default {
       this.MUTATIONS_ASSETS_DATA_SUBJECTIVE(target.value)
     },
     update() {
+      this.MUTATIONS_LOADING_INIT()
       this.paramsPreview.cutType = this.cutType
       this.paramsPreview.code = this.SCENE_CODE
       this.paramsPreview.bg = this.PREVIEW.img.bg

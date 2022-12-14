@@ -22,16 +22,16 @@
       <div class="setting-copy">
         <div class="setting-tit">저작권 설정</div>
         <input
-          v-model="intro.copy"
           type="text"
           placeholder="2022 (C) 프로젝트이름"
           class="input-text"
+          :value="PREVIEW_INTRO.copyright"
         />
       </div>
       <div class="setting-logo">
         <div class="setting-tit">로고 등록</div>
         <div class="input-wrap">
-          <select v-model="intro.position" class="input-select">
+          <select class="input-select" :value="PREVIEW_INTRO.position">
             <option>TOP</option>
           </select>
           <input
@@ -90,7 +90,13 @@ export default {
     }
   },
   computed: {
-    ...mapState(['SCENE_CODE', 'PREVIEW', 'PROJECT_ID', 'IS_POST']),
+    ...mapState([
+      'SCENE_CODE',
+      'PREVIEW',
+      'PROJECT_ID',
+      'IS_POST',
+      'PREVIEW_INTRO',
+    ]),
   },
   watch: {
     IS_POST: {

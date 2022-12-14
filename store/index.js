@@ -58,6 +58,7 @@ const createStore = () => {
                     point: '',
                     pointCr: '',
                     pointType: '',
+                    endType: '',
                     sound: '',
                     text: '',
                     narration: '',
@@ -100,6 +101,8 @@ const createStore = () => {
                 copyright: '',
                 logo: '',
                 position: '',
+                bg: '',
+                ver: '',
             },
             PREVIEW_ENDING: [
                 {
@@ -112,13 +115,22 @@ const createStore = () => {
                     cut: []
                 }
             ],
+            // UI세팅
+            UISetting: {
+                // mainColor: {},
+                // windowColor: {},
+                // strokeColor: {},
+                // shadowColor: {},
+            },
+            // app icon
+            IN_APP_ICON: null,
             // 챕터 코드
             SCENE_CODE: null,
             // 인물코드
             CHAPTER_CODE: null,
             // 컷코드
             CUT_CODE: null,
-            MAKER_GNB: 1,
+            MAKER_GNB: 6,
             ASSETS: [],
             SCENE_INDEX: null,
             CHAPTER_INDEX: null,
@@ -149,13 +161,21 @@ const createStore = () => {
             MUTATIONS_LOADING(state, payload) {
                 state.LOADING = false
             },
-
+            MUTATIONS_LOADING_INIT(state, payload) {
+                state.LOADING = true
+            },
+            MUTATIONS_COLOR_PICKER(state, payload) {
+                state.UISetting = payload
+            },
 
             MUTATIONS_STORE_CRLIST(state, payload) {
                 state.ASSETS_STORE.crList = payload
             },
             MUTATIONS_STORE_DETAIL(state, payload) {
                 state.ASSETS_STORE.detail = payload
+            },
+            MUTATIONS_IN_APP_ICON(state, payload) {
+                state.IN_APP_ICON = payload
             },
 
 
@@ -194,6 +214,9 @@ const createStore = () => {
             },
             MUTATIONS_PREVIEW_POINT_TYPE(state, payload) {
                 state.PREVIEW.data.pointType = payload
+            },
+            MUTATIONS_PREVIEW_END_TYPE(state, payload) {
+                // state.PREVIEW.data.endType = payload
             },
             MUTATIONS_PREVIEW_QUESTIONS_POINT(state, payload) {
                 state.PREVIEW.data.questionsPoint = payload
@@ -399,6 +422,7 @@ const createStore = () => {
                     state.PREVIEW.data.questions.text = state.CUT_LIST.jsonData[0].questionsText
                     state.PREVIEW.data.questionsPoint = state.CUT_LIST.jsonData[0].questionsPoint
                     state.PREVIEW.data.questionsTimer = state.CUT_LIST.jsonData[0].questionsTimer
+                    state.PREVIEW.data.answer = state.CUT_LIST.jsonData[0].answer
                     state.PREVIEW.data.subjectiveQuestion = state.CUT_LIST.jsonData[0].subjectiveQuestion
                     state.SAVE_DATETIME = state.CUT_LIST.datetime_modify
                 } else {
@@ -455,6 +479,7 @@ const createStore = () => {
                     state.PREVIEW.data.questionsPoint = state.CUT_LIST.jsonData[payload].questionsPoint
                     state.PREVIEW.data.questionsTimer = state.CUT_LIST.jsonData[payload].questionsTimer
                     state.PREVIEW.data.subjectiveQuestion = state.CUT_LIST.jsonData[payload].subjectiveQuestion
+                    state.PREVIEW.data.answer = state.CUT_LIST.jsonData[payload].answer
                     state.cutType = state.CUT_LIST.jsonData[payload].cutType
                 }
             },

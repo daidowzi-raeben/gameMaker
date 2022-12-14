@@ -180,6 +180,7 @@ export default {
       'MUTATIONS_SCENE_INDEX',
       'MUTATIONS_CHAPTER_INDEX',
       'MUTATIONS_SAVE_DATETIME_INIT',
+      'MUTATIONS_LOADING_INIT',
     ]),
     onSubmit() {
       // form 데이터 전달
@@ -191,6 +192,7 @@ export default {
     },
     // 챕터 이동
     onClickChapterTo(e, i, i2) {
+      this.MUTATIONS_LOADING_INIT()
       this.MUTATIONS_SAVE_DATETIME_INIT()
       this.MUTATIONS_SCENE_CODE(e)
       this.MUTATIONS_SCENE_INDEX(i)
@@ -305,6 +307,7 @@ export default {
       this.params.secretKey = this.PROJECT_ID
       this.params.user_idx = this.user_idx
       this.params.apiKey = process.env.API_KEY
+      this.MUTATIONS_LOADING_INIT()
       this.ACTION_AXIOS_GET(this.params)
     },
   },
