@@ -1833,7 +1833,7 @@
                                 "cutType": 1,
                                 "pointCr": "이지안",
                                 "narration": "",
-                                "pointType": "P",
+                                "pointType": "M",
                                 "questions": {
                                     "text": [
                                         "",
@@ -2099,7 +2099,7 @@
                                 "cr2": "",
                                 "code": 1670991436705,
                                 "text": "",
-                                "point": "10",
+                                "point": "9",
                                 "answer": "잠자리를 관찰함",
                                 "crName": "",
                                 "effect": "",
