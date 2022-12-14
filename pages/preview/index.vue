@@ -3,23 +3,32 @@
     <div class="web-left">광고영역</div>
     <div class="preview" @click="nextGame">
       <div class="preview-img">
-        <img :src="inApp.bg" alt="" class="background" />
+        <img v-if="inApp.bg" :src="inApp.bg" alt="" class="background" />
         <div class="character-1">
           <img :src="inApp.cr" alt="" class="character right" />
         </div>
+        <!-- <div class="answer answer-multiple">
+          <button type="button" class="btn">객관식1</button>
+          <button type="button" class="btn">객관식2</button>
+          <button type="button" class="btn">객관식3</button>
+        </div> -->
+        <!-- <div class="answer answer-subjective">
+          <div class="text">주관식 질문</div>
+          <input type="text" class="input-text" placeholder="주관식 답변을 입력해주세요" />
+        </div> -->
         <div class="dialogue">
           <span v-if="cutType === 1" class="name">{{ inApp.crName }}</span>
           <p v-if="cutType === 1" class="text">{{ inApp.text }}</p>
           <p v-if="cutType === 2" class="text">{{ inApp.narration }}</p>
           <p v-if="cutType === 3" class="text">
-            {{ inApp.questions.text[0] }}<br />{{ inApp.questions.text[1]
-            }}<br />{{ inApp.questions.text[2] }}
+            {{ inApp.questionsText[0] }}<br />{{ inApp.questionsText[1]
+            }}<br />{{ inApp.questionsText[2] }}
           </p>
           <p v-if="cutType === 4" class="text">
             {{ inApp.subjectiveQuestion }}
           </p>
         </div>
-        <img src="/_nuxt/static/images/mockup.png" alt="" class="mockup" />
+        <img src="~/static/images/mockup.png" alt="" class="mockup" />
       </div>
     </div>
   </div>
