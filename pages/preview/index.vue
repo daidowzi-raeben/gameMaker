@@ -1,9 +1,8 @@
 <template>
   <div class="preview-wrap">
     <div class="web-left">광고영역</div>
-
     <div class="preview">
-      <div
+      <!-- <div
         style="
           background: #fff;
           color: #000;
@@ -14,24 +13,14 @@
         "
       >
         {{ gamePoint }}
-      </div>
+      </div> -->
       <div
-        v-if="cutType === 3"
-        style="
-          background: #fff;
-          width: 100%;
-          height: 100%;
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 5;
-          opacity: 0.5;
-        "
+        v-if="cutType === 3 || cutType === 4"
+        class="preview-con answer-dim"
       ></div>
       <div
         v-if="cutType === 3"
         class="answer answer-multiple"
-        style="z-index: 9"
       >
         <button type="button" class="btn" @click="onClickQuestions(0)">
           {{ inApp.questionsText[0] }}
@@ -43,10 +32,31 @@
           {{ inApp.questionsText[2] }}
         </button>
       </div>
-      <div class="preview-img" @click="nextGame">
+      <!-- 인트로화면 -->
+      <div v-show="displayPreview" ref="displayIntro" class="preview-con preview-intro">
+        <div class="preview-intro--background">
+          <img src="https://mblogthumb-phinf.pstatic.net/MjAyMDAyMDNfOTcg/MDAxNTgwNjY4MzA1OTQ5.e9NJgX23nV_5ZM4Bn8LN-KQyJ2ZxsVuR5HZpJPb_TMMg.S8LQwAn8Q03YQVPvbVrCSdut5GqudOXLObvrWWzZSxcg.JPEG.westar4501/2%EC%9B%94_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_se.jpg?type=w800" alt="background" />
+        </div>
+        <div class="preview-intro--logo">
+          <img src="~/static/images/logo.svg" alt="logo" />
+        </div>
+        <div class="preview-intro--menu">
+          <button type="button" class="btn" @click="onclickDisplayShow('displayGame')">시작하기</button>
+          <button type="button" class="btn">불러오기</button>
+          <button type="button" class="btn" @click="onclickDisplayShow('displayProfile')">등장인물</button>
+          <button type="button" class="btn">갤러리</button>
+        </div>
+        <div class="preview-intro--copy">ⓒproject koo</div>
+      </div>
+      <!-- 게임화면 -->
+      <div v-show="displayPreview" ref="displayGame" class="preview-con preview-img" @click="nextGame">
         <img v-if="inApp.bg" :src="inApp.bg" alt="" class="background" />
-        <div class="character-1">
+        <div v-if="inApp.cr && !inApp.cr2" class="character-1">
           <img :src="inApp.cr" alt="" class="character right" />
+        </div>
+        <div v-if="inApp.cr2" class="character-2">
+          <img :src="inApp.cr" alt="" class="character right" />
+          <img :src="inApp.cr2" alt="" class="character right" />
         </div>
 
         <div v-if="cutType === 4" class="answer answer-subjective">
@@ -69,8 +79,29 @@
           </p>
           <p v-if="cutType === 2" class="text">{{ inApp.narration }}</p>
         </div>
-        <img src="~/static/images/mockup.png" alt="" class="mockup" />
       </div>
+      <!-- 등장인물화면 -->
+      <div v-show="displayPreview" ref="displayProfile" class="preview-con preview-profile">
+        <div class="preview-profile--top">
+          <button type="button" class="btn back" @click="onclickDisplayShow('displayIntro')">뒤로</button>
+          <div class="title">등장인물</div>
+        </div>
+        <ul class="preview-profile--list">
+          <li class="item" @click="onclickDisplayShow('displayProfileDetail')">
+            <img :src="inApp.cr" alt="" />
+            <span class="name">{{inApp.crName}}</span>
+          </li>
+        </ul>
+      </div>
+      <div v-show="displayPreview" ref="displayProfileDetail" class="preview-con preview-profile detail">
+        <button type="button" class="btn close" @click="onclickDisplayShow('displayProfile')">닫기</button>
+        <p class="name">{{inApp.crName}}</p>
+        <img :src="inApp.cr" alt="" class="character" />
+        <p class="profile">
+          {{inApp.text}}
+        </p>
+      </div>
+      <img src="~/static/images/mockup.png" alt="mockup" class="preview-mockup" />
     </div>
   </div>
 </template>
@@ -133,6 +164,7 @@ export default {
         questionsTimer: null,
         subjectiveQuestion: '',
       },
+      displayPreview: false,
     }
   },
   mounted() {
@@ -150,6 +182,8 @@ export default {
     })
 
     this.updateGame()
+
+    this.$refs.displayIntro.style = 'display:block'
   },
   methods: {
     nextGame(e) {
@@ -295,6 +329,32 @@ export default {
       }
       // }
     },
+    onclickDisplayShow(name){
+      this.displayPreview = false
+      console.log(this.displayPreview)
+      switch (name) {
+        case 'displayIntro':
+          this.$refs.displayGame.style = 'display:none'
+          this.$refs.displayProfile.style = 'display:none'
+          this.$refs.displayIntro.style = 'display:block'
+          break
+        case 'displayGame':
+          this.$refs.displayIntro.style = 'display:none'
+          this.$refs.displayGame.style = 'display:block'
+          break
+        case 'displayProfile':
+          this.$refs.displayIntro.style = 'display:none'
+          this.$refs.displayProfileDetail.style = 'display:none'
+          this.$refs.displayProfile.style = 'display:block'
+          break
+        case 'displayProfileDetail':
+          this.$refs.displayProfile.style = 'display:none'
+          this.$refs.displayProfileDetail.style = 'display:block'
+          break
+      }
+
+      console.log(this.displayPreview)
+    }
   },
 }
 </script>

@@ -79,6 +79,7 @@ export default {
         strokeColor: {},
         shadowColor: {},
       },
+    temp:true
     }
   },
   computed: {
@@ -106,6 +107,10 @@ export default {
     onChangeIconSetting({ target }) {
       this.MUTATIONS_IN_APP_ICON(target.value)
     },
+    test({target}) {
+      this.temp = false
+      target.nextElementSibling.style = 'display:block'
+    }
   },
 }
 </script>
