@@ -1,11 +1,11 @@
 <template>
   <div class="insert">
     <div class="setting bottom-none">
-      <div class="setting-color">
+      <div class="setting-con setting-color">
         <div class="setting-tit">메인 색상 설정</div>
         <Chrome v-model="colorPicker.mainColor"></Chrome>
       </div>
-      <div class="setting-window">
+      <div class="setting-con setting-window">
         <div class="setting-tit">창 설정</div>
         <div class="input-wrap">
           <label class="input-label">창 색상</label>
@@ -37,7 +37,7 @@
           <input type="number" class="input-number" value="0" />
         </div>
       </div>
-      <div class="setting-icon">
+      <div class="setting-con setting-icon">
         <div class="setting-tit">아이콘 설정</div>
         <select
           class="input-select"

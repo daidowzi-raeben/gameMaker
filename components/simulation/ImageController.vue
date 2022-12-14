@@ -1,5 +1,5 @@
 <template>
-  <div class="setting-scen">
+  <div class="setting-con setting-scen">
     <div class="setting-tit">
       화면 설정
       <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">

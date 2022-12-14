@@ -4,7 +4,7 @@
     <div class="setting">
       <button type="button" class="button btn-pink delete-btn">삭제</button>
       <ImageController />
-      <div class="setting-talk">
+      <div class="setting-con setting-talk">
         <div class="setting-tit">대화 설정</div>
         <div class="tab-list">
           <button

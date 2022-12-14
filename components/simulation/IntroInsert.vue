@@ -19,7 +19,7 @@
           </div>
         </div>
       </div> -->
-      <div class="setting-copy">
+      <div class="setting-con setting-copy">
         <div class="setting-tit">저작권 설정</div>
         <input
           type="text"
@@ -28,7 +28,7 @@
           :value="PREVIEW_INTRO.copyright"
         />
       </div>
-      <div class="setting-logo">
+      <div class="setting-con setting-logo">
         <div class="setting-tit">로고 등록</div>
         <div class="input-wrap">
           <select class="input-select" :value="PREVIEW_INTRO.position">

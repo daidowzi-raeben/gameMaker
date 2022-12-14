@@ -3,7 +3,7 @@
     <div class="setting">
       <button type="button" class="button btn-pink delete-btn">삭제</button>
       <ImageController />
-      <div class="setting-profile">
+      <div class="setting-con setting-profile">
         <div class="setting-tit">프로필 설정</div>
         <div class="input-wrap">
           <select ref="profilePosition" class="input-select">

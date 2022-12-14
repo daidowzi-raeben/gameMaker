@@ -2,7 +2,7 @@
   <div class="insert">
     <div class="setting">
       <ImageController />
-      <div class="setting-terms">
+      <div class="setting-con setting-terms">
         <div class="setting-tit">조건 설정</div>
         <div class="input-wrap">
           <select class="input-select">

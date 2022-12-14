@@ -1,86 +1,87 @@
 <template>
-  <div class="preview" :class="{ bottomnone: MAKER_GNB === 5 }">
+  <div class="preview-wrap" :class="{ bottomnone: MAKER_GNB === 5 }">
     <div v-if="MAKER_GNB === 1 && CUT_LIST.jsonData" class="preview-tit">
       {{ CUT_LIST.jsonData.length - CUT_CODE }} CUT
     </div>
-    <!-- 컬러피커 -->
-    <!-- <div v-if="MAKER_GNB === 5">
-      {{ UISetting }}
-    </div> -->
-    <div v-if="PREVIEW && MAKER_GNB !== 5" class="preview-img">
-      <img
-        v-if="PREVIEW.img.bg"
-        :src="PREVIEW.img.bg"
-        alt=""
-        class="background"
-      />
-      <div v-if="PREVIEW.img.cr && !PREVIEW.img.cr2" class="character-1">
-        <img
-          v-if="PREVIEW.img.cr"
-          ref="characterImage"
-          :src="PREVIEW.img.cr"
-          alt=""
-          class="character"
-          :class="PREVIEW.data.effect"
-        />
-      </div>
-      <div v-if="PREVIEW.img.cr2" class="character-2">
-        <img
-          v-if="PREVIEW.img.cr"
-          ref="characterImage"
-          :src="PREVIEW.img.cr"
-          alt=""
-          class="character"
-          :class="PREVIEW.data.effect"
-        />
-        <img
-          v-if="PREVIEW.img.cr2"
-          ref="characterImage"
-          :src="PREVIEW.img.cr2"
-          alt=""
-          class="character"
-          :class="PREVIEW.data.effect2"
-        />
-      </div>
-      <!-- <div class="answer answer-multiple">
-        <button type="button" class="btn">객관식1</button>
-        <button type="button" class="btn">객관식2</button>
-        <button type="button" class="btn">객관식3</button>
+    <div class="preview">
+      <!-- 컬러피커 -->
+      <!-- <div v-if="MAKER_GNB === 5">
+        {{ UISetting }}
       </div> -->
-      <!-- <div class="answer answer-subjective">
-        <div class="text">주관식 질문</div>
-        <input type="text" class="input-text" placeholder="주관식 답변을 입력해주세요" />
-      </div> -->
-      <div class="dialogue">
-        <span v-if="PREVIEW.data.cr" class="name">{{ PREVIEW.data.cr }}</span>
-        <!-- prettier-ignore-start -->
-        <p v-if="cutType === 1" ref="myLoadText" class="text">
-          {{ PREVIEW.data.text }}
-        </p>
-        <p v-if="cutType === 2" ref="myLoadText" class="text">
-          {{ PREVIEW.data.narration }}
-        </p>
-        <!-- prettier-ignore-end -->
+      <div v-if="PREVIEW && MAKER_GNB !== 5" class="preview-con preview-img">
+        <img
+          v-if="PREVIEW.img.bg"
+          :src="PREVIEW.img.bg"
+          alt=""
+          class="background"
+        />
+        <div v-if="PREVIEW.img.cr && !PREVIEW.img.cr2" class="character-1">
+          <img
+            v-if="PREVIEW.img.cr"
+            ref="characterImage"
+            :src="PREVIEW.img.cr"
+            alt=""
+            class="character"
+            :class="PREVIEW.data.effect"
+          />
+        </div>
+        <div v-if="PREVIEW.img.cr2" class="character-2">
+          <img
+            v-if="PREVIEW.img.cr"
+            ref="characterImage"
+            :src="PREVIEW.img.cr"
+            alt=""
+            class="character"
+            :class="PREVIEW.data.effect"
+          />
+          <img
+            v-if="PREVIEW.img.cr2"
+            ref="characterImage"
+            :src="PREVIEW.img.cr2"
+            alt=""
+            class="character"
+            :class="PREVIEW.data.effect2"
+          />
+        </div>
+        <!-- <div class="answer answer-multiple">
+          <button type="button" class="btn">객관식1</button>
+          <button type="button" class="btn">객관식2</button>
+          <button type="button" class="btn">객관식3</button>
+        </div> -->
+        <!-- <div class="answer answer-subjective">
+          <div class="text">주관식 질문</div>
+          <input type="text" class="input-text" placeholder="주관식 답변을 입력해주세요" />
+        </div> -->
+        <div class="dialogue">
+          <span v-if="PREVIEW.data.cr" class="name">{{ PREVIEW.data.cr }}</span>
+          <!-- prettier-ignore-start -->
+          <p v-if="cutType === 1" ref="myLoadText" class="text">
+            {{ PREVIEW.data.text }}
+          </p>
+          <p v-if="cutType === 2" ref="myLoadText" class="text">
+            {{ PREVIEW.data.narration }}
+          </p>
+          <!-- prettier-ignore-end -->
+        </div>
       </div>
-      <img src="~/static/images/mockup.png" alt="" class="mockup" />
-    </div>
-    <div v-if="PREVIEW && MAKER_GNB === 5" class="preview-img">
-      <div
-        class="dialogue"
-        :style="
-          UISetting.windowColor ? `background:${UISetting.windowColor.hex}` : ''
-        "
-      >
-        <span
-          class="name"
+      <div v-if="PREVIEW && MAKER_GNB === 5" class="preview-con preview-img">
+        <div
+          class="dialogue"
           :style="
-            UISetting.mainColor ? `background:${UISetting.mainColor.hex}` : ''
+            UISetting.windowColor ? `background:${UISetting.windowColor.hex}` : ''
           "
-          >메인 색상</span
         >
-        <p class="text">창 색상</p>
+          <span
+            class="name"
+            :style="
+              UISetting.mainColor ? `background:${UISetting.mainColor.hex}` : ''
+            "
+            >메인 색상</span
+          >
+          <p class="text">창 색상</p>
+        </div>
       </div>
-      <img src="~/static/images/mockup.png" alt="" class="mockup" />
+      <img src="~/static/images/mockup.png" alt="" class="preview-mockup" />
     </div>
     <div class="preview-save">
       마지막 저장
