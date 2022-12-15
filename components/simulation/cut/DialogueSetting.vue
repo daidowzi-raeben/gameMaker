@@ -1,9 +1,8 @@
 <template>
   <div class="setting">
-    <button type="button" class="button btn-pink delete-btn">삭제</button>
     <!-- <ImageController /> -->
     <div class="setting-con setting-talk">
-      <div class="setting-tit">대화 설정</div>
+      <div class="setting-info">상황에 따라 대사의 상대와 종류를 변경할 수 있습니다.</div>
       <div class="tab-list">
         <button
           type="button"
@@ -11,7 +10,7 @@
           :class="{ active: cutType === 1 }"
           @click="onClickChangeCutType(1)"
         >
-          대사
+          일반대사
         </button>
         <button
           type="button"
@@ -63,31 +62,31 @@
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
-      <swiper
-        v-if="
-          SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData && cutType === 1
-        "
-        :options="swiperOptionSelectCharacter"
-        class="tab-list type2"
-      >
-        <swiper-slide
-          v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
-          :key="'SCENE_DATA_CHARACTER' + i"
-          class="tab-list--item"
-        >
-          <label class="radio" @change="onCiickDataCr(v.name)">
-            <input
-              type="radio"
-              name="character"
-              :checked="v.name === PREVIEW.data.cr"
-              :value="SCENE_DATA_CHARACTER.idx[i]"
-            />
-            <span>{{ v.name }}</span>
+      <div v-if="cutType === 3 || cutType ===4" class="timer">
+        <button type="button" class="btn set">타이머 설정</button>
+        <div class="btn-wrap">
+          <label class="btn">
+            <input type="checkbox" :checked="timerSettingSecond === 5" @change="onChangeTimerSetting(5)" />
+            <span class="check-text">5초</span>
           </label>
-        </swiper-slide>
-        <div slot="button-prev" class="swiper-button-prev"></div>
-        <div slot="button-next" class="swiper-button-next"></div>
-      </swiper>
+          <label class="btn">
+            <input type="checkbox" :checked="timerSettingSecond === 10" @change="onChangeTimerSetting(10)" />
+            <span class="check-text">10초</span>
+          </label>
+          <label class="btn">
+            <input type="checkbox" :checked="timerSettingSecond === 15" @change="onChangeTimerSetting(15)" />
+            <span class="check-text">15초</span>
+          </label>
+          <label class="btn">
+            <input type="checkbox" :checked="timerSettingSecond === 20" @change="onChangeTimerSetting(20)" />
+            <span class="check-text">20초</span>
+          </label>
+          <label class="btn">
+            <input type="checkbox" :checked="timerSettingSecond === 30" @change="onChangeTimerSetting(30)" />
+            <span class="check-text">30초</span>
+          </label>
+        </div>
+      </div>
       <label v-if="cutType === 4" class="label">질문</label>
       <div v-if="cutType === 4" class="insert-wrap">
         <textarea
@@ -111,37 +110,6 @@
         <!-- 객관식 버튼 1 -->
         <!-- temp1.nextElementSibling.classList.toggle('aaa') -->
         <div class="insert-set">
-          <button
-            v-show="
-              (!timerSettingShow && cutType === 3) ||
-              (!timerSettingShow && cutType === 4)
-            "
-            type="button"
-            class="btn timer"
-            @click="onClickTimerSetting"
-          >
-            타이머 설정
-          </button>
-          <div v-show="timerSettingShow" class="set timer-set">
-            <select
-              class="input-select"
-              :value="PREVIEW.data.questionsTimer"
-              @change="onChageQuestionsTimer"
-            >
-              <option :value="null">사용안함</option>
-              <option :value="5">5초</option>
-              <option :value="10">10초</option>
-              <option :value="15">15초</option>
-              <option :value="20">20초</option>
-            </select>
-            <button
-              type="button"
-              class="save"
-              @click="onClickTimerSetting('save')"
-            >
-              닫기
-            </button>
-          </div>
           <button
             v-show="!pointSettingShow"
             type="button"
@@ -427,7 +395,7 @@
         ></textarea>
         <textarea
           v-if="cutType === 1"
-          placeholder="인물의 대화를 입력해 주세요"
+          placeholder="대사를 입력해 주세요. 대사는 세줄까지만 입력가능합니다."
           rows="3"
           :value="PREVIEW.data.text"
           @input="onInputDataText"
@@ -441,38 +409,7 @@
         ></textarea>
         <div class="insert-set">
           <button
-            v-show="
-              (!timerSettingShow && cutType === 3) ||
-              (!timerSettingShow && cutType === 4)
-            "
-            type="button"
-            class="btn timer"
-            @click="onClickTimerSetting"
-          >
-            타이머 설정
-          </button>
-          <div v-show="timerSettingShow" class="set timer-set">
-            <select
-              class="input-select"
-              :value="PREVIEW.data.questionsTimer"
-              @change="onChageQuestionsTimer"
-            >
-              <option :value="null">사용안함</option>
-              <option :value="5">5초</option>
-              <option :value="10">10초</option>
-              <option :value="15">15초</option>
-              <option :value="20">20초</option>
-            </select>
-            <button
-              type="button"
-              class="save"
-              @click="onClickTimerSetting('save')"
-            >
-              닫기
-            </button>
-          </div>
-          <button
-            v-show="!pointSettingShow && cutType === 1"
+            v-show="(!pointSettingShow && cutType !== 1) || detailSettingButton"
             type="button"
             class="btn point"
             @click="onClickPointSetting('set')"
@@ -480,13 +417,6 @@
             포인트 조건
           </button>
           <div v-show="pointSettingShow && cutType === 1" class="set point-set">
-            <!-- <select
-                class="input-select"
-                @change="dataPointUpdate('endType', $event)"
-              >
-                <option :value="null">컷</option>
-                <option value="ending">엔딩</option>
-              </select> -->
             <select
               v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
               class="input-select"
@@ -525,13 +455,13 @@
               닫기
             </button>
           </div>
-          <button
-            v-show="!pointSettingShow && cutType !== 1"
+          <!-- <button
+            v-show="(!pointSettingShow && cutType !== 1)"
             type="button"
             class="btn point"
             @click="onClickPointSetting('set')"
           >
-            포인트 설정
+            포인트 조건
           </button>
           <div v-show="pointSettingShow && cutType !== 1" class="set point-set">
             <select
@@ -571,9 +501,9 @@
             >
               닫기
             </button>
-          </div>
+          </div> -->
           <button
-            v-show="!scenarioSettingShow"
+            v-show="!scenarioSettingShow && detailSettingButton"
             type="button"
             class="btn scenario"
             @click="onClickScenarioSetting('set')"
@@ -627,17 +557,17 @@
     <div class="text-center">
       <button
         v-if="CUT_CODE === 0"
-        class="button lg btn-primary"
+        class="button md btn-primary"
         @click="onSubmitCutData"
       >
         대사 추가
       </button>
-      <button class="button lg btn-grey" @click="onSubmitCutDataUpdate">
+      <button class="button md btn-l-grey" @click="onSubmitCutDataUpdate">
         수정
       </button>
       <button
         v-if="CUT_LIST.idx && CUT_LIST.idx.length > 0 && CUT_CODE > 0"
-        class="button lg btn-blue"
+        class="button md btn-blue"
         @click="onSubmitCutDataAdd"
       >
         다음컷에 추가
@@ -699,9 +629,9 @@ export default {
       cutListShow: false,
       pointSettingShow: false,
       scenarioSettingShow: false,
-      timerSettingShow: false,
       // cutType: 1,
       rightContentShow: false,
+      detailSettingButton: true,
       cutData: [],
       rowIdx: [],
       questions: 1,
@@ -726,6 +656,7 @@ export default {
           nextBtn: null,
         },
       ],
+      timerSettingSecond: 0,
     }
   },
   computed: {
@@ -827,20 +758,20 @@ export default {
     onClickPointSetting(type) {
       this.pointSettingShow = true
       this.scenarioSettingShow = false
-      this.timerSettingShow = false
-      if (type === 'save') this.pointSettingShow = false
+      this.detailSettingButton = false
+      if (type === 'save'){
+        this.pointSettingShow = false
+        this.detailSettingButton = true
+      }
     },
     onClickScenarioSetting(type) {
       this.pointSettingShow = false
       this.scenarioSettingShow = true
-      this.timerSettingShow = false
-      if (type === 'save') this.scenarioSettingShow = false
-    },
-    onClickTimerSetting(type) {
-      this.pointSettingShow = false
-      this.scenarioSettingShow = false
-      this.timerSettingShow = true
-      if (type === 'save') this.timerSettingShow = false
+      this.detailSettingButton = false
+      if (type === 'save'){
+        this.scenarioSettingShow = false
+      this.detailSettingButton = true
+      }
     },
     onClickChangeCutType(type) {
       // this.MUTATIONS_ASSETS_INIT_TEXT()
@@ -1063,6 +994,9 @@ export default {
       }
       this.params.previewData = JSON.stringify(this.paramsPreview)
     },
+    onChangeTimerSetting(second){
+      this.timerSettingSecond = second
+    }
   },
 }
 </script>

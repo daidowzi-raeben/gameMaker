@@ -66,7 +66,7 @@
                   @click="onClickChapterTo(chapter.timestamp, index, index2)"
                 >
                   <input type="radio" name="chapterTitle" />
-                  <span style="cursor: pointer">{{ chapter.tit }}</span>
+                  <span>{{ chapter.tit }}</span>
                 </label>
                 <button
                   type="button"

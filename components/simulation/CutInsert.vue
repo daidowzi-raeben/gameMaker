@@ -1,12 +1,14 @@
 <template>
   <div class="insert">
     <div v-if="!SCENE_CODE" class="insert-dim">챕터를 선택하세요</div>
-    <div class="setting">
-      <div class="v-move"><BackgroundAssets /></div>
-      <div class="v-move"><CharacterFirst /></div>
-      <div class="v-move"><CharacterSecond /></div>
-      <div class="v-move"><SoundAssets /></div>
-      <div class="v-move"><TextArea /></div>
+    <div v-bar>
+      <div class="setting">
+        <BackgroundAssets v-if="settingType === 1" />
+        <CharacterFirst v-else-if="settingType === 2" />
+        <CharacterSecond v-else-if="settingType === 3" />
+        <SoundAssets v-else-if="settingType === 4" />
+        <DialogueSetting v-else-if="settingType === 5" />
+      </div>
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
       <button
@@ -33,7 +35,7 @@ import { mapState } from 'vuex'
 import BackgroundAssets from '~/components/simulation/cut/BackgroundAssets.vue'
 import CharacterFirst from '~/components/simulation/cut/CharacterFirst.vue'
 import CharacterSecond from '~/components/simulation/cut/CharacterSecond.vue'
-import TextArea from '~/components/simulation/cut/TextArea.vue'
+import DialogueSetting from '~/components/simulation/cut/DialogueSetting.vue'
 import SoundAssets from '~/components/simulation/cut/SoundAssets.vue'
 import { kooLogin } from '~/config/util'
 export default {
@@ -41,7 +43,7 @@ export default {
     BackgroundAssets,
     CharacterFirst,
     CharacterSecond,
-    TextArea,
+    DialogueSetting,
     SoundAssets,
   },
   data() {
@@ -50,6 +52,7 @@ export default {
       paramsPreview: {},
       paramsList: {},
       rightContentShow: false,
+      settingType: 5,
     }
   },
   computed: {

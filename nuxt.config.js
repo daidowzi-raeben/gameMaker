@@ -45,6 +45,7 @@ export default {
     { src: '~plugins/LottieWebVue.js', ssr: false, mode: 'client' },
     { src: '~plugins/ApexCart.js', ssr: false, mode: 'client' },
     { src: '~plugins/ColorPicker.js', ssr: false, mode: 'client' },
+    { src: '~plugins/VueScrollbar.js', ssr: false, mode: 'client' },
     { src: '~plugins/Vuedraggable.js', ssr: false, mode: 'client' },
     { src: '~plugins/VShowSlide.js', ssr: false, mode: 'client' },
   ],
