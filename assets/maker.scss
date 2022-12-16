@@ -262,6 +262,23 @@
         color: #fff;
       }
     }
+    .asset{
+      &-list{
+        &--item{
+          display:flex;
+          justify-content: space-between;
+          padding: 8px 20px 8px 40px;
+          .tit{
+            font-size:1.2rem;
+            color:#fff;
+          }
+          .num{
+            font-size:1.2rem;
+            color:$colPrimary;
+          }
+        }
+      }
+    }
   }
 
   &-right {
@@ -811,6 +828,10 @@
               padding:5px 25px 10px;
               border-bottom:1px solid #eee;
               height:50px;
+              display:none;
+              &.active{
+                display:block;
+              }
               .input-number{
                 margin:0 5px;
                 position:relative;
@@ -844,16 +865,6 @@
               margin: 0 7px;
               outline: none;
 
-              &.timer {
-                border-color: $colPrimaryHover;
-                color: $colPrimaryHover;
-              }
-
-              &.sound {
-                border-color: $colPrimaryHover;
-                color: $colPrimaryHover;
-              }
-
               &.point {
                 border-color: $colPinkHover;
                 color: $colPinkHover;
@@ -875,23 +886,18 @@
               }
 
               .save {
-                width: 100px;
+                width: 116px;
                 height: 34px;
-                color: #fff;
                 border-radius: 5px;
-                font-weight: 300;
                 outline: none;
-                background-color: $colPink;
+                border: 1px solid $colPink;
+                color:$colPink
               }
 
               &.scenario-set {
                 .save {
-                  background-color: $colBlue;
-                }
-              }
-              &.timer-set {
-                .save {
-                  background-color: $colPrimary;
+                  border: 1px solid $colBlue;
+                  color: $colBlue;
                 }
               }
             }
