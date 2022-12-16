@@ -59,6 +59,7 @@ const createStore = () => {
                     pointCr: '',
                     pointType: '',
                     endType: '',
+                    sr: '',
                     sound: '',
                     text: '',
                     narration: '',
@@ -366,6 +367,10 @@ const createStore = () => {
             // 배경
             MUTATIONS_ASSETS_BG(state, payload) {
                 state.PREVIEW.img.bg = payload;
+            },
+            // 사운드
+            MUTATIONS_ASSETS_SOUND(state, payload) {
+                state.PREVIEW.data.sr = payload;
             },
             // 인물
             MUTATIONS_ASSETS_CR(state, payload) {
