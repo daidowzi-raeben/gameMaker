@@ -16,6 +16,7 @@ const createStore = () => {
             LOGIN: {},
             PROJECT_MANAGER: [],
             IS_POST: false,
+            IS_UI: false,
             cutType: 1,
             PROJECT_ID: '',
             POST: {
@@ -163,6 +164,10 @@ const createStore = () => {
             // 로딩
             MUTATIONS_LOADING(state, payload) {
                 state.LOADING = false
+            },
+            MUTATIONS_IS_UI(state, payload) {
+                state.IS_UI = true
+                state.UISetting = payload.jsonData
             },
             MUTATIONS_LOADING_INIT(state, payload) {
                 state.LOADING = true
@@ -586,6 +591,11 @@ const createStore = () => {
                         if (params.type === 'assetsDetail') {
                             console.log('MUTATIONS_STORE_DETAIL', res.data)
                             commit('MUTATIONS_STORE_DETAIL', res.data)
+                            return;
+                        }
+                        if (params.type === 'uiList') {
+                            console.log('MUTATIONS_IS_UI', res.data)
+                            commit('MUTATIONS_IS_UI', res.data)
                             return;
                         }
                         // if (params.type === 'characterList') {

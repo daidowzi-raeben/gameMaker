@@ -5,12 +5,19 @@
       <div>
         <div>LIST</div>
       </div>
+      <button v-b-modal.AssetsLocalUpload>모달열기</button>
     </div>
+    <AssetsLocalUpload />
   </div>
 </template>
 
 <script>
-export default {}
+import AssetsLocalUpload from '~/components/modal/AssetsLocalUpload'
+export default {
+  components: {
+    AssetsLocalUpload,
+  },
+}
 </script>
 
 <style></style>

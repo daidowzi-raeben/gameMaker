@@ -193,17 +193,17 @@ export default {
         style += `background:rgba(${this.UISetting.windowColor.rgba.r},${this.UISetting.windowColor.rgba.g},${this.UISetting.windowColor.rgba.b},${this.UISetting.windowColor.rgba.a});`
       }
       if (this.UISetting.strokeColor && this.UISetting.strokeColor.rgba) {
-        style += `border 1px solid rgba(${this.UISetting.strokeColor.rgba.r},${this.UISetting.strokeColor.rgba.g},${this.UISetting.strokeColor.rgba.b},${this.UISetting.strokeColor.rgba.a});`
+        style += `border : ${this.UISetting.border}px solid rgba(${this.UISetting.strokeColor.rgba.r},${this.UISetting.strokeColor.rgba.g},${this.UISetting.strokeColor.rgba.b},${this.UISetting.strokeColor.rgba.a});`
       }
       if (this.UISetting.round) {
         style += `border-radius:${this.UISetting.round}px;`
       }
       if (this.UISetting.shadowColor && this.UISetting.shadowColor.rgba) {
-        style += `box-shadow: 0 8px rgb(${this.UISetting.shadowColor.rgba.r},${
-          this.UISetting.shadowColor.rgba.g
-        },${this.UISetting.shadowColor.rgba.b},${
-          Number(this.UISetting.shadowColor.rgba.a) * 100
-        }%);`
+        style += `box-shadow: ${this.UISetting.x}px ${this.UISetting.y}px rgb(${
+          this.UISetting.shadowColor.rgba.r
+        },${this.UISetting.shadowColor.rgba.g},${
+          this.UISetting.shadowColor.rgba.b
+        },${Number(this.UISetting.shadowColor.rgba.a) * 100}%);`
       }
       console.log(style)
       return style
