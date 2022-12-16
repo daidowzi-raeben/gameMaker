@@ -66,19 +66,12 @@
           </div>
         </div>
         <div v-if="PREVIEW && MAKER_GNB === 5" class="preview-con preview-img">
-          <div
-            class="dialogue"
-            :style="
-              UISetting.windowColor
-                ? `background:${UISetting.windowColor.hex}`
-                : ''
-            "
-          >
+          <div class="dialogue" :style="windowColor()">
             <span
               class="name"
               :style="
-                UISetting.mainColor
-                  ? `background:${UISetting.mainColor.hex}`
+                UISetting.mainColor && UISetting.mainColor.rgba
+                  ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})`
                   : ''
               "
               >메인 색상</span
@@ -193,6 +186,27 @@ export default {
       // }
       // bn[e - 1].classList.add('active')
       this.MUTATIONS_CONTENT_CODE(e)
+    },
+    windowColor() {
+      let style = ''
+      if (this.UISetting.windowColor && this.UISetting.windowColor.rgba) {
+        style += `background:rgba(${this.UISetting.windowColor.rgba.r},${this.UISetting.windowColor.rgba.g},${this.UISetting.windowColor.rgba.b},${this.UISetting.windowColor.rgba.a});`
+      }
+      if (this.UISetting.strokeColor && this.UISetting.strokeColor.rgba) {
+        style += `border 1px solid rgba(${this.UISetting.strokeColor.rgba.r},${this.UISetting.strokeColor.rgba.g},${this.UISetting.strokeColor.rgba.b},${this.UISetting.strokeColor.rgba.a});`
+      }
+      if (this.UISetting.round) {
+        style += `border-radius:${this.UISetting.round}px;`
+      }
+      if (this.UISetting.shadowColor && this.UISetting.shadowColor.rgba) {
+        style += `box-shadow: 0 8px rgb(${this.UISetting.shadowColor.rgba.r},${
+          this.UISetting.shadowColor.rgba.g
+        },${this.UISetting.shadowColor.rgba.b},${
+          Number(this.UISetting.shadowColor.rgba.a) * 100
+        }%);`
+      }
+      console.log(style)
+      return style
     },
   },
 }

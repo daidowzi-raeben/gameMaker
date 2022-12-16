@@ -14,7 +14,12 @@
           </div>
           <div class="input-wrap">
             <label class="input-label">모서리 둥글게</label>
-            <input type="number" class="input-number" value="0" />
+            <input
+              v-model="colorPicker.round"
+              type="number"
+              class="input-number"
+              value="0"
+            />
             <span class="text">px</span>
           </div>
           <div class="input-wrap">
@@ -80,8 +85,9 @@ export default {
         windowColor: {},
         strokeColor: {},
         shadowColor: {},
+        round: 0,
       },
-    temp:true
+      temp: true,
     }
   },
   computed: {
@@ -109,10 +115,10 @@ export default {
     onChangeIconSetting({ target }) {
       this.MUTATIONS_IN_APP_ICON(target.value)
     },
-    test({target}) {
+    test({ target }) {
       this.temp = false
       target.nextElementSibling.style = 'display:block'
-    }
+    },
   },
 }
 </script>
