@@ -1,20 +1,71 @@
 <template>
   <div class="setting-con setting-image">
-    <div class="setting-tit">
-      배경화면
+    <div>
+      <div class="setting-tit">배경화면</div>
+      <div class="setting-info">설명</div>
+      <ul v-if="ASSETS" class="thumbnail-list">
+        <li class="thumbnail-list--item" @click="onClickBgImage('')">
+          <div class="none"></div>
+        </li>
+        <li
+          v-for="(v, i) in ASSETS.bg"
+          :key="i"
+          class="thumbnail-list--item"
+          :class="{ active: PREVIEW.img.bg === v.path }"
+          @click="onClickBgImage(v.path)"
+        >
+          <img v-if="v.path" :src="v.path" alt="" />
+        </li>
+      </ul>
     </div>
-    <div class="setting-info">설명</div>
-    <ul class="thumbnail-list">
-      <li v-for="(v, i) in 20" :key="i" class="thumbnail-list--item" :class="{active : i === 0}">
-        <div v-if="i === 0" class="none"></div>
-        <img v-if="i !== 0" src="https://www.newsworks.co.kr/news/photo/202002/433057_327801_345.jpg" alt="" />
-      </li>
-    </ul>
   </div>
 </template>
 
 <script>
-export default {}
+import { mapActions, mapState, mapMutations } from 'vuex'
+import { kooLogin } from '~/config/util'
+export default {
+  data() {
+    return {
+      params: {},
+    }
+  },
+  computed: {
+    ...mapState([
+      'LOGIN',
+      'LOADING',
+      'IS_POST',
+      'ASSETS',
+      'PROJECT_ID',
+      'PREVIEW',
+      'MAKER_GNB',
+    ]),
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.params.type = 'assetsProject'
+      this.params.user_idx = kooLogin('user_idx')
+      this.params.secretKey = this.PROJECT_ID
+      this.params.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.params)
+    })
+  },
+  methods: {
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
+    ...mapMutations([
+      'MUTATIONS_ASSETS_BG',
+      'MUTATIONS_ASSETS_CR',
+      'MUTATIONS_ASSETS_CR2',
+      'MUTATIONS_ASSETS_EFFECT',
+      'MUTATIONS_CONTENT_CODE',
+    ]),
+    onClickBgImage(e) {
+      console.log(e)
+      this.MUTATIONS_ASSETS_BG(e)
+      this.MUTATIONS_CONTENT_CODE(2)
+    },
+  },
+}
 </script>
 
 <style></style>

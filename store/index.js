@@ -130,6 +130,8 @@ const createStore = () => {
             CHAPTER_CODE: null,
             // 컷코드
             CUT_CODE: null,
+            // 컨텐츠
+            CONTENT_CODE: 4,
             MAKER_GNB: 6,
             ASSETS: [],
             SCENE_INDEX: null,
@@ -176,6 +178,9 @@ const createStore = () => {
             },
             MUTATIONS_IN_APP_ICON(state, payload) {
                 state.IN_APP_ICON = payload
+            },
+            MUTATIONS_CONTENT_CODE(state, payload) {
+                state.CONTENT_CODE = payload
             },
 
 
@@ -410,6 +415,11 @@ const createStore = () => {
             MUTATIONS_CUT_LIST_GET_DATA(state, payload) {
                 console.log('MUTATIONS_CUT_LIST_GET_DATA', payload)
                 state.CUT_LIST = payload;
+                if (state.CUT_LIST.jsonData) {
+                    state.CONTENT_CODE = 5
+                } else {
+                    state.CONTENT_CODE = 1
+                }
                 if (state.CUT_LIST && state.CUT_LIST.jsonData && state.CUT_LIST.jsonData.length > 0) {
                     state.PREVIEW.img.bg = state.CUT_LIST.jsonData[0].bg
                     state.cutType = state.CUT_LIST.jsonData[0].cutType

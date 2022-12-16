@@ -2,7 +2,9 @@
   <div class="setting">
     <!-- <ImageController /> -->
     <div class="setting-con setting-talk">
-      <div class="setting-info">상황에 따라 대사의 상대와 종류를 변경할 수 있습니다.</div>
+      <div class="setting-info">
+        상황에 따라 대사의 상대와 종류를 변경할 수 있습니다.
+      </div>
       <div class="tab-list">
         <button
           type="button"
@@ -62,27 +64,47 @@
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
-      <div v-if="cutType === 3 || cutType ===4" class="timer">
+      <div v-if="cutType === 3 || cutType === 4" class="timer">
         <button type="button" class="btn set">타이머 설정</button>
         <div class="btn-wrap">
           <label class="btn">
-            <input type="checkbox" :checked="timerSettingSecond === 5" @change="onChangeTimerSetting(5)" />
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 5"
+              @change="onChangeTimerSetting(5)"
+            />
             <span class="check-text">5초</span>
           </label>
           <label class="btn">
-            <input type="checkbox" :checked="timerSettingSecond === 10" @change="onChangeTimerSetting(10)" />
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 10"
+              @change="onChangeTimerSetting(10)"
+            />
             <span class="check-text">10초</span>
           </label>
           <label class="btn">
-            <input type="checkbox" :checked="timerSettingSecond === 15" @change="onChangeTimerSetting(15)" />
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 15"
+              @change="onChangeTimerSetting(15)"
+            />
             <span class="check-text">15초</span>
           </label>
           <label class="btn">
-            <input type="checkbox" :checked="timerSettingSecond === 20" @change="onChangeTimerSetting(20)" />
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 20"
+              @change="onChangeTimerSetting(20)"
+            />
             <span class="check-text">20초</span>
           </label>
           <label class="btn">
-            <input type="checkbox" :checked="timerSettingSecond === 30" @change="onChangeTimerSetting(30)" />
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 30"
+              @change="onChangeTimerSetting(30)"
+            />
             <span class="check-text">30초</span>
           </label>
         </div>
@@ -701,6 +723,11 @@ export default {
       this.paramsList.apiKey = process.env.API_KEY
       console.log(this.SCENE_CODE)
     }
+    this.$nextTick(() => {
+      if (this.CUT_LIST && this.CUT_LIST.jsonData) {
+        this.MUTATIONS_CONTENT_CODE(5)
+      }
+    })
   },
   methods: {
     ...mapMutations([
@@ -725,6 +752,7 @@ export default {
       'MUTATIONS_ASSETS_DATA_SUBJECTIVE',
       'MUTATIONS_LOADING_INIT',
       'MUTATIONS_PREVIEW_END_TYPE',
+      'MUTATIONS_CONTENT_CODE',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
@@ -759,7 +787,7 @@ export default {
       this.pointSettingShow = true
       this.scenarioSettingShow = false
       this.detailSettingButton = false
-      if (type === 'save'){
+      if (type === 'save') {
         this.pointSettingShow = false
         this.detailSettingButton = true
       }
@@ -768,9 +796,9 @@ export default {
       this.pointSettingShow = false
       this.scenarioSettingShow = true
       this.detailSettingButton = false
-      if (type === 'save'){
+      if (type === 'save') {
         this.scenarioSettingShow = false
-      this.detailSettingButton = true
+        this.detailSettingButton = true
       }
     },
     onClickChangeCutType(type) {
@@ -994,9 +1022,9 @@ export default {
       }
       this.params.previewData = JSON.stringify(this.paramsPreview)
     },
-    onChangeTimerSetting(second){
+    onChangeTimerSetting(second) {
       this.timerSettingSecond = second
-    }
+    },
   },
 }
 </script>

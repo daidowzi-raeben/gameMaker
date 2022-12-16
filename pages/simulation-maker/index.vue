@@ -7,54 +7,7 @@
       <UIList v-if="MAKER_GNB === 5" />
       <AssetsList v-if="MAKER_GNB === 6" />
       <div class="maker-right">
-        <div v-if="MAKER_GNB === 1" v-bar class="cut-list--wrap">
-          <ul class="cut-list">
-            <li v-for="(v, i) in 10" :key="i" class="cut-list--item" :class="{ active: i === 2 }">
-              <div class="thumbnail">
-                <div class="thumbnail-wrap">
-                  <img src="https://www.newsworks.co.kr/news/photo/202002/433057_327801_345.jpg" alt="" />
-                </div>
-                <div v-if="i / 2 === 0" class="thumbnail-wrap">
-                  <img src="https://www.newsworks.co.kr/news/photo/202002/433057_327801_345.jpg" alt="" />
-                </div>
-              </div>
-              <div class="info">
-                <div class="top">
-                  <span v-if="i !== 1" class="name">하린</span>
-                  <span v-if="i === 1" class="name">에드워드릭</span>
-                  <span v-if="i === 1" class="category type2">나레이션</span>
-                  <span v-else-if="i === 2" class="category type3">주관식</span>
-                  <span v-else-if="i === 3" class="category type4">객관식</span>
-                  <span v-else class="category type1">대사</span>
-                </div>
-                <div v-if="i === 1" class="text question">
-                  이건 한줄짜리 객관식 질문이구 한줄 넘어가면 일립시스처리가 될 거예요
-                </div>
-                <div v-if="i === 1" class="text question">
-                  이건 한줄짜리 객관식 질문이구 한줄 넘어가면 일립시스처리가 될 거예요
-                </div>
-                <div v-if="i === 1" class="text question">
-                  이건 한줄짜리 객관식 질문이구 한줄 넘어가면 일립시스처리가 될 거예요
-                </div>
-                <div v-if="i === 2" class="text question line2">
-                  질문은 두줄까지만 나올거예요 두줄이 넘어간다면 어떻게 하냐고요?... 처리!
-                  여긴 최대 2줄까지 출력할거예요 정답은 밑에줄에 들어갑니다
-                </div>
-                <div v-if="i === 2" class="text answer">
-                  정답입니다
-                </div>
-                <div v-if="i !== 1 && i !== 2" class="text normal">
-                  안녕? 대사를 치면 여기에도 미리보기 노출이 될거에요 width는 작업해
-                  보고 잡을 예정이고 여긴 줄바꿈이 없어요 시나리오 1장 글시는 5차
-                  제한으로 ... 처리! 여긴 최대 4줄까지 출력 안녕? 대사를 치면 여기에도
-                  미리보기 노출이 될거에요 width는 작업해 보고 잡을 예정이고 여긴
-                  줄바꿈이 없어요 시나리오 1장 글시는 5차 제한으로 ... 처리! 여긴 최대
-                  4줄까지 출력
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <CutList v-if="MAKER_GNB === 1" />
         <PreviewApp />
         <CutInsert
           v-if="!MAKER_GNB || MAKER_GNB === 1"
@@ -90,6 +43,7 @@
 import { mapActions, mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 import ScenarioList from '~/components/simulation/ScenarioList.vue'
+import CutList from '~/components/simulation/CutList.vue'
 import AssetsList from '~/components/simulation/AssetsList.vue'
 import IntroList from '~/components/simulation/IntroList.vue'
 import UIList from '~/components/simulation/UIList.vue'
@@ -106,6 +60,7 @@ export default {
   name: 'SimulationMakerMain',
   components: {
     ScenarioList,
+    CutList,
     IntroList,
     AssetsList,
     UIList,

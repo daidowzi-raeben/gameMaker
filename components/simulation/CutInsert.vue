@@ -3,11 +3,11 @@
     <div v-if="!SCENE_CODE" class="insert-dim">챕터를 선택하세요</div>
     <div v-bar>
       <div class="setting">
-        <BackgroundAssets v-if="settingType === 1" />
-        <CharacterFirst v-else-if="settingType === 2" />
-        <CharacterSecond v-else-if="settingType === 3" />
-        <SoundAssets v-else-if="settingType === 4" />
-        <DialogueSetting v-else-if="settingType === 5" />
+        <BackgroundAssets v-if="CONTENT_CODE === 1" />
+        <CharacterFirst v-else-if="CONTENT_CODE === 2" />
+        <CharacterSecond v-else-if="CONTENT_CODE === 3" />
+        <SoundAssets v-else-if="CONTENT_CODE === 4" />
+        <DialogueSetting v-else-if="CONTENT_CODE === 5" />
       </div>
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
@@ -31,7 +31,7 @@
 
 <script>
 // SCENE_DATA
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import BackgroundAssets from '~/components/simulation/cut/BackgroundAssets.vue'
 import CharacterFirst from '~/components/simulation/cut/CharacterFirst.vue'
 import CharacterSecond from '~/components/simulation/cut/CharacterSecond.vue'
@@ -70,6 +70,7 @@ export default {
       'CUT_LIST',
       'cutType',
       'CUT_CODE',
+      'CONTENT_CODE',
     ]),
   },
   // watch: {
@@ -82,13 +83,7 @@ export default {
   // },
   mounted() {
     // cutList
-    // this.$nextTick(() => {
-    //   this.SCENE_DATA.forEach((e, i) => {
-    //     e.chapters.forEach((v, k) => {
-    //       console.log('=================', v)
-    //     })
-    //   })
-    // })
+
     if (this.SCENE_CODE) {
       this.paramsList.gc_timestamp = this.SCENE_CODE
       this.paramsList.type = 'cutList'
@@ -99,6 +94,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['MUTATIONS_CONTENT_CODE']),
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
     },
