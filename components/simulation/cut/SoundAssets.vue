@@ -4,19 +4,27 @@
       <div class="setting-tit">사운드</div>
       <div class="setting-info">설명</div>
       <ul v-if="ASSETS" class="thumbnail-list">
-        <li class="thumbnail-list--item" @click="onClickSrData('')">
+        <li
+          class="thumbnail-list--item"
+          :class="{ active: PREVIEW.data.sr === '' }"
+          @click="onClickSrData('')"
+        >
           <div class="none"></div>
         </li>
         <!-- v-for="(v, i) in ASSETS.sr" -->
         <li
-          v-for="(v, i) in 10"
+          v-for="(v, i) in ASSETS.sr"
           :key="i"
           class="thumbnail-list--item"
           :class="{ active: PREVIEW.data.sr === v.path }"
         >
           <div class="sound">
-            <span class="name" @click="onClickSrData(v.path)">웃음소리</span>
-            <button type="button" class="btn">미리듣기</button>
+            <span class="name" @click="onClickSrData(v.path)">{{
+              v.gas_name
+            }}</span>
+            <button type="button" class="btn" @click="onClickSrPlay(v.path)">
+              미리듣기
+            </button>
             <!-- <img v-if="v.path" :src="v.path" alt="" /> -->
           </div>
         </li>
@@ -63,8 +71,15 @@ export default {
     ]),
     onClickSrData(e) {
       console.log(e)
-      //   this.MUTATIONS_ASSETS_SOUND(e)
+      this.MUTATIONS_ASSETS_SOUND(e)
       //   this.MUTATIONS_CONTENT_CODE(4)
+    },
+    onClickSrPlay(e) {
+      console.log(e)
+      if (e) {
+        const audio = new Audio(e)
+        audio.play()
+      }
     },
   },
 }
