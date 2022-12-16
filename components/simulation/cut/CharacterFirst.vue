@@ -1,7 +1,7 @@
 <template>
   <div class="setting-con setting-image">
     <div>
-      <div class="setting-tit">배경화면</div>
+      <div class="setting-tit">등장인물</div>
       <div class="setting-info">설명</div>
       <ul v-if="ASSETS" class="thumbnail-list">
         <li class="thumbnail-list--item" @click="onClickCrImage('')">

@@ -67,7 +67,7 @@
                 >
                   <input type="radio" name="chapterTitle" />
                   <span>{{ chapter.tit }}</span>
-                  <div style="display: none">이채은바보</div>
+                  <span class="arrow"></span>
                 </label>
                 <button
                   type="button"

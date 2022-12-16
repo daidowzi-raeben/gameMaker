@@ -109,6 +109,67 @@
           </label>
         </div>
       </div>
+      <div v-if="cutType === 3 ">
+        <label class="label">답변1</label>
+        <div class="insert-answer">
+          <input type="text" class="input-text" />
+          <button type="button" class="btn link" :class="{active : isActiveEventLink}"></button>
+          <div v-show="isActiveEventLink" class="event-con">
+            <div class="tab-list sm">
+              <button type="button" class="tab-list--btn" :class="{active : isActivePointTab}" @click="onClickTabActive('pointTab')">포인트 설정</button>
+              <button type="button" class="tab-list--btn" :class="{active : isActiveScenarioTab}" @click="onClickTabActive('scenarioTab')">시나리오 연결</button>
+            </div>
+            <div v-show="isActivePointTab" class="set point-set">
+              <select
+                v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
+                class="input-select"
+                :value="PREVIEW.data.questionsPoint[0].pointCr"
+                @change="dataPointUpdate('pointCr0', $event)"
+              >
+                <option :value="null">선택안함</option>
+                <option
+                  v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
+                  :key="'SCENE_DATA_CHARACTER' + i"
+                  :value="v.name"
+                >
+                  {{ v.name }}
+                </option>
+              </select>
+              <select v-else disabled class="input-select">
+                <option>캐릭터 없음</option>
+              </select>
+              <input type="number" class="input-number" min="1" max="100" />
+              <span class="text">포인트</span>
+              <select
+                class="input-select"
+                :value="PREVIEW.data.questionsPoint[1].pointType"
+                @change="dataPointUpdate('pointType1', $event)"
+              >
+                <option :value="null">선택</option>
+                <option value="P">증가</option>
+                <option value="M">감소</option>
+              </select>
+            </div>
+            <div v-show="isActiveScenarioTab" class="set scenario-set">
+              <select
+                v-if="CUT_LIST && CUT_LIST.jsonData"
+                class="input-select"
+                :value="PREVIEW.data.questionsPoint[0].nextBtn"
+                @change="dataPointUpdate('nextBtn0', $event)"
+              >
+                <option :value="null">선택안함</option>
+                <option
+                  v-for="(v, i) in CUT_LIST.jsonData"
+                  :key="CUT_LIST.idx[i]"
+                  :value="CUT_LIST.idx[i]"
+                >
+                  {{ CUT_LIST.jsonData.length - i }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
       <label v-if="cutType === 4" class="label">질문</label>
       <div v-if="cutType === 4" class="insert-wrap">
         <textarea
@@ -679,6 +740,9 @@ export default {
         },
       ],
       timerSettingSecond: 0,
+      isActiveEventLink:true,
+      isActivePointTab:true,
+      isActiveScenarioTab:false,
     }
   },
   computed: {
@@ -1025,6 +1089,16 @@ export default {
     onChangeTimerSetting(second) {
       this.timerSettingSecond = second
     },
+    onClickTabActive(name){
+      if(name === 'pointTab'){
+        this.isActivePointTab = true
+        this.isActiveScenarioTab = false
+      }
+      else if(name === 'scenarioTab'){
+        this.isActivePointTab = false
+        this.isActiveScenarioTab = true
+      }
+    }
   },
 }
 </script>

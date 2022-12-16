@@ -36,19 +36,19 @@
           </div>
           <div
             v-if="v.cutType === 3 && v.questionsText[0]"
-            class="text question"
+            class="text answer"
           >
             {{ v.questionsText[0] }}
           </div>
           <div
             v-if="v.cutType === 3 && v.questionsText[1]"
-            class="text question"
+            class="text answer"
           >
             {{ v.questionsText[1] }}
           </div>
           <div
             v-if="v.cutType === 3 && v.questionsText[2]"
-            class="text question"
+            class="text answer"
           >
             {{ v.questionsText[2] }}
           </div>
