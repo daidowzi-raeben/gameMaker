@@ -67,6 +67,7 @@
                 >
                   <input type="radio" name="chapterTitle" />
                   <span>{{ chapter.tit }}</span>
+                  <div style="display: none">이채은바보</div>
                 </label>
                 <button
                   type="button"
@@ -323,6 +324,10 @@ input[name='chapterTitle'] {
   &:checked {
     + span {
       color: #efdc2c;
+      + div {
+        display: block !important;
+        color: #fff;
+      }
     }
   }
 }
