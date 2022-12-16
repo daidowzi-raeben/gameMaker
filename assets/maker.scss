@@ -723,6 +723,11 @@
                   width:0;
                   height:0;
                   position:absolute;
+                  &:checked ~ .check-text{
+                    background-color:$colPrimary;
+                    color:#fff;
+                    font-weight: 300;
+                  }
                 }
                 .check-text{
                   display: inline-flex;
