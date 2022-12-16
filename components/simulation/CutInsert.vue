@@ -1,8 +1,9 @@
 <template>
   <div class="insert">
     <div v-if="!SCENE_CODE" class="insert-dim">챕터를 선택하세요</div>
-    <div v-bar>
-      <div class="setting">
+
+    <div v-bar class="setting">
+      <div>
         <BackgroundAssets v-if="CONTENT_CODE === 1" />
         <CharacterFirst v-else-if="CONTENT_CODE === 2" />
         <CharacterSecond v-else-if="CONTENT_CODE === 3" />

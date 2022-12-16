@@ -151,7 +151,7 @@ export default {
       handler(value) {
         if (value) {
           setTimeout(() => {
-            this.$refs.characterImage.classList.remove('vibration')
+            this.$refs.characterImage.classList.remove('ani-vibration')
           }, 400)
         }
       },
@@ -213,23 +213,23 @@ export default {
 </script>
 
 <style lang="scss">
-.vibration {
+.ani-vibration {
   animation: vibration 0.1s infinite;
   -webkit-animation: vibration 0.1s infinite;
 }
-.fade {
+.ani-fade {
   animation: fade 0.5s forwards;
   -webkit-animation: fade 0.5s forwards;
 }
-.left {
+.ani-left {
   animation: left 0.5s forwards;
   -webkit-animation: left 0.5s forwards;
 }
-.right {
+.ani-right {
   animation: right 0.5s forwards;
   -webkit-animation: right 0.5s forwards;
 }
-.bottom {
+.ani-bottom {
   animation: bottom 0.5s forwards;
   -webkit-animation: bottom 0.5s forwards;
 }

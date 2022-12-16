@@ -52,7 +52,7 @@
       ></button>
       <div>가이드</div>
     </div>
-    <div class="cut" :class="{ fold: cutListShow === false }">
+    <div v-show="false" class="cut" :class="{ fold: cutListShow === false }">
       <div class="cut-tit">
         <span class="scenario">인물 리스트</span>
         <button

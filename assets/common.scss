@@ -842,3 +842,13 @@
     font-size:1.6rem;
   }
 }
+
+.modal{
+  &-header{
+    border:none !important;
+    padding:1rem 1rem 0 !important;
+  }
+  &-body{
+    padding-bottom:2rem !important;
+  }
+}

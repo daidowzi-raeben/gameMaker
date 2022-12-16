@@ -5,40 +5,40 @@
       <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
         <input
           type="checkbox"
-          :checked="PREVIEW.data.effect === 'vibration' ? true : false"
-          @change="onClickEffect('vibration')"
+          :checked="PREVIEW.data.effect === 'ani-vibration' ? true : false"
+          @change="onClickEffect('ani-vibration')"
         />
         <span class="check-text">흔들림</span>
       </label>
       <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
         <input
           type="checkbox"
-          :checked="PREVIEW.data.effect === 'fade' ? true : false"
-          @change="onClickEffect('fade')"
+          :checked="PREVIEW.data.effect === 'ani-fade' ? true : false"
+          @change="onClickEffect('ani-fade')"
         />
         <span class="check-text">서서히</span>
       </label>
       <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
         <input
           type="checkbox"
-          :checked="PREVIEW.data.effect === 'right' ? true : false"
-          @change="onClickEffect('right')"
+          :checked="PREVIEW.data.effect === 'ani-right' ? true : false"
+          @change="onClickEffect('ani-right')"
         />
         <span class="check-text">오른쪽에서</span>
       </label>
       <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
         <input
           type="checkbox"
-          :checked="PREVIEW.data.effect === 'left' ? true : false"
-          @change="onClickEffect('left')"
+          :checked="PREVIEW.data.effect === 'ani-left' ? true : false"
+          @change="onClickEffect('ani-left')"
         />
         <span class="check-text">왼쪽에서</span>
       </label>
       <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
         <input
           type="checkbox"
-          :checked="PREVIEW.data.effect === 'bottom' ? true : false"
-          @change="onClickEffect('bottom')"
+          :checked="PREVIEW.data.effect === 'ani-bottom' ? true : false"
+          @change="onClickEffect('ani-bottom')"
         />
         <span class="check-text">아래에서</span>
       </label>
@@ -148,13 +148,27 @@ export default {
       swiperOptionSelectImage: {
         allowTouchMove: false,
         loop: false,
-        slidesPerView: 13,
-        slidesPerGroup: 13,
-        spaceBetween: 7,
+        slidesPerView: 8,
+        slidesPerGroup: 8,
+        spaceBetween: 10,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
+        breakpoints: {
+          1600: {
+            slidesPerView: 10,
+            slidesPerGroup: 10,
+          },
+          1500: {
+            slidesPerView: 8,
+            slidesPerGroup: 8,
+          },
+          1400: {
+            slidesPerView: 6,
+            slidesPerGroup: 6,
+          },
+        }
       },
     }
   },
@@ -200,20 +214,20 @@ export default {
         ? this.MUTATIONS_ASSETS_EFFECT('')
         : (this.PREVIEW.data.effect = type)
       switch (type) {
-        case 'vibration':
-          this.MUTATIONS_ASSETS_EFFECT('vibration')
+        case 'ani-vibration':
+          this.MUTATIONS_ASSETS_EFFECT('ani-vibration')
           break
-        case 'fade':
-          this.MUTATIONS_ASSETS_EFFECT('fade')
+        case 'ani-fade':
+          this.MUTATIONS_ASSETS_EFFECT('ani-fade')
           break
-        case 'left':
-          this.MUTATIONS_ASSETS_EFFECT('left')
+        case 'ani-left':
+          this.MUTATIONS_ASSETS_EFFECT('ani-left')
           break
-        case 'right':
-          this.MUTATIONS_ASSETS_EFFECT('right')
+        case 'ani-right':
+          this.MUTATIONS_ASSETS_EFFECT('ani-right')
           break
-        case 'bottom':
-          this.MUTATIONS_ASSETS_EFFECT('bottom')
+        case 'ani-bottom':
+          this.MUTATIONS_ASSETS_EFFECT('ani-bottom')
           break
       }
     },

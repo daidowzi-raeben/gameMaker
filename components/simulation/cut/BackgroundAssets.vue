@@ -10,7 +10,7 @@
         <li
           v-for="(v, i) in ASSETS.bg"
           :key="i"
-          class="thumbnail-list--item"
+          class="thumbnail-list--item background"
           :class="{ active: PREVIEW.img.bg === v.path }"
           @click="onClickBgImage(v.path)"
         >

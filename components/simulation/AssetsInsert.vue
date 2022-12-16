@@ -5,7 +5,7 @@
       <div>
         <div>LIST</div>
       </div>
-      <button v-b-modal.AssetsLocalUpload>모달열기</button>
+      <button v-b-modal.AssetsLocalUpload type="button">모달열기</button>
     </div>
     <AssetsLocalUpload />
   </div>

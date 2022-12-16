@@ -147,27 +147,27 @@ export default {
       // return e
     },
     myLoadEffect(e) {
-      if (e === 'vibration') {
+      if (e === 'ani-vibration') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
-      } else if (e === 'fade') {
+      } else if (e === 'ani-fade') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
-      } else if (e === 'left') {
+      } else if (e === 'ani-left') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
-      } else if (e === 'right') {
+      } else if (e === 'ani-right') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
-      } else if (e === 'bottom') {
+      } else if (e === 'ani-bottom') {
         this.$refs.characterImage.classList.add(e)
         setTimeout(() => {
           this.$refs.characterImage.classList.remove(e)

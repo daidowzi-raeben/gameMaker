@@ -295,6 +295,7 @@
     }
 
     .insert{
+      flex:2;
       display:flex;
       width: calc(100% - 730px);
       height:calc(100vh - 100px);
@@ -316,13 +317,17 @@
         font-size:2rem;
         color:#fff;
       }
-
+      .left{
+        min-width: 460px;
+        border-radius: 10px;
+        overflow:hidden;
+      }
       & >.right {
-        width: 380px;
+        flex:1;
+        width:380px;
         height: 100%;
         background: #fff;
         border-radius: 10px;
-        margin-left:10px;
         @media (max-width: 1600px) {
           position: fixed;
           right: -330px;
@@ -372,7 +377,7 @@
         }
       }
       &-wrap{
-        margin-left:10px;
+        flex:1;
         min-width: 500px;
         height: calc(100vh - 100px);
         background: #fff;
@@ -434,6 +439,9 @@
       }
       &-mockup{
         width:100%;
+        @media (max-width: 800px) {
+          display:block;
+        }
       }
       &-con{
         width:calc(100% - 30px);
@@ -455,17 +463,28 @@
     }
 
     .setting {
+      flex:2;
       height:100%;
       background: #fff;
       border-radius: 10px;
-      margin: 0 10px;
       position:relative;
+      min-width: 500px;
+      margin:0 10px;
+      @media (max-width: 1600px) {
+        margin: 0 50px 0 10px;
+      }
+      &:last-child{
+        margin-right:0;
+      }
       // &.bottom-none{
       //   height: calc(100vh - 100px);
       // }
       .setting-con {
-        width: 460px;
+        width: 100%;
         padding: 15px 15px 10px 15px;
+        & ~ .text-center{
+          width: calc(100% - 20px);
+        }
       }
 
       &-tit {
@@ -517,7 +536,7 @@
           .list {
             display: flex;
             margin: 0;
-            width: 800px;
+            width: 100%;
             padding: 0 30px;
             &-item {
               .label{
@@ -617,7 +636,7 @@
 
       &-talk {
         .tab-list {
-          width: 510px;
+          width: calc(100% + 50px);
           position: relative;
           left: -25px;
           padding: 0 25px 10px;
@@ -769,7 +788,7 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             position: relative;
-            width:calc(100% + 30px);
+            width:calc(100% - 20px);
             .input-text{
               display:block;
               margin-bottom:10px;
@@ -791,7 +810,7 @@
           &-answer{
             margin-top:25px;
             position:relative;
-            width:calc(100% + 30px);
+            width:calc(100% - 20px);
             input[type=text]{
               height:45px;
               width:calc(100% - 45px);
@@ -891,7 +910,8 @@
                 border-radius: 5px;
                 outline: none;
                 border: 1px solid $colPink;
-                color:$colPink
+                color:$colPink;
+                margin:0 7px;
               }
 
               &.scenario-set {
@@ -1070,6 +1090,15 @@
                 }
               }
             }
+            &.background{
+              position:relative;
+              img{
+                position:absolute;
+                left:0;
+                top:50%;
+                transform:translateY(-50%);
+              }
+            }
             .none{
               width:100%;
               height:100%;
@@ -1078,12 +1107,17 @@
             .sound{
               width:100%;
               height:100%;
-              display:flex;
-              align-items: center;
-              justify-content: center;
               font-size:1.4rem;
               color:$textCol2;
               position:relative;
+              .name{
+                width:100%;
+                height:100%;
+                display:block;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+              }
               .btn{
                 position:absolute;
                 left:0;
@@ -1116,6 +1150,9 @@
           height:calc(100vh - 80px);
           background-color:#1D1D1D;
           margin:-10px 0 -10px -10px;
+          & + .preview-wrap{
+            margin-left:10px;
+          }
         }
         &--item {
           display:flex;
@@ -1701,6 +1738,9 @@
     .text {
       font-size: 1.4rem;
       margin-left: 5px;
+      &.col-green{
+        color:#108C7D;
+      }
     }
   }
 
@@ -1773,5 +1813,98 @@
 
   &-number {
     width: 70px;
+  }
+}
+
+.upload{
+  &-wrap{
+    display:flex;
+    padding:0 10px;
+  }
+  &-spot{
+    flex:3;
+    padding-right:20px;
+    .input-file{
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      background:url(~/static/images/icon/cloud.svg)no-repeat 50% 45%;
+      padding-top:60px;
+      border:2px solid $colPrimary;
+      border-radius: 10px;
+      position:relative;
+      overflow:hidden;
+      .image-wrap{
+        width:100%;
+        height:100%;
+        background:#fff;
+        position:absolute;
+        left:0;
+        top:0;
+        img{
+          width:100%;
+        }
+      }
+      span{
+        font-size:1.4rem;
+        color:$textCol2;
+        font-weight: 300;
+      }
+    }
+  }
+  &-set{
+    flex:5;
+    .tit{
+      font-size:1.8rem;
+      margin-bottom:25px;
+      font-weight: 500;
+    }
+    .sub-tit{
+      font-size:1.6rem;
+      margin-bottom:5px;
+    }
+    .scroll{
+      height:100px;
+      padding-right:15px;
+      margin-bottom:25px;
+      p{
+        font-size:1.2rem;
+        color:$textCol2;
+        word-break: keep-all;
+        padding-right:20px;
+        font-weight: 300;
+      }
+    }
+    .label{
+      display:block;
+      font-size:1.4rem;
+      color:$textCol2;
+      font-weight: 300;
+    }
+    .input-text{
+      width:100%;
+      margin-bottom:40px;
+    }
+    .input-check{
+      .text{
+        font-size:1.3rem;
+        margin-top:-1px;
+      }
+    }
+    .register-btn{
+      background:#ccc;
+      color:#fff;
+      font-size:1.3rem;
+      font-weight: 300;
+      border-radius: 10px;
+      width:100%;
+      margin-top:30px;
+      height:46px;
+      &.active{
+        background:$colPrimary;
+      }
+    }
   }
 }

@@ -24,7 +24,7 @@
     <div class="right" :class="{ fold: rightContentShow === true }">
       <button type="button" class="btn-fold" :class="{ active: rightContentShow === true }" @click="onClickRightContentShow()"></button>
     </div>
-    <div class="cut" :class="{ fold: cutListShow === false }">
+    <div v-show="false" class="cut" :class="{ fold: cutListShow === false }">
       <div class="cut-tit">
         <span class="scenario">엔딩 리스트</span>
         <button

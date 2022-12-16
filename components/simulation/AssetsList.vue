@@ -28,15 +28,4 @@ export default {}
 </script>
 
 <style lang="scss">
-input[name='chapterTitle'] {
-  display: none;
-  + span {
-    color: #fff;
-  }
-  &:checked {
-    + span {
-      color: #efdc2c;
-    }
-  }
-}
 </style>
