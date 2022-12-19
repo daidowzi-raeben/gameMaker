@@ -507,6 +507,9 @@
             color:#fff;
           }
         }
+        &.sub{
+          font-size:1.6rem;
+        }
       }
 
       &-info{
@@ -636,7 +639,7 @@
 
       &-talk {
         .tab-list {
-          width: calc(100% + 50px);
+          width: calc(100% + 30px);
           position: relative;
           left: -25px;
           padding: 0 25px 10px;
@@ -1073,9 +1076,6 @@
             overflow:hidden;
             margin:0 15px 15px 0;
             cursor: pointer;
-            &:nth-child(3n){
-              margin-right:0;
-            }
             img{
               width:100%;
             }
@@ -1682,16 +1682,20 @@
       appearance: none;
 
       &:checked+.radio {
+        border-color:$colPrimary;
+        & ~ .text{
+          color:$colPrimaryHover;
+        }
         &:after {
           content: "";
           display: block;
           width: 9px;
           height: 9px;
-          background: #aaa;
+          background: $colPrimary;
           border-radius: 50%;
           position: absolute;
-          left: 3px;
-          top: 3px;
+          left: 2px;
+          top: 2px;
         }
       }
 
@@ -1722,6 +1726,7 @@
         display: inline-block;
         border-radius: 50%;
         position: relative;
+        border:1px solid #666;
       }
 
       &.checkbox {

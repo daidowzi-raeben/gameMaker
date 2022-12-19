@@ -65,6 +65,51 @@
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
+      <div v-if="cutType === 3 || cutType === 4" class="timer">
+        <button type="button" class="btn set">타이머 설정</button>
+        <div class="btn-wrap">
+          <label class="btn">
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 5"
+              @change="onChangeTimerSetting(5)"
+            />
+            <span class="check-text">5초</span>
+          </label>
+          <label class="btn">
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 10"
+              @change="onChangeTimerSetting(10)"
+            />
+            <span class="check-text">10초</span>
+          </label>
+          <label class="btn">
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 15"
+              @change="onChangeTimerSetting(15)"
+            />
+            <span class="check-text">15초</span>
+          </label>
+          <label class="btn">
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 20"
+              @change="onChangeTimerSetting(20)"
+            />
+            <span class="check-text">20초</span>
+          </label>
+          <label class="btn">
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === 30"
+              @change="onChangeTimerSetting(30)"
+            />
+            <span class="check-text">30초</span>
+          </label>
+        </div>
+      </div>
       <div
         v-if="cutType === 1 || cutType === 2 || cutType === 4"
         class="insert-wrap"
@@ -139,51 +184,6 @@
               닫기
             </button>
           </div>
-        </div>
-      </div>
-      <div v-if="cutType === 3 || cutType === 4" class="timer">
-        <button type="button" class="btn set">타이머 설정</button>
-        <div class="btn-wrap">
-          <label class="btn">
-            <input
-              type="checkbox"
-              :checked="timerSettingSecond === 5"
-              @change="onChangeTimerSetting(5)"
-            />
-            <span class="check-text">5초</span>
-          </label>
-          <label class="btn">
-            <input
-              type="checkbox"
-              :checked="timerSettingSecond === 10"
-              @change="onChangeTimerSetting(10)"
-            />
-            <span class="check-text">10초</span>
-          </label>
-          <label class="btn">
-            <input
-              type="checkbox"
-              :checked="timerSettingSecond === 15"
-              @change="onChangeTimerSetting(15)"
-            />
-            <span class="check-text">15초</span>
-          </label>
-          <label class="btn">
-            <input
-              type="checkbox"
-              :checked="timerSettingSecond === 20"
-              @change="onChangeTimerSetting(20)"
-            />
-            <span class="check-text">20초</span>
-          </label>
-          <label class="btn">
-            <input
-              type="checkbox"
-              :checked="timerSettingSecond === 30"
-              @change="onChangeTimerSetting(30)"
-            />
-            <span class="check-text">30초</span>
-          </label>
         </div>
       </div>
       <div v-if="cutType === 3">
