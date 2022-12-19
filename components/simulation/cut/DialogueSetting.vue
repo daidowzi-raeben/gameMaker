@@ -2,6 +2,7 @@
   <div class="setting">
     <!-- <ImageController /> -->
     <div class="setting-con setting-talk">
+      <div class="setting-tit">대사 입력</div>
       <div class="setting-info">
         상황에 따라 대사의 상대와 종류를 변경할 수 있습니다.
       </div>
@@ -64,10 +65,40 @@
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
-      <div v-if="cutType === 1 || cutType === 2" class="insert-wrap">
-        <textarea rows="3" placeholder="대사를 입력해 주세요. 대사는 세 줄까지만 입력 가능합니다."></textarea>
+      <div
+        v-if="cutType === 1 || cutType === 2 || cutType === 4"
+        class="insert-wrap"
+      >
+        <textarea
+          v-if="cutType === 1"
+          rows="3"
+          placeholder="대사를 입력해 주세요. 세 줄까지만 입력 가능합니다."
+          :value="PREVIEW.data.text"
+          @input="onInputDataText"
+        ></textarea>
+        <textarea
+          v-if="cutType === 2"
+          rows="3"
+          placeholder="나레이션을 입력해 주세요. 세 줄까지만 입력 가능합니다."
+          :value="PREVIEW.data.narration"
+          @input="onInputDataNarration"
+        ></textarea>
+        <textarea
+          v-if="cutType === 4"
+          rows="3"
+          placeholder="질문을 입력해 주세요. 세 줄까지만 입력 가능합니다."
+          :value="PREVIEW.data.subjectiveQuestion"
+          @input="onInputDataSubjectiveQuestion"
+        ></textarea>
         <div class="insert-set">
-          <button v-show="!pointSettingShow && !scenarioSettingShow" type="button" class="btn point" @click="onClickPointSetting">포인트 조건</button>
+          <button
+            v-show="!pointSettingShow && !scenarioSettingShow"
+            type="button"
+            class="btn point"
+            @click="onClickPointSetting"
+          >
+            포인트 조건
+          </button>
           <div v-show="pointSettingShow" class="set point-set">
             <select class="input-select">
               <option></option>
@@ -79,15 +110,34 @@
               <option></option>
               <option></option>
             </select>
-            <button type="button" class="save" @click="onClickPointSetting('save')">닫기</button>
+            <button
+              type="button"
+              class="save"
+              @click="onClickPointSetting('save')"
+            >
+              닫기
+            </button>
           </div>
-          <button v-show="!pointSettingShow && !scenarioSettingShow" type="button" class="btn scenario" @click="onClickScenarioSetting">시나리오 연결</button>
+          <button
+            v-show="!pointSettingShow && !scenarioSettingShow"
+            type="button"
+            class="btn scenario"
+            @click="onClickScenarioSetting"
+          >
+            시나리오 연결
+          </button>
           <div v-show="scenarioSettingShow" class="set scenario-set">
             <select class="input-select">
               <option></option>
               <option></option>
             </select>
-            <button type="button" class="save" @click="onClickScenarioSetting('save')">닫기</button>
+            <button
+              type="button"
+              class="save"
+              @click="onClickScenarioSetting('save')"
+            >
+              닫기
+            </button>
           </div>
         </div>
       </div>
@@ -140,7 +190,12 @@
         <div v-for="itemQuestion in 3" :key="`question${itemQuestion}`">
           <label class="label">답변{{ itemQuestion }}</label>
           <div class="insert-answer">
-            <input type="text" class="input-text" />
+            <input
+              type="text"
+              class="input-text"
+              :value="PREVIEW.data.questions.text[itemQuestion - 1]"
+              @input="onInputDataQuestions(itemQuestion, $event)"
+            />
             <button
               type="button"
               class="btn link"
@@ -682,83 +737,88 @@
       <div v-if="cutType === 4">
         <label class="label">질문</label>
         <label class="label">답변</label>
-          <div class="insert-answer">
-            <input type="text" class="input-text" />
-            <button
-              type="button"
-              class="btn link"
-              :class="{ active: isActiveEventLink }"
-              @click="onClickIsActiveEventLink"
-            ></button>
-            <div v-show="isActiveEventLink" class="event-con">
-              <div class="tab-list sm">
-                <button
-                  id="isActivePointTab4"
-                  type="button"
-                  class="tab-list--btn active"
-                  @click="onClickTabActive(4, $event)"
+        <div class="insert-answer">
+          <input
+            type="text"
+            class="input-text"
+            :value="PREVIEW.data.answer"
+            @input="onInputDatAnswer"
+          />
+          <button
+            type="button"
+            class="btn link"
+            :class="{ active: isActiveEventLink }"
+            @click="onClickIsActiveEventLink"
+          ></button>
+          <div v-show="isActiveEventLink" class="event-con">
+            <div class="tab-list sm">
+              <button
+                id="isActivePointTab4"
+                type="button"
+                class="tab-list--btn active"
+                @click="onClickTabActive(4, $event)"
+              >
+                포인트 설정
+              </button>
+              <button
+                id="isActiveScenarioTab4"
+                type="button"
+                class="tab-list--btn"
+                @click="onClickTabActive(4, $event)"
+              >
+                시나리오 연결
+              </button>
+            </div>
+            <div id="pointTab4" class="set point-set active">
+              <select
+                v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
+                class="input-select"
+                :value="PREVIEW.data.questionsPoint[0].pointCr"
+                @change="dataPointUpdate('pointCr0', $event)"
+              >
+                <option :value="null">선택안함</option>
+                <option
+                  v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
+                  :key="'SCENE_DATA_CHARACTER' + i"
+                  :value="v.name"
                 >
-                  포인트 설정
-                </button>
-                <button
-                  id="isActiveScenarioTab4"
-                  type="button"
-                  class="tab-list--btn"
-                  @click="onClickTabActive(4, $event)"
+                  {{ v.name }}
+                </option>
+              </select>
+              <select v-else disabled class="input-select">
+                <option>캐릭터 없음</option>
+              </select>
+              <input type="number" class="input-number" min="1" max="100" />
+              <span class="text">포인트</span>
+              <select
+                class="input-select"
+                :value="PREVIEW.data.questionsPoint[1].pointType"
+                @change="dataPointUpdate('pointType1', $event)"
+              >
+                <option :value="null">선택</option>
+                <option value="P">증가</option>
+                <option value="M">감소</option>
+              </select>
+            </div>
+            <div id="scenarioTab4" class="set scenario-set">
+              <select
+                v-if="CUT_LIST && CUT_LIST.jsonData"
+                class="input-select"
+                :value="PREVIEW.data.questionsPoint[0].nextBtn"
+                @change="dataPointUpdate('nextBtn0', $event)"
+              >
+                <option :value="null">선택안함</option>
+                <option
+                  v-for="(v, i) in CUT_LIST.jsonData"
+                  :key="CUT_LIST.idx[i]"
+                  :value="CUT_LIST.idx[i]"
                 >
-                  시나리오 연결
-                </button>
-              </div>
-              <div id="pointTab4" class="set point-set active">
-                <select
-                  v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
-                  class="input-select"
-                  :value="PREVIEW.data.questionsPoint[0].pointCr"
-                  @change="dataPointUpdate('pointCr0', $event)"
-                >
-                  <option :value="null">선택안함</option>
-                  <option
-                    v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
-                    :key="'SCENE_DATA_CHARACTER' + i"
-                    :value="v.name"
-                  >
-                    {{ v.name }}
-                  </option>
-                </select>
-                <select v-else disabled class="input-select">
-                  <option>캐릭터 없음</option>
-                </select>
-                <input type="number" class="input-number" min="1" max="100" />
-                <span class="text">포인트</span>
-                <select
-                  class="input-select"
-                  :value="PREVIEW.data.questionsPoint[1].pointType"
-                  @change="dataPointUpdate('pointType1', $event)"
-                >
-                  <option :value="null">선택</option>
-                  <option value="P">증가</option>
-                  <option value="M">감소</option>
-                </select>
-              </div>
-              <div id="scenarioTab4" class="set scenario-set">
-                <select
-                  v-if="CUT_LIST && CUT_LIST.jsonData"
-                  class="input-select"
-                  :value="PREVIEW.data.questionsPoint[0].nextBtn"
-                  @change="dataPointUpdate('nextBtn0', $event)"
-                >
-                  <option :value="null">선택안함</option>
-                  <option
-                    v-for="(v, i) in CUT_LIST.jsonData"
-                    :key="CUT_LIST.idx[i]"
-                    :value="CUT_LIST.idx[i]"
-                  >
-                    {{ CUT_LIST.jsonData.length - i }}
-                  </option>
-                </select>
-              </div>
+                  {{ CUT_LIST.jsonData.length - i }}
+                </option>
+              </select>
             </div>
           </div>
+        </div>
       </div>
     </div>
     <div class="text-center">

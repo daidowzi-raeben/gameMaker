@@ -49,6 +49,7 @@ const createStore = () => {
             PREVIEW: {
                 s_code: '',
                 c_code: '',
+                type: '',
                 img: {
                     bg: '',
                     cr: '',
@@ -109,10 +110,8 @@ const createStore = () => {
             PREVIEW_ENDING: [
                 {
                     name: '',
-                    upPoint: '',
-                    upUnit: '',
-                    downPoint: '',
-                    downUnit: '',
+                    upPoint: 0,
+                    downPoint: 0,
                     gotoBtn: [],
                     cut: []
                 }
@@ -156,6 +155,9 @@ const createStore = () => {
                         : (state.LOGIN = '')
                 }
             },
+            // GETTER_IS_ENDING(state) {
+            //     state.PREVIEW.type = 'e'
+            // },
             // GETTER_LOGIN_CHECK(state, payload) {
             //     console.log('GETTER_LOGIN_CHECK', payload)
             // },

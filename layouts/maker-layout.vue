@@ -33,13 +33,13 @@
       <button v-b-modal.ScenarioInsert type="button">모달</button> -->
     </header>
     <Nuxt />
-    <ScenarioInsert @scenarioInsert="scenarioInsert" />
-    <JsonDatapreview />
+    <!-- <ScenarioInsert @scenarioInsert="scenarioInsert" /> -->
+    <!-- <JsonDatapreview /> -->
     <div class="popup-toast">
       <!-- <b-alert :show="alertSave" dismissible variant="warning">
         저장되었습니다.
       </b-alert> -->
-      <b-alert show="10000" dismissible variant="warning">
+      <b-alert :show="alertSave" dismissible variant="warning">
         저장되었습니다.
       </b-alert>
     </div>
@@ -49,14 +49,14 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import ScenarioInsert from '~/components/simulation/ScenarioInsert'
-import JsonDatapreview from '~/components/modal/JsonDatapreview'
+// import ScenarioInsert from '~/components/simulation/ScenarioInsert'
+// import JsonDatapreview from '~/components/modal/JsonDatapreview'
 import LoadingContent from '~/components/modules/LoadingContent'
 import { kooLogin } from '~/config/util'
 export default {
   components: {
-    ScenarioInsert,
-    JsonDatapreview,
+    // ScenarioInsert,
+    // JsonDatapreview,
     LoadingContent,
   },
   data() {
@@ -118,9 +118,9 @@ export default {
       event.preventDefault()
       event.returnValue = ''
     },
-    scenarioInsert(e) {
-      console.log(e)
-    },
+    // scenarioInsert(e) {
+    //   console.log(e)
+    // },
     onClickGnbTo(e) {
       this.MUTATIONS_ASSETS_INIT()
       this.MUTATIONS_MAKER_GNB(e)

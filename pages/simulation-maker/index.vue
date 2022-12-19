@@ -2,6 +2,7 @@
   <div id="gameMaker">
     <div class="maker-wrap">
       <ScenarioList v-if="MAKER_GNB === 1" />
+      <EndingList v-if="MAKER_GNB === 3" />
       <IntroList v-if="MAKER_GNB === 2" />
       <CharacterList v-if="MAKER_GNB === 4" />
       <UIList v-if="MAKER_GNB === 5" />
@@ -44,6 +45,7 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 import ScenarioList from '~/components/simulation/ScenarioList.vue'
 import CutList from '~/components/simulation/CutList.vue'
+import EndingList from '~/components/simulation/EndingList.vue'
 import AssetsList from '~/components/simulation/AssetsList.vue'
 import IntroList from '~/components/simulation/IntroList.vue'
 import UIList from '~/components/simulation/UIList.vue'
@@ -61,6 +63,7 @@ export default {
   components: {
     ScenarioList,
     CutList,
+    EndingList,
     IntroList,
     AssetsList,
     UIList,
