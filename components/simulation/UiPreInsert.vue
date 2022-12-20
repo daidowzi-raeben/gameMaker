@@ -7,51 +7,32 @@
           <div class="setting-info">나만의 설명</div>
           <div class="radio-wrap">
             <label class="input-radio">
-              <input
-                ref="isUiSettingTheme"
-                type="radio"
-                name="ui"
-                checked
-                @change="onChangeUiSetting"
-              />
+              <input ref="isUiSettingTheme" type="radio" name="ui" checked @change="onChangeUiSetting" />
               <span class="check radio"></span>
               <span class="text">에셋 테마</span>
             </label>
             <label class="input-radio">
-              <input
-                ref="isUiSettingCustom"
-                type="radio"
-                name="ui"
-                @change="onChangeUiSetting"
-              />
+              <input ref="isUiSettingCustom" type="radio" name="ui" @change="onChangeUiSetting" />
               <span class="check radio"></span>
               <span class="text">커스터마이징</span>
             </label>
           </div>
           <div v-if="isUiSettingTheme" class="ui-wrap">
             <ul class="theme-list">
-              <li v-for="(v, i) in 20" :key="i" class="theme-list--item">
+              <li v-for="(v,i) in 20" :key="i" class="theme-list--item">
                 <div class="img-wrap">
                   <!-- <img src="" alt="theme" /> -->
                 </div>
-                <div class="hash"><span>호러</span><span>블랙</span></div>
+                <div class="hash">
+                  <span>호러</span><span>블랙</span>
+                </div>
               </li>
             </ul>
           </div>
           <div v-if="isUiSettingCustom" class="ui-wrap">
             <div class="setting-tit sub">메인색상 관리</div>
             <div class="color-select--wrap">
-              <button
-                ref="mainColor"
-                :style="
-                  UISetting.mainColor && UISetting.mainColor.rgba
-                    ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})`
-                    : ''
-                "
-                type="button"
-                class="color"
-                @click="onClickActiveToggle($event)"
-              ></button>
+              <button ref="mainColor" :style=" UISetting.mainColor && UISetting.mainColor.rgba ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
               <label class="label">메인색상</label>
               <div class="color-select">
                 <Chrome v-model="colorPicker.mainColor"></Chrome>
@@ -61,68 +42,28 @@
             <div class="setting-tit sub">대사창 색상 관리</div>
             <div class="color-select--list">
               <div class="color-select--wrap">
-                <button
-                  ref="windowMainColor"
-                  :style="
-                    UISetting.windowColor && UISetting.windowColor.rgba
-                      ? `background:rgba(${UISetting.windowColor.rgba.r},${UISetting.windowColor.rgba.g},${UISetting.windowColor.rgba.b},${UISetting.windowColor.rgba.a})`
-                      : ''
-                  "
-                  type="button"
-                  class="color"
-                  @click="onClickActiveToggle($event)"
-                ></button>
+                <button ref="windowMainColor" :style=" UISetting.windowColor && UISetting.windowColor.rgba ? `background:rgba(${UISetting.windowColor.rgba.r},${UISetting.windowColor.rgba.g},${UISetting.windowColor.rgba.b},${UISetting.windowColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
                 <label class="label">메인색상</label>
                 <div v-click-outside="onBlurPickerClose" class="color-select">
                   <Chrome v-model="colorPicker.windowColor"></Chrome>
                 </div>
               </div>
               <div class="color-select--wrap">
-                <button
-                  ref="windowTextColor"
-                  :style="
-                    UISetting.fontColor && UISetting.fontColor.rgba
-                      ? `background:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})`
-                      : ''
-                  "
-                  type="button"
-                  class="color"
-                  @click="onClickActiveToggle($event)"
-                ></button>
+                <button ref="windowTextColor" :style=" UISetting.fontColor && UISetting.fontColor.rgba ? `background:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
                 <label class="label">글자</label>
                 <div class="color-select">
                   <Chrome v-model="colorPicker.fontColor"></Chrome>
                 </div>
               </div>
               <div class="color-select--wrap">
-                <button
-                  ref="windowOutlineColor"
-                  :style="
-                    UISetting.strokeColor && UISetting.strokeColor.rgba
-                      ? `background:rgba(${UISetting.strokeColor.rgba.r},${UISetting.strokeColor.rgba.g},${UISetting.strokeColor.rgba.b},${UISetting.strokeColor.rgba.a})`
-                      : ''
-                  "
-                  type="button"
-                  class="color"
-                  @click="onClickActiveToggle($event)"
-                ></button>
+                <button ref="windowOutlineColor" :style=" UISetting.strokeColor && UISetting.strokeColor.rgba ? `background:rgba(${UISetting.strokeColor.rgba.r},${UISetting.strokeColor.rgba.g},${UISetting.strokeColor.rgba.b},${UISetting.strokeColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
                 <label class="label">외곽선</label>
                 <div class="color-select">
                   <Chrome v-model="colorPicker.strokeColor"></Chrome>
                 </div>
               </div>
               <div class="color-select--wrap">
-                <button
-                  ref="windowShadowColor"
-                  :style="
-                    UISetting.shadowColor && UISetting.shadowColor.rgba
-                      ? `background:rgba(${UISetting.shadowColor.rgba.r},${UISetting.shadowColor.rgba.g},${UISetting.shadowColor.rgba.b},${UISetting.shadowColor.rgba.a})`
-                      : ''
-                  "
-                  type="button"
-                  class="color"
-                  @click="onClickActiveToggle($event)"
-                ></button>
+                <button ref="windowShadowColor" :style=" UISetting.shadowColor && UISetting.shadowColor.rgba ? `background:rgba(${UISetting.shadowColor.rgba.r},${UISetting.shadowColor.rgba.g},${UISetting.shadowColor.rgba.b},${UISetting.shadowColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
                 <label class="label">그림자</label>
                 <div class="color-select">
                   <Chrome v-model="colorPicker.shadowColor"></Chrome>
@@ -174,6 +115,7 @@
                 </select>
               </div>
             </div>
+
           </div>
         </div>
         <div class="text-center mb-5">
@@ -218,8 +160,8 @@ export default {
         y: 0,
       },
       temp: true,
-      isUiSettingTheme: true,
-      isUiSettingCustom: false,
+      isUiSettingTheme:true,
+      isUiSettingCustom:false,
     }
   },
   computed: {
@@ -253,7 +195,7 @@ export default {
       this.paramsInit.type = 'uiList'
       this.paramsInit.secretKey = this.PROJECT_ID
       this.paramsInit.apiKey = process.env.API_KEY
-      this.ACTION_AXIOS_GET(this.paramsInit)
+      // this.ACTION_AXIOS_GET(this.paramsInit)
     })
   },
   methods: {
@@ -278,128 +220,129 @@ export default {
       frm.append('user_idx', kooLogin('user_idx'))
       this.ACTION_AXIOS_POST(frm)
     },
-    onChangeUiSetting() {
-      if (this.$refs.isUiSettingTheme.checked) {
+    onChangeUiSetting(){
+      if(this.$refs.isUiSettingTheme.checked){
         this.isUiSettingTheme = true
         this.isUiSettingCustom = false
-      } else {
+      }
+      else{
         this.isUiSettingTheme = false
         this.isUiSettingCustom = true
       }
     },
-    onClickActiveToggle(e) {
+    onClickActiveToggle(e){
       e.target.classList.add('active')
     },
-    onBlurPickerClose() {
+    onBlurPickerClose(){
       this.$refs.mainColor.classList.remove('active')
       this.$refs.windowMainColor.classList.remove('active')
       this.$refs.windowTextColor.classList.remove('active')
       this.$refs.windowOutlineColor.classList.remove('active')
       this.$refs.windowShadowColor.classList.remove('active')
-    },
+    }
   },
 }
 </script>
 
 <style lang="scss">
-.radio-wrap {
-  margin: 40px 0 30px;
-  .input-radio {
-    margin-right: 20px;
+  .radio-wrap{
+    margin:40px 0 30px;
+    .input-radio{
+      margin-right:20px;
+    }
   }
-}
-.theme-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 0;
-  &--item {
-    width: calc(25% - 25px);
-    margin: 0 25px 20px 0;
-    &:nth-child(4n) {
-      margin-right: 0;
-    }
-    .img-wrap {
-      width: 100%;
-      height: 200px;
-      background: #d9d9d9;
-      border-radius: 5px;
-    }
-    .hash {
-      margin: 8px 0;
-      height: 35px;
-      overflow: hidden;
-      span {
-        font-size: 1.2rem;
-        color: $textCol2;
-        margin-right: 3px;
-        font-weight: 300;
-        &:before {
-          content: '#';
+  .theme-list{
+    display:flex;
+    flex-wrap: wrap;
+    margin-bottom:0;
+    &--item{
+      width:calc(25% - 25px);
+      margin:0 25px 20px 0;
+      &:nth-child(4n){
+        margin-right:0;
+      }
+      .img-wrap{
+        width:100%;
+        height:200px;
+        background:#d9d9d9;
+        border-radius: 5px;
+      }
+      .hash{
+        margin:8px 0;
+        height: 35px;
+        overflow: hidden;
+        span{
+          font-size:1.2rem;
+          color:$textCol2;
+          margin-right:3px;
+          font-weight: 300;
+          &:before{
+            content:"#";
+          }
+        }
+      }
+      @media (max-width: 1400px) {
+        width:calc(33.3% - 20px);
+        margin:0 20px 30px 0;
+        &:nth-child(3n){
+          margin-right:0;
+        }
+        &:nth-child(4n){
+          margin-right:20px;
         }
       }
     }
-    @media (max-width: 1400px) {
-      width: calc(33.3% - 20px);
-      margin: 0 20px 30px 0;
-      &:nth-child(3n) {
-        margin-right: 0;
-      }
-      &:nth-child(4n) {
-        margin-right: 20px;
+  }
+  .color-select{
+    &--list{
+      display:flex;
+      .color-select--wrap{
+        margin-right:35px;
       }
     }
-  }
-}
-.color-select {
-  &--list {
-    display: flex;
-    .color-select--wrap {
-      margin-right: 35px;
-    }
-  }
-  &--wrap {
-    position: relative;
-    margin: 20px 0 40px;
-    .color {
-      width: 70px;
-      height: 70px;
-      border: 1px solid #e3e3e3;
-      background: #000;
-      border-radius: 35px;
-      &.active ~ .color-select {
-        display: block;
+    &--wrap{
+      position:relative;
+      margin:20px 0 40px;
+      .color{
+        width:70px;
+        height:70px;
+        border:1px solid #e3e3e3;
+        background:#000;
+        border-radius: 35px;
+        &.active ~ .color-select{
+          display:block;
+        }
+      }
+      .label{
+        width:70px;
+        text-align: center;
+        margin:5px 0;
+        display:block;
+        font-size:1.6rem;
+        color:$textCol2;
+      }
+      .color-select{
+        position:absolute;
+        left:38px;
+        top:35px;
+        z-index: 1;
+        display:none;
       }
     }
-    .label {
-      width: 70px;
-      text-align: center;
-      margin: 5px 0;
-      display: block;
-      font-size: 1.6rem;
-      color: $textCol2;
-    }
-    .color-select {
-      position: absolute;
-      left: 38px;
-      top: 35px;
-      z-index: 1;
-      display: none;
+  }
+  .input-select--list{
+    margin:28px 0;
+    display:flex;
+    .input-wrap{
+      margin-right:40px;
+      .input-label{
+        width:40px;
+        color:$textCol2;
+      }
+      .input-select{
+        width:125px;
+        height:40px;
+      }
     }
   }
-}
-.input-select--list {
-  margin: 28px 0;
-  display: flex;
-  .input-wrap {
-    margin-right: 40px;
-    .input-label {
-      width: 40px;
-      color: $textCol2;
-    }
-    .input-select {
-      width: 125px;
-      height: 40px;
-    }
-  }
-}
 </style>
