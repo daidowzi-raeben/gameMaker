@@ -169,7 +169,9 @@ const createStore = () => {
             },
             MUTATIONS_IS_UI(state, payload) {
                 state.IS_UI = true
-                state.UISetting = payload.jsonData
+                if (payload.jsonData) {
+                    state.UISetting = payload.jsonData
+                }
             },
             MUTATIONS_LOADING_INIT(state, payload) {
                 state.LOADING = true
