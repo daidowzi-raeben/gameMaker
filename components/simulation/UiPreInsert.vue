@@ -32,9 +32,9 @@
           <div v-if="isUiSettingCustom" class="ui-wrap">
             <div class="setting-tit sub">메인색상 관리</div>
             <div class="color-select--wrap">
-              <button ref="mainColor" :style=" UISetting.mainColor && UISetting.mainColor.rgba ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+              <button :style=" UISetting.mainColor && UISetting.mainColor.rgba ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})` : ''" type="button" class="color" @click="isShowColorPickerName='mainColor'"></button>
               <label class="label">메인색상</label>
-              <div class="color-select">
+              <div v-if="isShowColorPickerName==='mainColor'" v-click-outside="onBlurPickerClose" class="color-select">
                 <Chrome v-model="colorPicker.mainColor"></Chrome>
               </div>
             </div>
@@ -42,30 +42,30 @@
             <div class="setting-tit sub">대사창 색상 관리</div>
             <div class="color-select--list">
               <div class="color-select--wrap">
-                <button ref="windowMainColor" :style=" UISetting.windowColor && UISetting.windowColor.rgba ? `background:rgba(${UISetting.windowColor.rgba.r},${UISetting.windowColor.rgba.g},${UISetting.windowColor.rgba.b},${UISetting.windowColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+                <button :style=" UISetting.windowColor && UISetting.windowColor.rgba ? `background:rgba(${UISetting.windowColor.rgba.r},${UISetting.windowColor.rgba.g},${UISetting.windowColor.rgba.b},${UISetting.windowColor.rgba.a})` : ''" type="button" class="color" @click="isShowColorPickerName='windowMainColor'"></button>
                 <label class="label">메인색상</label>
-                <div v-click-outside="onBlurPickerClose" class="color-select">
+                <div v-if="isShowColorPickerName==='windowMainColor'" v-click-outside="onBlurPickerClose" class="color-select">
                   <Chrome v-model="colorPicker.windowColor"></Chrome>
                 </div>
               </div>
               <div class="color-select--wrap">
-                <button ref="windowTextColor" :style=" UISetting.fontColor && UISetting.fontColor.rgba ? `background:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+                <button :style=" UISetting.fontColor && UISetting.fontColor.rgba ? `background:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})` : ''" type="button" class="color" @click="isShowColorPickerName='windowTextColor'"></button>
                 <label class="label">글자</label>
-                <div class="color-select">
+                <div v-if="isShowColorPickerName==='windowTextColor'" v-click-outside="onBlurPickerClose" class="color-select">
                   <Chrome v-model="colorPicker.fontColor"></Chrome>
                 </div>
               </div>
               <div class="color-select--wrap">
-                <button ref="windowOutlineColor" :style=" UISetting.strokeColor && UISetting.strokeColor.rgba ? `background:rgba(${UISetting.strokeColor.rgba.r},${UISetting.strokeColor.rgba.g},${UISetting.strokeColor.rgba.b},${UISetting.strokeColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+                <button :style=" UISetting.strokeColor && UISetting.strokeColor.rgba ? `background:rgba(${UISetting.strokeColor.rgba.r},${UISetting.strokeColor.rgba.g},${UISetting.strokeColor.rgba.b},${UISetting.strokeColor.rgba.a})` : ''" type="button" class="color" @click="isShowColorPickerName='windowOutlineColor'"></button>
                 <label class="label">외곽선</label>
-                <div class="color-select">
+                <div v-if="isShowColorPickerName==='windowOutlineColor'" v-click-outside="onBlurPickerClose" class="color-select">
                   <Chrome v-model="colorPicker.strokeColor"></Chrome>
                 </div>
               </div>
               <div class="color-select--wrap">
-                <button ref="windowShadowColor" :style=" UISetting.shadowColor && UISetting.shadowColor.rgba ? `background:rgba(${UISetting.shadowColor.rgba.r},${UISetting.shadowColor.rgba.g},${UISetting.shadowColor.rgba.b},${UISetting.shadowColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+                <button :style=" UISetting.shadowColor && UISetting.shadowColor.rgba ? `background:rgba(${UISetting.shadowColor.rgba.r},${UISetting.shadowColor.rgba.g},${UISetting.shadowColor.rgba.b},${UISetting.shadowColor.rgba.a})` : ''" type="button" class="color" @click="isShowColorPickerName='windowShadowColor'"></button>
                 <label class="label">그림자</label>
-                <div class="color-select">
+                <div v-if="isShowColorPickerName==='windowShadowColor'" v-click-outside="onBlurPickerClose" class="color-select">
                   <Chrome v-model="colorPicker.shadowColor"></Chrome>
                 </div>
               </div>
@@ -162,6 +162,7 @@ export default {
       temp: true,
       isUiSettingTheme:true,
       isUiSettingCustom:false,
+      isShowColorPickerName:'',
     }
   },
   computed: {
@@ -230,15 +231,8 @@ export default {
         this.isUiSettingCustom = true
       }
     },
-    onClickActiveToggle(e){
-      e.target.classList.add('active')
-    },
     onBlurPickerClose(){
-      this.$refs.mainColor.classList.remove('active')
-      this.$refs.windowMainColor.classList.remove('active')
-      this.$refs.windowTextColor.classList.remove('active')
-      this.$refs.windowOutlineColor.classList.remove('active')
-      this.$refs.windowShadowColor.classList.remove('active')
+      this.isShowColorPickerName = ''
     }
   },
 }
@@ -309,9 +303,6 @@ export default {
         border:1px solid #e3e3e3;
         background:#000;
         border-radius: 35px;
-        &.active ~ .color-select{
-          display:block;
-        }
       }
       .label{
         width:70px;
@@ -326,7 +317,6 @@ export default {
         left:38px;
         top:35px;
         z-index: 1;
-        display:none;
       }
     }
   }

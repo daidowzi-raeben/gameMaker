@@ -193,7 +193,7 @@ export default {
         style += `background:rgba(${this.UISetting.windowColor.rgba.r},${this.UISetting.windowColor.rgba.g},${this.UISetting.windowColor.rgba.b},${this.UISetting.windowColor.rgba.a});`
       }
       if (this.UISetting.strokeColor && this.UISetting.strokeColor.rgba) {
-        style += `border : ${this.UISetting.border}px solid rgba(${this.UISetting.strokeColor.rgba.r},${this.UISetting.strokeColor.rgba.g},${this.UISetting.strokeColor.rgba.b},${this.UISetting.strokeColor.rgba.a});`
+        style += `outline : ${this.UISetting.border}px solid rgba(${this.UISetting.strokeColor.rgba.r},${this.UISetting.strokeColor.rgba.g},${this.UISetting.strokeColor.rgba.b},${this.UISetting.strokeColor.rgba.a});`
       }
       if (this.UISetting.round) {
         style += `border-radius:${this.UISetting.round}px;`
