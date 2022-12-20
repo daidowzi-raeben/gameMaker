@@ -118,10 +118,17 @@ const createStore = () => {
             ],
             // UI세팅
             UISetting: {
-                // mainColor: {},
-                // windowColor: {},
-                // strokeColor: {},
-                // shadowColor: {},
+                mainColor: {},
+                windowColor: {},
+                strokeColor: {},
+                shadowColor: {},
+                fontColor: {},
+                round: 0,
+                border: 0,
+                x: 0,
+                y: 0,
+                font: '',
+                icon: ''
             },
             // app icon
             IN_APP_ICON: null,
