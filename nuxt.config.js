@@ -48,6 +48,7 @@ export default {
     { src: '~plugins/VueScrollbar.js', ssr: false, mode: 'client' },
     { src: '~plugins/Vuedraggable.js', ssr: false, mode: 'client' },
     { src: '~plugins/VShowSlide.js', ssr: false, mode: 'client' },
+    { src: '~plugins/VClickOutside.js', ssr: false, mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

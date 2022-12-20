@@ -32,7 +32,7 @@
           <div v-if="isUiSettingCustom" class="ui-wrap">
             <div class="setting-tit sub">메인색상 관리</div>
             <div class="color-select--wrap">
-              <button :style=" UISetting.mainColor && UISetting.mainColor.rgba ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+              <button ref="mainColor" :style=" UISetting.mainColor && UISetting.mainColor.rgba ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
               <label class="label">메인색상</label>
               <div class="color-select">
                 <Chrome v-model="colorPicker.mainColor"></Chrome>
@@ -42,28 +42,28 @@
             <div class="setting-tit sub">대사창 색상 관리</div>
             <div class="color-select--list">
               <div class="color-select--wrap">
-                <button :style=" UISetting.windowColor && UISetting.windowColor.rgba ? `background:rgba(${UISetting.windowColor.rgba.r},${UISetting.windowColor.rgba.g},${UISetting.windowColor.rgba.b},${UISetting.windowColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+                <button ref="windowMainColor" :style=" UISetting.windowColor && UISetting.windowColor.rgba ? `background:rgba(${UISetting.windowColor.rgba.r},${UISetting.windowColor.rgba.g},${UISetting.windowColor.rgba.b},${UISetting.windowColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
                 <label class="label">메인색상</label>
-                <div class="color-select">
+                <div v-click-outside="onBlurPickerClose" class="color-select">
                   <Chrome v-model="colorPicker.windowColor"></Chrome>
                 </div>
               </div>
               <div class="color-select--wrap">
-                <button :style=" UISetting.fontColor && UISetting.fontColor.rgba ? `background:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+                <button ref="windowTextColor" :style=" UISetting.fontColor && UISetting.fontColor.rgba ? `background:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
                 <label class="label">글자</label>
                 <div class="color-select">
                   <Chrome v-model="colorPicker.fontColor"></Chrome>
                 </div>
               </div>
               <div class="color-select--wrap">
-                <button :style=" UISetting.strokeColor && UISetting.strokeColor.rgba ? `background:rgba(${UISetting.strokeColor.rgba.r},${UISetting.strokeColor.rgba.g},${UISetting.strokeColor.rgba.b},${UISetting.strokeColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+                <button ref="windowOutlineColor" :style=" UISetting.strokeColor && UISetting.strokeColor.rgba ? `background:rgba(${UISetting.strokeColor.rgba.r},${UISetting.strokeColor.rgba.g},${UISetting.strokeColor.rgba.b},${UISetting.strokeColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
                 <label class="label">외곽선</label>
                 <div class="color-select">
                   <Chrome v-model="colorPicker.strokeColor"></Chrome>
                 </div>
               </div>
               <div class="color-select--wrap">
-                <button :style=" UISetting.shadowColor && UISetting.shadowColor.rgba ? `background:rgba(${UISetting.shadowColor.rgba.r},${UISetting.shadowColor.rgba.g},${UISetting.shadowColor.rgba.b},${UISetting.shadowColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
+                <button ref="windowShadowColor" :style=" UISetting.shadowColor && UISetting.shadowColor.rgba ? `background:rgba(${UISetting.shadowColor.rgba.r},${UISetting.shadowColor.rgba.g},${UISetting.shadowColor.rgba.b},${UISetting.shadowColor.rgba.a})` : ''" type="button" class="color" @click="onClickActiveToggle($event)"></button>
                 <label class="label">그림자</label>
                 <div class="color-select">
                   <Chrome v-model="colorPicker.shadowColor"></Chrome>
@@ -231,7 +231,14 @@ export default {
       }
     },
     onClickActiveToggle(e){
-      e.target.classList.toggle('active')
+      e.target.classList.add('active')
+    },
+    onBlurPickerClose(){
+      this.$refs.mainColor.classList.remove('active')
+      this.$refs.windowMainColor.classList.remove('active')
+      this.$refs.windowTextColor.classList.remove('active')
+      this.$refs.windowOutlineColor.classList.remove('active')
+      this.$refs.windowShadowColor.classList.remove('active')
     }
   },
 }
