@@ -28,15 +28,17 @@
               <span class="text">커스터마이징</span>
             </label>
           </div>
-          <div v-if="isUiSettingTheme" class="ui-wrap">
-            <ul class="theme-list">
-              <li v-for="(v, i) in 20" :key="i" class="theme-list--item">
-                <div class="img-wrap">
-                  <!-- <img src="" alt="theme" /> -->
-                </div>
-                <div class="hash"><span>호러</span><span>블랙</span></div>
-              </li>
-            </ul>
+          <div v-if="isUiSettingTheme" v-bar class="ui-wrap h-550">
+            <div>
+              <ul class="theme-list">
+                <li v-for="(v, i) in 20" :key="i" class="theme-list--item">
+                  <div class="img-wrap">
+                    <!-- <img src="" alt="theme" /> -->
+                  </div>
+                  <div class="hash"><span>호러</span><span>블랙</span></div>
+                </li>
+              </ul>
+            </div>
           </div>
           <div v-if="isUiSettingCustom" class="ui-wrap">
             <div class="setting-tit sub">메인색상 관리</div>
@@ -176,6 +178,8 @@
                   <option :value="10">아주 굵게</option>
                 </select>
               </div>
+            </div>
+            <div class="input-select--list">
               <div class="input-wrap">
                 <label class="input-label">그림자</label>
                 <select
@@ -451,9 +455,18 @@ export default {
       color: $textCol2;
     }
     .input-select {
-      width: 125px;
+      width: 150px;
       height: 40px;
     }
+  }
+}
+.ui-wrap.h-550{
+  height: 550px;
+  background: #f4f5f7;
+  padding:0 20px 20px 0;
+  margin-bottom:40px;
+  .vb-content{
+    padding: 20px 20px 0 20px;
   }
 }
 </style>
