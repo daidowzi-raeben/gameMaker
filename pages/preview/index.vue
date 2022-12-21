@@ -172,6 +172,7 @@ export default {
         bg: '',
         cr: '',
         cr2: '',
+        sr: '',
         code: '',
         text: '',
         point: '',
@@ -341,6 +342,10 @@ export default {
       }
 
       this.cutType = this.inApp.cutType
+      if (this.inApp.sr) {
+        const s = new Audio(this.inApp.sr)
+        s.play()
+      }
       if (this.inApp.cutType === 1) {
         console.log('대사')
       }
