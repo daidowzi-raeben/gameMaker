@@ -28,6 +28,7 @@
   border-radius: 5px;
   margin: 0 5px;
   transition: background-color .3s;
+  white-space: nowrap;
 
   &.md {
     font-size: 1.5rem;
@@ -49,6 +50,12 @@
 
     &:hover {
       background-color: $colPrimaryHover !important;
+    }
+    &.red{
+      background-color: $colPink !important;
+      &:hover {
+        background-color: $colPinkHover !important;
+      }
     }
   }
 
@@ -1019,4 +1026,8 @@
   &-nanumNeo {
     font-family: 'NanumSquareNeo-Variable', sans-serif;
   }
+}
+
+.el-loading-spinner i{
+  font-size:50px;
 }

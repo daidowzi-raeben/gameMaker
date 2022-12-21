@@ -498,7 +498,7 @@ export default {
   .input-wrap {
     margin-right: 40px;
     .input-label {
-      width: 40px;
+      width: 60px;
       color: $textCol2;
     }
     .input-select {

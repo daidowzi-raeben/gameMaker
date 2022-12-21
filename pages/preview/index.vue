@@ -29,6 +29,17 @@
           {{ inApp.questionsText[2] }}
         </button>
       </div>
+      <div v-if="cutType === 4" class="answer answer-subjective">
+        <div class="text">{{ inApp.subjectiveQuestion }}</div>
+        <div class="input-wrap">
+          <input
+            type="text"
+            class="input-text"
+            placeholder="주관식 답변을 입력해주세요"
+          />
+          <button type="button" class="button">입력</button>
+        </div>
+      </div>
       <!-- 인트로화면 -->
       <div
         v-show="displayPreview"
@@ -80,14 +91,7 @@
           <img :src="inApp.cr2" alt="" class="character right" />
         </div>
 
-        <div v-if="cutType === 4" class="answer answer-subjective">
-          <div class="text">{{ inApp.subjectiveQuestion }}</div>
-          <input
-            type="text"
-            class="input-text"
-            placeholder="주관식 답변을 입력해주세요"
-          />
-        </div>
+
         <div class="dialogue">
           <span v-if="cutType === 1" class="name">{{ inApp.crName }}</span>
           <p v-if="cutType === 1" class="text">{{ inApp.text }}</p>

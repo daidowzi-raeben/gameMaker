@@ -1,7 +1,7 @@
 <template>
   <div class="insert">
     <div class="setting">
-      <button type="button" class="button btn-pink delete-btn">삭제</button>
+      <!-- <button type="button" class="button btn-pink delete-btn">삭제</button> -->
       <ImageController />
       <div class="setting-con setting-profile">
         <div class="setting-tit">프로필 설정</div>
@@ -36,8 +36,8 @@
             <ScenarioSelect />
           </div>
         </div>
-        <div class="text-center">
-          <button style="font-size: 20px" @click="onSubmit">
+        <div class="text-center mt-5">
+          <button class="button md btn-primary" :class="{red : CHAPTER_DEATILE_IDX === true}" @click="onSubmit">
             {{ CHAPTER_DEATILE_IDX
             }}{{ CHAPTER_DEATILE_IDX ? '수정하기' : '추가하기' }}
           </button>

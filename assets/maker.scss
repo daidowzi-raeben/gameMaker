@@ -727,6 +727,7 @@
               background-repeat: no-repeat;
               background-position: 7px 50%;
               position:relative;
+              width:130px;
               &:after{
                 content:"";
                 display:block;
@@ -908,7 +909,7 @@
               }
 
               .save {
-                width: 116px;
+                width: 100px;
                 height: 34px;
                 border-radius: 5px;
                 outline: none;
@@ -1511,6 +1512,22 @@
     display:flex;
     flex-direction: column;
     transform:translateY(-50%);
+    .input-wrap{
+      position:relative;
+      .input-text{
+        padding-right:50px;
+      }
+      .button{
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-radius: 0 10px 10px 0;
+        margin: 0;
+        height: 34px;
+        background:$colPrimary;
+        color:#fff;
+      }
+    }
     &-dim{
       z-index: 3;
       opacity: .5;

@@ -34,7 +34,7 @@
         저장
       </button>
     </div>
-    <button type="button" class="btn sound">사운드 설정</button>
+    <!-- <button type="button" class="btn sound">사운드 설정</button> -->
     <div class="set sound-set"></div>
   </div>
 </template>
