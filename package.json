@@ -33,6 +33,7 @@
     "lottie-web": "^5.9.4",
     "lottie-web-vue": "^1.2.1",
     "nuxt": "^2.15.8",
+    "nuxt-element-ui": "^1.0.10",
     "nuxt-socket-io": "^2.0.3",
     "read-excel-file": "^5.4.7",
     "socket.io": "^4.5.1",

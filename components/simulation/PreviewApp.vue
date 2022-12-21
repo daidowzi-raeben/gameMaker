@@ -51,15 +51,33 @@
             <div class="text">주관식 질문</div>
             <input type="text" class="input-text" placeholder="주관식 답변을 입력해주세요" />
           </div> -->
-          <div class="dialogue">
-            <span v-if="PREVIEW.data.cr" class="name">{{
-              PREVIEW.data.cr
-            }}</span>
+          <div class="dialogue" :style="windowColor()">
+            <span
+              v-if="PREVIEW.data.cr"
+              class="name"
+              :class="UISetting.font"
+              :style="
+                UISetting.mainColor && UISetting.mainColor.rgba
+                  ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a});color:rgba(${UISetting.mainFontColor.rgba.r},${UISetting.mainFontColor.rgba.g},${UISetting.mainFontColor.rgba.b},${UISetting.mainFontColor.rgba.a})`
+                  : ''
+              "
+              >{{ PREVIEW.data.cr }}</span
+            >
             <!-- prettier-ignore-start -->
-            <p v-if="cutType === 1" ref="myLoadText" class="text">
+            <p
+              v-if="cutType === 1"
+              ref="myLoadText"
+              class="text"
+              :class="UISetting.font"
+            >
               {{ PREVIEW.data.text }}
             </p>
-            <p v-if="cutType === 2" ref="myLoadText" class="text">
+            <p
+              v-if="cutType === 2"
+              ref="myLoadText"
+              class="text"
+              :class="UISetting.font"
+            >
               {{ PREVIEW.data.narration }}
             </p>
             <!-- prettier-ignore-end -->
@@ -69,41 +87,42 @@
           <div class="dialogue" :style="windowColor()">
             <span
               class="name"
+              :class="UISetting.font"
               :style="
                 UISetting.mainColor && UISetting.mainColor.rgba
-                  ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})`
+                  ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a});color:rgba(${UISetting.mainFontColor.rgba.r},${UISetting.mainFontColor.rgba.g},${UISetting.mainFontColor.rgba.b},${UISetting.mainFontColor.rgba.a})`
                   : ''
               "
               >메인 색상</span
             >
-            <p class="text">창 색상</p>
+            <p class="text" :class="UISetting.font">창 색상</p>
           </div>
         </div>
         <img src="~/static/images/mockup.png" alt="" class="preview-mockup" />
       </div>
-      <div ref="buttonNav" class="buttons">
+      <div v-if="MAKER_GNB === 1" ref="buttonNav" class="buttons">
         <button
           type="button"
-          class="btn icon3 done"
-          :class="{ active: CONTENT_CODE === 1 }"
+          class="btn icon3"
+          :class="{ active: CONTENT_CODE === 1, done: PREVIEW.img.bg }"
           @click="onClickContent(1)"
         ></button>
         <button
           type="button"
           class="btn icon1"
-          :class="{ active: CONTENT_CODE === 2 }"
+          :class="{ active: CONTENT_CODE === 2, done: PREVIEW.img.cr }"
           @click="onClickContent(2)"
         ></button>
         <button
           type="button"
           class="btn icon2"
-          :class="{ active: CONTENT_CODE === 3 }"
+          :class="{ active: CONTENT_CODE === 3, done: PREVIEW.img.cr2 }"
           @click="onClickContent(3)"
         ></button>
         <button
           type="button"
           class="btn icon4"
-          :class="{ active: CONTENT_CODE === 4 }"
+          :class="{ active: CONTENT_CODE === 4, done: PREVIEW.data.sr }"
           @click="onClickContent(4)"
         ></button>
         <button
@@ -117,7 +136,7 @@
     <div class="preview-save">
       마지막 저장
       <span v-if="SAVE_DATETIME" class="time">{{
-        SAVE_DATETIME | moment('YY.MM.DD h:mm:ss')
+        SAVE_DATETIME | moment('YY.MM.DD HH:mm:ss')
       }}</span>
     </div>
   </div>
@@ -148,6 +167,15 @@ export default {
   },
   watch: {
     'PREVIEW.data.effect': {
+      handler(value) {
+        if (value) {
+          setTimeout(() => {
+            this.$refs.characterImage.classList.remove('ani-vibration')
+          }, 400)
+        }
+      },
+    },
+    'PREVIEW.data.effect2': {
       handler(value) {
         if (value) {
           setTimeout(() => {

@@ -96,6 +96,7 @@ const createStore = () => {
                     answer: '',
                     cr: '',
                     effect: '',
+                    effect2: '',
                     connect: '',
                     code: ''
                 }
@@ -123,12 +124,14 @@ const createStore = () => {
                 strokeColor: {},
                 shadowColor: {},
                 fontColor: {},
+                mainFontColor: {},
                 round: 0,
                 border: 0,
                 x: 0,
                 y: 0,
                 font: '',
-                icon: ''
+                icon: '',
+                fontSize: ''
             },
             // app icon
             IN_APP_ICON: null,
@@ -380,6 +383,12 @@ const createStore = () => {
             MUTATIONS_ASSETS_INIT_TEXT(state, payload) {
                 state.PREVIEW.data.text = '';
             },
+            // 인트로
+            MUTATIONS_PREVIEW_INTRO(state, payload) {
+                if (payload.jsonData) {
+                    state.PREVIEW_INTRO = payload.jsonData
+                }
+            },
             // 배경
             MUTATIONS_ASSETS_BG(state, payload) {
                 state.PREVIEW.img.bg = payload;
@@ -398,6 +407,10 @@ const createStore = () => {
             // 효과
             MUTATIONS_ASSETS_EFFECT(state, payload) {
                 state.PREVIEW.data.effect = payload;
+            },
+            // 효과
+            MUTATIONS_ASSETS_EFFECT2(state, payload) {
+                state.PREVIEW.data.effect2 = payload;
             },
             // 대사인물
             MUTATIONS_ASSETS_DATA_CR(state, payload) {
@@ -607,6 +620,11 @@ const createStore = () => {
                         if (params.type === 'uiList') {
                             console.log('MUTATIONS_IS_UI', res.data)
                             commit('MUTATIONS_IS_UI', res.data)
+                            return;
+                        }
+                        if (params.type === 'introList') {
+                            console.log('MUTATIONS_PREVIEW_INTRO', res.data)
+                            commit('MUTATIONS_PREVIEW_INTRO', res.data)
                             return;
                         }
                         // if (params.type === 'characterList') {

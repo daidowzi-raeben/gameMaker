@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div
+    v-loading="LOADING"
+    :element-loading-text="loadingText()"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
     <header class="maker-header">
       <ul class="maker-header--menu">
         <li
@@ -43,7 +48,7 @@
         저장되었습니다.
       </b-alert>
     </div>
-    <LoadingContent v-show="LOADING === true" />
+    <!-- <LoadingContent v-show="LOADING === true" /> -->
   </div>
 </template>
 
@@ -51,13 +56,13 @@
 import { mapState, mapMutations } from 'vuex'
 // import ScenarioInsert from '~/components/simulation/ScenarioInsert'
 // import JsonDatapreview from '~/components/modal/JsonDatapreview'
-import LoadingContent from '~/components/modules/LoadingContent'
+// import LoadingContent from '~/components/modules/LoadingContent'
 import { kooLogin } from '~/config/util'
 export default {
   components: {
     // ScenarioInsert,
     // JsonDatapreview,
-    LoadingContent,
+    // LoadingContent,
   },
   data() {
     return {
@@ -125,6 +130,15 @@ export default {
       this.MUTATIONS_ASSETS_INIT()
       this.MUTATIONS_MAKER_GNB(e)
       this.activeMenu = e
+    },
+    loadingText() {
+      const text = [
+        '시나리오 펼치는중',
+        '챕터 펼치는중',
+        '컷을 불러오는 중',
+        '노력하는 중',
+      ]
+      return text[Math.floor(Math.random() * 4)] + '...'
     },
   },
 }

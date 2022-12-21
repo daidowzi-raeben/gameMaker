@@ -11,7 +11,6 @@
                 ref="isUiSettingTheme"
                 type="radio"
                 name="ui"
-                checked
                 @change="onChangeUiSetting"
               />
               <span class="check radio"></span>
@@ -22,13 +21,14 @@
                 ref="isUiSettingCustom"
                 type="radio"
                 name="ui"
+                checked
                 @change="onChangeUiSetting"
               />
               <span class="check radio"></span>
               <span class="text">커스터마이징</span>
             </label>
           </div>
-          <div v-if="isUiSettingTheme">
+          <div v-if="isUiSettingTab === false">
             <div v-bar class="ui-wrap h-550">
               <div>
                 <ul class="theme-list">
@@ -42,26 +42,48 @@
               </div>
             </div>
           </div>
-          <div v-if="isUiSettingCustom" class="ui-wrap">
+          <div v-if="isUiSettingTab === true" class="ui-wrap">
             <div class="setting-tit sub">메인색상 관리</div>
-            <div class="color-select--wrap">
-              <button
-                :style="
-                  UISetting.mainColor && UISetting.mainColor.rgba
-                    ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})`
-                    : ''
-                "
-                type="button"
-                class="color"
-                @click="isShowColorPickerName = 'mainColor'"
-              ></button>
-              <label class="label">메인색상</label>
-              <div
-                v-if="isShowColorPickerName === 'mainColor'"
-                v-click-outside="onBlurPickerClose"
-                class="color-select"
-              >
-                <Chrome v-model="colorPicker.mainColor"></Chrome>
+            <div class="color-select--list">
+              <div class="color-select--wrap">
+                <button
+                  :style="
+                    UISetting.mainColor && UISetting.mainColor.rgba
+                      ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})`
+                      : ''
+                  "
+                  type="button"
+                  class="color"
+                  @click="isShowColorPickerName = 'mainColor'"
+                ></button>
+                <label class="label">메인색상</label>
+                <div
+                  v-if="isShowColorPickerName === 'mainColor'"
+                  v-click-outside="onBlurPickerClose"
+                  class="color-select"
+                >
+                  <Chrome v-model="colorPicker.mainColor"></Chrome>
+                </div>
+              </div>
+              <div class="color-select--wrap">
+                <button
+                  :style="
+                    UISetting.mainFontColor && UISetting.mainFontColor.rgba
+                      ? `background:rgba(${UISetting.mainFontColor.rgba.r},${UISetting.mainFontColor.rgba.g},${UISetting.mainFontColor.rgba.b},${UISetting.mainFontColor.rgba.a})`
+                      : ''
+                  "
+                  type="button"
+                  class="color"
+                  @click="isShowColorPickerName = 'mainFontColor'"
+                ></button>
+                <label class="label">메인글씨색상</label>
+                <div
+                  v-if="isShowColorPickerName === 'mainFontColor'"
+                  v-click-outside="onBlurPickerClose"
+                  class="color-select"
+                >
+                  <Chrome v-model="colorPicker.mainFontColor"></Chrome>
+                </div>
               </div>
             </div>
 
@@ -190,14 +212,12 @@
                   @change="onChangeThemeSet($event, 'shadow')"
                 >
                   <option :value="'0|0'">선택안함</option>
-                  <option value="5|5">약간 멀리</option>
-                  <option value="15|15">멀리</option>
-                  <option value="25|25">더 멀리</option>
-                  <option value="35|35">아주 멀리</option>
+                  <option value="3|3">약간 멀리</option>
+                  <option value="5|5">멀리</option>
+                  <option value="8|8">더 멀리</option>
+                  <option value="10|10">아주 멀리</option>
                 </select>
               </div>
-            </div>
-            <div class="input-select--list mb-5">
               <div class="input-wrap">
                 <label class="input-label">아이콘</label>
                 <select
@@ -211,8 +231,10 @@
                   <option value="icon3">아이콘3</option>
                 </select>
               </div>
+            </div>
+            <div class="input-select--list mb-5">
               <div class="input-wrap">
-                <label class="input-label">폰트</label>
+                <label class="input-label">글씨체</label>
                 <select
                   class="input-select"
                   :value="colorPicker.font"
@@ -221,6 +243,19 @@
                   <option v-for="(v, i) in fontStyle" :key="i" :value="v.value">
                     {{ v.name }}
                   </option>
+                </select>
+              </div>
+              <div class="input-wrap">
+                <label class="input-label">글씨크기</label>
+                <select
+                  class="input-select"
+                  :value="colorPicker.fontSize"
+                  @change="onChangeThemeSet($event, 'fontSize')"
+                >
+                  <option :value="''">기본</option>
+                  <option value="font-sm">작게</option>
+                  <option value="font-md">보통</option>
+                  <option value="font-lg">크게</option>
                 </select>
               </div>
             </div>
@@ -262,22 +297,28 @@ export default {
         strokeColor: {},
         shadowColor: {},
         fontColor: {},
+        mainFontColor: {},
         font: '',
         round: 0,
         border: 0,
         x: 0,
         y: 0,
         icon: '',
+        fontSize: '',
       },
       temp: true,
-      isUiSettingTheme: true,
-      isUiSettingCustom: false,
+      isUiSettingTab: true,
+      // isUiSettingCustom: false,
       isShowColorPickerName: '',
       fontStyle: [
         { name: '기본', value: '' },
-        { name: '나눔스퀘어', value: 'nanum' },
-        { name: '마포', value: 'mapo' },
-        { name: '콤퓨타', value: 'computer' },
+        { name: '나눔스퀘어네오', value: 'font-nanumNeo' },
+        { name: '마포꽃섬', value: 'font-mapo' },
+        { name: 'Y콤퓨타체', value: 'font-ycomputer' },
+        { name: '푸라닭 젠틀고딕', value: 'font-pura' },
+        { name: '생거진천체', value: 'font-saenggeo' },
+        { name: '한국기계연구원', value: 'font-kimm' },
+        { name: '해피니스 산스', value: 'font-happiness' },
       ],
     }
   },
@@ -338,13 +379,16 @@ export default {
       this.ACTION_AXIOS_POST(frm)
     },
     onChangeUiSetting() {
-      if (this.$refs.isUiSettingTheme.checked) {
-        this.isUiSettingTheme = true
-        this.isUiSettingCustom = false
-      } else {
-        this.isUiSettingTheme = false
-        this.isUiSettingCustom = true
-      }
+      // if (this.$refs.isUiSettingTheme.checked) {
+      //   this.isUiSettingTheme = true
+      //   this.isUiSettingCustom = false
+      // } else {
+      //   this.isUiSettingTheme = false
+      //   this.isUiSettingCustom = true
+      // }
+      this.isUiSettingTab === false
+        ? (this.isUiSettingTab = true)
+        : (this.isUiSettingTab = false)
     },
     onBlurPickerClose() {
       this.isShowColorPickerName = ''
@@ -355,6 +399,7 @@ export default {
       if (type === 'font') this.colorPicker.font = e.target.value
       if (type === 'icon') this.colorPicker.icon = e.target.value
       if (type === 'border') this.colorPicker.border = e.target.value
+      if (type === 'fontSize') this.colorPicker.fontSize = e.target.value
       if (type === 'shadow') {
         console.log(e)
         this.colorPicker.x = e.target.value.split('|')[0]

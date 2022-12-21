@@ -66,16 +66,30 @@
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
       <div v-if="cutType === 3 || cutType === 4" class="timer">
-        <button type="button" class="btn set">타이머 설정</button>
+        <button type="button" class="btn set">
+          {{
+            PREVIEW.data.questionsTimer
+              ? PREVIEW.data.questionsTimer + '초'
+              : '타이머 설정'
+          }}
+        </button>
         <div class="btn-wrap">
           <label class="btn">
+            <input
+              type="checkbox"
+              :checked="timerSettingSecond === null"
+              @change="onChangeTimerSetting(null)"
+            />
+            <span class="check-text">없음</span>
+          </label>
+          <!-- <label class="btn">
             <input
               type="checkbox"
               :checked="timerSettingSecond === 5"
               @change="onChangeTimerSetting(5)"
             />
             <span class="check-text">5초</span>
-          </label>
+          </label> -->
           <label class="btn">
             <input
               type="checkbox"
@@ -144,16 +158,83 @@
           >
             포인트 조건
           </button>
-          <div v-show="pointSettingShow" class="set point-set">
-            <select class="input-select">
-              <option></option>
-              <option></option>
+          <div
+            v-if="cutType !== 4"
+            v-show="pointSettingShow"
+            class="set point-set"
+          >
+            <select
+              v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
+              class="input-select"
+              @change="dataPointUpdate('pointCr', $event)"
+            >
+              <option :value="null">인물선택</option>
+              <option
+                v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
+                :key="'SCENE_DATA_CHARACTER' + i"
+              >
+                {{ v.name }}
+              </option>
             </select>
-            <input type="number" class="input-number" min="1" max="100" />
+            <select v-else disabled class="input-select">
+              <option>캐릭터 없음</option>
+            </select>
+            <input
+              type="number"
+              class="input-number"
+              @input="dataPointUpdate('point', $event)"
+            />
             <span class="text">포인트</span>
-            <select class="input-select">
-              <option></option>
-              <option></option>
+            <select
+              class="input-select"
+              @change="dataPointUpdate('pointType', $event)"
+            >
+              <option :value="null">선택</option>
+              <option value="P">이상일때</option>
+              <option value="P">이하일때</option>
+            </select>
+            <button
+              type="button"
+              class="save"
+              @click="onClickPointSetting('save')"
+            >
+              닫기
+            </button>
+          </div>
+          <div
+            v-if="cutType === 4"
+            v-show="pointSettingShow"
+            class="set point-set"
+          >
+            <select
+              v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
+              class="input-select"
+              @change="dataPointUpdate('pointCr', $event)"
+            >
+              <option :value="null">선택안함</option>
+              <option
+                v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
+                :key="'SCENE_DATA_CHARACTER' + i"
+              >
+                {{ v.name }}
+              </option>
+            </select>
+            <select v-else disabled class="input-select">
+              <option>캐릭터 없음</option>
+            </select>
+            <input
+              type="number"
+              class="input-number"
+              @input="dataPointUpdate('point', $event)"
+            />
+            <span class="text">포인트</span>
+            <select
+              class="input-select"
+              @change="dataPointUpdate('pointType', $event)"
+            >
+              <option :value="null">선택</option>
+              <option value="P">증가</option>
+              <option value="M">감소</option>
             </select>
             <button
               type="button"
@@ -172,9 +253,37 @@
             시나리오 연결
           </button>
           <div v-show="scenarioSettingShow" class="set scenario-set">
-            <select class="input-select">
-              <option></option>
-              <option></option>
+            <!-- <select v-if="SCENE_DATA" class="input-select">
+                <option
+                  v-for="(v, i) in SCENE_DATA"
+                  :key="i"
+                  :value="v.timestamp"
+                >
+                  {{ v.tit }}
+                </option>
+              </select>
+              <select v-else disabled class="input-select">
+                <option>시나리오 없음</option>
+              </select>
+              <select class="input-select">
+                <option>챕터2</option>
+                <option>챕터2</option>
+              </select>
+              eventCut-->
+            <select
+              v-if="CUT_LIST && CUT_LIST.jsonData"
+              class="input-select"
+              :value="CUT_LIST.jsonData[CUT_CODE].connect"
+            >
+              <option :value="''">선택안함</option>
+              <option
+                v-for="(v, i) in CUT_LIST.jsonData"
+                :key="CUT_LIST.idx[i]"
+                :value="CUT_LIST.idx[i]"
+                :disabled="CUT_CODE + 1 > i ? true : false"
+              >
+                {{ CUT_LIST.jsonData.length - i }}
+              </option>
             </select>
             <button
               type="button"
@@ -225,8 +334,10 @@
                 <select
                   v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
                   class="input-select"
-                  :value="PREVIEW.data.questionsPoint[0].pointCr"
-                  @change="dataPointUpdate('pointCr0', $event)"
+                  :value="PREVIEW.data.questionsPoint[itemQuestion - 1].pointCr"
+                  @change="
+                    dataPointUpdate(`pointCr${itemQuestion - 1}`, $event)
+                  "
                 >
                   <option :value="null">선택안함</option>
                   <option
@@ -240,12 +351,23 @@
                 <select v-else disabled class="input-select">
                   <option>캐릭터 없음</option>
                 </select>
-                <input type="number" class="input-number" min="1" max="100" />
+                <input
+                  type="number"
+                  class="input-number"
+                  min="1"
+                  max="100"
+                  :value="PREVIEW.data.questionsPoint[itemQuestion - 1].point"
+                  @input="dataPointUpdate(`point${itemQuestion - 1}`, $event)"
+                />
                 <span class="text">포인트</span>
                 <select
                   class="input-select"
-                  :value="PREVIEW.data.questionsPoint[1].pointType"
-                  @change="dataPointUpdate('pointType1', $event)"
+                  :value="
+                    PREVIEW.data.questionsPoint[itemQuestion - 1].pointType
+                  "
+                  @change="
+                    dataPointUpdate(`pointType${itemQuestion - 1}`, $event)
+                  "
                 >
                   <option :value="null">선택</option>
                   <option value="P">증가</option>
@@ -256,14 +378,17 @@
                 <select
                   v-if="CUT_LIST && CUT_LIST.jsonData"
                   class="input-select"
-                  :value="PREVIEW.data.questionsPoint[0].nextBtn"
-                  @change="dataPointUpdate('nextBtn0', $event)"
+                  :value="PREVIEW.data.questionsPoint[itemQuestion - 1].nextBtn"
+                  @change="
+                    dataPointUpdate(`nextBtn${itemQuestion - 1}`, $event)
+                  "
                 >
                   <option :value="null">선택안함</option>
                   <option
                     v-for="(v, i) in CUT_LIST.jsonData"
                     :key="CUT_LIST.idx[i]"
                     :value="CUT_LIST.idx[i]"
+                    :disabled="CUT_CODE + 1 > i ? true : false"
                   >
                     {{ CUT_LIST.jsonData.length - i }}
                   </option>
@@ -1180,7 +1305,8 @@ export default {
     },
     onInputDataQuestions(array, e) {
       // console.log(array, e.target.value)
-      this.questionsText[array] = e.target.value.replaceAll('||n', '\n')
+      this.questionsText = this.PREVIEW.data.questions.text
+      this.questionsText[array - 1] = e.target.value.replaceAll('||n', '\n')
       this.MUTATIONS_ASSETS_DATA_QUESTIONS(this.questionsText)
       console.log(this.questionsText)
     },
@@ -1199,6 +1325,7 @@ export default {
       this.paramsPreview.cr2 = this.PREVIEW.img.cr2
       this.paramsPreview.crName = this.PREVIEW.data.cr
       this.paramsPreview.effect = this.PREVIEW.data.effect
+      this.paramsPreview.effect2 = this.PREVIEW.data.effect2
       this.paramsPreview.point = this.PREVIEW.data.point
       this.paramsPreview.pointCr = this.PREVIEW.data.pointCr
       this.paramsPreview.pointType = this.PREVIEW.data.pointType
@@ -1208,6 +1335,7 @@ export default {
       this.paramsPreview.sr = this.PREVIEW.data.sr
       this.paramsPreview.questionsTimer = this.PREVIEW.data.questionsTimer
       this.paramsPreview.questionsPoint = this.PREVIEW.data.questionsPoint
+      this.paramsPreview.connect = this.PREVIEW.data.connect
       this.paramsPreview.text = this.PREVIEW.data.text.replaceAll('\n', '||n')
       this.paramsPreview.narration = this.PREVIEW.data.narration.replaceAll(
         '\n',
@@ -1251,9 +1379,13 @@ export default {
         }
       }
       this.params.previewData = JSON.stringify(this.paramsPreview)
+      setTimeout(() => {
+        this.onSave()
+      }, 500)
     },
     onChangeTimerSetting(second) {
       this.timerSettingSecond = second
+      this.MUTATIONS_PREVIEW_TIMER(second)
     },
     onClickTabActive(e, t) {
       if (t.target.classList.contains('active')) {
@@ -1282,6 +1414,17 @@ export default {
       this.pointSettingShow = false
       this.scenarioSettingShow = true
       if (type === 'save') this.scenarioSettingShow = false
+    },
+    onSave() {
+      const h = this.$createElement
+      this.$notify({
+        title: '저장되었습니다.',
+        message: h(
+          'i',
+          { style: 'color: teal' },
+          '멋진 시나리오를 만들어 보아요!'
+        ),
+      })
     },
   },
 }

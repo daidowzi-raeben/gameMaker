@@ -23,12 +23,33 @@
         <div>내용</div>
       </b-collapse>
     </div>
+    <div class="m-t-5">
+      <el-switch v-model="value1"> </el-switch>
+      <el-switch
+        v-model="value2"
+        active-color="#13ce66"
+        inactive-color="#ff4949"
+      >
+      </el-switch>
+    </div>
+    <div class="m-t-5">
+      <i class="el-icon-edit"></i>
+      <i class="el-icon-share"></i>
+      <i class="el-icon-delete"></i>
+      <el-button type="primary" icon="el-icon-search">Search</el-button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'EXtab',
+  data() {
+    return {
+      value1: true,
+      value2: true,
+    }
+  },
 }
 </script>
 

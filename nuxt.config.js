@@ -31,6 +31,8 @@ export default {
   css: [
     '~/assets/reset.scss',
     '~/assets/common.scss',
+    'element-ui/lib/theme-chalk/reset.css',
+    'element-ui/lib/theme-chalk/index.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -49,6 +51,7 @@ export default {
     { src: '~plugins/Vuedraggable.js', ssr: false, mode: 'client' },
     { src: '~plugins/VShowSlide.js', ssr: false, mode: 'client' },
     { src: '~plugins/VClickOutside.js', ssr: false, mode: 'client' },
+    { src: '~plugins/Element-ui.js', ssr: false, mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -71,7 +74,9 @@ export default {
     'nuxt-socket-io',
     'vue2-editor/nuxt',
     'cookie-universal-nuxt',
+    'nuxt-element-ui'
   ],
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308

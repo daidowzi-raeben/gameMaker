@@ -38,7 +38,8 @@
         </div>
         <div class="text-center">
           <button style="font-size: 20px" @click="onSubmit">
-            {{ CHAPTER_DEATILE_IDX ? '수정하기' : '추가하기' }}
+            {{ CHAPTER_DEATILE_IDX
+            }}{{ CHAPTER_DEATILE_IDX ? '수정하기' : '추가하기' }}
           </button>
         </div>
       </div>
@@ -199,6 +200,10 @@ export default {
       this.paramsData.user_idx = this.user_idx
       this.paramsData.apiKey = process.env.API_KEY
       this.paramsData.previewData = JSON.stringify(this.characterData)
+      this.paramsData.previewData = this.paramsData.previewData.replaceAll(
+        '\n',
+        '||n'
+      )
       this.ACTION_AXIOS_GET(this.paramsData)
 
       // this.MUTATIONS_ASSETS_INIT()

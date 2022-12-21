@@ -2,7 +2,9 @@
   <div class="setting-con setting-image">
     <div>
       <div class="setting-tit">사운드</div>
-      <div class="setting-info">설명</div>
+      <div class="setting-info">
+        효과음 또는 음성을 넣어 생생한 시나리오를 구성하세요.
+      </div>
       <ul v-if="ASSETS" class="thumbnail-list">
         <li
           class="thumbnail-list--item"
@@ -72,7 +74,7 @@ export default {
     onClickSrData(e) {
       console.log(e)
       this.MUTATIONS_ASSETS_SOUND(e)
-      //   this.MUTATIONS_CONTENT_CODE(4)
+      this.MUTATIONS_CONTENT_CODE(5)
     },
     onClickSrPlay(e) {
       console.log(e)
