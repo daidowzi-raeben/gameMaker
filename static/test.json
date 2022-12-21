@@ -1,25 +1,28 @@
 {
-    "savePointData": "{\"1670990397556\":[0,0],\"1670990849753\":[0,1],\"1670990912622\":[0,2],\"1670991066578\":[1,0],\"1670991076707\":[1,1],\"1670991436511\":[1,2],\"1670991436705\":[1,3]}",
+    "savePointData": "{\"1670990397556\":[0,0],\"1670990849753\":[0,1],\"1670991066578\":[1,0],\"1670991076707\":[1,1],\"1671542260763\":[2,0],\"1671608360737\":[3,0]}",
     "scenarioList": [
         {
             "scenarioTitle": "제1장",
             "chapters": [
                 {
                     "code": 1670990397556,
-                    "title": "3화",
+                    "title": "1화",
                     "cuts": {
                         "cut1": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/12.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
                                 "cr2": "",
                                 "code": 1670990397556,
-                                "text": "아버진 뭐 하시고?",
+                                "text": "제가 아홉살 때 이런거 절대 안하겠다고 마음 먹었는데요. ",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -58,16 +61,19 @@
                         },
                         "cut2": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/12.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
                                 "cr2": "",
                                 "code": 1670990397556,
-                                "text": "아저씨 아버지는 뭐 하세요? 나는 아저씨 아버지 뭐 하시는지 하나도 안 궁금한데, 왜 우리 아버지가 궁금할까?",
+                                "text": "너무 급해서 그러는거니까 이해 부탁드려요.",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -106,16 +112,19 @@
                         },
                         "cut3": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/12.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
                                 "cr2": "",
                                 "code": 1670990397556,
-                                "text": "아, 그냥 물어봤어.",
+                                "text": "알바 좀 꼭 구하게 해주시구요. 이모네 식구 좀 어떻게 해주시고. ",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -154,16 +163,19 @@
                         },
                         "cut4": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/12.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/2.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "",
                                 "code": 1670990397556,
-                                "text": "그런 걸 왜 그냥 물어봐요?",
+                                "text": " 저 남자친구도 꼭 좀 생기게 해주세요, 제발. ",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -202,16 +214,19 @@
                         },
                         "cut5": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/12.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/2.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "",
                                 "code": 1670990397556,
-                                "text": "어른들은 애들 보면 그냥 물어봐, 그런 거.",
+                                "text": "알바 꼭 구하게 해주시구 이모네 식구 좀 어떻게 해주시구 그지같은 상황에서 저 좀 어떻게.. 10원어치라도 제발.",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -250,16 +265,19 @@
                         },
                         "cut6": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/12.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "",
                                 "code": 1670990397556,
-                                "text": "잘 사는 집구석인지 못사는 집구석인지, 아버지 직업으로 간보려고?",
+                                "text": "나 뭐하냐. 누구한테 비냐. 신이 어딨다고.",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -298,16 +316,19 @@
                         },
                         "cut7": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "",
                                 "code": 1670990397556,
-                                "text": "......",
+                                "text": "설마 여기서 비까지 오는 건가요? 이건 소나긴가요, ",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -346,16 +367,19 @@
                         },
                         "cut8": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "",
                                 "code": 1670990397556,
-                                "text": "미안하다.",
+                                "text": " 장마인가요! 비가 그치긴 하는 건가요! 우산도 두개밖에 없는데 왜 비는 자꾸 오고 난리신데요!!",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -394,16 +418,19 @@
                         },
                         "cut9": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/12.png",
                                 "code": 1670990397556,
-                                "text": "실례예요, 그런 질문.",
+                                "text": "너야?",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "도깨비",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -442,16 +469,529 @@
                         },
                         "cut10": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/12.png",
                                 "code": 1670990397556,
-                                "text": "실례했다.",
+                                "text": "깜짝이야.. 저요? ..저요? 저한테 말거신 거에요?",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "11"
+                        },
+                        "cut11": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/12.png",
+                                "code": 1670990397556,
+                                "text": "깜짝이야.. 저요? ..저요? 저한테 말거신 거에요?",
+                                "point": "",
+                                "answer": "",
+                                "crName": "은탁",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "12"
+                        },
+                        "cut12": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/12.png",
+                                "code": 1670990397556,
+                                "text": "어, 너. 너야?",
+                                "point": "",
+                                "answer": "",
+                                "crName": "도깨비",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "13"
+                        },
+                        "cut13": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/12.png",
+                                "code": 1670990397556,
+                                "text": "뭐가요?",
+                                "point": "",
+                                "answer": "",
+                                "crName": "은탁",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "14"
+                        },
+                        "cut14": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/12.png",
+                                "code": 1670990397556,
+                                "text": "날 불러낸 게 너냐고.",
+                                "point": "",
+                                "answer": "",
+                                "crName": "도깨비",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "15"
+                        },
+                        "cut15": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/12.png",
+                                "code": 1670990397556,
+                                "text": "제가요? 저 안불렀는데요?",
+                                "point": "",
+                                "answer": "",
+                                "crName": "은탁",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "16"
+                        },
+                        "cut16": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/5.png",
+                                "code": 1670990397556,
+                                "text": "니가 불렀어. 대체 날 어떻게 불러낸거야?",
+                                "point": "",
+                                "answer": "",
+                                "crName": "도깨비",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "17"
+                        },
+                        "cut17": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/3.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/5.png",
+                                "code": 1670990397556,
+                                "text": "지난번에 거리에서 실수로 눈 마주쳐가지구. 그 아저씨 맞죠?",
+                                "point": "",
+                                "answer": "",
+                                "crName": "은탁",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "18"
+                        },
+                        "cut18": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/3.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "code": 1670990397556,
+                                "text": "무슨 말이야, 보인다는게.",
+                                "point": "",
+                                "answer": "",
+                                "crName": "도깨비",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "19"
+                        },
+                        "cut19": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/9.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "code": 1670990397556,
+                                "text": "아저씨 귀신이잖아요. 제가 귀신을 보거든요.",
+                                "point": "",
+                                "answer": "",
+                                "crName": "은탁",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "20"
+                        },
+                        "cut20": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/12.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "",
+                                "code": 1670990397556,
+                                "text": "귀신 아니야.",
+                                "point": "",
+                                "answer": "",
+                                "crName": "도깨비",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -499,518 +1039,38 @@
                         "cut7",
                         "cut8",
                         "cut9",
-                        "cut10"
-                    ]
-                },
-                {
-                    "code": 1670990849753,
-                    "title": "4화",
-                    "cuts": {
-                        "cut11": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/2.png",
-                                "cr2": "",
-                                "code": 1670990849753,
-                                "text": "여기서 제일 지겹고 불행해 보이는 사람.||n나만큼 인생 거지 같은 거 같아서",
-                                "point": "",
-                                "answer": "",
-                                "crName": "이지안",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "12"
-                        },
-                        "cut12": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/2.png",
-                                "cr2": "",
-                                "code": 1670990849753,
-                                "text": "입술 대보면 그래도 좀 덜 지겨울까.||n잠깐이라도 재밌을까.||n그래서 그냥 대봤어요.",
-                                "point": "",
-                                "answer": "",
-                                "crName": "이지안",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "13"
-                        },
-                        "cut13": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670990849753,
-                                "text": "경직된 인간들은 다 불쌍해.||n살아온 날들을 말해 주잖아.",
-                                "point": "",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "14"
-                        },
-                        "cut14": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670990849753,
-                                "text": "상처받은 아이들은 너무 일찍 커버려.||n그게 보여, 그래서 불쌍해.",
-                                "point": "",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "15"
-                        },
-                        "cut15": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670990849753,
-                                "text": "산사는 평화로운가? 난 천근만근인 몸을 질질 끌고... 가기 싫은 회사로 간다..",
-                                "point": "",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": null
-                        }
-                    },
-                    "initBtn": [
+                        "cut10",
                         "cut11",
                         "cut12",
                         "cut13",
                         "cut14",
-                        "cut15"
+                        "cut15",
+                        "cut16",
+                        "cut17",
+                        "cut18",
+                        "cut19",
+                        "cut20"
                     ]
                 },
                 {
-                    "code": 1670990912622,
-                    "title": "6화",
+                    "code": 1670990849753,
+                    "title": "2화",
                     "cuts": {
-                        "cut16": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670990912622,
-                                "text": "누가 욕하는 거 들으면 그 사람한테 전달하지마.",
-                                "point": "",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "17"
-                        },
-                        "cut17": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670990912622,
-                                "text": "너희들 사이에서는 다 말해주는 게 우정일지 몰라도 어른들은 안그래.",
-                                "point": "",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "18"
-                        },
-                        "cut18": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670990912622,
-                                "text": "괜히 말해주고 그러면 그 사람이 널 피해.",
-                                "point": "",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "19"
-                        },
-                        "cut19": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670990912622,
-                                "text": "내가 상처받은 걸 아는 사람 불편해, 보기 싫어.",
-                                "point": "",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "20"
-                        },
-                        "cut20": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670990912622,
-                                "text": "아무도 모르면 돼, 그러면 아무일도 아니야.",
-                                "point": "",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "21"
-                        },
                         "cut21": {
                             "list": {
-                                "bg": "",
-                                "cr": "",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
-                                "code": 1670990912622,
-                                "text": "한번 안아봐도 돼요?",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/11.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/3.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/1.mp3",
+                                "cr2": "",
+                                "code": 1670990849753,
+                                "text": "너 대체 뭐야. 뭔데 보통은 보여야 되는 게 아무것도 안보여.",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "도깨비",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -1049,16 +1109,19 @@
                         },
                         "cut22": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/11.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/6.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/3.mp3",
                                 "cr2": "",
-                                "code": 1670990912622,
-                                "text": "이지안, 편안함에 이르렀나?",
+                                "code": 1670990849753,
+                                "text": "뭐가 보여야 되는데요?",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -1093,40 +1156,23 @@
                                 "questionsTimer": null,
                                 "subjectiveQuestion": ""
                             },
-                            "nextBtn": null
-                        }
-                    },
-                    "initBtn": [
-                        "cut16",
-                        "cut17",
-                        "cut18",
-                        "cut19",
-                        "cut20",
-                        "cut21",
-                        "cut22"
-                    ]
-                }
-            ]
-        },
-        {
-            "scenarioTitle": "2장",
-            "chapters": [
-                {
-                    "code": 1670991066578,
-                    "title": "테스트추가",
-                    "cuts": {
+                            "nextBtn": "23"
+                        },
                         "cut23": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/11.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/6.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/3.mp3",
                                 "cr2": "",
-                                "code": 1670991066578,
-                                "text": "그냥 나 하나 희생하면 인생 그런대로 흘러가겠다 싶었는데",
+                                "code": 1670990849753,
+                                "text": "스무살, 서른살, 너의 미래.",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "도깨비",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -1165,16 +1211,19 @@
                         },
                         "cut24": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
-                                "code": 1670991066578,
-                                "text": "희생 같은 소리 하고 있네. 니가 6.25 용사냐, 인마? 희생하게",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/11.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/6.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/3.mp3",
+                                "cr2": "",
+                                "code": 1670990849753,
+                                "text": "없나부죠, 미래가. 근데 아저씬 죽기 전에 뭐, 무당이었어요? 아님 사기꾼? 미래 같은 소리한다.",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -1209,20 +1258,40 @@
                                 "questionsTimer": null,
                                 "subjectiveQuestion": ""
                             },
-                            "nextBtn": "25"
-                        },
+                            "nextBtn": null
+                        }
+                    },
+                    "initBtn": [
+                        "cut21",
+                        "cut22",
+                        "cut23",
+                        "cut24"
+                    ]
+                }
+            ]
+        },
+        {
+            "scenarioTitle": "2장",
+            "chapters": [
+                {
+                    "code": 1670991066578,
+                    "title": "3화",
+                    "cuts": {
                         "cut25": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/1.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/3.mp3",
+                                "cr2": "",
                                 "code": 1670991066578,
-                                "text": "열심히 산 거 같은데, 이뤄 놓은 건 없고 행복하지도 않고, 희생했다 치고 싶겠지",
+                                "text": "뭐, 뭐? 무슨, 무슨 꾼?",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "도깨비",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -1261,16 +1330,19 @@
                         },
                         "cut26": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/1.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/3.mp3",
+                                "cr2": "",
                                 "code": 1670991066578,
-                                "text": "그렇게 포장하고 싶겠지.",
+                                "text": "좋은 곳으로 가세요. 오래 떠돌면 안 좋아요. 근데 그 꽃은 뭐예요?",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "은탁",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -1309,16 +1381,19 @@
                         },
                         "cut27": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/1.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/6.mp3",
                                 "cr2": "",
                                 "code": 1670991066578,
-                                "text": " 지석이한테 말해 봐라. 널 위해서 희생했다고 욕 나오지, 기분 더럽지. 누가 희생을 원해?",
+                                "text": "",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "",
                                 "effect": "",
-                                "cutType": 1,
+                                "connect": "",
+                                "cutType": 3,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -1329,46 +1404,64 @@
                                         ""
                                     ]
                                 },
-                                "questionsText": [],
+                                "questionsText": [
+                                    "수국화",
+                                    "장미꽃",
+                                    "매밀꽃"
+                                ],
                                 "questionsPoint": [
                                     {
-                                        "point": null,
+                                        "point": "10",
                                         "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
+                                        "pointCr": "도깨비",
+                                        "pointType": "P"
                                     },
                                     {
-                                        "point": null,
+                                        "point": "1",
                                         "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
+                                        "pointCr": "도깨비",
+                                        "pointType": "M"
                                     },
                                     {
-                                        "point": null,
+                                        "point": "1",
                                         "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
+                                        "pointCr": "도깨비",
+                                        "pointType": "M"
                                     }
                                 ],
                                 "questionsTimer": null,
                                 "subjectiveQuestion": ""
                             },
-                            "nextBtn": "28"
-                        },
+                            "nextBtn": null
+                        }
+                    },
+                    "initBtn": [
+                        "cut25",
+                        "cut26",
+                        "cut27"
+                    ]
+                },
+                {
+                    "code": 1670991076707,
+                    "title": "4화",
+                    "cuts": {
                         "cut28": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/3.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/8.mp3",
                                 "cr2": "",
-                                "code": 1670991066578,
-                                "text": "어떤 자식이 어떤 부모가 아니, 누가 누구한테? 거지 같은 인생들의 자기 합리화 쩐다, 인마",
+                                "code": 1670991076707,
+                                "text": "",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "",
                                 "effect": "",
-                                "cutType": 1,
+                                "connect": "",
+                                "cutType": 2,
+                                "effect2": "",
                                 "pointCr": "",
-                                "narration": "",
+                                "narration": "리채은이 포인트 초기화했다",
                                 "pointType": "",
                                 "questions": {
                                     "text": [
@@ -1405,18 +1498,21 @@
                         },
                         "cut29": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/3.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/8.mp3",
                                 "cr2": "",
-                                "code": 1670991066578,
-                                "text": "다들 그렇게 살아",
+                                "code": 1670991076707,
+                                "text": "",
                                 "point": "",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "",
                                 "effect": "",
-                                "cutType": 1,
+                                "connect": "",
+                                "cutType": 2,
+                                "effect2": "",
                                 "pointCr": "",
-                                "narration": "",
+                                "narration": "다시개발해야한다.....",
                                 "pointType": "",
                                 "questions": {
                                     "text": [
@@ -1453,18 +1549,21 @@
                         },
                         "cut30": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/3.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/8.mp3",
                                 "cr2": "",
-                                "code": 1670991066578,
-                                "text": "아유, 그럼 지석이도 그렇게 살라 그래. 그 소리엔 눈에 불나지? ",
+                                "code": 1670991076707,
+                                "text": "",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "",
                                 "effect": "",
-                                "cutType": 1,
+                                "connect": "",
+                                "cutType": 2,
+                                "effect2": "",
                                 "pointCr": "",
-                                "narration": "",
+                                "narration": "이거슨 나래이션이다",
                                 "pointType": "",
                                 "questions": {
                                     "text": [
@@ -1501,18 +1600,21 @@
                         },
                         "cut31": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/3.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/8.mp3",
                                 "cr2": "",
-                                "code": 1670991066578,
-                                "text": "지석이 한텐 절대 강요하지 않을 인생 너한테는 왜 강요해?",
+                                "code": 1670991076707,
+                                "text": "",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "",
                                 "effect": "",
-                                "cutType": 1,
+                                "connect": "",
+                                "cutType": 2,
+                                "effect2": "",
                                 "pointCr": "",
-                                "narration": "",
+                                "narration": "여기까지 사운드가 완료되었다면",
                                 "pointType": "",
                                 "questions": {
                                     "text": [
@@ -1549,18 +1651,72 @@
                         },
                         "cut32": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/3.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/8.mp3",
                                 "cr2": "",
-                                "code": 1670991066578,
-                                "text": "뻔뻔하게 너만 생각해, 그래도 돼",
+                                "code": 1670991076707,
+                                "text": "",
                                 "point": "",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "",
                                 "effect": "",
-                                "cutType": 1,
+                                "connect": "",
+                                "cutType": 2,
+                                "effect2": "",
                                 "pointCr": "",
-                                "narration": "",
+                                "narration": "대사 나레이션 객관식은 어느정도 나온거 같다",
+                                "pointType": "",
+                                "questions": {
+                                    "text": [
+                                        "",
+                                        "",
+                                        ""
+                                    ]
+                                },
+                                "questionsText": [],
+                                "questionsPoint": [
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    },
+                                    {
+                                        "point": null,
+                                        "nextBtn": null,
+                                        "pointCr": null,
+                                        "pointType": null
+                                    }
+                                ],
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
+                            },
+                            "nextBtn": "33"
+                        },
+                        "cut33": {
+                            "list": {
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/3.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/8.mp3",
+                                "cr2": "",
+                                "code": 1670991076707,
+                                "text": "",
+                                "point": "",
+                                "answer": "",
+                                "crName": "",
+                                "effect": "",
+                                "connect": "",
+                                "cutType": 2,
+                                "effect2": "",
+                                "pointCr": "",
+                                "narration": "전체 끗!||n엔딩은 나중에...",
                                 "pointType": "",
                                 "questions": {
                                     "text": [
@@ -1597,82 +1753,38 @@
                         }
                     },
                     "initBtn": [
-                        "cut23",
-                        "cut24",
-                        "cut25",
-                        "cut26",
-                        "cut27",
                         "cut28",
                         "cut29",
                         "cut30",
                         "cut31",
-                        "cut32"
+                        "cut32",
+                        "cut33"
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "scenarioTitle": "사쿠라의 마음",
+            "chapters": [
                 {
-                    "code": 1670991076707,
-                    "title": "테스트추가2",
+                    "code": 1671542260763,
+                    "title": "1화",
                     "cuts": {
-                        "cut33": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670991076707,
-                                "text": "뭐, 이런 꼴같잖은 파견직 하나 자르지 못해서 징징댈 때는 언제고... 뭐 있어, 이것들, 그렇지?",
-                                "point": "",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "34"
-                        },
                         "cut34": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/2.png",
-                                "cr2": "",
-                                "code": 1670991076707,
-                                "text": "제가... 이지안 씨 좋아합니다.",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/1.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/5.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/6.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/7.png",
+                                "code": 1671542260763,
+                                "text": "",
                                 "point": "",
-                                "answer": "",
-                                "crName": "이지안",
+                                "answer": "답변",
+                                "crName": "",
                                 "effect": "",
-                                "cutType": 1,
+                                "connect": "",
+                                "cutType": 4,
+                                "effect2": "",
                                 "pointCr": "",
                                 "narration": "",
                                 "pointType": "",
@@ -1705,35 +1817,28 @@
                                     }
                                 ],
                                 "questionsTimer": null,
-                                "subjectiveQuestion": ""
+                                "subjectiveQuestion": "주관식"
                             },
-                            "nextBtn": null
-                        }
-                    },
-                    "initBtn": [
-                        "cut33",
-                        "cut34"
-                    ]
-                },
-                {
-                    "code": 1670991436511,
-                    "title": "개그",
-                    "cuts": {
+                            "nextBtn": "35"
+                        },
                         "cut35": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/6.mp3",
                                 "cr2": "",
-                                "code": 1670991436511,
-                                "text": "폭우가 심하게 쏟아질 때 필요한 사람은?",
-                                "point": "",
+                                "code": 1671542260763,
+                                "text": "세이브 테스트",
+                                "point": "11",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "도깨비2",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
-                                "pointCr": "",
+                                "effect2": "",
+                                "pointCr": "도깨비2",
                                 "narration": "",
-                                "pointType": "",
+                                "pointType": "P",
                                 "questions": {
                                     "text": [
                                         "",
@@ -1769,19 +1874,22 @@
                         },
                         "cut36": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/6.mp3",
                                 "cr2": "",
-                                "code": 1670991436511,
-                                "text": "",
-                                "point": "",
+                                "code": 1671542260763,
+                                "text": "두번째 세이브 테스트",
+                                "point": "11",
                                 "answer": "",
-                                "crName": "",
+                                "crName": "은탁2",
                                 "effect": "",
-                                "cutType": 3,
-                                "pointCr": "",
+                                "connect": "",
+                                "cutType": 1,
+                                "effect2": "",
+                                "pointCr": "도깨비2",
                                 "narration": "",
-                                "pointType": "",
+                                "pointType": "P",
                                 "questions": {
                                     "text": [
                                         "",
@@ -1789,11 +1897,7 @@
                                         ""
                                     ]
                                 },
-                                "questionsText": [
-                                    "우서",
-                                    "비서",
-                                    "익명"
-                                ],
+                                "questionsText": [],
                                 "questionsPoint": [
                                     {
                                         "point": null,
@@ -1802,10 +1906,10 @@
                                         "pointType": null
                                     },
                                     {
-                                        "point": "10",
+                                        "point": null,
                                         "nextBtn": null,
-                                        "pointCr": "이지안",
-                                        "pointType": "P"
+                                        "pointCr": null,
+                                        "pointType": null
                                     },
                                     {
                                         "point": null,
@@ -1821,19 +1925,22 @@
                         },
                         "cut37": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/6.mp3",
                                 "cr2": "",
-                                "code": 1670991436511,
-                                "text": "못맞춰찌롱~",
-                                "point": "4",
+                                "code": 1671542260763,
+                                "text": "세이브하면...?",
+                                "point": "11",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "은탁2",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
-                                "pointCr": "이지안",
+                                "effect2": "",
+                                "pointCr": "도깨비2",
                                 "narration": "",
-                                "pointType": "M",
+                                "pointType": "P",
                                 "questions": {
                                     "text": [
                                         "",
@@ -1841,11 +1948,7 @@
                                         ""
                                     ]
                                 },
-                                "questionsText": [
-                                    "우서",
-                                    "비서",
-                                    "익명"
-                                ],
+                                "questionsText": [],
                                 "questionsPoint": [
                                     {
                                         "point": null,
@@ -1854,10 +1957,10 @@
                                         "pointType": null
                                     },
                                     {
-                                        "point": "10",
+                                        "point": null,
                                         "nextBtn": null,
-                                        "pointCr": "이지안",
-                                        "pointType": "P"
+                                        "pointCr": null,
+                                        "pointType": null
                                     },
                                     {
                                         "point": null,
@@ -1873,17 +1976,20 @@
                         },
                         "cut38": {
                             "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/10.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/6.mp3",
                                 "cr2": "",
-                                "code": 1670991436511,
-                                "text": "대다나다....",
-                                "point": "4",
+                                "code": 1671542260763,
+                                "text": "세이브 다시 하면...?",
+                                "point": "11",
                                 "answer": "",
-                                "crName": "박동훈",
+                                "crName": "은탁2",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
-                                "pointCr": "이지안",
+                                "effect2": "",
+                                "pointCr": "도깨비2",
                                 "narration": "",
                                 "pointType": "P",
                                 "questions": {
@@ -1893,11 +1999,7 @@
                                         ""
                                     ]
                                 },
-                                "questionsText": [
-                                    "우서",
-                                    "비서",
-                                    "익명"
-                                ],
+                                "questionsText": [],
                                 "questionsPoint": [
                                     {
                                         "point": null,
@@ -1906,62 +2008,10 @@
                                         "pointType": null
                                     },
                                     {
-                                        "point": "10",
-                                        "nextBtn": null,
-                                        "pointCr": "이지안",
-                                        "pointType": "P"
-                                    },
-                                    {
                                         "point": null,
                                         "nextBtn": null,
                                         "pointCr": null,
                                         "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "39"
-                        },
-                        "cut39": {
-                            "list": {
-                                "bg": "",
-                                "cr": "https://api.school-os.net/game/upload/cr/8.png",
-                                "cr2": "",
-                                "code": 1670991436511,
-                                "text": "여기서 끗",
-                                "point": "0",
-                                "answer": "",
-                                "crName": "박동훈",
-                                "effect": "",
-                                "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [
-                                    "우서",
-                                    "비서",
-                                    "익명"
-                                ],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": "10",
-                                        "nextBtn": null,
-                                        "pointCr": "이지안",
-                                        "pointType": "P"
                                     },
                                     {
                                         "point": null,
@@ -1977,134 +2027,38 @@
                         }
                     },
                     "initBtn": [
+                        "cut34",
                         "cut35",
                         "cut36",
                         "cut37",
-                        "cut38",
-                        "cut39"
+                        "cut38"
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "scenarioTitle": "추가된 시나리오",
+            "chapters": [
                 {
-                    "code": 1670991436705,
-                    "title": "코믹",
+                    "code": 1671608360737,
+                    "title": "추가된 챕터",
                     "cuts": {
-                        "cut40": {
+                        "cut39": {
                             "list": {
-                                "bg": "https://api.school-os.net/game/upload/bg/11.jpg",
-                                "cr": "https://api.school-os.net/game/upload/cr/2.png",
-                                "cr2": "",
-                                "code": 1670991436705,
-                                "text": "게임을 시작하지",
-                                "point": "0",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/1.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/12.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/3.mp3",
+                                "cr2": "https:\/\/api.school-os.net\/game\/upload\/cr\/4.png",
+                                "code": 1671608360737,
+                                "text": "??????",
+                                "point": "11",
                                 "answer": "",
-                                "crName": "이지안",
+                                "crName": "은탁2",
                                 "effect": "",
+                                "connect": "",
                                 "cutType": 1,
-                                "pointCr": "",
-                                "narration": "",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [
-                                    "우서",
-                                    "비서",
-                                    "익명"
-                                ],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "41"
-                        },
-                        "cut41": {
-                            "list": {
-                                "bg": "https://api.school-os.net/game/upload/bg/11.jpg",
-                                "cr": "https://api.school-os.net/game/upload/cr/2.png",
-                                "cr2": "",
-                                "code": 1670991436705,
-                                "text": "",
-                                "point": "",
-                                "answer": "",
-                                "crName": "",
-                                "effect": "",
-                                "cutType": 2,
-                                "pointCr": "",
-                                "narration": "못맞출거라 생각한다||n왜냐하면 주관식이니까",
-                                "pointType": "",
-                                "questions": {
-                                    "text": [
-                                        "",
-                                        "",
-                                        ""
-                                    ]
-                                },
-                                "questionsText": [
-                                    "우서",
-                                    "비서",
-                                    "익명"
-                                ],
-                                "questionsPoint": [
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    },
-                                    {
-                                        "point": null,
-                                        "nextBtn": null,
-                                        "pointCr": null,
-                                        "pointType": null
-                                    }
-                                ],
-                                "questionsTimer": null,
-                                "subjectiveQuestion": ""
-                            },
-                            "nextBtn": "42"
-                        },
-                        "cut42": {
-                            "list": {
-                                "bg": "https://api.school-os.net/game/upload/bg/11.jpg",
-                                "cr": "https://api.school-os.net/game/upload/cr/2.png",
-                                "cr2": "",
-                                "code": 1670991436705,
-                                "text": "",
-                                "point": "9",
-                                "answer": "잠자리를 관찰함",
-                                "crName": "",
-                                "effect": "",
-                                "cutType": 4,
-                                "pointCr": "이지안",
+                                "effect2": "",
+                                "pointCr": "도깨비2",
                                 "narration": "",
                                 "pointType": "P",
                                 "questions": {
@@ -2114,11 +2068,7 @@
                                         ""
                                     ]
                                 },
-                                "questionsText": [
-                                    "우서",
-                                    "비서",
-                                    "익명"
-                                ],
+                                "questionsText": [],
                                 "questionsPoint": [
                                     {
                                         "point": null,
@@ -2139,26 +2089,29 @@
                                         "pointType": null
                                     }
                                 ],
-                                "questionsTimer": "10",
-                                "subjectiveQuestion": "파브르가 경찰서에 잡혀간 이유는?"
+                                "questionsTimer": null,
+                                "subjectiveQuestion": ""
                             },
-                            "nextBtn": "43"
+                            "nextBtn": "40"
                         },
-                        "cut43": {
+                        "cut40": {
                             "list": {
-                                "bg": "https://api.school-os.net/game/upload/bg/11.jpg",
-                                "cr": "https://api.school-os.net/game/upload/cr/2.png",
+                                "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/11.jpg",
+                                "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/2.png",
+                                "sr": "https:\/\/api.school-os.net\/game\/upload\/sound\/4.mp3",
                                 "cr2": "",
-                                "code": 1670991436705,
-                                "text": "사스가....",
-                                "point": "",
+                                "code": 1671608360737,
+                                "text": "안뇽 효과가 적용됐어",
+                                "point": "11",
                                 "answer": "",
-                                "crName": "이지안",
-                                "effect": "",
+                                "crName": "은탁2",
+                                "effect": "ani-right",
+                                "connect": "",
                                 "cutType": 1,
-                                "pointCr": "",
+                                "effect2": "",
+                                "pointCr": "도깨비2",
                                 "narration": "",
-                                "pointType": "",
+                                "pointType": "P",
                                 "questions": {
                                     "text": [
                                         "",
@@ -2166,11 +2119,7 @@
                                         ""
                                     ]
                                 },
-                                "questionsText": [
-                                    "우서",
-                                    "비서",
-                                    "익명"
-                                ],
+                                "questionsText": [],
                                 "questionsPoint": [
                                     {
                                         "point": null,
@@ -2191,17 +2140,15 @@
                                         "pointType": null
                                     }
                                 ],
-                                "questionsTimer": "10",
+                                "questionsTimer": null,
                                 "subjectiveQuestion": ""
                             },
                             "nextBtn": null
                         }
                     },
                     "initBtn": [
-                        "cut40",
-                        "cut41",
-                        "cut42",
-                        "cut43"
+                        "cut39",
+                        "cut40"
                     ]
                 }
             ]
@@ -2209,25 +2156,159 @@
     ],
     "profileList": [
         {
-            "bg": "",
-            "cr": "https://api.school-os.net/game/upload/cr/8.png",
-            "name": "박동훈",
-            "profile": "부장",
+            "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/1.jpg",
+            "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/7.png",
+            "name": "도깨비2",
+            "profile": "도깨비2",
             "position": "top"
         },
         {
-            "bg": "",
-            "cr": "https://api.school-os.net/game/upload/cr/2.png",
-            "name": "이지안",
-            "profile": "인턴",
+            "bg": "https:\/\/api.school-os.net\/game\/upload\/bg\/2.jpg",
+            "cr": "https:\/\/api.school-os.net\/game\/upload\/cr\/5.png",
+            "name": "은탁2",
+            "profile": "은탁이2",
             "position": "top"
         }
     ],
     "intro": {
         "data": {
-            "bg": "https://api.school-os.net/game/upload/bg/1.jpg",
-            "copy": "dsadasdaa@@"
+            "bg": ""
         },
-        "introLogo": "688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6"
+        "introLogo": ""
+    },
+    "uiSet": {
+        "x": "3",
+        "y": "3",
+        "font": "font-kimm",
+        "icon": "icon2",
+        "round": "10",
+        "border": "1",
+        "fontSize": "font-md",
+        "fontColor": {},
+        "mainColor": {
+            "a": 1,
+            "hex": "#3F0F0F",
+            "hsl": {
+                "a": 1,
+                "h": 0,
+                "l": 0.15278194,
+                "s": 0.6186468112657817
+            },
+            "hsv": {
+                "a": 1,
+                "h": 0,
+                "s": 0.7644,
+                "v": 0.2473
+            },
+            "hex8": "#3F0F0FFF",
+            "rgba": {
+                "a": 1,
+                "b": 15,
+                "g": 15,
+                "r": 63
+            },
+            "oldHue": 0,
+            "source": "hsva"
+        },
+        "shadowColor": {
+            "a": 0.45,
+            "hex": "#000000",
+            "hsl": {
+                "a": 0.45,
+                "h": 0,
+                "l": 0,
+                "s": 0
+            },
+            "hsv": {
+                "a": 0.45,
+                "h": 0,
+                "s": 0,
+                "v": 0
+            },
+            "hex8": "#00000073",
+            "rgba": {
+                "a": 0.45,
+                "b": 0,
+                "g": 0,
+                "r": 0
+            },
+            "oldHue": 0,
+            "source": "rgba"
+        },
+        "strokeColor": {
+            "a": 1,
+            "hex": "#DF1111",
+            "hsl": {
+                "a": 1,
+                "h": 0,
+                "l": 0.46982208,
+                "s": 0.859427296392711
+            },
+            "hsv": {
+                "a": 1,
+                "h": 0,
+                "s": 0.9244,
+                "v": 0.8736
+            },
+            "hex8": "#DF1111FF",
+            "rgba": {
+                "a": 1,
+                "b": 17,
+                "g": 17,
+                "r": 223
+            },
+            "oldHue": 0,
+            "source": "hsva"
+        },
+        "windowColor": {
+            "a": 0.11,
+            "hex": "#000000",
+            "hsl": {
+                "a": 0.11,
+                "h": 0,
+                "l": 0,
+                "s": 0
+            },
+            "hsv": {
+                "a": 0.11,
+                "h": 0,
+                "s": 0,
+                "v": 0
+            },
+            "hex8": "#0000001C",
+            "rgba": {
+                "a": 0.11,
+                "b": 0,
+                "g": 0,
+                "r": 0
+            },
+            "oldHue": 0,
+            "source": "rgba"
+        },
+        "mainFontColor": {
+            "a": 0.67,
+            "hex": "#FFFFFF",
+            "hsl": {
+                "a": 0.67,
+                "h": 0,
+                "l": 1,
+                "s": 0
+            },
+            "hsv": {
+                "a": 0.67,
+                "h": 0,
+                "s": 0,
+                "v": 1
+            },
+            "hex8": "#FFFFFFAB",
+            "rgba": {
+                "a": 0.67,
+                "b": 255,
+                "g": 255,
+                "r": 255
+            },
+            "oldHue": 0,
+            "source": "hsva"
+        }
     }
 }
