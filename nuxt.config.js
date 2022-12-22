@@ -1,5 +1,5 @@
 // import path from 'path'
-import colors from 'vuetify/es5/util/colors'
+// import colors from 'vuetify/es5/util/colors'
 // import dotenv from 'dotenv'
 // import {DIR_CONFIG} from './config/dirConfig'
 // import { CONST_ENV_TYPE } from './config/envConfig'
@@ -13,7 +13,7 @@ export default {
   },
   head: {
     titleTemplate: '%s - MAKER',
-    title: 'MAKER',
+    title: 'Project Koo',
     htmlAttrs: {
       lang: 'ko',
     },
@@ -29,6 +29,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    // '~/assets/variables.scss',
     '~/assets/reset.scss',
     '~/assets/common.scss',
     'element-ui/lib/theme-chalk/reset.css',
@@ -37,15 +38,15 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~plugins/BootstrapVue.js', ssr: false, mode: 'client' },
+    // { src: '~plugins/BootstrapVue.js', ssr: false, mode: 'client' },
     { src: '~plugins/MomentVue.js', ssr: false, mode: 'client' },
     { src: '~plugins/AwesomeSwiper.js', ssr: false, mode: 'client' },
-    { src: '~plugins/Vcaledar.js', ssr: false, mode: 'client' },
-    { src: '~plugins/HtmlEditor.js', ssr: false, mode: 'client' },
+    // { src: '~plugins/Vcaledar.js', ssr: false, mode: 'client' },
+    // { src: '~plugins/HtmlEditor.js', ssr: false, mode: 'client' },
     { src: '~plugins/filters.js', ssr: false, mode: 'client' },
-    { src: '~plugins/QrCode.js', ssr: false, mode: 'client' },
-    { src: '~plugins/LottieWebVue.js', ssr: false, mode: 'client' },
-    { src: '~plugins/ApexCart.js', ssr: false, mode: 'client' },
+    // { src: '~plugins/QrCode.js', ssr: false, mode: 'client' },
+    // { src: '~plugins/LottieWebVue.js', ssr: false, mode: 'client' },
+    // { src: '~plugins/ApexCart.js', ssr: false, mode: 'client' },
     { src: '~plugins/ColorPicker.js', ssr: false, mode: 'client' },
     { src: '~plugins/VueScrollbar.js', ssr: false, mode: 'client' },
     { src: '~plugins/Vuedraggable.js', ssr: false, mode: 'client' },
@@ -71,7 +72,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/device',
-    'nuxt-socket-io',
+    // 'nuxt-socket-io',
     'vue2-editor/nuxt',
     'cookie-universal-nuxt',
     'nuxt-element-ui'
@@ -86,20 +87,20 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    theme: {
-      dark: true,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
-        },
-      },
-    },
+    // theme: {
+    //   dark: true,
+    //   themes: {
+    //     dark: {
+    //       primary: colors.blue.darken2,
+    //       accent: colors.grey.darken3,
+    //       secondary: colors.amber.darken3,
+    //       info: colors.teal.lighten1,
+    //       warning: colors.amber.base,
+    //       error: colors.deepOrange.accent4,
+    //       success: colors.green.accent3,
+    //     },
+    //   },
+    // },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
