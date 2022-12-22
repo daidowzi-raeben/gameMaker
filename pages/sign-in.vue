@@ -79,7 +79,9 @@ export default {
         console.log(value)
         console.log('SUCCESS')
         // 로그인 성공 시 페이지 이동
-        this.$router.push('/project-manager')
+        if (value.user_idx) {
+          // this.$router.push('/project-manager')
+        }
       },
       immediate: true,
     },
