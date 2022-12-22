@@ -45,7 +45,7 @@
         </label>
       </div>
       <div class="setting-info">
-        두번째 인물을 선택하세요! 에셋관리에서 더 추가할 수 있어요.
+        두번째 인물을 선택하세요! 에셋 관리에서 더 추가할 수 있어요.
       </div>
       <ul v-if="ASSETS" class="thumbnail-list">
         <li class="thumbnail-list--item" @click="onClickCrImage2('')">

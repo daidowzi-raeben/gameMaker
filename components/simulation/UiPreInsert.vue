@@ -1,6 +1,6 @@
 <template>
   <div class="insert">
-    <div v-bar class="setting">
+    <el-scrollbar class="setting">
       <div class="setting bottom-none">
         <div class="setting-con setting-color">
           <div class="setting-tit">UI 설정</div>
@@ -29,7 +29,7 @@
             </label>
           </div>
           <div v-if="isUiSettingTab === false">
-            <div v-bar class="ui-wrap h-550">
+            <el-scrollbar class="ui-wrap h-550">
               <div>
                 <ul class="theme-list">
                   <li v-for="(v, i) in 20" :key="i" class="theme-list--item">
@@ -40,13 +40,51 @@
                   </li>
                 </ul>
               </div>
-            </div>
+            </el-scrollbar>
           </div>
           <div v-if="isUiSettingTab === true" class="ui-wrap">
+            <div class="setting-tit sub">인트로 관리</div>
+            <div class="input-select--list">
+              <div class="input-wrap">
+                <label class="input-label">딤 효과</label>
+                <el-select v-model="introDimOptionValue" placeholder="선택안함">
+                  <el-option
+                    v-for="item in introDimOption"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+                <!-- <select class="input-select">
+                  <option>밝게</option>
+                  <option>어둡게</option>
+                  <option>흐릿하게</option>
+                </select> -->
+              </div>
+            </div>
+            <div class="input-select--list">
+              <div class="input-wrap">
+                <label class="input-label">로고&버튼</label>
+                <select class="input-select">
+                  <option>중앙</option>
+                  <option>대각선(로고가 위로)</option>
+                  <option>대각선(버튼이 위로)</option>
+                </select>
+              </div>
+              <div class="input-wrap">
+                <label class="input-label">카피라이트</label>
+                <select class="input-select">
+                  <option>왼쪽</option>
+                  <option>중앙</option>
+                  <option>오른쪽</option>
+                </select>
+              </div>
+            </div>
+
             <div class="setting-tit sub">메인색상 관리</div>
             <div class="color-select--list">
               <div class="color-select--wrap">
-                <button
+                <!-- <button
                   :style="
                     UISetting.mainColor && UISetting.mainColor.rgba
                       ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a})`
@@ -55,18 +93,19 @@
                   type="button"
                   class="color"
                   @click="isShowColorPickerName = 'mainColor'"
-                ></button>
+                ></button> -->
+                <el-color-picker v-model="mainColor" show-alpha></el-color-picker>
                 <label class="label">메인색상</label>
-                <div
+                <!-- <div
                   v-if="isShowColorPickerName === 'mainColor'"
                   v-click-outside="onBlurPickerClose"
                   class="color-select"
                 >
                   <Chrome v-model="colorPicker.mainColor"></Chrome>
-                </div>
+                </div> -->
               </div>
               <div class="color-select--wrap">
-                <button
+                <!-- <button
                   :style="
                     UISetting.mainFontColor && UISetting.mainFontColor.rgba
                       ? `background:rgba(${UISetting.mainFontColor.rgba.r},${UISetting.mainFontColor.rgba.g},${UISetting.mainFontColor.rgba.b},${UISetting.mainFontColor.rgba.a})`
@@ -75,22 +114,23 @@
                   type="button"
                   class="color"
                   @click="isShowColorPickerName = 'mainFontColor'"
-                ></button>
+                ></button> -->
+                <el-color-picker v-model="mainFontColor" show-alpha></el-color-picker>
                 <label class="label">메인글씨색상</label>
-                <div
+                <!-- <div
                   v-if="isShowColorPickerName === 'mainFontColor'"
                   v-click-outside="onBlurPickerClose"
                   class="color-select"
                 >
                   <Chrome v-model="colorPicker.mainFontColor"></Chrome>
-                </div>
+                </div> -->
               </div>
             </div>
 
             <div class="setting-tit sub">대사창 색상 관리</div>
             <div class="color-select--list">
               <div class="color-select--wrap">
-                <button
+                <!-- <button
                   :style="
                     UISetting.windowColor && UISetting.windowColor.rgba
                       ? `background:rgba(${UISetting.windowColor.rgba.r},${UISetting.windowColor.rgba.g},${UISetting.windowColor.rgba.b},${UISetting.windowColor.rgba.a})`
@@ -99,18 +139,19 @@
                   type="button"
                   class="color"
                   @click="isShowColorPickerName = 'windowMainColor'"
-                ></button>
+                ></button> -->
+                <el-color-picker v-model="windowColor" show-alpha></el-color-picker>
                 <label class="label">메인색상</label>
-                <div
+                <!-- <div
                   v-if="isShowColorPickerName === 'windowMainColor'"
                   v-click-outside="onBlurPickerClose"
                   class="color-select"
                 >
                   <Chrome v-model="colorPicker.windowColor"></Chrome>
-                </div>
+                </div> -->
               </div>
               <div class="color-select--wrap">
-                <button
+                <!-- <button
                   :style="
                     UISetting.fontColor && UISetting.fontColor.rgba
                       ? `background:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})`
@@ -119,18 +160,19 @@
                   type="button"
                   class="color"
                   @click="isShowColorPickerName = 'windowTextColor'"
-                ></button>
+                ></button> -->
+                <el-color-picker v-model="fontColor" show-alpha></el-color-picker>
                 <label class="label">글자</label>
-                <div
+                <!-- <div
                   v-if="isShowColorPickerName === 'windowTextColor'"
                   v-click-outside="onBlurPickerClose"
                   class="color-select"
                 >
                   <Chrome v-model="colorPicker.fontColor"></Chrome>
-                </div>
+                </div> -->
               </div>
               <div class="color-select--wrap">
-                <button
+                <!-- <button
                   :style="
                     UISetting.strokeColor && UISetting.strokeColor.rgba
                       ? `background:rgba(${UISetting.strokeColor.rgba.r},${UISetting.strokeColor.rgba.g},${UISetting.strokeColor.rgba.b},${UISetting.strokeColor.rgba.a})`
@@ -139,18 +181,19 @@
                   type="button"
                   class="color"
                   @click="isShowColorPickerName = 'windowOutlineColor'"
-                ></button>
+                ></button> -->
+                <el-color-picker v-model="strokeColor" show-alpha></el-color-picker>
                 <label class="label">외곽선</label>
-                <div
+                <!-- <div
                   v-if="isShowColorPickerName === 'windowOutlineColor'"
                   v-click-outside="onBlurPickerClose"
                   class="color-select"
                 >
                   <Chrome v-model="colorPicker.strokeColor"></Chrome>
-                </div>
+                </div> -->
               </div>
               <div class="color-select--wrap">
-                <button
+                <!-- <button
                   :style="
                     UISetting.shadowColor && UISetting.shadowColor.rgba
                       ? `background:rgba(${UISetting.shadowColor.rgba.r},${UISetting.shadowColor.rgba.g},${UISetting.shadowColor.rgba.b},${UISetting.shadowColor.rgba.a})`
@@ -159,15 +202,16 @@
                   type="button"
                   class="color"
                   @click="isShowColorPickerName = 'windowShadowColor'"
-                ></button>
+                ></button> -->
+                <el-color-picker v-model="shadowColor" show-alpha></el-color-picker>
                 <label class="label">그림자</label>
-                <div
+                <!-- <div
                   v-if="isShowColorPickerName === 'windowShadowColor'"
                   v-click-outside="onBlurPickerClose"
                   class="color-select"
                 >
                   <Chrome v-model="colorPicker.shadowColor"></Chrome>
-                </div>
+                </div> -->
               </div>
             </div>
 
@@ -267,7 +311,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </el-scrollbar>
     <div class="right" :class="{ fold: rightContentShow === true }">
       <button
         type="button"
@@ -281,18 +325,16 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-import { Chrome } from 'vue-color'
 import { kooLogin } from '~/config/util'
 export default {
   components: {
-    Chrome,
   },
   data() {
     return {
       rightContentShow: false,
       paramsInit: {},
       colorPicker: {
-        mainColor: {},
+        mainColor: null,
         windowColor: {},
         strokeColor: {},
         shadowColor: {},
@@ -320,6 +362,17 @@ export default {
         { name: '한국기계연구원', value: 'font-kimm' },
         { name: '해피니스 산스', value: 'font-happiness' },
       ],
+      introDimOption:[{
+        value: 'introDimOption1',
+        label: '밝게'
+      },{
+        value: 'introDimOption2',
+        label: '어둡게'
+      },{
+        value: 'introDimOption3',
+        label: '흐리게'
+      },],
+      introDimOptionValue:'',
     }
   },
   computed: {
@@ -422,9 +475,9 @@ export default {
   flex-wrap: wrap;
   margin-bottom: 0;
   &--item {
-    width: calc(25% - 25px);
+    width: calc(33.3% - 17px);
     margin: 0 25px 20px 0;
-    &:nth-child(4n) {
+    &:nth-child(3n) {
       margin-right: 0;
     }
     .img-wrap {
@@ -447,14 +500,24 @@ export default {
         }
       }
     }
-    @media (max-width: 1400px) {
-      width: calc(33.3% - 20px);
+    @media (max-width: 1600px) {
+      width: calc(25% - 15px);
+      margin: 0 20px 30px 0;
+      &:nth-child(3n) {
+        margin-right: 20px;
+      }
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+    }
+    @media (max-width: 1450px) {
+      width: calc(33.3% - 17px);
       margin: 0 20px 30px 0;
       &:nth-child(3n) {
         margin-right: 0;
       }
       &:nth-child(4n) {
-        margin-right: 20px;
+        margin-right: 17px;
       }
     }
   }
@@ -463,6 +526,10 @@ export default {
   &--list {
     display: flex;
     .color-select--wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       margin-right: 35px;
     }
   }
@@ -477,11 +544,10 @@ export default {
       border-radius: 35px;
     }
     .label {
-      width: 70px;
       text-align: center;
-      margin: 5px 0;
+      margin: 15px 0 0;
       display: block;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       color: $textCol2;
     }
     .color-select {
@@ -493,12 +559,12 @@ export default {
   }
 }
 .input-select--list {
-  margin: 28px 0;
+  margin: 20px 0;
   display: flex;
   .input-wrap {
-    margin-right: 40px;
+    margin-right: 30px;
     .input-label {
-      width: 60px;
+      width: 65px;
       color: $textCol2;
     }
     .input-select {
@@ -510,10 +576,8 @@ export default {
 .ui-wrap.h-550 {
   height: 550px;
   background: #f4f5f7;
-  padding: 0 20px 20px 0;
+  padding: 20px;
   margin-bottom: 40px;
-  .vb-content {
-    padding: 20px 20px 0 20px;
-  }
+  border-radius: 10px;
 }
 </style>

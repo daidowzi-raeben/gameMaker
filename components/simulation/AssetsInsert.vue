@@ -5,7 +5,7 @@
       <div>
         <div>LIST</div>
       </div>
-      <button v-b-modal.AssetsLocalUpload type="button">모달열기</button>
+      <button type="button">모달열기</button>
     </div>
     <AssetsLocalUpload />
   </div>
@@ -16,6 +16,10 @@ import AssetsLocalUpload from '~/components/modal/AssetsLocalUpload'
 export default {
   components: {
     AssetsLocalUpload,
+  },
+  data() {
+    return {
+    }
   },
 }
 </script>

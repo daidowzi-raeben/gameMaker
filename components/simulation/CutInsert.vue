@@ -1,32 +1,24 @@
 <template>
   <div class="insert">
     <div v-if="!SCENE_CODE" class="insert-dim">챕터를 선택하세요</div>
-
-    <div v-bar class="setting">
-      <div style="position: relative">
-        <transition name="el-zoom-in-center">
+    <div class="setting">
+      <transition name="el-fade-in-linear">
           <BackgroundAssets
             v-if="CONTENT_CODE === 1"
-            style="position: absolute; top: 0"
           />
           <CharacterFirst
             v-if="CONTENT_CODE === 2"
-            style="position: absolute; top: 0"
           />
           <CharacterSecond
             v-if="CONTENT_CODE === 3"
-            style="position: absolute; top: 0"
           />
           <SoundAssets
             v-if="CONTENT_CODE === 4"
-            style="position: absolute; top: 0"
           />
           <DialogueSetting
             v-if="CONTENT_CODE === 5"
-            style="position: absolute; top: 0"
           />
-        </transition>
-      </div>
+      </transition>
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
       <button

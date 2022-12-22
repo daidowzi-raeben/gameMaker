@@ -1,5 +1,5 @@
 <template>
-  <div v-bar class="cut-list--wrap">
+  <el-scrollbar class="cut-list--wrap">
     <ul id="activeList" class="cut-list">
       <li
         v-for="(v, i) in CUT_LIST.jsonData"
@@ -61,7 +61,7 @@
         </div>
       </li>
     </ul>
-  </div>
+  </el-scrollbar>
 </template>
 
 <script>

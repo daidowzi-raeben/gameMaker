@@ -7,6 +7,37 @@
     </div>
     <div class="column-2">
       <div v-if="PREVIEW" class="preview">
+        <!-- dim-light, dim-dark, dim-blur, diagonal, diagonal-r, copy-left, copy-right 클래스 추가로 구분. intro만있으면 기본 중앙정렬 -->
+        <div v-if="PREVIEW && MAKER_GNB === 5" class="preview-con preview-intro dim-light diagonal">
+          <div class="preview-intro--background">
+            <img
+              src="https://mblogthumb-phinf.pstatic.net/MjAyMDAyMDNfOTcg/MDAxNTgwNjY4MzA1OTQ5.e9NJgX23nV_5ZM4Bn8LN-KQyJ2ZxsVuR5HZpJPb_TMMg.S8LQwAn8Q03YQVPvbVrCSdut5GqudOXLObvrWWzZSxcg.JPEG.westar4501/2%EC%9B%94_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_se.jpg?type=w800"
+              alt="background"
+            />
+          </div>
+          <div class="preview-intro--logo">
+            <img src="~/static/images/logo.svg" alt="logo" />
+          </div>
+          <div class="preview-intro--menu">
+            <button
+              type="button"
+              class="btn"
+              @click="onclickDisplayShow('displayGame')"
+            >
+              시작하기
+            </button>
+            <button type="button" class="btn">불러오기</button>
+            <button
+              type="button"
+              class="btn"
+              @click="onclickDisplayShow('displayProfile')"
+            >
+              등장인물
+            </button>
+            <button type="button" class="btn">갤러리</button>
+          </div>
+          <div class="preview-intro--copy">ⓒproject koo</div>
+        </div>
         <div v-if="PREVIEW && MAKER_GNB !== 5" class="preview-con preview-img">
           <img
             v-if="PREVIEW.img.bg"

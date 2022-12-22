@@ -3,7 +3,7 @@
     <div>
       <div class="setting-tit">배경화면</div>
       <div class="setting-info">
-        배경을 선택하세요! 에셋관리에서 더 추가할 수 있어요.
+        배경을 선택하세요! 에셋 관리에서 더 추가할 수 있어요.
       </div>
       <ul v-if="ASSETS" class="thumbnail-list">
         <li class="thumbnail-list--item" @click="onClickBgImage('')">

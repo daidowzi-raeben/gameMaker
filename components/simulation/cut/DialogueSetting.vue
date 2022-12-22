@@ -1,5 +1,5 @@
 <template>
-  <div class="setting">
+  <div>
     <!-- <ImageController /> -->
     <div class="setting-con setting-talk">
       <div class="setting-tit">대사 입력</div>

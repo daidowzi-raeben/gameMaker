@@ -22,18 +22,36 @@
   margin-top: 70px;
 }
 
+.text-center{
+  text-align: center;
+}
+
+.mb{
+  &-5{
+    margin-bottom:2.5em;
+  }
+}
+.mt{
+  &-5{
+    margin-top:2.5em;
+  }
+}
+
+button{
+  transition:all .3s;
+}
 .button {
   font-size: 1.4rem;
   padding: 5px 10px;
   border-radius: 5px;
   margin: 0 5px;
-  transition: background-color .3s;
   white-space: nowrap;
 
   &.md {
     font-size: 1.5rem;
     padding: 6px 10px;
     min-width: 130px;
+    height:38px;
     font-weight: 300;
   }
 
@@ -1030,4 +1048,18 @@
 
 .el-loading-spinner i{
   font-size:50px;
+}
+
+.el-dialog{
+  width:55% !important;
+}
+
+.el-input__inner{
+  border-color:#C0C4CC !important;
+  width:150px !important;
+}
+
+.el-select-dropdown__item.selected span{
+  color:$colPrimaryHover !important;
+  font-weight: 400;
 }

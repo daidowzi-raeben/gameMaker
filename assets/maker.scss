@@ -96,6 +96,7 @@
         display: inline-block;
         vertical-align: middle;
         opacity: 0;
+        margin:0 2px;
       }
       &-sound {
         width: 20px;
@@ -162,6 +163,9 @@
         padding: 8px 5px 8px 20px;
         font-size: 1.2rem;
         color:#fff;
+        min-height: 32px;
+        display: flex;
+        align-items: center;
         .text{
           display:inline-block;
           vertical-align: middle;
@@ -206,7 +210,7 @@
 
       &-tit {
         display: flex;
-        padding: 8px 40px;
+        padding: 8px 40px 7px;
         font-size: 1.2rem;
         color: #fff;
         position:relative;
@@ -256,8 +260,6 @@
         font-size: 1.8rem;
         line-height: 1;
         vertical-align: middle;
-        position: relative;
-        top: -2px;
         opacity: 0;
         color: #fff;
       }
@@ -268,6 +270,7 @@
           display:flex;
           justify-content: space-between;
           padding: 8px 20px 8px 40px;
+          min-height: 32px;
           .tit{
             font-size:1.2rem;
             color:#fff;
@@ -481,15 +484,20 @@
       // }
       .setting-con {
         width: 100%;
-        padding: 15px 15px 10px 15px;
+        padding: 20px;
         & ~ .text-center{
           width: calc(100% - 20px);
+        }
+        &.setting-image{
+          position:absolute;
+          left:0;
+          top:0;
         }
       }
 
       &-tit {
         font-size: 1.8rem;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         display:flex;
         .input-check{
           position:relative;
@@ -497,7 +505,7 @@
           .check-text{
             font-size:1.1rem;
             background-color:#D9D9D9;
-            padding:1px 8px;
+            padding:3px 8px 4px;
             border-radius: 5px;
             color:$textCol2;
             margin-left:10px;
@@ -517,10 +525,6 @@
         color:$textCol2;
         font-weight: 300;
         margin-bottom:20px;
-      }
-
-      &-image {
-
       }
 
       &-scen {
@@ -563,6 +567,7 @@
                   z-index: 1;
                   border-radius: 10px;
                   overflow: hidden;
+                  box-sizing: border-box;
                   img{
                     width:50px;
                   }
@@ -639,9 +644,9 @@
 
       &-talk {
         .tab-list {
-          width: calc(100% + 30px);
+          width: calc(100% + 40px);
           position: relative;
-          left: -25px;
+          left: -20px;
           padding: 0 25px 10px;
           margin-bottom: 10px;
 
@@ -779,6 +784,7 @@
                   border-radius: 5px;
                   font-weight: 400;
                   margin-right: 2px;
+                  cursor: pointer;
                 }
               }
             }
@@ -787,12 +793,11 @@
 
         .insert {
           &-wrap {
-            margin: 25px 0 10px;
-            padding: 10px 10px 50px 10px;
+            margin: 15px 0 10px;
+            padding: 15px 10px 60px 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
             position: relative;
-            width:calc(100% - 20px);
             .input-text{
               display:block;
               margin-bottom:10px;
@@ -804,9 +809,11 @@
               resize: none;
               font-size: 1.4rem;
               width: 100%;
+              padding:2px;
 
               &::placeholder {
                 color: #ccc;
+                font-weight: 300;
               }
             }
           }
@@ -814,7 +821,6 @@
           &-answer{
             margin-top:25px;
             position:relative;
-            width:calc(100% - 20px);
             input[type=text]{
               height:45px;
               width:calc(100% - 45px);
@@ -887,15 +893,22 @@
               font-size: 1.4rem;
               margin: 0 7px;
               outline: none;
+              border:1px solid #ccc;
 
               &.point {
                 border-color: $colPinkHover;
                 color: $colPinkHover;
+                &:hover{
+                  box-shadow: 0 0 5px rgba(234, 112, 112, .4);
+                }
               }
 
               &.scenario {
                 border-color: $colBlueHover;
                 color: $colBlueHover;
+                &:hover{
+                  box-shadow: 0 0 5px rgba(125, 165, 225, .4);
+                }
               }
             }
 
@@ -906,6 +919,7 @@
 
               &>* {
                 margin: 0 3px;
+                font-size:1.3rem;
               }
 
               .save {
@@ -916,12 +930,18 @@
                 border: 1px solid $colPink;
                 color:$colPink;
                 margin:0 7px;
+                &:hover{
+                  box-shadow: 0 0 5px rgba(234, 112, 112, .4);
+                }
               }
 
               &.scenario-set {
                 .save {
                   border: 1px solid $colBlue;
                   color: $colBlue;
+                  &:hover{
+                    box-shadow: 0 0 5px rgba(125, 165, 225, .4);
+                  }
                 }
               }
             }
@@ -1377,7 +1397,7 @@
       .name {
         font-weight: 500;
         background-color: #222;
-        padding: 3px 0 4px;
+        padding: 10px 0 11px;
         width:100px;
         text-align: center;
         border-radius: 10px;
@@ -1400,16 +1420,6 @@
       position:absolute;
       width:100%;
       height:100%;
-      &:after{
-        content:"";
-        display:block;
-        width:100%;
-        height: 100%;
-        background:url(~/static/images/bg_dim.png)no-repeat center / 100% 100%;
-        position:absolute;
-        left:0;
-        top:0;
-      }
       img{
         width:auto;
         height: 100%;
@@ -1436,7 +1446,7 @@
       top:250px;
       display:flex;
       flex-direction: column;
-      width:70%;
+      width:55%;
       .btn{
         font-size:1.6rem;
         background:#ccc;
@@ -1446,11 +1456,82 @@
       }
     }
     &--copy{
+      width:100%;
+      padding:0 20px;
       position:absolute;
       left:50%;
       transform:translateX(-50%);
       bottom:30px;
       font-size:1.5rem;
+      text-align: center;
+    }
+    &.dim{
+      &-light, &-dark{
+        .preview-intro--background{
+          &:after{
+            content:"";
+            display:block;
+            width:100%;
+            height: 100%;
+            background:url(~/static/images/bg_dim.png)no-repeat center / 100% 100%;
+            position:absolute;
+            left:0;
+            top:0;
+          }
+        }
+      }
+      &-dark{
+        .preview-intro--background{
+          &:after{
+            filter: brightness(0.5);
+          }
+        }
+      }
+      &-blur{
+        .preview-intro--background img{
+          filter: blur(5px);
+        }
+      }
+    }
+    &.diagonal{
+      .preview-intro--logo{
+        left:20px;
+        top:50px;
+        transform:none;
+      }
+      .preview-intro--menu{
+        left:unset;
+        top:unset;
+        right:20px;
+        bottom:40px;
+        transform: none;
+      }
+      &-r{
+        .preview-intro--logo{
+          left:unset;
+          right:20px;
+          top:unset;
+          bottom:50px;
+          transform:none;
+        }
+        .preview-intro--menu{
+          left:20px;
+          top:40px;
+          transform: none;
+        }
+      }
+    }
+    &.copy{
+      &-left{
+        .preview-intro--copy{
+          text-align: left;
+        }
+      }
+      &-right{
+        .preview-intro--copy{
+          text-align: right;
+        }
+      }
     }
   }
   &-profile{
@@ -1771,7 +1852,7 @@
     background: #fff;
     border: 1px solid #ccc;
     font-size: 1.4rem;
-    padding: 5px 30px 5px 10px;
+    padding: 5px 25px 5px 10px;
     min-width: 50px;
     border-radius: 5px;
     background-image: url('~/static/images/icon/select_arrow.svg');
@@ -1779,6 +1860,7 @@
     background-size: 10px;
     background-position: calc(100% - 10px) center;
     outline: none;
+    box-sizing: border-box;
   }
 
   &-file{
@@ -1889,7 +1971,6 @@
     }
     .scroll{
       height:100px;
-      padding-right:15px;
       margin-bottom:25px;
       p{
         font-size:1.2rem;
@@ -1904,6 +1985,7 @@
       font-size:1.4rem;
       color:$textCol2;
       font-weight: 300;
+      margin-bottom:10px;
     }
     .input-text{
       width:100%;
