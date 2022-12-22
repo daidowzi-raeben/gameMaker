@@ -3,13 +3,19 @@
     <div class="header type2">
       <div class="header-wrap">
         <div class="header-logo"><a href="#"></a></div>
-        <button type="button" class="menu-btn"><i class="fa-solid fa-bars"></i></button>
+        <button type="button" class="menu-btn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
         <button type="button" class="close-btn">&times;</button>
         <div class="dim"></div>
         <ul class="header-menu">
-          <li class="header-menu--item"><nuxt-link to="">프로젝트 Koo</nuxt-link></li>
+          <li class="header-menu--item">
+            <nuxt-link to="">프로젝트 Koo</nuxt-link>
+          </li>
           <li class="header-menu--item"><nuxt-link to="">공유</nuxt-link></li>
-          <li class="header-menu--item"><nuxt-link to="">이용방법</nuxt-link></li>
+          <li class="header-menu--item">
+            <nuxt-link to="">이용방법</nuxt-link>
+          </li>
           <li class="header-menu--item"><nuxt-link to="">금액</nuxt-link></li>
           <li class="header-menu--item"><nuxt-link to="">로그인</nuxt-link></li>
         </ul>
@@ -19,10 +25,22 @@
       <div class="login-wrap">
         <form @submit.prevent="onSubmit">
           <div class="login-input id">
-            <input v-model="login.id" class="input" type="text" placeholder="아이디를 입력하세요" required />
+            <input
+              v-model="login.id"
+              class="input"
+              type="text"
+              placeholder="아이디를 입력하세요"
+              required
+            />
           </div>
           <div class="login-input pass">
-            <input v-model="login.pw" class="input" type="password" placeholder="비밀번호를 입력하세요" required />
+            <input
+              v-model="login.pw"
+              class="input"
+              type="password"
+              placeholder="비밀번호를 입력하세요"
+              required
+            />
           </div>
           <div class="login-option">
             <label class="input-check">
@@ -61,6 +79,7 @@ export default {
         console.log(value)
         console.log('SUCCESS')
         // 로그인 성공 시 페이지 이동
+        this.$router.push('/project-manager')
       },
       immediate: true,
     },

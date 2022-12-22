@@ -1,6 +1,7 @@
 <template>
   <div class="insert">
     <div class="setting">
+      {{ intro }}
       <ImageController />
       <!-- <div class="setting-copy">
         <div class="setting-tit">버튼설정</div>
@@ -26,13 +27,22 @@
           placeholder="2022 (C) 프로젝트이름"
           class="input-text"
           :value="PREVIEW_INTRO.copyright"
+          @input="onIntroData('copyright', $event)"
         />
       </div>
       <div class="setting-con setting-logo">
         <div class="setting-tit">로고 등록</div>
         <div class="input-wrap">
-          <select class="input-select" :value="PREVIEW_INTRO.position">
-            <option>TOP</option>
+          <select
+            class="input-select"
+            :value="PREVIEW_INTRO.position"
+            @change="onIntroData('position', $event)"
+          >
+            <option :value="null">CENTER</option>
+            <option value="TOP">TOP</option>
+            <option value="BOTTOM">BOTTOM</option>
+            <option value="LEFT">LEFT</option>
+            <option value="RIGHT">RIGHT</option>
           </select>
           <input
             type="text"
@@ -85,7 +95,13 @@ export default {
       rightContentShow: false,
       isFileInsert: false,
       fileInsertName: '',
-      intro: {},
+      intro: {
+        copyright: '',
+        logo: '',
+        position: '',
+        bg: '',
+        ver: '',
+      },
       paramsInit: {},
     }
   },
@@ -117,7 +133,12 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['MUTATIONS_ASSETS_INIT', 'MUTATIONS_AXIOS_POST_INIT']),
+    ...mapMutations([
+      'MUTATIONS_ASSETS_INIT',
+      'MUTATIONS_AXIOS_POST_INIT',
+      'MUTATIONS_INTRO',
+      'MUTATIONS_INTRO_COPYRIGHT',
+    ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
@@ -131,8 +152,21 @@ export default {
       this.fileInsertName = ''
       this.$refs.logoFile.value = ''
     },
+    onIntroData(v, e) {
+      if (v === 'copyright') {
+        this.MUTATIONS_INTRO_COPYRIGHT(e.value)
+        // this.intro.copyright = e.value
+      }
+      if (v === 'position') {
+        this.MUTATIONS_INTRO_POSITION(e.value)
+        // this.intro.position = e.value
+      }
+    },
     onSubmit() {
       this.intro.bg = this.PREVIEW.img.bg
+      this.intro.copyright = this.PREVIEW.img.copyright
+      this.intro.position = this.PREVIEW.img.position
+      // this.MUTATIONS_INTRO(this.intro)
       const frm = new FormData()
       const photoFile = document.getElementById('logoFile')
       frm.append('logoFile', photoFile.files[0])

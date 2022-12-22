@@ -69,6 +69,11 @@
               ref="myLoadText"
               class="text"
               :class="UISetting.font"
+              :style="
+                UISetting.fontColor && UISetting.fontColor.rgba
+                  ? `color:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})`
+                  : ''
+              "
             >
               {{ PREVIEW.data.text }}
             </p>
@@ -95,7 +100,17 @@
               "
               >메인 색상</span
             >
-            <p class="text" :class="UISetting.font">창 색상</p>
+            <p
+              class="text"
+              :class="UISetting.font"
+              :style="
+                UISetting.fontColor && UISetting.fontColor.rgba
+                  ? `color:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})`
+                  : ''
+              "
+            >
+              창 색상
+            </p>
           </div>
         </div>
         <img src="~/static/images/mockup.png" alt="" class="preview-mockup" />

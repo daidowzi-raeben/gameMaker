@@ -1,5 +1,11 @@
 <template>
-  <div class="preview-wrap">
+  <div
+    v-loading="loading"
+    :element-loading-text="loadingText()"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+    class="preview-wrap"
+  >
     <div class="web-left">광고영역</div>
     <div class="preview">
       <!-- <div
@@ -33,11 +39,19 @@
         <div class="text">{{ inApp.subjectiveQuestion }}</div>
         <div class="input-wrap">
           <input
+            v-model="answer"
             type="text"
             class="input-text"
             placeholder="주관식 답변을 입력해주세요"
           />
-          <button type="button" class="button">입력</button>
+          <button
+            type="button"
+            class="button"
+            @click="onClickSubjectiveQuestion"
+            @keyup.enter="onClickSubjectiveQuestion"
+          >
+            입력
+          </button>
         </div>
       </div>
       <!-- 인트로화면 -->
@@ -91,18 +105,55 @@
           <img :src="inApp.cr2" alt="" class="character right" />
         </div>
 
-
-        <div class="dialogue">
-          <span v-if="cutType === 1" class="name">{{ inApp.crName }}</span>
-          <p v-if="cutType === 1" class="text">{{ inApp.text }}</p>
+        <div class="dialogue" :style="windowColor()">
+          <span
+            v-if="cutType === 1"
+            class="name"
+            :class="IN_APP_GAME.uiSet.font"
+            :style="
+              IN_APP_GAME.uiSet &&
+              IN_APP_GAME.uiSet.mainColor &&
+              IN_APP_GAME.uiSet.mainColor.rgba
+                ? `background:rgba(${IN_APP_GAME.uiSet.mainColor.rgba.r},${IN_APP_GAME.uiSet.mainColor.rgba.g},${IN_APP_GAME.uiSet.mainColor.rgba.b},${IN_APP_GAME.uiSet.mainColor.rgba.a});color:rgba(${IN_APP_GAME.uiSet.mainFontColor.rgba.r},${IN_APP_GAME.uiSet.mainFontColor.rgba.g},${IN_APP_GAME.uiSet.mainFontColor.rgba.b},${IN_APP_GAME.uiSet.mainFontColor.rgba.a})`
+                : ''
+            "
+            >{{ inApp.crName }}</span
+          >
+          <p
+            v-if="cutType === 1"
+            class="text"
+            :class="IN_APP_GAME.uiSet.font"
+            :style="
+              IN_APP_GAME.uiSet &&
+              IN_APP_GAME.uiSet.fontColor &&
+              IN_APP_GAME.uiSet.fontColor.rgba
+                ? `color:rgba(${IN_APP_GAME.uiSet.fontColor.rgba.r},${IN_APP_GAME.uiSet.fontColor.rgba.g},${IN_APP_GAME.uiSet.fontColor.rgba.b},${IN_APP_GAME.uiSet.fontColor.rgba.a})`
+                : ''
+            "
+          >
+            {{ inApp.text.replaceAll('||n', '\n') }}
+          </p>
           <p v-if="cutType === 3" class="text">
             {{
-              game.scenarioList[s].chapters[c].cuts[
-                game.scenarioList[s].chapters[c].initBtn[t - 1]
+              IN_APP_GAME.scenarioList[s].chapters[c].cuts[
+                IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t - 1]
               ].list.text
             }}
           </p>
-          <p v-if="cutType === 2" class="text">{{ inApp.narration }}</p>
+          <p
+            v-if="cutType === 2"
+            class="text"
+            :class="IN_APP_GAME.uiSet.font"
+            :style="
+              IN_APP_GAME.uiSet &&
+              IN_APP_GAME.uiSet.fontColor &&
+              IN_APP_GAME.uiSet.fontColor.rgba
+                ? `color:rgba(${IN_APP_GAME.uiSet.fontColor.rgba.r},${IN_APP_GAME.uiSet.fontColor.rgba.g},${IN_APP_GAME.uiSet.fontColor.rgba.b},${IN_APP_GAME.uiSet.fontColor.rgba.a})`
+                : ''
+            "
+          >
+            {{ inApp.narration.replaceAll('||n', '\n') }}
+          </p>
         </div>
       </div>
       <!-- 등장인물화면 -->
@@ -156,15 +207,19 @@
 </template>
 
 <script>
-import appData from '~/static/test.json'
+import { mapState, mapActions, mapMutations } from 'vuex'
+import { kooLogin } from '~/config/util'
+// import appData from '~/static/test.json'
 export default {
   name: 'PreviewIndex',
   data() {
     return {
+      loading: true,
       game: [],
       s: 0,
       c: 0,
       t: 0,
+      answer: '',
       isEnding: false,
       gamePoint: [],
       gamePointCr: {},
@@ -215,48 +270,67 @@ export default {
         subjectiveQuestion: '',
       },
       displayPreview: false,
+      paramsList: {},
     }
   },
+  computed: {
+    ...mapState(['IN_APP_GAME', 'PROJECT_ID']),
+  },
   mounted() {
-    console.log(appData)
-    this.game = appData
-    // 첫 데이터 찾기
-    this.game.profileList.forEach((e, i) => {
-      this.gamePoint = [
-        ...this.gamePoint,
-        {
-          name: e.name,
-          point: 0,
-        },
-      ]
-    })
+    // console.log(appData)
+    this.MUTATIONS_PROJECT(this.$route.query.projectKey)
+    this.paramsList.type = 'develop'
+    this.paramsList.secretKey = this.PROJECT_ID
+    this.paramsList.user_idx = kooLogin('user_idx')
+    this.paramsList.apiKey = process.env.API_KEY
+    this.paramsList.mode = 'web'
+    this.ACTION_AXIOS_GET(this.paramsList)
+    // http://localhost:9001/preview?projectKey=688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6
+    setTimeout(() => {
+      // this.game = this.IN_APP_GAME
+      // 첫 데이터 찾기
+      this.IN_APP_GAME.profileList.forEach((e, i) => {
+        this.gamePoint = [
+          ...this.gamePoint,
+          {
+            name: e.name,
+            point: 0,
+          },
+        ]
+      })
 
-    this.updateGame()
+      this.updateGame()
 
-    this.$refs.displayIntro.style = 'display:block'
+      this.$refs.displayIntro.style = 'display:block'
+      this.loading = false
+    }, 9000)
   },
   methods: {
+    ...mapMutations(['MUTATIONS_PROJECT']),
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     nextGame(e) {
       if (this.isEnding === false) {
         this.t++
-        // console.log(this.game.scenarioList[this.s].chapters[this.c].length)
+        // console.log(this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].length)
         // 컷 구분
 
         console.log(this.s, this.c, this.t)
         if (
-          this.game.scenarioList[this.s].chapters[this.c].initBtn.length ===
-          this.t
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn
+            .length === this.t
         ) {
           console.log('챕터 끝')
           this.t = 0
           this.c++
           console.log('chpter length', this.initBtn)
-          if (this.game.scenarioList[this.s].chapters.length === this.c) {
+          if (
+            this.IN_APP_GAME.scenarioList[this.s].chapters.length === this.c
+          ) {
             this.t = 0
             this.c = 0
             this.s++
             console.log('시나리오 끝')
-            if (this.game.scenarioList.length === this.s) {
+            if (this.IN_APP_GAME.scenarioList.length === this.s) {
               this.isEnding = true
               return console.log('ending')
             }
@@ -304,8 +378,8 @@ export default {
       // this.updateGame()
       console.log('cutUpdate', name, point, type)
       if (name && point && type) {
-        this.gamePoint.forEach((e, i) => {
-          if (e.name === name) {
+        for (let i = 0; i < this.gamePoint.length; i++) {
+          if (this.gamePoint[i].name === name) {
             if (type === 'P') {
               if (this.gamePoint[i].point < point) {
                 this.t++
@@ -325,26 +399,28 @@ export default {
               }
             }
           }
-        })
+        }
       } else {
         console.log('컷 미정산')
       }
     },
     updateGame(e) {
       this.initBtn =
-        this.game.scenarioList[this.s].chapters[this.c].initBtn[this.t]
+        this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
       if (e && e !== null) {
         console.log('객관식')
         this.inApp =
-          this.game.scenarioList[this.s].chapters[this.c].cuts['cut' + e].list
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].cuts[
+            'cut' + e
+          ].list
       } else {
         console.log('객관식패스')
         this.inApp =
-          this.game.scenarioList[this.s].chapters[this.c].cuts[
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].cuts[
             this.initBtn
           ].list
       }
-
+      console.log(this.cutType, '=============================')
       this.cutType = this.inApp.cutType
       if (this.inApp.sr) {
         const s = new Audio(this.inApp.sr)
@@ -357,7 +433,8 @@ export default {
         console.log('나레이션')
       }
       if (this.inApp.cutType === 3) {
-        console.log('객관식')
+        console.log('객관식', e)
+        return
       }
       if (this.inApp.cutType === 4) {
         console.log('주관식')
@@ -408,6 +485,67 @@ export default {
       }
 
       console.log(this.displayPreview)
+    },
+    loadingText() {
+      const text = [
+        '시나리오 펼치는중',
+        '챕터 펼치는중',
+        '컷을 불러오는 중',
+        '노력하는 중',
+      ]
+      return text[Math.floor(Math.random() * 4)] + '...'
+    },
+    windowColor() {
+      let style = ''
+      if (this.IN_APP_GAME.uiSet) {
+        if (
+          this.IN_APP_GAME.uiSet.windowColor &&
+          this.IN_APP_GAME.uiSet.windowColor.rgba
+        ) {
+          style += `background:rgba(${this.IN_APP_GAME.uiSet.windowColor.rgba.r},${this.IN_APP_GAME.uiSet.windowColor.rgba.g},${this.IN_APP_GAME.uiSet.windowColor.rgba.b},${this.IN_APP_GAME.uiSet.windowColor.rgba.a});`
+        }
+        if (
+          this.IN_APP_GAME.uiSet.strokeColor &&
+          this.IN_APP_GAME.uiSet.strokeColor.rgba
+        ) {
+          style += `outline : ${this.IN_APP_GAME.uiSet.border}px solid rgba(${this.IN_APP_GAME.uiSet.strokeColor.rgba.r},${this.IN_APP_GAME.uiSet.strokeColor.rgba.g},${this.IN_APP_GAME.uiSet.strokeColor.rgba.b},${this.IN_APP_GAME.uiSet.strokeColor.rgba.a});`
+        }
+        if (this.IN_APP_GAME.uiSet.round) {
+          style += `border-radius:${this.IN_APP_GAME.uiSet.round}px;`
+        }
+        if (
+          this.IN_APP_GAME.uiSet.shadowColor &&
+          this.IN_APP_GAME.uiSet.shadowColor.rgba
+        ) {
+          style += `box-shadow: ${this.IN_APP_GAME.uiSet.x}px ${
+            this.IN_APP_GAME.uiSet.y
+          }px rgb(${this.IN_APP_GAME.uiSet.shadowColor.rgba.r},${
+            this.IN_APP_GAME.uiSet.shadowColor.rgba.g
+          },${this.IN_APP_GAME.uiSet.shadowColor.rgba.b},${
+            Number(this.IN_APP_GAME.uiSet.shadowColor.rgba.a) * 100
+          }%);`
+        }
+      }
+      console.log(style)
+      return style
+    },
+    // 주관식
+    onClickSubjectiveQuestion() {
+      console.log(this.answer, '주관식 처리')
+
+      for (let i = 0; i < this.gamePoint.length; i++) {
+        if (this.gamePoint[i].name === this.inApp.pointCr) {
+          if (this.inApp.pointType === 'P') {
+            this.gamePoint[i].point =
+              Number(this.gamePoint[i].point) + Number(this.inApp.point)
+          } else {
+            this.gamePoint[i].point =
+              Number(this.gamePoint[i].point) - Number(this.inApp.point)
+          }
+        }
+      }
+      console.log(this.gamePoint)
+      this.nextGame()
     },
   },
 }

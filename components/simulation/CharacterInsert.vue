@@ -27,7 +27,7 @@
             class="input-textarea"
             :value="
               CHAPTER_DEATILE && CHAPTER_DEATILE_IDX
-                ? CHAPTER_DEATILE.profile
+                ? CHAPTER_DEATILE.profile.replaceAll('||n', '\n')
                 : ''
             "
             @input="onInputProfile"
@@ -37,9 +37,12 @@
           </div>
         </div>
         <div class="text-center mt-5">
-          <button class="button md btn-primary" :class="{red : CHAPTER_DEATILE_IDX === true}" @click="onSubmit">
-            {{ CHAPTER_DEATILE_IDX
-            }}{{ CHAPTER_DEATILE_IDX ? '수정하기' : '추가하기' }}
+          <button
+            class="button md btn-primary"
+            :class="{ red: CHAPTER_DEATILE_IDX === true }"
+            @click="onSubmit"
+          >
+            {{ CHAPTER_DEATILE_IDX ? '수정하기' : '추가하기' }}
           </button>
         </div>
       </div>
@@ -160,7 +163,12 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['MUTATIONS_ASSETS_INIT', 'MUTAIONS_SAVE']),
+    ...mapMutations([
+      'MUTATIONS_ASSETS_INIT',
+      'MUTAIONS_SAVE',
+      'MUTATIONS_LOADING_INIT',
+      'MUTATIONS_LOADING',
+    ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
 
     onClickRightContentShow() {
@@ -182,6 +190,8 @@ export default {
       this.characterData.name = target.value
     },
     onSubmit() {
+      this.MUTATIONS_LOADING_INIT()
+
       if (this.CHAPTER_DEATILE_IDX) {
         this.paramsData.mode = 'update'
         this.paramsData.idx = this.CHAPTER_DEATILE_IDX
@@ -190,6 +200,16 @@ export default {
         }
         if (!this.characterData?.name) {
           this.characterData.name = this.CHAPTER_DEATILE.name
+        }
+      } else {
+        for (let i = 0; i < this.SCENE_DATA_CHARACTER.jsonData.length; i++) {
+          if (
+            this.SCENE_DATA_CHARACTER.jsonData[i].name ===
+            this.characterData.name
+          ) {
+            this.onErrorMsg()
+            return this.MUTATIONS_LOADING()
+          }
         }
       }
       this.characterData.bg = this.PREVIEW.img.bg
@@ -205,6 +225,7 @@ export default {
         '||n'
       )
       this.ACTION_AXIOS_GET(this.paramsData)
+      this.onSave()
 
       // this.MUTATIONS_ASSETS_INIT()
       // 리스트 초기화
@@ -217,6 +238,28 @@ export default {
       //   this.ACTION_AXIOS_GET(this.paramsInit)
       //   this.MUTAIONS_SAVE()
       // })
+    },
+    onSave() {
+      const h = this.$createElement
+      this.$notify({
+        title: '저장되었습니다.',
+        message: h(
+          'i',
+          { style: 'color: teal' },
+          '다양한 인물을 소개해 주세요!'
+        ),
+      })
+    },
+    onErrorMsg() {
+      const h = this.$createElement
+      this.$notify({
+        title: '이름이 중복되었습니다.',
+        message: h(
+          'i',
+          { style: 'color: teal' },
+          '인물의 이름은 중복으로 사용할 수 없어요'
+        ),
+      })
     },
   },
 }

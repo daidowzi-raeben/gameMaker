@@ -3,19 +3,35 @@
     <div class="project-wrap">
       <div class="card-wrap">
         <div class="card-tit"><nuxt-link to="">Visual Novel</nuxt-link></div>
-        <swiper :options="swiperOptionCol4" class="card-list project-list">
-          <swiper-slide v-for="(v, i) in 4" :key="i" class="card-list--item project-list--item">
-            <nuxt-link to="">
+        <swiper
+          v-if="PROJECT_MANAGER"
+          :options="swiperOptionCol4"
+          class="card-list project-list"
+        >
+          <swiper-slide
+            v-for="(v, i) in PROJECT_MANAGER.projectList"
+            :key="i"
+            class="card-list--item project-list--item"
+          >
+            <nuxt-link :to="`/simulation-maker?projectKey=${v.secret_code}`">
               <div class="top">
-                <span class="date">최근 수정일<span class="num">22.12.12</span></span>
+                <span class="date"
+                  >최근 수정일<span class="num">{{
+                    v.datetime | moment('YY.MM.DD')
+                  }}</span></span
+                >
                 <div class="badge-wrap">
                   <span class="badge red">인트로</span>
                   <span class="badge blue">엔딩</span>
                   <span class="badge green">배포완료</span>
                 </div>
               </div>
-              <div class="tit">나의 첫 프로젝트 프로젝트명은 두줄까지만 지원합니다 두줄이 넘어가면 말줄임으로 표시될거예요</div>
-              <div class="info">프로젝트 설명이 들어갑니다. 프로젝트 설명은 세줄까지만 지원합니다. 세줄이 넘어가면 말줄임으로 표시될거예요 세줄 세줄 세줄 세줄 세줄 세줄 세줄 세줄 세줄</div>
+              <div class="tit">
+                {{ v.title }}
+              </div>
+              <div class="info">
+                {{ v.discription }}
+              </div>
               <ul class="state-list">
                 <li class="state-list--item">
                   <label class="label">인물</label>
@@ -35,7 +51,9 @@
           <swiper-slide class="card-list--item project-list--item">
             <nuxt-link to="">
               <div class="top">
-                <span class="date">최근 수정일<span class="num">22.12.12</span></span>
+                <span class="date"
+                  >최근 수정일<span class="num">22.12.12</span></span
+                >
                 <div class="badge-wrap">
                   <span class="badge red">인트로</span>
                   <span class="badge">엔딩</span>
@@ -146,7 +164,7 @@ export default {
         loop: false,
         slidesPerView: 4,
         slidesPerGroup: 4,
-        spaceBetween:20,
+        spaceBetween: 20,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
@@ -156,13 +174,13 @@ export default {
         loop: false,
         slidesPerView: 7,
         slidesPerGroup: 7,
-        spaceBetween:15,
+        spaceBetween: 15,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
       },
-      temp: [1,2,3,4,5,6,7,8,9],
+      temp: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     }
   },
   computed: {
@@ -199,7 +217,7 @@ export default {
     },
     // 프로젝트 이동
     onClickGotoProject(e) {
-      this.$router.push(`/simulation-maker/${e}`)
+      this.$router.push(`/simulation-maker?projectKey=${e}`)
     },
     // 프로젝트 생성
     onClickProjectCreate() {

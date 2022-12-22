@@ -10,6 +10,7 @@ Vue.use(Vuex)
 const createStore = () => {
     return new Store({
         state: {
+            IN_APP_GAME: [],
             API_KEY: 'ZFR4NUR3WnhyUVdBb0ExZDdMUGNDMWY3T25hV0pOWXhwQk0xZCtvV1E9',
             LOADING: true,
             alertSave: 0,
@@ -189,6 +190,15 @@ const createStore = () => {
             MUTATIONS_COLOR_PICKER(state, payload) {
                 state.UISetting = payload
             },
+            MUTATIONS_INTRO(state, payload) {
+                state.PREVIEW_INTRO = payload
+            },
+            MUTATIONS_INTRO_COPYRIGHT(state, payload) {
+                state.PREVIEW_INTRO = payload
+            },
+            MUTATIONS_INTRO_POSITION(state, payload) {
+                state.PREVIEW_INTRO.position = payload
+            },
 
             MUTATIONS_STORE_CRLIST(state, payload) {
                 state.ASSETS_STORE.crList = payload
@@ -224,6 +234,9 @@ const createStore = () => {
             },
             MUTATIONS_AXIOS_GET_PROJECT(state, payload) {
                 state.PROJECT_MANAGER = payload
+            },
+            MUTATIONS_AXIOS_GET_DEVELOP(state, payload) {
+                state.IN_APP_GAME = payload
             },
             MUTATIONS_PROJECT(state, payload) {
                 state.PROJECT_ID = payload
@@ -345,9 +358,11 @@ const createStore = () => {
             MUTATIONS_ASSETS_INIT(state, payload) {
                 state.PREVIEW.img.bg = '';
                 state.PREVIEW.img.cr = '';
+                state.PREVIEW.data.sr = '';
                 state.PREVIEW.img.cr2 = '';
                 state.PREVIEW.data.cr = '';
                 state.PREVIEW.data.effect = '';
+                state.PREVIEW.data.effect2 = '';
                 state.PREVIEW.data.text = '';
                 state.SCENE_CODE = ''
                 state.PREVIEW.data.questionsPoint = [
@@ -378,6 +393,7 @@ const createStore = () => {
                 state.PREVIEW.img.bg = '';
                 state.PREVIEW.img.cr = '';
                 state.PREVIEW.img.cr2 = '';
+                state.PREVIEW.data.sr = '';
             },
             // 대사 초기화
             MUTATIONS_ASSETS_INIT_TEXT(state, payload) {
@@ -461,6 +477,8 @@ const createStore = () => {
                     state.PREVIEW.img.cr2 = state.CUT_LIST.jsonData[0].cr2
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[0].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[0].effect
+                    state.PREVIEW.data.effect2 = state.CUT_LIST.jsonData[0].effect2
+                    state.PREVIEW.data.sr = state.CUT_LIST.jsonData[0].sr
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text.replaceAll('||n', '\n')
                     state.PREVIEW.data.narration = state.CUT_LIST.jsonData[0].narration.replaceAll('||n', '\n')
                     state.PREVIEW.data.questions.text = state.CUT_LIST.jsonData[0].questionsText
@@ -475,6 +493,8 @@ const createStore = () => {
                     state.PREVIEW.img.cr2 = ''
                     state.PREVIEW.data.cr = ''
                     state.PREVIEW.data.effect = ''
+                    state.PREVIEW.data.effect2 = ''
+                    state.PREVIEW.data.sr = ''
                     state.PREVIEW.data.text = ''
                     state.PREVIEW.data.narration = ''
                     state.PREVIEW.data.questionsTimer = null
@@ -518,6 +538,8 @@ const createStore = () => {
                     state.PREVIEW.img.cr2 = state.CUT_LIST.jsonData[payload].cr2
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[payload].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[payload].effect
+                    state.PREVIEW.data.effect2 = state.CUT_LIST.jsonData[payload].effect2
+                    state.PREVIEW.data.sr = state.CUT_LIST.jsonData[payload].sr
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[payload].text.replaceAll('||n', '\n')
                     state.PREVIEW.data.narration = state.CUT_LIST.jsonData[payload].narration.replaceAll('||n', '\n')
                     state.PREVIEW.data.questionsPoint = state.CUT_LIST.jsonData[payload].questionsPoint
@@ -570,6 +592,10 @@ const createStore = () => {
                         console.log('ACTION_AXIOS_GET', res, params)
                         if (params.type === 'project') {
                             commit('MUTATIONS_AXIOS_GET_PROJECT', res.data)
+                            return;
+                        }
+                        if (params.type === 'develop') {
+                            commit('MUTATIONS_AXIOS_GET_DEVELOP', res.data)
                             return;
                         }
                         if (params.type === 'assetsProject') {

@@ -44,9 +44,9 @@
       <!-- <b-alert :show="alertSave" dismissible variant="warning">
         저장되었습니다.
       </b-alert> -->
-      <b-alert :show="alertSave" dismissible variant="warning">
+      <!-- <b-alert :show="alertSave" dismissible variant="warning">
         저장되었습니다.
-      </b-alert>
+      </b-alert> -->
     </div>
     <!-- <LoadingContent v-show="LOADING === true" /> -->
   </div>
