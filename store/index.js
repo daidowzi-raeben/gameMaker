@@ -13,6 +13,7 @@ const createStore = () => {
             IN_APP_GAME: [],
             API_KEY: 'ZFR4NUR3WnhyUVdBb0ExZDdMUGNDMWY3T25hV0pOWXhwQk0xZCtvV1E9',
             LOADING: true,
+            IN_APP_GAME_START: false,
             alertSave: 0,
             LOGIN: {},
             PROJECT_MANAGER: [],
@@ -237,6 +238,8 @@ const createStore = () => {
             },
             MUTATIONS_AXIOS_GET_DEVELOP(state, payload) {
                 state.IN_APP_GAME = payload
+                state.IN_APP_GAME_START = true
+                console.log('START')
             },
             MUTATIONS_PROJECT(state, payload) {
                 state.PROJECT_ID = payload

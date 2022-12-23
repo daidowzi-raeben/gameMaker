@@ -274,7 +274,35 @@ export default {
     }
   },
   computed: {
-    ...mapState(['IN_APP_GAME', 'PROJECT_ID']),
+    ...mapState(['IN_APP_GAME', 'PROJECT_ID', 'IN_APP_GAME_START']),
+  },
+  watch: {
+    IN_APP_GAME_START: {
+      handler(value) {
+        console.log('IN_APP_GAME_START', value)
+        if (value === true) {
+          setTimeout(() => {
+            // this.game = this.IN_APP_GAME
+            // 첫 데이터 찾기
+            this.IN_APP_GAME.profileList.forEach((e, i) => {
+              this.gamePoint = [
+                ...this.gamePoint,
+                {
+                  name: e.name,
+                  point: 0,
+                },
+              ]
+            })
+
+            this.updateGame()
+
+            this.$refs.displayIntro.style = 'display:block'
+            this.loading = false
+          }, 400)
+        }
+      },
+      immediate: true,
+    },
   },
   mounted() {
     // console.log(appData)
@@ -286,24 +314,6 @@ export default {
     this.paramsList.mode = 'web'
     this.ACTION_AXIOS_GET(this.paramsList)
     // http://localhost:9001/preview?projectKey=688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6
-    setTimeout(() => {
-      // this.game = this.IN_APP_GAME
-      // 첫 데이터 찾기
-      this.IN_APP_GAME.profileList.forEach((e, i) => {
-        this.gamePoint = [
-          ...this.gamePoint,
-          {
-            name: e.name,
-            point: 0,
-          },
-        ]
-      })
-
-      this.updateGame()
-
-      this.$refs.displayIntro.style = 'display:block'
-      this.loading = false
-    }, 9000)
   },
   methods: {
     ...mapMutations(['MUTATIONS_PROJECT']),
