@@ -1089,6 +1089,9 @@
         &-list{
           display:flex;
           flex-wrap: wrap;
+          &--wrap{
+            height:calc(100vh - 200px);
+          }
           &--item{
             width:130px;
             height:130px;

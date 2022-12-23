@@ -5,20 +5,23 @@
       <div class="setting-info">
         배경을 선택하세요! 에셋 관리에서 더 추가할 수 있어요.
       </div>
-      <ul v-if="ASSETS" class="thumbnail-list">
-        <li class="thumbnail-list--item" @click="onClickBgImage('')">
-          <div class="none"></div>
-        </li>
-        <li
-          v-for="(v, i) in ASSETS.bg"
-          :key="i"
-          class="thumbnail-list--item background"
-          :class="{ active: PREVIEW.img.bg === v.path }"
-          @click="onClickBgImage(v.path)"
-        >
-          <img v-if="v.path" :src="v.path" alt="" />
-        </li>
-      </ul>
+      <el-scrollbar class="thumbnail-list--wrap">
+        <ul v-if="ASSETS" class="thumbnail-list">
+          <li class="thumbnail-list--item" @click="onClickBgImage('')">
+            <div class="none"></div>
+          </li>
+          <li
+            v-for="(v, i) in ASSETS.bg"
+            :key="i"
+            class="thumbnail-list--item background"
+            :class="{ active: PREVIEW.img.bg === v.path }"
+            @click="onClickBgImage(v.path)"
+          >
+            <img v-if="v.path" :src="v.path" alt="" />
+          </li>
+        </ul>
+      </el-scrollbar>
+
     </div>
   </div>
 </template>

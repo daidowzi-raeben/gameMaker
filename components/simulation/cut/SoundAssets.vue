@@ -5,32 +5,34 @@
       <div class="setting-info">
         효과음 또는 음성을 넣어 생생한 시나리오를 구성하세요.
       </div>
-      <ul v-if="ASSETS" class="thumbnail-list">
-        <li
-          class="thumbnail-list--item"
-          :class="{ active: PREVIEW.data.sr === '' }"
-          @click="onClickSrData('')"
-        >
-          <div class="none"></div>
-        </li>
-        <!-- v-for="(v, i) in ASSETS.sr" -->
-        <li
-          v-for="(v, i) in ASSETS.sr"
-          :key="i"
-          class="thumbnail-list--item"
-          :class="{ active: PREVIEW.data.sr === v.path }"
-        >
-          <div class="sound">
-            <span class="name" @click="onClickSrData(v.path)">{{
-              v.gas_name
-            }}</span>
-            <button type="button" class="btn" @click="onClickSrPlay(v.path)">
-              미리듣기
-            </button>
-            <!-- <img v-if="v.path" :src="v.path" alt="" /> -->
-          </div>
-        </li>
-      </ul>
+      <el-scrollbar class="thumbnail-list--wrap">
+        <ul v-if="ASSETS" class="thumbnail-list">
+          <li
+            class="thumbnail-list--item"
+            :class="{ active: PREVIEW.data.sr === '' }"
+            @click="onClickSrData('')"
+          >
+            <div class="none"></div>
+          </li>
+          <!-- v-for="(v, i) in ASSETS.sr" -->
+          <li
+            v-for="(v, i) in ASSETS.sr"
+            :key="i"
+            class="thumbnail-list--item"
+            :class="{ active: PREVIEW.data.sr === v.path }"
+          >
+            <div class="sound">
+              <span class="name" @click="onClickSrData(v.path)">{{
+                v.gas_name
+              }}</span>
+              <button type="button" class="btn" @click="onClickSrPlay(v.path)">
+                미리듣기
+              </button>
+              <!-- <img v-if="v.path" :src="v.path" alt="" /> -->
+            </div>
+          </li>
+        </ul>
+      </el-scrollbar>
     </div>
   </div>
 </template>

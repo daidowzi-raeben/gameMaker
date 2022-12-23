@@ -47,20 +47,22 @@
       <div class="setting-info">
         첫번째 인물을 선택하세요! 에셋 관리에서 더 추가할 수 있어요.
       </div>
-      <ul v-if="ASSETS" class="thumbnail-list">
-        <li class="thumbnail-list--item" @click="onClickCrImage('')">
-          <div class="none"></div>
-        </li>
-        <li
-          v-for="(v, i) in ASSETS.cr"
-          :key="i"
-          class="thumbnail-list--item"
-          :class="{ active: PREVIEW.img.cr === v.path }"
-          @click="onClickCrImage(v.path)"
-        >
-          <img v-if="v.path" :src="v.path" alt="" />
-        </li>
-      </ul>
+      <el-scrollbar class="thumbnail-list--wrap">
+        <ul v-if="ASSETS" class="thumbnail-list">
+          <li class="thumbnail-list--item" @click="onClickCrImage('')">
+            <div class="none"></div>
+          </li>
+          <li
+            v-for="(v, i) in ASSETS.cr"
+            :key="i"
+            class="thumbnail-list--item"
+            :class="{ active: PREVIEW.img.cr === v.path }"
+            @click="onClickCrImage(v.path)"
+          >
+            <img v-if="v.path" :src="v.path" alt="" />
+          </li>
+        </ul>
+      </el-scrollbar>
     </div>
   </div>
 </template>
