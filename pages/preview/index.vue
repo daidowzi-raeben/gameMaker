@@ -298,7 +298,7 @@ export default {
 
             this.$refs.displayIntro.style = 'display:block'
             this.loading = false
-          }, 400)
+          }, 3000)
         }
       },
       immediate: true,
