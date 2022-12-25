@@ -132,6 +132,7 @@ export default {
       user_idx: '',
       paramsData: {},
       paramsInit: {},
+      characterLength: 0,
     }
   },
   PREVIEW: {
@@ -191,7 +192,9 @@ export default {
     },
     onSubmit() {
       this.MUTATIONS_LOADING_INIT()
-
+      if (this.SCENE_DATA_CHARACTER.jsonData) {
+        this.characterLength = this.SCENE_DATA_CHARACTER.jsonData.length
+      }
       if (this.CHAPTER_DEATILE_IDX) {
         this.paramsData.mode = 'update'
         this.paramsData.idx = this.CHAPTER_DEATILE_IDX
@@ -202,7 +205,7 @@ export default {
           this.characterData.name = this.CHAPTER_DEATILE.name
         }
       } else {
-        for (let i = 0; i < this.SCENE_DATA_CHARACTER.jsonData.length; i++) {
+        for (let i = 0; i < this.characterLength; i++) {
           if (
             this.SCENE_DATA_CHARACTER.jsonData[i].name ===
             this.characterData.name

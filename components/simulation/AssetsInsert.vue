@@ -18,8 +18,7 @@ export default {
     AssetsLocalUpload,
   },
   data() {
-    return {
-    }
+    return {}
   },
 }
 </script>
