@@ -27,14 +27,14 @@
         :class="{ active: rightContentShow === true }"
         @click="onClickRightContentShow()"
       ></button>
-      <div>가이드</div>
+      <!-- <div>가이드</div>
       <div>
         <p>화면설정</p>
         <dl>
           <dt>흔들림</dt>
           <dd>흔들리는 효과</dd>
         </dl>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

@@ -32,9 +32,7 @@
             "
             @input="onInputProfile"
           ></textarea>
-          <div class="insert-wrap">
-            <ScenarioSelect />
-          </div>
+          <ScenarioSelect />
         </div>
         <div class="text-center mt-5">
           <button
@@ -54,7 +52,7 @@
         :class="{ active: rightContentShow === true }"
         @click="onClickRightContentShow()"
       ></button>
-      <div>가이드</div>
+      <!-- <div>가이드</div> -->
     </div>
     <div v-show="false" class="cut" :class="{ fold: cutListShow === false }">
       <div class="cut-tit">
