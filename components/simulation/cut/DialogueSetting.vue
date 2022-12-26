@@ -280,7 +280,6 @@
                 v-for="(v, i) in CUT_LIST.jsonData"
                 :key="CUT_LIST.idx[i]"
                 :value="CUT_LIST.idx[i]"
-                :disabled="CUT_CODE + 1 > i ? true : false"
               >
                 {{ CUT_LIST.jsonData.length - i }}
               </option>
@@ -388,7 +387,6 @@
                     v-for="(v, i) in CUT_LIST.jsonData"
                     :key="CUT_LIST.idx[i]"
                     :value="CUT_LIST.idx[i]"
-                    :disabled="CUT_CODE + 1 > i ? true : false"
                   >
                     {{ CUT_LIST.jsonData.length - i }}
                   </option>

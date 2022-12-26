@@ -189,6 +189,7 @@ export default {
     },
     onInputName({ target }) {
       this.characterData.name = target.value
+      console.log(target.value)
     },
     onSubmit() {
       this.MUTATIONS_LOADING_INIT()

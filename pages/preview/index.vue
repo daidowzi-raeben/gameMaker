@@ -25,13 +25,28 @@
         class="preview-con answer-dim"
       ></div>
       <div v-if="cutType === 3" class="answer answer-multiple">
-        <button type="button" class="btn" @click="onClickQuestions(0)">
+        <button
+          inApp.questionsText[0]
+          type="button"
+          class="btn"
+          @click="onClickQuestions(0)"
+        >
           {{ inApp.questionsText[0] }}
         </button>
-        <button type="button" class="btn" @click="onClickQuestions(1)">
+        <button
+          inApp.questionsText[1]
+          type="button"
+          class="btn"
+          @click="onClickQuestions(1)"
+        >
           {{ inApp.questionsText[1] }}
         </button>
-        <button type="button" class="btn" @click="onClickQuestions(2)">
+        <button
+          inApp.questionsText[2]
+          type="button"
+          class="btn"
+          @click="onClickQuestions(2)"
+        >
           {{ inApp.questionsText[2] }}
         </button>
       </div>
@@ -361,7 +376,7 @@ export default {
           this.inApp.pointType
         )
       } else {
-        alert('끝났어유 새로고침해유')
+        console.log('엔딩')
       }
     },
     onClickQuestions(e) {
@@ -378,7 +393,7 @@ export default {
         this.inApp.questionsPoint[e].point,
         this.inApp.questionsPoint[e].pointType
       )
-      alert(
+      console.log(
         `인물 : ${this.inApp.questionsPoint[e].pointCr} / 포인트 ${this.inApp.questionsPoint[e].point}`
       )
 

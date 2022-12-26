@@ -10,7 +10,7 @@ Vue.use(Vuex)
 const createStore = () => {
     return new Store({
         state: {
-            IN_APP_GAME: [],
+            IN_APP_GAME: [{}],
             API_KEY: 'ZFR4NUR3WnhyUVdBb0ExZDdMUGNDMWY3T25hV0pOWXhwQk0xZCtvV1E9',
             LOADING: true,
             IN_APP_GAME_START: false,
@@ -267,8 +267,9 @@ const createStore = () => {
                 state.SCENE_DATA = payload
             },
             MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER(state, payload) {
-                // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
+                console.log('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', payload)
                 state.SCENE_DATA_CHARACTER = payload
+                state.CHAPTER_DEATILE = payload.jsonData[state.CHAPTER_DEATILE_IDX - 1];
             },
             MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL(state, payload) {
                 // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
@@ -549,6 +550,7 @@ const createStore = () => {
                     state.PREVIEW.data.questionsTimer = state.CUT_LIST.jsonData[payload].questionsTimer
                     state.PREVIEW.data.subjectiveQuestion = state.CUT_LIST.jsonData[payload].subjectiveQuestion
                     state.PREVIEW.data.answer = state.CUT_LIST.jsonData[payload].answer
+                    state.PREVIEW.data.questions.text = state.CUT_LIST.jsonData[payload].questionsText
                     state.cutType = state.CUT_LIST.jsonData[payload].cutType
                 }
             },
@@ -608,7 +610,7 @@ const createStore = () => {
                         }
                         if (params.type === 'characterList' || params.type === 'characterInsert') {
                             commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
-                            commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
+                            // commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
                             return;
                         }
                         // if (params.type === 'characterDetail') {
