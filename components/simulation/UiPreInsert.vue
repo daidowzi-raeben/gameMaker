@@ -432,7 +432,11 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['MUTATIONS_COLOR_PICKER', 'MUTATIONS_IN_APP_ICON']),
+    ...mapMutations([
+      'MUTATIONS_COLOR_PICKER',
+      'MUTATIONS_IN_APP_ICON',
+      'MUTATIONS_LOADING_INIT',
+    ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     updateColor() {
       console.log(this.mainColor)
@@ -445,6 +449,7 @@ export default {
       target.nextElementSibling.style = 'display:block'
     },
     onSubmit() {
+      this.MUTATIONS_LOADING_INIT()
       const frm = new FormData()
       frm.append('type', 'uiInsert')
       frm.append('secretKey', this.PROJECT_ID)
@@ -452,6 +457,9 @@ export default {
       frm.append('apiKey', process.env.API_KEY)
       frm.append('user_idx', kooLogin('user_idx'))
       this.ACTION_AXIOS_POST(frm)
+      setTimeout(() => {
+        this.onSave()
+      }, 500)
     },
     onChangeUiSetting() {
       // if (this.$refs.isUiSettingTheme.checked) {
@@ -480,6 +488,13 @@ export default {
         this.colorPicker.x = e.target.value.split('|')[0]
         this.colorPicker.y = e.target.value.split('|')[1]
       }
+    },
+    onSave() {
+      const h = this.$createElement
+      this.$notify({
+        title: '저장되었습니다.',
+        message: h('i', { style: 'color: teal' }, '멋진 UI를 만들어 보아요!'),
+      })
     },
   },
 }

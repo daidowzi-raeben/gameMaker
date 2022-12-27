@@ -517,32 +517,17 @@ export default {
     windowColor() {
       let style = ''
       if (this.IN_APP_GAME.uiSet) {
-        if (
-          this.IN_APP_GAME.uiSet.windowColor &&
-          this.IN_APP_GAME.uiSet.windowColor.rgba
-        ) {
-          style += `background:rgba(${this.IN_APP_GAME.uiSet.windowColor.rgba.r},${this.IN_APP_GAME.uiSet.windowColor.rgba.g},${this.IN_APP_GAME.uiSet.windowColor.rgba.b},${this.IN_APP_GAME.uiSet.windowColor.rgba.a});`
+        if (this.IN_APP_GAME.uiSet.windowColor) {
+          style += `background:${this.IN_APP_GAME.uiSet.windowColor};`
         }
-        if (
-          this.IN_APP_GAME.uiSet.strokeColor &&
-          this.IN_APP_GAME.uiSet.strokeColor.rgba
-        ) {
-          style += `outline : ${this.IN_APP_GAME.uiSet.border}px solid rgba(${this.IN_APP_GAME.uiSet.strokeColor.rgba.r},${this.IN_APP_GAME.uiSet.strokeColor.rgba.g},${this.IN_APP_GAME.uiSet.strokeColor.rgba.b},${this.IN_APP_GAME.uiSet.strokeColor.rgba.a});`
+        if (this.IN_APP_GAME.uiSet.strokeColor) {
+          style += `outline : ${this.IN_APP_GAME.uiSet.border}px solid ${this.IN_APP_GAME.uiSet.strokeColor};`
         }
         if (this.IN_APP_GAME.uiSet.round) {
           style += `border-radius:${this.IN_APP_GAME.uiSet.round}px;`
         }
-        if (
-          this.IN_APP_GAME.uiSet.shadowColor &&
-          this.IN_APP_GAME.uiSet.shadowColor.rgba
-        ) {
-          style += `box-shadow: ${this.IN_APP_GAME.uiSet.x}px ${
-            this.IN_APP_GAME.uiSet.y
-          }px rgb(${this.IN_APP_GAME.uiSet.shadowColor.rgba.r},${
-            this.IN_APP_GAME.uiSet.shadowColor.rgba.g
-          },${this.IN_APP_GAME.uiSet.shadowColor.rgba.b},${
-            Number(this.IN_APP_GAME.uiSet.shadowColor.rgba.a) * 100
-          }%);`
+        if (this.IN_APP_GAME.uiSet.shadowColor) {
+          style += `box-shadow: ${this.IN_APP_GAME.uiSet.x}px ${this.IN_APP_GAME.uiSet.y}px ${this.IN_APP_GAME.uiSet.y}px ${this.IN_APP_GAME.uiSet.shadowColor};`
         }
       }
       console.log(style)
