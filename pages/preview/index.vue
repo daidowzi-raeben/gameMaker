@@ -521,11 +521,12 @@ export default {
           style += `background:${this.IN_APP_GAME.uiSet.windowColor};`
         }
         if (this.IN_APP_GAME.uiSet.strokeColor) {
-          style += `outline : ${this.IN_APP_GAME.uiSet.border}px solid ${this.IN_APP_GAME.uiSet.strokeColor};`
+          style += `box-shadow :0 0 ${this.IN_APP_GAME.uiSet.border}px ${this.IN_APP_GAME.uiSet.strokeColor};`
         }
         if (this.IN_APP_GAME.uiSet.round) {
           style += `border-radius:${this.IN_APP_GAME.uiSet.round}px;`
         }
+
         if (this.IN_APP_GAME.uiSet.shadowColor) {
           style += `box-shadow: ${this.IN_APP_GAME.uiSet.x}px ${this.IN_APP_GAME.uiSet.y}px ${this.IN_APP_GAME.uiSet.y}px ${this.IN_APP_GAME.uiSet.shadowColor};`
         }
