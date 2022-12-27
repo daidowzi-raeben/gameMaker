@@ -52,7 +52,8 @@
                     v-for="item in introDimOption"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value">
+                    :value="item.value"
+                  >
                   </el-option>
                 </el-select>
                 <!-- <select class="input-select">
@@ -94,7 +95,10 @@
                   class="color"
                   @click="isShowColorPickerName = 'mainColor'"
                 ></button> -->
-                <el-color-picker v-model="mainColor" show-alpha></el-color-picker>
+                <el-color-picker
+                  v-model="colorPicker.mainColor"
+                  show-alpha
+                ></el-color-picker>
                 <label class="label">메인색상</label>
                 <!-- <div
                   v-if="isShowColorPickerName === 'mainColor'"
@@ -115,7 +119,10 @@
                   class="color"
                   @click="isShowColorPickerName = 'mainFontColor'"
                 ></button> -->
-                <el-color-picker v-model="mainFontColor" show-alpha></el-color-picker>
+                <el-color-picker
+                  v-model="colorPicker.mainFontColor"
+                  show-alpha
+                ></el-color-picker>
                 <label class="label">메인글씨색상</label>
                 <!-- <div
                   v-if="isShowColorPickerName === 'mainFontColor'"
@@ -140,7 +147,10 @@
                   class="color"
                   @click="isShowColorPickerName = 'windowMainColor'"
                 ></button> -->
-                <el-color-picker v-model="windowColor" show-alpha></el-color-picker>
+                <el-color-picker
+                  v-model="colorPicker.windowColor"
+                  show-alpha
+                ></el-color-picker>
                 <label class="label">메인색상</label>
                 <!-- <div
                   v-if="isShowColorPickerName === 'windowMainColor'"
@@ -161,7 +171,10 @@
                   class="color"
                   @click="isShowColorPickerName = 'windowTextColor'"
                 ></button> -->
-                <el-color-picker v-model="fontColor" show-alpha></el-color-picker>
+                <el-color-picker
+                  v-model="colorPicker.fontColor"
+                  show-alpha
+                ></el-color-picker>
                 <label class="label">글자</label>
                 <!-- <div
                   v-if="isShowColorPickerName === 'windowTextColor'"
@@ -182,7 +195,10 @@
                   class="color"
                   @click="isShowColorPickerName = 'windowOutlineColor'"
                 ></button> -->
-                <el-color-picker v-model="strokeColor" show-alpha></el-color-picker>
+                <el-color-picker
+                  v-model="colorPicker.strokeColor"
+                  show-alpha
+                ></el-color-picker>
                 <label class="label">외곽선</label>
                 <!-- <div
                   v-if="isShowColorPickerName === 'windowOutlineColor'"
@@ -203,7 +219,10 @@
                   class="color"
                   @click="isShowColorPickerName = 'windowShadowColor'"
                 ></button> -->
-                <el-color-picker v-model="shadowColor" show-alpha></el-color-picker>
+                <el-color-picker
+                  v-model="colorPicker.shadowColor"
+                  show-alpha
+                ></el-color-picker>
                 <label class="label">그림자</label>
                 <!-- <div
                   v-if="isShowColorPickerName === 'windowShadowColor'"
@@ -327,19 +346,18 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
       rightContentShow: false,
       paramsInit: {},
       colorPicker: {
         mainColor: null,
-        windowColor: {},
-        strokeColor: {},
-        shadowColor: {},
-        fontColor: {},
-        mainFontColor: {},
+        windowColor: null,
+        strokeColor: null,
+        shadowColor: null,
+        fontColor: null,
+        mainFontColor: null,
         font: '',
         round: 0,
         border: 0,
@@ -362,17 +380,21 @@ export default {
         { name: '한국기계연구원', value: 'font-kimm' },
         { name: '해피니스 산스', value: 'font-happiness' },
       ],
-      introDimOption:[{
-        value: 'introDimOption1',
-        label: '밝게'
-      },{
-        value: 'introDimOption2',
-        label: '어둡게'
-      },{
-        value: 'introDimOption3',
-        label: '흐리게'
-      },],
-      introDimOptionValue:'',
+      introDimOption: [
+        {
+          value: 'introDimOption1',
+          label: '밝게',
+        },
+        {
+          value: 'introDimOption2',
+          label: '어둡게',
+        },
+        {
+          value: 'introDimOption3',
+          label: '흐리게',
+        },
+      ],
+      introDimOptionValue: '',
     }
   },
   computed: {

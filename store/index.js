@@ -121,12 +121,12 @@ const createStore = () => {
             ],
             // UI세팅
             UISetting: {
-                mainColor: {},
-                windowColor: {},
-                strokeColor: {},
-                shadowColor: {},
-                fontColor: {},
-                mainFontColor: {},
+                mainColor: null,
+                windowColor: null,
+                strokeColor: null,
+                shadowColor: null,
+                fontColor: null,
+                mainFontColor: null,
                 round: 0,
                 border: 0,
                 x: 0,

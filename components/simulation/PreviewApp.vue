@@ -8,7 +8,10 @@
     <div class="column-2">
       <div v-if="PREVIEW" class="preview">
         <!-- dim-light, dim-dark, dim-blur, diagonal, diagonal-r, copy-left, copy-right 클래스 추가로 구분. intro만있으면 기본 중앙정렬 -->
-        <div v-if="PREVIEW && MAKER_GNB === 5" class="preview-con preview-intro dim-light diagonal">
+        <div
+          v-if="PREVIEW && MAKER_GNB === 5"
+          class="preview-con preview-intro dim-light diagonal"
+        >
           <div class="preview-intro--background">
             <img
               src="https://mblogthumb-phinf.pstatic.net/MjAyMDAyMDNfOTcg/MDAxNTgwNjY4MzA1OTQ5.e9NJgX23nV_5ZM4Bn8LN-KQyJ2ZxsVuR5HZpJPb_TMMg.S8LQwAn8Q03YQVPvbVrCSdut5GqudOXLObvrWWzZSxcg.JPEG.westar4501/2%EC%9B%94_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_se.jpg?type=w800"
@@ -88,8 +91,8 @@
               class="name"
               :class="UISetting.font"
               :style="
-                UISetting.mainColor && UISetting.mainColor.rgba
-                  ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a});color:rgba(${UISetting.mainFontColor.rgba.r},${UISetting.mainFontColor.rgba.g},${UISetting.mainFontColor.rgba.b},${UISetting.mainFontColor.rgba.a})`
+                UISetting.mainColor
+                  ? `background:${UISetting.mainColor};color:${UISetting.mainFontColor}`
                   : ''
               "
               >{{ PREVIEW.data.cr }}</span
@@ -100,11 +103,7 @@
               ref="myLoadText"
               class="text"
               :class="UISetting.font"
-              :style="
-                UISetting.fontColor && UISetting.fontColor.rgba
-                  ? `color:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})`
-                  : ''
-              "
+              :style="UISetting.fontColor ? `color:${UISetting.fontColor}` : ''"
             >
               {{ PREVIEW.data.text }}
             </p>
@@ -125,8 +124,8 @@
               class="name"
               :class="UISetting.font"
               :style="
-                UISetting.mainColor && UISetting.mainColor.rgba
-                  ? `background:rgba(${UISetting.mainColor.rgba.r},${UISetting.mainColor.rgba.g},${UISetting.mainColor.rgba.b},${UISetting.mainColor.rgba.a});color:rgba(${UISetting.mainFontColor.rgba.r},${UISetting.mainFontColor.rgba.g},${UISetting.mainFontColor.rgba.b},${UISetting.mainFontColor.rgba.a})`
+                UISetting.mainColor
+                  ? `background:${UISetting.mainColor};color:${UISetting.mainFontColor}`
                   : ''
               "
               >메인 색상</span
@@ -135,9 +134,7 @@
               class="text"
               :class="UISetting.font"
               :style="
-                UISetting.fontColor && UISetting.fontColor.rgba
-                  ? `color:rgba(${UISetting.fontColor.rgba.r},${UISetting.fontColor.rgba.g},${UISetting.fontColor.rgba.b},${UISetting.fontColor.rgba.a})`
-                  : ''
+                UISetting.fontColor ? `color:rgba(${UISetting.fontColor}` : ''
               "
             >
               창 색상
@@ -263,21 +260,17 @@ export default {
     },
     windowColor() {
       let style = ''
-      if (this.UISetting.windowColor && this.UISetting.windowColor.rgba) {
-        style += `background:rgba(${this.UISetting.windowColor.rgba.r},${this.UISetting.windowColor.rgba.g},${this.UISetting.windowColor.rgba.b},${this.UISetting.windowColor.rgba.a});`
+      if (this.UISetting.windowColor) {
+        style += `background:${this.UISetting.windowColor};`
       }
-      if (this.UISetting.strokeColor && this.UISetting.strokeColor.rgba) {
-        style += `outline : ${this.UISetting.border}px solid rgba(${this.UISetting.strokeColor.rgba.r},${this.UISetting.strokeColor.rgba.g},${this.UISetting.strokeColor.rgba.b},${this.UISetting.strokeColor.rgba.a});`
+      if (this.UISetting.strokeColor) {
+        style += `outline : ${this.UISetting.border}px solid ${this.UISetting.strokeColor};`
       }
       if (this.UISetting.round) {
         style += `border-radius:${this.UISetting.round}px;`
       }
-      if (this.UISetting.shadowColor && this.UISetting.shadowColor.rgba) {
-        style += `box-shadow: ${this.UISetting.x}px ${this.UISetting.y}px rgb(${
-          this.UISetting.shadowColor.rgba.r
-        },${this.UISetting.shadowColor.rgba.g},${
-          this.UISetting.shadowColor.rgba.b
-        },${Number(this.UISetting.shadowColor.rgba.a) * 100}%);`
+      if (this.UISetting.shadowColor) {
+        style += `box-shadow: ${this.UISetting.x}px ${this.UISetting.y}px ${this.UISetting.y}px ${this.UISetting.shadowColor};`
       }
       console.log(style)
       return style
