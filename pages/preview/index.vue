@@ -26,7 +26,7 @@
       ></div>
       <div v-if="cutType === 3" class="answer answer-multiple">
         <button
-          inApp.questionsText[0]
+          v-if="inApp.questionsText[0]"
           type="button"
           class="btn"
           @click="onClickQuestions(0)"
@@ -34,7 +34,7 @@
           {{ inApp.questionsText[0] }}
         </button>
         <button
-          inApp.questionsText[1]
+          v-if="inApp.questionsText[1]"
           type="button"
           class="btn"
           @click="onClickQuestions(1)"
@@ -42,7 +42,7 @@
           {{ inApp.questionsText[1] }}
         </button>
         <button
-          inApp.questionsText[2]
+          v-if="inApp.questionsText[2]"
           type="button"
           class="btn"
           @click="onClickQuestions(2)"
