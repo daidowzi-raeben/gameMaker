@@ -126,10 +126,8 @@
             class="name"
             :class="IN_APP_GAME.uiSet.font"
             :style="
-              IN_APP_GAME.uiSet &&
-              IN_APP_GAME.uiSet.mainColor &&
-              IN_APP_GAME.uiSet.mainColor.rgba
-                ? `background:rgba(${IN_APP_GAME.uiSet.mainColor.rgba.r},${IN_APP_GAME.uiSet.mainColor.rgba.g},${IN_APP_GAME.uiSet.mainColor.rgba.b},${IN_APP_GAME.uiSet.mainColor.rgba.a});color:rgba(${IN_APP_GAME.uiSet.mainFontColor.rgba.r},${IN_APP_GAME.uiSet.mainFontColor.rgba.g},${IN_APP_GAME.uiSet.mainFontColor.rgba.b},${IN_APP_GAME.uiSet.mainFontColor.rgba.a})`
+              IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.mainColor
+                ? `background:${IN_APP_GAME.uiSet.mainColor};color:${IN_APP_GAME.uiSet.mainFontColor}`
                 : ''
             "
             >{{ inApp.crName }}</span
@@ -139,10 +137,8 @@
             class="text"
             :class="IN_APP_GAME.uiSet.font"
             :style="
-              IN_APP_GAME.uiSet &&
-              IN_APP_GAME.uiSet.fontColor &&
-              IN_APP_GAME.uiSet.fontColor.rgba
-                ? `color:rgba(${IN_APP_GAME.uiSet.fontColor.rgba.r},${IN_APP_GAME.uiSet.fontColor.rgba.g},${IN_APP_GAME.uiSet.fontColor.rgba.b},${IN_APP_GAME.uiSet.fontColor.rgba.a})`
+              IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.fontColor
+                ? `color:${IN_APP_GAME.uiSet.fontColor}`
                 : ''
             "
           >
@@ -160,10 +156,8 @@
             class="text"
             :class="IN_APP_GAME.uiSet.font"
             :style="
-              IN_APP_GAME.uiSet &&
-              IN_APP_GAME.uiSet.fontColor &&
-              IN_APP_GAME.uiSet.fontColor.rgba
-                ? `color:rgba(${IN_APP_GAME.uiSet.fontColor.rgba.r},${IN_APP_GAME.uiSet.fontColor.rgba.g},${IN_APP_GAME.uiSet.fontColor.rgba.b},${IN_APP_GAME.uiSet.fontColor.rgba.a})`
+              IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.fontColor
+                ? `color:${IN_APP_GAME.uiSet.fontColor}`
                 : ''
             "
           >

@@ -195,7 +195,7 @@ const createStore = () => {
                 state.PREVIEW_INTRO = payload
             },
             MUTATIONS_INTRO_COPYRIGHT(state, payload) {
-                state.PREVIEW_INTRO = payload
+                state.PREVIEW_INTRO.copyright = payload
             },
             MUTATIONS_INTRO_POSITION(state, payload) {
                 state.PREVIEW_INTRO.position = payload
@@ -405,6 +405,7 @@ const createStore = () => {
             },
             // 인트로
             MUTATIONS_PREVIEW_INTRO(state, payload) {
+                // return console.log('MUTATIONS_PREVIEW_INTRO', payload)
                 if (payload.jsonData) {
                     state.PREVIEW_INTRO = payload.jsonData
                 }
