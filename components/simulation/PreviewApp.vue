@@ -176,7 +176,7 @@
         ></button>
       </div>
     </div>
-    <div class="preview-save">
+    <div class="preview-save" :class="{left : MAKER_GNB === 1}">
       마지막 저장
       <span v-if="SAVE_DATETIME" class="time">{{
         SAVE_DATETIME | moment('YY.MM.DD HH:mm:ss')

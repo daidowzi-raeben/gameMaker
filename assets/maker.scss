@@ -369,11 +369,12 @@
     }
 
     .preview {
-      width:360px;
+      width:35vh;
+      max-width: 360px;
       max-height:730px;
       height:100%;
       &-tit{
-        margin:10px 0 15px -80px;
+        margin-left:-75px;
         .highlight{
           color:$colPrimaryHover;
           font-weight: 500;
@@ -396,8 +397,10 @@
         // }
         .column-2{
           display:flex;
-          height:90%;
-          max-height: 730px;
+          height:80%;
+          max-height: 700px;
+          align-items: center;
+          position:relative;
           .buttons{
             display:flex;
             flex-direction: column;
@@ -441,6 +444,13 @@
               }
             }
           }
+          .preview-tit{
+            position:absolute;
+          }
+          .preview-save{
+            position:absolute;
+            bottom:-20px;
+          }
         }
       }
       &-mockup{
@@ -451,16 +461,18 @@
         }
       }
       &-con{
-        width:calc(100% - 30px);
-        height: calc(100% - 25px);
-        left:15px;
-        top:12px;
+        width:calc(100% - 20px);
+        height: calc(100% - 10px);
+        left:10px;
+        top:5px;
         border-radius: 30px;
       }
       &-save {
         font-size: 1.2rem;
-        margin: 15px 0 10px -70px;
-
+        margin-top:15px;
+        &.left{
+          margin-left:-75px;
+        }
         .time {
           color: $colPrimaryHover;
           font-size: 1.6rem;
@@ -1298,6 +1310,7 @@
     justify-content: center;
     background:#000;
     height:100vh;
+    overflow:hidden;
     .web-left{
       background:#fff;
       min-height:730px;
@@ -1374,24 +1387,29 @@
       z-index: 1;
     }
     .background {
-      width: 100%;
-      height: 100%;
+      min-width: 100%;
+      width:auto;
+      height:100%;
+      left:50%;
+      transform: translateX(-50%);
     }
     .character {
-      width:100%;
+      width:auto;
+      height:120%;
       top: unset;
-      bottom:0;
+      bottom:-25%;
+      left:50%;
+      transform:translateX(-50%);
         &-1, &-2{
           width:100%;
           height:100%;
         }
       &-2{
         .character:first-child{
-          left:-30%;
+          transform:translateX(-70%);
         }
         .character:last-child{
-          left:unset;
-          right:-30%;
+          transform:translateX(-30%)
         }
       }
     }
