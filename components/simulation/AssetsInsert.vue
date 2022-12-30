@@ -5,9 +5,11 @@
       <div>
         <div>LIST</div>
       </div>
-      <button type="button">모달열기</button>
+      <button type="button" @click="popsModalVisible = true">모달열기</button>
     </div>
-    <AssetsLocalUpload />
+    <el-dialog title="" :visible.sync="popsModalVisible">
+      <AssetsLocalUpload />
+    </el-dialog>
   </div>
 </template>
 
@@ -18,8 +20,11 @@ export default {
     AssetsLocalUpload,
   },
   data() {
-    return {}
+    return {
+      popsModalVisible: false,
+    }
   },
+  methods: {},
 }
 </script>
 
