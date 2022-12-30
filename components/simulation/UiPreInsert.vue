@@ -53,6 +53,7 @@
                     :key="item.value"
                     :label="item.label"
                     :value="item.value"
+                    @click="onClickPreviewDim"
                   >
                   </el-option>
                 </el-select>
@@ -495,6 +496,9 @@ export default {
         title: '저장되었습니다.',
         message: h('i', { style: 'color: teal' }, '멋진 UI를 만들어 보아요!'),
       })
+    },
+    onClickPreviewDim({ target }) {
+      console.log(target)
     },
   },
 }
