@@ -24,7 +24,7 @@
             <span v-else-if="v.cutType === 3" class="category type4"
               >객관식</span
             >
-            <span v-else-if="v.cutType === 5" class="category type3"
+            <span v-else-if="v.cutType === 4" class="category type3"
               >주관식</span
             >
           </div>

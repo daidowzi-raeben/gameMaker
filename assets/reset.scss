@@ -1,16 +1,55 @@
 @charset "utf-8";
 @import "variables.scss";
 
+//노토산스
 @each $fonts in 1,
 3,
 4,
 5,
 7,
 9 {
-
 	@font-face {
 		font-family: $font1;
 		src: url('../static/fonts/#{$font1}#{$fonts}.woff') format('woff');
+
+		@if $fonts ==1 {
+			font-weight: 100;
+		}
+
+		@else if $fonts ==3 {
+			font-weight: 300;
+		}
+
+		@else if $fonts ==4 {
+			font-weight: 400;
+		}
+
+		@else if $fonts ==5 {
+			font-weight: 500;
+		}
+
+		@else if $fonts ==7 {
+			font-weight: 700;
+		}
+
+		@else if $fonts ==9 {
+			font-weight: 900;
+		}
+
+		font-style: normal;
+	}
+}
+
+// 나눔스퀘어네오
+@each $fonts in 1,
+3,
+4,
+5,
+7,
+9 {
+	@font-face {
+		font-family: $font2;
+		src: url('../static/fonts/#{$font2}#{$fonts}.woff2') format('woff2');
 
 		@if $fonts ==1 {
 			font-weight: 100;
@@ -84,14 +123,6 @@
 @font-face {
 	font-family: 'Ycomputer-Regular';
 	src: url('../static/fonts/Ycomputer-Regular.woff2') format('woff2');
-	font-weight: normal;
-	font-style: normal;
-}
-
-// 나눔스퀘어네오
-@font-face {
-	font-family: 'NanumSquareNeo-Variable';
-	src: url('../static/fonts/NanumSquareNeo-Variable.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 }
