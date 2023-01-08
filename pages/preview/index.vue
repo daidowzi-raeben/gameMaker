@@ -182,9 +182,21 @@
           <div class="title">등장인물</div>
         </div>
         <ul class="preview-profile--list">
-          <li class="item" @click="onclickDisplayShow('displayProfileDetail')">
-            <img :src="inApp.cr" alt="" />
-            <span class="name">{{ inApp.crName }}</span>
+          <li class="item" @click="onclickDisplayShow('displayProfileDetail')" style="background-color:#ffda72">
+            <div class="img-wrap">
+              <img src="https://imgur.com/Xs5xsVU.png" alt="" />
+            </div>
+            <div class="name">
+              쟈몽
+            </div>
+          </li>
+          <li class="item" @click="onclickDisplayShow('displayProfileDetail')" style="background-color:#e38542">
+            <div class="img-wrap">
+              <img src="https://imgur.com/HzC0LCW.png" alt="" />
+            </div>
+            <div class="name">
+              북극산꽁치
+            </div>
           </li>
         </ul>
       </div>
@@ -193,18 +205,43 @@
         ref="displayProfileDetail"
         class="preview-con preview-profile detail"
       >
-        <button
-          type="button"
-          class="btn close"
-          @click="onclickDisplayShow('displayProfile')"
-        >
-          닫기
-        </button>
+        <div class="btn-wrap">
+          <button
+            type="button"
+            class="btn close"
+            @click="onclickDisplayShow('displayProfile')"
+          >
+            닫기
+          </button>
+          <button
+            type="button"
+            class="btn picture"
+          >
+            사진
+          </button>
+        </div>
+
         <p class="name">{{ inApp.crName }}</p>
-        <img :src="inApp.cr" alt="" class="character" />
-        <p class="profile">
-          {{ inApp.text }}
-        </p>
+        <div class="character">
+          <img src="https://imgur.com/Xs5xsVU.png" alt="" />
+        </div>
+        <div class="profile">
+          <p class="con"><span v-for="i in 10" :key="i">{{ inApp.text }}</span></p>
+        </div>
+        <ul class="face-list">
+          <li class="face-list--item">
+            <img src="https://i.imgur.com/TNnVehQ.png" alt="" />
+          </li>
+          <li class="face-list--item">
+            <img src="https://i.imgur.com/Fya1jHk.png" alt="" />
+          </li>
+          <li class="face-list--item">
+            <img src="https://i.imgur.com/W6z9by0.png" alt="" />
+          </li>
+          <li class="face-list--item">
+            <img src="https://i.imgur.com/m14VXCI.png" alt="" />
+          </li>
+        </ul>
       </div>
       <img
         src="~/static/images/mockup.png"
@@ -499,7 +536,7 @@ export default {
           break
         case 'displayProfileDetail':
           this.$refs.displayProfile.style = 'display:none'
-          this.$refs.displayProfileDetail.style = 'display:block'
+          this.$refs.displayProfileDetail.style = 'display:block;background-color:#ffda72'
           break
       }
 
