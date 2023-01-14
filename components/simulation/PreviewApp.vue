@@ -141,6 +141,33 @@
             </p>
           </div>
         </div>
+        <div
+          v-show="MAKER_GNB === 4"
+          ref="displayProfileDetail"
+          class="preview-con preview-profile detail"
+        >
+          <p class="name">캐릭터명</p>
+          <div class="character">
+            <img src="https://imgur.com/Xs5xsVU.png" alt="" />
+          </div>
+          <div class="profile">
+            <p class="con">프로필</p>
+          </div>
+          <ul class="face-list">
+            <li class="face-list--item">
+              <img src="https://i.imgur.com/TNnVehQ.png" alt="" />
+            </li>
+            <li class="face-list--item">
+              <img src="https://i.imgur.com/Fya1jHk.png" alt="" />
+            </li>
+            <li class="face-list--item">
+              <img src="https://i.imgur.com/W6z9by0.png" alt="" />
+            </li>
+            <li class="face-list--item">
+              <img src="https://i.imgur.com/m14VXCI.png" alt="" />
+            </li>
+          </ul>
+        </div>
         <img src="~/static/images/mockup.png" alt="" class="preview-mockup" />
       </div>
       <div v-if="MAKER_GNB === 1" ref="buttonNav" class="buttons">

@@ -2,14 +2,40 @@
   <div class="insert">
     <div class="setting">
       <!-- <button type="button" class="button btn-pink delete-btn">삭제</button> -->
-      <ImageController />
       <div class="setting-con setting-profile">
-        <div class="setting-tit">프로필 설정</div>
+        <div class="setting-tit">
+          캐릭터 설정
+        </div>
+        <el-scrollbar class="thumbnail-list--wrap type2">
+          <ul v-if="ASSETS" class="thumbnail-list">
+            <li class="thumbnail-list--item" @click="onClickCrImage('')">
+              <div class="none"></div>
+            </li>
+            <li
+              v-for="(v, i) in ASSETS.cr"
+              :key="i"
+              class="thumbnail-list--item"
+              :class="{ active: PREVIEW.img.cr === v.path }"
+              @click="onClickCrImage(v.path)"
+            >
+              <img v-if="v.path" :src="v.path" alt="" />
+            </li>
+          </ul>
+        </el-scrollbar>
+        <div class="color-select--list">
+          <div class="color-select--wrap">
+            <el-color-picker
+              v-model="colorPicker"
+              show-alpha
+            ></el-color-picker>
+            <label class="label">프로필 배경색상</label>
+          </div>
+        </div>
         <div class="input-wrap">
-          <select ref="profilePosition" class="input-select">
+          <!-- <select ref="profilePosition" class="input-select">
             <option value="top">TOP</option>
             <option value="bottom">BOTTOM</option>
-          </select>
+          </select> -->
           <input
             type="text"
             class="input-text"
@@ -20,6 +46,7 @@
             @input="onInputName"
           />
         </div>
+
         <div class="textarea-wrap">
           <textarea
             rows="10"
@@ -103,12 +130,10 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-import ImageController from '~/components/simulation/ImageController.vue'
 import ScenarioSelect from '~/components/modules/ScenarioSelect.vue'
 import { kooLogin } from '~/config/util'
 export default {
   components: {
-    ImageController,
     ScenarioSelect,
   },
   data() {
@@ -131,6 +156,7 @@ export default {
       paramsData: {},
       paramsInit: {},
       characterLength: 0,
+      colorPicker:null,
     }
   },
   PREVIEW: {

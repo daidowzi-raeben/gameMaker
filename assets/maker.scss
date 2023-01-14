@@ -464,10 +464,15 @@
       }
       &-con{
         width:calc(100% - 20px);
-        height: calc(100% - 10px);
+        height: calc(100% - 30px);
         left:10px;
-        top:5px;
+        top:15px;
         border-radius: 30px;
+        &.preview-profile{
+          .character img{
+            width:110%;
+          }
+        }
       }
       &-save {
         font-size: 1.2rem;
@@ -509,6 +514,8 @@
       .setting-con {
         width: 100%;
         padding: 20px;
+        height: 100%;
+        overflow:auto;
         & ~ .text-center{
           width: calc(100% - 20px);
         }
@@ -516,6 +523,11 @@
           position:absolute;
           left:0;
           top:0;
+        }
+        &.setting-profile{
+          .color-select--list{
+            margin-bottom:20px;
+          }
         }
       }
 
@@ -1044,7 +1056,6 @@
           .input-text{
             width:270px;
             height: 38px;
-            margin-left:10px;
           }
         }
         .textarea-wrap{
@@ -1116,6 +1127,10 @@
           flex-wrap: wrap;
           &--wrap{
             height:calc(100vh - 200px);
+            &.type2{
+              height: auto;
+              max-height: 300px;
+            }
           }
           &--item{
             width:130px;
@@ -1483,7 +1498,7 @@
     .dialogue {
       position: absolute;
       left: 10%;
-      bottom: 35px;
+      bottom: 25px;
       background-color: rgba(255, 255, 255, .8);
       width: 80%;
       border-radius: 10px;
