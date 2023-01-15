@@ -506,7 +506,7 @@ export default {
 
 <style lang="scss">
 .radio-wrap {
-  margin: 40px 0 30px;
+  margin: 20px 0;
   .input-radio {
     margin-right: 20px;
   }
@@ -552,13 +552,13 @@ export default {
       }
     }
     @media (max-width: 1450px) {
-      width: calc(33.3% - 17px);
+      width: calc(33.3% - 14px);
       margin: 0 20px 30px 0;
       &:nth-child(3n) {
-        margin-right: 0;
+        margin-right: 0 !important;
       }
       &:nth-child(4n) {
-        margin-right: 17px;
+        margin-right: 20px;
       }
     }
   }
@@ -618,7 +618,7 @@ export default {
   height: 550px;
   background: #f4f5f7;
   padding: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   border-radius: 10px;
 }
 </style>

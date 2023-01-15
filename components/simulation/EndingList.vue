@@ -6,8 +6,8 @@
         <!-- {{ scen.chapters }} -->
         <ul class="asset-list">
           <li class="asset-list--item">
-            <span class="tit">ㅁㄴㅇ</span>
-            <span class="num">▼5/▲10</span>
+            <span class="tit">엔딩1</span>
+            <span class="tit"><span class="text-color--danger">▲ 5</span> / <span class="text-color--collect">▼ 10</span></span>
           </li>
         </ul>
       </li>

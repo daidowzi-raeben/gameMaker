@@ -6,21 +6,23 @@
         <div class="setting-tit">
           캐릭터 설정
         </div>
-        <el-scrollbar class="thumbnail-list--wrap type2">
-          <ul v-if="ASSETS" class="thumbnail-list">
-            <li class="thumbnail-list--item" @click="onClickCrImage('')">
-              <div class="none"></div>
-            </li>
-            <li
-              v-for="(v, i) in ASSETS.cr"
-              :key="i"
-              class="thumbnail-list--item"
-              :class="{ active: PREVIEW.img.cr === v.path }"
-              @click="onClickCrImage(v.path)"
-            >
-              <img v-if="v.path" :src="v.path" alt="" />
-            </li>
-          </ul>
+        <el-scrollbar>
+          <div class="thumbnail-list--wrap type2">
+            <ul v-if="ASSETS" class="thumbnail-list">
+              <li class="thumbnail-list--item" @click="onClickCrImage('')">
+                <div class="none"></div>
+              </li>
+              <li
+                v-for="(v, i) in ASSETS.cr"
+                :key="i"
+                class="thumbnail-list--item"
+                :class="{ active: PREVIEW.img.cr === v.path }"
+                @click="onClickCrImage(v.path)"
+              >
+                <img v-if="v.path" :src="v.path" alt="" />
+              </li>
+            </ul>
+          </div>
         </el-scrollbar>
         <div class="color-select--list">
           <div class="color-select--wrap">

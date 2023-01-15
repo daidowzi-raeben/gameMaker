@@ -8,7 +8,7 @@
       <UIList v-if="MAKER_GNB === 5" />
       <AssetsList v-if="MAKER_GNB === 6" />
       <div class="maker-right">
-        <CutList v-if="MAKER_GNB === 1" />
+        <CutList v-if="MAKER_GNB === 1 || MAKER_GNB === 3" />
         <PreviewApp />
         <CutInsert
           v-if="!MAKER_GNB || MAKER_GNB === 1"

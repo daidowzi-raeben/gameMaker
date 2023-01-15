@@ -469,6 +469,7 @@
         top:15px;
         border-radius: 30px;
         &.preview-profile{
+          background:#fff;
           .character img{
             width:110%;
           }
@@ -526,8 +527,11 @@
         }
         &.setting-profile{
           .color-select--list{
-            margin-bottom:20px;
+            margin:-10px 0 20px;
           }
+        }
+        .el-scrollbar{
+          margin-bottom:20px;
         }
       }
 
@@ -560,7 +564,7 @@
         font-size:1.4rem;
         color:$textCol2;
         font-weight: 300;
-        margin-bottom:20px;
+        margin-bottom:10px;
       }
 
       &-scen {
@@ -998,20 +1002,20 @@
         .input-text{
           width:100%;
           height:38px;
-          margin-bottom:10px;
+          margin-bottom:30px;
         }
       }
 
       &-logo{
         .input-wrap{
-          margin-bottom:10px;
+          margin-bottom:30px;
           .input-select{
             min-width:114px;
             height:38px;
           }
           .input-text{
-            width:calc(100% - 250px);
-            margin:0 10px;
+            width:100%;
+            margin:0 10px 0 0;
             height:38px;
           }
           .input-file{
@@ -1027,20 +1031,25 @@
         .input-wrap{
           align-items: center;
           margin-bottom:10px;
+          margin-left:-7px;
           .input-select{
             height:38px;
             min-width: 114px;
           }
+          .el-input-number{
+            width:140px;
+            input{
+              width:100% !important;
+            }
+          }
           .text{
             font-size:1.4rem;
-            margin:0 5px;
+            margin:0 7px;
             &.red{
               color:$colPink;
-              margin-left:15px;
             }
             &.blue{
               color:$colBlue;
-              margin-left:15px;
             }
           }
         }
@@ -1126,7 +1135,7 @@
           display:flex;
           flex-wrap: wrap;
           &--wrap{
-            height:calc(100vh - 200px);
+            height:calc(100vh - 215px);
             &.type2{
               height: auto;
               max-height: 300px;
@@ -1138,7 +1147,7 @@
             border-radius: 10px;
             border:2px solid $textCol2;
             overflow:hidden;
-            margin:0 15px 15px 0;
+            margin:15px 15px 0 0;
             cursor: pointer;
             &.upload{
               border-color:$colPrimary;
@@ -2090,7 +2099,7 @@
     .btn, & ~ .btn{
       width:116px;
       font-size:1.4rem;
-      background-color:$colPrimary;
+      background-color:$colBlue;
       color:#fff;
       font-weight: 300;
       border-radius: 5px;
@@ -2098,8 +2107,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      transition:background-color .3s;
       &:hover{
-        color:#fff;
+        background-color:$colBlueHover;
       }
     }
     & ~ .delete{

@@ -1,7 +1,7 @@
 <template>
   <b-modal id="EndingAdd" size="lg" hide-footer centered>
     <div>
-      <div>앤딩 등록</div>
+      <!-- <div>엔딩 등록</div>
       <div v-if="SCENE_DATA_CHARACTER">
         <select class="input-select" @change="onChangeEndingCr">
           <option :value="''">기본엔딩</option>
@@ -19,7 +19,7 @@
         <span class="text blue">포인트</span>
         <input type="number" @input="onInputDownPoint" />
         <span class="text">이하</span>
-      </div>
+      </div> -->
     </div>
   </b-modal>
 </template>

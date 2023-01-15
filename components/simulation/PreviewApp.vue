@@ -9,8 +9,8 @@
       <div v-if="PREVIEW" class="preview">
         <!-- dim-light, dim-dark, dim-blur, diagonal, diagonal-r, copy-left, copy-right 클래스 추가로 구분. intro만있으면 기본 중앙정렬 -->
         <div
-          v-if="PREVIEW && MAKER_GNB === 5"
-          class="preview-con preview-intro dim-light diagonal"
+          v-if="MAKER_GNB === 2 || MAKER_GNB === 5"
+          class="preview-con preview-intro dim-light"
         >
           <div class="preview-intro--background">
             <img
@@ -41,7 +41,7 @@
           </div>
           <div class="preview-intro--copy">ⓒproject koo</div>
         </div>
-        <div v-if="PREVIEW && MAKER_GNB !== 5" class="preview-con preview-img">
+        <div v-if="PREVIEW &&  MAKER_GNB === 1" class="preview-con preview-img">
           <img
             v-if="PREVIEW.img.bg"
             :src="PREVIEW.img.bg"

@@ -1,22 +1,25 @@
 <template>
   <div class="insert">
     <div class="setting">
-      <ImageController />
       <div class="setting-con setting-terms">
         <div class="setting-tit">조건 설정</div>
+        <div class="input-wrap mt-3">
+          <span class="text">캐릭터</span>
+          <el-select v-model="value" class="m-2" placeholder="선택안함" >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </div>
         <div class="input-wrap">
-          <select class="input-select">
-            <option>이지안</option>
-          </select>
-          <span class="text red">호감도</span>
-          <select class="input-select">
-            <option>10</option>
-          </select>
+          <span class="text red">포인트</span>
+          <el-input-number :min="1" :max="100" :disabled="value === ''" />
           <span class="text">이상</span>
-          <span class="text blue">호감도</span>
-          <select class="input-select">
-            <option>10</option>
-          </select>
+          <span class="text blue">포인트</span>
+          <el-input-number :min="1" :max="100" :disabled="value === ''" />
           <span class="text">이하</span>
         </div>
       </div>
@@ -67,10 +70,8 @@
 </template>
 
 <script>
-import ImageController from './ImageController.vue'
 export default {
   components: {
-    ImageController,
   },
   data() {
     return {
@@ -87,6 +88,14 @@ export default {
           prevEl: '.swiper-button-prev',
         },
       },
+      options:[{
+        value: '',
+        label: '선택안함',
+      },{
+        value: '이지안',
+        label: '이지안',
+      }],
+      value: '',
     }
   },
   methods: {

@@ -1,75 +1,78 @@
 <template>
   <div class="insert">
     <div class="setting">
-      {{ intro }}
-      <ImageController />
-      <!-- <div class="setting-copy">
-        <div class="setting-tit">버튼설정</div>
-        <div class="d-flex">
-          <div>
-            <span>인물소개</span>
-            <select class="input-select">
-              <option>사용</option>
-            </select>
-          </div>
-          <div>
-            <span>asd</span>
-            <select class="input-select">
-              <option>TOP</option>
-            </select>
-          </div>
+      <div class="setting-con">
+        <div class="setting-tit">
+          배경화면 설정
         </div>
-      </div> -->
-      <div class="setting-con setting-copy">
-        <div class="setting-tit">저작권 설정</div>
-        <input
-          type="text"
-          placeholder="2022 (C) 프로젝트이름"
-          class="input-text"
-          :value="PREVIEW_INTRO.copyright"
-          @input="onIntroData('copyright', $event)"
-        />
-      </div>
-      <div class="setting-con setting-logo">
-        <div class="setting-tit">로고 등록</div>
-        <div class="input-wrap">
-          <select
-            class="input-select"
-            :value="PREVIEW_INTRO.position"
-            @change="onIntroData('position', $event)"
-          >
-            <option :value="null">CENTER</option>
-            <option value="TOP">TOP</option>
-            <option value="BOTTOM">BOTTOM</option>
-            <option value="LEFT">LEFT</option>
-            <option value="RIGHT">RIGHT</option>
-          </select>
+        <el-scrollbar>
+          <div class="thumbnail-list--wrap type2">
+            <ul class="thumbnail-list">
+              <li class="thumbnail-list--item">
+                <div class="none"></div>
+              </li>
+              <li
+                v-for="i in 10"
+                :key="i"
+                class="thumbnail-list--item"
+              >
+                <img src="" alt="" />
+              </li>
+            </ul>
+          </div>
+        </el-scrollbar>
+        <div class="setting-copy">
+          <div class="setting-tit">저작권 설정</div>
           <input
-            type="text"
-            class="input-text"
-            :value="fileInsertName"
-            readonly
-          />
-          <label class="input-file">
-            <input
-              id="logoFile"
-              ref="logoFile"
-              type="file"
-              @change="onChangeFileInput"
+              type="text"
+              placeholder="2022 (C) 프로젝트이름"
+              class="input-text"
+              :value="PREVIEW_INTRO.copyright"
+              @input="onIntroData('copyright', $event)"
             />
-            <span v-if="isFileInsert === false" class="btn">이미지 등록</span>
-          </label>
-          <span
-            v-if="isFileInsert === true"
-            class="btn delete"
-            @click="onClickFileDelete"
-            >이미지 삭제</span
-          >
+        </div>
+        <div class="setting-logo">
+          <div class="setting-tit">로고 등록</div>
+          <div class="input-wrap">
+            <!-- <select
+              class="input-select"
+              :value="PREVIEW_INTRO.position"
+              @change="onIntroData('position', $event)"
+            >
+              <option :value="null">CENTER</option>
+              <option value="TOP">TOP</option>
+              <option value="BOTTOM">BOTTOM</option>
+              <option value="LEFT">LEFT</option>
+              <option value="RIGHT">RIGHT</option>
+            </select> -->
+            <input
+              type="text"
+              class="input-text"
+              :value="fileInsertName"
+              readonly
+            />
+            <label class="input-file">
+              <input
+                id="logoFile"
+                ref="logoFile"
+                type="file"
+                @change="onChangeFileInput"
+              />
+              <span v-if="isFileInsert === false" class="btn">이미지 등록</span>
+            </label>
+            <span
+              v-if="isFileInsert === true"
+              class="btn delete"
+              @click="onClickFileDelete"
+              >이미지 삭제</span
+            >
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="button" class="button md btn-primary" @click="onSubmit">저장</button>
         </div>
       </div>
-      <div class="text-center">
-        <button style="font-size: 20px" @click="onSubmit">저장</button>
-      </div>
+
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
       <button
@@ -84,11 +87,9 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-import ImageController from './ImageController.vue'
 import { kooLogin } from '~/config/util'
 export default {
   components: {
-    ImageController,
   },
   data() {
     return {
