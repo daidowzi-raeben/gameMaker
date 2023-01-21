@@ -29,19 +29,37 @@
             <button
               type="button"
               class="btn"
+              :class="UISetting.font"
+              :style="`background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.round}px`"
               @click="onclickDisplayShow('displayGame')"
             >
               시작하기
             </button>
-            <button type="button" class="btn">불러오기</button>
             <button
               type="button"
               class="btn"
+              :class="UISetting.font"
+              :style="`background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.round}px`"
+            >
+              불러오기
+            </button>
+            <button
+              type="button"
+              class="btn"
+              :class="UISetting.font"
+              :style="`background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.round}px`"
               @click="onclickDisplayShow('displayProfile')"
             >
               등장인물
             </button>
-            <button type="button" class="btn">갤러리</button>
+            <button
+              type="button"
+              class="btn"
+              :class="UISetting.font"
+              :style="`background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.round}px`"
+            >
+              갤러리
+            </button>
           </div>
           <div class="preview-intro--copy">
             <!-- {{ PREVIEW_INTRO.copyright }} -->
@@ -169,14 +187,14 @@
             width="100%"
             height="100%"
           />
-          <p class="name">
+          <p class="name" :class="UISetting.font">
             {{ PREVIEW_PROFILE.name ? PREVIEW_PROFILE.name : '인물이름' }}
           </p>
           <div class="character">
             <img :src="PREVIEW.img.cr" alt="" />
           </div>
           <div class="profile">
-            <p class="con">
+            <p class="con" :class="UISetting.font">
               {{
                 PREVIEW_PROFILE.discription
                   ? PREVIEW_PROFILE.discription.replaceAll('||n', '\n')

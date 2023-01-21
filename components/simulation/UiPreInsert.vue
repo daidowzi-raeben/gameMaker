@@ -396,6 +396,7 @@ export default {
         },
       ],
       introDimOptionValue: '',
+      paramsInitIntro: {},
     }
   },
   computed: {
@@ -430,6 +431,13 @@ export default {
       this.paramsInit.secretKey = this.PROJECT_ID
       this.paramsInit.apiKey = process.env.API_KEY
       this.ACTION_AXIOS_GET(this.paramsInit)
+    })
+    this.$nextTick(() => {
+      this.paramsInitIntro.user_idx = kooLogin('user_idx')
+      this.paramsInitIntro.type = 'introList'
+      this.paramsInitIntro.secretKey = this.PROJECT_ID
+      this.paramsInitIntro.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.paramsInitIntro)
     })
   },
   methods: {
