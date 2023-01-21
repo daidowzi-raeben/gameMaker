@@ -208,6 +208,11 @@ export default {
     onClickScenarioAdd() {
       // user_idx: kooLogin('user_idx')
       console.log(kooLogin('user_idx'))
+      Object.entries(document.getElementsByName('chapterTitle')).forEach(
+        (e, i) => {
+          console.log((e[1].checked = false))
+        }
+      )
       this.MUTATIONS_CHAPTER_DEATILE_INIT()
     },
     onClickChapterAdd(idx) {

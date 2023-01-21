@@ -13,13 +13,17 @@
           class="preview-con preview-intro dim-light"
         >
           <div class="preview-intro--background">
-            <img
-              src="https://mblogthumb-phinf.pstatic.net/MjAyMDAyMDNfOTcg/MDAxNTgwNjY4MzA1OTQ5.e9NJgX23nV_5ZM4Bn8LN-KQyJ2ZxsVuR5HZpJPb_TMMg.S8LQwAn8Q03YQVPvbVrCSdut5GqudOXLObvrWWzZSxcg.JPEG.westar4501/2%EC%9B%94_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_se.jpg?type=w800"
-              alt="background"
-            />
+            <img :src="PREVIEW_INTRO.bg" alt="background" />
           </div>
           <div class="preview-intro--logo">
-            <img src="~/static/images/logo.svg" alt="logo" />
+            <img v-if="!PREVIEW_INTRO.logo" src="~/static/images/logo.svg" />
+            <img
+              v-if="PREVIEW_INTRO.logo"
+              :src="
+                'https://api.school-os.net/game/upload/logo/' +
+                PREVIEW_INTRO.logo
+              "
+            />
           </div>
           <div class="preview-intro--menu">
             <button
@@ -39,9 +43,14 @@
             </button>
             <button type="button" class="btn">갤러리</button>
           </div>
-          <div class="preview-intro--copy">ⓒproject koo</div>
+          <div class="preview-intro--copy">
+            <!-- {{ PREVIEW_INTRO.copyright }} -->
+            {{
+              PREVIEW_INTRO.copyright ? PREVIEW_INTRO.copyright : 'ⓒproject koo'
+            }}
+          </div>
         </div>
-        <div v-if="PREVIEW &&  MAKER_GNB === 1" class="preview-con preview-img">
+        <div v-if="PREVIEW && MAKER_GNB === 1" class="preview-con preview-img">
           <img
             v-if="PREVIEW.img.bg"
             :src="PREVIEW.img.bg"
@@ -145,13 +154,35 @@
           v-show="MAKER_GNB === 4"
           ref="displayProfileDetail"
           class="preview-con preview-profile detail"
+          :style="
+            PREVIEW_PROFILE.background
+              ? `background: ${PREVIEW_PROFILE.background}`
+              : ''
+          "
         >
-          <p class="name">캐릭터명</p>
+          <!-- 배경 넣어주세요 -->
+          <img
+            v-if="PREVIEW.img.bg"
+            :src="PREVIEW.img.bg"
+            alt=""
+            class="background"
+            width="100%"
+            height="100%"
+          />
+          <p class="name">
+            {{ PREVIEW_PROFILE.name ? PREVIEW_PROFILE.name : '인물이름' }}
+          </p>
           <div class="character">
-            <img src="https://imgur.com/Xs5xsVU.png" alt="" />
+            <img :src="PREVIEW.img.cr" alt="" />
           </div>
           <div class="profile">
-            <p class="con">프로필</p>
+            <p class="con">
+              {{
+                PREVIEW_PROFILE.discription
+                  ? PREVIEW_PROFILE.discription.replaceAll('||n', '\n')
+                  : '프로필을 입력하세요'
+              }}
+            </p>
           </div>
           <ul class="face-list">
             <li class="face-list--item">
@@ -203,7 +234,7 @@
         ></button>
       </div>
     </div>
-    <div class="preview-save" :class="{left : MAKER_GNB === 1}">
+    <div class="preview-save" :class="{ left: MAKER_GNB === 1 }">
       마지막 저장
       <span v-if="SAVE_DATETIME" class="time">{{
         SAVE_DATETIME | moment('YY.MM.DD HH:mm:ss')
@@ -233,6 +264,8 @@ export default {
       'MAKER_GNB',
       'UISetting',
       'CONTENT_CODE',
+      'PREVIEW_PROFILE',
+      'PREVIEW_INTRO',
     ]),
   },
   watch: {

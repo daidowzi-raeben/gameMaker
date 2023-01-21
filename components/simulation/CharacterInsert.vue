@@ -2,10 +2,8 @@
   <div class="insert">
     <div class="setting">
       <!-- <button type="button" class="button btn-pink delete-btn">삭제</button> -->
-      <div class="setting-con setting-profile">
-        <div class="setting-tit">
-          캐릭터 설정
-        </div>
+      <div class="setting-con setting-profile" style="position: unset">
+        <div class="setting-tit">캐릭터 설정</div>
         <el-scrollbar>
           <div class="thumbnail-list--wrap type2">
             <ul v-if="ASSETS" class="thumbnail-list">
@@ -24,12 +22,31 @@
             </ul>
           </div>
         </el-scrollbar>
+        <div>
+          <div class="setting-tit">배경화면</div>
+          <div class="setting-info">
+            배경을 선택하세요! 에셋 관리에서 더 추가할 수 있어요.
+          </div>
+          <el-scrollbar class="thumbnail-list--wrap" style="height: auto">
+            <ul v-if="ASSETS" class="thumbnail-list">
+              <li class="thumbnail-list--item" @click="onClickBgImage('')">
+                <div class="none"></div>
+              </li>
+              <li
+                v-for="(v, i) in ASSETS.bg"
+                :key="i"
+                class="thumbnail-list--item background"
+                :class="{ active: PREVIEW.img.bg === v.path }"
+                @click="onClickBgImage(v.path)"
+              >
+                <img v-if="v.path" :src="v.path" alt="" />
+              </li>
+            </ul>
+          </el-scrollbar>
+        </div>
         <div class="color-select--list">
           <div class="color-select--wrap">
-            <el-color-picker
-              v-model="colorPicker"
-              show-alpha
-            ></el-color-picker>
+            <el-color-picker v-model="colorPicker" show-alpha></el-color-picker>
             <label class="label">프로필 배경색상</label>
           </div>
         </div>
@@ -158,7 +175,8 @@ export default {
       paramsData: {},
       paramsInit: {},
       characterLength: 0,
-      colorPicker:null,
+      colorPicker: null,
+      params: {},
     }
   },
   PREVIEW: {
@@ -177,16 +195,34 @@ export default {
       'CHAPTER_DEATILE',
       'SCENE_DATA',
       'SCENE_DATA_CHARACTER',
+      'PREVIEW_PROFILE',
     ]),
+  },
+  watch: {
+    'PREVIEW_PROFILE.background': {
+      handler(value) {
+        console.log('watch=============', value)
+        this.colorPicker = value
+      },
+      immediate: true,
+    },
+    colorPicker: {
+      handler(value) {
+        console.log('watch', value)
+        this.MUTATIONS_PROFILE_COLOR_PICKER(value)
+      },
+      immediate: false,
+      deep: true,
+    },
   },
   mounted() {
     // console.log(time)
     this.$nextTick(() => {
-      this.user_idx = kooLogin('user_idx')
-      // this.paramsInit.type = 'scenarioDetail'
-      // this.paramsInit.secretKey = this.PROJECT_ID
-      // this.paramsInit.apiKey = process.env.API_KEY
-      // this.ACTION_AXIOS_GET(this.paramsInit)
+      this.params.type = 'assetsProject'
+      this.params.user_idx = kooLogin('user_idx')
+      this.params.secretKey = this.PROJECT_ID
+      this.params.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.params)
     })
   },
   methods: {
@@ -195,6 +231,12 @@ export default {
       'MUTAIONS_SAVE',
       'MUTATIONS_LOADING_INIT',
       'MUTATIONS_LOADING',
+      'MUTATIONS_ASSETS_CR',
+      'MUTATIONS_PROFILE_NAME',
+      'MUTATIONS_PROFILE_DISCRIPTION',
+      'MUTATIONS_ASSETS_BG',
+      'MUTATIONS_CONTENT_CODE',
+      'MUTATIONS_PROFILE_COLOR_PICKER',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
 
@@ -212,10 +254,12 @@ export default {
     },
     onInputProfile({ target }) {
       this.characterData.profile = target.value
+      this.MUTATIONS_PROFILE_DISCRIPTION(target.value)
     },
     onInputName({ target }) {
       this.characterData.name = target.value
       console.log(target.value)
+      this.MUTATIONS_PROFILE_NAME(target.value)
     },
     onSubmit() {
       this.MUTATIONS_LOADING_INIT()
@@ -233,27 +277,33 @@ export default {
         }
       } else {
         for (let i = 0; i < this.characterLength; i++) {
-          if (
-            this.SCENE_DATA_CHARACTER.jsonData[i].name ===
-            this.characterData.name
-          ) {
-            this.onErrorMsg()
-            return this.MUTATIONS_LOADING()
-          }
+          // if (
+          //   this.SCENE_DATA_CHARACTER.jsonData[i].name ===
+          //   this.characterData.name
+          // ) {
+          //   this.onErrorMsg()
+          //   return this.MUTATIONS_LOADING()
+          // }
         }
       }
+      // return
       this.characterData.bg = this.PREVIEW.img.bg
       this.characterData.cr = this.PREVIEW.img.cr
-      this.characterData.position = this.$refs.profilePosition.value
+      // this.characterData.position = this.$refs.profilePosition.value
       this.paramsData.type = 'characterInsert'
       this.paramsData.secretKey = this.PROJECT_ID
-      this.paramsData.user_idx = this.user_idx
+      this.paramsData.user_idx = kooLogin('user_idx')
       this.paramsData.apiKey = process.env.API_KEY
-      this.paramsData.previewData = JSON.stringify(this.characterData)
-      this.paramsData.previewData = this.paramsData.previewData.replaceAll(
+      this.characterData.profile = this.characterData.profile.replaceAll(
         '\n',
         '||n'
       )
+      this.characterData.background = this.colorPicker
+      this.paramsData.previewData = JSON.stringify(this.characterData)
+      // this.paramsData.previewData = this.paramsData.previewData.replaceAll(
+      //   '\n',
+      //   '||n'
+      // )
       this.ACTION_AXIOS_GET(this.paramsData)
       this.onSave()
 
@@ -268,6 +318,12 @@ export default {
       //   this.ACTION_AXIOS_GET(this.paramsInit)
       //   this.MUTAIONS_SAVE()
       // })
+    },
+    onClickBgImage(e) {
+      console.log(e)
+      this.characterData.bg = e
+      this.MUTATIONS_ASSETS_BG(e)
+      this.MUTATIONS_CONTENT_CODE(2)
     },
     onSave() {
       const h = this.$createElement
@@ -290,6 +346,9 @@ export default {
           '인물의 이름은 중복으로 사용할 수 없어요'
         ),
       })
+    },
+    onClickCrImage(e) {
+      this.MUTATIONS_ASSETS_CR(e)
     },
   },
 }

@@ -110,6 +110,13 @@ const createStore = () => {
                 bg: '',
                 ver: '',
             },
+            PREVIEW_PROFILE: {
+                name: '',
+                background: '',
+                discription: '',
+                open: '',
+                backgroundChk: null
+            },
             PREVIEW_ENDING: [
                 {
                     name: '',
@@ -188,8 +195,17 @@ const createStore = () => {
             MUTATIONS_LOADING_INIT(state, payload) {
                 state.LOADING = true
             },
+            MUTATIONS_PROFILE_NAME(state, payload) {
+                state.PREVIEW_PROFILE.name = payload
+            },
+            MUTATIONS_PROFILE_DISCRIPTION(state, payload) {
+                state.PREVIEW_PROFILE.discription = payload
+            },
             MUTATIONS_COLOR_PICKER(state, payload) {
                 state.UISetting = payload
+            },
+            MUTATIONS_PROFILE_COLOR_PICKER(state, payload) {
+                state.PREVIEW_PROFILE.background = payload
             },
             MUTATIONS_INTRO(state, payload) {
                 state.PREVIEW_INTRO = payload
@@ -352,7 +368,15 @@ const createStore = () => {
                 state.PREVIEW.img.bg = payload.jsonData.bg;
                 state.PREVIEW.img.cr = payload.jsonData.cr;
                 state.PREVIEW.img.cr2 = payload.jsonData.cr2;
-                console.log(payload)
+                state.PREVIEW_PROFILE.name = payload.jsonData.name
+                state.PREVIEW_PROFILE.discription = payload.jsonData.profile
+                if (payload.jsonData.background) {
+                    state.PREVIEW_PROFILE.background = payload.jsonData.background
+                    state.PREVIEW_PROFILE.backgroundChk = payload.jsonData.background
+                } else {
+                    state.PREVIEW_PROFILE.background = null
+                }
+                console.log('MUTATIONS_ASSETS_GET_DATA', payload)
             },
             // 저장시간 초기화
             MUTATIONS_SAVE_DATETIME_INIT(state, payload) {
@@ -393,11 +417,16 @@ const createStore = () => {
             // 인물 데이터 초기화
             MUTATIONS_CHAPTER_DEATILE_INIT(state, payload) {
                 state.CHAPTER_DEATILE = []
-                state.CHAPTER_DEATILE_IDX = ''
+                state.CHAPTER_DEATILE_IDX = null
                 state.PREVIEW.img.bg = '';
                 state.PREVIEW.img.cr = '';
                 state.PREVIEW.img.cr2 = '';
                 state.PREVIEW.data.sr = '';
+                state.PREVIEW_PROFILE.name = ''
+                state.PREVIEW_PROFILE.discription = ''
+                state.PREVIEW_PROFILE.background = null
+                state.PREVIEW_PROFILE.bg = ''
+                state.PREVIEW_PROFILE.open = ''
             },
             // 대사 초기화
             MUTATIONS_ASSETS_INIT_TEXT(state, payload) {
@@ -409,10 +438,13 @@ const createStore = () => {
                 if (payload.jsonData) {
                     state.PREVIEW_INTRO = payload.jsonData
                 }
+
+                state.PREVIEW_INTRO.logo = payload.logo
             },
             // 배경
             MUTATIONS_ASSETS_BG(state, payload) {
                 state.PREVIEW.img.bg = payload;
+                state.PREVIEW_INTRO.bg = payload;
             },
             // 사운드
             MUTATIONS_ASSETS_SOUND(state, payload) {

@@ -2,21 +2,22 @@
   <div class="insert">
     <div class="setting">
       <div class="setting-con">
-        <div class="setting-tit">
-          배경화면 설정
-        </div>
+        <div class="setting-tit">배경화면 설정</div>
+
         <el-scrollbar>
           <div class="thumbnail-list--wrap type2">
             <ul class="thumbnail-list">
-              <li class="thumbnail-list--item">
+              <li class="thumbnail-list--item" @click="onClickBgImage('')">
                 <div class="none"></div>
               </li>
               <li
-                v-for="i in 10"
+                v-for="(v, i) in ASSETS.bg"
                 :key="i"
                 class="thumbnail-list--item"
+                :class="{ active: PREVIEW.img.bg === v.path }"
+                @click="onClickBgImage(v.path)"
               >
-                <img src="" alt="" />
+                <img v-if="v.path" :src="v.path" alt="" />
               </li>
             </ul>
           </div>
@@ -24,12 +25,12 @@
         <div class="setting-copy">
           <div class="setting-tit">저작권 설정</div>
           <input
-              type="text"
-              placeholder="2022 (C) 프로젝트이름"
-              class="input-text"
-              :value="PREVIEW_INTRO.copyright"
-              @input="onIntroData('copyright', $event)"
-            />
+            type="text"
+            placeholder="2022 (C) 프로젝트이름"
+            class="input-text"
+            :value="PREVIEW_INTRO.copyright"
+            @input="onIntroData('copyright', $event)"
+          />
         </div>
         <div class="setting-logo">
           <div class="setting-tit">로고 등록</div>
@@ -69,10 +70,11 @@
           </div>
         </div>
         <div class="text-center">
-          <button type="button" class="button md btn-primary" @click="onSubmit">저장</button>
+          <button type="button" class="button md btn-primary" @click="onSubmit">
+            저장
+          </button>
         </div>
       </div>
-
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
       <button
@@ -89,8 +91,7 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
       rightContentShow: false,
@@ -104,6 +105,7 @@ export default {
         ver: '',
       },
       paramsInit: {},
+      params: {},
     }
   },
   computed: {
@@ -113,6 +115,7 @@ export default {
       'PROJECT_ID',
       'IS_POST',
       'PREVIEW_INTRO',
+      'ASSETS',
     ]),
   },
   watch: {
@@ -132,6 +135,13 @@ export default {
       this.paramsInit.apiKey = process.env.API_KEY
       this.ACTION_AXIOS_GET(this.paramsInit)
     })
+    this.$nextTick(() => {
+      this.params.type = 'assetsProject'
+      this.params.user_idx = kooLogin('user_idx')
+      this.params.secretKey = this.PROJECT_ID
+      this.params.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.params)
+    })
   },
   methods: {
     ...mapMutations([
@@ -139,6 +149,8 @@ export default {
       'MUTATIONS_AXIOS_POST_INIT',
       'MUTATIONS_INTRO',
       'MUTATIONS_INTRO_COPYRIGHT',
+      'MUTATIONS_ASSETS_BG',
+      'MUTATIONS_CONTENT_CODE',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickRightContentShow() {
@@ -155,17 +167,17 @@ export default {
     },
     onIntroData(v, e) {
       if (v === 'copyright') {
-        this.MUTATIONS_INTRO_COPYRIGHT(e.value)
+        this.MUTATIONS_INTRO_COPYRIGHT(e.target.value)
         // this.intro.copyright = e.value
       }
       if (v === 'position') {
-        this.MUTATIONS_INTRO_POSITION(e.value)
+        this.MUTATIONS_INTRO_POSITION(e.target.value)
         // this.intro.position = e.value
       }
     },
     onSubmit() {
-      this.intro.bg = this.PREVIEW.img.bg
-      this.intro.copyright = this.PREVIEW.img.copyright
+      this.intro.bg = this.PREVIEW_INTRO.bg
+      this.intro.copyright = this.PREVIEW_INTRO.copyright
       this.intro.position = this.PREVIEW.img.position
       // this.MUTATIONS_INTRO(this.intro)
       const frm = new FormData()
@@ -177,6 +189,11 @@ export default {
       frm.append('apiKey', process.env.API_KEY)
       frm.append('user_idx', kooLogin('user_idx'))
       this.ACTION_AXIOS_POST(frm)
+    },
+    onClickBgImage(e) {
+      console.log(e)
+      this.MUTATIONS_ASSETS_BG(e)
+      this.MUTATIONS_CONTENT_CODE(2)
     },
   },
 }
