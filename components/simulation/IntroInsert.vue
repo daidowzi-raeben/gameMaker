@@ -189,11 +189,23 @@ export default {
       frm.append('apiKey', process.env.API_KEY)
       frm.append('user_idx', kooLogin('user_idx'))
       this.ACTION_AXIOS_POST(frm)
+      this.onSave()
     },
     onClickBgImage(e) {
       console.log(e)
       this.MUTATIONS_ASSETS_BG(e)
       this.MUTATIONS_CONTENT_CODE(2)
+    },
+    onSave() {
+      const h = this.$createElement
+      this.$notify({
+        title: '저장되었습니다.',
+        message: h(
+          'i',
+          { style: 'color: teal' },
+          '인트로는 어플리케이션의 얼굴이에요!'
+        ),
+      })
     },
   },
 }

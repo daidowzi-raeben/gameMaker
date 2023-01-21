@@ -721,6 +721,9 @@ const createStore = () => {
                         console.log('MUTATIONS_AXIOS_POST_SUCCESS', res, params)
                         commit('MUTATIONS_AXIOS_POST_SUCCESS', res.data)
 
+                        // intro
+                        commit('MUTATIONS_PREVIEW_INTRO', res.data)
+
                         console.log('SUCCESS')
                     })
                     .catch((res) => {

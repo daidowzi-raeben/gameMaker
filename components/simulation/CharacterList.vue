@@ -238,6 +238,11 @@ export default {
         this.paramsInit.secretKey = this.PROJECT_ID
         this.paramsInit.apiKey = process.env.API_KEY
         this.ACTION_AXIOS_GET(this.paramsInit)
+        Object.entries(document.getElementsByName('chapterTitle')).forEach(
+          (e, i) => {
+            console.log((e[1].checked = false))
+          }
+        )
       }
     },
     onClickDeleteScenarioList(timestamp) {
