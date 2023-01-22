@@ -19,7 +19,7 @@
           <swiper-slide
             v-for="(v, i) in ASSETS_STORE.crList"
             :key="i"
-            class="card-list--item"
+            class="card-list--item character"
           >
             <div @click="onClickAssetsDetail(v.code)">
               <img :src="onImageLoad(v.path)" alt="" />
