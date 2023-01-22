@@ -638,7 +638,7 @@ export default {
   }
   &--wrap {
     position: relative;
-    margin: 20px 0 40px;
+    margin: 15px 0 40px;
     .color {
       width: 70px;
       height: 70px;
