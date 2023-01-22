@@ -17,7 +17,7 @@
                 :class="{ active: PREVIEW.img.cr === v.path }"
                 @click="onClickCrImage(v.path)"
               >
-                <img v-if="v.path" :src="v.path" alt="" />
+                <img v-if="v.path" :src="onLoadAssetsImage(v.path)" alt="" />
               </li>
             </ul>
           </div>
@@ -351,6 +351,9 @@ export default {
     },
     onClickCrImage(e) {
       this.MUTATIONS_ASSETS_CR(e)
+    },
+    onLoadAssetsImage(v) {
+      return `${process.env.VUE_APP_IMAGE}/cr/${v}`
     },
   },
 }

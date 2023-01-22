@@ -1,5 +1,9 @@
 <template>
-  <div class="preview-wrap" :class="{ bottomnone: MAKER_GNB === 5 }">
+  <div
+    v-if="MAKER_GNB !== 6"
+    class="preview-wrap"
+    :class="{ bottomnone: MAKER_GNB === 5 }"
+  >
     <div v-if="MAKER_GNB === 1 && CUT_LIST.jsonData" class="preview-tit">
       시나리오 <span class="highlight"></span> 챕터
       <span class="highlight"></span> 컷
@@ -13,16 +17,16 @@
           class="preview-con preview-intro dim-light"
         >
           <div class="preview-intro--background">
-            <img :src="PREVIEW_INTRO.bg" alt="background" />
+            <img
+              :src="onLoadAssetsImage(PREVIEW_INTRO.bg, 'bg')"
+              alt="background"
+            />
           </div>
           <div class="preview-intro--logo">
             <img v-if="!PREVIEW_INTRO.logo" src="~/static/images/logo.svg" />
             <img
               v-if="PREVIEW_INTRO.logo"
-              :src="
-                'https://api.school-os.net/game/upload/logo/' +
-                PREVIEW_INTRO.logo
-              "
+              :src="onLoadAssetsImage(PREVIEW_INTRO.logo, 'logo')"
             />
           </div>
           <div class="preview-intro--menu">
@@ -71,7 +75,7 @@
         <div v-if="PREVIEW && MAKER_GNB === 1" class="preview-con preview-img">
           <img
             v-if="PREVIEW.img.bg"
-            :src="PREVIEW.img.bg"
+            :src="onLoadAssetsImage(PREVIEW.img.bg, 'bg')"
             alt=""
             class="background"
           />
@@ -79,7 +83,7 @@
             <img
               v-if="PREVIEW.img.cr"
               ref="characterImage"
-              :src="PREVIEW.img.cr"
+              :src="onLoadAssetsImage(PREVIEW.img.cr, 'cr')"
               alt=""
               class="character"
               :class="PREVIEW.data.effect"
@@ -89,7 +93,7 @@
             <img
               v-if="PREVIEW.img.cr"
               ref="characterImage"
-              :src="PREVIEW.img.cr"
+              :src="onLoadAssetsImage(PREVIEW.img.cr, 'cr')"
               alt=""
               class="character"
               :class="PREVIEW.data.effect"
@@ -97,7 +101,7 @@
             <img
               v-if="PREVIEW.img.cr2"
               ref="characterImage"
-              :src="PREVIEW.img.cr2"
+              :src="onLoadAssetsImage(PREVIEW.img.cr2, 'cr')"
               alt=""
               class="character"
               :class="PREVIEW.data.effect2"
@@ -181,7 +185,7 @@
           <!-- 배경 넣어주세요 -->
           <img
             v-if="PREVIEW.img.bg"
-            :src="PREVIEW.img.bg"
+            :src="onLoadAssetsImage(PREVIEW.img.bg, 'bg')"
             alt=""
             class="background"
             width="100%"
@@ -191,7 +195,7 @@
             {{ PREVIEW_PROFILE.name ? PREVIEW_PROFILE.name : '인물이름' }}
           </p>
           <div class="character">
-            <img :src="PREVIEW.img.cr" alt="" />
+            <img :src="onLoadAssetsImage(PREVIEW.img.cr, 'cr')" alt="" />
           </div>
           <div class="profile">
             <p class="con" :class="UISetting.font">
@@ -352,6 +356,9 @@ export default {
       }
       console.log(style)
       return style
+    },
+    onLoadAssetsImage(v, f) {
+      return `${process.env.VUE_APP_IMAGE}/${f}/${v}`
     },
   },
 }

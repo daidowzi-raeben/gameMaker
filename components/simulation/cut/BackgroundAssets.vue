@@ -17,11 +17,10 @@
             :class="{ active: PREVIEW.img.bg === v.path }"
             @click="onClickBgImage(v.path)"
           >
-            <img v-if="v.path" :src="v.path" alt="" />
+            <img v-if="v.path" :src="onLoadAssetsImage(v.path)" alt="" />
           </li>
         </ul>
       </el-scrollbar>
-
     </div>
   </div>
 </template>
@@ -68,6 +67,9 @@ export default {
       console.log(e)
       this.MUTATIONS_ASSETS_BG(e)
       this.MUTATIONS_CONTENT_CODE(2)
+    },
+    onLoadAssetsImage(v) {
+      return `${process.env.VUE_APP_IMAGE}/cr/${v}`
     },
   },
 }

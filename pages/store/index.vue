@@ -22,7 +22,7 @@
             class="card-list--item"
           >
             <div @click="onClickAssetsDetail(v.code)">
-              <img :src="v.path" alt="" />
+              <img :src="onImageLoad(v.path)" alt="" />
               <label class="like">
                 <input type="checkbox" :checked="i === 1" />
                 <span class="icon"></span>
@@ -120,6 +120,9 @@ export default {
     ...mapMutations(['MUTATIONS_AXIOS_POST_INIT']),
 
     // ------------------------ EVENT
+    onImageLoad(v) {
+      return `${process.env.VUE_APP_IMAGE}/cr/${v}`
+    },
     onChangeScene({ target }) {
       console.log(target.value)
     },

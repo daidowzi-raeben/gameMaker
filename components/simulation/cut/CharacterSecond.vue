@@ -59,7 +59,7 @@
             :class="{ active: PREVIEW.img.cr2 === v.path }"
             @click="onClickCrImage2(v.path)"
           >
-            <img v-if="v.path" :src="v.path" alt="" />
+            <img v-if="v.path" :src="onLoadAssetsImage(v.path)" alt="" />
           </li>
         </ul>
       </el-scrollbar>
@@ -132,6 +132,9 @@ export default {
           this.MUTATIONS_ASSETS_EFFECT2('ani-bottom')
           break
       }
+    },
+    onLoadAssetsImage(v) {
+      return `${process.env.VUE_APP_IMAGE}/cr/${v}`
     },
   },
 }

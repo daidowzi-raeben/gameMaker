@@ -3,6 +3,25 @@
     <div class="project-wrap">
       <div class="card-wrap">
         <div class="card-tit"><nuxt-link to="">Visual Novel</nuxt-link></div>
+        <div style="margin-top: 50px; margin-bottom: 50px">
+          <form @submit.prevent="onClickMakerProject">
+            <div style="padding: 10px">
+              프로젝트명
+              <input
+                v-model="makerProject.subject"
+                style="border: 1px solid #000"
+              /><br />
+              프로젝트 설명
+              <input
+                v-model="makerProject.discription"
+                style="border: 1px solid #000"
+              />
+            </div>
+            <button type="button" @click.prevent="onClickMakerProject">
+              프로젝트 생성
+            </button>
+          </form>
+        </div>
         <swiper
           v-if="PROJECT_MANAGER"
           :options="swiperOptionCol4"
@@ -181,6 +200,10 @@ export default {
         },
       },
       temp: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      makerProject: {
+        subject: '',
+        discription: '',
+      },
     }
   },
   computed: {
@@ -233,6 +256,15 @@ export default {
       this.ACTION_AXIOS_POST(frm, 'projectInsert')
       //   모달 닫고 데이터 리로드
       this.$bvModal.hide('ProjectCreate')
+    },
+    onClickMakerProject() {
+      const frm = new FormData()
+      frm.append('type', 'projectInsert')
+      frm.append('title', this.makerProject.subject)
+      frm.append('discription', this.makerProject.discription)
+      frm.append('user_idx', this.$cookies.get('user_idx'))
+      frm.append('apiKey', process.env.API_KEY)
+      this.ACTION_AXIOS_POST(frm, 'projectInsert')
     },
   },
 }

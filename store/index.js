@@ -1,12 +1,16 @@
 import axios from 'axios'
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
+
+import ASEETS_STORE from "./modules/assetsStore.js"
+
 Vue.use(Vuex)
 // const apiUrl = {
 //   apiMain: '/student.php?type=main&smt_idx=1&sms_idx=1',
 // }
 // const LOCALSTORAGE = localStorage.getItem('STUDENT')
 // console.log('LOCALSTORAGE', LOCALSTORAGE)
+
 const createStore = () => {
     return new Store({
         state: {
@@ -167,6 +171,9 @@ const createStore = () => {
 
         },
         getters: {
+            GETTER_LOADING_INIT(state) {
+                state.LOADING = false
+            },
             GETTER_SCENE_DATA(state) {
                 if (typeof window !== 'undefined') {
                     return localStorage.getItem('TEACHER')
@@ -672,6 +679,11 @@ const createStore = () => {
                             return;
                         }
                         if (params.type === 'assetsList') {
+                            console.log('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
+                            commit('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
+                            return;
+                        }
+                        if (params.type === 'assetsMyList') {
                             console.log('MUTATIONS_STORE_CRLIST', res.data)
                             commit('MUTATIONS_STORE_CRLIST', res.data)
                             return;
@@ -689,6 +701,12 @@ const createStore = () => {
                         if (params.type === 'introList') {
                             console.log('MUTATIONS_PREVIEW_INTRO', res.data)
                             commit('MUTATIONS_PREVIEW_INTRO', res.data)
+                            return;
+                        }
+
+                        if (params.type === 'assetsProjectAdd') {
+                            console.log('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
+                            commit('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
                             return;
                         }
                         // if (params.type === 'characterList') {
@@ -731,6 +749,14 @@ const createStore = () => {
                     })
             },
 
+        },
+        modules: {
+            foo: {
+                // namespaced: true,
+                modules: {
+                    assetsStore: ASEETS_STORE,
+                },
+            },
         },
     })
 }

@@ -84,6 +84,12 @@ export default {
       if (!this.$cookies.get('user_idx')) {
         return alert('로그인 후 이용 가능합니다')
       }
+      console.log('구매하기')
+      this.params.type = 'assetsBuy'
+      this.params.apiKey = process.env.API_KEY
+      this.params.asId = this.$route.query.asId
+      this.params.user_idx = this.$cookies.get('user_idx')
+      this.ACTION_AXIOS_GET(this.params)
     },
   },
 }
