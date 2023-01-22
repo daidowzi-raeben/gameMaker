@@ -1,24 +1,27 @@
 <template>
   <div class="insert">
     <div class="setting">
-      <button
-        type="button"
-        class="button md btn-primary right-top"
-        @click="popsModalVisible = true"
-      >
-        에셋 등록하기
-      </button>
-      <div></div>
       <div class="setting-con setting-image">
-        <div class="setting-tit">인물</div>
+        <div class="setting-tit">
+          인물
+          <div class="right">
+            <button
+              type="button"
+              class="button md btn-blue"
+              @click="onClickLoadAssets('cr')"
+            >
+              에셋 불러오기
+            </button>
+            <button
+              type="button"
+              class="button md btn-primary"
+              @click="popsModalVisible = true"
+            >
+              에셋 등록하기
+            </button>
+          </div>
+        </div>
         <div class="setting-info">나만의 에셋을 등록할 수 있습니다.</div>
-        <button
-          type="button"
-          class="button md btn-primary"
-          @click="onClickLoadAssets('cr')"
-        >
-          에셋 불러오기
-        </button>
         <el-scrollbar v-if="ASSETS && ASSETS.cr" class="thumbnail-list--wrap">
           <ul class="thumbnail-list asset">
             <!-- <li class="thumbnail-list--item upload">

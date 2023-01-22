@@ -111,7 +111,7 @@ button{
 
   &-blue {
     background: $colBlue;
-    color: #fff;
+    color: #fff !important;
 
     &:hover {
       background-color: $colBlueHover;
@@ -120,7 +120,7 @@ button{
 
   &-grey {
     background: $textCol2;
-    color: #fff;
+    color: #fff !important;
 
     &:hover {
       background-color: $textCol2Hover;
@@ -329,9 +329,12 @@ button{
       a {
         font-family: 'NanumSquareNeo', sans-serif;
         font-size: 1.6rem;
-        color: $textCol1 !important;
+        color: $textCol1;
         white-space: nowrap;
         position:relative;
+        &:hover{
+          color:$textCol1;
+        }
         &:before{
           content:"";
           display:block;
@@ -363,7 +366,7 @@ button{
     }
 
     .header-logo a {
-      background: url(../static/images/logo_wh.svg)no-repeat center / auto;
+      background: url(../static/images/symbol2.png)no-repeat center / 32px;
     }
 
     .header-menu--item {
@@ -1014,7 +1017,6 @@ button{
 
 .project {
   &-wrap {
-    margin-top: 70px;
     padding: 50px 0;
     min-height: calc(100vh - 70px);
     background-color: #F4F5F7;

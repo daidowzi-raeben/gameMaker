@@ -52,6 +52,22 @@
           <li class="thumbnail-list--item" @click="onClickCrImage('')">
             <div class="none"></div>
           </li>
+          <li class="thumbnail-list--item">
+            <el-popover
+              placement="right"
+              trigger="click"
+              v-model="visible">
+              <div class="character-face">
+                <el-scrollbar>
+                  <ul class="character-face--list">
+                    <li v-for="i in 20" :key="i" class="item">웃는표정</li>
+                  </ul>
+                </el-scrollbar>
+                <button type="button" class="button sm btn-grey" @click="visible = !visible">닫기</button>
+              </div>
+              <img slot="reference" src="https://pbs.twimg.com/profile_images/883006072843153408/DGb3iOy5_400x400.jpg" alt="" />
+            </el-popover>
+          </li>
           <li
             v-for="(v, i) in ASSETS.cr"
             :key="i"
@@ -74,6 +90,7 @@ export default {
   data() {
     return {
       params: {},
+      visible: false,
     }
   },
   computed: {

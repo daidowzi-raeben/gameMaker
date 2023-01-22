@@ -69,7 +69,47 @@
             >
           </div>
         </div>
-        <div class="text-center">
+
+        <div class="setting-tit">디자인 관리</div>
+          <div class="input-select--list">
+            <div class="input-wrap">
+              <label class="input-label">딤 효과</label>
+              <el-select v-model="introDimOptionValue" placeholder="선택안함">
+                <el-option
+                  v-for="item in introDimOption"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                  @click="onClickPreviewDim"
+                >
+                </el-option>
+              </el-select>
+              <!-- <select class="input-select">
+                <option>밝게</option>
+                <option>어둡게</option>
+                <option>흐릿하게</option>
+              </select> -->
+            </div>
+          </div>
+          <div class="input-select--list">
+            <div class="input-wrap">
+              <label class="input-label">로고&버튼</label>
+              <select class="input-select">
+                <option>중앙</option>
+                <option>대각선(로고가 위로)</option>
+                <option>대각선(버튼이 위로)</option>
+              </select>
+            </div>
+            <div class="input-wrap">
+              <label class="input-label">카피라이트</label>
+              <select class="input-select">
+                <option>왼쪽</option>
+                <option>중앙</option>
+                <option>오른쪽</option>
+              </select>
+            </div>
+          </div>
+        <div class="text-center mt-5">
           <button type="button" class="button md btn-primary" @click="onSubmit">
             저장
           </button>

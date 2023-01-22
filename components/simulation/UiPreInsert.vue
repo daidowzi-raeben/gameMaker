@@ -43,46 +43,6 @@
             </el-scrollbar>
           </div>
           <div v-if="isUiSettingTab === true" class="ui-wrap">
-            <div class="setting-tit sub">인트로 관리</div>
-            <div class="input-select--list">
-              <div class="input-wrap">
-                <label class="input-label">딤 효과</label>
-                <el-select v-model="introDimOptionValue" placeholder="선택안함">
-                  <el-option
-                    v-for="item in introDimOption"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                    @click="onClickPreviewDim"
-                  >
-                  </el-option>
-                </el-select>
-                <!-- <select class="input-select">
-                  <option>밝게</option>
-                  <option>어둡게</option>
-                  <option>흐릿하게</option>
-                </select> -->
-              </div>
-            </div>
-            <div class="input-select--list">
-              <div class="input-wrap">
-                <label class="input-label">로고&버튼</label>
-                <select class="input-select">
-                  <option>중앙</option>
-                  <option>대각선(로고가 위로)</option>
-                  <option>대각선(버튼이 위로)</option>
-                </select>
-              </div>
-              <div class="input-wrap">
-                <label class="input-label">카피라이트</label>
-                <select class="input-select">
-                  <option>왼쪽</option>
-                  <option>중앙</option>
-                  <option>오른쪽</option>
-                </select>
-              </div>
-            </div>
-
             <div class="setting-tit sub">메인창 관리</div>
             <div class="color-select--list">
               <div class="color-select--wrap">
@@ -563,8 +523,6 @@ export default {
 <style lang="scss">
 .radio-wrap {
   margin: 20px 0;
-  background:#f4f5f7;
-  padding:10px;
   border-radius: 8px;
   .input-radio {
     margin-right: 20px;
