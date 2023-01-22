@@ -348,7 +348,7 @@ export default {
         style += `border-radius:${this.UISetting.round}px;`
       }
       if (this.UISetting.shadowColor) {
-        style += `box-shadow: ${this.UISetting.x}px ${this.UISetting.y}px ${this.UISetting.y}px ${this.UISetting.shadowColor};`
+        style += `box-shadow: ${this.UISetting.x}px ${this.UISetting.y}px 0 ${this.UISetting.shadowColor};`
       }
       console.log(style)
       return style

@@ -83,7 +83,7 @@
               </div>
             </div>
 
-            <div class="setting-tit sub">메인색상 관리</div>
+            <div class="setting-tit sub">메인창 관리</div>
             <div class="color-select--list">
               <div class="color-select--wrap">
                 <!-- <button
@@ -134,8 +134,54 @@
                 </div> -->
               </div>
             </div>
+            <div class="input-select--list">
+              <div class="input-wrap">
+                <label class="input-label">모서리</label>
+                <select
+                  class="input-select"
+                  :value="colorPicker.round"
+                  @change="onChangeThemeSet($event, 'round')"
+                >
+                  <option :value="0">선택안함</option>
+                  <option :value="10">약간 둥글게</option>
+                  <option :value="20">둥글게</option>
+                  <option :value="40">더 둥글게</option>
+                  <option :value="100">아주 둥글게</option>
+                </select>
+              </div>
+              <div class="input-wrap">
+                <label class="input-label">선굵기</label>
+                <select
+                  class="input-select"
+                  :value="colorPicker.border"
+                  @change="onChangeThemeSet($event, 'border')"
+                >
+                  <option :value="0">선택안함</option>
+                  <option :value="1">더 얇게</option>
+                  <option :value="2">얇게</option>
+                  <option :value="4">굵게</option>
+                  <option :value="10">아주 굵게</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-select--list">
+              <div class="input-wrap">
+                <label class="input-label">그림자</label>
+                <select
+                  class="input-select"
+                  :value="`${colorPicker.x}|${colorPicker.y}`"
+                  @change="onChangeThemeSet($event, 'shadow')"
+                >
+                  <option :value="'0|0'">선택안함</option>
+                  <option value="3|3">약간 멀리</option>
+                  <option value="5|5">멀리</option>
+                  <option value="8|8">더 멀리</option>
+                  <option value="10|10">아주 멀리</option>
+                </select>
+              </div>
+            </div>
 
-            <div class="setting-tit sub">대사창 색상 관리</div>
+            <div class="setting-tit sub">대사창 관리</div>
             <div class="color-select--list">
               <div class="color-select--wrap">
                 <!-- <button
@@ -234,9 +280,6 @@
                 </div> -->
               </div>
             </div>
-
-            <div class="setting-tit sub">디자인 관리</div>
-
             <div class="input-select--list">
               <div class="input-wrap">
                 <label class="input-label">모서리</label>
@@ -282,6 +325,11 @@
                   <option value="10|10">아주 멀리</option>
                 </select>
               </div>
+            </div>
+
+            <div class="setting-tit sub">디자인 관리</div>
+
+            <div class="input-select--list">
               <div class="input-wrap">
                 <label class="input-label">아이콘</label>
                 <select
@@ -515,6 +563,9 @@ export default {
 <style lang="scss">
 .radio-wrap {
   margin: 20px 0;
+  background:#f4f5f7;
+  padding:10px;
+  border-radius: 8px;
   .input-radio {
     margin-right: 20px;
   }
@@ -580,6 +631,9 @@ export default {
       justify-content: center;
       align-items: center;
       margin-right: 35px;
+    }
+    & + .input-select--list{
+      margin-top:-20px;
     }
   }
   &--wrap {

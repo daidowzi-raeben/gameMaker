@@ -22,12 +22,13 @@
             </ul>
           </div>
         </el-scrollbar>
-        <div>
-          <div class="setting-tit">배경화면</div>
-          <div class="setting-info">
-            배경을 선택하세요! 에셋 관리에서 더 추가할 수 있어요.
-          </div>
-          <el-scrollbar class="thumbnail-list--wrap" style="height: auto">
+
+        <div class="setting-tit">배경화면</div>
+        <div class="setting-info">
+          배경을 선택하세요! 에셋 관리에서 더 추가할 수 있어요.
+        </div>
+        <el-scrollbar>
+          <div class="thumbnail-list--wrap type2">
             <ul v-if="ASSETS" class="thumbnail-list">
               <li class="thumbnail-list--item" @click="onClickBgImage('')">
                 <div class="none"></div>
@@ -42,8 +43,9 @@
                 <img v-if="v.path" :src="v.path" alt="" />
               </li>
             </ul>
-          </el-scrollbar>
-        </div>
+          </div>
+        </el-scrollbar>
+
         <div class="color-select--list">
           <div class="color-select--wrap">
             <el-color-picker v-model="colorPicker" show-alpha></el-color-picker>
