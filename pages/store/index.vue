@@ -29,7 +29,7 @@
               </label>
               <div class="info">
                 <div class="category">
-                  {{ v.kind === 'C' ? 'CHARACTER' : 'BACKGROUnD' }}
+                  {{ v.kind === 'C' ? 'CHARACTER' : 'BACKGROUND' }}
                 </div>
                 <div class="text">{{ v.gas_name }}</div>
                 <div class="bottom">

@@ -158,6 +158,7 @@ const createStore = () => {
             CONTENT_CODE: 4,
             MAKER_GNB: 6,
             ASSETS: [],
+            ASSETSMY: [],
             SCENE_INDEX: null,
             CHAPTER_INDEX: null,
             CHAPTER_LIST: [],
@@ -357,6 +358,9 @@ const createStore = () => {
             // 나의 에셋 로드
             MUTATIONS_AXIOS_GET_ASSETS_PROJECT(state, payload) {
                 state.ASSETS = payload;
+            },
+            MUTATIONS_AXIOS_MY_GET_ASSETS_PROJECT(state, payload) {
+                state.ASSETSMY = payload;
             },
             // 캐릭터 리스트
             MUTATIONS_AXIOS_GET_CHAPTER_LIST(state, payload) {
@@ -678,12 +682,12 @@ const createStore = () => {
                             commit('MUTATIONS_CUT_LIST_GET_DATA', res.data)
                             return;
                         }
-                        if (params.type === 'assetsList') {
-                            console.log('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
-                            commit('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
+                        if (params.type === 'assetsMyList') {
+                            console.log('MUTATIONS_AXIOS_MY_GET_ASSETS_PROJECT', res.data)
+                            commit('MUTATIONS_AXIOS_MY_GET_ASSETS_PROJECT', res.data)
                             return;
                         }
-                        if (params.type === 'assetsMyList') {
+                        if (params.type === 'assetsList') {
                             console.log('MUTATIONS_STORE_CRLIST', res.data)
                             commit('MUTATIONS_STORE_CRLIST', res.data)
                             return;

@@ -57,12 +57,8 @@
     </el-dialog>
     <el-dialog title="" :visible.sync="popsModalVisibleLoadAssets">
       <div>
-        <ul v-if="ASSETS_STORE && ASSETS_STORE.crList">
-          <li
-            v-for="(v, i) in ASSETS_STORE.crList"
-            :key="i"
-            style="float: left"
-          >
+        <ul v-if="ASSETSMY && ASSETSMY.cr">
+          <li v-for="(v, i) in ASSETSMY.cr" :key="i" style="float: left">
             <input type="checkbox" name="assetsImage[]" :value="v.idx" />
             <img :src="onLoadAssetsImage(v.path)" height="300" />
           </li>
@@ -96,7 +92,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['PROJECT_ID', 'ASSETS', 'ASSETS_STORE']),
+    ...mapState(['PROJECT_ID', 'ASSETS', 'ASSETS_STORE', 'ASSETSMY']),
   },
   mounted() {
     this.$nextTick(() => {
