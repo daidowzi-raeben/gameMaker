@@ -3,25 +3,6 @@
     <div class="project-wrap">
       <div class="card-wrap">
         <div class="card-tit"><nuxt-link to="">Visual Novel</nuxt-link></div>
-        <div style="margin-top: 50px; margin-bottom: 50px">
-          <form @submit.prevent="onClickMakerProject">
-            <div style="padding: 10px">
-              프로젝트명
-              <input
-                v-model="makerProject.subject"
-                style="border: 1px solid #000"
-              /><br />
-              프로젝트 설명
-              <input
-                v-model="makerProject.discription"
-                style="border: 1px solid #000"
-              />
-            </div>
-            <button type="button" @click.prevent="onClickMakerProject">
-              프로젝트 생성
-            </button>
-          </form>
-        </div>
         <swiper
           v-if="PROJECT_MANAGER"
           :options="swiperOptionCol4"
@@ -67,7 +48,7 @@
               </ul>
             </nuxt-link>
           </swiper-slide>
-          <swiper-slide class="card-list--item project-list--item">
+          <!-- <swiper-slide class="card-list--item project-list--item">
             <nuxt-link to="">
               <div class="top">
                 <span class="date"
@@ -96,9 +77,9 @@
                 </li>
               </ul>
             </nuxt-link>
-          </swiper-slide>
+          </swiper-slide> -->
           <swiper-slide class="card-list--item project-list--item add">
-            <button type="button" class="add-btn">
+            <button type="button" class="add-btn" @click="popsModalVisible = true">
               새로운 프로젝트를<br />추가해 보세요
             </button>
           </swiper-slide>
@@ -141,7 +122,33 @@
         </div>
       </div>
     </div>
-    <ProjectCreate @dataReload="dataReload" />
+
+    <el-dialog title="" width="500px" :visible.sync="popsModalVisible">
+
+        <form class="mt-3" @submit.prevent="onClickMakerProject">
+          <div class="input-wrap">
+            <label class="input-label">프로젝트 이름</label>
+            <input
+              v-model="makerProject.subject"
+              class="input-text"
+            />
+          </div>
+          <div class="input-wrap">
+            <label class="input-label">프로젝트 설명</label>
+            <input
+              v-model="makerProject.discription"
+              class="input-text"
+            />
+          </div>
+          <div class="text-center mt-3">
+            <button type="button" class="button md btn-primary" @click.prevent="onClickMakerProject">
+              프로젝트 생성
+            </button>
+          </div>
+        </form>
+
+    </el-dialog>
+    <!-- <ProjectCreate @dataReload="dataReload" /> -->
   </div>
   <!-- <div id="projectManager">
     {{ IS_POST }}
@@ -204,6 +211,7 @@ export default {
         subject: '',
         discription: '',
       },
+      popsModalVisible:false
     }
   },
   computed: {

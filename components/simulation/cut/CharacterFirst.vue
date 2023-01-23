@@ -3,46 +3,48 @@
     <div>
       <div class="setting-tit">
         등장인물
-        <label class="input-check">
-          <input
-            type="checkbox"
-            :checked="PREVIEW.data.effect === 'ani-vibration' ? true : false"
-            @change="onClickEffect('ani-vibration')"
-          />
-          <span class="check-text">흔들림</span>
-        </label>
-        <label class="input-check">
-          <input
-            type="checkbox"
-            :checked="PREVIEW.data.effect === 'ani-fade' ? true : false"
-            @change="onClickEffect('ani-fade')"
-          />
-          <span class="check-text">서서히</span>
-        </label>
-        <label class="input-check">
-          <input
-            type="checkbox"
-            :checked="PREVIEW.data.effect === 'ani-right' ? true : false"
-            @change="onClickEffect('ani-right')"
-          />
-          <span class="check-text">오른쪽에서</span>
-        </label>
-        <label class="input-check">
-          <input
-            type="checkbox"
-            :checked="PREVIEW.data.effect === 'ani-left' ? true : false"
-            @change="onClickEffect('ani-left')"
-          />
-          <span class="check-text">왼쪽에서</span>
-        </label>
-        <label class="input-check">
-          <input
-            type="checkbox"
-            :checked="PREVIEW.data.effect === 'ani-bottom' ? true : false"
-            @change="onClickEffect('ani-bottom')"
-          />
-          <span class="check-text">아래에서</span>
-        </label>
+        <div class="ani">
+          <label class="input-check">
+            <input
+              type="checkbox"
+              :checked="PREVIEW.data.effect === 'ani-vibration' ? true : false"
+              @change="onClickEffect('ani-vibration')"
+            />
+            <span class="check-text">흔들림</span>
+          </label>
+          <label class="input-check">
+            <input
+              type="checkbox"
+              :checked="PREVIEW.data.effect === 'ani-fade' ? true : false"
+              @change="onClickEffect('ani-fade')"
+            />
+            <span class="check-text">서서히</span>
+          </label>
+          <label class="input-check">
+            <input
+              type="checkbox"
+              :checked="PREVIEW.data.effect === 'ani-right' ? true : false"
+              @change="onClickEffect('ani-right')"
+            />
+            <span class="check-text">오른쪽에서</span>
+          </label>
+          <label class="input-check">
+            <input
+              type="checkbox"
+              :checked="PREVIEW.data.effect === 'ani-left' ? true : false"
+              @change="onClickEffect('ani-left')"
+            />
+            <span class="check-text">왼쪽에서</span>
+          </label>
+          <label class="input-check">
+            <input
+              type="checkbox"
+              :checked="PREVIEW.data.effect === 'ani-bottom' ? true : false"
+              @change="onClickEffect('ani-bottom')"
+            />
+            <span class="check-text">아래에서</span>
+          </label>
+        </div>
       </div>
       <div class="setting-info">
         첫번째 인물을 선택하세요! 에셋 관리에서 더 추가할 수 있어요.
@@ -107,12 +109,13 @@
                   닫기
                 </button>
               </div>
-              <img
-                slot="reference"
-                :src="onLoadAssetsImage(v.path)"
-                alt=""
-                @click="onClickEmotionAssets(v.timestemp)"
-              />
+              <div class="img-wrap" slot="reference">
+                <img
+                  :src="onLoadAssetsImage(v.path)"
+                  alt=""
+                  @click="onClickEmotionAssets(v.timestemp)"
+                />
+              </div>
             </el-popover>
             <!-- <img v-if="v.path" :src="onLoadAssetsImage(v.path)" alt="" /> -->
           </li>

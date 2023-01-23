@@ -228,36 +228,46 @@
         <img src="~/static/images/mockup.png" alt="" class="preview-mockup" />
       </div>
       <div v-if="MAKER_GNB === 1" ref="buttonNav" class="buttons">
-        <button
-          type="button"
-          class="btn icon3"
-          :class="{ active: CONTENT_CODE === 1, done: PREVIEW.img.bg }"
-          @click="onClickContent(1)"
-        ></button>
-        <button
-          type="button"
-          class="btn icon1"
-          :class="{ active: CONTENT_CODE === 2, done: PREVIEW.img.cr }"
-          @click="onClickContent(2)"
-        ></button>
-        <button
-          type="button"
-          class="btn icon2"
-          :class="{ active: CONTENT_CODE === 3, done: PREVIEW.img.cr2 }"
-          @click="onClickContent(3)"
-        ></button>
-        <button
-          type="button"
-          class="btn icon4"
-          :class="{ active: CONTENT_CODE === 4, done: PREVIEW.data.sr }"
-          @click="onClickContent(4)"
-        ></button>
-        <button
-          type="button"
-          class="btn icon5"
-          :class="{ active: CONTENT_CODE === 5 }"
-          @click="onClickContent(5)"
-        ></button>
+        <el-tooltip class="item" effect="dark" content="배경" placement="top">
+          <button
+            type="button"
+            class="btn icon3"
+            :class="{ active: CONTENT_CODE === 1, done: PREVIEW.img.bg }"
+            @click="onClickContent(1)"
+          ></button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="인물" placement="top">
+          <button
+            type="button"
+            class="btn icon1"
+            :class="{ active: CONTENT_CODE === 2, done: PREVIEW.img.cr }"
+            @click="onClickContent(2)"
+          ></button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="두번째 인물" placement="top">
+          <button
+            type="button"
+            class="btn icon2"
+            :class="{ active: CONTENT_CODE === 3, done: PREVIEW.img.cr2 }"
+            @click="onClickContent(3)"
+          ></button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="사운드" placement="top">
+          <button
+            type="button"
+            class="btn icon4"
+            :class="{ active: CONTENT_CODE === 4, done: PREVIEW.data.sr }"
+            @click="onClickContent(4)"
+          ></button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="대사" placement="top">
+          <button
+            type="button"
+            class="btn icon5"
+            :class="{ active: CONTENT_CODE === 5 }"
+            @click="onClickContent(5)"
+          ></button>
+        </el-tooltip>
       </div>
     </div>
     <div class="preview-save" :class="{ left: MAKER_GNB === 1 }">

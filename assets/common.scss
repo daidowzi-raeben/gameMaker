@@ -808,14 +808,13 @@ button{
     margin-bottom: 80px;
 
     &--item {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 23px 25px;
-
       a {
+        background-color: #fff;
+        border-radius: 10px;
+        border: 1px solid #ddd;
         display: block;
-        min-height: 200px;
+        padding: 23px 25px;
+        height: 185px;
       }
     }
 
@@ -1035,14 +1034,21 @@ button{
     &--item {
       &.add {
         padding: 0;
-
         .add-btn {
-          height: 250px;
+          border:1px solid #ddd;
+          background-image: url(~/static/images/icon/add_color.svg);
+          background-repeat:no-repeat;
+          background-position: 50% 40%;
+          background-color: #fff;
+          border-radius: 10px;
+          height: 190px;
           font-size: 1.6rem;
-          background: url(~/static/images/icon/add_color.svg)no-repeat 50% 40%;
           text-align: center;
-          width: 100%;
+          width: calc(100% - 2px);
           padding-top: 40px;
+          color:#aaa;
+          font-weight: 400;
+          line-height: 1.2;
         }
       }
 
@@ -1241,7 +1247,6 @@ button{
 }
 
 .el-dialog{
-  width:55% !important;
   margin:0 auto !important;
   &__wrapper{
     display:flex;
