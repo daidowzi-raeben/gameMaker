@@ -52,6 +52,7 @@ const createStore = () => {
                 cr: [],
                 su: [],
             },
+
             PREVIEW: {
                 s_code: '',
                 c_code: '',
@@ -109,10 +110,12 @@ const createStore = () => {
             },
             PREVIEW_INTRO: {
                 copyright: '',
+                copyrightPosition: 'center',
                 logo: '',
-                position: '',
+                position: 'center',
                 bg: '',
                 ver: '',
+                dim: 'dim-light',
             },
             PREVIEW_PROFILE: {
                 name: '',
@@ -168,7 +171,8 @@ const createStore = () => {
             ASSETS_STORE: {
                 crList: [],
                 detail: {}
-            }
+            },
+            ASSETS_EMOTION: {},
 
         },
         getters: {
@@ -190,6 +194,21 @@ const createStore = () => {
             // },
         },
         mutations: {
+            // ----------- intro
+            MUTATIONS_INTRO_DIM(state, payload) {
+                state.PREVIEW_INTRO.dim = payload
+            },
+            MUTATIONS_INTRO_POSITION(state, payload) {
+                state.PREVIEW_INTRO.position = payload
+            },
+            MUTATIONS_INTRO_COPYRIGHT(state, payload) {
+                state.PREVIEW_INTRO.copyright = payload
+            },
+            MUTATIONS_INTRO_COPYRIGHT_POSITION(state, payload) {
+                state.PREVIEW_INTRO.copyrightPosition = payload
+            },
+
+
             // 로딩
             MUTATIONS_LOADING(state, payload) {
                 state.LOADING = false
@@ -218,13 +237,6 @@ const createStore = () => {
             MUTATIONS_INTRO(state, payload) {
                 state.PREVIEW_INTRO = payload
             },
-            MUTATIONS_INTRO_COPYRIGHT(state, payload) {
-                state.PREVIEW_INTRO.copyright = payload
-            },
-            MUTATIONS_INTRO_POSITION(state, payload) {
-                state.PREVIEW_INTRO.position = payload
-            },
-
             MUTATIONS_STORE_CRLIST(state, payload) {
                 state.ASSETS_STORE.crList = payload
             },
@@ -464,6 +476,10 @@ const createStore = () => {
             // 인물
             MUTATIONS_ASSETS_CR(state, payload) {
                 state.PREVIEW.img.cr = payload;
+            },
+            // 표정
+            MUTATIONS_ASSETS_EMOTION(state, payload) {
+                state.ASSETS_EMOTION = payload;
             },
             MUTATIONS_ASSETS_CR2(state, payload) {
                 state.PREVIEW.img.cr2 = payload;
@@ -711,6 +727,11 @@ const createStore = () => {
                         if (params.type === 'assetsProjectAdd') {
                             console.log('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
                             commit('MUTATIONS_AXIOS_GET_ASSETS_PROJECT', res.data)
+                            return;
+                        }
+                        if (params.type === 'assetsProjectEmotion') {
+                            console.log('MUTATIONS_ASSETS_EMOTION', res.data)
+                            commit('MUTATIONS_ASSETS_EMOTION', res.data)
                             return;
                         }
                         // if (params.type === 'characterList') {

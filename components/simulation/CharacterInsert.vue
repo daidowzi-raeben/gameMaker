@@ -37,7 +37,7 @@
                 :class="{ active: PREVIEW.img.bg === v.path }"
                 @click="onClickBgImage(v.path)"
               >
-                <img v-if="v.path" :src="v.path" alt="" />
+                <img v-if="v.path" :src="onLoadAssetsImageBg(v.path)" alt="" />
               </li>
             </ul>
           </div>
@@ -351,6 +351,9 @@ export default {
     },
     onLoadAssetsImage(v) {
       return `${process.env.VUE_APP_IMAGE}/cr/${v}`
+    },
+    onLoadAssetsImageBg(v) {
+      return `${process.env.VUE_APP_IMAGE}/bg/${v}`
     },
   },
 }

@@ -3,21 +3,11 @@
     <div v-if="!SCENE_CODE" class="insert-dim">챕터를 선택하세요</div>
     <div class="setting">
       <transition name="el-fade-in-linear">
-          <BackgroundAssets
-            v-if="CONTENT_CODE === 1"
-          />
-          <CharacterFirst
-            v-if="CONTENT_CODE === 2"
-          />
-          <CharacterSecond
-            v-if="CONTENT_CODE === 3"
-          />
-          <SoundAssets
-            v-if="CONTENT_CODE === 4"
-          />
-          <DialogueSetting
-            v-if="CONTENT_CODE === 5"
-          />
+        <BackgroundAssets v-if="CONTENT_CODE === 1" />
+        <CharacterFirst v-if="CONTENT_CODE === 2" />
+        <CharacterSecond v-if="CONTENT_CODE === 3" />
+        <SoundAssets v-if="CONTENT_CODE === 4" />
+        <DialogueSetting v-if="CONTENT_CODE === 5" />
       </transition>
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
@@ -33,7 +23,7 @@
 
 <script>
 // SCENE_DATA
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import BackgroundAssets from '~/components/simulation/cut/BackgroundAssets.vue'
 import CharacterFirst from '~/components/simulation/cut/CharacterFirst.vue'
 import CharacterSecond from '~/components/simulation/cut/CharacterSecond.vue'
@@ -55,6 +45,7 @@ export default {
       paramsList: {},
       rightContentShow: false,
       settingType: 5,
+      paramsInit: {},
     }
   },
   computed: {
@@ -94,8 +85,16 @@ export default {
       this.paramsList.apiKey = process.env.API_KEY
       console.log(this.SCENE_CODE)
     }
+    this.$nextTick(() => {
+      this.paramsInit.user_idx = kooLogin('user_idx')
+      this.paramsInit.type = 'uiList'
+      this.paramsInit.secretKey = this.PROJECT_ID
+      this.paramsInit.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.paramsInit)
+    })
   },
   methods: {
+    ...mapActions(['ACTION_AXIOS_GET']),
     ...mapMutations(['MUTATIONS_CONTENT_CODE']),
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow

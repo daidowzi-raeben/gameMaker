@@ -69,7 +69,7 @@ export default {
       this.MUTATIONS_CONTENT_CODE(2)
     },
     onLoadAssetsImage(v) {
-      return `${process.env.VUE_APP_IMAGE}/cr/${v}`
+      return `${process.env.VUE_APP_IMAGE}/bg/${v}`
     },
   },
 }

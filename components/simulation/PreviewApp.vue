@@ -14,7 +14,8 @@
         <!-- dim-light, dim-dark, dim-blur, diagonal, diagonal-r, copy-left, copy-right 클래스 추가로 구분. intro만있으면 기본 중앙정렬 -->
         <div
           v-if="MAKER_GNB === 2 || MAKER_GNB === 5"
-          class="preview-con preview-intro dim-light"
+          class="preview-con preview-intro"
+          :class="PREVIEW_INTRO.dim"
         >
           <div class="preview-intro--background">
             <img
@@ -65,7 +66,10 @@
               갤러리
             </button>
           </div>
-          <div class="preview-intro--copy">
+          <div
+            class="preview-intro--copy"
+            :class="PREVIEW_INTRO.copyrightPosition"
+          >
             <!-- {{ PREVIEW_INTRO.copyright }} -->
             {{
               PREVIEW_INTRO.copyright ? PREVIEW_INTRO.copyright : 'ⓒproject koo'

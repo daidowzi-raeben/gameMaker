@@ -17,7 +17,7 @@
                 :class="{ active: PREVIEW.img.bg === v.path }"
                 @click="onClickBgImage(v.path)"
               >
-                <img v-if="v.path" :src="v.path" alt="" />
+                <img v-if="v.path" :src="onLoadAssetsImage(v.path)" alt="" />
               </li>
             </ul>
           </div>
@@ -71,44 +71,63 @@
         </div>
 
         <div class="setting-tit">디자인 관리</div>
-          <div class="input-select--list">
-            <div class="input-wrap">
-              <label class="input-label">딤 효과</label>
-              <el-select v-model="introDimOptionValue" placeholder="선택안함">
-                <el-option
-                  v-for="item in introDimOption"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                  @click="onClickPreviewDim"
-                >
-                </el-option>
-              </el-select>
-              <!-- <select class="input-select">
+        <div class="input-select--list">
+          <div class="input-wrap">
+            <label class="input-label">딤 효과</label>
+            <el-select
+              v-model="intro.dim"
+              placeholder="선택안함"
+              @change="onClickPreviewDim"
+            >
+              <el-option
+                v-for="item in introDimOption"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+            <!-- <select class="input-select">
                 <option>밝게</option>
                 <option>어둡게</option>
                 <option>흐릿하게</option>
               </select> -->
-            </div>
           </div>
-          <div class="input-select--list">
-            <div class="input-wrap">
-              <label class="input-label">로고&버튼</label>
-              <select class="input-select">
-                <option>중앙</option>
-                <option>대각선(로고가 위로)</option>
-                <option>대각선(버튼이 위로)</option>
-              </select>
-            </div>
-            <div class="input-wrap">
-              <label class="input-label">카피라이트</label>
-              <select class="input-select">
-                <option>왼쪽</option>
-                <option>중앙</option>
-                <option>오른쪽</option>
-              </select>
-            </div>
+        </div>
+        <div class="input-select--list">
+          <div class="input-wrap">
+            <label class="input-label">로고&버튼</label>
+            <el-select
+              v-model="intro.position"
+              placeholder="선택안함"
+              @change="onClickPreviewPosition"
+            >
+              <el-option
+                v-for="item in introPositionOption"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
           </div>
+          <div class="input-wrap">
+            <label class="input-label">카피라이트</label>
+            <el-select
+              v-model="intro.copyrightPosition"
+              placeholder="선택안함"
+              @change="onClickPreviewCopyrightPosition"
+            >
+              <el-option
+                v-for="item in introCopyrightPositionOption"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
         <div class="text-center mt-5">
           <button type="button" class="button md btn-primary" @click="onSubmit">
             저장
@@ -137,15 +156,54 @@ export default {
       rightContentShow: false,
       isFileInsert: false,
       fileInsertName: '',
-      intro: {
-        copyright: '',
-        logo: '',
-        position: '',
-        bg: '',
-        ver: '',
-      },
+      intro: {},
       paramsInit: {},
       params: {},
+      introDimOption: [
+        {
+          value: 'dim-light',
+          label: '밝게',
+        },
+        {
+          value: 'dim-dark',
+          label: '어둡게',
+        },
+        {
+          value: 'dim-blur',
+          label: '흐리게',
+        },
+      ],
+      introPositionValue: 'center',
+      introPositionOption: [
+        {
+          value: 'center',
+          label: '중앙',
+        },
+        {
+          value: 'logo-top',
+          label: '대각선(로고가 위로)',
+        },
+        {
+          value: 'button-top',
+          label: '대각선(버튼이 위로)',
+        },
+      ],
+      introCopyrightPositionOption: [
+        {
+          value: 'center',
+          label: '중앙',
+        },
+        {
+          value: 'copyright-left',
+          label: '왼쪽',
+        },
+        {
+          value: 'copyright-right',
+          label: '오른쪽',
+        },
+      ],
+      introDimOptionValue: '',
+      paramsUI: {},
     }
   },
   computed: {
@@ -166,6 +224,13 @@ export default {
       },
       immediate: false,
     },
+    PREVIEW_INTRO: {
+      handler(value) {
+        this.intro = value
+        this.fileInsertName = value.logo
+      },
+      immediate: true,
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -182,6 +247,13 @@ export default {
       this.params.apiKey = process.env.API_KEY
       this.ACTION_AXIOS_GET(this.params)
     })
+    this.$nextTick(() => {
+      this.paramsUI.user_idx = kooLogin('user_idx')
+      this.paramsUI.type = 'uiList'
+      this.paramsUI.secretKey = this.PROJECT_ID
+      this.paramsUI.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.paramsUI)
+    })
   },
   methods: {
     ...mapMutations([
@@ -191,6 +263,9 @@ export default {
       'MUTATIONS_INTRO_COPYRIGHT',
       'MUTATIONS_ASSETS_BG',
       'MUTATIONS_CONTENT_CODE',
+      'MUTATIONS_INTRO_DIM',
+      'MUTATIONS_INTRO_POSITION',
+      'MUTATIONS_INTRO_COPYRIGHT_POSITION',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickRightContentShow() {
@@ -216,9 +291,10 @@ export default {
       }
     },
     onSubmit() {
-      this.intro.bg = this.PREVIEW_INTRO.bg
-      this.intro.copyright = this.PREVIEW_INTRO.copyright
-      this.intro.position = this.PREVIEW.img.position
+      this.intro = this.PREVIEW_INTRO
+      // this.intro.bg = this.PREVIEW_INTRO.bg
+      // this.intro.copyright = this.PREVIEW_INTRO.copyright
+      // this.intro.position = this.PREVIEW.img.position
       // this.MUTATIONS_INTRO(this.intro)
       const frm = new FormData()
       const photoFile = document.getElementById('logoFile')
@@ -246,6 +322,18 @@ export default {
           '인트로는 어플리케이션의 얼굴이에요!'
         ),
       })
+    },
+    onClickPreviewDim() {
+      this.MUTATIONS_INTRO_DIM(this.intro.dim)
+    },
+    onClickPreviewPosition() {
+      this.MUTATIONS_INTRO_POSITION(this.intro.position)
+    },
+    onClickPreviewCopyrightPosition() {
+      this.MUTATIONS_INTRO_COPYRIGHT_POSITION(this.intro.copyrightPosition)
+    },
+    onLoadAssetsImage(v) {
+      return `${process.env.VUE_APP_IMAGE}/bg/${v}`
     },
   },
 }

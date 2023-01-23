@@ -513,9 +513,6 @@ export default {
         message: h('i', { style: 'color: teal' }, '멋진 UI를 만들어 보아요!'),
       })
     },
-    onClickPreviewDim({ target }) {
-      console.log(target)
-    },
   },
 }
 </script>
@@ -590,8 +587,8 @@ export default {
       align-items: center;
       margin-right: 35px;
     }
-    & + .input-select--list{
-      margin-top:-20px;
+    & + .input-select--list {
+      margin-top: -20px;
     }
   }
   &--wrap {
