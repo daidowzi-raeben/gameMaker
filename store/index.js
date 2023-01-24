@@ -173,11 +173,18 @@ const createStore = () => {
                 detail: {}
             },
             ASSETS_EMOTION: {},
+            TEST: ''
 
         },
         getters: {
             GETTER_LOADING_INIT(state) {
                 state.LOADING = false
+            },
+            GETTER_LOADING(state) {
+                state.LOADING = true
+            },
+            GETTER_TEST(state) {
+                state.TEST = 'asd'
             },
             GETTER_SCENE_DATA(state) {
                 if (typeof window !== 'undefined') {

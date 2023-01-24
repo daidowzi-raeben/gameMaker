@@ -24,7 +24,7 @@
         <div class="setting-info">나만의 인물 에셋을 등록할 수 있습니다.</div>
         <el-scrollbar>
           <div v-if="ASSETS && ASSETS.cr" class="thumbnail-list--wrap type2">
-            <ul v-for="i in 5" :key="i" class="thumbnail-list asset">
+            <ul class="thumbnail-list asset">
               <!-- <li class="thumbnail-list--item upload">
                 <label class="label">
                   <input type="file" />
@@ -57,7 +57,7 @@
             <button
               type="button"
               class="button md btn-blue"
-              @click="onClickLoadAssets('cr')"
+              @click="onClickLoadAssets('bg')"
             >
               에셋 불러오기
             </button>
@@ -72,10 +72,51 @@
         </div>
         <div class="setting-info">나만의 배경 에셋을 등록할 수 있습니다.</div>
         <el-scrollbar>
-          <div v-if="ASSETS && ASSETS.cr" class="thumbnail-list--wrap type2">
+          <div v-if="ASSETS && ASSETS.bg" class="thumbnail-list--wrap type2">
             <ul class="thumbnail-list asset">
               <li
-                v-for="(v, i) in ASSETS.cr"
+                v-for="(v, i) in ASSETS.bg"
+                :key="i"
+                class="thumbnail-list--item background"
+              >
+                <img :src="onLoadAssetsImage(v.path)" alt="" />
+                <div class="btn-wrap">
+                  <button type="button" class="btn">삭제하기</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="assets-none" v-else>
+            <i class="el-timeline-item__icon el-icon-more"></i>
+            프로젝트에 등록된 에셋이 없습니다.
+          </div>
+        </el-scrollbar>
+
+        <div class="setting-tit">
+          사운드
+          <div class="right">
+            <button
+              type="button"
+              class="button md btn-blue"
+              @click="onClickLoadAssets('sr')"
+            >
+              에셋 불러오기
+            </button>
+            <button
+              type="button"
+              class="button md btn-primary"
+              @click="popsModalVisible = true"
+            >
+              에셋 등록하기
+            </button>
+          </div>
+        </div>
+        <div class="setting-info">나만의 사운드 에셋을 등록할 수 있습니다.</div>
+        <el-scrollbar>
+          <div v-if="!ASSETS && ASSETS.sr" class="thumbnail-list--wrap type2">
+            <ul class="thumbnail-list asset">
+              <li
+                v-for="(v, i) in ASSETS.sr"
                 :key="i"
                 class="thumbnail-list--item background"
               >
@@ -94,49 +135,6 @@
             프로젝트에 등록된 에셋이 없습니다.
           </div>
         </el-scrollbar>
-
-        <div class="setting-tit">
-          사운드
-          <div class="right">
-            <button
-              type="button"
-              class="button md btn-blue"
-              @click="onClickLoadAssets('cr')"
-            >
-              에셋 불러오기
-            </button>
-            <button
-              type="button"
-              class="button md btn-primary"
-              @click="popsModalVisible = true"
-            >
-              에셋 등록하기
-            </button>
-          </div>
-        </div>
-        <div class="setting-info">나만의 사운드 에셋을 등록할 수 있습니다.</div>
-        <el-scrollbar>
-          <div v-if="!ASSETS && ASSETS.cr" class="thumbnail-list--wrap type2">
-            <ul class="thumbnail-list asset">
-              <li
-                v-for="(v, i) in ASSETS.cr"
-                :key="i"
-                class="thumbnail-list--item background"
-              >
-                <img :src="onLoadAssetsImage(v.path)" alt="" />
-                <div class="btn-wrap">
-                  <button type="button" class="btn">삭제하기</button>
-                  <button v-if="i === 1" type="button" class="btn">
-                    미리듣기
-                  </button>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="assets-none" v-else>
-            프로젝트에 등록된 에셋이 없습니다.
-          </div>
-        </el-scrollbar>
       </div>
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
@@ -148,13 +146,20 @@
       ></button>
     </div>
     <el-dialog title="" :visible.sync="popsModalVisible">
-      <AssetsLocalUpload />
+      <AssetsLocalUpload @assetsInsertIsClose="assetsInsertIsClose" />
     </el-dialog>
     <el-dialog title="" :visible.sync="popsModalVisibleLoadAssets">
       <el-scrollbar>
         <div class="thumbnail-list--wrap type2">
-          <ul v-if="ASSETSMY && ASSETSMY.cr" class="thumbnail-list">
-            <li v-for="(v, i) in ASSETSMY.cr" :key="i" class="thumbnail-list--item">
+          <ul
+            v-if="ASSETSMY && ASSETSMY.cr && params.mode === 'cr'"
+            class="thumbnail-list"
+          >
+            <li
+              v-for="(v, i) in ASSETSMY.cr"
+              :key="i"
+              class="thumbnail-list--item"
+            >
               <label class="thumbnail-check">
                 <input type="checkbox" name="assetsImage[]" :value="v.idx" />
                 <span class="box"></span>
@@ -162,17 +167,55 @@
               </label>
             </li>
           </ul>
+          <ul
+            v-else-if="ASSETSMY && ASSETSMY.cr && params.mode === 'bg'"
+            class="thumbnail-list"
+          >
+            <li
+              v-for="(v, i) in ASSETSMY.bg"
+              :key="i"
+              class="thumbnail-list--item"
+            >
+              <label class="thumbnail-check">
+                <input type="checkbox" name="assetsImage[]" :value="v.idx" />
+                <span class="box"></span>
+                <img :src="onLoadAssetsImage(v.path)" />
+              </label>
+            </li>
+          </ul>
+          <ul
+            v-else-if="ASSETSMY && ASSETSMY.cr && params.mode === 'sr'"
+            class="thumbnail-list"
+          >
+            <li
+              v-for="(v, i) in ASSETSMY.sr"
+              :key="i"
+              class="thumbnail-list--item"
+            >
+              <label class="thumbnail-check">
+                <input type="checkbox" name="assetsImage[]" :value="v.idx" />
+                <span class="box"></span>
+                <img :src="onLoadAssetsImage(v.path)" />
+              </label>
+            </li>
+          </ul>
+          <div class="assets-none" v-else>
+            <i class="el-timeline-item__icon el-icon-more"></i>
+            구매한 에셋이 없습니다.
+          </div>
         </div>
       </el-scrollbar>
       <div class="text-center mt-5">
-        <button type="button" class="button md btn-primary" @click="onSubmitCr">등록하기</button>
+        <button type="button" class="button md btn-primary" @click="onSubmitCr">
+          등록하기
+        </button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 import AssetsLocalUpload from '~/components/modal/AssetsLocalUpload'
 import { kooLogin } from '~/config/util'
 export default {
@@ -192,6 +235,7 @@ export default {
   },
   computed: {
     ...mapState(['PROJECT_ID', 'ASSETS', 'ASSETS_STORE', 'ASSETSMY']),
+    ...mapGetters(['GETTER_LOADING', 'GETTER_TEST']),
   },
   mounted() {
     this.$nextTick(() => {
@@ -209,14 +253,12 @@ export default {
       this.rightContentShow = !this.rightContentShow
     },
     onClickLoadAssets(type) {
-      if (type === 'cr') {
-        console.log('asd')
-        this.params.type = 'assetsMyList'
-        this.params.mode = 'cr'
-        this.params.apiKey = process.env.API_KEY
-        // this.params.user_idx = this.$cookies.get('user_idx')
-        this.ACTION_AXIOS_GET(this.params)
-      }
+      this.params.loading = this.GETTER_LOADING
+      this.params.mode = type
+      this.params.type = 'assetsMyList'
+      this.params.apiKey = process.env.API_KEY
+      // this.params.user_idx = this.$cookies.get('user_idx')
+      this.ACTION_AXIOS_GET(this.params)
       this.popsModalVisibleLoadAssets = true
     },
     onLoadAssetsImage(v) {
@@ -244,6 +286,17 @@ export default {
       this.ACTION_AXIOS_GET(this.paramsAddAssets)
       this.paramsAddAssets.list = []
       this.popsModalVisibleLoadAssets = false
+    },
+    assetsInsertIsClose() {
+      console.log('=================')
+      this.$nextTick(() => {
+        this.params.type = 'assetsProject'
+        this.params.user_idx = kooLogin('user_idx')
+        this.params.secretKey = this.PROJECT_ID
+        this.params.apiKey = process.env.API_KEY
+        this.ACTION_AXIOS_GET(this.params)
+      })
+      this.popsModalVisible = false
     },
   },
 }
