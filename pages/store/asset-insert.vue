@@ -116,10 +116,9 @@ export default {
       console.log(this.$refs[`addImage${key}`][0].remove())
     },
     onValue(e) {
-      if (e === 1) return '웃는'
-      if (e === 2) return '화내는'
-      if (e === 3) return '슬픈'
-      if (e === 4) return '당황'
+      if (e === 1) return '웃는표정'
+      if (e === 2) return '화난표정'
+      if (e === 3) return '슬픈표정'
     },
     onSubmit() {
       // URL.createObjectURL(target.files[0])

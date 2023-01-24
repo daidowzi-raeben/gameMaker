@@ -1246,6 +1246,10 @@ button{
   font-size:50px;
 }
 
+.el-loading-mask{
+  z-index: 9999;
+}
+
 .el-dialog{
   margin:0 auto !important;
   &__wrapper{
