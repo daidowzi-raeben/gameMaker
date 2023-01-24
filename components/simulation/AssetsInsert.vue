@@ -1,7 +1,8 @@
 <template>
   <div class="insert">
-    <div class="setting">
-      <div class="setting-con setting-image">
+    <el-scrollbar class="setting">
+      <div class="setting-con">
+
         <div class="setting-tit">
           인물
           <div class="right">
@@ -22,36 +23,29 @@
           </div>
         </div>
         <div class="setting-info">나만의 인물 에셋을 등록할 수 있습니다.</div>
-        <el-scrollbar>
-          <div v-if="ASSETS && ASSETS.cr" class="thumbnail-list--wrap type2">
-            <ul class="thumbnail-list asset">
-              <!-- <li class="thumbnail-list--item upload">
-                <label class="label">
-                  <input type="file" />
-                </label>
-              </li> -->
-              <li
-                v-for="(v, i) in ASSETS.cr"
-                :key="i"
-                class="thumbnail-list--item"
-              >
-                <img :src="onLoadAssetsImage(v.path)" alt="" />
-                <div class="btn-wrap">
-                  <button type="button" class="btn">삭제하기</button>
-                  <button v-if="i === 1" type="button" class="btn">
-                    미리듣기
-                  </button>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="assets-none" v-else>
-            <i class="el-timeline-item__icon el-icon-more"></i>
-            프로젝트에 등록된 에셋이 없습니다.
-          </div>
-        </el-scrollbar>
+        <div v-if="ASSETS && ASSETS.cr" class="thumbnail-list--wrap type3">
+          <ul class="thumbnail-list asset">
+            <li
+              v-for="(v, i) in ASSETS.cr"
+              :key="i"
+              class="thumbnail-list--item"
+            >
+              <img :src="onLoadAssetsImage(v.path)" alt="" />
+              <div class="btn-wrap">
+                <button type="button" class="btn">삭제하기</button>
+                <button v-if="i === 1" type="button" class="btn">
+                  미리듣기
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="assets-none" v-else>
+          <i class="el-timeline-item__icon el-icon-more"></i>
+          프로젝트에 등록된 에셋이 없습니다.
+        </div>
 
-        <div class="setting-tit">
+        <div class="setting-tit mt-5">
           배경
           <div class="right">
             <button
@@ -71,28 +65,26 @@
           </div>
         </div>
         <div class="setting-info">나만의 배경 에셋을 등록할 수 있습니다.</div>
-        <el-scrollbar>
-          <div v-if="ASSETS && ASSETS.bg" class="thumbnail-list--wrap type2">
-            <ul class="thumbnail-list asset">
-              <li
-                v-for="(v, i) in ASSETS.bg"
-                :key="i"
-                class="thumbnail-list--item background"
-              >
-                <img :src="onLoadAssetsImage(v.path)" alt="" />
-                <div class="btn-wrap">
-                  <button type="button" class="btn">삭제하기</button>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="assets-none" v-else>
-            <i class="el-timeline-item__icon el-icon-more"></i>
-            프로젝트에 등록된 에셋이 없습니다.
-          </div>
-        </el-scrollbar>
+        <div v-if="ASSETS && ASSETS.bg" class="thumbnail-list--wrap type3">
+          <ul class="thumbnail-list asset">
+            <li
+              v-for="(v, i) in ASSETS.bg"
+              :key="i"
+              class="thumbnail-list--item background"
+            >
+              <img :src="onLoadAssetsImage(v.path)" alt="" />
+              <div class="btn-wrap">
+                <button type="button" class="btn">삭제하기</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="assets-none" v-else>
+          <i class="el-timeline-item__icon el-icon-more"></i>
+          프로젝트에 등록된 에셋이 없습니다.
+        </div>
 
-        <div class="setting-tit">
+        <div class="setting-tit mt-5">
           사운드
           <div class="right">
             <button
@@ -112,31 +104,31 @@
           </div>
         </div>
         <div class="setting-info">나만의 사운드 에셋을 등록할 수 있습니다.</div>
-        <el-scrollbar>
-          <div v-if="!ASSETS && ASSETS.sr" class="thumbnail-list--wrap type2">
-            <ul class="thumbnail-list asset">
-              <li
-                v-for="(v, i) in ASSETS.sr"
-                :key="i"
-                class="thumbnail-list--item background"
-              >
-                <img :src="onLoadAssetsImage(v.path)" alt="" />
-                <div class="btn-wrap">
-                  <button type="button" class="btn">삭제하기</button>
-                  <button v-if="i === 1" type="button" class="btn">
-                    미리듣기
-                  </button>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="assets-none" v-else>
-            <i class="el-timeline-item__icon el-icon-more"></i>
-            프로젝트에 등록된 에셋이 없습니다.
-          </div>
-        </el-scrollbar>
+        <div v-if="!ASSETS && ASSETS.sr" class="thumbnail-list--wrap type3">
+          <ul class="thumbnail-list asset">
+            <li
+              v-for="(v, i) in ASSETS.sr"
+              :key="i"
+              class="thumbnail-list--item background"
+            >
+              <img :src="onLoadAssetsImage(v.path)" alt="" />
+              <div class="btn-wrap">
+                <button type="button" class="btn">삭제하기</button>
+                <button v-if="i === 1" type="button" class="btn">
+                  미리듣기
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="assets-none" v-else>
+          <i class="el-timeline-item__icon el-icon-more"></i>
+          프로젝트에 등록된 에셋이 없습니다.
+        </div>
+
       </div>
-    </div>
+    </el-scrollbar>
+
     <div class="right" :class="{ fold: rightContentShow === true }">
       <button
         type="button"
@@ -145,7 +137,7 @@
         @click="onClickRightContentShow()"
       ></button>
     </div>
-    <el-dialog title="" :visible.sync="popsModalVisible">
+    <el-dialog title="" width="800px" :visible.sync="popsModalVisible">
       <AssetsLocalUpload
         :assetsType="assetsType"
         @assetsInsertIsClose="assetsInsertIsClose"

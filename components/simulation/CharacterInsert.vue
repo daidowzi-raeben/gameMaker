@@ -3,7 +3,7 @@
     <div class="setting">
       <!-- <button type="button" class="button btn-pink delete-btn">삭제</button> -->
       <div class="setting-con setting-profile" style="position: unset">
-        <div class="setting-tit">캐릭터 설정</div>
+        <div class="setting-tit">인물 이미지</div>
         <el-scrollbar>
           <div class="thumbnail-list--wrap type2">
             <ul v-if="ASSETS" class="thumbnail-list">
@@ -23,7 +23,7 @@
           </div>
         </el-scrollbar>
 
-        <div class="setting-tit">배경 설정</div>
+        <div class="setting-tit mt-5">배경 이미지</div>
         <el-scrollbar>
           <div class="thumbnail-list--wrap type2">
             <ul v-if="ASSETS" class="thumbnail-list">
@@ -46,10 +46,12 @@
         <div class="color-select--list">
           <div class="color-select--wrap">
             <el-color-picker v-model="colorPicker" show-alpha></el-color-picker>
-            <label class="label">프로필 배경색상</label>
+            <label class="label">배경색상</label>
           </div>
         </div>
-        <div class="input-wrap">
+
+        <div class="setting-tit mt-3">상세 정보</div>
+        <div class="input-wrap mt-3">
           <!-- <select ref="profilePosition" class="input-select">
             <option value="top">TOP</option>
             <option value="bottom">BOTTOM</option>
@@ -68,7 +70,7 @@
         <div class="textarea-wrap">
           <textarea
             rows="10"
-            placeholder="인물의 프로필을 입력하세요"
+            placeholder="인물의 소개를 입력하세요"
             class="input-textarea"
             :value="
               CHAPTER_DEATILE && CHAPTER_DEATILE_IDX

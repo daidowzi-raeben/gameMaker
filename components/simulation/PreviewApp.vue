@@ -206,11 +206,11 @@
               {{
                 PREVIEW_PROFILE.discription
                   ? PREVIEW_PROFILE.discription.replaceAll('||n', '\n')
-                  : '프로필을 입력하세요'
+                  : '인물소개'
               }}
             </p>
           </div>
-          <ul class="face-list">
+          <!-- <ul class="face-list">
             <li class="face-list--item">
               <img src="https://i.imgur.com/TNnVehQ.png" alt="" />
             </li>
@@ -223,7 +223,7 @@
             <li class="face-list--item">
               <img src="https://i.imgur.com/m14VXCI.png" alt="" />
             </li>
-          </ul>
+          </ul> -->
         </div>
         <img src="~/static/images/mockup.png" alt="" class="preview-mockup" />
       </div>
