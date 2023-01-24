@@ -2,7 +2,6 @@
   <div class="insert">
     <el-scrollbar class="setting">
       <div class="setting-con">
-
         <div class="setting-tit">
           인물
           <div class="right">
@@ -72,7 +71,7 @@
               :key="i"
               class="thumbnail-list--item background"
             >
-              <img :src="onLoadAssetsImage(v.path)" alt="" />
+              <img :src="onLoadAssetsImageBg(v.path)" alt="" />
               <div class="btn-wrap">
                 <button type="button" class="btn">삭제하기</button>
               </div>
@@ -125,7 +124,6 @@
           <i class="el-timeline-item__icon el-icon-more"></i>
           프로젝트에 등록된 에셋이 없습니다.
         </div>
-
       </div>
     </el-scrollbar>
 
@@ -259,6 +257,9 @@ export default {
     },
     onLoadAssetsImage(v) {
       return `${process.env.VUE_APP_IMAGE}/cr/${v}`
+    },
+    onLoadAssetsImageBg(v) {
+      return `${process.env.VUE_APP_IMAGE}/bg/${v}`
     },
     onSubmitCr() {
       let k = 0
