@@ -15,7 +15,7 @@
             <button
               type="button"
               class="button md btn-primary"
-              @click="popsModalVisible = true"
+              @click="onClickIsOpen('C')"
             >
               에셋 등록하기
             </button>
@@ -64,7 +64,7 @@
             <button
               type="button"
               class="button md btn-primary"
-              @click="popsModalVisible = true"
+              @click="onClickIsOpen('B')"
             >
               에셋 등록하기
             </button>
@@ -105,7 +105,7 @@
             <button
               type="button"
               class="button md btn-primary"
-              @click="popsModalVisible = true"
+              @click="onClickIsOpen('S')"
             >
               에셋 등록하기
             </button>
@@ -146,7 +146,10 @@
       ></button>
     </div>
     <el-dialog title="" :visible.sync="popsModalVisible">
-      <AssetsLocalUpload @assetsInsertIsClose="assetsInsertIsClose" />
+      <AssetsLocalUpload
+        :assetsType="assetsType"
+        @assetsInsertIsClose="assetsInsertIsClose"
+      />
     </el-dialog>
     <el-dialog title="" :visible.sync="popsModalVisibleLoadAssets">
       <el-scrollbar>
@@ -231,6 +234,7 @@ export default {
       paramsAddAssets: {
         list: [],
       },
+      assetsType: 'C',
     }
   },
   computed: {
@@ -297,6 +301,10 @@ export default {
         this.ACTION_AXIOS_GET(this.params)
       })
       this.popsModalVisible = false
+    },
+    onClickIsOpen(v) {
+      this.popsModalVisible = true
+      this.assetsType = v
     },
   },
 }

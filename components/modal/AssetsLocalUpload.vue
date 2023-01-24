@@ -10,7 +10,7 @@
               required
               @change="onChangeUploadPreview($event)"
             />
-            <span>이곳을 클릭해서 에셋을 등록해 보세요</span>
+            <span>이곳을 클릭해서 에셋을 등록해 보세요 </span>
             <div v-if="uploadPreview !== ''" class="image-wrap">
               <img :src="uploadPreview" alt="" />
             </div>
@@ -157,7 +157,7 @@ export default {
       frm.append('gas_name', this.params.gas_name)
       frm.append('gas_discription', this.params.gas_discription)
       frm.append('type', 'my')
-      frm.append('mode', 'C')
+      frm.append('mode', this.assetsType)
       frm.append(
         'national_2000',
         document.getElementsByName('myAssetsFile')[0].files[0]
