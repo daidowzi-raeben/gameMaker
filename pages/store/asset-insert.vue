@@ -2,15 +2,18 @@
   <div>
     <form @submit.prevent="onSubmit">
       <div>
+        <div>
+          <select v-model="params.user_idx" class="input-select">
+            <option v-for="(item, i) in selectName" :key="i" :value="i + 31">
+              {{ item }}
+            </option>
+          </select>
+          <br />
+          <br />
+        </div>
         <div>에셋 이름 : <input v-model="params.mainName" /></div>
         대표_2000 :
         <input ref="national_2000" type="file" @change="onChangeNational" />
-        대표_1200 :
-        <input ref="national_1200" type="file" />
-        대표_800 :
-        <input ref="national_800" type="file" />
-        대표_400 :
-        <input ref="national_400" type="file" />
         <br />
         <br />
 
@@ -29,20 +32,10 @@
       <div v-for="(i, key) in addImage" :key="i">
         <div :ref="`addImage${key}`">
           이름 :
-          <input
-            :ref="`subName${key}`"
-            type="text"
-            :readonly="i < 4 ? true : false"
-            :value="onValue(i)"
-          /><br />
+          <input :ref="`subName${key}`" type="text" :value="onValue(i)" /><br />
+          <!-- :readonly="i < 4 ? true : false" -->
           업로드_2000 :
           <input :ref="`files_2000${key}`" type="file" />
-          업로드_1200 :
-          <input :ref="`files_1200${key}`" type="file" />
-          업로드_800 :
-          <input :ref="`files_800${key}`" type="file" />
-          업로드_400 :
-          <input :ref="`files_400${key}`" type="file" />
           <button v-if="i > 4" @click="onChangeDel($event, key)">삭제</button>
           <br />
           <br />
@@ -61,7 +54,7 @@
 
 <script>
 import { createNamespacedHelpers, mapGetters } from 'vuex'
-import { kooLogin } from '~/config/util'
+// import { kooLogin } from '~/config/util'
 // import makerLayoutVue from '~/layouts/maker-layout.vue'
 const commonHelpers = createNamespacedHelpers('assetsStore')
 export default {
@@ -77,8 +70,34 @@ export default {
       params: {
         mainName: '',
         subName: [],
+        user_idx: 31,
       },
       imgUrl: '',
+      // 32 53
+      selectName: [
+        '푸슬',
+        '팡',
+        '유령선',
+        '노넴',
+        '물개말이',
+        '킨',
+        '북극산꽁치',
+        'BUT/비유티',
+        '예제',
+        '신아',
+        '말랑',
+        '쟈몽',
+        'Bbreaad',
+        '김자반',
+        '몰라',
+        '진진자라',
+        '이자기',
+        '꽃깔콘',
+        '모차',
+        '웅녀',
+        '성은이는 만극하지 않아요',
+        '한결',
+      ],
     }
   },
   computed: {
@@ -108,30 +127,15 @@ export default {
       this.files = [...this.files, this.$refs]
       //   console.log(Object.entries(this.$refs))
       frm.append('apiKey', process.env.API_KEY)
-      frm.append('user_idx', kooLogin('user_idx'))
+      frm.append('user_idx', this.params.user_idx)
       frm.append('gas_name', this.params.mainName)
 
       frm.append('national_2000', this.$refs.national_2000.files[0])
-      frm.append('national_1200', this.$refs.national_1200.files[0])
-      frm.append('national_800', this.$refs.national_800.files[0])
-      frm.append('national_400', this.$refs.national_400.files[0])
 
       Object.entries(this.$refs).forEach((e, i) => {
         if (e[0].includes('files_2000') === true && e[1][0].files.length > 0) {
           console.log(e, i, `subFiles_2000[${i}]`, e[0], e[1][0].files[0])
           frm.append(`subFiles_2000[]`, e[1][0].files[0])
-        }
-        if (e[0].includes('files_1200') === true && e[1][0].files.length > 0) {
-          console.log(e, i, `subFiles_1200[${i}]`, e[0], e[1][0].files[0])
-          frm.append(`subFiles_1200[]`, e[1][0].files[0])
-        }
-        if (e[0].includes('files_800') === true && e[1][0].files.length > 0) {
-          console.log(e, i, `subFiles_800[${i}]`, e[0], e[1][0].files[0])
-          frm.append(`subFiles_800[]`, e[1][0].files[0])
-        }
-        if (e[0].includes('files_400') === true && e[1][0].files.length > 0) {
-          console.log(e, i, `subFiles_400[${i}]`, e[0], e[1][0].files[0])
-          frm.append(`subFiles_400[]`, e[1][0].files[0])
         }
       })
 
