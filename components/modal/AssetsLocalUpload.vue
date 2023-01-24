@@ -126,9 +126,11 @@ export default {
       this.isOpen = false
     },
     onChangeUploadPreview(e) {
-      const file = e.target.files[0]
-      this.uploadPreview = URL.createObjectURL(file)
-      this.onChangeContentAllCheck('file', e)
+      if (e.target.value) {
+        const file = e.target.files[0]
+        this.uploadPreview = URL.createObjectURL(file)
+        this.onChangeContentAllCheck('file', e)
+      }
     },
     onChangeContentAllCheck(type, e) {
       if (type === 'text') {
