@@ -105,7 +105,7 @@ export default {
     ...commonHelpers.mapState(['CS_CUS_SEARCH_DATA']),
   },
   mounted() {
-    this.lodingGetter = this.GETTER_LOADING_INIT
+    // this.lodingGetter = this.GETTER_LOADING_INIT
   },
   methods: {
     onChangeNational({ target }) {

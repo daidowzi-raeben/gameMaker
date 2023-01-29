@@ -660,7 +660,9 @@ const createStore = () => {
                 axios
                     .get(process.env.VUE_APP_API, { params })
                     .then((res) => {
-                        commit('MUTATIONS_LOADING', false)
+                        setTimeout(() => {
+                            commit('MUTATIONS_LOADING', false)
+                        }, 1000);
                         console.log('ACTION_AXIOS_GET', res, params)
                         if (params.type === 'project') {
                             commit('MUTATIONS_AXIOS_GET_PROJECT', res.data)

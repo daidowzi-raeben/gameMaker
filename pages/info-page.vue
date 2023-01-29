@@ -3,11 +3,19 @@
     <div class="header bg">
       <div class="header-wrap">
         <div class="left">
-          <div class="header-logo"><nuxt-link to="">PROJECT KOO<span class="maker">. MAKER</span></nuxt-link></div>
+          <div class="header-logo">
+            <nuxt-link to=""
+              >PROJECT KOO<span class="maker">. MAKER</span></nuxt-link
+            >
+          </div>
           <ul class="header-menu">
-            <li class="header-menu--item"><nuxt-link to="">프로젝트 Koo</nuxt-link></li>
+            <li class="header-menu--item">
+              <nuxt-link to="">프로젝트 Koo</nuxt-link>
+            </li>
             <li class="header-menu--item"><nuxt-link to="">공유</nuxt-link></li>
-            <li class="header-menu--item"><nuxt-link to="">이용방법</nuxt-link></li>
+            <li class="header-menu--item">
+              <nuxt-link to="">이용방법</nuxt-link>
+            </li>
             <li class="header-menu--item"><nuxt-link to="">금액</nuxt-link></li>
           </ul>
         </div>
@@ -24,7 +32,8 @@
         <p class="sub">내가 만드는 첫번째 어플리케이션</p>
       </div>
       <p class="main-top--sub">
-        프로젝트 Koo는 내가 상상하고 원하던 스토리를 쉽게 앱으로 제작하여 출시할 수 있습니다.<br />
+        프로젝트 Koo는 내가 상상하고 원하던 스토리를 쉽게 앱으로 제작하여 출시할
+        수 있습니다.<br />
         다양한 경험을 지금 시작하세요.
       </p>
       <div class="main-top--app">
@@ -42,7 +51,7 @@
 
     <div class="main-section">
       <div class="main-section--left">
-        <div class="text-wrap" >
+        <div class="text-wrap">
           <div class="step">STEP 1</div>
           <div class="tit">
             내 마음대로, <br />
@@ -108,69 +117,81 @@
     <div class="main-section">
       <div class="main-section--center">
         <div class="text-wrap">
-          <div class="tit">
-            세상에서 가장 쉬운<br />나만의 스토리 만들기
-          </div>
+          <div class="tit">세상에서 가장 쉬운<br />나만의 스토리 만들기</div>
         </div>
         <div class="bottom">
           <div class="img-wrap play">
             <img src="" alt="" />
           </div>
           <div class="right">
-            <button type="button" class="btn tit active" @click="onClickTitActive">1. 비주얼 노벨</button>
+            <button
+              type="button"
+              class="btn tit active"
+              @click="onClickTitActive"
+            >
+              1. 비주얼 노벨
+            </button>
             <div class="con">
               상상만 하고 있던 매력적인 스토리,<br />
               이제 게임으로 만들어 보세요.
             </div>
-            <button type="button" class="btn tit" @click="onClickTitActive">2. 어린이 학습용 문제집</button>
+            <button type="button" class="btn tit" @click="onClickTitActive">
+              2. 어린이 학습용 문제집
+            </button>
             <div class="con">
               객관식, 주관식 문제 풀이로<br />
               어린이 학습용 문제집을 비주얼 라이징 하게!
             </div>
-            <button type="button" class="btn tit" @click="onClickTitActive">3. 지루할 틈 없는 방 탈출 게임</button>
+            <button type="button" class="btn tit" @click="onClickTitActive">
+              3. 지루할 틈 없는 방 탈출 게임
+            </button>
             <div class="con">
               추리해서 문제를 풀고,<br />
               루트가 복잡한 방탈출 게임도 손쉽게!
             </div>
-            <button type="button" class="btn tit" @click="onClickTitActive">4. 우리끼리 만드는 연애편지</button>
+            <button type="button" class="btn tit" @click="onClickTitActive">
+              4. 우리끼리 만드는 연애편지
+            </button>
             <div class="con">
               글로만 적어서 보냈던 연애편지,<br />
               서로의 사진을 담아 조금 더 특별하게!
             </div>
-            <button type="button" class="btn tit" @click="onClickTitActive">5. 그 밖에 다양한 스토리</button>
+            <button type="button" class="btn tit" @click="onClickTitActive">
+              5. 그 밖에 다양한 스토리
+            </button>
             <div class="con">
               다양한 이미지와 사운드를 넣어<br />
               나만의 특별한 스토리 게임을 만들어 보세요.
             </div>
             <div class="mt-5">
-              <button type="button" class="button xlg btn-primary">지금 시작하기</button>
+              <button type="button" class="button xlg btn-primary">
+                지금 시작하기
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import AOS from 'aos';
-import "aos/dist/aos.css";
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 export default {
-  created() {
-      AOS.init();
+  mounted() {
+    AOS.init()
   },
   methods: {
-    onClickTitActive(e){
+    onClickTitActive(e) {
       console.log(e.target)
       document.querySelector('.btn.tit.active').classList.remove('active')
       e.target.classList.add('active')
-    }
+    },
   },
 }
 </script>
 
 <style>
-
 </style>
