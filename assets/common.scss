@@ -7,7 +7,7 @@
 }
 
 ::selection {
-  background-color:#fff;
+  background-color:rgba(253, 246, 189, 0.2);
  }
 
 // ::-webkit-scrollbar-thumb {
@@ -81,6 +81,11 @@ button{
   &.lg {
     font-size: 1.6rem;
     padding: 10px 20px;
+  }
+
+  &.xlg {
+    font-size: 2rem;
+    padding: 15px 30px;
   }
 }
 
@@ -181,6 +186,9 @@ button{
   z-index: 100;
   left: 0;
   top: 0;
+  &.bg{
+    background-color:#fff;
+  }
   &-wrap {
     display: flex;
     justify-content: space-between;
@@ -483,9 +491,12 @@ button{
   &-top{
     text-align: center;
     position:relative;
+    flex-direction: column;
     &--tit{
+      font-family: "NanumSquareNeo", sans-serif;
       font-size:30px;
       .sub{
+        font-family: "NanumSquareNeo", sans-serif;
         color:$colPrimary;
         font-size:20px;
         font-weight: 300;
@@ -493,26 +504,35 @@ button{
       }
     }
     &--sub{
+      font-family: "NanumSquareNeo", sans-serif;
       color:$textCol2;
       font-size:20px;
       font-weight: 300;
       margin-top:36px;
     }
-    &--button{
-      width:250px;
-      height:70px;
-      display:flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 5px;
-      font-size:30px;
-      color:#fff !important;
-      background-color:$colPrimary;
-      font-weight: 300;
-      margin:70px auto 100px;
-      transition:background-color .3s;
-      &:hover{
-        background-color:$colPrimaryHover;
+    &--app{
+      margin:50px 0 20vh;
+      .btn{
+        font-family: "NanumSquareNeo", sans-serif;
+        width:60px;
+        font-size:1.2rem;
+        color:#888;
+        padding-top:35px;
+        background-repeat: no-repeat;
+        background-position:top center;
+        margin:0 15px;
+        line-height: 1.2;
+        &.type{
+          &-1{
+            background-image: url(../static/images/icon/app_apple.svg);
+          }
+          &-2{
+            background-image: url(../static/images/icon/app_google.svg);
+          }
+          &-3{
+            background-image: url(../static/images/icon/app_steam.svg);
+          }
+        }
       }
     }
     &--shape{
@@ -636,10 +656,106 @@ button{
     }
   }
   &-section{
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 80px);
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    &--left,&--right{
+      flex:1;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &--center{
+      text-align: center;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .bottom{
+        margin-top:30px;
+        display:flex;
+        .img-wrap{
+          margin-right:100px;
+        }
+        .right{
+          text-align: left;
+          display:flex;
+          flex-direction: column;
+          align-items:flex-start;
+          justify-content: center;
+          .tit{
+            font-size:3rem;
+            color:#ccc;
+            font-family: "NanumSquareNeo", sans-serif;
+            font-weight: 300;
+            margin:20px 0;
+            transition:color .3s;
+            &.active{
+              color:$colPrimary;
+              & + .con{
+                max-height: 70px;
+                opacity: 1;
+                margin:0 0 40px;
+              }
+            }
+          }
+          .con{
+            font-size:2rem;
+            color:#888;
+            font-family: "NanumSquareNeo", sans-serif;
+            font-weight: 300;
+            line-height: 1.5;
+            max-height: 0;
+            overflow:hidden;
+            transition:opacity .3s;
+            opacity: 0;
+          }
+        }
+      }
+    }
+    .img-wrap{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        width:100%;
+      }
+      &.play{
+        width:300px;
+        height:600px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+        border-radius: 20px;
+      }
+      &.images{
+        position:relative;
+        width:650px;
+        height:433px;
+        img{
+          position:absolute;
+        }
+      }
+    }
+    .text-wrap{
+      line-height: 1.5;
+      .step{
+        font-family: 'NanumSquareNeo', sans-serif;
+        color:$colPrimary;
+        font-weight: 500;
+        font-size:1.6rem;
+      }
+      .tit{
+        font-family: 'NanumSquareNeo', sans-serif;
+        font-size:5rem;
+        margin:10px 0 20px;
+        line-height: 1.3;
+      }
+      .con{
+        font-family: 'NanumSquareNeo', sans-serif;
+        font-size:2rem;
+        color:#888;
+      }
+    }
   }
 }
 
