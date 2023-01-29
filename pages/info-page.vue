@@ -27,21 +27,21 @@
     </div>
 
     <div class="main-section main-top">
-      <div class="main-top--tit" data-aos="fade-up">
+      <div class="main-top--tit" data-aos="fade-up" data-aos-duration="1000">
         PROJECT KOO
         <p class="sub">내가 만드는 첫번째 어플리케이션</p>
       </div>
-      <p class="main-top--sub">
+      <p class="main-top--sub" data-aos="fade-up" data-aos-duration="1000">
         프로젝트 Koo는 내가 상상하고 원하던 스토리를 쉽게 앱으로 제작하여 출시할
         수 있습니다.<br />
         다양한 경험을 지금 시작하세요.
       </p>
-      <div class="main-top--app">
+      <div class="main-top--app" data-aos="fade-up" data-aos-duration="1000">
         <button class="btn type-1">IOS</button>
         <button class="btn type-2">Android</button>
         <button class="btn type-3">Steam<br />(지원예정)</button>
       </div>
-      <div class="main-top--shape">
+      <div class="main-top--shape" data-aos="fade" data-aos-duration="1500">
         <div class="circle-1"></div>
         <div class="circle-2"></div>
         <div class="circle-3"></div>
@@ -50,7 +50,7 @@
     </div>
 
     <div class="main-section">
-      <div class="main-section--left">
+      <div class="main-section--left" data-aos="fade-right" data-aos-duration="1000">
         <div class="text-wrap">
           <div class="step">STEP 1</div>
           <div class="tit">
@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-      <div class="main-section--right">
+      <div class="main-section--right" data-aos="fade" data-aos-duration="2000">
         <div class="img-wrap play">
           <img src="" alt="" />
         </div>
@@ -73,12 +73,12 @@
     <div class="main-section">
       <div class="main-section--left">
         <div class="img-wrap images">
-          <img src="../static/images/main_img2_1.png" alt="" />
-          <img src="../static/images/main_img2_2.png" alt="" />
-          <img src="../static/images/main_img2_3.png" alt="" />
+          <img src="../static/images/main_img2_1.png" alt="" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="500" />
+          <img src="../static/images/main_img2_2.png" alt="" data-aos="fade-up" data-aos-duration="1000" />
+          <img src="../static/images/main_img2_3.png" alt="" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="1000" />
         </div>
       </div>
-      <div class="main-section--right">
+      <div class="main-section--right" data-aos="fade-left" data-aos-duration="1000">
         <div class="text-wrap">
           <div class="step">STEP 2</div>
           <div class="tit">
@@ -94,7 +94,7 @@
     </div>
 
     <div class="main-section">
-      <div class="main-section--left">
+      <div class="main-section--left" data-aos="fade-right" data-aos-duration="1000">
         <div class="text-wrap">
           <div class="step">STEP 3</div>
           <div class="tit">
@@ -107,7 +107,7 @@
           </div>
         </div>
       </div>
-      <div class="main-section--right">
+      <div class="main-section--right" data-aos="fade" data-aos-duration="2000">
         <div class="img-wrap">
           <img src="../static/images/main_img3.png" alt="" />
         </div>
@@ -116,14 +116,14 @@
 
     <div class="main-section">
       <div class="main-section--center">
-        <div class="text-wrap">
+        <div class="text-wrap" data-aos="fade-up" data-aos-duration="1000">
           <div class="tit">세상에서 가장 쉬운<br />나만의 스토리 만들기</div>
         </div>
         <div class="bottom">
-          <div class="img-wrap play">
+          <div class="img-wrap play" data-aos="fade-right" data-aos-duration="1000">
             <img src="" alt="" />
           </div>
-          <div class="right">
+          <div class="right" data-aos="fade-left" data-aos-duration="1000">
             <button
               type="button"
               class="btn tit active"
