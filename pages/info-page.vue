@@ -19,7 +19,7 @@
     </div>
 
     <div class="main-section main-top">
-      <div class="main-top--tit">
+      <div class="main-top--tit" data-aos="fade-up">
         PROJECT KOO
         <p class="sub">내가 만드는 첫번째 어플리케이션</p>
       </div>
@@ -154,12 +154,12 @@
 </template>
 
 <script>
-// import AOS from 'aos';
-// import "aos/dist/aos.css";
+import AOS from 'aos';
+import "aos/dist/aos.css";
 
 export default {
   created() {
-      // AOS.init();
+      AOS.init();
   },
   methods: {
     onClickTitActive(e){
