@@ -85,6 +85,7 @@
                   show-alpha
                 ></el-color-picker>
                 <label class="label">메인글씨색상</label>
+
                 <!-- <div
                   v-if="isShowColorPickerName === 'mainFontColor'"
                   v-click-outside="onBlurPickerClose"
@@ -93,14 +94,28 @@
                   <Chrome v-model="colorPicker.mainFontColor"></Chrome>
                 </div> -->
               </div>
+              <div class="color-select--wrap">
+                <el-color-picker
+                  v-model="colorPicker.button.strokeColor"
+                  show-alpha
+                ></el-color-picker>
+                <label class="label">메인외곽선</label>
+              </div>
+              <div class="color-select--wrap">
+                <el-color-picker
+                  v-model="colorPicker.button.shadowColor"
+                  show-alpha
+                ></el-color-picker>
+                <label class="label">메인그림자</label>
+              </div>
             </div>
             <div class="input-select--list">
               <div class="input-wrap">
                 <label class="input-label">모서리</label>
                 <select
                   class="input-select"
-                  :value="colorPicker.round"
-                  @change="onChangeThemeSet($event, 'round')"
+                  :value="colorPicker.button.round"
+                  @change="onChangeThemeSet($event, 'roundButton')"
                 >
                   <option :value="0">선택안함</option>
                   <option :value="10">약간 둥글게</option>
@@ -113,8 +128,8 @@
                 <label class="input-label">선굵기</label>
                 <select
                   class="input-select"
-                  :value="colorPicker.border"
-                  @change="onChangeThemeSet($event, 'border')"
+                  :value="colorPicker.button.border"
+                  @change="onChangeThemeSet($event, 'borderButton')"
                 >
                   <option :value="0">선택안함</option>
                   <option :value="1">더 얇게</option>
@@ -129,8 +144,8 @@
                 <label class="input-label">그림자</label>
                 <select
                   class="input-select"
-                  :value="`${colorPicker.x}|${colorPicker.y}`"
-                  @change="onChangeThemeSet($event, 'shadow')"
+                  :value="`${colorPicker.button.x}|${colorPicker.button.y}`"
+                  @change="onChangeThemeSet($event, 'shadowButton')"
                 >
                   <option :value="'0|0'">선택안함</option>
                   <option value="3|3">약간 멀리</option>
@@ -374,6 +389,14 @@ export default {
         y: 0,
         icon: '',
         fontSize: '',
+        button: {
+          strokeColor: null,
+          shadowColor: null,
+          x: 0,
+          y: 0,
+          round: 0,
+          border: 0,
+        },
       },
       temp: true,
       isUiSettingTab: true,
@@ -504,6 +527,15 @@ export default {
         console.log(e)
         this.colorPicker.x = e.target.value.split('|')[0]
         this.colorPicker.y = e.target.value.split('|')[1]
+      }
+
+      if (type === 'roundButton') this.colorPicker.button.round = e.target.value
+      if (type === 'borderButton')
+        this.colorPicker.button.border = e.target.value
+      if (type === 'shadowButton') {
+        console.log(e)
+        this.colorPicker.button.x = e.target.value.split('|')[0]
+        this.colorPicker.button.y = e.target.value.split('|')[1]
       }
     },
     onSave() {

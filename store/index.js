@@ -147,7 +147,15 @@ const createStore = () => {
                 y: 0,
                 font: '',
                 icon: '',
-                fontSize: ''
+                fontSize: '',
+                button: {
+                    strokeColor: null,
+                    shadowColor: null,
+                    x: 0,
+                    y: 0,
+                    round: 0,
+                    border: 0,
+                },
             },
             // app icon
             IN_APP_ICON: null,

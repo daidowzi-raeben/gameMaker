@@ -35,7 +35,7 @@
               type="button"
               class="btn"
               :class="UISetting.font"
-              :style="`background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.round}px`"
+              :style="`box-shadow: ${UISetting.button.x}px ${UISetting.button.y}px 0 ${UISetting.button.shadowColor}; outline : ${UISetting.button.border}px solid ${UISetting.button.strokeColor}; background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.button.round}px`"
               @click="onclickDisplayShow('displayGame')"
             >
               시작하기
@@ -44,7 +44,7 @@
               type="button"
               class="btn"
               :class="UISetting.font"
-              :style="`background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.round}px`"
+              :style="`box-shadow: ${UISetting.button.x}px ${UISetting.button.y}px 0 ${UISetting.button.shadowColor}; outline : ${UISetting.button.border}px solid ${UISetting.button.strokeColor}; background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.button.round}px`"
             >
               불러오기
             </button>
@@ -52,7 +52,7 @@
               type="button"
               class="btn"
               :class="UISetting.font"
-              :style="`background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.round}px`"
+              :style="`box-shadow: ${UISetting.button.x}px ${UISetting.button.y}px 0 ${UISetting.button.shadowColor}; outline : ${UISetting.button.border}px solid ${UISetting.button.strokeColor}; background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.button.round}px`"
               @click="onclickDisplayShow('displayProfile')"
             >
               등장인물
@@ -61,7 +61,7 @@
               type="button"
               class="btn"
               :class="UISetting.font"
-              :style="`background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.round}px`"
+              :style="`box-shadow: ${UISetting.button.x}px ${UISetting.button.y}px 0 ${UISetting.button.shadowColor}; outline : ${UISetting.button.border}px solid ${UISetting.button.strokeColor}; background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.button.round}px`"
             >
               갤러리
             </button>
@@ -168,9 +168,7 @@
             <p
               class="text"
               :class="UISetting.font"
-              :style="
-                UISetting.fontColor ? `color:rgba(${UISetting.fontColor}` : ''
-              "
+              :style="UISetting.fontColor ? `color:${UISetting.fontColor}` : ''"
             >
               창 색상
             </p>
@@ -244,7 +242,12 @@
             @click="onClickContent(2)"
           ></button>
         </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="두번째 인물" placement="top">
+        <el-tooltip
+          class="item"
+          effect="dark"
+          content="두번째 인물"
+          placement="top"
+        >
           <button
             type="button"
             class="btn icon2"
