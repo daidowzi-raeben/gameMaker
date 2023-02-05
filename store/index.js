@@ -73,11 +73,9 @@ const createStore = () => {
                     text: '',
                     narration: '',
                     questions: {
-                        text: [
-                            '',
-                            '',
-                            '',
-                        ]
+                        text_1: '',
+                        text_2: '',
+                        text_3: ''
                     },
                     questionsTimer: null,
                     subjectiveQuestion: '',
@@ -166,7 +164,7 @@ const createStore = () => {
             // 컷코드
             CUT_CODE: null,
             // 컨텐츠
-            CONTENT_CODE: 4,
+            CONTENT_CODE: 1,
             MAKER_GNB: 6,
             ASSETS: [],
             ASSETSMY: [],
@@ -523,10 +521,22 @@ const createStore = () => {
                 state.PREVIEW.data.narration = payload.replaceAll('||n', '\n');
             },
             // 객관식
-            MUTATIONS_ASSETS_DATA_QUESTIONS(state, payload) {
+            MUTATIONS_ASSETS_DATA_QUESTIONS_1(state, payload) {
 
-                console.log('MUTATIONS_ASSETS_DATA_NARRATION', payload)
-                state.PREVIEW.data.questions.text = payload
+                console.log('MUTATIONS_ASSETS_DATA_QUESTIONS', payload)
+                state.PREVIEW.data.questions.text_1 = payload
+            },
+            // 객관식
+            MUTATIONS_ASSETS_DATA_QUESTIONS_2(state, payload) {
+
+                console.log('MUTATIONS_ASSETS_DATA_QUESTIONS', payload)
+                state.PREVIEW.data.questions.text_2 = payload
+            },
+            // 객관식
+            MUTATIONS_ASSETS_DATA_QUESTIONS_3(state, payload) {
+
+                console.log('MUTATIONS_ASSETS_DATA_QUESTIONS', payload)
+                state.PREVIEW.data.questions.text_3 = payload
             },
             // 주관식 질문
             MUTATIONS_ASSETS_DATA_SUBJECTIVE(state, payload) {
@@ -780,10 +790,10 @@ const createStore = () => {
                         commit('MUTATIONS_LOADING', false)
                         console.log('MUTATIONS_AXIOS_POST_SUCCESS', res, params)
                         commit('MUTATIONS_AXIOS_POST_SUCCESS', res.data)
-
-                        // intro
-                        commit('MUTATIONS_PREVIEW_INTRO', res.data)
-
+                        if (params.type === 'introList') {
+                            // intro
+                            commit('MUTATIONS_PREVIEW_INTRO', res.data)
+                        }
                         console.log('SUCCESS')
                     })
                     .catch((res) => {

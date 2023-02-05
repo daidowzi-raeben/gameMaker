@@ -10,10 +10,18 @@
       >
         <div class="thumbnail">
           <div class="thumbnail-wrap">
-            <img v-if="v.cr" :src="v.cr" alt="" />
+            <img
+              v-if="v.cr"
+              :src="'http://api.school-os.net/game/upload/cr/' + v.cr"
+              alt=""
+            />
           </div>
-          <div class="thumbnail-wrap">
-            <img v-if="v.cr2" :src="v.cr2" alt="" />
+          <div v-if="v.cr2" class="thumbnail-wrap">
+            <img
+              v-if="v.cr2"
+              :src="'http://api.school-os.net/game/upload/cr/' + v.cr2"
+              alt=""
+            />
           </div>
         </div>
         <div class="info">
@@ -34,22 +42,13 @@
           <div v-if="v.cutType === 2" class="text normal">
             {{ v.narration }}
           </div>
-          <div
-            v-if="v.cutType === 3 && v.questionsText[0]"
-            class="text answer"
-          >
+          <div v-if="v.cutType === 3 && v.questionsText[0]" class="text answer">
             {{ v.questionsText[0] }}
           </div>
-          <div
-            v-if="v.cutType === 3 && v.questionsText[1]"
-            class="text answer"
-          >
+          <div v-if="v.cutType === 3 && v.questionsText[1]" class="text answer">
             {{ v.questionsText[1] }}
           </div>
-          <div
-            v-if="v.cutType === 3 && v.questionsText[2]"
-            class="text answer"
-          >
+          <div v-if="v.cutType === 3 && v.questionsText[2]" class="text answer">
             {{ v.questionsText[2] }}
           </div>
           <div v-if="v.cutType === 4" class="text question line2">

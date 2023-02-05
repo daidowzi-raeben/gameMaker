@@ -76,14 +76,17 @@ export default {
     onClickSrData(e) {
       console.log(e)
       this.MUTATIONS_ASSETS_SOUND(e)
-      this.MUTATIONS_CONTENT_CODE(5)
+      // this.MUTATIONS_CONTENT_CODE(5)
     },
     onClickSrPlay(e) {
       console.log(e)
       if (e) {
-        const audio = new Audio(e)
+        const audio = new Audio(`${process.env.VUE_APP_IMAGE}/sr/${e}`)
         audio.play()
       }
+    },
+    onLoadAssetsSr(v) {
+      return `${process.env.VUE_APP_IMAGE}/sr/${v}`
     },
   },
 }

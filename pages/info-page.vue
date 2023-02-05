@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header bg">
+    <!-- <div class="header bg">
       <div class="header-wrap">
         <div class="left">
           <div class="header-logo">
@@ -24,7 +24,7 @@
           <nuxt-link to="" class="btn btn-primary">회원가입</nuxt-link>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="main-section main-top">
       <div class="main-top--tit" data-aos="fade-up" data-aos-duration="1000">
@@ -50,7 +50,11 @@
     </div>
 
     <div class="main-section">
-      <div class="main-section--left" data-aos="fade-right" data-aos-duration="1000">
+      <div
+        class="main-section--left"
+        data-aos="fade-right"
+        data-aos-duration="1000"
+      >
         <div class="text-wrap">
           <div class="step">STEP 1</div>
           <div class="tit">
@@ -73,12 +77,33 @@
     <div class="main-section">
       <div class="main-section--left">
         <div class="img-wrap images">
-          <img src="../static/images/main_img2_1.png" alt="" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="500" />
-          <img src="../static/images/main_img2_2.png" alt="" data-aos="fade-up" data-aos-duration="1000" />
-          <img src="../static/images/main_img2_3.png" alt="" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="1000" />
+          <img
+            src="../static/images/main_img2_1.png"
+            alt=""
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-delay="500"
+          />
+          <img
+            src="../static/images/main_img2_2.png"
+            alt=""
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          />
+          <img
+            src="../static/images/main_img2_3.png"
+            alt=""
+            data-aos="fade-left"
+            data-aos-duration="1000"
+            data-aos-delay="1000"
+          />
         </div>
       </div>
-      <div class="main-section--right" data-aos="fade-left" data-aos-duration="1000">
+      <div
+        class="main-section--right"
+        data-aos="fade-left"
+        data-aos-duration="1000"
+      >
         <div class="text-wrap">
           <div class="step">STEP 2</div>
           <div class="tit">
@@ -94,7 +119,11 @@
     </div>
 
     <div class="main-section">
-      <div class="main-section--left" data-aos="fade-right" data-aos-duration="1000">
+      <div
+        class="main-section--left"
+        data-aos="fade-right"
+        data-aos-duration="1000"
+      >
         <div class="text-wrap">
           <div class="step">STEP 3</div>
           <div class="tit">
@@ -120,7 +149,11 @@
           <div class="tit">세상에서 가장 쉬운<br />나만의 스토리 만들기</div>
         </div>
         <div class="bottom">
-          <div class="img-wrap play" data-aos="fade-right" data-aos-duration="1000">
+          <div
+            class="img-wrap play"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
             <img src="" alt="" />
           </div>
           <div class="right" data-aos="fade-left" data-aos-duration="1000">
@@ -180,6 +213,7 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 
 export default {
+  layout: 'index',
   mounted() {
     AOS.init()
   },

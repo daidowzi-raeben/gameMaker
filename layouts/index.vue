@@ -3,11 +3,21 @@
     <div class="header">
       <div class="header-wrap">
         <div class="left">
-          <div class="header-logo"><nuxt-link to="">PROJECT KOO<span class="maker">. MAKER</span></nuxt-link></div>
+          <div class="header-logo">
+            <nuxt-link to="/"
+              >PROJECT KOO<span class="maker">. MAKER</span></nuxt-link
+            >
+          </div>
           <ul class="header-menu">
-            <li class="header-menu--item"><nuxt-link to="">프로젝트 Koo</nuxt-link></li>
-            <li class="header-menu--item"><nuxt-link to="">공유</nuxt-link></li>
-            <li class="header-menu--item"><nuxt-link to="">이용방법</nuxt-link></li>
+            <li class="header-menu--item">
+              <nuxt-link to="/">프로젝트 Koo</nuxt-link>
+            </li>
+            <li class="header-menu--item">
+              <nuxt-link to="info-page">소개</nuxt-link>
+            </li>
+            <li class="header-menu--item">
+              <nuxt-link to="">이용방법</nuxt-link>
+            </li>
             <li class="header-menu--item"><nuxt-link to="">금액</nuxt-link></li>
           </ul>
         </div>
@@ -15,7 +25,7 @@
         <button type="button" class="close-btn" @click="onMenuActive">&times;</button>
         <div class="dim"></div> -->
         <div class="right">
-          <nuxt-link to="" class="btn btn-login">로그인</nuxt-link>
+          <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link>
           <nuxt-link to="" class="btn btn-primary">회원가입</nuxt-link>
         </div>
       </div>
@@ -55,10 +65,10 @@
 <script>
 export default {
   name: 'IndexLayout',
-  data(){
-    return{
+  data() {
+    return {
       isMenuActive: false,
-    };
+    }
   },
   methods: {
     onMenuActive() {

@@ -299,9 +299,27 @@
           <label class="label">답변{{ itemQuestion }}</label>
           <div class="insert-answer">
             <input
+              v-if="itemQuestion === 1"
+              :id="`Questions${itemQuestion}`"
               type="text"
               class="input-text"
-              :value="PREVIEW.data.questions.text[itemQuestion - 1]"
+              :value="PREVIEW.data.questions.text_1"
+              @input="onInputDataQuestions(itemQuestion, $event)"
+            />
+            <input
+              v-if="itemQuestion === 2"
+              :id="`Questions${itemQuestion}`"
+              type="text"
+              class="input-text"
+              :value="PREVIEW.data.questions.text_2"
+              @input="onInputDataQuestions(itemQuestion, $event)"
+            />
+            <input
+              v-if="itemQuestion === 3"
+              :id="`Questions${itemQuestion}`"
+              type="text"
+              class="input-text"
+              :value="PREVIEW.data.questions.text_3"
               @input="onInputDataQuestions(itemQuestion, $event)"
             />
             <button
@@ -1023,7 +1041,7 @@ export default {
       cutData: [],
       rowIdx: [],
       questions: 1,
-      questionsText: [],
+      questionsText: ['', '', ''],
       questionsPoint: [
         {
           pointType: null,
@@ -1116,7 +1134,9 @@ export default {
       'MUTATIONS_PREVIEW_POINT',
       'MUTATIONS_PREVIEW_POINT_CR',
       'MUTATIONS_PREVIEW_POINT_TYPE',
-      'MUTATIONS_ASSETS_DATA_QUESTIONS',
+      'MUTATIONS_ASSETS_DATA_QUESTIONS_1',
+      'MUTATIONS_ASSETS_DATA_QUESTIONS_2',
+      'MUTATIONS_ASSETS_DATA_QUESTIONS_3',
       'MUTATIONS_ASSETS_DATA_ANSWER',
       'MUTATIONS_PREVIEW_QUESTIONS_POINT',
       'MUTATIONS_PREVIEW_TIMER',
@@ -1302,11 +1322,22 @@ export default {
       }
     },
     onInputDataQuestions(array, e) {
-      // console.log(array, e.target.value)
-      this.questionsText = this.PREVIEW.data.questions.text
-      this.questionsText[array - 1] = e.target.value.replaceAll('||n', '\n')
-      this.MUTATIONS_ASSETS_DATA_QUESTIONS(this.questionsText)
-      console.log(this.questionsText)
+      console.log(array, e.target.value)
+      // Questions1
+      // this.questionsText[0] = document.getElementById('Questions1').value
+      // this.questionsText[1] = document.getElementById('Questions2').value
+      // this.questionsText[2] = document.getElementById('Questions3').value
+      // this.questionsText[array - 1] = e.target.value
+      if (array === 1) {
+        this.MUTATIONS_ASSETS_DATA_QUESTIONS_1(e.target.value)
+      }
+      if (array === 2) {
+        this.MUTATIONS_ASSETS_DATA_QUESTIONS_2(e.target.value)
+      }
+      if (array === 3) {
+        this.MUTATIONS_ASSETS_DATA_QUESTIONS_3(e.target.value)
+      }
+      console.log(e)
     },
     onInputDatAnswer({ target }) {
       this.MUTATIONS_ASSETS_DATA_ANSWER(target.value)

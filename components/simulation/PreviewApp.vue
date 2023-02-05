@@ -104,23 +104,68 @@
             />
             <img
               v-if="PREVIEW.img.cr2"
-              ref="characterImage"
+              ref="characterImage2"
               :src="onLoadAssetsImage(PREVIEW.img.cr2, 'cr')"
               alt=""
               class="character"
               :class="PREVIEW.data.effect2"
             />
           </div>
-          <!-- <div class="answer answer-multiple">
-            <button type="button" class="btn">객관식1</button>
-            <button type="button" class="btn">객관식2</button>
-            <button type="button" class="btn">객관식3</button>
-          </div> -->
-          <!-- <div class="answer answer-subjective">
-            <div class="text">주관식 질문</div>
-            <input type="text" class="input-text" placeholder="주관식 답변을 입력해주세요" />
-          </div> -->
-          <div class="dialogue" :style="windowColor()">
+          <div v-if="cutType === 3" class="answer answer-multiple">
+            <button
+              type="button"
+              class="btn"
+              :style="
+                UISetting.fontColor
+                  ? `${windowColor()}; color:${UISetting.fontColor}`
+                  : windowColor()
+              "
+            >
+              {{ PREVIEW.data.questions.text_1 }}
+            </button>
+            <button
+              type="button"
+              class="btn"
+              :style="
+                UISetting.fontColor
+                  ? `${windowColor()}; color:${UISetting.fontColor}`
+                  : windowColor()
+              "
+            >
+              {{ PREVIEW.data.questions.text_2 }}
+            </button>
+            <button
+              type="button"
+              class="btn"
+              :style="
+                UISetting.fontColor
+                  ? `${windowColor()}; color:${UISetting.fontColor}`
+                  : windowColor()
+              "
+            >
+              {{ PREVIEW.data.questions.text_3 }}
+            </button>
+          </div>
+          <div v-if="cutType === 4" class="answer answer-subjective">
+            <div
+              class="text"
+              :style="
+                UISetting.fontColor
+                  ? `${windowColor()}; color:${UISetting.fontColor}`
+                  : windowColor()
+              "
+            >
+              {{ PREVIEW.data.subjectiveQuestion }}
+            </div>
+            <input
+              type="text"
+              class="input-text"
+              placeholder="주관식 답변을 입력해주세요"
+              :value="PREVIEW.data.answer"
+              :style="windowColor()"
+            />
+          </div>
+          <div v-if="cutType < 3" class="dialogue" :style="windowColor()">
             <span
               v-if="PREVIEW.data.cr"
               class="name"
@@ -147,6 +192,7 @@
               ref="myLoadText"
               class="text"
               :class="UISetting.font"
+              :style="UISetting.fontColor ? `color:${UISetting.fontColor}` : ''"
             >
               {{ PREVIEW.data.narration }}
             </p>
@@ -321,7 +367,7 @@ export default {
       handler(value) {
         if (value) {
           setTimeout(() => {
-            this.$refs.characterImage.classList.remove('ani-vibration')
+            this.$refs.characterImage2.classList.remove('ani-vibration')
           }, 400)
         }
       },

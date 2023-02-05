@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header type2">
+    <!-- <div class="header type2">
       <div class="header-wrap">
         <div class="header-logo"><a href="#"></a></div>
         <button type="button" class="menu-btn">
@@ -20,7 +20,7 @@
           <li class="header-menu--item"><nuxt-link to="">로그인</nuxt-link></li>
         </ul>
       </div>
-    </div>
+    </div> -->
     <div class="login">
       <div class="login-wrap">
         <form @submit.prevent="onSubmit">
@@ -61,6 +61,7 @@
 import { mapActions, mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
+  layout: 'index',
   data() {
     return {
       login: {

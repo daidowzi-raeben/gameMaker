@@ -72,37 +72,58 @@
       <!-- 인트로화면 -->
       <div
         v-show="displayPreview"
+        v-if="IN_APP_GAME && IN_APP_GAME.intro && IN_APP_GAME.intro.data"
         ref="displayIntro"
         class="preview-con preview-intro"
+        :class="IN_APP_GAME.intro.data.dim"
       >
         <div class="preview-intro--background">
           <img
-            src="https://mblogthumb-phinf.pstatic.net/MjAyMDAyMDNfOTcg/MDAxNTgwNjY4MzA1OTQ5.e9NJgX23nV_5ZM4Bn8LN-KQyJ2ZxsVuR5HZpJPb_TMMg.S8LQwAn8Q03YQVPvbVrCSdut5GqudOXLObvrWWzZSxcg.JPEG.westar4501/2%EC%9B%94_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_se.jpg?type=w800"
+            :src="onLoadAssetsImage(IN_APP_GAME.intro.data.bg, 'bg')"
             alt="background"
           />
         </div>
         <div class="preview-intro--logo">
-          <img src="~/static/images/logo.svg" alt="logo" />
+          <img
+            :src="onLoadAssetsImage(IN_APP_GAME.intro.data.logo, 'logo')"
+            alt="logo"
+          />
         </div>
         <div class="preview-intro--menu">
           <button
             type="button"
             class="btn"
+            :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
             @click="onclickDisplayShow('displayGame')"
           >
             시작하기
           </button>
-          <button type="button" class="btn">불러오기</button>
           <button
             type="button"
             class="btn"
+            :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
+          >
+            불러오기
+          </button>
+          <button
+            type="button"
+            class="btn"
+            :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
             @click="onclickDisplayShow('displayProfile')"
           >
             등장인물
           </button>
-          <button type="button" class="btn">갤러리</button>
+          <button
+            type="button"
+            class="btn"
+            :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
+          >
+            갤러리
+          </button>
         </div>
-        <div class="preview-intro--copy">ⓒproject koo</div>
+        <div class="preview-intro--copy">
+          {{ IN_APP_GAME.intro.data.copyright }}
+        </div>
       </div>
       <!-- 게임화면 -->
       <div
@@ -111,13 +132,30 @@
         class="preview-con preview-img"
         @click="nextGame"
       >
-        <img v-if="inApp.bg" :src="inApp.bg" alt="" class="background" />
+        <img
+          v-if="inApp.bg"
+          :src="onLoadAssetsImage(inApp.bg, 'bg')"
+          alt=""
+          class="background"
+        />
         <div v-if="inApp.cr && !inApp.cr2" class="character-1">
-          <img :src="inApp.cr" alt="" class="character right" />
+          <img
+            :src="onLoadAssetsImage(inApp.cr, 'cr')"
+            alt=""
+            class="character right"
+          />
         </div>
         <div v-if="inApp.cr2" class="character-2">
-          <img :src="inApp.cr" alt="" class="character right" />
-          <img :src="inApp.cr2" alt="" class="character right" />
+          <img
+            :src="onLoadAssetsImage(inApp.cr, 'cr')"
+            alt=""
+            class="character right"
+          />
+          <img
+            :src="onLoadAssetsImage(inApp.cr2, 'cr')"
+            alt=""
+            class="character right"
+          />
         </div>
 
         <div class="dialogue" :style="windowColor()">
@@ -182,21 +220,25 @@
           <div class="title">등장인물</div>
         </div>
         <ul class="preview-profile--list">
-          <li class="item" @click="onclickDisplayShow('displayProfileDetail')" style="background-color:#ffda72">
+          <li
+            class="item"
+            @click="onclickDisplayShow('displayProfileDetail')"
+            style="background-color: #ffda72"
+          >
             <div class="img-wrap">
               <img src="https://imgur.com/Xs5xsVU.png" alt="" />
             </div>
-            <div class="name">
-              쟈몽
-            </div>
+            <div class="name">쟈몽</div>
           </li>
-          <li class="item" @click="onclickDisplayShow('displayProfileDetail')" style="background-color:#e38542">
+          <li
+            class="item"
+            @click="onclickDisplayShow('displayProfileDetail')"
+            style="background-color: #e38542"
+          >
             <div class="img-wrap">
               <img src="https://imgur.com/HzC0LCW.png" alt="" />
             </div>
-            <div class="name">
-              북극산꽁치
-            </div>
+            <div class="name">북극산꽁치</div>
           </li>
         </ul>
       </div>
@@ -213,12 +255,7 @@
           >
             닫기
           </button>
-          <button
-            type="button"
-            class="btn picture"
-          >
-            사진
-          </button>
+          <button type="button" class="btn picture">사진</button>
         </div>
 
         <p class="name">{{ inApp.crName }}</p>
@@ -226,7 +263,9 @@
           <img src="https://imgur.com/Xs5xsVU.png" alt="" />
         </div>
         <div class="profile">
-          <p class="con"><span v-for="i in 10" :key="i">{{ inApp.text }}</span></p>
+          <p class="con">
+            <span v-for="i in 10" :key="i">{{ inApp.text }}</span>
+          </p>
         </div>
         <ul class="face-list">
           <li class="face-list--item">
@@ -479,7 +518,7 @@ export default {
       console.log(this.cutType, '=============================')
       this.cutType = this.inApp.cutType
       if (this.inApp.sr) {
-        const s = new Audio(this.inApp.sr)
+        const s = new Audio(`${process.env.VUE_APP_IMAGE}/sr/${this.inApp.sr}`)
         s.play()
       }
       if (this.inApp.cutType === 1) {
@@ -536,7 +575,8 @@ export default {
           break
         case 'displayProfileDetail':
           this.$refs.displayProfile.style = 'display:none'
-          this.$refs.displayProfileDetail.style = 'display:block;background-color:#ffda72'
+          this.$refs.displayProfileDetail.style =
+            'display:block;background-color:#ffda72'
           break
       }
 
@@ -558,14 +598,13 @@ export default {
           style += `background:${this.IN_APP_GAME.uiSet.windowColor};`
         }
         if (this.IN_APP_GAME.uiSet.strokeColor) {
-          style += `box-shadow :0 0 ${this.IN_APP_GAME.uiSet.border}px ${this.IN_APP_GAME.uiSet.strokeColor};`
+          style += `outline : ${this.IN_APP_GAME.uiSet.border}px solid ${this.IN_APP_GAME.uiSet.strokeColor};`
         }
         if (this.IN_APP_GAME.uiSet.round) {
           style += `border-radius:${this.IN_APP_GAME.uiSet.round}px;`
         }
-
         if (this.IN_APP_GAME.uiSet.shadowColor) {
-          style += `box-shadow: ${this.IN_APP_GAME.uiSet.x}px ${this.IN_APP_GAME.uiSet.y}px ${this.IN_APP_GAME.uiSet.y}px ${this.IN_APP_GAME.uiSet.shadowColor};`
+          style += `box-shadow: ${this.IN_APP_GAME.uiSet.x}px ${this.IN_APP_GAME.uiSet.y}px 0 ${this.IN_APP_GAME.uiSet.shadowColor};`
         }
       }
       console.log(style)
@@ -588,6 +627,9 @@ export default {
       }
       console.log(this.gamePoint)
       this.nextGame()
+    },
+    onLoadAssetsImage(v, f) {
+      return `${process.env.VUE_APP_IMAGE}/${f}/${v}`
     },
   },
 }
