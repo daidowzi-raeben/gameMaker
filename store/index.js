@@ -570,7 +570,9 @@ const createStore = () => {
                     state.PREVIEW.data.sr = state.CUT_LIST.jsonData[0].sr
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text.replaceAll('||n', '\n')
                     state.PREVIEW.data.narration = state.CUT_LIST.jsonData[0].narration.replaceAll('||n', '\n')
-                    state.PREVIEW.data.questions.text = state.CUT_LIST.jsonData[0].questionsText
+                    state.PREVIEW.data.questions.text_1 = state.CUT_LIST.jsonData[0].questions.text_1
+                    state.PREVIEW.data.questions.text_2 = state.CUT_LIST.jsonData[0].questions.text_2
+                    state.PREVIEW.data.questions.text_3 = state.CUT_LIST.jsonData[0].questions.text_3
                     state.PREVIEW.data.questionsPoint = state.CUT_LIST.jsonData[0].questionsPoint
                     state.PREVIEW.data.questionsTimer = state.CUT_LIST.jsonData[0].questionsTimer
                     state.PREVIEW.data.answer = state.CUT_LIST.jsonData[0].answer
@@ -588,6 +590,9 @@ const createStore = () => {
                     state.PREVIEW.data.narration = ''
                     state.PREVIEW.data.questionsTimer = null
                     state.PREVIEW.data.subjectiveQuestion = ''
+                    state.PREVIEW.data.questions.text_1 = ''
+                    state.PREVIEW.data.questions.text_2 = ''
+                    state.PREVIEW.data.questions.text_3 = ''
                     state.PREVIEW.data.questions.text = [
                         '',
                         '',
@@ -635,7 +640,9 @@ const createStore = () => {
                     state.PREVIEW.data.questionsTimer = state.CUT_LIST.jsonData[payload].questionsTimer
                     state.PREVIEW.data.subjectiveQuestion = state.CUT_LIST.jsonData[payload].subjectiveQuestion
                     state.PREVIEW.data.answer = state.CUT_LIST.jsonData[payload].answer
-                    state.PREVIEW.data.questions.text = state.CUT_LIST.jsonData[payload].questionsText
+                    state.PREVIEW.data.questions.text_1 = state.CUT_LIST.jsonData[payload].questions.text_1
+                    state.PREVIEW.data.questions.text_2 = state.CUT_LIST.jsonData[payload].questions.text_2
+                    state.PREVIEW.data.questions.text_3 = state.CUT_LIST.jsonData[payload].questions.text_3
                     state.cutType = state.CUT_LIST.jsonData[payload].cutType
                 }
             },

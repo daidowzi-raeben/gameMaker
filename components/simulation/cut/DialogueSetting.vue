@@ -1041,7 +1041,11 @@ export default {
       cutData: [],
       rowIdx: [],
       questions: 1,
-      questionsText: ['', '', ''],
+      questionsText: {
+        text_1: '',
+        text_2: '',
+        text_3: '',
+      },
       questionsPoint: [
         {
           pointType: null,
@@ -1329,12 +1333,15 @@ export default {
       // this.questionsText[2] = document.getElementById('Questions3').value
       // this.questionsText[array - 1] = e.target.value
       if (array === 1) {
+        this.questionsText.text_1 = e.target.value
         this.MUTATIONS_ASSETS_DATA_QUESTIONS_1(e.target.value)
       }
       if (array === 2) {
+        this.questionsText.text_2 = e.target.value
         this.MUTATIONS_ASSETS_DATA_QUESTIONS_2(e.target.value)
       }
       if (array === 3) {
+        this.questionsText.text_3 = e.target.value
         this.MUTATIONS_ASSETS_DATA_QUESTIONS_3(e.target.value)
       }
       console.log(e)
@@ -1370,14 +1377,15 @@ export default {
         '\n',
         '||n'
       )
-      this.paramsPreview.questionsText = this.questionsText
       if (this.cutType === 1) {
         // this.paramsPreview.text = ''
         this.paramsPreview.answer = ''
         this.paramsPreview.narration = ''
         this.paramsPreview.subjectiveQuestion = ''
         this.paramsPreview.questions = {
-          text: ['', '', ''],
+          text_1: '',
+          text_2: '',
+          text_3: '',
         }
       }
       if (this.cutType === 2) {
@@ -1386,7 +1394,9 @@ export default {
         // this.paramsPreview.narration = ''
         this.paramsPreview.subjectiveQuestion = ''
         this.paramsPreview.questions = {
-          text: ['', '', ''],
+          text_1: '',
+          text_2: '',
+          text_3: '',
         }
       }
       if (this.cutType === 3) {
@@ -1397,6 +1407,10 @@ export default {
         // this.paramsPreview.questions = {
         //   text: ['', '', ''],
         // }
+        this.paramsPreview.questions.text_1 = this.questionsText.text_1
+
+        this.paramsPreview.questions.text_2 = this.questionsText.text_2
+        this.paramsPreview.questions.text_3 = this.questionsText.text_3
       }
       if (this.cutType === 4) {
         this.paramsPreview.text = ''
@@ -1404,7 +1418,9 @@ export default {
         this.paramsPreview.narration = ''
         // this.paramsPreview.subjectiveQuestion = ''
         this.paramsPreview.questions = {
-          text: ['', '', ''],
+          text_1: '',
+          text_2: '',
+          text_3: '',
         }
       }
       this.params.previewData = JSON.stringify(this.paramsPreview)

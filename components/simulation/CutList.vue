@@ -42,14 +42,14 @@
           <div v-if="v.cutType === 2" class="text normal">
             {{ v.narration }}
           </div>
-          <div v-if="v.cutType === 3 && v.questionsText[0]" class="text answer">
-            {{ v.questionsText[0] }}
+          <div v-if="v.cutType === 3 && v.questions.text_1" class="text answer">
+            {{ v.questions.text_1 }}
           </div>
-          <div v-if="v.cutType === 3 && v.questionsText[1]" class="text answer">
-            {{ v.questionsText[1] }}
+          <div v-if="v.cutType === 3 && v.questions.text_2" class="text answer">
+            {{ v.questions.text_2 }}
           </div>
-          <div v-if="v.cutType === 3 && v.questionsText[2]" class="text answer">
-            {{ v.questionsText[2] }}
+          <div v-if="v.cutType === 3 && v.questions.text_3" class="text answer">
+            {{ v.questions.text_3 }}
           </div>
           <div v-if="v.cutType === 4" class="text question line2">
             {{ v.subjectiveQuestion }}

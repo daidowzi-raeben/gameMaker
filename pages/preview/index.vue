@@ -26,28 +26,46 @@
       ></div>
       <div v-if="cutType === 3" class="answer answer-multiple">
         <button
-          v-if="inApp.questionsText[0]"
+          v-if="inApp.questions.text_1"
           type="button"
           class="btn"
+          :class="IN_APP_GAME.uiSet.font"
+          :style="
+            IN_APP_GAME.uiSet.fontColor
+              ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
+              : windowColor()
+          "
           @click="onClickQuestions(0)"
         >
-          {{ inApp.questionsText[0] }}
+          {{ inApp.questions.text_1 }}
         </button>
         <button
-          v-if="inApp.questionsText[1]"
+          v-if="inApp.questions.text_2"
           type="button"
           class="btn"
+          :class="IN_APP_GAME.uiSet.font"
+          :style="
+            IN_APP_GAME.uiSet.fontColor
+              ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
+              : windowColor()
+          "
           @click="onClickQuestions(1)"
         >
-          {{ inApp.questionsText[1] }}
+          {{ inApp.questions.text_2 }}
         </button>
         <button
-          v-if="inApp.questionsText[2]"
+          v-if="inApp.questions.text_3"
           type="button"
           class="btn"
+          :class="IN_APP_GAME.uiSet.font"
+          :style="
+            IN_APP_GAME.uiSet.fontColor
+              ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
+              : windowColor()
+          "
           @click="onClickQuestions(2)"
         >
-          {{ inApp.questionsText[2] }}
+          {{ inApp.questions.text_3 }}
         </button>
       </div>
       <div v-if="cutType === 4" class="answer answer-subjective">
@@ -57,11 +75,23 @@
             v-model="answer"
             type="text"
             class="input-text"
+            :class="IN_APP_GAME.uiSet.font"
+            :style="
+              IN_APP_GAME.uiSet.fontColor
+                ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
+                : windowColor()
+            "
             placeholder="주관식 답변을 입력해주세요"
           />
           <button
             type="button"
             class="button"
+            :class="IN_APP_GAME.uiSet.font"
+            :style="
+              IN_APP_GAME.uiSet.fontColor
+                ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
+                : windowColor()
+            "
             @click="onClickSubjectiveQuestion"
             @keyup.enter="onClickSubjectiveQuestion"
           >
@@ -182,7 +212,16 @@
           >
             {{ inApp.text.replaceAll('||n', '\n') }}
           </p>
-          <p v-if="cutType === 3" class="text">
+          <p
+            v-if="cutType === 3"
+            class="text"
+            :class="IN_APP_GAME.uiSet.font"
+            :style="
+              IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.fontColor
+                ? `color:${IN_APP_GAME.uiSet.fontColor}`
+                : ''
+            "
+          >
             {{
               IN_APP_GAME.scenarioList[s].chapters[c].cuts[
                 IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t - 1]
