@@ -39,16 +39,16 @@
       :options="swiperOption"
     >
       <swiper-slide class="main-image">
-        <img src="https://i.imgur.com/ZXjdvvp.png" alt="" />
+        <img src="../static/images/main_sample1.png" alt="" />
       </swiper-slide>
       <swiper-slide class="main-image">
-        <img src="https://i.imgur.com/FGCCmkp.png" alt="" />
+        <img src="../static/images/main_sample2.png" alt="" />
       </swiper-slide>
       <swiper-slide class="main-image">
-        <img src="https://i.imgur.com/fz9P6qJ.png" alt="" />
+        <img src="../static/images/main_sample3.png" alt="" />
       </swiper-slide>
       <swiper-slide class="main-image">
-        <img src="https://i.imgur.com/WG7TzZv.png" alt="" />
+        <img src="../static/images/main_sample4.png" alt="" />
       </swiper-slide>
     </swiper>
     <div class="right-menu">
@@ -130,6 +130,8 @@ export default {
   },
   mounted() {
     document.addEventListener('wheel', this.onMouseWheelEvent)
+    document.querySelector('#__layout').style.backgroundColor = '#e7f0fa'
+    document.querySelector('.header').style.backgroundColor = 'transparent'
   },
   beforeDestroy() {
     document.removeEventListener('wheel', this.onMouseWheelEvent)
@@ -167,7 +169,7 @@ export default {
           swiper.slideTo(page + 2)
           break
         case 5:
-          changeBackground.style.backgroundColor = '#feede0'
+          changeBackground.style.backgroundColor = '#f5f0ff'
           swiper.slideTo(page + 2)
           break
       }
@@ -177,8 +179,5 @@ export default {
 }
 </script>
 
-<style lang="scss">
-#__layout {
-  background-color: #e7f0fa;
-}
+<style lang="scss" scoped>
 </style>

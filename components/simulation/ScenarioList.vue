@@ -74,7 +74,7 @@
                   class="chapter-modi"
                   @click="onClickTitleModi(`${index}`, `${index2}`)"
                 ></button>
-                <button type="button" class="chapter-sound"></button>
+                <button type="button" class="chapter-sound" @click="popsModalVisible = true"></button>
                 <button
                   type="button"
                   class="chapter-del"
@@ -103,7 +103,10 @@
       class="scenario-add"
       @click="onClickScenarioAdd"
     ></button>
-    <ChapterSoundUpload />
+    <!-- <ChapterSoundUpload /> -->
+    <el-dialog title="" width="480px" :visible.sync="popsModalVisible">
+      <ChapterSoundUpload />
+    </el-dialog>
   </div>
 </template>
 
@@ -127,6 +130,7 @@ export default {
       paramsInit: {},
       paramsData: {},
       user_idx: '',
+      popsModalVisible:false,
     }
   },
   computed: {
