@@ -248,6 +248,10 @@ button{
       display: none;
     }
 
+    .dim{
+      display:none;
+    }
+
     @media (max-width: 1500px) {
       width: 100%;
       padding: 0 50px 0 30px;
@@ -298,6 +302,7 @@ button{
         }
 
         &.active~.dim {
+          display:block;
           width: 100vw;
           height: 100vh;
           background-color: rgba(0, 0, 0, .5);
