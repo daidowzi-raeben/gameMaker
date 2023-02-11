@@ -68,8 +68,8 @@
         </div>
       </div>
       <div class="main-section--right" data-aos="fade" data-aos-duration="2000">
-        <div class="img-wrap play">
-          <img src="" alt="" />
+        <div class="img-wrap">
+          <img src="../static/images/main_img4.png" alt="" />
         </div>
       </div>
     </div>
@@ -154,7 +154,11 @@
             data-aos="fade-right"
             data-aos-duration="1000"
           >
-            <img src="" alt="" />
+            <img v-if="isImageActive===1" src="../static/images/main_sample1.png" alt="" />
+            <img v-else-if="isImageActive===2" src="../static/images/main_sample2.png" alt="" />
+            <img v-else-if="isImageActive===3" src="../static/images/main_sample3.png" alt="" />
+            <img v-else-if="isImageActive===4" src="../static/images/main_sample4.png" alt="" />
+            <img v-else-if="isImageActive===5" src="../static/images/main_sample5.png" alt="" />
           </div>
           <div class="right" data-aos="fade-left" data-aos-duration="1000">
             <button
@@ -214,12 +218,35 @@ import 'aos/dist/aos.css'
 
 export default {
   layout: 'index',
+  data() {
+    return {
+      isImageActive: 1,
+    }
+  },
   mounted() {
     AOS.init()
   },
   methods: {
     onClickTitActive(e) {
-      console.log(e.target)
+      const nodes = [...e.target.parentElement.children]
+      const index = nodes.indexOf(e.target)
+      switch(index){
+        case 0 :
+          this.isImageActive = 1
+        break
+        case 2 :
+          this.isImageActive = 2
+        break
+        case 4 :
+          this.isImageActive = 3
+        break
+        case 6 :
+          this.isImageActive = 4
+        break
+        case 8 :
+          this.isImageActive = 5
+        break
+      }
       document.querySelector('.btn.tit.active').classList.remove('active')
       e.target.classList.add('active')
     },

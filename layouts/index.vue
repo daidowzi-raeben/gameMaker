@@ -2,6 +2,9 @@
   <div>
     <div class="header">
       <div class="header-wrap">
+        <button type="button" class="menu-btn" :class="{active:isMenuActive}" @click="onMenuActive"></button>
+        <button type="button" class="close-btn" @click="onMenuActive">&times;</button>
+        <div class="dim"></div>
         <div class="left">
           <div class="header-logo">
             <nuxt-link to="/"
@@ -21,9 +24,6 @@
             <li class="header-menu--item"><nuxt-link to="">금액</nuxt-link></li>
           </ul>
         </div>
-        <!-- <button type="button" class="menu-btn" :class="{active:isMenuActive}" @click="onMenuActive"><i class="fa-solid fa-bars"></i></button>
-        <button type="button" class="close-btn" @click="onMenuActive">&times;</button>
-        <div class="dim"></div> -->
         <div class="right">
           <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link>
           <nuxt-link to="" class="btn btn-primary">회원가입</nuxt-link>

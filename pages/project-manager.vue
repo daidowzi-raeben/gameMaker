@@ -2,7 +2,10 @@
   <div id="projectManager">
     <div class="project-wrap">
       <div class="card-wrap">
-        <div class="card-tit"><nuxt-link to="">Visual Novel</nuxt-link></div>
+        <div class="card-tit">
+          <nuxt-link to="">Visual Novel</nuxt-link>
+          <button type="button" class="button btn-primary md btn-add" @click="popsModalVisible = true">추가하기</button>
+        </div>
         <swiper
           v-if="PROJECT_MANAGER"
           :options="swiperOptionCol4"
@@ -78,7 +81,7 @@
               </ul>
             </nuxt-link>
           </swiper-slide> -->
-          <swiper-slide class="card-list--item project-list--item add">
+          <!-- <swiper-slide class="card-list--item project-list--item add">
             <button
               type="button"
               class="add-btn"
@@ -86,7 +89,7 @@
             >
               새로운 프로젝트를<br />추가해 보세요
             </button>
-          </swiper-slide>
+          </swiper-slide> -->
           <div slot="button-prev" class="swiper-button-prev"></div>
           <div slot="button-next" class="swiper-button-next"></div>
         </swiper>
@@ -133,7 +136,7 @@
           <label class="input-label">프로젝트 이름</label>
           <input v-model="makerProject.subject" class="input-text" />
         </div>
-        <div class="input-wrap">
+        <div class="input-wrap mt-2">
           <label class="input-label">프로젝트 설명</label>
           <input v-model="makerProject.discription" class="input-text" />
         </div>

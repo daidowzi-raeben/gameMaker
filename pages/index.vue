@@ -5,7 +5,7 @@
       <transition name="el-fade-in">
         <div v-show="isMainPageActive === 1" class="main-top--con">
           <p class="tit">MAKER KOO</p>
-          <p class="text">나만의 스토리를 손쉽게 게임으로 만들어 보세요</p>
+          <p class="text">나만의 스토리를 <br class="m-block" />손쉽게 게임으로 만들어 보세요</p>
         </div>
       </transition>
       <transition name="el-fade-in">
@@ -32,6 +32,12 @@
           <p class="text">연인에게 더욱 특별한 편지를!</p>
         </div>
       </transition>
+    </div>
+    <div class="main-image--mobile">
+      <img src="../static/images/main_sample1.png" alt="" />
+      <img src="../static/images/main_sample2.png" alt="" />
+      <img src="../static/images/main_sample3.png" alt="" />
+      <img src="../static/images/main_sample4.png" alt="" />
     </div>
     <swiper
       class="main-image--list"
