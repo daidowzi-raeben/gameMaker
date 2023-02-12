@@ -1,7 +1,7 @@
 <template>
   <div class="store">
     <div class="store-wrap">
-    <!-- <div v-if="ASSETS_STORE.detail.detail" style="margin-top: 150px">
+      <!-- <div v-if="ASSETS_STORE.detail.detail" style="margin-top: 150px">
       에셋명 : {{ ASSETS_STORE.detail.detail.gas_name }} <br />
       설명 : {{ ASSETS_STORE.detail.detail.gas_discription }} <br />
       구분 : {{ ASSETS_STORE.detail.detail.kind }} <br />
@@ -45,7 +45,7 @@
           <el-scrollbar>
             <ul class="img-list">
               <li v-for="i in 10" :key="i" class="img-list--item">
-                <button type="button" class="btn" :class="{active : i===1}">
+                <button type="button" class="btn" :class="{ active: i === 1 }">
                   <img src="https://i.imgur.com/sDJ0R7M.png" alt="" />
                 </button>
               </li>
@@ -57,7 +57,10 @@
             <span class="badge">판타지</span>
             <span class="badge">서양</span>
           </div>
-          <div class="tit">판타지 핑뚝 여자 캐릭터 제목은 총 두줄까지 표시됩니다 글자수 제한을 하나요 그럼?</div>
+          <div class="tit">
+            판타지 핑뚝 여자 캐릭터 제목은 총 두줄까지 표시됩니다 글자수 제한을
+            하나요 그럼?
+          </div>
           <div class="price">
             <div class="top">6,500원</div>
             <div class="bottom">
@@ -110,12 +113,8 @@
             </div>
           </div>
         </div>
-        <div class="store-con--section">
-          제작자컨텐츠
-        </div>
-        <div class="store-con--section">
-          관련에셋
-        </div>
+        <div class="store-con--section">제작자컨텐츠</div>
+        <div class="store-con--section">관련에셋</div>
         <div class="store-con--section">
           <div class="comment">
             <div class="left">
@@ -141,8 +140,10 @@
               </div>
               <div class="right">
                 <el-rate v-model="value2" disabled></el-rate>
-                <div class="text">예쁜 분홍색이 머리색 얘기가 아니라 옷 얘기였구나</div>
-                <div v-if="i===2" class="re">
+                <div class="text">
+                  예쁜 분홍색이 머리색 얘기가 아니라 옷 얘기였구나
+                </div>
+                <div v-if="i === 2" class="re">
                   <div class="top">쟈몽님의 답변</div>
                   <div class="text">답변 내용입니다.</div>
                 </div>
@@ -151,7 +152,9 @@
           </ul>
         </div>
         <div class="store-con--section">
-          <div class="guide">쟈몽님에게 추가 표정 및 에셋을 요청할 수 있습니다.</div>
+          <div class="guide">
+            쟈몽님에게 추가 표정 및 에셋을 요청할 수 있습니다.
+          </div>
           <div class="comment-write">
             <textarea class="input-textarea" rows="3"></textarea>
             <button type="button" class="btn btn-blue">작성하기</button>
@@ -166,7 +169,7 @@
 import { mapActions, mapState, mapMutations } from 'vuex'
 export default {
   name: 'StoreDetail',
-  layout: 'default-index',
+  layout: 'index',
   data() {
     return {
       preview: {

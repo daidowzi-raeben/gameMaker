@@ -32,9 +32,9 @@
               <img :src="onLoadAssetsImage(v.path)" alt="" />
               <div class="btn-wrap">
                 <button type="button" class="btn">삭제하기</button>
-                <button v-if="i === 1" type="button" class="btn">
+                <!-- <button v-if="i === 1" type="button" class="btn">
                   미리듣기
-                </button>
+                </button> -->
               </div>
             </li>
           </ul>
@@ -103,17 +103,22 @@
           </div>
         </div>
         <div class="setting-info">나만의 사운드 에셋을 등록할 수 있습니다.</div>
-        <div v-if="!ASSETS && ASSETS.sr" class="thumbnail-list--wrap type3">
+        <div v-if="ASSETS && ASSETS.sr" class="thumbnail-list--wrap type3">
           <ul class="thumbnail-list asset">
             <li
               v-for="(v, i) in ASSETS.sr"
               :key="i"
               class="thumbnail-list--item background"
             >
-              <img :src="onLoadAssetsImage(v.path)" alt="" />
+              <!-- <img :src="onLoadAssetsImageSr(v.path)" alt="" /> -->
+              {{ v.gas_name }}
               <div class="btn-wrap">
                 <button type="button" class="btn">삭제하기</button>
-                <button v-if="i === 1" type="button" class="btn">
+                <button
+                  type="button"
+                  class="btn"
+                  @click="onClickSrPlay(v.path)"
+                >
                   미리듣기
                 </button>
               </div>
@@ -260,6 +265,16 @@ export default {
     },
     onLoadAssetsImageBg(v) {
       return `${process.env.VUE_APP_IMAGE}/bg/${v}`
+    },
+    onLoadAssetsImageSr(v) {
+      return `${process.env.VUE_APP_IMAGE}/sr/${v}`
+    },
+    onClickSrPlay(e) {
+      console.log(e)
+      if (e) {
+        const audio = new Audio(`${process.env.VUE_APP_IMAGE}/sr/${e}`)
+        audio.play()
+      }
     },
     onSubmitCr() {
       let k = 0

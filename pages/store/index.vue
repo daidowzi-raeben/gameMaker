@@ -66,7 +66,7 @@ export default {
   components: {
     ProjectCreate,
   },
-  layout: 'default-index',
+  layout: 'index',
   data() {
     return {
       params: {},

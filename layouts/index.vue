@@ -2,8 +2,15 @@
   <div>
     <div class="header">
       <div class="header-wrap">
-        <button type="button" class="menu-btn" :class="{active:isMenuActive}" @click="onMenuActive"></button>
-        <button type="button" class="close-btn" @click="onMenuActive">&times;</button>
+        <button
+          type="button"
+          class="menu-btn"
+          :class="{ active: isMenuActive }"
+          @click="onMenuActive"
+        ></button>
+        <button type="button" class="close-btn" @click="onMenuActive">
+          &times;
+        </button>
         <div class="dim"></div>
         <div class="left">
           <div class="header-logo">
@@ -19,14 +26,26 @@
               <nuxt-link to="info-page">소개</nuxt-link>
             </li>
             <li class="header-menu--item">
+              <nuxt-link to="/store">스토어</nuxt-link>
+            </li>
+            <li class="header-menu--item">
               <nuxt-link to="">이용방법</nuxt-link>
             </li>
             <li class="header-menu--item"><nuxt-link to="">금액</nuxt-link></li>
           </ul>
         </div>
-        <div class="right">
+        <div v-if="!isLogin" class="right">
           <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link>
           <nuxt-link to="" class="btn btn-primary">회원가입</nuxt-link>
+        </div>
+        <div v-if="isLogin" class="right">
+          <!-- <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link> -->
+          <nuxt-link
+            target="_blank"
+            to="/project-manager"
+            class="btn btn-primary"
+            >프로젝트</nuxt-link
+          >
         </div>
       </div>
     </div>
@@ -63,12 +82,18 @@
 </template>
 
 <script>
+// MUTATIONS_LOGIN
+import { kooLogin } from '~/config/util'
 export default {
   name: 'IndexLayout',
   data() {
     return {
       isMenuActive: false,
+      isLogin: '',
     }
+  },
+  mounted() {
+    this.isLogin = kooLogin('user_idx')
   },
   methods: {
     onMenuActive() {

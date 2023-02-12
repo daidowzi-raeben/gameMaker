@@ -5,7 +5,9 @@
       <transition name="el-fade-in">
         <div v-show="isMainPageActive === 1" class="main-top--con">
           <p class="tit">MAKER KOO</p>
-          <p class="text">나만의 스토리를 <br class="m-block" />손쉽게 게임으로 만들어 보세요</p>
+          <p class="text">
+            나만의 스토리를 <br class="m-block" />손쉽게 게임으로 만들어 보세요
+          </p>
         </div>
       </transition>
       <transition name="el-fade-in">
@@ -140,7 +142,9 @@ export default {
     document.querySelector('.header').style.backgroundColor = 'transparent'
   },
   beforeDestroy() {
+    document.querySelector('#__layout').style.backgroundColor = ''
     document.removeEventListener('wheel', this.onMouseWheelEvent)
+    document.querySelector('.header').style.backgroundColor = ''
   },
   methods: {
     onMouseWheelEvent(e) {

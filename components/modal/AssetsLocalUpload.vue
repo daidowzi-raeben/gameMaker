@@ -10,9 +10,18 @@
               required
               @change="onChangeUploadPreview($event)"
             />
-            <span>이곳을 클릭해서 에셋을 등록해 보세요 </span>
-            <div v-if="uploadPreview !== ''" class="image-wrap">
-              <img :src="uploadPreview" alt="" />
+            <span>
+              {{
+                uploadPreview && assetsType === 'S'
+                  ? uploadPreview
+                  : '이곳을 클릭해서 에셋을 등록해 보세요'
+              }}
+            </span>
+            <div
+              v-if="uploadPreview !== '' && assetsType !== 'S'"
+              class="image-wrap"
+            >
+              <img v-if="assetsType !== 'S'" :src="uploadPreview" alt="" />
             </div>
           </label>
         </div>
@@ -24,16 +33,18 @@
             type="text"
             class="input-text"
             required
-            placeholder="긴머리 주인공"
+            :placeholder="assetsType === 'S' ? '' : '긴머리 주인공'"
             @keyup="onChangeContentAllCheck('text', $event)"
           />
-          <label class="label">에셋 표정</label>
+          <label class="label">
+            {{ assetsType === 'C' ? '에셋 표정' : '에셋 설명' }}
+          </label>
           <input
             v-model="params.gas_discription"
             type="text"
             class="input-text"
             required
-            placeholder="무표정"
+            :placeholder="assetsType === 'S' ? '' : '무표정'"
             @keyup="onChangeContentAllCheck('text', $event)"
           />
           <div class="sub-tit">주의사항</div>
@@ -126,6 +137,10 @@ export default {
       this.isOpen = false
     },
     onChangeUploadPreview(e) {
+      if (this.assetsType === 'S') {
+        console.log(e.target.files[0].name)
+        return (this.uploadPreview = e.target.files[0].name)
+      }
       if (e.target.value) {
         const file = e.target.files[0]
         this.uploadPreview = URL.createObjectURL(file)
@@ -158,7 +173,11 @@ export default {
       frm.append('secretKey', this.PROJECT_ID)
       frm.append('gas_name', this.params.gas_name)
       frm.append('gas_discription', this.params.gas_discription)
-      frm.append('type', 'my')
+      if (this.assetsType === 'S') {
+        frm.append('type', 'mySound')
+      } else {
+        frm.append('type', 'my')
+      }
       frm.append('mode', this.assetsType)
       frm.append(
         'national_2000',
