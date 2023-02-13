@@ -24,7 +24,11 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'google-signin-client_id', content: '222131177892-51smeo64gg7v5lj0bjivi8uqhcni7pvt.apps.googleusercontent.com' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, { src: 'https://apis.google.com/js/platform.js?onload=init' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { src: 'https://apis.google.com/js/platform.js?onload=init' },
+    { src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8019581580650071', crossorigin: 'anonymous' },
+
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

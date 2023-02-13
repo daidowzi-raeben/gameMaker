@@ -27,13 +27,13 @@
               <dt>공유하기</dt>
               <dd>
                 <ul>
-                  <li>
+                  <li @click="shareTwitter">
                     <img src="@/static/images/preview/twitter_share.png" />
                   </li>
-                  <li>
+                  <li @click="shareFacebook">
                     <img src="@/static/images/preview/facebook_share.png" />
                   </li>
-                  <li>
+                  <li @click="sendkakao">
                     <img src="@/static/images/preview/chat.png" />
                     <img
                       src="@/static/images/preview/KAKAO.png"
@@ -470,7 +470,11 @@ export default {
       },
       displayPreview: false,
       paramsList: {},
+      sharUrl: 'projectkoo.com',
     }
+  },
+  head: {
+    script: [{ src: 'https://developers.kakao.com/sdk/js/kakao.min.js' }],
   },
   computed: {
     ...mapState(['IN_APP_GAME', 'PROJECT_ID', 'IN_APP_GAME_START']),
@@ -517,6 +521,44 @@ export default {
   methods: {
     ...mapMutations(['MUTATIONS_PROJECT']),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
+    // 공유하기
+    shareTwitter() {
+      const sendText = '코딩없이 만드는 나만의 스토리형 게임, 메이커 쿠' // 전달할 텍스트
+      const sendUrl = this.sharUrl // 전달할 URL
+      window.open(
+        'https://twitter.com/intent/tweet?text=' + sendText + '&url=' + sendUrl
+      )
+    },
+    shareFacebook() {
+      const sendUrl = this.sharUrl // 전달할 URL
+      window.open('http://www.facebook.com/sharer/sharer.php?u=' + sendUrl)
+    },
+    sendkakao() {
+      Kakao.init('654e0eb959cb92350e11a4872c04acbb')
+      Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '프로젝트 쿠',
+          description: '프로젝트 쿠 디스크립션',
+          imageUrl:
+            'http://api.school-os.net/game/upload/logo/logo1675285700.png',
+          link: {
+            mobileWebUrl: 'http://projectkoo.com',
+            webUrl: 'http://projectkoo.com',
+          },
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              mobileWebUrl: 'http://projectkoo.com',
+              webUrl: 'http://projectkoo.com',
+            },
+          },
+        ],
+      })
+    },
+
     nextGame(e) {
       if (this.isEnding === false) {
         this.t++
