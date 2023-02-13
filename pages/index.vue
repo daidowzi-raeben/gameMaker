@@ -137,7 +137,15 @@ export default {
     }
   },
   mounted() {
-    document.addEventListener('wheel', this.onMouseWheelEvent)
+    let debouncer;
+    const funcs = (e)=>{
+      if (debouncer) clearTimeout(debouncer)
+      debouncer = setTimeout(()=> {
+        this.onMouseWheelEvent(e)
+        debouncer = null
+      }, 100)
+    }
+    document.addEventListener('wheel', (e)=>funcs(e))
     document.querySelector('#__layout').style.backgroundColor = '#e7f0fa'
     document.querySelector('.header').style.backgroundColor = 'transparent'
   },
