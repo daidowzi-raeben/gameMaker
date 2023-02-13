@@ -6,9 +6,71 @@
     element-loading-background="rgba(0, 0, 0, 0.8)"
     class="preview-wrap"
   >
-    <div class="web-left">광고영역</div>
-    <div class="preview">
-      <!-- <div
+    <div id="preview">
+      <div class="app">
+        <div class="app-title">
+          <div class="app-title__warp">
+            <div class="logo">
+              <img src="@/static/images/preview/logo.png" />
+              <img src="@/static/images/preview/ProjectKoo.png" height="20" />
+            </div>
+            <div class="copy">
+              코딩없이 누구나 클릭만으로 만드는<br />
+              나만의 스토리형 게임
+            </div>
+            <div class="title">프로젝트명이 노출됩니다 스퀘어로</div>
+            <dl class="list">
+              <dt>제작자</dt>
+              <dd>닉네임</dd>
+            </dl>
+            <dl class="list">
+              <dt>공유하기</dt>
+              <dd>
+                <ul>
+                  <li>
+                    <img src="@/static/images/preview/twitter_share.png" />
+                  </li>
+                  <li>
+                    <img src="@/static/images/preview/facebook_share.png" />
+                  </li>
+                  <li>
+                    <img src="@/static/images/preview/chat.png" />
+                    <img
+                      src="@/static/images/preview/KAKAO.png"
+                      class="kakao"
+                    />
+                  </li>
+                  <li>
+                    <img src="@/static/images/preview/reply-fill_share.png" />
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl class="list">
+              <dt>도움주신분</dt>
+              <dd>
+                <textarea readonly>sad</textarea>
+              </dd>
+            </dl>
+            <div class="footer-preview">
+              <ul class="footer-preview-social">
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <button type="button" class="footer-preview-blank">
+                프로젝트 쿠 바로가기
+              </button>
+              <div class="footer-preview-copyright">
+                Copyright (C) 2023 Project Koo
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="app-device">
+          <div class="app-device__warp">
+            <div class="preview">
+              <!-- <div
         style="
           background: #fff;
           color: #000;
@@ -20,312 +82,325 @@
       >
         {{ gamePoint }}
       </div> -->
-      <div
-        v-if="cutType === 3 || cutType === 4"
-        class="preview-con answer-dim"
-      ></div>
-      <div v-if="cutType === 3" class="answer answer-multiple">
-        <button
-          v-if="inApp.questions.text_1"
-          type="button"
-          class="btn"
-          :class="IN_APP_GAME.uiSet.font"
-          :style="
-            IN_APP_GAME.uiSet.fontColor
-              ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
-              : windowColor()
-          "
-          @click="onClickQuestions(0)"
-        >
-          {{ inApp.questions.text_1 }}
-        </button>
-        <button
-          v-if="inApp.questions.text_2"
-          type="button"
-          class="btn"
-          :class="IN_APP_GAME.uiSet.font"
-          :style="
-            IN_APP_GAME.uiSet.fontColor
-              ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
-              : windowColor()
-          "
-          @click="onClickQuestions(1)"
-        >
-          {{ inApp.questions.text_2 }}
-        </button>
-        <button
-          v-if="inApp.questions.text_3"
-          type="button"
-          class="btn"
-          :class="IN_APP_GAME.uiSet.font"
-          :style="
-            IN_APP_GAME.uiSet.fontColor
-              ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
-              : windowColor()
-          "
-          @click="onClickQuestions(2)"
-        >
-          {{ inApp.questions.text_3 }}
-        </button>
-      </div>
-      <div v-if="cutType === 4" class="answer answer-subjective">
-        <div class="text">{{ inApp.subjectiveQuestion }}</div>
-        <div class="input-wrap">
-          <input
-            v-model="answer"
-            type="text"
-            class="input-text"
-            :class="IN_APP_GAME.uiSet.font"
-            :style="
-              IN_APP_GAME.uiSet.fontColor
-                ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
-                : windowColor()
-            "
-            placeholder="주관식 답변을 입력해주세요"
-          />
-          <button
-            type="button"
-            class="button"
-            :class="IN_APP_GAME.uiSet.font"
-            :style="
-              IN_APP_GAME.uiSet.fontColor
-                ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
-                : windowColor()
-            "
-            @click="onClickSubjectiveQuestion"
-            @keyup.enter="onClickSubjectiveQuestion"
-          >
-            입력
-          </button>
-        </div>
-      </div>
-      <!-- 인트로화면 -->
-      <div
-        v-show="displayPreview"
-        v-if="IN_APP_GAME && IN_APP_GAME.intro && IN_APP_GAME.intro.data"
-        ref="displayIntro"
-        class="preview-con preview-intro"
-        :class="IN_APP_GAME.intro.data.dim"
-      >
-        <div class="preview-intro--background">
-          <img
-            :src="onLoadAssetsImage(IN_APP_GAME.intro.data.bg, 'bg')"
-            alt="background"
-          />
-        </div>
-        <div class="preview-intro--logo">
-          <img
-            :src="onLoadAssetsImage(IN_APP_GAME.intro.data.logo, 'logo')"
-            alt="logo"
-          />
-        </div>
-        <div class="preview-intro--menu">
-          <button
-            type="button"
-            class="btn"
-            :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
-            @click="onclickDisplayShow('displayGame')"
-          >
-            시작하기
-          </button>
-          <button
-            type="button"
-            class="btn"
-            :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
-          >
-            불러오기
-          </button>
-          <button
-            type="button"
-            class="btn"
-            :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
-            @click="onclickDisplayShow('displayProfile')"
-          >
-            등장인물
-          </button>
-          <button
-            type="button"
-            class="btn"
-            :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
-          >
-            갤러리
-          </button>
-        </div>
-        <div class="preview-intro--copy">
-          {{ IN_APP_GAME.intro.data.copyright }}
-        </div>
-      </div>
-      <!-- 게임화면 -->
-      <div
-        v-show="displayPreview"
-        ref="displayGame"
-        class="preview-con preview-img"
-        @click="nextGame"
-      >
-        <img
-          v-if="inApp.bg"
-          :src="onLoadAssetsImage(inApp.bg, 'bg')"
-          alt=""
-          class="background"
-        />
-        <div v-if="inApp.cr && !inApp.cr2" class="character-1">
-          <img
-            :src="onLoadAssetsImage(inApp.cr, 'cr')"
-            alt=""
-            class="character right"
-          />
-        </div>
-        <div v-if="inApp.cr2" class="character-2">
-          <img
-            :src="onLoadAssetsImage(inApp.cr, 'cr')"
-            alt=""
-            class="character right"
-          />
-          <img
-            :src="onLoadAssetsImage(inApp.cr2, 'cr')"
-            alt=""
-            class="character right"
-          />
-        </div>
+              <div
+                v-if="cutType === 3 || cutType === 4"
+                class="preview-con answer-dim"
+              ></div>
+              <div v-if="cutType === 3" class="answer answer-multiple">
+                <button
+                  v-if="inApp.questions.text_1"
+                  type="button"
+                  class="btn"
+                  :class="IN_APP_GAME.uiSet.font"
+                  :style="
+                    IN_APP_GAME.uiSet.fontColor
+                      ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
+                      : windowColor()
+                  "
+                  @click="onClickQuestions(0)"
+                >
+                  {{ inApp.questions.text_1 }}
+                </button>
+                <button
+                  v-if="inApp.questions.text_2"
+                  type="button"
+                  class="btn"
+                  :class="IN_APP_GAME.uiSet.font"
+                  :style="
+                    IN_APP_GAME.uiSet.fontColor
+                      ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
+                      : windowColor()
+                  "
+                  @click="onClickQuestions(1)"
+                >
+                  {{ inApp.questions.text_2 }}
+                </button>
+                <button
+                  v-if="inApp.questions.text_3"
+                  type="button"
+                  class="btn"
+                  :class="IN_APP_GAME.uiSet.font"
+                  :style="
+                    IN_APP_GAME.uiSet.fontColor
+                      ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
+                      : windowColor()
+                  "
+                  @click="onClickQuestions(2)"
+                >
+                  {{ inApp.questions.text_3 }}
+                </button>
+              </div>
+              <div v-if="cutType === 4" class="answer answer-subjective">
+                <div class="text">{{ inApp.subjectiveQuestion }}</div>
+                <div class="input-wrap">
+                  <input
+                    v-model="answer"
+                    type="text"
+                    class="input-text"
+                    :class="IN_APP_GAME.uiSet.font"
+                    :style="
+                      IN_APP_GAME.uiSet.fontColor
+                        ? `${windowColor()}; color:${
+                            IN_APP_GAME.uiSet.fontColor
+                          }`
+                        : windowColor()
+                    "
+                    placeholder="주관식 답변을 입력해주세요"
+                  />
+                  <button
+                    type="button"
+                    class="button"
+                    :class="IN_APP_GAME.uiSet.font"
+                    :style="
+                      IN_APP_GAME.uiSet.fontColor
+                        ? `${windowColor()}; color:${
+                            IN_APP_GAME.uiSet.fontColor
+                          }`
+                        : windowColor()
+                    "
+                    @click="onClickSubjectiveQuestion"
+                    @keyup.enter="onClickSubjectiveQuestion"
+                  >
+                    입력
+                  </button>
+                </div>
+              </div>
+              <!-- 인트로화면 -->
+              <div
+                v-show="displayPreview"
+                v-if="
+                  IN_APP_GAME && IN_APP_GAME.intro && IN_APP_GAME.intro.data
+                "
+                ref="displayIntro"
+                class="preview-con preview-intro"
+                :class="IN_APP_GAME.intro.data.dim"
+              >
+                <div class="preview-intro--background">
+                  <img
+                    :src="onLoadAssetsImage(IN_APP_GAME.intro.data.bg, 'bg')"
+                    alt="background"
+                  />
+                </div>
+                <div class="preview-intro--logo">
+                  <img
+                    :src="
+                      onLoadAssetsImage(IN_APP_GAME.intro.data.logo, 'logo')
+                    "
+                    alt="logo"
+                  />
+                </div>
+                <div class="preview-intro--menu">
+                  <button
+                    type="button"
+                    class="btn"
+                    :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
+                    @click="onclickDisplayShow('displayGame')"
+                  >
+                    시작하기
+                  </button>
+                  <button
+                    type="button"
+                    class="btn"
+                    :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
+                  >
+                    불러오기
+                  </button>
+                  <button
+                    type="button"
+                    class="btn"
+                    :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
+                    @click="onclickDisplayShow('displayProfile')"
+                  >
+                    등장인물
+                  </button>
+                  <button
+                    type="button"
+                    class="btn"
+                    :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
+                  >
+                    갤러리
+                  </button>
+                </div>
+                <div class="preview-intro--copy">
+                  {{ IN_APP_GAME.intro.data.copyright }}
+                </div>
+              </div>
+              <!-- 게임화면 -->
+              <div
+                v-show="displayPreview"
+                ref="displayGame"
+                class="preview-con preview-img"
+                @click="nextGame"
+              >
+                <img
+                  v-if="inApp.bg"
+                  :src="onLoadAssetsImage(inApp.bg, 'bg')"
+                  alt=""
+                  class="background"
+                />
+                <div v-if="inApp.cr && !inApp.cr2" class="character-1">
+                  <img
+                    :src="onLoadAssetsImage(inApp.cr, 'cr')"
+                    alt=""
+                    class="character right"
+                  />
+                </div>
+                <div v-if="inApp.cr2" class="character-2">
+                  <img
+                    :src="onLoadAssetsImage(inApp.cr, 'cr')"
+                    alt=""
+                    class="character right"
+                  />
+                  <img
+                    :src="onLoadAssetsImage(inApp.cr2, 'cr')"
+                    alt=""
+                    class="character right"
+                  />
+                </div>
 
-        <div class="dialogue" :style="windowColor()">
-          <span
-            v-if="cutType === 1"
-            class="name"
-            :class="IN_APP_GAME.uiSet.font"
-            :style="
-              IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.mainColor
-                ? `background:${IN_APP_GAME.uiSet.mainColor};color:${IN_APP_GAME.uiSet.mainFontColor}`
-                : ''
-            "
-            >{{ inApp.crName }}</span
-          >
-          <p
-            v-if="cutType === 1"
-            class="text"
-            :class="IN_APP_GAME.uiSet.font"
-            :style="
-              IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.fontColor
-                ? `color:${IN_APP_GAME.uiSet.fontColor}`
-                : ''
-            "
-          >
-            {{ inApp.text.replaceAll('||n', '\n') }}
-          </p>
-          <p
-            v-if="cutType === 3"
-            class="text"
-            :class="IN_APP_GAME.uiSet.font"
-            :style="
-              IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.fontColor
-                ? `color:${IN_APP_GAME.uiSet.fontColor}`
-                : ''
-            "
-          >
-            {{
-              IN_APP_GAME.scenarioList[s].chapters[c].cuts[
-                IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t - 1]
-              ].list.text
-            }}
-          </p>
-          <p
-            v-if="cutType === 2"
-            class="text"
-            :class="IN_APP_GAME.uiSet.font"
-            :style="
-              IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.fontColor
-                ? `color:${IN_APP_GAME.uiSet.fontColor}`
-                : ''
-            "
-          >
-            {{ inApp.narration.replaceAll('||n', '\n') }}
-          </p>
-        </div>
-      </div>
-      <!-- 등장인물화면 -->
-      <div
-        v-show="displayPreview"
-        ref="displayProfile"
-        class="preview-con preview-profile"
-      >
-        <div class="preview-profile--top">
-          <button
-            type="button"
-            class="btn back"
-            @click="onclickDisplayShow('displayIntro')"
-          >
-            뒤로
-          </button>
-          <div class="title">등장인물</div>
-        </div>
-        <ul class="preview-profile--list">
-          <li
-            class="item"
-            @click="onclickDisplayShow('displayProfileDetail')"
-            style="background-color: #ffda72"
-          >
-            <div class="img-wrap">
-              <img src="https://imgur.com/Xs5xsVU.png" alt="" />
-            </div>
-            <div class="name">쟈몽</div>
-          </li>
-          <li
-            class="item"
-            @click="onclickDisplayShow('displayProfileDetail')"
-            style="background-color: #e38542"
-          >
-            <div class="img-wrap">
-              <img src="https://imgur.com/HzC0LCW.png" alt="" />
-            </div>
-            <div class="name">북극산꽁치</div>
-          </li>
-        </ul>
-      </div>
-      <div
-        v-show="displayPreview"
-        ref="displayProfileDetail"
-        class="preview-con preview-profile detail"
-      >
-        <div class="btn-wrap">
-          <button
-            type="button"
-            class="btn close"
-            @click="onclickDisplayShow('displayProfile')"
-          >
-            닫기
-          </button>
-          <button type="button" class="btn picture">사진</button>
-        </div>
+                <div class="dialogue" :style="windowColor()">
+                  <span
+                    v-if="cutType === 1"
+                    class="name"
+                    :class="IN_APP_GAME.uiSet.font"
+                    :style="
+                      IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.mainColor
+                        ? `background:${IN_APP_GAME.uiSet.mainColor};color:${IN_APP_GAME.uiSet.mainFontColor}`
+                        : ''
+                    "
+                    >{{ inApp.crName }}</span
+                  >
+                  <p
+                    v-if="cutType === 1"
+                    class="text"
+                    :class="IN_APP_GAME.uiSet.font"
+                    :style="
+                      IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.fontColor
+                        ? `color:${IN_APP_GAME.uiSet.fontColor}`
+                        : ''
+                    "
+                  >
+                    {{ inApp.text.replaceAll('||n', '\n') }}
+                  </p>
+                  <p
+                    v-if="cutType === 3"
+                    class="text"
+                    :class="IN_APP_GAME.uiSet.font"
+                    :style="
+                      IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.fontColor
+                        ? `color:${IN_APP_GAME.uiSet.fontColor}`
+                        : ''
+                    "
+                  >
+                    {{
+                      IN_APP_GAME.scenarioList[s].chapters[c].cuts[
+                        IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t - 1]
+                      ].list.text
+                    }}
+                  </p>
+                  <p
+                    v-if="cutType === 2"
+                    class="text"
+                    :class="IN_APP_GAME.uiSet.font"
+                    :style="
+                      IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.fontColor
+                        ? `color:${IN_APP_GAME.uiSet.fontColor}`
+                        : ''
+                    "
+                  >
+                    {{ inApp.narration.replaceAll('||n', '\n') }}
+                  </p>
+                </div>
+              </div>
+              <!-- 등장인물화면 -->
+              <div
+                v-show="displayPreview"
+                ref="displayProfile"
+                class="preview-con preview-profile"
+              >
+                <div class="preview-profile--top">
+                  <button
+                    type="button"
+                    class="btn back"
+                    @click="onclickDisplayShow('displayIntro')"
+                  >
+                    뒤로
+                  </button>
+                  <div class="title">등장인물</div>
+                </div>
+                <ul class="preview-profile--list">
+                  <li
+                    class="item"
+                    @click="onclickDisplayShow('displayProfileDetail')"
+                    style="background-color: #ffda72"
+                  >
+                    <div class="img-wrap">
+                      <img src="https://imgur.com/Xs5xsVU.png" alt="" />
+                    </div>
+                    <div class="name">쟈몽</div>
+                  </li>
+                  <li
+                    class="item"
+                    @click="onclickDisplayShow('displayProfileDetail')"
+                    style="background-color: #e38542"
+                  >
+                    <div class="img-wrap">
+                      <img src="https://imgur.com/HzC0LCW.png" alt="" />
+                    </div>
+                    <div class="name">북극산꽁치</div>
+                  </li>
+                </ul>
+              </div>
+              <div
+                v-show="displayPreview"
+                ref="displayProfileDetail"
+                class="preview-con preview-profile detail"
+              >
+                <div class="btn-wrap">
+                  <button
+                    type="button"
+                    class="btn close"
+                    @click="onclickDisplayShow('displayProfile')"
+                  >
+                    닫기
+                  </button>
+                  <button type="button" class="btn picture">사진</button>
+                </div>
 
-        <p class="name">{{ inApp.crName }}</p>
-        <div class="character">
-          <img src="https://imgur.com/Xs5xsVU.png" alt="" />
+                <p class="name">{{ inApp.crName }}</p>
+                <div class="character">
+                  <img src="https://imgur.com/Xs5xsVU.png" alt="" />
+                </div>
+                <div class="profile">
+                  <p class="con">
+                    <span v-for="i in 10" :key="i">{{ inApp.text }}</span>
+                  </p>
+                </div>
+                <ul class="face-list">
+                  <li class="face-list--item">
+                    <img src="https://i.imgur.com/TNnVehQ.png" alt="" />
+                  </li>
+                  <li class="face-list--item">
+                    <img src="https://i.imgur.com/Fya1jHk.png" alt="" />
+                  </li>
+                  <li class="face-list--item">
+                    <img src="https://i.imgur.com/W6z9by0.png" alt="" />
+                  </li>
+                  <li class="face-list--item">
+                    <img src="https://i.imgur.com/m14VXCI.png" alt="" />
+                  </li>
+                </ul>
+              </div>
+              <img
+                src="~/static/images/mockup.png"
+                alt="mockup"
+                class="preview-mockup"
+              />
+            </div>
+            <div class="ad"></div>
+          </div>
         </div>
-        <div class="profile">
-          <p class="con">
-            <span v-for="i in 10" :key="i">{{ inApp.text }}</span>
-          </p>
-        </div>
-        <ul class="face-list">
-          <li class="face-list--item">
-            <img src="https://i.imgur.com/TNnVehQ.png" alt="" />
-          </li>
-          <li class="face-list--item">
-            <img src="https://i.imgur.com/Fya1jHk.png" alt="" />
-          </li>
-          <li class="face-list--item">
-            <img src="https://i.imgur.com/W6z9by0.png" alt="" />
-          </li>
-          <li class="face-list--item">
-            <img src="https://i.imgur.com/m14VXCI.png" alt="" />
-          </li>
-        </ul>
       </div>
-      <img
-        src="~/static/images/mockup.png"
-        alt="mockup"
-        class="preview-mockup"
-      />
     </div>
   </div>
 </template>
