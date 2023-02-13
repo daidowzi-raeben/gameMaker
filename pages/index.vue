@@ -137,13 +137,19 @@ export default {
     }
   },
   mounted() {
-    let debouncer;
+    let timer
     const funcs = (e)=>{
-      if (debouncer) clearTimeout(debouncer)
-      debouncer = setTimeout(()=> {
-        this.onMouseWheelEvent(e)
-        debouncer = null
-      }, 100)
+      if (!timer) {
+        timer = setTimeout(()=> {
+          timer = null;
+          this.onMouseWheelEvent(e)
+        }, 200);
+      }
+      // if (debouncer) clearTimeout(debouncer)
+      // debouncer = setTimeout(()=> {
+      //   this.onMouseWheelEvent(e)
+      //   debouncer = null
+      // }, 100)
     }
     document.addEventListener('wheel', (e)=>funcs(e))
     document.querySelector('#__layout').style.backgroundColor = '#e7f0fa'
