@@ -39,6 +39,7 @@
           color: #fff;
           margin-top: 15px;
           font-size: 16px;
+          line-height:1.5;
         }
 
         .title {
@@ -614,6 +615,22 @@
 
       &-tit {
         margin-left: -75px;
+        position:relative;
+        .delete-btn{
+          right:calc(50% - 30px);
+          top:-30px;
+        }
+        .guide{
+          position:absolute;
+          left:50%;
+          top:-25px;
+          width:250px;
+          transform: translateX(-50%);
+          font-size:1.2rem;
+          font-style: italic;
+          color:#999;
+          font-weight: 400;
+        }
 
         .highlight {
           color: $colPrimaryHover;
@@ -1758,6 +1775,16 @@
           transition: all .3s;
         }
 
+        .btn-wrap{
+          .btn{
+            position:unset;
+            background-color:transparent;
+            &:nth-child(2):after{
+              top:10px;
+            }
+          }
+        }
+
         &:hover .btn {
           opacity: 1;
         }
@@ -1936,7 +1963,7 @@
 
       &-2 {
         .character:first-child {
-          left: -35%;
+          left: -45%;
         }
 
         .character:last-child {
@@ -2072,6 +2099,7 @@
             position: absolute;
             left: 0;
             top: 0;
+            opacity: .5;
           }
         }
       }

@@ -104,8 +104,8 @@
                 :label="v"
               ></el-option>
             </el-select>
-            <input v-model="login.hp2" class="input" type="text" required />
-            <input v-model="login.hp3" class="input" type="text" required />
+            <input v-model="login.hp2" class="input sm mr" type="text" required />
+            <input v-model="login.hp3" class="input sm" type="text" required />
             <!-- <button type="button" class="button btn-l-grey2">인증하기</button> -->
           </div>
           <!-- <div class="login-input">

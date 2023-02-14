@@ -111,16 +111,18 @@
               class="thumbnail-list--item background"
             >
               <!-- <img :src="onLoadAssetsImageSr(v.path)" alt="" /> -->
-              {{ v.gas_name }}
-              <div class="btn-wrap">
-                <button type="button" class="btn">삭제하기</button>
-                <button
-                  type="button"
-                  class="btn"
-                  @click="onClickSrPlay(v.path)"
-                >
-                  미리듣기
-                </button>
+              <div class="sound">
+                <span class="name">{{ v.gas_name }}</span>
+                <div class="btn-wrap">
+                  <button type="button" class="btn">삭제하기</button>
+                  <button
+                    type="button"
+                    class="btn"
+                    @click="onClickSrPlay(v.path)"
+                  >
+                    미리듣기
+                  </button>
+                </div>
               </div>
             </li>
           </ul>
