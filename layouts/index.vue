@@ -36,10 +36,12 @@
         </div>
         <div v-if="!isLogin" class="right">
           <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link>
-          <nuxt-link to="" class="btn btn-primary">회원가입</nuxt-link>
+          <nuxt-link to="/join" class="btn btn-primary">회원가입</nuxt-link>
         </div>
         <div v-if="isLogin" class="right">
-          <!-- <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link> -->
+          <a href="#_self" class="btn btn-login" @click.prevent="onClickLogout"
+            >로그아웃</a
+          >
           <nuxt-link
             target="_blank"
             to="/project-manager"
@@ -83,6 +85,7 @@
 
 <script>
 // MUTATIONS_LOGIN
+import { mapState } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
   name: 'IndexLayout',
@@ -92,12 +95,31 @@ export default {
       isLogin: '',
     }
   },
+  computed: {
+    ...mapState(['LOGIN']),
+  },
+  watch: {
+    LOGIN: {
+      handler(value) {
+        console.log(value.result)
+        if (value.result === 'TRUE') {
+          this.isLogin = value.login
+        }
+      },
+    },
+  },
   mounted() {
     this.isLogin = kooLogin('user_idx')
   },
   methods: {
     onMenuActive() {
       this.isMenuActive = !this.isMenuActive
+    },
+    onClickLogout() {
+      this.$cookies.set('user_name', '', 0)
+      this.$cookies.set('user_idx', '', 0)
+      this.isLogin = ''
+      this.$router.push('/sign-in')
     },
   },
 }

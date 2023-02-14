@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
 
 import ASEETS_STORE from "./modules/assetsStore.js"
+import JOIN_STORE from "./modules/joinStore.js"
 
 Vue.use(Vuex)
 // const apiUrl = {
@@ -14,6 +15,8 @@ Vue.use(Vuex)
 const createStore = () => {
     return new Store({
         state: {
+            JOIN_ID: null,
+            JOIN_NAME: null,
             IN_APP_GAME: [{}],
             API_KEY: 'ZFR4NUR3WnhyUVdBb0ExZDdMUGNDMWY3T25hV0pOWXhwQk0xZCtvV1E9',
             LOADING: true,
@@ -659,6 +662,15 @@ const createStore = () => {
             },
             MUTATIONS_CUT_TYPE(state, payload) {
                 state.cutType = payload
+            },
+            JOIN_MUTATIONS_AXIOS_INIT(state, payLoad) {
+                state.JOIN_ID = null
+            },
+            JOIN_MUTATIONS_AXIOS_GET(state, payLoad) {
+                state.JOIN_ID = payLoad
+            },
+            JOIN_MUTATIONS_AXIOS_GET_NAME(state, payLoad) {
+                state.JOIN_NAME = payLoad
             }
 
         },
@@ -833,13 +845,36 @@ const createStore = () => {
                         console.error('ACTIONS_TEACHER_FALSE', res)
                     })
             },
+            JOIN_ACTION_AXIOS_GET({ commit }, params) {
+                console.log('ACTION_AXIOS_GET', params, process.env.VUE_APP_API)
+                axios
+                    .get(process.env.VUE_APP_API, { params })
+                    .then((res) => {
+                        console.log(res)
+                        if (params.type === 'idChk') {
+                            commit('JOIN_MUTATIONS_AXIOS_GET', res.data)
+                            return
+                        }
+                        if (params.type === 'nameChk') {
+                            commit('JOIN_MUTATIONS_AXIOS_GET_NAME', res.data)
+                            return
+                        }
+                        if (params.type === 'join') {
+                            return alert('로그인 후 이용 가능합니다.')
+                        }
+                    })
+                    .catch((res) => {
+                        console.error('ACTIONS_TEACHER_FALSE', res)
+                    })
+            },
 
         },
         modules: {
             foo: {
-                // namespaced: true,
+                namespaced: true,
                 modules: {
                     assetsStore: ASEETS_STORE,
+                    joinStore: JOIN_STORE
                 },
             },
         },

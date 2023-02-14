@@ -48,7 +48,7 @@
               <span class="checkbox check"></span>
               <span class="text">아이디 기억하기</span>
             </label>
-            <nuxt-link to="" class="join">회원가입</nuxt-link>
+            <nuxt-link to="/join" class="join">회원가입</nuxt-link>
           </div>
           <button class="login-button" @click.prevent="onSubmit">로그인</button>
         </form>
@@ -113,6 +113,7 @@ export default {
       frm.append('user_pw', this.login.pw)
       frm.append('apiKey', process.env.API_KEY)
       this.ACTION_AXIOS_LOGIN(frm)
+      this.$router.push('/')
     },
   },
 }

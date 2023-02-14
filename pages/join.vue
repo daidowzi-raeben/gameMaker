@@ -3,7 +3,7 @@
     <div class="login type-join">
       <div class="login-tit">JOIN MAKER KOO</div>
       <div class="login-wrap">
-        <form @submit.prevent="onSubmit">
+        <form autocomplete="off" @submit.prevent="onSubmit">
           <div class="login-input">
             <label class="label">아이디(이메일)</label>
             <input
@@ -11,70 +11,113 @@
               class="input"
               type="text"
               required
+              :readonly="JOIN_ID === 'SUCCESS' ? true : false"
+              @input="onInputId"
             />
-            <button type="button" class="button btn-l-grey2">중복확인</button>
+            <button
+              type="button"
+              class="button btn-l-grey2"
+              @click="onClickIdChk"
+            >
+              중복확인
+            </button>
           </div>
-          <div class="input-guide blue">사용가능한 아이디입니다</div>
+          <div v-if="JOIN_ID !== 'SUCCESS'" class="input-guide">
+            중복확인 버튼을 클릭해 주세요
+          </div>
+          <div v-else class="input-guide blue">사용가능한 아이디입니다</div>
           <div class="login-input">
             <label class="label">비밀번호</label>
             <input
+              v-model="login.pw"
               class="input"
               type="password"
+              autocomplete="off"
               required
             />
           </div>
           <div class="login-input">
             <label class="label">비밀번호 확인</label>
             <input
+              v-model="login.pw2"
               class="input"
               type="password"
+              autocomplete="off"
               required
             />
           </div>
-          <div class="input-guide">비밀번호가 다릅니다</div>
+          <div
+            v-if="login.pw !== login.pw || !login.pw || !login.pw2"
+            class="input-guide"
+          >
+            비밀번호가 다릅니다
+          </div>
+          <div v-else class="input-guide blue">비밀번호가 입력되었습니다.</div>
           <div class="login-input">
             <label class="label">닉네임</label>
             <input
+              v-model="login.name"
               class="input"
               type="text"
               required
+              :readonly="JOIN_NAME === 'SUCCESS' ? true : false"
             />
-            <button type="button" class="button btn-l-grey2">중복확인</button>
+            <button
+              type="button"
+              class="button btn-l-grey2"
+              @click="onClickNameChk"
+            >
+              중복확인
+            </button>
           </div>
           <div class="login-input">
             <label class="label">생년월일</label>
-            <el-select class="select">
-              <el-option></el-option>
+            <el-select v-model="login.y" class="select">
+              <el-option v-for="item in 80" :key="item" :value="item + 1900">{{
+                item + 1900
+              }}</el-option>
             </el-select>
-            <el-select class="select sm">
-              <el-option></el-option>
+            <el-select v-model="login.m" class="select sm">
+              <el-option
+                v-for="item in 12"
+                :key="item"
+                :value="item"
+                :label="String(item).padStart(2, '0')"
+              ></el-option>
             </el-select>
-            <el-select class="select sm">
-              <el-option></el-option>
+            <el-select v-model="login.d" class="select sm">
+              <el-option
+                v-for="item in 31"
+                :key="item"
+                :value="item"
+                :label="String(item).padStart(2, '0')"
+              ></el-option>
             </el-select>
           </div>
           <div class="login-input">
             <label class="label">휴대폰번호</label>
-            <el-select class="select">
-              <el-option></el-option>
+            <el-select v-model="login.hp1" class="select">
+              <el-option
+                v-for="(v, i) in hp"
+                :key="i"
+                :value="v"
+                :label="v"
+              ></el-option>
             </el-select>
-            <input
-              class="input"
-              type="text"
-              required
-            />
-            <button type="button" class="button btn-l-grey2">인증하기</button>
+            <input v-model="login.hp2" class="input" type="text" required />
+            <input v-model="login.hp3" class="input" type="text" required />
+            <!-- <button type="button" class="button btn-l-grey2">인증하기</button> -->
           </div>
-          <div class="login-input">
+          <!-- <div class="login-input">
             <label class="label">인증번호</label>
-            <input
-              class="input"
-              type="text"
-              required
-            />
-            <button type="button" class="button btn-l-grey2">인증번호 확인</button>
-          </div>
-          <button class="login-button" @click.prevent="onSubmit">회원가입</button>
+            <input class="input" type="text" required />
+            <button type="button" class="button btn-l-grey2">
+              인증번호 확인
+            </button>
+          </div> -->
+          <button class="login-button" @click.prevent="onSubmit">
+            회원가입
+          </button>
         </form>
       </div>
     </div>
@@ -83,60 +126,55 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
-import { kooLogin } from '~/config/util'
+
 export default {
   layout: 'index',
   data() {
     return {
-      login: {
-        id: '',
-        pw: '',
-      },
+      login: {},
       stateLogin: [],
+      joinParams: {},
+      hp: ['010', '011', '017', '018', '019', '016'],
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING']),
+    ...mapState(['LOGIN', 'LOADING', 'JOIN_ID', 'JOIN_NAME']),
   },
-  watch: {
-    LOGIN: {
-      handler(value) {
-        console.log(value)
-        console.log('SUCCESS')
-        // 로그인 성공 시 페이지 이동
-        if (value.user_idx) {
-          // this.$router.push('/project-manager')
-        }
-      },
-      immediate: true,
-    },
-  },
+  watch: {},
   mounted() {
-    this.stateLogin = [
-      ...this.stateLogin,
-      {
-        user_idx: kooLogin('user_idx'),
-        user_name: kooLogin('user_name'),
-      },
-    ]
-    if (kooLogin('user_idx') && kooLogin('user_name'))
-      this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
+    // if (kooLogin('user_idx') && kooLogin('user_name'))
+    // this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
   },
   methods: {
     // ------------------------ INIT
-    ...mapActions(['ACTION_AXIOS_LOGIN']),
-    ...mapMutations(['MUTATIONS_LOGIN_CHECK']),
+    ...mapActions(['ACTION_AXIOS_LOGIN', 'JOIN_ACTION_AXIOS_GET']),
+    ...mapMutations(['MUTATIONS_LOGIN_CHECK', 'JOIN_MUTATIONS_AXIOS_INIT']),
 
     onSubmit() {
-      if (!this.login.id && !this.login.pw)
-        return alert('아이디 및 패스워드를 입력하세요')
-
-      const frm = new FormData()
-      frm.append('type', 'login')
-      frm.append('user_id', this.login.id)
-      frm.append('user_pw', this.login.pw)
-      frm.append('apiKey', process.env.API_KEY)
-      this.ACTION_AXIOS_LOGIN(frm)
+      this.login.apiKey = process.env.API_KEY
+      this.login.type = 'join'
+      this.JOIN_ACTION_AXIOS_GET(this.login)
+      this.$router.push('/sign-in')
+    },
+    onClickIdChk() {
+      const regex =
+        /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
+      if (regex.test(this.login.id) === false) {
+        return alert('이메일 형식이 맞지 않습니다')
+      }
+      this.joinParams.apiKey = process.env.API_KEY
+      this.joinParams.id = this.login.id
+      this.joinParams.type = 'idChk'
+      this.JOIN_ACTION_AXIOS_GET(this.joinParams)
+    },
+    onInputId() {
+      this.JOIN_MUTATIONS_AXIOS_INIT()
+    },
+    onClickNameChk() {
+      this.joinParams.apiKey = process.env.API_KEY
+      this.joinParams.name = this.login.name
+      this.joinParams.type = 'nameChk'
+      this.JOIN_ACTION_AXIOS_GET(this.joinParams)
     },
   },
 }
