@@ -8,6 +8,17 @@
       시나리오 <span class="highlight"></span> 챕터
       <span class="highlight"></span> 컷
       <span class="highlight">{{ CUT_LIST.jsonData.length - CUT_CODE }}</span>
+      <button
+        v-if="CUT_CODE !== 0"
+        type="button"
+        class="button btn-pink delete-btn"
+        @click="onClickCutDelete(CUT_CODE)"
+      >
+        삭제 {{ CUT_CODE }}
+      </button>
+      <span v-if="CUT_CODE === 0">
+        바로 수정된 컷과 첫 컷은 삭제할 수 없어요!
+      </span>
     </div>
     <div class="column-2">
       <div v-if="PREVIEW" class="preview">
@@ -336,6 +347,7 @@ export default {
     return {
       sceneData: [],
       params: {},
+      paramsDelete: {},
     }
   },
   computed: {
@@ -351,6 +363,7 @@ export default {
       'CONTENT_CODE',
       'PREVIEW_PROFILE',
       'PREVIEW_INTRO',
+      'PROJECT_ID',
     ]),
   },
   watch: {
@@ -422,6 +435,16 @@ export default {
     },
     onLoadAssetsImage(v, f) {
       return `${process.env.VUE_APP_IMAGE}/${f}/${v}`
+    },
+    onClickCutDelete(v) {
+      this.paramsDelete.type = 'cutDelete'
+      this.paramsDelete.idx = this.CUT_LIST.idx[this.CUT_CODE]
+      this.paramsDelete.secretKey = this.PROJECT_ID
+      this.paramsDelete.user_idx = kooLogin('user_idx')
+      this.paramsDelete.apiKey = process.env.API_KEY
+      this.paramsDelete.s_code = this.SCENE_CODE
+      console.log(this.paramsDelete)
+      this.ACTION_AXIOS_GET(this.paramsDelete)
     },
   },
 }

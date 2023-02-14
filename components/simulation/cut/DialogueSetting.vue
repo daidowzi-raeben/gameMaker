@@ -1217,6 +1217,7 @@ export default {
       this.rowIdx.splice(this.CUT_CODE, 0, '@@')
       console.log(this.CUT_CODE, this.rowIdx)
       this.params.type = 'cutInsert'
+      this.params.add = 'cutInsertAdd'
 
       this.params.idxRow = JSON.stringify(this.rowIdx)
       this.params.secretKey = this.PROJECT_ID
@@ -1293,6 +1294,7 @@ export default {
       this.update()
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)
+      this.MUTATIONS_CUT_LIST_FIRST()
       // this.MUTATIONS_CHAPTER_DEATILE_INIT()
       this.cutListShow = true
     },

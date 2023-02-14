@@ -551,6 +551,16 @@ const createStore = () => {
                 state.PREVIEW.data.answer = payload
             },
             // 컷 리스트
+            MUTATIONS_CUT_LIST_GET_DATA_UPDATE(state, payload) {
+                console.log('MUTATIONS_CUT_LIST_GET_DATA_UPDATE', payload)
+                state.CUT_LIST = payload;
+                if (state.CUT_LIST.jsonData) {
+                    state.CONTENT_CODE = 5
+                } else {
+                    state.CONTENT_CODE = 1
+                }
+                // state.CUT_CODE = 0
+            },
             MUTATIONS_CUT_LIST_GET_DATA(state, payload) {
                 console.log('MUTATIONS_CUT_LIST_GET_DATA', payload)
                 state.CUT_LIST = payload;
@@ -578,6 +588,7 @@ const createStore = () => {
                     state.PREVIEW.data.answer = state.CUT_LIST.jsonData[0].answer
                     state.PREVIEW.data.subjectiveQuestion = state.CUT_LIST.jsonData[0].subjectiveQuestion
                     state.SAVE_DATETIME = state.CUT_LIST.datetime_modify
+                    state.CUT_CODE = 0
                 } else {
                     state.PREVIEW.img.bg = ''
                     state.PREVIEW.img.cr = ''
@@ -620,7 +631,7 @@ const createStore = () => {
                         },
                     ]
                 }
-                state.CUT_CODE = 0
+
             },
             // 컷 리스트 변환
             MUTATIONS_CUT_LIST_GET_DATA_DETAIL(state, payload) {
@@ -723,9 +734,24 @@ const createStore = () => {
                             return;
                         }
                         if (params.type === 'cutInsert') {
+                            if (params.mode === 'update') {
+                                commit('MUTATIONS_CUT_LIST_GET_DATA_UPDATE', res.data)
+                                return;
+                            }
+                            if (params.add === 'cutInsertAdd') {
+                                console.log('=====update=====')
+                                commit('MUTATIONS_CUT_LIST_GET_DATA_UPDATE', res.data)
+                                return;
+                            }
+
                             console.log('MUTATIONS_CUT_LIST_GET_DATA', res.data)
                             commit('MUTATIONS_CUT_LIST_GET_DATA', res.data)
+
                             return;
+                        }
+                        if (params.type === 'cutDelete') {
+                            console.log('MUTATIONS_CUT_LIST_GET_DATA_DELETE', res.data)
+                            commit('MUTATIONS_CUT_LIST_GET_DATA_UPDATE', res.data)
                         }
                         if (params.type === 'cutList') {
                             console.log('MUTATIONS_CUT_LIST_GET_DATA', res.data)
