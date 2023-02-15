@@ -76,7 +76,7 @@
                 성은이는 만극하지 않아요<br />
                 한결
                 <!-- <textarea readonly style="width: 100%">
-                  
+
 
                 </textarea> -->
               </dd>
@@ -244,11 +244,18 @@
                   >
                     불러오기
                   </button>
-                  <button
+                  <!-- <button
                     type="button"
                     class="btn"
                     :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
                     @click="onclickDisplayShow('displayProfile')"
+                  >
+                    등장인물
+                  </button> -->
+                  <button
+                    type="button"
+                    class="btn"
+                    :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
                   >
                     등장인물
                   </button>
