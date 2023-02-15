@@ -1,6 +1,12 @@
 <template>
   <div>
-    <div class="header">
+    <div class="commingSoon">
+      <img src="~/static/images/soon.png" />
+    </div>
+    <div v-if="false">
+      <Nuxt />
+    </div>
+    <!-- <div class="header">
       <div class="header-wrap">
         <button
           type="button"
@@ -79,7 +85,7 @@
           <button type="button" class="btn sns-3"></button>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -125,4 +131,21 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.commingSoon {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #66c7bb;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  > img {
+    height: 215px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+}
+</style>

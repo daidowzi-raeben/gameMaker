@@ -165,7 +165,7 @@ const createStore = () => {
             // 인물코드
             CHAPTER_CODE: null,
             // 컷코드
-            CUT_CODE: null,
+            CUT_CODE: 0,
             // 컨텐츠
             CONTENT_CODE: 1,
             MAKER_GNB: 6,
@@ -398,6 +398,10 @@ const createStore = () => {
             MUTATIONS_CUT_GET_DATA(state, payload) {
                 state.CUT_DATA = payload;
             },
+            // 시나리오 연결
+            MUTATIONS_CUT_PUSH_DATA(state, payload) {
+                state.PREVIEW.data.connect = payload;
+            },
 
             //  ------------------- 프리뷰 데이터 바인딩
             // 통신용 데이터 변환
@@ -590,9 +594,12 @@ const createStore = () => {
                     state.PREVIEW.data.questionsTimer = state.CUT_LIST.jsonData[0].questionsTimer
                     state.PREVIEW.data.answer = state.CUT_LIST.jsonData[0].answer
                     state.PREVIEW.data.subjectiveQuestion = state.CUT_LIST.jsonData[0].subjectiveQuestion
+                    state.PREVIEW.data.connect = state.CUT_LIST.jsonData[0].connect
+                    state.PREVIEW.data.questionsPoint = state.CUT_LIST.jsonData[0].questionsPoint
                     state.SAVE_DATETIME = state.CUT_LIST.datetime_modify
                     state.CUT_CODE = 0
                 } else {
+                    state.PREVIEW.img.connect = ''
                     state.PREVIEW.img.bg = ''
                     state.PREVIEW.img.cr = ''
                     state.PREVIEW.img.cr2 = ''
@@ -657,6 +664,8 @@ const createStore = () => {
                     state.PREVIEW.data.questions.text_1 = state.CUT_LIST.jsonData[payload].questions.text_1
                     state.PREVIEW.data.questions.text_2 = state.CUT_LIST.jsonData[payload].questions.text_2
                     state.PREVIEW.data.questions.text_3 = state.CUT_LIST.jsonData[payload].questions.text_3
+                    state.PREVIEW.data.connect = state.CUT_LIST.jsonData[payload].connect
+                    state.PREVIEW.data.questionsPoint = state.CUT_LIST.jsonData[payload].questionsPoint
                     state.cutType = state.CUT_LIST.jsonData[payload].cutType
                 }
             },

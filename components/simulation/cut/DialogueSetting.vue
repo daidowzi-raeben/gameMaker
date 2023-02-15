@@ -273,13 +273,15 @@
             <select
               v-if="CUT_LIST && CUT_LIST.jsonData"
               class="input-select"
-              :value="CUT_LIST.jsonData[CUT_CODE].connect"
+              :value="PREVIEW.data.connect"
+              @change="onChangeConnect"
             >
               <option :value="''">선택안함</option>
               <option
                 v-for="(v, i) in CUT_LIST.jsonData"
                 :key="CUT_LIST.idx[i]"
                 :value="CUT_LIST.idx[i]"
+                :disabled="CUT_CODE === i ? true : false"
               >
                 {{ CUT_LIST.jsonData.length - i }}
               </option>
@@ -345,6 +347,7 @@
                   @click="onClickTabActive(itemQuestion, $event)"
                 >
                   시나리오 연결
+                  <!-- {{PREVIEW.data.questionsPoint[itemQuestion - 1].ne}} -->
                 </button>
               </div>
               <div :id="`pointTab${itemQuestion}`" class="set point-set active">
@@ -405,6 +408,7 @@
                     v-for="(v, i) in CUT_LIST.jsonData"
                     :key="CUT_LIST.idx[i]"
                     :value="CUT_LIST.idx[i]"
+                    :disabled="CUT_CODE === i ? true : false"
                   >
                     {{ CUT_LIST.jsonData.length - i }}
                   </option>
@@ -990,7 +994,13 @@ export default {
   data() {
     return {
       params: {},
-      paramsPreview: {},
+      paramsPreview: {
+        questions: {
+          text_1: '',
+          text_2: '',
+          text_3: '',
+        },
+      },
       paramsList: {},
       cutIndex: 0,
       eventCut: 3,
@@ -1148,6 +1158,7 @@ export default {
       'MUTATIONS_LOADING_INIT',
       'MUTATIONS_PREVIEW_END_TYPE',
       'MUTATIONS_CONTENT_CODE',
+      'MUTATIONS_CUT_PUSH_DATA',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
@@ -1472,6 +1483,9 @@ export default {
           '멋진 시나리오를 만들어 보아요!'
         ),
       })
+    },
+    onChangeConnect({ target }) {
+      this.MUTATIONS_CUT_PUSH_DATA(target.value)
     },
   },
 }

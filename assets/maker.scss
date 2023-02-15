@@ -39,11 +39,11 @@
           color: #fff;
           margin-top: 15px;
           font-size: 16px;
-          line-height:1.5;
+          line-height: 1.5;
         }
 
         .title {
-          margin-top: 75px;
+          margin-top: 50px;
           color: #fff;
           font-size: 25px;
         }
@@ -615,20 +615,22 @@
 
       &-tit {
         margin-left: -75px;
-        position:relative;
-        .delete-btn{
-          right:calc(50% - 30px);
-          top:-30px;
+        position: relative;
+
+        .delete-btn {
+          right: calc(50% - 30px);
+          top: -30px;
         }
-        .guide{
-          position:absolute;
-          left:50%;
-          top:-25px;
-          width:250px;
+
+        .guide {
+          position: absolute;
+          left: 50%;
+          top: -25px;
+          width: 250px;
           transform: translateX(-50%);
-          font-size:1.2rem;
+          font-size: 1.2rem;
           font-style: italic;
-          color:#999;
+          color: #999;
           font-weight: 400;
         }
 
@@ -1775,12 +1777,13 @@
           transition: all .3s;
         }
 
-        .btn-wrap{
-          .btn{
-            position:unset;
-            background-color:transparent;
-            &:nth-child(2):after{
-              top:10px;
+        .btn-wrap {
+          .btn {
+            position: unset;
+            background-color: transparent;
+
+            &:nth-child(2):after {
+              top: 10px;
             }
           }
         }
