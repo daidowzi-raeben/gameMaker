@@ -18,10 +18,13 @@
               코딩없이 누구나 클릭만으로 만드는<br />
               나만의 스토리형 게임
             </div>
-            <div class="title">프로젝트명이 노출됩니다 스퀘어로</div>
+            <div class="title">
+              메이커 쿠로 만든 우리의 첫 게임, <br />
+              메이커 쿠를 소개합니다!
+            </div>
             <dl class="list">
               <dt>제작자</dt>
-              <dd>닉네임</dd>
+              <dd>프로젝트 쿠 부선장</dd>
             </dl>
             <dl class="list">
               <dt>공유하기</dt>
@@ -48,17 +51,53 @@
             </dl>
             <dl class="list">
               <dt>도움주신분</dt>
-              <dd>
-                <textarea readonly>sad</textarea>
+              <dd style="line-height: 17px">
+                예원예술대학교 객원교수 장영섭<br />
+                푸슬<br />
+                팡<br />
+                유령선<br />
+                노넴<br />
+                물개말이<br />
+                킨<br />
+                북극산꽁치<br />
+                BUT<br />
+                예제<br />
+                신아<br />
+                말랑<br />
+                쟈몽<br />
+                Bbreaad<br />
+                김자반<br />
+                몰라<br />
+                진진자라<br />
+                이자기<br />
+                꽃깔콘<br />
+                모차<br />
+                웅녀<br />
+                성은이는 만극하지 않아요<br />
+                한결
+                <!-- <textarea readonly style="width: 100%">
+                  
+
+                </textarea> -->
               </dd>
             </dl>
             <div class="footer-preview">
               <ul class="footer-preview-social">
-                <li></li>
-                <li></li>
-                <li></li>
+                <li
+                  onclick="window.open('https://instagram.com/project_koo')"
+                ></li>
+                <li
+                  onclick="window.open('https://instagram.com/project_koo?igshid=YmMyMTA2M2Y=')"
+                ></li>
+                <li
+                  onclick="window.open('http://project-koo.tistory.com')"
+                ></li>
               </ul>
-              <button type="button" class="footer-preview-blank">
+              <button
+                type="button"
+                class="footer-preview-blank"
+                onclick="alert('곧 오픈합니다!')"
+              >
                 프로젝트 쿠 바로가기
               </button>
               <div class="footer-preview-copyright">
@@ -225,6 +264,7 @@
                   {{ IN_APP_GAME.intro.data.copyright }}
                 </div>
               </div>
+
               <!-- 게임화면 -->
               <div
                 v-show="displayPreview"
@@ -232,6 +272,23 @@
                 class="preview-con preview-img"
                 @click="nextGame"
               >
+                <!-- 로딩화면 -->
+                <div
+                  ref="loadingChater"
+                  style="
+                    background: rgb(0, 0, 0);
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 9;
+                    text-align: center;
+                  "
+                >
+                  <br /><br /><br /><br />
+                  <p id="ST" style="color: #fff"></p>
+                  <p id="CT" style="color: #fff"></p>
+                </div>
+
                 <img
                   v-if="inApp.bg"
                   :src="onLoadAssetsImage(inApp.bg, 'bg')"
@@ -397,7 +454,7 @@
                 class="preview-mockup"
               />
             </div>
-            <div class="ad"></div>
+            <!-- <div class="ad"></div> -->
           </div>
         </div>
       </div>
@@ -558,14 +615,33 @@ export default {
         ],
       })
     },
-
+    // http://localhost:9001/preview?projectKey=45a53c85a1ed65946772808cec29efc597504ba5a59747e3825813b0f7e9e6d9
     nextGame(e) {
       if (this.isEnding === false) {
         this.t++
         // console.log(this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].length)
         // 컷 구분
 
-        console.log(this.s, this.c, this.t)
+        console.log(this.s, this.c, this.t, `CUT${this.inApp.connect}`)
+        for (
+          let b = 0;
+          b <
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn.length;
+          b++
+        ) {
+          if (
+            this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[
+              b
+            ] === `cut${this.inApp.connect}`
+          ) {
+            console.log('========멈춰==========')
+            this.t = b
+          }
+          console.log(
+            this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[b]
+          )
+        }
+
         if (
           this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn
             .length === this.t
@@ -660,6 +736,24 @@ export default {
         this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
       if (e && e !== null) {
         console.log('객관식')
+        for (
+          let b = 0;
+          b <
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn.length;
+          b++
+        ) {
+          if (
+            this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[
+              b
+            ] === `cut${e}`
+          ) {
+            console.log('========멈춰==========')
+            this.t = b
+          }
+          console.log(
+            this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[b]
+          )
+        }
         this.inApp =
           this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].cuts[
             'cut' + e
@@ -714,6 +808,20 @@ export default {
     onclickDisplayShow(name) {
       this.displayPreview = false
       console.log(this.displayPreview)
+      // 챕터 로딩
+      if (this.t === 0) {
+        console.log(
+          this.IN_APP_GAME.scenarioList[this.s].scenarioTitle,
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
+        )
+        document.getElementById('ST').innerText =
+          this.IN_APP_GAME.scenarioList[this.s].scenarioTitle
+        document.getElementById('CT').innerText =
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
+        setTimeout(() => {
+          this.$refs.loadingChater.style = 'display:none'
+        }, 2000)
+      }
       switch (name) {
         case 'displayIntro':
           this.$refs.displayGame.style = 'display:none'
