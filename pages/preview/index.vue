@@ -565,6 +565,12 @@ export default {
     this.paramsList.mode = 'web'
     this.ACTION_AXIOS_GET(this.paramsList)
     // http://localhost:9001/preview?projectKey=688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6
+    const vh = window.innerHeight * 0.01
+
+    console.log(
+      'innerHeight()',
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    )
   },
   methods: {
     ...mapMutations(['MUTATIONS_PROJECT']),
@@ -885,6 +891,10 @@ export default {
     },
     onLoadAssetsImage(v, f) {
       return `${process.env.VUE_APP_IMAGE}/${f}/${v}`
+    },
+    innerHeight() {
+      const vh = window.innerHeight * 0.01
+      return document.documentElement.style.setProperty('--vh', `${vh}px`)
     },
   },
 }
