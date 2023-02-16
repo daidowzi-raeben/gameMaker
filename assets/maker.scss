@@ -1913,7 +1913,9 @@
       }
 
       #preview .app-device__warp {
+        // height: 100vh;
         height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
         width: 100%;
         top: 0;
         margin-left: 0;
@@ -1965,8 +1967,6 @@
     z-index: 1;
     width: calc(100% - 36px);
     height: calc(100% - 30px);
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
     border-radius: 40px;
     overflow: hidden;
 
