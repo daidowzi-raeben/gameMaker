@@ -1230,7 +1230,7 @@ export default {
       console.log(this.CUT_CODE, this.rowIdx)
       this.params.type = 'cutInsert'
       this.params.add = 'cutInsertAdd'
-
+      this.params.idx = null
       this.params.idxRow = JSON.stringify(this.rowIdx)
       this.params.secretKey = this.PROJECT_ID
       this.params.user_idx = kooLogin('user_idx')
@@ -1266,6 +1266,7 @@ export default {
       } else {
         this.params.idxRow = this.CUT_LIST.idx.unshift('@@')
       }
+      this.params.idx = null
       this.params.idxRow = JSON.stringify(this.CUT_LIST.idx)
       this.params.secretKey = this.PROJECT_ID
       this.params.user_idx = kooLogin('user_idx')

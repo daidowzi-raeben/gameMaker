@@ -430,6 +430,12 @@ export default {
       if (this.UISetting.shadowColor) {
         style += `box-shadow: ${this.UISetting.x}px ${this.UISetting.y}px 0 ${this.UISetting.shadowColor};`
       }
+      // style += `box-shadow:
+      // ${this.UISetting.round ? this.UISetting.round : 0}
+      // ${this.UISetting.round ? this.UISetting.round : 0}
+      // ${this.UISetting.round ? this.UISetting.round : 0}
+      // ${this.UISetting.round ? this.UISetting.round : 0}
+      //  #ff0, 10px 10px 10px 10px #f00`
       console.log(style)
       return style
     },

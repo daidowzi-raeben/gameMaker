@@ -6,7 +6,7 @@
         :key="'cutList' + i"
         class="cut-list--item"
         :class="{ active: i === 0 }"
-        @click="onClickCutPush(i)"
+        @click="onClickCutPush(i, v.code)"
       >
         <div class="thumbnail">
           <div class="thumbnail-wrap">
@@ -219,6 +219,7 @@ export default {
       'MUTATIONS_LOADING_INIT',
       'MUTATIONS_PREVIEW_END_TYPE',
       'MUTATIONS_CONTENT_CODE',
+      'MUTATIONS_SCENE_CODE',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
@@ -386,7 +387,7 @@ export default {
       // this.MUTATIONS_CHAPTER_DEATILE_INIT()
       this.cutListShow = true
     },
-    onClickCutPush(e) {
+    onClickCutPush(e, code) {
       console.log(e)
       const liList = document.getElementById('activeList').childNodes
       for (let i = 0; i < liList.length; i++) {
@@ -395,6 +396,7 @@ export default {
       liList[e].classList.add('active')
       this.MUTATIONS_CONTENT_CODE(5)
       this.MUTATIONS_CUT_LIST_GET_DATA_DETAIL(e)
+      this.MUTATIONS_SCENE_CODE(code)
     },
     onWatchTextRowLimit(e) {},
     onChageQuestionsTimer({ target }) {
