@@ -18,7 +18,7 @@
               코딩없이 누구나 클릭만으로 만드는<br />
               나만의 스토리형 게임
             </div>
-            <div class="title">
+            <div class="title" style="line-height: 30px">
               메이커 쿠로 만든 우리의 첫 게임, <br />
               메이커 쿠를 소개합니다!
             </div>
@@ -51,30 +51,14 @@
             </dl>
             <dl class="list">
               <dt>도움주신분</dt>
-              <dd style="line-height: 17px">
+              <dd style="line-height: 20px">
                 예원예술대학교 객원교수 장영섭<br />
-                푸슬<br />
-                팡<br />
-                유령선<br />
-                노넴<br />
-                물개말이<br />
-                킨<br />
-                북극산꽁치<br />
-                BUT<br />
-                예제<br />
-                신아<br />
-                말랑<br />
-                쟈몽<br />
-                Bbreaad<br />
-                김자반<br />
-                몰라<br />
-                진진자라<br />
-                이자기<br />
-                꽃깔콘<br />
-                모차<br />
-                웅녀<br />
-                성은이는 만극하지 않아요<br />
-                한결
+                푸슬, 팡, 유령선, 노넴, 물개말이,<br />
+                킨, 북극산꽁치, BUT, 예제, 신아, <br />
+                말랑, 쟈몽, Bbreaad, 김자반,<br />
+                몰라, 진진자라, 이자기, 꽃깔콘, <br />
+                모차, 웅녀, 성은이는 만극하지<br />
+                않아요, 한결
                 <!-- <textarea readonly style="width: 100%">
                   
 
