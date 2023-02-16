@@ -37,25 +37,29 @@
             >
           </div>
           <div v-if="v.cutType === 1" class="text normal">
-            {{ v.text }}
+            {{ v.text ? v.text.replaceAll('||n', '\n') : '' }}
           </div>
           <div v-if="v.cutType === 2" class="text normal">
-            {{ v.narration }}
+            {{ v.narration ? v.narration.replaceAll('||n', '\n') : '' }}
           </div>
           <div v-if="v.cutType === 3 && v.questions.text_1" class="text answer">
-            {{ v.questions.text_1 }}
+            {{ v.questions ? v.questions.text_1.replaceAll('||n', '\n') : '' }}
           </div>
           <div v-if="v.cutType === 3 && v.questions.text_2" class="text answer">
-            {{ v.questions.text_2 }}
+            {{ v.questions ? v.questions.text_2.replaceAll('||n', '\n') : '' }}
           </div>
           <div v-if="v.cutType === 3 && v.questions.text_3" class="text answer">
-            {{ v.questions.text_3 }}
+            {{ v.questions ? v.questions.text_3.replaceAll('||n', '\n') : '' }}
           </div>
           <div v-if="v.cutType === 4" class="text question line2">
-            {{ v.subjectiveQuestion }}
+            {{
+              v.subjectiveQuestion
+                ? v.subjectiveQuestion.replaceAll('||n', '\n')
+                : ''
+            }}
           </div>
           <div v-if="v.cutType === 4" class="text answer">
-            {{ v.answer }}
+            {{ v.answer ? v.answer.replaceAll('||n', '\n') : '' }}
           </div>
         </div>
       </li>

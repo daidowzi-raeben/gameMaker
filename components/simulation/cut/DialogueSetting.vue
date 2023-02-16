@@ -934,7 +934,7 @@
                 <option>캐릭터 없음</option>
               </select>
               <input type="number" class="input-number" min="1" max="100" />
-              <span class="text">포인트</span>
+              <span class="text">정답 시 포인트</span>
               <select
                 class="input-select"
                 :value="PREVIEW.data.questionsPoint[1].pointType"
@@ -946,6 +946,7 @@
               </select>
             </div>
             <div id="scenarioTab4" class="set scenario-set">
+              정답 시
               <select
                 v-if="CUT_LIST && CUT_LIST.jsonData"
                 class="input-select"
