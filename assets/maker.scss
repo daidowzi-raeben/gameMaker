@@ -234,6 +234,9 @@
 
   .preview-img .character-2 .character:first-child {
     left: -45%;
+    @media (max-width: 800px) {
+      left: calc(100px - 30vh);
+    }
   }
 }
 
