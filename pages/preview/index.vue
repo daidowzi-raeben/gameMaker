@@ -343,7 +343,7 @@
                     {{
                       IN_APP_GAME.scenarioList[s].chapters[c].cuts[
                         IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t - 1]
-                      ].list.text
+                      ].list.text.replaceAll('||n', '\n')
                     }}
                   </p>
                   <p
