@@ -683,6 +683,7 @@ export default {
       }
     },
     onClickQuestions(e) {
+      this.isLoading = false
       // questionsText
       // this.gamePoint = [
       //   ...this.gamePoint,
@@ -737,6 +738,7 @@ export default {
         this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
       if (e && e !== null) {
         console.log('객관식')
+        // this.isLoading = true
         for (
           let b = 0;
           b <
@@ -779,6 +781,7 @@ export default {
         console.log('나레이션')
       }
       if (this.inApp.cutType === 3) {
+        this.isLoading = true
         console.log('객관식', e)
         return
       }
