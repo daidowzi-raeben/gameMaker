@@ -261,7 +261,7 @@
                 v-show="displayPreview"
                 ref="displayGame"
                 class="preview-con preview-img"
-                @click="nextGame"
+                @click="nextGame(isLoading)"
               >
                 <!-- 로딩화면 -->
                 <div
@@ -461,6 +461,7 @@ export default {
   name: 'PreviewIndex',
   data() {
     return {
+      isLoading: false,
       loading: true,
       game: [],
       s: 0,
@@ -614,6 +615,9 @@ export default {
     },
     // http://localhost:9001/preview?projectKey=45a53c85a1ed65946772808cec29efc597504ba5a59747e3825813b0f7e9e6d9
     nextGame(e) {
+      if (this.isLoading === true) {
+        return
+      }
       if (this.isEnding === false) {
         this.t++
         // console.log(this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].length)
@@ -815,8 +819,10 @@ export default {
           this.IN_APP_GAME.scenarioList[this.s].scenarioTitle
         document.getElementById('CT').innerText =
           this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
+        this.isLoading = true
         setTimeout(() => {
           this.$refs.loadingChater.style = 'display:none'
+          this.isLoading = false
         }, 2000)
       }
       switch (name) {
