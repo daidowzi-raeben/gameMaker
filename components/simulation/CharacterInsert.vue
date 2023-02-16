@@ -61,7 +61,7 @@
             class="input-text"
             placeholder="인물의 이름을 입력하세요"
             :value="
-              CHAPTER_DEATILE && CHAPTER_DEATILE_IDX ? CHAPTER_DEATILE.name : ''
+              CHAPTER_DEATILE || CHAPTER_DEATILE_IDX ? CHAPTER_DEATILE.name : ''
             "
             @input="onInputName"
           />
@@ -73,8 +73,10 @@
             placeholder="인물의 소개를 입력하세요"
             class="input-textarea"
             :value="
-              CHAPTER_DEATILE && CHAPTER_DEATILE_IDX
-                ? CHAPTER_DEATILE.profile.replaceAll('||n', '\n')
+              CHAPTER_DEATILE || CHAPTER_DEATILE_IDX
+                ? CHAPTER_DEATILE.profile
+                  ? CHAPTER_DEATILE.profile.replaceAll('||n', '\n')
+                  : CHAPTER_DEATILE.profile
                 : ''
             "
             @input="onInputProfile"
