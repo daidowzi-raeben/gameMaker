@@ -91,7 +91,7 @@
           </div>
         </div>
         <div class="app-device">
-          <div class="app-device__warp">
+          <div class="app-device__warp" :class="isSafari">
             <div class="preview">
               <!-- <div
         style="
@@ -264,10 +264,7 @@
                 @click="nextGame(isLoading)"
               >
                 <!-- 로딩화면 -->
-                <div
-                  ref="loadingChater"
-                  class="loding-chapter active"
-                >
+                <div ref="loadingChater" class="loding-chapter active">
                   <p id="ST" style="color: #fff"></p>
                   <p id="CT" style="color: #fff"></p>
                 </div>
@@ -456,6 +453,7 @@ export default {
       isLoading: false,
       loading: true,
       game: [],
+      isSafari: '',
       s: 0,
       c: 0,
       t: 0,
@@ -520,6 +518,7 @@ export default {
   computed: {
     ...mapState(['IN_APP_GAME', 'PROJECT_ID', 'IN_APP_GAME_START']),
   },
+
   watch: {
     IN_APP_GAME_START: {
       handler(value) {
@@ -550,6 +549,10 @@ export default {
   },
   mounted() {
     // console.log(appData)
+    navigator.userAgent.includes('iPhone OS 16') === true
+      ? (this.isSafari = 'safari')
+      : (this.isSafari = '')
+
     this.MUTATIONS_PROJECT(this.$route.query.projectKey)
     this.paramsList.type = 'develop'
     this.paramsList.secretKey = this.PROJECT_ID
@@ -558,12 +561,13 @@ export default {
     this.paramsList.mode = 'web'
     this.ACTION_AXIOS_GET(this.paramsList)
     // http://localhost:9001/preview?projectKey=688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6
-    const vh = window.innerHeight * 0.01
+    // const vh = window.innerHeight * 0.01
 
-    console.log(
-      'innerHeight()',
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
-    )
+    //
+    // console.log(
+    //   'innerHeight()',
+    //   document.documentElement.style.setProperty('--vh', `${vh}px`)
+    // )
   },
   methods: {
     ...mapMutations(['MUTATIONS_PROJECT']),
@@ -816,7 +820,8 @@ export default {
           this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
         this.isLoading = true
         setTimeout(() => {
-          this.$refs.loadingChater.style = 'display:none'
+          this.$refs.loadingChater.classList.remove('active')
+          // this.$refs.loadingChater.style = 'display:none'
           this.isLoading = false
         }, 2000)
       }
