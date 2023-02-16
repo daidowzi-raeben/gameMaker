@@ -266,16 +266,8 @@
                 <!-- 로딩화면 -->
                 <div
                   ref="loadingChater"
-                  style="
-                    background: rgb(0, 0, 0);
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    z-index: 9;
-                    text-align: center;
-                  "
+                  class="loding-chapter active"
                 >
-                  <br /><br /><br /><br />
                   <p id="ST" style="color: #fff"></p>
                   <p id="CT" style="color: #fff"></p>
                 </div>
