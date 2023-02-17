@@ -9,7 +9,7 @@ require('dotenv').config()
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   generate: {
-    fallback: true
+    fallback: true,
   },
   head: {
     titleTemplate: '%s - MAKER',
@@ -19,15 +19,26 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no' },
+      {
+        name: 'viewport',
+        content:
+          'width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no',
+      },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
-      { name: 'google-signin-client_id', content: '222131177892-51smeo64gg7v5lj0bjivi8uqhcni7pvt.apps.googleusercontent.com' },
+      {
+        name: 'google-signin-client_id',
+        content:
+          '222131177892-51smeo64gg7v5lj0bjivi8uqhcni7pvt.apps.googleusercontent.com',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    { src: 'https://apis.google.com/js/platform.js?onload=init' },
-    { src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8019581580650071', crossorigin: 'anonymous' },
-
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { src: 'https://apis.google.com/js/platform.js?onload=init' },
+      {
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8019581580650071',
+        crossorigin: 'anonymous',
+      },
     ],
   },
 
@@ -70,6 +81,12 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     '@nuxtjs/dotenv',
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'G-YFQ43JQZDQ',
+      },
+    ],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -80,7 +97,7 @@ export default {
     // 'nuxt-socket-io',
     'vue2-editor/nuxt',
     'cookie-universal-nuxt',
-    'nuxt-element-ui'
+    'nuxt-element-ui',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -119,7 +136,7 @@ export default {
   },
   server: { port: process.env.PORT, host: '0.0.0.0' },
   dir: {
-    layouts: 'layouts'
+    layouts: 'layouts',
   },
   ssr: true,
   // server: { port: process.env.PORT, host: '0.0.0.0' },

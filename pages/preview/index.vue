@@ -332,7 +332,17 @@
                     {{
                       IN_APP_GAME.scenarioList[s].chapters[c].cuts[
                         IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t - 1]
-                      ].list.text.replaceAll('||n', '\n')
+                      ].list.text
+                        ? IN_APP_GAME.scenarioList[s].chapters[c].cuts[
+                            IN_APP_GAME.scenarioList[s].chapters[c].initBtn[
+                              t - 1
+                            ]
+                          ].list.text.replaceAll('||n', '\n')
+                        : IN_APP_GAME.scenarioList[s].chapters[c].cuts[
+                            IN_APP_GAME.scenarioList[s].chapters[c].initBtn[
+                              t - 1
+                            ]
+                          ].list.narration.replaceAll('||n', '\n')
                     }}
                   </p>
                   <p
@@ -574,8 +584,8 @@ export default {
       document.documentElement.style.setProperty('--vh', `${vh}px`)
     }
 
-    setScreenSize();
-    window.addEventListener('resize', () => setScreenSize());
+    setScreenSize()
+    window.addEventListener('resize', () => setScreenSize())
   },
   methods: {
     ...mapMutations(['MUTATIONS_PROJECT']),
