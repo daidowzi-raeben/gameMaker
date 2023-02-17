@@ -579,25 +579,21 @@ export default {
     this.paramsList.mode = 'web'
     this.ACTION_AXIOS_GET(this.paramsList)
     // http://localhost:9001/preview?projectKey=688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6
-    // const vh = window.innerHeight * 0.01
 
-    //
-    // console.log(
-    //   'innerHeight()',
-    //   document.documentElement.style.setProperty('--vh', `${vh}px`)
-    // )
-    function setScreenSize() {
-      const vh = window.innerHeight * 0.01
-
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
-    }
-
-    setScreenSize()
-    window.addEventListener('resize', () => setScreenSize())
+    this.setScreenSize()
+    window.addEventListener('resize', () => this.setScreenSize())
+  },
+  unmounted() {
+    window.removeEventListener('resize', () => this.setScreenSize())
   },
   methods: {
     ...mapMutations(['MUTATIONS_PROJECT']),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
+    // 모바일 높이
+    setScreenSize(){
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    },
     // 공유하기
     shareTwitter() {
       const sendText = '코딩없이 만드는 나만의 스토리형 게임, 메이커 쿠' // 전달할 텍스트
