@@ -583,7 +583,7 @@ export default {
     this.setScreenSize()
     window.addEventListener('resize', () => this.setScreenSize())
   },
-  unmounted() {
+  destroyed() {
     window.removeEventListener('resize', () => this.setScreenSize())
   },
   methods: {
