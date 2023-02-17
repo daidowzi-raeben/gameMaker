@@ -26,6 +26,7 @@ export default {
       },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
+      { name: 'naver-site-verification', content: '783b2f08786d9c4cf3fa6b41af59f567816a7f6d' },
       {
         name: 'google-signin-client_id',
         content:
