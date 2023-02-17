@@ -141,11 +141,12 @@ export default {
   height: 100%;
   text-align: center;
   > img {
-    height: 215px;
+    width:500px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
+    max-width: 90%;
   }
 }
 </style>

@@ -2,7 +2,6 @@
 @import "variables.scss";
 
 // PREVIEW
-
 #preview {
   .app {
     height: 100vh;
@@ -1917,17 +1916,19 @@
 
       #preview .app>div {
         width: 100%;
+        height: -webkit-fill-available;
       }
 
-      #preview .app-device__warp {
-        // height: 100vh;
+      #preview .app-device__warp { //모바일이슈
         height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
+        transform:height .3s;
 
-        @media not all and (min-resolution:.001dpcm) {
-          @supports (-webkit-appearance:none) {
-            height: calc(var(--vh, 1vh) * 100);
-          }
-        }
+        // @media not all and (min-resolution:.001dpcm) {
+        //   @supports (-webkit-appearance:none) {
+        //     height: calc(var(--vh, 1vh) * 100);
+        //   }
+        // }
 
         width: 100%;
         top: 0;
