@@ -264,9 +264,17 @@
                 @click="nextGame(isLoading)"
               >
                 <!-- 로딩화면 -->
-                <div ref="loadingChater" class="loding-chapter active">
-                  <p id="ST" style="color: #fff"></p>
-                  <p id="CT" style="color: #fff"></p>
+                <div ref="loadingChater" class="loading-chapter active"> 
+                  <!-- <div class="bg" :class="IN_APP_GAME.intro.data.dim">
+                    <img
+                      :src="onLoadAssetsImage(IN_APP_GAME.intro.data.bg, 'bg')"
+                      alt="background"
+                    />
+                  </div> -->
+                  <div class="box" :style="IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.mainColor ? `background:${IN_APP_GAME.uiSet.mainColor};color:${IN_APP_GAME.uiSet.mainFontColor}`: ''">
+                    <p id="ST"></p>
+                    <p id="CT"></p>
+                  </div>
                 </div>
 
                 <img
