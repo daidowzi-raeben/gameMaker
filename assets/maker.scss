@@ -1993,6 +1993,9 @@
       top: unset;
       bottom: -25%;
       left: -12%;
+      @media (max-width: 800px) {
+        left: calc(50vw - 30vh);
+      }
       &-1,
       &-2 {
         width: 100%;
