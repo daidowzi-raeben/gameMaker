@@ -326,3 +326,15 @@ b {
 	color: inherit;
 	font-family: inherit;
 }
+
+a{
+  &:active, &:visited{
+    color:inherit;
+  }
+}
+
+button{
+  &:active, &:focus{
+    outline:none;
+  }
+}

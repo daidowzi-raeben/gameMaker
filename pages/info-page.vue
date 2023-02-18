@@ -154,11 +154,11 @@
             data-aos="fade-right"
             data-aos-duration="1000"
           >
-            <img v-if="isImageActive===1" src="../static/images/main_sample1.png" alt="" />
-            <img v-else-if="isImageActive===2" src="../static/images/main_sample2.png" alt="" />
-            <img v-else-if="isImageActive===3" src="../static/images/main_sample3.png" alt="" />
-            <img v-else-if="isImageActive===4" src="../static/images/main_sample4.png" alt="" />
-            <img v-else-if="isImageActive===5" src="../static/images/main_sample5.png" alt="" />
+            <img class="sampleImage sampleImage1" src="../static/images/main_sample1.png" alt="" />
+            <img class="sampleImage sampleImage2" style="display:none" src="../static/images/main_sample2.png" alt="" />
+            <img class="sampleImage sampleImage3" style="display:none" src="../static/images/main_sample3.png" alt="" />
+            <img class="sampleImage sampleImage4" style="display:none" src="../static/images/main_sample4.png" alt="" />
+            <img class="sampleImage sampleImage5" style="display:none" src="../static/images/main_sample5.png" alt="" />
           </div>
           <div class="right" data-aos="fade-left" data-aos-duration="1000">
             <button
@@ -220,11 +220,10 @@ export default {
   layout: 'index',
   data() {
     return {
-      isImageActive: 1,
+      // isImageActive: 1,
     }
   },
   mounted() {
-    console.log(window.innerWidth)
     AOS.init({
       disable: function () {
         var desktop = 1000;
@@ -233,24 +232,31 @@ export default {
     })
   },
   methods: {
+    sampleImageNone(){
+      const sampleImages = document.querySelectorAll(".sampleImage");
+      sampleImages.forEach(function(userItem) {
+        userItem.style.display = 'none'
+      })
+    },
     onClickTitActive(e) {
       const nodes = [...e.target.parentElement.children]
       const index = nodes.indexOf(e.target)
+      this.sampleImageNone()
       switch(index){
         case 0 :
-          this.isImageActive = 1
+          document.querySelector('.sampleImage1').style.display = 'block'
         break
         case 2 :
-          this.isImageActive = 2
+          document.querySelector('.sampleImage2').style.display = 'block'
         break
         case 4 :
-          this.isImageActive = 3
+          document.querySelector('.sampleImage3').style.display = 'block'
         break
         case 6 :
-          this.isImageActive = 4
+          document.querySelector('.sampleImage4').style.display = 'block'
         break
         case 8 :
-          this.isImageActive = 5
+          document.querySelector('.sampleImage5').style.display = 'block'
         break
       }
       document.querySelector('.btn.tit.active').classList.remove('active')

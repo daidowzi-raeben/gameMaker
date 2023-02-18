@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="commingSoon">
+    <!-- <div class="commingSoon">
       <img src="~/static/images/soon.png" />
-    </div>
+    </div> -->
     <div v-if="false">
       <Nuxt />
     </div>
-    <!-- <div class="header">
+    <div class="header">
       <div class="header-wrap">
         <button
           type="button"
@@ -85,7 +85,7 @@
           <button type="button" class="btn sns-3"></button>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -141,7 +141,7 @@ export default {
   height: 100%;
   text-align: center;
   > img {
-    width: 500px;
+    width: 475px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
