@@ -26,6 +26,7 @@ export default {
       },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
+      { name: 'naver-site-verification', content: '783b2f08786d9c4cf3fa6b41af59f567816a7f6d' },
       {
         name: 'google-signin-client_id',
         content:
@@ -94,11 +95,17 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/device',
+    '@nuxtjs/robots',
     // 'nuxt-socket-io',
     'vue2-editor/nuxt',
     'cookie-universal-nuxt',
     'nuxt-element-ui',
   ],
+  robots: {
+    /* module options */
+    UserAgent: '*',
+    Disallow: '/'
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -127,6 +134,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    terser: {
+      // https://github.com/terser/terser#compress-options
+      terserOptions: {
+        compress: {
+          drop_console: true,
+        },
+      },
+    },
     html: {
       minify: {
         collapseWhitespace: true, // as @dario30186 mentioned

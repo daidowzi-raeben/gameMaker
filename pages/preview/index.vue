@@ -264,14 +264,21 @@
                 @click="nextGame(isLoading)"
               >
                 <!-- 로딩화면 -->
-                <div ref="loadingChater" class="loading-chapter active"> 
+                <div ref="loadingChater" class="loading-chapter active">
                   <!-- <div class="bg" :class="IN_APP_GAME.intro.data.dim">
                     <img
                       :src="onLoadAssetsImage(IN_APP_GAME.intro.data.bg, 'bg')"
                       alt="background"
                     />
                   </div> -->
-                  <div class="box" :style="IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.mainColor ? `background:${IN_APP_GAME.uiSet.mainColor};color:${IN_APP_GAME.uiSet.mainFontColor}`: ''">
+                  <div
+                    class="box"
+                    :style="
+                      IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.mainColor
+                        ? `background:${IN_APP_GAME.uiSet.mainColor};color:${IN_APP_GAME.uiSet.mainFontColor}`
+                        : ''
+                    "
+                  >
                     <p id="ST"></p>
                     <p id="CT"></p>
                   </div>
@@ -531,6 +538,7 @@ export default {
     }
   },
   head: {
+    title: '미리보기',
     script: [{ src: 'https://developers.kakao.com/sdk/js/kakao.min.js' }],
   },
   computed: {
@@ -590,7 +598,7 @@ export default {
     ...mapMutations(['MUTATIONS_PROJECT']),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     // 모바일 높이
-    setScreenSize(){
+    setScreenSize() {
       const vh = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', `${vh}px`)
     },
