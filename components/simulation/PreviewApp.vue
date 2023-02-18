@@ -5,8 +5,8 @@
     :class="{ bottomnone: MAKER_GNB === 5 }"
   >
     <div v-if="MAKER_GNB === 1 && CUT_LIST.jsonData" class="preview-tit">
-      시나리오 <span class="highlight"></span> 챕터
-      <span class="highlight"></span> 컷
+      시나리오 <span class="highlight"> {{ SCENE_INDEX + 1 }}</span> 챕터
+      <span class="highlight">{{ CHAPTER_INDEX + 1 }}</span> 컷
       <span class="highlight">{{ CUT_LIST.jsonData.length - CUT_CODE }}</span>
       <button
         v-if="CUT_CODE !== 0"
@@ -14,7 +14,7 @@
         class="button btn-pink delete-btn"
         @click="onClickCutDelete(CUT_CODE)"
       >
-        삭제 {{ CUT_CODE }}
+        삭제
       </button>
       <span class="guide" v-if="CUT_CODE === 0">
         직전 수정된 컷과 맨 마지막 컷은 삭제할 수 없어요!
@@ -364,6 +364,8 @@ export default {
       'PREVIEW_PROFILE',
       'PREVIEW_INTRO',
       'PROJECT_ID',
+      'CHAPTER_INDEX',
+      'SCENE_INDEX',
     ]),
   },
   watch: {
@@ -406,7 +408,7 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['MUTATIONS_CONTENT_CODE']),
+    ...mapMutations(['MUTATIONS_CONTENT_CODE', 'MUTATIONS_LOADING_INIT']),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickContent(e) {
       // const bn = this.$refs.buttonNav.children
@@ -443,6 +445,7 @@ export default {
       return `${process.env.VUE_APP_IMAGE}/${f}/${v}`
     },
     onClickCutDelete(v) {
+      this.MUTATIONS_LOADING_INIT()
       this.paramsDelete.type = 'cutDelete'
       this.paramsDelete.idx = this.CUT_LIST.idx[this.CUT_CODE]
       this.paramsDelete.secretKey = this.PROJECT_ID

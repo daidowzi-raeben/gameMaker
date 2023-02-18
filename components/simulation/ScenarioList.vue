@@ -62,6 +62,16 @@
               class="chapter-list--item"
             >
               <span class="chapter-tit">
+                <button
+                  type="button"
+                  class="chapter-sound"
+                  style="
+                    opacity: 1;
+                    position: absolute;
+                    margin-left: -24px;
+                    margin-top: -2px;
+                  "
+                ></button>
                 <label
                   @click="onClickChapterTo(chapter.timestamp, index, index2)"
                 >
@@ -74,7 +84,11 @@
                   class="chapter-modi"
                   @click="onClickTitleModi(`${index}`, `${index2}`)"
                 ></button>
-                <button type="button" class="chapter-sound" @click="popsModalVisible = true"></button>
+                <button
+                  type="button"
+                  class="chapter-sound"
+                  @click="chapterShound(`${index}`, `${index2}`)"
+                ></button>
                 <button
                   type="button"
                   class="chapter-del"
@@ -96,6 +110,7 @@
             </li>
           </draggable>
         </ul>
+        {{ scenarioLists }}
       </li>
     </ul>
     <button
@@ -104,19 +119,89 @@
       @click="onClickScenarioAdd"
     ></button>
     <!-- <ChapterSoundUpload /> -->
-    <el-dialog title="" width="480px" :visible.sync="popsModalVisible">
-      <ChapterSoundUpload />
+    <el-dialog title="" width="800px" :visible.sync="popsModalVisible">
+      <div>
+        <form @submit.prevent="onSubmitChapterSound">
+          <div class="upload-wrap">
+            <div class="upload-spot">
+              <label class="input-file">
+                <input
+                  type="file"
+                  name="myAssetsFile"
+                  required
+                  @change="onChangeUploadPreview($event)"
+                />
+                <span>
+                  {{
+                    uploadPreview && assetsType === 'S'
+                      ? uploadPreview
+                      : '이곳을 클릭해서 에셋을 등록해 보세요'
+                  }}
+                </span>
+                <div
+                  v-if="uploadPreview !== '' && assetsType !== 'S'"
+                  class="image-wrap"
+                >
+                  <img v-if="assetsType !== 'S'" :src="uploadPreview" alt="" />
+                </div>
+              </label>
+            </div>
+            <div class="upload-set">
+              <div class="tit">마이 에셋 업로드</div>
+              <div class="sub-tit">주의사항</div>
+              <el-scrollbar class="scroll">
+                <p>
+                  저작권자의 명시적 동의없이 타인의 저작물의 전부 또는 일부를
+                  복제 · 배포 · 전송 등의 방법으로 이용하는 것은 저작권자의
+                  권리를 침해하는 행위임으로 복제 · 배포 · 전송 등의 방법으로
+                  타인의 저작권을 침해하는 게시물을 홈페이지에 게재 또는
+                  등록하여서는 아니됩니다. 타인의 저작물을 인용한 게시물인 경우
+                  그 인용부분이 회원 개인의 의견을 뒷받침하기 위해 일부 인용된
+                  것이 아니라 게시물의 핵심적인 부분을 구성하고 있다면 출처를
+                  밝히더라도 저작권 침해에 해당됨으로 저작권자의 명시적 동의없이
+                  이러한 게시물을 홈페이지에 게재 또는 등록하여서는 아니됩니다.
+                  홈페이지에 게재 또는 등록된 회원의 게시물을 제3자가 사용하고자
+                  할 경우에는 반드시 해당회원의 명시적 동의를 얻은 뒤 사용하여야
+                  합니다. 회원이 서비스 이용과정에서 타인의 저작권, 상표권,
+                  의장권 등 지적재산권을 침해하는 경우 어떠한 책임도 부담하지
+                  않습니다.
+                </p>
+              </el-scrollbar>
+              <label class="input-check">
+                <input
+                  type="checkbox"
+                  required
+                  @change="onChangeContentAllCheck('check', $event)"
+                />
+                <span class="check checkbox"></span>
+                <span class="text col-green"
+                  >주의사항을 확인했으며, 해당 에셋은 저작권 침해 컨텐츠가
+                  아님을 증명합니다.</span
+                >
+              </label>
+              <button
+                type="button"
+                class="register-btn"
+                :class="{ active: isContentAllCheck }"
+                @click.prevent="onSubmitChapterSound"
+              >
+                등록하기
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
 import { kooLogin } from '~/config/util'
-import ChapterSoundUpload from '~/components/modal/ChapterSoundUpload.vue'
+// import ChapterSoundUpload from '~/components/modal/ChapterSoundUpload.vue'
 export default {
   components: {
-    ChapterSoundUpload,
+    // ChapterSoundUpload,
   },
   data() {
     return {
@@ -130,10 +215,25 @@ export default {
       paramsInit: {},
       paramsData: {},
       user_idx: '',
-      popsModalVisible:false,
+      popsModalVisible: false,
+      isOpen: false,
+      jsonData: '',
+      isContentAllCheck: false,
+      uploadPreview: '',
+      assetName: '',
+      assetNoticeCheck: false,
+      assetsType: 'S',
+      soundIndex: {
+        s: null,
+        c: null,
+      },
+      ext: '',
+      soundParams: {},
+      soundFile: null,
     }
   },
   computed: {
+    ...mapGetters(['GETTER_LOADING']),
     ...mapState([
       'LOGIN',
       'LOADING',
@@ -176,7 +276,11 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
+    ...mapActions([
+      'ACTION_AXIOS_GET',
+      'ACTION_AXIOS_POST',
+      'ACTION_AXIOS_POST_ASSETS',
+    ]),
     ...mapMutations([
       'MUTATIONS_SCENE_DATA',
       'MUTATIONS_CHAPTER_DATA',
@@ -314,6 +418,84 @@ export default {
       this.params.apiKey = process.env.API_KEY
       this.MUTATIONS_LOADING_INIT()
       this.ACTION_AXIOS_GET(this.params)
+    },
+    beforeClose() {
+      this.isOpen = false
+    },
+    onChangeUploadPreview(e) {
+      const mp = e.target.files[0].name.split('.')
+      this.soundFile = e.target.files[0]
+      // e.target.files[0].name.substr(0,mp)
+      console.log(mp[mp.length - 1], e.target.files[0].name)
+      this.ext = mp[mp.length - 1]
+      if (this.ext !== 'mp3') {
+        e.target.files = null
+        return alert('mp3 확장자만 업로드가 가능합니다')
+      }
+      // this.isContentAllCheck = true
+      return (this.uploadPreview = e.target.files[0].name)
+    },
+    onChangeContentAllCheck(type, e) {
+      if (type === 'text') {
+        this.assetName = e.target.value
+      }
+      if (type === 'check') {
+        this.assetNoticeCheck = e.target.checked
+      }
+      if (
+        this.uploadPreview !== '' &&
+        this.assetName !== '' &&
+        this.assetNoticeCheck
+      ) {
+        this.isContentAllCheck = true
+      } else {
+        this.isContentAllCheck = false
+      }
+    },
+    chapterShound(s, c) {
+      console.log(s, c)
+      this.soundIndex.s = Number(s)
+      this.soundIndex.c = Number(c)
+      this.popsModalVisible = true
+    },
+    onSubmitChapterSound() {
+      // this.MUTATIONS_LOADING_INIT()
+      const fileName =
+        this.PROJECT_ID + this.soundIndex.s + this.soundIndex.c + '.' + this.ext
+
+      console.log(fileName, this.scenarioLists)
+      this.scenarioLists[this.soundIndex.s].chapters[this.soundIndex.c].bgm =
+        fileName
+
+      const frm = new FormData()
+
+      frm.append('apiKey', process.env.API_KEY)
+      frm.append('user_idx', kooLogin('user_idx'))
+      frm.append('secretKey', this.PROJECT_ID)
+      frm.append('gas_name', this.soundParams.gas_name)
+      frm.append('filsName', fileName)
+      frm.append('files', this.soundFile)
+      frm.append('gas_discription', this.soundParams.gas_discription)
+      frm.append('scenarioLists', JSON.stringify(this.scenarioLists))
+      frm.append('type', 'chapterSound')
+
+      this.$axios
+        .post(process.env.VUE_APP_ASSETS_API, frm, {
+          header: {
+            'Context-Type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          console.log(res)
+          alert('등록되었습니다.')
+          this.popsModalVisible = false
+          this.soundParams = {}
+          this.isContentAllCheck = false
+        })
+        .catch((res) => {
+          console.log('AXIOS FALSE', res)
+          alert('등록에 실패하였습니다. 관리자에게 문의해 주세요.')
+        })
     },
   },
 }

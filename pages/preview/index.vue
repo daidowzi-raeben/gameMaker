@@ -264,7 +264,7 @@
                 @click="nextGame(isLoading)"
               >
                 <!-- 로딩화면 -->
-                <div ref="loadingChater" class="loading-chapter active">
+                <div ref="loadingChater" class="loading-chapter">
                   <!-- <div class="bg" :class="IN_APP_GAME.intro.data.dim">
                     <img
                       :src="onLoadAssetsImage(IN_APP_GAME.intro.data.bg, 'bg')"
@@ -760,6 +760,40 @@ export default {
       }
     },
     updateGame(e) {
+      // 챕터 로딩
+      console.log(this.IN_APP_GAME)
+      if (this.t === 0) {
+        // bgm 재생
+        const soundUrl = `${process.env.VUE_APP_IMAGE}/bgm/${
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].bgm
+        }`
+
+        if (soundUrl) {
+          // if (this.c !== 0) {
+          //   const soundUrlPrev = `${process.env.VUE_APP_IMAGE}/bgm/${
+          //     this.IN_APP_GAME.scenarioList[this.s].chapters[this.c - 1].bgm
+          //   }`
+          //   this.audioBgm(soundUrlPrev).puase()
+          // }
+          this.audioBgm(soundUrl).play()
+        }
+
+        this.$refs.loadingChater.classList.add('active')
+        console.log(
+          this.IN_APP_GAME.scenarioList[this.s].scenarioTitle,
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
+        )
+        document.getElementById('ST').innerText =
+          this.IN_APP_GAME.scenarioList[this.s].scenarioTitle
+        document.getElementById('CT').innerText =
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
+        this.isLoading = true
+        setTimeout(() => {
+          this.$refs.loadingChater.classList.remove('active')
+          // this.$refs.loadingChater.style = 'display:none'
+          this.isLoading = false
+        }, 4000)
+      }
       this.initBtn =
         this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
       if (e && e !== null) {
@@ -815,6 +849,12 @@ export default {
         console.log('주관식')
       }
     },
+    audioBgm(soundUrl) {
+      const s = new Audio(soundUrl)
+      // s.stop()
+      s.loop = true
+      return s
+    },
 
     pointUpdate(name, point, type) {
       if (name && point && type) {
@@ -838,23 +878,7 @@ export default {
     onclickDisplayShow(name) {
       this.displayPreview = false
       console.log(this.displayPreview)
-      // 챕터 로딩
-      if (this.t === 0) {
-        console.log(
-          this.IN_APP_GAME.scenarioList[this.s].scenarioTitle,
-          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
-        )
-        document.getElementById('ST').innerText =
-          this.IN_APP_GAME.scenarioList[this.s].scenarioTitle
-        document.getElementById('CT').innerText =
-          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
-        this.isLoading = true
-        setTimeout(() => {
-          this.$refs.loadingChater.classList.remove('active')
-          // this.$refs.loadingChater.style = 'display:none'
-          this.isLoading = false
-        }, 2000)
-      }
+
       switch (name) {
         case 'displayIntro':
           this.$refs.displayGame.style = 'display:none'

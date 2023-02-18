@@ -27,11 +27,11 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'naver-site-verification', content: '783b2f08786d9c4cf3fa6b41af59f567816a7f6d' },
-      {
-        name: 'google-signin-client_id',
-        content:
-          '222131177892-51smeo64gg7v5lj0bjivi8uqhcni7pvt.apps.googleusercontent.com',
-      },
+      // {
+      //   name: 'google-signin-client_id',
+      //   content:
+      //     '222131177892-51smeo64gg7v5lj0bjivi8uqhcni7pvt.apps.googleusercontent.com',
+      // },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -82,12 +82,12 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     '@nuxtjs/dotenv',
-    [
-      '@nuxtjs/google-analytics',
-      {
-        id: 'G-YFQ43JQZDQ',
-      },
-    ],
+    // [
+    //   '@nuxtjs/google-analytics',
+    //   {
+    //     id: 'G-YFQ43JQZDQ',
+    //   },
+    // ],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -95,22 +95,35 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/device',
-    '@nuxtjs/robots',
+    // '@nuxtjs/robots',
     // 'nuxt-socket-io',
     'vue2-editor/nuxt',
     'cookie-universal-nuxt',
     'nuxt-element-ui',
+    '@nuxtjs/proxy',
   ],
-  robots: {
-    /* module options */
-    UserAgent: '*',
-    Disallow: '/'
-  },
+
+  // proxy: {
+  //   '/api': 'http://localhost:3095/',
+  // },
+  // robots: {
+  //   /* module options */
+  //   UserAgent: '*',
+  //   Disallow: '/'
+  // },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    // baseURL: '/',
+    proxy: true     // proxy 사용
+  },
+  proxy: {
+    '/api': {
+      target: 'http://localhost:3095/',
+      secure: false,
+      changeOrigin: true
+    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -132,13 +145,14 @@ export default {
     // },
   },
 
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     terser: {
       // https://github.com/terser/terser#compress-options
       terserOptions: {
         compress: {
-          drop_console: true,
+          // drop_console: true,
         },
       },
     },
@@ -155,4 +169,5 @@ export default {
   },
   ssr: true,
   // server: { port: process.env.PORT, host: '0.0.0.0' },
+
 }

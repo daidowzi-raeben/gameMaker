@@ -854,6 +854,21 @@ const createStore = () => {
                         console.error('ACTIONS_TEACHER_FALSE', res)
                     })
             },
+            ACTION_AXIOS_POST_ASSETS({ commit }, params, isType) {
+                console.log('ACTION_AXIOS_POST_PARAMS', params, isType)
+                axios
+                    .post(process.env.VUE_APP_ASSETS_API, params, {
+                        header: {
+                            'Context-Type': 'multipart/form-data',
+                        },
+                    })
+                    .then((res) => {
+                        console.log('MUTATIONS_AXIOS_POST_SUCCESS', res, params)
+                    })
+                    .catch((res) => {
+                        console.error('ACTIONS_TEACHER_FALSE', res)
+                    })
+            },
             JOIN_ACTION_AXIOS_GET({ commit }, params) {
                 console.log('ACTION_AXIOS_GET', params, process.env.VUE_APP_API)
                 axios
