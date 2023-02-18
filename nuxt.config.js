@@ -95,11 +95,17 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/device',
+    '@nuxtjs/robots',
     // 'nuxt-socket-io',
     'vue2-editor/nuxt',
     'cookie-universal-nuxt',
     'nuxt-element-ui',
   ],
+  robots: {
+    /* module options */
+    UserAgent: '*',
+    Disallow: '/'
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
