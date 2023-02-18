@@ -74,7 +74,7 @@
       </div>
     </div>
 
-    <div class="main-section">
+    <div class="main-section m-reverse">
       <div class="main-section--left">
         <div class="img-wrap images">
           <img
@@ -194,11 +194,11 @@
               서로의 사진을 담아 조금 더 특별하게!
             </div>
             <button type="button" class="btn tit" @click="onClickTitActive">
-              5. 그 밖에 다양한 스토리
+              5. 성향을 파악하는 심리테스트
             </button>
             <div class="con">
-              다양한 이미지와 사운드를 넣어<br />
-              나만의 특별한 스토리 게임을 만들어 보세요.
+              늘 해 보기만 했던 심리 테스트도<br />
+              직접 만들어서 친구들에게 공유해요!
             </div>
             <div class="mt-5">
               <button type="button" class="button xlg btn-primary">
@@ -224,7 +224,13 @@ export default {
     }
   },
   mounted() {
-    AOS.init()
+    console.log(window.innerWidth)
+    AOS.init({
+      disable: function () {
+        var desktop = 1000;
+        return window.innerWidth < desktop;
+      }
+    })
   },
   methods: {
     onClickTitActive(e) {

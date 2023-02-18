@@ -400,7 +400,7 @@ button{
         color: $textCol1;
         white-space: nowrap;
         position:relative;
-        &:hover{
+        &:active, &:visited, &:hover{
           color:$textCol1;
         }
         &:before{
@@ -721,6 +721,12 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
+    &.m-reverse{
+      @media (max-width: 1000px) {
+        flex-direction: column-reverse;
+      }
+
+    }
     &:last-child{
       padding-bottom:100px;
     }
@@ -1262,7 +1268,7 @@ button{
         overflow: hidden;
         position: relative;
         height: 320px;
-
+        background-color: #F4F5F7;
         img {
           width: 100%;
           position: absolute;
@@ -1465,7 +1471,6 @@ button{
   &-wrap {
     padding: 50px 0;
     min-height: calc(100vh - 70px);
-    background-color: #F4F5F7;
   }
 
   &-list {
