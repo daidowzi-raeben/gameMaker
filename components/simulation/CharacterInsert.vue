@@ -45,8 +45,13 @@
 
         <div class="color-select--list">
           <div class="color-select--wrap">
-            <el-color-picker v-model="colorPicker" show-alpha></el-color-picker>
+            <el-color-picker
+              v-model="colorPicker"
+              show-alpha
+              @active-change="onChangeColorPicker"
+            ></el-color-picker>
             <label class="label">배경색상</label>
+            {{ colorPicker }}
           </div>
         </div>
 
@@ -358,6 +363,10 @@ export default {
     },
     onLoadAssetsImageBg(v) {
       return `${process.env.VUE_APP_IMAGE}/bg/${v}`
+    },
+    onChangeColorPicker(value) {
+      console.log('onChangeColorPicker', value)
+      this.colorPicker = value
     },
   },
 }
