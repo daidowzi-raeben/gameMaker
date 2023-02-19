@@ -51,7 +51,6 @@
               @active-change="onChangeColorPicker"
             ></el-color-picker>
             <label class="label">배경색상</label>
-            {{ colorPicker }}
           </div>
         </div>
 
