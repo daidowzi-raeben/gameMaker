@@ -26,7 +26,11 @@
         <div
           v-if="MAKER_GNB === 2 || MAKER_GNB === 5"
           class="preview-con preview-intro"
-          :class="PREVIEW_INTRO.dim"
+          :class="[
+            PREVIEW_INTRO.dim,
+            PREVIEW_INTRO.copyrightPosition,
+            PREVIEW_INTRO.position,
+          ]"
         >
           <div class="preview-intro--background">
             <img

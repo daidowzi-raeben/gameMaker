@@ -161,6 +161,10 @@ export default {
       params: {},
       introDimOption: [
         {
+          value: '',
+          label: '없음',
+        },
+        {
           value: 'dim-light',
           label: '밝게',
         },
@@ -176,29 +180,29 @@ export default {
       introPositionValue: 'center',
       introPositionOption: [
         {
-          value: 'center',
+          value: '',
           label: '중앙',
         },
         {
-          value: 'logo-top',
+          value: 'diagonal',
           label: '대각선(로고가 위로)',
         },
         {
-          value: 'button-top',
+          value: 'diagonal-r',
           label: '대각선(버튼이 위로)',
         },
       ],
       introCopyrightPositionOption: [
         {
-          value: 'center',
+          value: '',
           label: '중앙',
         },
         {
-          value: 'copyright-left',
+          value: 'copy-left',
           label: '왼쪽',
         },
         {
-          value: 'copyright-right',
+          value: 'copy-right',
           label: '오른쪽',
         },
       ],
