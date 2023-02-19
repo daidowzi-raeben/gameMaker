@@ -9,7 +9,7 @@
       <AssetsList v-if="MAKER_GNB === 6" />
       <div class="maker-right">
         <CutList v-if="MAKER_GNB === 1 || MAKER_GNB === 3" />
-        <PreviewApp />
+        <PreviewApp :cropImage="cropImage" />
         <CutInsert
           v-if="!MAKER_GNB || MAKER_GNB === 1"
           @myLoadBgImage="myLoadBgImage"
@@ -21,7 +21,10 @@
         />
         <IntroInsert v-if="MAKER_GNB === 2" />
         <EndingInsert v-if="MAKER_GNB === 3" />
-        <CharacterInsert v-if="MAKER_GNB === 4" />
+        <CharacterInsert
+          v-if="MAKER_GNB === 4"
+          @onChangeCropImage="onChangeCropImage"
+        />
         <UiPreInsert v-if="MAKER_GNB === 5" />
         <AssetsInsert v-if="MAKER_GNB === 6" />
         <SetupInsert v-if="MAKER_GNB === 7" />
@@ -93,6 +96,7 @@ export default {
       dragging: false,
       assetTab: 1,
       queryIndex: '',
+      cropImage: '',
       tempData: {
         bg: 'https://img.lovepik.com/background/20211102/medium/lovepik-banff-national-park-mobile-wallpaper-canada-background-image_400706001.jpg',
         cr: 'https://cdn.pixabay.com/photo/2013/07/12/13/27/man-147091_960_720.png',
@@ -176,6 +180,10 @@ export default {
           this.$refs.characterImage.classList.remove(e)
         }, 400)
       }
+    },
+    onChangeCropImage(value) {
+      console.log('onChangeCropImage', value)
+      this.cropImage = value
     },
   },
 }

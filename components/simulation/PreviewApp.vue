@@ -4,6 +4,7 @@
     class="preview-wrap"
     :class="{ bottomnone: MAKER_GNB === 5 }"
   >
+    <img :src="cropImage" />
     <div v-if="MAKER_GNB === 1 && CUT_LIST.jsonData" class="preview-tit">
       시나리오 <span class="highlight"> {{ SCENE_INDEX + 1 }}</span> 챕터
       <span class="highlight">{{ CHAPTER_INDEX + 1 }}</span> 컷
@@ -49,29 +50,48 @@
             <div class="svg-button">
               <svg width="200" height="60">
                 <rect
-                  width="180" height="46"
-                  x="10" y="10"
-                  :fill=UISetting.mainColor
-                  :rx=UISetting.button.round
-                  :stroke=UISetting.button.strokeColor
-                  :stroke-width=UISetting.button.border />
-                <text text-anchor="middle" alignment-baseline="middle" transform="translate(100, 35)" font-size="16px" :class="UISetting.font">
+                  width="180"
+                  height="46"
+                  x="10"
+                  y="10"
+                  :fill="UISetting.mainColor"
+                  :rx="UISetting.button.round"
+                  :stroke="UISetting.button.strokeColor"
+                  :stroke-width="UISetting.button.border"
+                />
+                <text
+                  text-anchor="middle"
+                  alignment-baseline="middle"
+                  transform="translate(100, 35)"
+                  font-size="16px"
+                  :class="UISetting.font"
+                >
                   시작하기
                 </text>
               </svg>
               <svg>
                 <defs>
                   <mask id="Mask">
-                    <rect width="100%" height="100%" fill="white"/>
-                    <rect x="-5" y="-5" width="185" height="51" fill="black" :rx=UISetting.button.round />
+                    <rect width="100%" height="100%" fill="white" />
+                    <rect
+                      x="-5"
+                      y="-5"
+                      width="185"
+                      height="51"
+                      fill="black"
+                      :rx="UISetting.button.round"
+                    />
                   </mask>
                 </defs>
                 <rect
-                  width="180" height="46"
-                  :x=UISetting.button.x :y=UISetting.button.y
-                  :fill=UISetting.button.shadowColor
-                  :rx=UISetting.button.round
-                  mask="url(#Mask)" />
+                  width="180"
+                  height="46"
+                  :x="UISetting.button.x"
+                  :y="UISetting.button.y"
+                  :fill="UISetting.button.shadowColor"
+                  :rx="UISetting.button.round"
+                  mask="url(#Mask)"
+                />
               </svg>
             </div>
             <button
@@ -378,6 +398,12 @@
 import { mapState, mapActions, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
+  props: {
+    cropImage: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       sceneData: [],
@@ -495,17 +521,17 @@ export default {
 </script>
 
 <style lang="scss">
-.svg-button{
-  position:relative;
-  left:-10px;
-  top:-10px;
-  width:180px;
-  height:46px;
-  svg{
-    position:absolute;
-    &:last-child{
-      left:10px;
-      top:10px;
+.svg-button {
+  position: relative;
+  left: -10px;
+  top: -10px;
+  width: 180px;
+  height: 46px;
+  svg {
+    position: absolute;
+    &:last-child {
+      left: 10px;
+      top: 10px;
     }
   }
 }

@@ -35,8 +35,7 @@
               width: 150,
               height: 150,
             }"
-            :resizeImage="{ wheel: false }"
-            @change="change"
+            @change="onChangeCropImage"
           ></cropper>
           <el-button slot="reference" class="btn-grey btn-line" @click="test()"
             >두상 이미지</el-button
@@ -388,8 +387,12 @@ export default {
       console.log('onChangeColorPicker', value)
       this.colorPicker = value
     },
-    change({ coordinates, canvas }) {
-      console.log(coordinates, canvas)
+    onChangeCropImage({ coordinates, canvas }) {
+      // this.coordinates = coordinates
+      // You able to do different manipulations at a canvas
+      // but there we just get a cropped image, that can be used
+      // as src for <img/> to preview result
+      this.$emit('onChangeCropImage', canvas.toDataURL())
     },
     test() {
       fetch('http://api.school-os.net/game/assets.php?type=assetsImage')
