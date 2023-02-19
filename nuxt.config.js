@@ -70,6 +70,9 @@ export default {
     { src: '~plugins/VShowSlide.js', ssr: false, mode: 'client' },
     // { src: '~plugins/VClickOutside.js', ssr: false, mode: 'client' },
     { src: '~plugins/Element-ui.js', ssr: false, mode: 'client' },
+    {
+      src: '~plugins/vue-cropper.js', ssr: false, mode: 'client'
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

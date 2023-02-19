@@ -4,6 +4,7 @@
       <div class="setting-con">
         <div class="setting-tit">
           인물
+
           <div class="right">
             <button
               type="button"

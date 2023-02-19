@@ -476,6 +476,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      inAllStart: false,
       loading: true,
       game: [],
       isSafari: '',
@@ -563,7 +564,7 @@ export default {
               ]
             })
 
-            this.updateGame()
+            // this.updateGame()
 
             this.$refs.displayIntro.style = 'display:block'
             this.loading = false
@@ -761,20 +762,21 @@ export default {
     },
     updateGame(e) {
       // 챕터 로딩
-      console.log(this.IN_APP_GAME)
+      console.log(this.IN_APP_GAME, this.displayPreview, '------------')
       if (this.t === 0) {
         // bgm 재생
         const soundUrl = `${process.env.VUE_APP_IMAGE}/bgm/${
           this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].bgm
         }`
 
-        if (soundUrl) {
-          // if (this.c !== 0) {
-          //   const soundUrlPrev = `${process.env.VUE_APP_IMAGE}/bgm/${
-          //     this.IN_APP_GAME.scenarioList[this.s].chapters[this.c - 1].bgm
-          //   }`
-          //   this.audioBgm(soundUrlPrev).puase()
-          // }
+        if (soundUrl && this.inAllStart === true) {
+          if (this.c !== 0) {
+            const soundUrlPrev = `${process.env.VUE_APP_IMAGE}/bgm/${
+              this.IN_APP_GAME.scenarioList[this.s].chapters[this.c - 1].bgm
+            }`
+            this.audioBgm(soundUrlPrev).puase()
+          }
+          console.log('음원시작')
           this.audioBgm(soundUrl).play()
         }
 
@@ -792,7 +794,7 @@ export default {
           this.$refs.loadingChater.classList.remove('active')
           // this.$refs.loadingChater.style = 'display:none'
           this.isLoading = false
-        }, 4000)
+        }, 3000)
       }
       this.initBtn =
         this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
@@ -877,7 +879,7 @@ export default {
     },
     onclickDisplayShow(name) {
       this.displayPreview = false
-      console.log(this.displayPreview)
+      console.log(this.displayPreview, '--------------------')
 
       switch (name) {
         case 'displayIntro':
@@ -888,6 +890,8 @@ export default {
         case 'displayGame':
           this.$refs.displayIntro.style = 'display:none'
           this.$refs.displayGame.style = 'display:block'
+          this.inAllStart = true
+          this.updateGame()
           break
         case 'displayProfile':
           this.$refs.displayIntro.style = 'display:none'

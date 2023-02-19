@@ -63,6 +63,7 @@
             >
               <span class="chapter-tit">
                 <button
+                  v-if="chapter.bgm"
                   type="button"
                   class="chapter-sound"
                   style="
@@ -110,7 +111,6 @@
             </li>
           </draggable>
         </ul>
-        {{ scenarioLists }}
       </li>
     </ul>
     <button
