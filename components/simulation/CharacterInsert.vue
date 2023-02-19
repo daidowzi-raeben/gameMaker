@@ -35,6 +35,7 @@
               width: 150,
               height: 150,
             }"
+            :resizeImage="{ wheel: false }"
             @change="change"
           ></cropper>
           <el-button slot="reference" class="btn-grey btn-line" @click="test()"
