@@ -536,6 +536,7 @@ export default {
       displayPreview: false,
       paramsList: {},
       sharUrl: 'projectkoo.com',
+      srPlay: [],
     }
   },
   head: {
@@ -764,20 +765,18 @@ export default {
       // 챕터 로딩
       console.log(this.IN_APP_GAME, this.displayPreview, '------------')
       if (this.t === 0) {
-        // bgm 재생
-        const soundUrl = `${process.env.VUE_APP_IMAGE}/bgm/${
-          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].bgm
-        }`
-
-        if (soundUrl && this.inAllStart === true) {
-          if (this.c !== 0) {
-            const soundUrlPrev = `${process.env.VUE_APP_IMAGE}/bgm/${
-              this.IN_APP_GAME.scenarioList[this.s].chapters[this.c - 1].bgm
-            }`
-            this.audioBgm(soundUrlPrev).puase()
-          }
-          console.log('음원시작')
-          this.audioBgm(soundUrl).play()
+        if (this.inAllStart === true) {
+          this.srPlay.forEach((element) => {
+            console.log(element.pause())
+          })
+          // bgm 재생
+          const soundUrl = `${process.env.VUE_APP_IMAGE}/bgm/${
+            this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].bgm
+          }`
+          // this.audioBgm(soundUrl).puase()
+          this.audioBgm(soundUrl, this.s + 1, this.c + 1)
+          this.srPlay[this.s + 1 + this.c + 1].play()
+          console.log('=========BGM START===========')
         }
 
         this.$refs.loadingChater.classList.add('active')
@@ -851,11 +850,14 @@ export default {
         console.log('주관식')
       }
     },
-    audioBgm(soundUrl) {
-      const s = new Audio(soundUrl)
+    audioBgm(soundUrl, s, c) {
+      this.srPlay[s + c] = new Audio(soundUrl)
       // s.stop()
-      s.loop = true
-      return s
+      this.srPlay[s + c].loop = true
+      // setTimeout(() => {
+      //   s.pause()
+      // }, 4000)
+      return this.srPlay
     },
 
     pointUpdate(name, point, type) {
