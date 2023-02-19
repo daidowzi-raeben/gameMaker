@@ -29,7 +29,7 @@ export default {
       console.log(coordinates, canvas)
     },
     test() {
-      fetch('http://localhost:3095/game/assets.php?type=assetsImage')
+      fetch('http://api.school-os.net/game/assets.php?type=assetsImage')
         .then((response) => response.text())
         .then((text) => {
           console.log('========', text)
