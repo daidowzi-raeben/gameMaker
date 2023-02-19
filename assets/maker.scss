@@ -2339,8 +2339,9 @@
       }
 
       .name {
+        text-align: right;
         border-top: 3px solid #fff;
-        font-size: 4rem;
+        font-size: 3.2rem;
         background-color: rgba(255, 255, 255, .5);
         position: absolute;
         left: 0;
@@ -2356,11 +2357,26 @@
       .character {
         width: 100%;
         height: 100%;
+        &.head{
+          position:absolute;
+          left:0;
+          bottom:189px;
+          width:150px;
+          height:150px;
+          z-index: 10;
+          overflow:hidden;
+          img{
+            left: 50%;
+            width: 300%;
+            top: 270%;
+            filter: none;
+          }
+        }
 
         img {
           width: 100%;
           position: absolute;
-          left: 50%;
+          left:65%;
           top: 50%;
           transform: translate(-50%, -50%);
           filter: drop-shadow(5px 0 #fff);
@@ -2374,15 +2390,16 @@
         height: 190px;
         position: absolute;
         left: 0;
-        top: calc(60% + 100px);
+        top: calc(60% + 90px);
         font-size: 1.4rem;
         word-break: break-all;
         color: #000;
         text-shadow: -1px 0 rgba(255, 255, 255, .5), 0 1px rgba(255, 255, 255, .5), 1px 0 rgba(255, 255, 255, .5), 0 -1px rgba(255, 255, 255, .5);
 
         .con {
-          height: 100%;
+          height: 90%;
           overflow: auto;
+          margin:0 10px;
         }
       }
 

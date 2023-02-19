@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-      <div class="main-section--right" data-aos="fade" data-aos-duration="2000">
+      <div class="main-section--right" data-aos="fade" data-aos-duration="1000" data-aos-easing="linear">
         <div class="img-wrap">
           <img src="../static/images/main_img4.png" alt="" />
         </div>
@@ -136,7 +136,7 @@
           </div>
         </div>
       </div>
-      <div class="main-section--right" data-aos="fade" data-aos-duration="2000">
+      <div class="main-section--right" data-aos="fade" data-aos-duration="1000" data-aos-easing="linear">
         <div class="img-wrap">
           <img src="../static/images/main_img3.png" alt="" />
         </div>

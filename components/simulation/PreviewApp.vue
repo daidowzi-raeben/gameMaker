@@ -256,6 +256,9 @@
           <div class="character">
             <img :src="onLoadAssetsImage(PREVIEW.img.cr, 'cr')" alt="" />
           </div>
+          <div class="character head">
+            <img :src="onLoadAssetsImage(PREVIEW.img.cr, 'cr')" alt="" />
+          </div>
           <div class="profile">
             <p class="con" :class="UISetting.font">
               {{

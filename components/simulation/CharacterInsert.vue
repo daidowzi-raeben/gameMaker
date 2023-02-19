@@ -22,6 +22,20 @@
             </ul>
           </div>
         </el-scrollbar>
+        <el-popover
+          placement="right"
+          width="400"
+          trigger="click">
+          <cropper
+            class="cropper"
+            :src="img"
+            :stencil-props="{
+              aspectRatio: 10 / 10,
+            }"
+            @change="change"
+          ></cropper>
+          <el-button slot="reference" class="btn-grey btn-line">두상 이미지</el-button>
+        </el-popover>
 
         <div class="setting-tit mt-5">배경 이미지</div>
         <el-scrollbar>
@@ -184,6 +198,7 @@ export default {
       characterLength: 0,
       colorPicker: null,
       params: {},
+      img: 'http://api.school-os.net/game/upload/cr/cr_1674556532_national.png',
     }
   },
   PREVIEW: {
@@ -367,8 +382,24 @@ export default {
       console.log('onChangeColorPicker', value)
       this.colorPicker = value
     },
+    change({ coordinates, canvas }) {
+      console.log(coordinates, canvas)
+    },
+    test() {
+      fetch('http://api.school-os.net/game/assets.php?type=assetsImage')
+        .then((response) => response.text())
+        .then((text) => {
+          console.log('========', text)
+          this.img = text
+        })
+    },
   },
 }
 </script>
 
-<style></style>
+<style>
+.cropper {
+  height: 600px;
+  background: #ddd;
+}
+</style>
