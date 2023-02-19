@@ -22,10 +22,7 @@
             </ul>
           </div>
         </el-scrollbar>
-        <el-popover
-          placement="right"
-          width="400"
-          trigger="click">
+        <el-popover placement="right" width="400" trigger="click">
           <cropper
             class="cropper"
             :src="img"
@@ -34,7 +31,9 @@
             }"
             @change="change"
           ></cropper>
-          <el-button slot="reference" class="btn-grey btn-line">두상 이미지</el-button>
+          <el-button slot="reference" class="btn-grey btn-line" @click="test()"
+            >두상 이미지</el-button
+          >
         </el-popover>
 
         <div class="setting-tit mt-5">배경 이미지</div>
@@ -198,7 +197,7 @@ export default {
       characterLength: 0,
       colorPicker: null,
       params: {},
-      img: 'http://api.school-os.net/game/upload/cr/cr_1674556532_national.png',
+      img: '',
     }
   },
   PREVIEW: {
