@@ -27,7 +27,13 @@
             class="cropper"
             :src="img"
             :stencil-props="{
+              handlers: {},
               aspectRatio: 10 / 10,
+              resizable: false,
+            }"
+            :stencil-size="{
+              width: 150,
+              height: 150,
             }"
             @change="change"
           ></cropper>

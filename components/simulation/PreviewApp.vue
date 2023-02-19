@@ -46,6 +46,29 @@
             />
           </div>
           <div class="preview-intro--menu">
+            <svg width="200" height="60">
+              <defs>
+                <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="shadow-filter">
+                  <feOffset dx="4" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+                  <feGaussianBlur stdDeviation="0" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+                  <feColorMatrix values="0 0 0 .2 0   0 0 0 .2 0   1 1 2 .2 0   0 0 0 0.5 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"/>
+                  <feMerge>
+                    <feMergeNode in="shadowMatrixOuter1"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <rect
+                width="180" height="46"
+                :fill=UISetting.mainColor
+                :rx=UISetting.button.round
+                :stroke=UISetting.button.strokeColor
+                :stroke-width=UISetting.button.border
+                filter="url(#shadow-filter)" />
+                <text text-anchor="middle" alignment-baseline="middle" transform="translate(90, 25)" font-size="16px">
+                  시작하기
+                </text>
+            </svg>
             <button
               type="button"
               class="btn"
