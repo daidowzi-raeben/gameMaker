@@ -4,7 +4,6 @@
     class="preview-wrap"
     :class="{ bottomnone: MAKER_GNB === 5 }"
   >
-    <img :src="cropImage" />
     <div v-if="MAKER_GNB === 1 && CUT_LIST.jsonData" class="preview-tit">
       시나리오 <span class="highlight"> {{ SCENE_INDEX + 1 }}</span> 챕터
       <span class="highlight">{{ CHAPTER_INDEX + 1 }}</span> 컷
@@ -309,7 +308,7 @@
             <img :src="onLoadAssetsImage(PREVIEW.img.cr, 'cr')" alt="" />
           </div>
           <div class="character head">
-            <img :src="onLoadAssetsImage(PREVIEW.img.cr, 'cr')" alt="" />
+            <img :src="cropImage" />
           </div>
           <div class="profile">
             <p class="con" :class="UISetting.font">

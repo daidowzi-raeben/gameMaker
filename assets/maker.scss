@@ -2366,9 +2366,8 @@
           z-index: 10;
           overflow:hidden;
           img{
-            left: 50%;
-            width: 300%;
-            top: 270%;
+            position:unset;
+            transform: unset;
             filter: none;
           }
         }
