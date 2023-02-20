@@ -37,7 +37,11 @@
             }"
             @change="onChangeCropImage"
           ></cropper>
-          <el-button slot="reference" class="btn-grey btn-line" @click="test()"
+          <el-button
+            slot="reference"
+            class="btn-grey btn-line"
+            :disabled="PREVIEW.img.cr ? false : true"
+            @click="onClickThumb(PREVIEW.img.cr)"
             >두상 이미지</el-button
           >
         </el-popover>
@@ -316,6 +320,7 @@ export default {
       // return
       this.characterData.bg = this.PREVIEW.img.bg
       this.characterData.cr = this.PREVIEW.img.cr
+      // this.paramsData.crHead = this.img
       // this.characterData.position = this.$refs.profilePosition.value
       this.paramsData.type = 'characterInsert'
       this.paramsData.secretKey = this.PROJECT_ID
@@ -394,8 +399,10 @@ export default {
       // as src for <img/> to preview result
       this.$emit('onChangeCropImage', canvas.toDataURL())
     },
-    test() {
-      fetch('http://api.school-os.net/game/assets.php?type=assetsImage')
+    onClickThumb(v) {
+      fetch(
+        'http://api.school-os.net/game/assets.php?type=assetsImage&file=' + v
+      )
         .then((response) => response.text())
         .then((text) => {
           console.log('========', text)

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="svg-button">
-      <svg id="img">
+      <svg id="img" width="200" height="60">
         <svg width="200" height="60">
           <rect
             width="180"
@@ -23,7 +23,7 @@
             시작하기
           </text>
         </svg>
-        <svg>
+        <svg width="200" height="60">
           <defs>
             <mask id="Mask">
               <rect width="100%" height="100%" fill="white"></rect>
@@ -57,7 +57,7 @@
 export default {
   methods: {
     download() {
-      const svg = document.getElementById('img')
+      const svg = document.querySelector('#img')
 
       const svgData = new XMLSerializer().serializeToString(svg)
 
@@ -97,5 +97,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
