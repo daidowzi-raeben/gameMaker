@@ -47,7 +47,7 @@
           </div>
           <div class="preview-intro--menu">
             <div class="svg-button">
-              <svg width="200" height="60">
+              <svg width="220" height="80">
                 <rect
                   width="180"
                   height="46"
@@ -67,14 +67,13 @@
                 >
                   시작하기
                 </text>
-              </svg>
-              <svg>
+
                 <defs>
                   <mask id="Mask">
                     <rect width="100%" height="100%" fill="white" />
                     <rect
-                      x="-5"
-                      y="-5"
+                      x="5"
+                      y="5"
                       width="185"
                       height="51"
                       fill="black"
@@ -85,8 +84,8 @@
                 <rect
                   width="180"
                   height="46"
-                  :x="UISetting.button.x"
-                  :y="UISetting.button.y"
+                  :x="Number(UISetting.button.x)+10"
+                  :y="Number(UISetting.button.y)+10"
                   :fill="UISetting.button.shadowColor"
                   :rx="UISetting.button.round"
                   mask="url(#Mask)"
@@ -528,10 +527,10 @@ export default {
   height: 46px;
   svg {
     position: absolute;
-    &:last-child {
-      left: 10px;
-      top: 10px;
-    }
+    // &:last-child {
+    //   left: 10px;
+    //   top: 10px;
+    // }
   }
 }
 .ani-vibration {

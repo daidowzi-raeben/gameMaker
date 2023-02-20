@@ -6,13 +6,13 @@
           인물
 
           <div class="right">
-            <button
+            <!-- <button
               type="button"
               class="button md btn-blue"
               @click="onClickLoadAssets('cr')"
             >
               에셋 불러오기
-            </button>
+            </button> -->
             <button
               type="button"
               class="button md btn-primary"
@@ -48,13 +48,13 @@
         <div class="setting-tit mt-5">
           배경
           <div class="right">
-            <button
+            <!-- <button
               type="button"
               class="button md btn-blue"
               @click="onClickLoadAssets('bg')"
             >
               에셋 불러오기
-            </button>
+            </button> -->
             <button
               type="button"
               class="button md btn-primary"
@@ -87,13 +87,13 @@
         <div class="setting-tit mt-5">
           사운드
           <div class="right">
-            <button
+            <!-- <button
               type="button"
               class="button md btn-blue"
               @click="onClickLoadAssets('sr')"
             >
               에셋 불러오기
-            </button>
+            </button> -->
             <button
               type="button"
               class="button md btn-primary"
@@ -200,7 +200,7 @@
               </label>
             </li>
           </ul>
-          <div class="assets-none" v-else>
+          <div class="assets-none mt-3" v-else>
             <i class="el-timeline-item__icon el-icon-more"></i>
             구매한 에셋이 없습니다.
           </div>

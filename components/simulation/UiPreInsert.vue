@@ -6,7 +6,7 @@
           <div class="setting-tit">UI 설정</div>
           <div class="setting-info">나만의 설명</div>
           <div class="radio-wrap">
-            <label class="input-radio">
+            <!-- <label class="input-radio">
               <input
                 ref="isUiSettingTheme"
                 type="radio"
@@ -15,7 +15,7 @@
               />
               <span class="check radio"></span>
               <span class="text">에셋 테마</span>
-            </label>
+            </label> -->
             <label class="input-radio">
               <input
                 ref="isUiSettingCustom"

@@ -185,11 +185,11 @@ export default {
         },
         {
           value: 'diagonal',
-          label: '대각선(로고가 위로)',
+          label: '버튼 우측 하단',
         },
         {
           value: 'diagonal-r',
-          label: '대각선(버튼이 위로)',
+          label: '버튼 상단',
         },
       ],
       introCopyrightPositionOption: [
