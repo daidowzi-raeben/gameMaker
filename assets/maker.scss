@@ -2075,6 +2075,7 @@
         top: -13px;
         color: #fff;
         font-weight: 600;
+        text-shadow: -1px 0 rgba(255, 255, 255, .5), 0 1px rgba(255, 255, 255, .5), 1px 0 rgba(255, 255, 255, .5), 0 -1px rgba(255, 255, 255, .5);
 
         &.font-sm {
           font-size: 1.3rem;
@@ -2092,7 +2093,7 @@
         word-break: break-all;
         line-height: 1.5;
         font-weight: 500;
-        text-shadow: 0 0 2px #fff;
+        text-shadow: -1px 0 rgba(255, 255, 255, .5), 0 1px rgba(255, 255, 255, .5), 1px 0 rgba(255, 255, 255, .5), 0 -1px rgba(255, 255, 255, .5);
 
         &.font-sm {
           font-size: 1.3rem;
@@ -2343,7 +2344,6 @@
         padding: 9px 20px;
         width: 100%;
         z-index: 1;
-        font-family: 'NanumSquareNeo', sans-serif;
         font-weight: 600;
         text-shadow: -1px 0 rgba(255, 255, 255, .5), 0 1px rgba(255, 255, 255, .5), 1px 0 rgba(255, 255, 255, .5), 0 -1px rgba(255, 255, 255, .5);
       }
