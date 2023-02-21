@@ -318,8 +318,7 @@
                   <option value="icon3">아이콘3</option>
                 </select>
               </div>
-            </div>
-            <div class="input-select--list mb-5">
+
               <div class="input-wrap">
                 <label class="input-label">글씨체</label>
                 <select
@@ -332,6 +331,8 @@
                   </option>
                 </select>
               </div>
+            </div>
+            <!-- <div class="input-select--list mb-5">
               <div class="input-wrap">
                 <label class="input-label">글씨크기</label>
                 <select
@@ -345,7 +346,7 @@
                   <option value="font-lg">크게</option>
                 </select>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="text-center mb-5">

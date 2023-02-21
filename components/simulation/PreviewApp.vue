@@ -11,7 +11,7 @@
       <button
         v-if="CUT_CODE !== 0"
         type="button"
-        class="button btn-pink delete-btn"
+        class="button btn-pink delete-btn sm"
         @click="onClickCutDelete(CUT_CODE)"
       >
         삭제
@@ -224,6 +224,7 @@
               placeholder="주관식 답변을 입력해주세요"
               :value="PREVIEW.data.answer"
               :style="windowColor()"
+              readonly
             />
           </div>
           <div v-if="cutType < 3" class="dialogue" :style="windowColor()">
@@ -318,7 +319,6 @@
             <p
               class="con"
               :class="UISetting.font"
-              style="white-space: pre-line"
             >
               {{
                 PREVIEW_PROFILE.discription

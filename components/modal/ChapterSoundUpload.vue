@@ -9,7 +9,7 @@
           @change="onChangeAssetType"
         />
         <span class="check radio"></span>
-        <span class="text">에셋 불러오기</span>
+        <span class="text">구매한 에셋 불러오기</span>
       </label>
       <label class="input-radio">
         <input
@@ -18,7 +18,7 @@
           @change="onChangeAssetType"
         />
         <span class="check radio"></span>
-        <span class="text">직접 올리기</span>
+        <span class="text">에셋 직접 등록하기</span>
       </label>
     </div>
     <div v-show="!isAssetDirect">

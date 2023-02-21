@@ -1,13 +1,13 @@
 <template>
   <div class="insert-set">
-    <button
+    <!-- <button
       v-show="!scenarioSettingShow"
       type="button"
       class="btn scenario"
       @click="onClickScenarioSetting('set')"
     >
       프로필 등장
-    </button>
+    </button> -->
     <div v-show="scenarioSettingShow" class="set scenario-set">
       <select v-if="SCENE_DATA" class="input-select">
         <option

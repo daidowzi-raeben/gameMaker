@@ -3,15 +3,25 @@
     <div class="project-wrap">
       <div class="card-wrap">
         <div class="card-tit">
-          <nuxt-link to="">Visual Novel</nuxt-link>
+          <nuxt-link to="">내 프로젝트</nuxt-link>
           <button type="button" class="button btn-primary md btn-add" @click="popsModalVisible = true">추가하기</button>
         </div>
-        <swiper
+        <!-- <swiper
           v-if="PROJECT_MANAGER"
           :options="swiperOptionCol4"
           class="card-list project-list"
+        > -->
+        <div
+          v-if="PROJECT_MANAGER"
+          :options="swiperOptionCol4"
+          class="card-list project-list type-temp"
         >
-          <swiper-slide
+          <!-- <swiper-slide
+            v-for="(v, i) in PROJECT_MANAGER.projectList"
+            :key="i"
+            class="card-list--item project-list--item"
+          > -->
+          <div
             v-for="(v, i) in PROJECT_MANAGER.projectList"
             :key="i"
             class="card-list--item project-list--item"
@@ -23,11 +33,11 @@
                     v.datetime | moment('YY.MM.DD')
                   }}</span></span
                 >
-                <div class="badge-wrap">
+                <!-- <div class="badge-wrap">
                   <span class="badge red">인트로</span>
                   <span class="badge blue">엔딩</span>
                   <span class="badge green">배포완료</span>
-                </div>
+                </div> -->
               </div>
               <div class="tit">
                 {{ v.title }}
@@ -50,7 +60,7 @@
                 </li>
               </ul>
             </nuxt-link>
-          </swiper-slide>
+          </div>
           <!-- <swiper-slide class="card-list--item project-list--item">
             <nuxt-link to="">
               <div class="top">
@@ -90,11 +100,11 @@
               새로운 프로젝트를<br />추가해 보세요
             </button>
           </swiper-slide> -->
-          <div slot="button-prev" class="swiper-button-prev"></div>
-          <div slot="button-next" class="swiper-button-next"></div>
-        </swiper>
+          <!-- <div slot="button-prev" class="swiper-button-prev"></div>
+          <div slot="button-next" class="swiper-button-next"></div> -->
+        </div>
       </div>
-      <div class="card-wrap">
+      <!-- <div class="card-wrap">
         <div class="card-tit"><nuxt-link to="">Asset Store</nuxt-link></div>
         <swiper :options="swiperOptionCol7" class="card-list">
           <swiper-slide v-for="(v, i) in 10" :key="i" class="card-list--item">
@@ -103,8 +113,8 @@
           <div slot="button-prev" class="swiper-button-prev"></div>
           <div slot="button-next" class="swiper-button-next"></div>
         </swiper>
-      </div>
-      <div class="card-wrap type2">
+      </div> -->
+      <!-- <div class="card-wrap type2">
         <div class="left">
           <div class="card-tit"><nuxt-link to="">Notice</nuxt-link></div>
           <ul class="tit-list">
@@ -127,7 +137,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <el-dialog title="" width="500px" :visible.sync="popsModalVisible">

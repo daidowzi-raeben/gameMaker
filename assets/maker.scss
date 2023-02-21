@@ -641,9 +641,10 @@
       &-tit {
         margin-left: -75px;
         position: relative;
+        width:100%;
 
         .delete-btn {
-          right: calc(50% - 30px);
+          right: -35px;
           top: -30px;
         }
 
@@ -883,7 +884,7 @@
         font-size: 1.4rem;
         color: $textCol2;
         font-weight: 300;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
       }
 
       &-scen {
@@ -1019,7 +1020,7 @@
           width: calc(100% + 40px);
           position: relative;
           left: -20px;
-          padding: 0 25px 10px;
+          padding: 0 20px 10px;
           margin-bottom: 10px;
 
           &--btn {
@@ -1211,8 +1212,9 @@
           }
 
           &-answer {
-            margin-top: 25px;
+            // margin-top: 25px;
             position: relative;
+            margin-bottom:10px;
 
             input[type=text] {
               height: 45px;
@@ -1359,7 +1361,9 @@
           margin: 0;
           font-size: 1.4rem;
           position: relative;
-          top: 15px;
+          // top: 15px;
+          display:block;
+          margin-bottom:25px;
         }
       }
 
@@ -1455,6 +1459,7 @@
             width: 100%;
             border: none;
             padding: 0;
+            line-height: 1.5;
           }
 
           .insert-set {
@@ -2385,9 +2390,11 @@
         text-shadow: -1px 0 rgba(255, 255, 255, .5), 0 1px rgba(255, 255, 255, .5), 1px 0 rgba(255, 255, 255, .5), 0 -1px rgba(255, 255, 255, .5);
 
         .con {
-          height: 90%;
+          height: 100%;
           overflow: auto;
           margin:0 10px;
+          white-space: pre-line;
+          margin-top:-20px;
         }
       }
 
@@ -2890,7 +2897,7 @@
     .register-btn {
       background: #ccc;
       color: #fff;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 300;
       border-radius: 10px;
       width: 100%;

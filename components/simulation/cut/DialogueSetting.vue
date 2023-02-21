@@ -65,7 +65,7 @@
         <div slot="button-prev" class="swiper-button-prev"></div>
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
-      <div v-if="cutType === 3 || cutType === 4" class="timer">
+      <!-- <div v-if="cutType === 3 || cutType === 4" class="timer">
         <button type="button" class="btn set">
           {{
             PREVIEW.data.questionsTimer
@@ -82,14 +82,14 @@
             />
             <span class="check-text">없음</span>
           </label>
-          <!-- <label class="btn">
+          <label class="btn">
             <input
               type="checkbox"
               :checked="timerSettingSecond === 5"
               @change="onChangeTimerSetting(5)"
             />
             <span class="check-text">5초</span>
-          </label> -->
+          </label>
           <label class="btn">
             <input
               type="checkbox"
@@ -123,7 +123,7 @@
             <span class="check-text">30초</span>
           </label>
         </div>
-      </div>
+      </div> -->
       <div
         v-if="cutType === 1 || cutType === 2 || cutType === 4"
         class="insert-wrap"
@@ -880,7 +880,7 @@
         </div> -->
       </div>
       <div v-if="cutType === 4">
-        <label class="label">질문</label>
+        <!-- <label class="label">질문</label> -->
         <label class="label">답변</label>
         <div class="insert-answer">
           <input

@@ -11,14 +11,14 @@
               class="button md btn-blue"
               @click="onClickLoadAssets('cr')"
             >
-              에셋 불러오기
+              구매한 에셋 불러오기
             </button> -->
             <button
               type="button"
               class="button md btn-primary"
               @click="onClickIsOpen('C')"
             >
-              에셋 등록하기
+              에셋 직접 등록하기
             </button>
           </div>
         </div>
@@ -53,14 +53,14 @@
               class="button md btn-blue"
               @click="onClickLoadAssets('bg')"
             >
-              에셋 불러오기
+              구매한 에셋 불러오기
             </button> -->
             <button
               type="button"
               class="button md btn-primary"
               @click="onClickIsOpen('B')"
             >
-              에셋 등록하기
+              에셋 직접 등록하기
             </button>
           </div>
         </div>
@@ -92,14 +92,14 @@
               class="button md btn-blue"
               @click="onClickLoadAssets('sr')"
             >
-              에셋 불러오기
+              구매한 에셋 불러오기
             </button> -->
             <button
               type="button"
               class="button md btn-primary"
               @click="onClickIsOpen('S')"
             >
-              에셋 등록하기
+              에셋 직접 등록하기
             </button>
           </div>
         </div>

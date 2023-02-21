@@ -22,29 +22,6 @@
             </ul>
           </div>
         </el-scrollbar>
-        <el-popover placement="right" width="400" trigger="click">
-          <cropper
-            class="cropper"
-            :src="img"
-            :stencil-props="{
-              handlers: {},
-              aspectRatio: 10 / 10,
-              resizable: false,
-            }"
-            :stencil-size="{
-              width: 150,
-              height: 150,
-            }"
-            @change="onChangeCropImage"
-          ></cropper>
-          <el-button
-            slot="reference"
-            class="btn-grey btn-line"
-            :disabled="PREVIEW.img.cr ? false : true"
-            @click="onClickThumb(PREVIEW.img.cr)"
-            >두상 이미지</el-button
-          >
-        </el-popover>
 
         <div class="setting-tit mt-5">배경 이미지</div>
         <el-scrollbar>
@@ -83,19 +60,43 @@
             <option value="top">TOP</option>
             <option value="bottom">BOTTOM</option>
           </select> -->
+          <el-popover placement="right" width="400" trigger="click" class="mr-1">
+            <cropper
+              class="cropper"
+              :src="img"
+              :stencil-props="{
+                handlers: {},
+                aspectRatio: 10 / 10,
+                resizable: false,
+              }"
+              :stencil-size="{
+                width: 150,
+                height: 150,
+              }"
+              @change="onChangeCropImage"
+            ></cropper>
+            <el-button
+              slot="reference"
+              class="btn-blue"
+              :disabled="PREVIEW.img.cr ? false : true"
+              @click="onClickThumb(PREVIEW.img.cr)"
+              >대표 이미지 만들기</el-button
+            >
+          </el-popover>
           <input
             type="text"
             class="input-text"
-            placeholder="인물의 이름을 입력하세요"
+            placeholder="이름은 최대 5글자까지 입력 가능해요"
             :value="PREVIEW_PROFILE.name"
             @input="onInputName"
+            :maxlength="5"
           />
         </div>
-
-        <div class="textarea-wrap">
+        <!-- 프로필등장 버튼 주석, 스타일 임시 -->
+        <div class="textarea-wrap" style="padding-bottom:10px">
           <textarea
             rows="10"
-            placeholder="인물의 소개를 입력하세요"
+            placeholder="인물의 소개를 입력하세요! 길어지면 스크롤 처리돼요"
             class="input-textarea"
             :value="PREVIEW_PROFILE.discription.replaceAll('||n', '\n')"
             @input="onInputProfile"
