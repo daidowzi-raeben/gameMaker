@@ -7,15 +7,17 @@
         <ul class="asset-list">
           <li class="asset-list--item">
             <span class="tit">인물</span>
-            <span class="num">5</span>
+            <span class="num">
+              {{ ASSETS.cr ? ASSETS.cr.length : 0 }}
+            </span>
           </li>
           <li class="asset-list--item">
             <span class="tit">배경</span>
-            <span class="num">15</span>
+            <span class="num">{{ ASSETS.bg ? ASSETS.bg.length : 0 }}</span>
           </li>
           <li class="asset-list--item">
             <span class="tit">사운드</span>
-            <span class="num">1,000</span>
+            <span class="num">{{ ASSETS.sr ? ASSETS.sr.length : 0 }}</span>
           </li>
         </ul>
       </li>
@@ -24,8 +26,12 @@
 </template>
 
 <script>
-export default {}
+import { mapState } from 'vuex'
+export default {
+  computed: {
+    ...mapState(['ASSETS']),
+  },
+}
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

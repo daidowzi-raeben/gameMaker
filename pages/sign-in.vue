@@ -112,12 +112,36 @@ export default {
       frm.append('user_id', this.login.id)
       frm.append('user_pw', this.login.pw)
       frm.append('apiKey', process.env.API_KEY)
-      this.ACTION_AXIOS_LOGIN(frm)
-      this.$router.push('/')
+      this.$axios
+        .post(process.env.VUE_APP_API, frm, {
+          header: {
+            'Context-Type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          console.log(res)
+          if (res.data.result === 'FALSE') {
+            return alert('아이디 및 패스워드를 확인해 주세요.')
+          }
+          //   아이디 암호화
+          this.$cookies.set('user_idx', res.data.login.user_idx, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7,
+          })
+          //   이름
+          this.$cookies.set('user_name', res.data.login.user_name, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7,
+          })
+          this.$store.commit('MUTATIONS_LOGIN', res.data)
+          this.$router.push('/')
+        })
+        .catch((res) => {
+          console.log('AXIOS FALSE', res)
+        })
     },
   },
 }
 </script>
 
-<style>
-</style>
+<style></style>

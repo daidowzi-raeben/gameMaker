@@ -86,6 +86,7 @@ export default {
       handler(value) {
         console.log(value)
         console.log('SUCCESS')
+        this.MUTATIONS_LOADING()
         // 로그인 성공 시 페이지 이동
       },
       immediate: true,
@@ -116,6 +117,7 @@ export default {
       'MUTATIONS_LOGIN_CHECK',
       'MUTATIONS_MAKER_GNB',
       'MUTATIONS_ASSETS_INIT',
+      'MUTATIONS_LOADING',
     ]),
 
     // 페이지 이탈 경고
@@ -127,6 +129,9 @@ export default {
     //   console.log(e)
     // },
     onClickGnbTo(e) {
+      if (e === 3 || e === 7) {
+        return alert('준비중입니다.')
+      }
       this.MUTATIONS_ASSETS_INIT()
       this.MUTATIONS_MAKER_GNB(e)
       this.activeMenu = e

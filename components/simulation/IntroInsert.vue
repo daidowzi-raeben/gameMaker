@@ -278,6 +278,7 @@ export default {
     onChangeFileInput(e) {
       this.isFileInsert = true
       this.fileInsertName = e.target.files[0].name
+      console.log(e)
     },
     onClickFileDelete() {
       this.isFileInsert = false

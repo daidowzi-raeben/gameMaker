@@ -143,12 +143,14 @@
         @click="onClickRightContentShow()"
       ></button>
     </div>
-    <el-dialog title="" width="800px" :visible.sync="popsModalVisible">
-      <AssetsLocalUpload
-        :assetsType="assetsType"
-        @assetsInsertIsClose="assetsInsertIsClose"
-      />
-    </el-dialog>
+    <div v-if="popsModalVisible">
+      <el-dialog title="" width="800px" :visible.sync="popsModalVisible">
+        <AssetsLocalUpload
+          :assetsType="assetsType"
+          @assetsInsertIsClose="assetsInsertIsClose"
+        />
+      </el-dialog>
+    </div>
     <el-dialog title="" :visible.sync="popsModalVisibleLoadAssets">
       <el-scrollbar>
         <div class="thumbnail-list--wrap type2">
@@ -235,10 +237,12 @@ export default {
       assetsType: 'C',
     }
   },
+
   computed: {
     ...mapState(['PROJECT_ID', 'ASSETS', 'ASSETS_STORE', 'ASSETSMY']),
     ...mapGetters(['GETTER_LOADING', 'GETTER_TEST']),
   },
+
   mounted() {
     this.$nextTick(() => {
       this.params.type = 'assetsProject'
@@ -321,5 +325,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
