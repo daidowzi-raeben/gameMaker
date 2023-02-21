@@ -87,9 +87,7 @@
             type="text"
             class="input-text"
             placeholder="인물의 이름을 입력하세요"
-            :value="
-              CHAPTER_DEATILE || CHAPTER_DEATILE_IDX ? CHAPTER_DEATILE.name : ''
-            "
+            :value="PREVIEW_PROFILE.name"
             @input="onInputName"
           />
         </div>
@@ -99,13 +97,7 @@
             rows="10"
             placeholder="인물의 소개를 입력하세요"
             class="input-textarea"
-            :value="
-              CHAPTER_DEATILE || CHAPTER_DEATILE_IDX
-                ? CHAPTER_DEATILE.profile
-                  ? CHAPTER_DEATILE.profile.replaceAll('||n', '\n')
-                  : CHAPTER_DEATILE.profile
-                : ''
-            "
+            :value="PREVIEW_PROFILE.discription.replaceAll('||n', '\n')"
             @input="onInputProfile"
           ></textarea>
           <ScenarioSelect />
@@ -208,6 +200,7 @@ export default {
       colorPicker: null,
       params: {},
       img: '',
+      thumb: '',
     }
   },
   PREVIEW: {
@@ -227,6 +220,7 @@ export default {
       'SCENE_DATA',
       'SCENE_DATA_CHARACTER',
       'PREVIEW_PROFILE',
+      'CROP_IMAGE',
     ]),
   },
   watch: {
@@ -268,8 +262,9 @@ export default {
       'MUTATIONS_ASSETS_BG',
       'MUTATIONS_CONTENT_CODE',
       'MUTATIONS_PROFILE_COLOR_PICKER',
+      'MUTATIONS_CROP_IMAGE',
     ]),
-    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST_PROFILE']),
 
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
@@ -294,17 +289,21 @@ export default {
     },
     onSubmit() {
       this.MUTATIONS_LOADING_INIT()
+      const frm = new FormData()
       if (this.SCENE_DATA_CHARACTER.jsonData) {
         this.characterLength = this.SCENE_DATA_CHARACTER.jsonData.length
       }
       if (this.CHAPTER_DEATILE_IDX) {
-        this.paramsData.mode = 'update'
-        this.paramsData.idx = this.CHAPTER_DEATILE_IDX
+        frm.append('mode', 'update')
+        frm.append('idx', this.CHAPTER_DEATILE_IDX)
+        this.characterData.profile = ''
+        this.characterData.name = ''
         if (!this.characterData?.profile) {
-          this.characterData.profile = this.CHAPTER_DEATILE.profile
+          // frm.append('profile', this.CHAPTER_DEATILE.profile)
+          this.characterData.profile = this.PREVIEW_PROFILE.discription
         }
         if (!this.characterData?.name) {
-          this.characterData.name = this.CHAPTER_DEATILE.name
+          this.characterData.name = this.PREVIEW_PROFILE.name
         }
       } else {
         for (let i = 0; i < this.characterLength; i++) {
@@ -317,10 +316,13 @@ export default {
           // }
         }
       }
-      // return
+
       this.characterData.bg = this.PREVIEW.img.bg
       this.characterData.cr = this.PREVIEW.img.cr
-      // this.paramsData.crHead = this.img
+      // this.paramsData.crHead = this.thumb.replaceAll(
+      //   'data:image/png;base64,',
+      //   ''
+      // )
       // this.characterData.position = this.$refs.profilePosition.value
       this.paramsData.type = 'characterInsert'
       this.paramsData.secretKey = this.PROJECT_ID
@@ -330,13 +332,31 @@ export default {
         '\n',
         '||n'
       )
-      this.characterData.background = this.colorPicker
-      this.paramsData.previewData = JSON.stringify(this.characterData)
+
+      // return
+      frm.append('bg', this.PREVIEW.img.bg)
+      frm.append('cr', this.PREVIEW.img.cr)
+      if (this.thumb) {
+        frm.append('crHead', this.thumb)
+      }
+
+      frm.append('type', 'characterInsert')
+      frm.append('secretKey', this.PROJECT_ID)
+      frm.append('user_idx', kooLogin('user_idx'))
+      frm.append('apiKey', process.env.API_KEY)
+      frm.append('background', this.colorPicker)
+      frm.append('previewData', JSON.stringify(this.characterData))
+      frm.append(
+        'profile',
+        this.characterData.profile
+          ? this.characterData.profile.replaceAll('\n', '||n')
+          : ''
+      )
       // this.paramsData.previewData = this.paramsData.previewData.replaceAll(
       //   '\n',
       //   '||n'
       // )
-      this.ACTION_AXIOS_GET(this.paramsData)
+      this.ACTION_AXIOS_POST_PROFILE(frm)
       this.onSave()
 
       // this.MUTATIONS_ASSETS_INIT()
@@ -397,7 +417,9 @@ export default {
       // You able to do different manipulations at a canvas
       // but there we just get a cropped image, that can be used
       // as src for <img/> to preview result
-      this.$emit('onChangeCropImage', canvas.toDataURL())
+      // this.$emit('onChangeCropImage', canvas.toDataURL())
+      this.thumb = canvas.toDataURL()
+      this.MUTATIONS_CROP_IMAGE(this.thumb)
     },
     onClickThumb(v) {
       fetch(

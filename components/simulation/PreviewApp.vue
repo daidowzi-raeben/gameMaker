@@ -84,8 +84,8 @@
                 <rect
                   width="180"
                   height="46"
-                  :x="Number(UISetting.button.x)+10"
-                  :y="Number(UISetting.button.y)+10"
+                  :x="Number(UISetting.button.x) + 10"
+                  :y="Number(UISetting.button.y) + 10"
                   :fill="UISetting.button.shadowColor"
                   :rx="UISetting.button.round"
                   mask="url(#Mask)"
@@ -307,10 +307,19 @@
             <img :src="onLoadAssetsImage(PREVIEW.img.cr, 'cr')" alt="" />
           </div>
           <div class="character head">
-            <img :src="cropImage" />
+            <img
+              v-if="!CROP_IMAGE && PREVIEW.img.head"
+              width="100%"
+              :src="onLoadAssetsImage(PREVIEW.img.head, 'cr')"
+            />
+            <img v-if="CROP_IMAGE" :src="CROP_IMAGE" />
           </div>
           <div class="profile">
-            <p class="con" :class="UISetting.font">
+            <p
+              class="con"
+              :class="UISetting.font"
+              style="white-space: pre-line"
+            >
               {{
                 PREVIEW_PROFILE.discription
                   ? PREVIEW_PROFILE.discription.replaceAll('||n', '\n')
@@ -424,6 +433,7 @@ export default {
       'PREVIEW_INTRO',
       'PROJECT_ID',
       'CHAPTER_INDEX',
+      'CROP_IMAGE',
       'SCENE_INDEX',
     ]),
   },
