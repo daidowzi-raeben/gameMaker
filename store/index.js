@@ -626,6 +626,12 @@ const createStore = () => {
                         state.CUT_LIST.jsonData[0].questionsPoint
                     state.SAVE_DATETIME = state.CUT_LIST.datetime_modify
                     state.CUT_CODE = 0
+                    state.PREVIEW.data.text = ''
+                    state.PREVIEW.data.questions.text_1 = ''
+                    state.PREVIEW.data.questions.text_2 = ''
+                    state.PREVIEW.data.questions.text_3 = ''
+                    state.PREVIEW.data.subjectiveQuestion = ''
+                    state.PREVIEW.data.answer = ''
                 } else {
                     state.PREVIEW.img.connect = ''
                     state.PREVIEW.img.bg = ''
@@ -668,6 +674,10 @@ const createStore = () => {
                     ]
                 }
             },
+            MUTATIONS_CUT_LIST_CUT_CODE(state, payload) {
+                state.CUT_CODE = 0
+            },
+
             // 컷 리스트 변환
             MUTATIONS_CUT_LIST_GET_DATA_DETAIL(state, payload) {
                 console.log('MUTATIONS_ASSETS_DATA_TEXT', payload)

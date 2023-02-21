@@ -1,11 +1,11 @@
 <template>
   <el-scrollbar class="cut-list--wrap">
-    <ul id="activeList" class="cut-list">
+    <ul v-if="CUT_LIST.jsonData" id="activeList" class="cut-list">
       <li
         v-for="(v, i) in CUT_LIST.jsonData"
         :key="'cutList' + i"
         class="cut-list--item"
-        :class="{ active: i === 0 }"
+        :class="{ active: i === CUT_CODE }"
         @click="onClickCutPush(i, v.code)"
       >
         <div class="thumbnail">
@@ -27,7 +27,7 @@
         <div class="info">
           <div class="top">
             <span class="name">{{ v.crName }}</span>
-            <span v-if="v.cutType === 1" class="category type1">대사</span>
+            <span v-if="v.cutType === 1" class="category type1">대사 </span>
             <span v-if="v.cutType === 2" class="category type2">나레이션</span>
             <span v-else-if="v.cutType === 3" class="category type4"
               >객관식</span

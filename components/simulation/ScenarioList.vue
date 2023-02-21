@@ -290,6 +290,7 @@ export default {
       'MUTATIONS_CHAPTER_INDEX',
       'MUTATIONS_SAVE_DATETIME_INIT',
       'MUTATIONS_LOADING_INIT',
+      'MUTATIONS_CUT_LIST_CUT_CODE',
     ]),
     onSubmit() {
       // form 데이터 전달
@@ -303,6 +304,7 @@ export default {
     onClickChapterTo(e, i, i2) {
       this.MUTATIONS_LOADING_INIT()
       this.MUTATIONS_SAVE_DATETIME_INIT()
+      this.MUTATIONS_CUT_LIST_CUT_CODE(0)
       this.MUTATIONS_SCENE_CODE(e)
       this.MUTATIONS_SCENE_INDEX(i)
       this.MUTATIONS_CHAPTER_INDEX(i2)
