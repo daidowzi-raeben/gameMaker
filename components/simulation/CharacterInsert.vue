@@ -319,6 +319,7 @@ export default {
 
       this.characterData.bg = this.PREVIEW.img.bg
       this.characterData.cr = this.PREVIEW.img.cr
+      this.characterData.background = this.colorPicker
       // this.paramsData.crHead = this.thumb.replaceAll(
       //   'data:image/png;base64,',
       //   ''
@@ -344,7 +345,6 @@ export default {
       frm.append('secretKey', this.PROJECT_ID)
       frm.append('user_idx', kooLogin('user_idx'))
       frm.append('apiKey', process.env.API_KEY)
-      frm.append('background', this.colorPicker)
       frm.append('previewData', JSON.stringify(this.characterData))
       frm.append(
         'profile',
