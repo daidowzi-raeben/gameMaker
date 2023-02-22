@@ -268,7 +268,11 @@
               :class="UISetting.font"
               :style="
                 UISetting.mainColor
-                  ? `background:${UISetting.mainColor};color:${UISetting.mainFontColor}`
+                  ? `background:${UISetting.mainColor};color:${
+                      UISetting.mainFontColor
+                    };border-radius:${Math.round(
+                      Number(UISetting.button.round) / 2
+                    )}px`
                   : ''
               "
               >메인 색상</span
@@ -316,10 +320,7 @@
             <img v-if="CROP_IMAGE" :src="CROP_IMAGE" />
           </div>
           <div class="profile">
-            <p
-              class="con"
-              :class="UISetting.font"
-            >
+            <p class="con" :class="UISetting.font">
               {{
                 PREVIEW_PROFILE.discription
                   ? PREVIEW_PROFILE.discription.replaceAll('||n', '\n')

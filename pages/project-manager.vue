@@ -4,7 +4,13 @@
       <div class="card-wrap">
         <div class="card-tit">
           <nuxt-link to="">내 프로젝트</nuxt-link>
-          <button type="button" class="button btn-primary md btn-add" @click="popsModalVisible = true">추가하기</button>
+          <button
+            type="button"
+            class="button btn-primary md btn-add"
+            @click="popsModalVisible = true"
+          >
+            추가하기
+          </button>
         </div>
         <!-- <swiper
           v-if="PROJECT_MANAGER"
@@ -195,7 +201,7 @@ export default {
   components: {
     // ProjectCreate,
   },
-  layout: 'default-index',
+  layout: 'index',
   data() {
     return {
       params: {},
@@ -291,5 +297,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

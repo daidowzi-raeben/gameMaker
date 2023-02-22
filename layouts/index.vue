@@ -48,10 +48,7 @@
           <a href="#_self" class="btn btn-login" @click.prevent="onClickLogout"
             >로그아웃</a
           >
-          <nuxt-link
-            target="_blank"
-            to="/project-manager"
-            class="btn btn-primary"
+          <nuxt-link to="/project-manager" class="btn btn-primary"
             >프로젝트</nuxt-link
           >
         </div>
