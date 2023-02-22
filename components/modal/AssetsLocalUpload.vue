@@ -192,6 +192,9 @@ export default {
         .then((res) => {
           console.log(res)
           this.params.loadingInit = this.GETTER_LOADING_INIT
+          setTimeout(() => {
+            console.log(1)
+          }, (10000));
           if (res.data === 'OK') {
             alert('등록되었습니다.')
             this.isOpen = false

@@ -306,6 +306,7 @@
   &-wrap {
     display: flex;
     min-height: calc(100vh - 80px);
+    position:relative;
   }
 
   &-left {
@@ -313,6 +314,36 @@
     width: 240px;
     height: calc(100vh - 80px);
     overflow-y: auto;
+
+    &--capacity{
+      position:absolute;
+      left:0;
+      bottom:20px;
+      width:100%;
+      padding:0 20px;
+      .num{
+        color:#fff;
+        margin-bottom:10px;
+        strong{
+          color:$colPrimary;
+        }
+      }
+      .bar{
+        position:absolute;
+        left:0;
+        top:0;
+        height:6px;
+        background-color:$colPrimary;
+        border-radius: 20px;
+        &-wrap{
+          background-color:#888;
+          border-radius: 20px;
+          height:6px;
+          width:200px;
+          position:relative;
+        }
+      }
+    }
 
     &::-webkit-scrollbar {
       width: 8px;
@@ -2075,7 +2106,6 @@
         top: -13px;
         color: #fff;
         font-weight: 600;
-        text-shadow: -1px 0 rgba(255, 255, 255, .5), 0 1px rgba(255, 255, 255, .5), 1px 0 rgba(255, 255, 255, .5), 0 -1px rgba(255, 255, 255, .5);
 
         &.font-sm {
           font-size: 1.3rem;
@@ -2093,7 +2123,7 @@
         word-break: break-all;
         line-height: 1.5;
         font-weight: 500;
-        text-shadow: -1px 0 rgba(255, 255, 255, .5), 0 1px rgba(255, 255, 255, .5), 1px 0 rgba(255, 255, 255, .5), 0 -1px rgba(255, 255, 255, .5);
+        text-shadow: 0 0 white;
 
         &.font-sm {
           font-size: 1.3rem;

@@ -792,6 +792,9 @@ button:disabled{
             font-weight: 300;
             margin:20px 0;
             transition:color .3s;
+            &:hover{
+              color:$colPrimary;
+            }
             &.active{
               color:$colPrimary;
               & + .con{
@@ -1749,7 +1752,7 @@ button:disabled{
 }
 
 .el-loading-mask{
-  z-index: 9999;
+  z-index: 9999 !important;
 }
 
 .el-dialog{

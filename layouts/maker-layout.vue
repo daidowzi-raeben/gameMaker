@@ -29,7 +29,7 @@
           </button>
         </li>
         <li class="item">
-          <button type="button" class="icon icon-9">
+          <button type="button" class="icon icon-9" @click="onClickGnbTo(9)">
             <span class="icon-txt">저장하기</span>
           </button>
         </li>
@@ -129,8 +129,8 @@ export default {
     //   console.log(e)
     // },
     onClickGnbTo(e) {
-      if (e === 3 || e === 7) {
-        return alert('준비중입니다.')
+      if (e === 3 || e === 7 || e === 9) {
+        return alert('준비 중입니다!')
       }
       this.MUTATIONS_ASSETS_INIT()
       this.MUTATIONS_MAKER_GNB(e)

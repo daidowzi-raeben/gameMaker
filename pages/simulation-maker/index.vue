@@ -29,6 +29,16 @@
         <AssetsInsert v-if="MAKER_GNB === 6" />
         <SetupInsert v-if="MAKER_GNB === 7" />
       </div>
+
+      <div class="maker-left--capacity">
+        <p class="num">
+          <strong>18.5MB</strong>
+          / 50MB
+        </p>
+        <div class="bar-wrap">
+          <span class="bar" style="width:20%;"></span>
+        </div>
+      </div>
     </div>
     <!-- <div class="maker-wrap">
       <CutInsert
