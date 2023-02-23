@@ -38,8 +38,12 @@
               alt="background"
             />
           </div>
-          <div v-if="MAKER_GNB !== 5" class="preview-intro--logo">
-            <img v-if="!PREVIEW_INTRO.logo" src="~/static/images/logo.svg" />
+          <div class="preview-intro--logo">
+            <img
+              v-if="!PREVIEW_INTRO.logo && !LOGO_IMG"
+              src="~/static/images/logo.svg"
+            />
+            <img v-if="!PREVIEW_INTRO.logo && LOGO_IMG" :src="LOGO_IMG" />
             <img
               v-if="PREVIEW_INTRO.logo"
               :src="onLoadAssetsImage(PREVIEW_INTRO.logo, 'logo')"
@@ -82,8 +86,11 @@
                   mask="url(#Mask)"
                 />
               </svg>
-              <div :class="`text ${UISetting.font}`" :style="`color:${UISetting.mainFontColor}`">
-                  버튼 미리보기
+              <div
+                :class="`text ${UISetting.font}`"
+                :style="`color:${UISetting.mainFontColor}`"
+              >
+                버튼 미리보기
               </div>
             </div>
             <template v-if="MAKER_GNB === 2">
@@ -123,11 +130,14 @@
                     mask="url(#Mask)"
                   />
                 </svg>
-                <div :class="`text ${UISetting.font}`" :style="`color:${UISetting.mainFontColor}`">
-                    <template v-if="i===1">시작하기</template>
-                    <template v-if="i===2">불러오기</template>
-                    <template v-if="i===3">등장인물</template>
-                    <template v-if="i===4">갤러리</template>
+                <div
+                  :class="`text ${UISetting.font}`"
+                  :style="`color:${UISetting.mainFontColor}`"
+                >
+                  <template v-if="i === 1">시작하기</template>
+                  <template v-if="i === 2">불러오기</template>
+                  <template v-if="i === 3">등장인물</template>
+                  <template v-if="i === 4">갤러리</template>
                 </div>
               </div>
             </template>
@@ -192,9 +202,21 @@
             }}
           </div>
         </div>
-        <div v-if="MAKER_GNB === 1 || MAKER_GNB === 4 || MAKER_GNB === 5" class="preview-con icon" :style="`background:${UISetting.mainColor}`">
-          <button type="button" class="btn back" :class="{ wh: UISetting.icon === 'icon1' }"></button>
-          <button type="button" class="btn camera" :class="{ wh: UISetting.icon === 'icon1' }"></button>
+        <div
+          v-if="MAKER_GNB === 1 || MAKER_GNB === 4 || MAKER_GNB === 5"
+          class="preview-con icon"
+          :style="`background:${UISetting.mainColor}`"
+        >
+          <button
+            type="button"
+            class="btn back"
+            :class="{ wh: UISetting.icon === 'icon1' }"
+          ></button>
+          <button
+            type="button"
+            class="btn camera"
+            :class="{ wh: UISetting.icon === 'icon1' }"
+          ></button>
         </div>
         <div v-if="PREVIEW && MAKER_GNB === 1" class="preview-con preview-img">
           <img
@@ -495,6 +517,7 @@ export default {
       'CHAPTER_INDEX',
       'CROP_IMAGE',
       'SCENE_INDEX',
+      'LOGO_IMG',
     ]),
   },
   watch: {
@@ -595,8 +618,8 @@ export default {
   top: -10px;
   width: 180px;
   height: 46px;
-  margin-bottom:20px;
-  .text{
+  margin-bottom: 20px;
+  .text {
     position: absolute;
     left: 10px;
     top: 10px;
@@ -606,7 +629,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size:1.6rem;
+    font-size: 1.6rem;
   }
   svg {
     position: absolute;

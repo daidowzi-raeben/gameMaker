@@ -57,6 +57,7 @@
                 id="logoFile"
                 ref="logoFile"
                 type="file"
+                accept="image/png"
                 @change="onChangeFileInput"
               />
               <span v-if="isFileInsert === false" class="btn">이미지 등록</span>
@@ -270,20 +271,33 @@ export default {
       'MUTATIONS_INTRO_DIM',
       'MUTATIONS_INTRO_POSITION',
       'MUTATIONS_INTRO_COPYRIGHT_POSITION',
+      'MUTATIONS_LOGO_IMG',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
     },
     onChangeFileInput(e) {
+      const mp = e.target.files[0].name.split('.')
+      this.soundFile = e.target.files[0]
+      // e.target.files[0].name.substr(0,mp)
+      console.log(mp[mp.length - 1], e.target.files[0].name)
+      this.ext = mp[mp.length - 1]
+      if (this.ext !== 'png') {
+        e.target.files = null
+        return alert('png 확장자만 업로드가 가능합니다')
+      }
       this.isFileInsert = true
       this.fileInsertName = e.target.files[0].name
-      console.log(e)
+      this.MUTATIONS_LOGO_IMG(URL.createObjectURL(e.target.files[0]))
+
+      console.log(URL.createObjectURL(e.target.files[0]))
     },
     onClickFileDelete() {
       this.isFileInsert = false
       this.fileInsertName = ''
       this.$refs.logoFile.value = ''
+      this.MUTATIONS_LOGO_IMG('')
     },
     onIntroData(v, e) {
       if (v === 'copyright') {
