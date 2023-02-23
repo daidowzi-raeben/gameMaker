@@ -11,13 +11,14 @@
               accept="image/png"
               @change="onChangeUploadPreview($event)"
             />
-            <span>
-              {{
-                uploadPreview && assetsType === 'S'
-                  ? uploadPreview
-                  : '이곳을 클릭해서 에셋을 등록해 보세요'
-              }}
+            <span v-if="uploadPreview && assetsType === 'S'">
+              {{ uploadPreview }}
             </span>
+            <span v-else class="text-center" style="line-height: 20px"
+              >이곳을 클릭해서 에셋을 등록해 보세요<br />이미지는 2000*4000
+              의<br />
+              사이즈가 가장 적합합니다</span
+            >
             <div
               v-if="uploadPreview !== '' && assetsType !== 'S'"
               class="image-wrap"
@@ -140,6 +141,10 @@ export default {
       this.isOpen = false
     },
     onChangeUploadPreview(e) {
+      const limitSize = 1024 * 1024 * 10
+      if (limitSize < e.target.files[0].size / 1024 / 1024) {
+        return alert('이미지는 10MB 이하로 올릴 수 있습니다')
+      }
       const mp = e.target.files[0].name.split('.')
       this.soundFile = e.target.files[0]
       // e.target.files[0].name.substr(0,mp)

@@ -24,7 +24,7 @@
       </ul>
       <ul class="maker-header--menu right">
         <li class="item">
-          <button type="button" class="icon icon-8">
+          <button type="button" class="icon icon-8" @click="onClickGnbTo(10)">
             <span class="icon-txt">미리보기</span>
           </button>
         </li>
@@ -131,6 +131,9 @@ export default {
     onClickGnbTo(e) {
       if (e === 3 || e === 7 || e === 9) {
         return alert('준비 중입니다!')
+      }
+      if (e === 10) {
+        return alert('3월 1일 15시에 오픈됩니다!!')
       }
       this.MUTATIONS_ASSETS_INIT()
       this.MUTATIONS_MAKER_GNB(e)

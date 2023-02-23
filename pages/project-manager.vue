@@ -289,6 +289,7 @@ export default {
       this.$bvModal.hide('ProjectCreate')
     },
     onClickMakerProject() {
+      this.popsModalVisible = false
       const frm = new FormData()
       frm.append('type', 'projectInsert')
       frm.append('title', this.makerProject.subject)
