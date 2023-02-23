@@ -38,7 +38,7 @@
               alt="background"
             />
           </div>
-          <div class="preview-intro--logo">
+          <div v-if="MAKER_GNB !== 5" class="preview-intro--logo">
             <img v-if="!PREVIEW_INTRO.logo" src="~/static/images/logo.svg" />
             <img
               v-if="PREVIEW_INTRO.logo"
@@ -46,7 +46,7 @@
             />
           </div>
           <div class="preview-intro--menu">
-            <div class="svg-button">
+            <div v-if="MAKER_GNB === 5" :key="`button${i}`" class="svg-button">
               <svg width="220" height="80">
                 <rect
                   width="180"
@@ -58,15 +58,6 @@
                   :stroke="UISetting.button.strokeColor"
                   :stroke-width="UISetting.button.border"
                 />
-                <text
-                  text-anchor="middle"
-                  alignment-baseline="middle"
-                  transform="translate(100, 35)"
-                  font-size="16px"
-                  :class="UISetting.font"
-                >
-                  시작하기
-                </text>
 
                 <defs>
                   <mask id="Mask">
@@ -91,8 +82,56 @@
                   mask="url(#Mask)"
                 />
               </svg>
+              <div :class="`text ${UISetting.font}`" :style="`color:${UISetting.mainFontColor}`">
+                  버튼 미리보기
+              </div>
             </div>
-            <button
+            <template v-if="MAKER_GNB === 2">
+              <div v-for="i in 4" :key="`button${i}`" class="svg-button">
+                <svg width="220" height="80">
+                  <rect
+                    width="180"
+                    height="46"
+                    x="10"
+                    y="10"
+                    :fill="UISetting.mainColor"
+                    :rx="UISetting.button.round"
+                    :stroke="UISetting.button.strokeColor"
+                    :stroke-width="UISetting.button.border"
+                  />
+
+                  <defs>
+                    <mask id="Mask">
+                      <rect width="100%" height="100%" fill="white" />
+                      <rect
+                        x="5"
+                        y="5"
+                        width="185"
+                        height="51"
+                        fill="black"
+                        :rx="UISetting.button.round"
+                      />
+                    </mask>
+                  </defs>
+                  <rect
+                    width="180"
+                    height="46"
+                    :x="Number(UISetting.button.x) + 10"
+                    :y="Number(UISetting.button.y) + 10"
+                    :fill="UISetting.button.shadowColor"
+                    :rx="UISetting.button.round"
+                    mask="url(#Mask)"
+                  />
+                </svg>
+                <div :class="`text ${UISetting.font}`" :style="`color:${UISetting.mainFontColor}`">
+                    <template v-if="i===1">시작하기</template>
+                    <template v-if="i===2">불러오기</template>
+                    <template v-if="i===3">등장인물</template>
+                    <template v-if="i===4">갤러리</template>
+                </div>
+              </div>
+            </template>
+            <!-- <button
               type="button"
               class="btn"
               :class="UISetting.font"
@@ -125,9 +164,25 @@
               :style="`box-shadow: ${UISetting.button.x}px ${UISetting.button.y}px 0 ${UISetting.button.shadowColor}; outline : ${UISetting.button.border}px solid ${UISetting.button.strokeColor}; background:${UISetting.mainColor}; color:${UISetting.mainFontColor}; border-radius:${UISetting.button.round}px`"
             >
               갤러리
+            </button> -->
+          </div>
+
+          <div v-if="MAKER_GNB === 5" class="answer answer-multiple">
+            <button
+              type="button"
+              class="btn"
+              :class="UISetting.font"
+              :style="
+                UISetting.fontColor
+                  ? `${windowColor()}; color:${UISetting.fontColor}`
+                  : windowColor()
+              "
+            >
+              객/주관식 창 미리보기
             </button>
           </div>
           <div
+            v-if="MAKER_GNB !== 5"
             class="preview-intro--copy"
             :class="PREVIEW_INTRO.copyrightPosition"
           >
@@ -137,20 +192,9 @@
             }}
           </div>
         </div>
-        <div
-          class="preview-con icon"
-          :style="`background:${UISetting.mainColor}`"
-        >
-          <button
-            type="button"
-            class="btn back"
-            :class="{ wh: UISetting.icon === 'icon1' }"
-          ></button>
-          <button
-            type="button"
-            class="btn camera"
-            :class="{ wh: UISetting.icon === 'icon1' }"
-          ></button>
+        <div v-if="MAKER_GNB === 1 || MAKER_GNB === 4 || MAKER_GNB === 5" class="preview-con icon" :style="`background:${UISetting.mainColor}`">
+          <button type="button" class="btn back" :class="{ wh: UISetting.icon === 'icon1' }"></button>
+          <button type="button" class="btn camera" :class="{ wh: UISetting.icon === 'icon1' }"></button>
         </div>
         <div v-if="PREVIEW && MAKER_GNB === 1" class="preview-con preview-img">
           <img
@@ -290,14 +334,14 @@
                     )}px`
                   : ''
               "
-              >메인 색상</span
+              >이름</span
             >
             <p
               class="text"
               :class="UISetting.font"
               :style="UISetting.fontColor ? `color:${UISetting.fontColor}` : ''"
             >
-              창 색상
+              대사창 미리보기
             </p>
           </div>
         </div>
@@ -551,6 +595,19 @@ export default {
   top: -10px;
   width: 180px;
   height: 46px;
+  margin-bottom:20px;
+  .text{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:1.6rem;
+  }
   svg {
     position: absolute;
     // &:last-child {
