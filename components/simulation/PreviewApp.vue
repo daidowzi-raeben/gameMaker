@@ -137,6 +137,10 @@
             }}
           </div>
         </div>
+        <div class="preview-con icon" :style="`background:${UISetting.mainColor}`">
+          <button type="button" class="btn back"></button>
+          <button type="button" class="btn camera wh"></button>
+        </div>
         <div v-if="PREVIEW && MAKER_GNB === 1" class="preview-con preview-img">
           <img
             v-if="PREVIEW.img.bg"
