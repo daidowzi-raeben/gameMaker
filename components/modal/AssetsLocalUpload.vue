@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
   props: {
@@ -137,6 +137,7 @@ export default {
     console.log(this.modalVisible)
   },
   methods: {
+    ...mapMutations(['MUTATIONS_LOADING_INIT', 'MUTATIONS_LOADING']),
     beforeClose() {
       this.isOpen = false
     },
@@ -183,6 +184,7 @@ export default {
       }
     },
     onSubmit() {
+      this.MUTATIONS_LOADING_INIT()
       if (!this.params.gas_name) {
         return alert('에셋 이름을 작성해 주세요')
       }
@@ -234,6 +236,7 @@ export default {
             this.$emit('assetsInsertIsClose', false)
             this.isDisabled = false
           }
+          this.MUTATIONS_LOADING()
         })
         .catch((res) => {
           console.log('AXIOS FALSE', res)
