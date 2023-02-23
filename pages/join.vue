@@ -69,6 +69,10 @@
             중복확인
           </button>
         </div>
+        <div v-if="JOIN_NAME !== 'SUCCESS'" class="input-guide">
+          중복확인 버튼을 클릭해 주세요
+        </div>
+        <div v-else class="input-guide blue">사용가능한 아이디입니다</div>
         <div class="login-input">
           <label class="label">생년월일</label>
           <el-select v-model="login.y" class="select">
