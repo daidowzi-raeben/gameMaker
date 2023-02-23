@@ -137,9 +137,20 @@
             }}
           </div>
         </div>
-        <div class="preview-con icon" :style="`background:${UISetting.mainColor}`">
-          <button type="button" class="btn back"></button>
-          <button type="button" class="btn camera wh"></button>
+        <div
+          class="preview-con icon"
+          :style="`background:${UISetting.mainColor}`"
+        >
+          <button
+            type="button"
+            class="btn back"
+            :class="{ wh: UISetting.icon === 'icon1' }"
+          ></button>
+          <button
+            type="button"
+            class="btn camera"
+            :class="{ wh: UISetting.icon === 'icon1' }"
+          ></button>
         </div>
         <div v-if="PREVIEW && MAKER_GNB === 1" class="preview-con preview-img">
           <img
