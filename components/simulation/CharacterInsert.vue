@@ -50,7 +50,7 @@
               show-alpha
               @active-change="onChangeColorPicker"
             ></el-color-picker>
-            <label class="label">배경색상</label>
+            <label class="label mt-2">배경색상</label>
           </div>
         </div>
 

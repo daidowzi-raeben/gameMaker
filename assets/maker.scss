@@ -319,7 +319,7 @@
       position:absolute;
       left:0;
       bottom:20px;
-      width:100%;
+      width:240px;
       padding:0 20px;
       .num{
         color:#fff;
@@ -622,6 +622,7 @@
         background: #fff;
         border-radius: 10px;
         transition: right .3s;
+        display:none;
 
         @media (max-width: 1600px) {
           position: fixed;
@@ -829,7 +830,7 @@
       border-radius: 10px;
       position: relative;
       min-width: 500px;
-      margin: 0 10px;
+      margin: 0 0 0 10px;
 
       .right-top {
         position: absolute;
@@ -838,9 +839,9 @@
         z-index: 1;
       }
 
-      @media (max-width: 1600px) {
-        margin: 0 50px 0 10px;
-      }
+      // @media (max-width: 1600px) {
+      //   margin: 0 50px 0 10px;
+      // }
 
       &:last-child {
         margin-right: 0;
@@ -1389,7 +1390,7 @@
 
         .label {
           height: 0;
-          margin: 0;
+          // margin: 0;
           font-size: 1.4rem;
           position: relative;
           // top: 15px;
@@ -1612,6 +1613,7 @@
 
           .info {
             width: calc(100% - 40px);
+            line-height: 1.2;
 
             .top {
               display: flex;
@@ -2120,13 +2122,13 @@
       position: absolute;
       left: 10%;
       bottom: 25px;
-      background-color: rgba(255, 255, 255, .8);
+      // background-color: rgba(255, 255, 255, .8);
       width: 80%;
-      border-radius: 10px;
+      // border-radius: 10px;
       padding: 22px 15px 15px;
       font-size: 1.4rem;
       height: 120px;
-      box-shadow: 0 8px rgba(0, 0, 0, .5);
+      // box-shadow: 0 8px rgba(0, 0, 0, .5);
       z-index: 2;
 
       .name {
@@ -2529,12 +2531,12 @@
 
     &-multiple {
       .btn {
-        background: rgba(255, 255, 255, .8);
+        // background: rgba(255, 255, 255, .8);
         margin: 7px 0;
         font-size: 1.4rem;
         padding: 7px;
-        box-shadow: 0 8px 0 rgba(0, 0, 0, .5);
-        border-radius: 10px;
+        // box-shadow: 0 8px 0 rgba(0, 0, 0, .5);
+        // border-radius: 10px;
         height: 40px;
         font-weight: 500;
       }
@@ -2546,17 +2548,23 @@
         background: rgba(255, 255, 255, .8);
         margin-bottom: 15px;
         font-size: 1.4rem;
-        padding: 7px 10px;
+        padding: 15px;
+        line-height: 1.5;
         box-shadow: 0 8px 0 rgba(0, 0, 0, .5);
         border-radius: 10px;
       }
 
       .input-text {
+        padding:5px 15px;
+        height:40px;
         width: 100%;
         background: rgba(255, 255, 255, .8);
         box-shadow: 0 8px 0 rgba(0, 0, 0, .5);
         border-radius: 10px;
         border: none;
+        &::placeholder{
+          color:#999;
+        }
       }
     }
   }
