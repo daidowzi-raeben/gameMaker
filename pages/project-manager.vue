@@ -33,6 +33,8 @@
             class="card-list--item project-list--item"
           >
             <nuxt-link :to="`/simulation-maker?projectKey=${v.secret_code}`">
+              <img v-if="v.logo" :src="onLoadAssetsImage(v.logo)" />
+              <img v-else src="~/static/images/logo.svg" />
               <div class="top">
                 <span class="date"
                   >최근 수정일<span class="num">{{
@@ -53,17 +55,17 @@
               </div>
               <ul class="state-list">
                 <li class="state-list--item">
-                  <label class="label">인물</label>
-                  <span class="num">3</span>
+                  <label class="label">시나리오</label>
+                  <span class="num">{{ onLoadStory(v.json_data, 'S') }}</span>
                 </li>
                 <li class="state-list--item">
-                  <label class="label">에셋</label>
-                  <span class="num">10,904</span>
+                  <label class="label">챕터</label>
+                  <span class="num">{{ onLoadStory(v.json_data, 'C') }}</span>
                 </li>
-                <li class="state-list--item">
+                <!-- <li class="state-list--item">
                   <label class="label">스토리</label>
                   <span class="num">20-30</span>
-                </li>
+                </li> -->
               </ul>
             </nuxt-link>
           </div>
@@ -292,6 +294,28 @@ export default {
       frm.append('user_idx', this.$cookies.get('user_idx'))
       frm.append('apiKey', process.env.API_KEY)
       this.ACTION_AXIOS_POST(frm, 'projectInsert')
+    },
+    onLoadAssetsImage(v) {
+      return `${process.env.VUE_APP_IMAGE}/logo/${v}`
+    },
+    onLoadStory(v, t) {
+      let count = 0
+      console.log(JSON.parse(v), t)
+      if (t === 'S') {
+        return v ? JSON.parse(v).length : 0
+      }
+      if (t === 'C') {
+        if (v) {
+          JSON.parse(v).forEach((element) => {
+            if (element.chapters) {
+              count += element.chapters.length
+            }
+          })
+        }
+        return count
+      }
+
+      return 0
     },
   },
 }
