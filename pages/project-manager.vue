@@ -33,8 +33,10 @@
             class="card-list--item project-list--item"
           >
             <nuxt-link :to="`/simulation-maker?projectKey=${v.secret_code}`">
-              <img v-if="v.logo" :src="onLoadAssetsImage(v.logo)" />
-              <img v-else src="~/static/images/logo.svg" />
+              <div class="logo">
+                <img v-if="v.logo" :src="onLoadAssetsImage(v.logo)" />
+                <img v-else src="~/static/images/logo.svg" />
+              </div>
               <div class="top">
                 <span class="date"
                   >최근 수정일<span class="num">{{

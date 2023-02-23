@@ -399,7 +399,7 @@ button:disabled{
   &-logo {
     a {
       background: url(../static/images/symbol.png)no-repeat left center / auto;
-      color:#888;
+      color:#888 !important;
       padding-left:40px;
       font-family: 'NanumSquareNeo', sans-serif;
       font-size:2rem;
@@ -409,7 +409,7 @@ button:disabled{
       align-items: center;
       font-weight: 300;
       &:hover{
-        color:$colPrimary;
+        color:$colPrimary !important;
       }
       .maker{
         font-size:1.2rem;
@@ -428,7 +428,7 @@ button:disabled{
       a {
         font-family: 'NanumSquareNeo', sans-serif;
         font-size: 1.6rem;
-        color: $textCol1;
+        color: $textCol1 !important;
         white-space: nowrap;
         position:relative;
         &:hover{
@@ -1453,6 +1453,26 @@ button:disabled{
         }
         a{
           height: auto;
+          position:relative;
+          .logo{
+            position:absolute;
+            right:20px;
+            top:20px;
+            max-height: 120px;
+            max-width: 200px;
+            width:auto;
+            img{
+              max-width: 100%;
+              max-height: 120px;
+            }
+          }
+          .state-list{
+            justify-content: flex-start;
+            &--item{
+              margin:0 30px 0 0;
+              padding:0;
+            }
+          }
         }
       }
     }

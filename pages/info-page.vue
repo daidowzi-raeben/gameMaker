@@ -28,11 +28,11 @@
 
     <div class="main-section main-top">
       <div class="main-top--tit" data-aos="fade-up" data-aos-duration="1000">
-        PROJECT KOO
+        MAKER KOO
         <p class="sub">내가 만드는 첫번째 어플리케이션</p>
       </div>
       <p class="main-top--sub" data-aos="fade-up" data-aos-duration="1000">
-        프로젝트 Koo는 내가 상상하고 원하던 스토리를 쉽게 앱으로 제작하여 출시할
+        MAKER KOO는 내가 상상하고 원하던 스토리를 쉽게 앱으로 제작하여 출시할
         수 있습니다.<br />
         다양한 경험을 지금 시작하세요.
       </p>

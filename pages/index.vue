@@ -13,7 +13,7 @@
       <transition name="el-fade-in">
         <div v-show="isMainPageActive === 2" class="main-top--con">
           <p class="tit">VISUAL NOVEL</p>
-          <p class="text">취향껏 나만의 노벨 만들기</p>
+          <p class="text">취향껏 나만의 소설 만들기</p>
         </div>
       </transition>
       <transition name="el-fade-in">

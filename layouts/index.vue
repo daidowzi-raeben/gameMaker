@@ -21,12 +21,12 @@
         <div class="left">
           <div class="header-logo">
             <nuxt-link to="/"
-              >PROJECT KOO<span class="maker">. MAKER</span></nuxt-link
+              >MAKER KOO</nuxt-link
             >
           </div>
           <ul class="header-menu">
             <li class="header-menu--item">
-              <nuxt-link to="/">프로젝트 Koo</nuxt-link>
+              <nuxt-link to="/">메이커 쿠</nuxt-link>
             </li>
             <li class="header-menu--item">
               <nuxt-link to="info-page">소개</nuxt-link>
