@@ -72,8 +72,8 @@
         <div class="login-input">
           <label class="label">생년월일</label>
           <el-select v-model="login.y" class="select">
-            <el-option v-for="item in 80" :key="item" :value="item + 1900">{{
-              item + 1900
+            <el-option v-for="item in 80" :key="item" :value="item + 1943">{{
+              item + 1943
             }}</el-option>
           </el-select>
           <el-select v-model="login.m" class="select sm">
