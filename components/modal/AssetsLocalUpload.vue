@@ -186,7 +186,7 @@ export default {
       if (!this.params.gas_name) {
         return alert('에셋 이름을 작성해 주세요')
       }
-      if (!this.params.gas_discription) {
+      if (!this.params.gas_discription && this.assetsType === 'C') {
         return alert('에셋 표정 이름을 작성해 주세요')
       }
       if (!this.isContentAllCheck) {
