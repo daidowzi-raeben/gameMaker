@@ -35,7 +35,13 @@
             type="text"
             class="input-text"
             required
-            :placeholder="assetsType === 'S' ? '' : '긴머리 주인공'"
+            :placeholder="
+              assetsType === 'S'
+                ? ''
+                : assetsType === 'B'
+                ? '에셋 제목'
+                : '에셋 제목'
+            "
             @keyup="onChangeContentAllCheck('text', $event)"
           />
           <label class="label">
@@ -46,7 +52,13 @@
             type="text"
             class="input-text"
             required
-            :placeholder="assetsType === 'S' ? '' : '무표정'"
+            :placeholder="
+              assetsType === 'S'
+                ? ''
+                : assetsType === 'B'
+                ? '에셋 설명'
+                : '무표정'
+            "
             @keyup="onChangeContentAllCheck('text', $event)"
           />
           <div class="sub-tit">주의사항</div>

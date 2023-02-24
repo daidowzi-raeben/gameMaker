@@ -38,14 +38,14 @@
               alt="background"
             />
           </div>
-          <div class="preview-intro--logo">
+          <div v-if="MAKER_GNB === 2" class="preview-intro--logo">
             <img
               v-if="!PREVIEW_INTRO.logo && !LOGO_IMG"
               src="~/static/images/logo.svg"
             />
-            <img v-if="!PREVIEW_INTRO.logo && LOGO_IMG" :src="LOGO_IMG" />
+            <img v-if="LOGO_IMG" :src="LOGO_IMG" />
             <img
-              v-if="PREVIEW_INTRO.logo"
+              v-if="PREVIEW_INTRO.logo && !LOGO_IMG"
               :src="onLoadAssetsImage(PREVIEW_INTRO.logo, 'logo')"
             />
           </div>
