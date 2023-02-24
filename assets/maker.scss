@@ -672,24 +672,25 @@
 
       &-tit {
         margin-left: -75px;
-        position: relative;
         width:100%;
 
         .delete-btn {
-          right: -35px;
-          top: -30px;
+          right: 10px;
+          top: 10px;
         }
 
         .guide {
           position: absolute;
-          left: 50%;
-          top: -25px;
+          right:10px;
+          top: 10px;
           width: 250px;
-          transform: translateX(-50%);
           font-size: 1.2rem;
           font-style: italic;
           color: #999;
           font-weight: 400;
+          text-align: right;
+          letter-spacing: -1px;
+          line-height: 1.2;
         }
 
         .highlight {

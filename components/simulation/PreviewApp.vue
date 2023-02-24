@@ -17,7 +17,7 @@
         삭제
       </button>
       <span class="guide" v-if="CUT_CODE === 0">
-        직전 수정된 컷과 맨 마지막 컷은 삭제할 수 없어요!
+        직전 수정된 컷과 맨 마지막 컷은<br />삭제할 수 없어요!
       </span>
     </div>
     <div class="column-2">
