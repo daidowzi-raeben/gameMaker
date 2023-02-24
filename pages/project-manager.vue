@@ -18,7 +18,7 @@
           class="card-list project-list"
         > -->
         <div
-          v-if="PROJECT_MANAGER"
+          v-if="PROJECT_MANAGER && PROJECT_MANAGER.projectList"
           :options="swiperOptionCol4"
           class="card-list project-list type-temp"
         >
@@ -112,6 +112,13 @@
           </swiper-slide> -->
           <!-- <div slot="button-prev" class="swiper-button-prev"></div>
           <div slot="button-next" class="swiper-button-next"></div> -->
+        </div>
+        <div v-else>
+          <div class="text-center">
+            <h2 style="color: #66c7bb !important; margin-top: 100px">
+              지금, [추가하기]를 눌러 첫 프로젝트를 만들어 보세요
+            </h2>
+          </div>
         </div>
       </div>
       <!-- <div class="card-wrap">
