@@ -832,7 +832,7 @@ export default {
     width: 90%;
     .name {
       width: 120px;
-      left: 24px;
+      left: 23px;
       top: 13px;
       height: 40px;
       padding: 0;

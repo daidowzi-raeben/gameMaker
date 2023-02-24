@@ -379,7 +379,7 @@ button:disabled{
       .right{
         position: fixed;
         width: 100vw;
-        top: 190px;
+        top: 220px;
         flex-direction: column;
         right:-100vw;
         transition: right .3s;
@@ -946,9 +946,12 @@ button:disabled{
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height:calc(100vh - 212px);
+      height:calc(100vh - 117px);
       .right-menu{
         display:none;
+      }
+      @media (max-width: 520px) {
+        height:calc(100vh - 148px);
       }
     }
     &-top{
@@ -1724,6 +1727,25 @@ button:disabled{
         position:absolute;
         right:20px;
         top:20px;
+      }
+    }
+    @media (max-width: 520px) {
+      flex-direction: column;
+      .left{
+        .copy{
+          text-align: center;
+          font-size:1.1rem;
+        }
+      }
+      .right{
+        position:unset;
+        right:unset;
+        top:unset;
+        text-align: center;
+        margin-top:10px;
+        .btn{
+          margin:0 10px;
+        }
       }
     }
   }
