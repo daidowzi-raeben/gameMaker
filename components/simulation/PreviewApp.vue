@@ -79,8 +79,8 @@
                 <rect
                   width="180"
                   height="46"
-                  :x="Number(UISetting.button.x) + Number(UISetting.button.border) + 10"
-                  :y="Number(UISetting.button.y) + Number(UISetting.button.border) + 10"
+                  :x="Number(UISetting.button.x) + Number(UISetting.button.border) / 2 + 9"
+                  :y="Number(UISetting.button.y) + Number(UISetting.button.border) / 2 + 9"
                   :fill="UISetting.button.shadowColor"
                   :rx="UISetting.button.round"
                   mask="url(#Mask)"
@@ -123,8 +123,8 @@
                   <rect
                     width="180"
                     height="46"
-                    :x="Number(UISetting.button.x) + 10"
-                    :y="Number(UISetting.button.y) + 10"
+                    :x="Number(UISetting.button.x) + Number(UISetting.button.border) / 2 + 9"
+                    :y="Number(UISetting.button.y) + Number(UISetting.button.border) / 2 + 9"
                     :fill="UISetting.button.shadowColor"
                     :rx="UISetting.button.round"
                     mask="url(#Mask)"
@@ -177,15 +177,15 @@
             </button> -->
           </div>
 
-          <div v-if="MAKER_GNB === 5" :key="`button${i}`" class="answer answer-multiple svg-window">
-            <svg width="280" height="80">
+          <div v-if="MAKER_GNB === 5" class="answer answer-multiple svg-window">
+            <svg width="100%" height="80">
               <rect
-                width="250"
+                width="90%"
                 height="50"
                 x="10"
                 y="10"
                 :fill="UISetting.windowColor"
-                :rx="UISetting.round"
+                :rx="Number(UISetting.round) / 2"
                 :stroke="UISetting.strokeColor"
                 :stroke-width="UISetting.border"
               />
@@ -196,20 +196,20 @@
                   <rect
                     :x="Number(UISetting.border) / 2"
                     :y="Number(UISetting.border) / 2"
-                    width="260"
+                    width="calc(90% + 10px)"
                     height="60"
                     fill="black"
-                    :rx="Number(UISetting.round) + Number(UISetting.border) / 2"
+                    :rx="Number(UISetting.round) / 2 + Number(UISetting.border) / 2"
                   />
                 </mask>
               </defs>
               <rect
-                width="250"
+                width="90%"
                 height="50"
-                :x="Number(UISetting.x) + Number(UISetting.border) + 10"
-                :y="Number(UISetting.y) + Number(UISetting.border) + 10"
+                :x="Number(UISetting.x) + Number(UISetting.border) / 2 + 9"
+                :y="Number(UISetting.y) + Number(UISetting.border) / 2 + 9"
                 :fill="UISetting.shadowColor"
-                :rx="UISetting.round"
+                :rx="Number(UISetting.round) / 2"
                 mask="url(#Mask2)"
               />
             </svg>
@@ -249,7 +249,7 @@
         <div
           v-if="MAKER_GNB === 1 || MAKER_GNB === 4 || MAKER_GNB === 5"
           class="preview-con icon"
-          :style="`background:${UISetting.mainColor}`"
+          :style="`background:${UISetting.mainColor};border:${UISetting.button.border}px solid ${UISetting.button.strokeColor}`"
         >
           <button
             type="button"
@@ -387,7 +387,83 @@
           </div>
         </div>
         <div v-if="PREVIEW && MAKER_GNB === 5" class="preview-con preview-img">
-          <div class="dialogue" :style="windowColor()">
+
+          <div v-if="MAKER_GNB === 5" class="dialogue svg-window">
+            <svg width="100%" height="150">
+              <rect
+                width="90%"
+                height="120"
+                x="10"
+                y="10"
+                :fill="UISetting.windowColor"
+                :rx="Number(UISetting.round) / 2"
+                :stroke="UISetting.strokeColor"
+                :stroke-width="UISetting.border"
+              />
+
+              <defs>
+                <mask id="Mask3">
+                  <rect width="100%" height="100%" fill="white" />
+                  <rect
+                    :x="Number(UISetting.border) / 2"
+                    :y="Number(UISetting.border) / 2"
+                    width="calc(90% + 10px)"
+                    height="130"
+                    fill="black"
+                    :rx="Number(UISetting.round) / 2 + Number(UISetting.border) / 2"
+                  />
+                </mask>
+              </defs>
+              <rect
+                width="90%"
+                height="120"
+                :x="Number(UISetting.x) + Number(UISetting.border) + 9"
+                :y="Number(UISetting.y) + Number(UISetting.border) + 9"
+                :fill="UISetting.shadowColor"
+                :rx="Number(UISetting.round) / 2"
+                mask="url(#Mask3)"
+              />
+            </svg>
+            <div
+              :class="`text ${UISetting.font}`"
+              :style="`color:${UISetting.fontColor}`"
+            >
+              대사창 미리보기
+            </div>
+            <span
+              class="name"
+              :class="UISetting.font"
+              :style="
+                UISetting.mainColor
+                  ? `background:${UISetting.mainColor};color:${
+                      UISetting.mainFontColor
+                    };border-radius:${Math.round(
+                      Number(UISetting.button.round) / 2
+                    )}px;
+                    border:${UISetting.button.border}px solid ${UISetting.button.strokeColor}`
+                  : ''
+              "
+              >이름</span>
+            <!-- <svg class="name" width="120" height="55">
+              <rect
+                width="100"
+                height="35"
+                x="10"
+                y="10"
+                :fill="UISetting.mainColor"
+                :rx="UISetting.button.round"
+                :stroke="UISetting.button.strokeColor"
+                :stroke-width="UISetting.button.border"
+              />
+            </svg>
+            <div
+              :class="`text name ${UISetting.font}`"
+              :style="`color:${UISetting.mainFontColor}`"
+            >
+              이름
+            </div> -->
+          </div>
+          <div v-else class="dialogue" :style="windowColor()">
             <span
               class="name"
               :class="UISetting.font"
@@ -400,8 +476,7 @@
                     )}px`
                   : ''
               "
-              >이름</span
-            >
+              >이름</span>
             <p
               class="text"
               :class="UISetting.font"
@@ -411,6 +486,7 @@
             </p>
           </div>
         </div>
+
         <div
           v-show="MAKER_GNB === 4"
           ref="displayProfileDetail"
@@ -682,7 +758,31 @@ export default {
 .svg-window{
   height:50px;
   .text{
-    width:calc(100% - 10px);
+    width:calc(100% - 25px);
+  }
+  &.dialogue{
+    top:unset;
+    bottom: 40px;
+    left: 5px;
+    width: 90%;
+    .name{
+      width: 120px;
+      left: 24px;
+      top: 13px;
+      height: 40px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size:1.5rem;
+    }
+    .text{
+      font-size:1.4rem;
+      justify-content: flex-start;
+      left:45px;
+      top:55px;
+      align-items: flex-start;
+    }
   }
 }
 .ani-vibration {
