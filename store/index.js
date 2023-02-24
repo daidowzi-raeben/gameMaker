@@ -119,9 +119,9 @@ const createStore = () => {
             },
             PREVIEW_INTRO: {
                 copyright: '',
-                copyrightPosition: 'center',
+                copyrightPosition: '',
                 logo: '',
-                position: 'center',
+                position: '',
                 bg: '',
                 ver: '',
                 dim: 'dim-light',

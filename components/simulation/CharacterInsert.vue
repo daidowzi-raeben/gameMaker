@@ -60,7 +60,12 @@
             <option value="top">TOP</option>
             <option value="bottom">BOTTOM</option>
           </select> -->
-          <el-popover placement="right" width="400" trigger="click" class="mr-1">
+          <el-popover
+            placement="right"
+            width="400"
+            trigger="click"
+            class="mr-1"
+          >
             <cropper
               class="cropper"
               :src="img"
@@ -93,7 +98,7 @@
           />
         </div>
         <!-- 프로필등장 버튼 주석, 스타일 임시 -->
-        <div class="textarea-wrap" style="padding-bottom:10px">
+        <div class="textarea-wrap" style="padding-bottom: 10px">
           <textarea
             rows="10"
             placeholder="인물의 소개를 입력하세요! 길어지면 스크롤 처리돼요"
@@ -289,6 +294,9 @@ export default {
       this.MUTATIONS_PROFILE_NAME(target.value)
     },
     onSubmit() {
+      if (!this.characterData.name || !this.characterData.profile) {
+        return alert('이름과 소개를 입력해 주세요')
+      }
       this.MUTATIONS_LOADING_INIT()
       const frm = new FormData()
       if (this.SCENE_DATA_CHARACTER.jsonData) {

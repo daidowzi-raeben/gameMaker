@@ -72,15 +72,26 @@
                       width="185"
                       height="51"
                       fill="black"
-                      :rx="Number(UISetting.button.round) + Number(UISetting.button.border) / 2"
+                      :rx="
+                        Number(UISetting.button.round) +
+                        Number(UISetting.button.border) / 2
+                      "
                     />
                   </mask>
                 </defs>
                 <rect
                   width="180"
                   height="46"
-                  :x="Number(UISetting.button.x) + Number(UISetting.button.border) / 2 + 9"
-                  :y="Number(UISetting.button.y) + Number(UISetting.button.border) / 2 + 9"
+                  :x="
+                    Number(UISetting.button.x) +
+                    Number(UISetting.button.border) / 2 +
+                    9
+                  "
+                  :y="
+                    Number(UISetting.button.y) +
+                    Number(UISetting.button.border) / 2 +
+                    9
+                  "
                   :fill="UISetting.button.shadowColor"
                   :rx="UISetting.button.round"
                   mask="url(#Mask)"
@@ -116,15 +127,26 @@
                         width="185"
                         height="51"
                         fill="black"
-                        :rx="Number(UISetting.button.round) + Number(UISetting.button.border) / 2"
+                        :rx="
+                          Number(UISetting.button.round) +
+                          Number(UISetting.button.border) / 2
+                        "
                       />
                     </mask>
                   </defs>
                   <rect
                     width="180"
                     height="46"
-                    :x="Number(UISetting.button.x) + Number(UISetting.button.border) / 2 + 9"
-                    :y="Number(UISetting.button.y) + Number(UISetting.button.border) / 2 + 9"
+                    :x="
+                      Number(UISetting.button.x) +
+                      Number(UISetting.button.border) / 2 +
+                      9
+                    "
+                    :y="
+                      Number(UISetting.button.y) +
+                      Number(UISetting.button.border) / 2 +
+                      9
+                    "
                     :fill="UISetting.button.shadowColor"
                     :rx="UISetting.button.round"
                     mask="url(#Mask1_1)"
@@ -199,7 +221,9 @@
                     width="calc(90% + 10px)"
                     height="60"
                     fill="black"
-                    :rx="Number(UISetting.round) / 2 + Number(UISetting.border) / 2"
+                    :rx="
+                      Number(UISetting.round) / 2 + Number(UISetting.border) / 2
+                    "
                   />
                 </mask>
               </defs>
@@ -301,6 +325,7 @@
             <button
               type="button"
               class="btn"
+              :class="UISetting.font"
               :style="
                 UISetting.fontColor
                   ? `${windowColor()}; color:${UISetting.fontColor}`
@@ -312,6 +337,7 @@
             <button
               type="button"
               class="btn"
+              :class="UISetting.font"
               :style="
                 UISetting.fontColor
                   ? `${windowColor()}; color:${UISetting.fontColor}`
@@ -323,6 +349,7 @@
             <button
               type="button"
               class="btn"
+              :class="UISetting.font"
               :style="
                 UISetting.fontColor
                   ? `${windowColor()}; color:${UISetting.fontColor}`
@@ -335,6 +362,7 @@
           <div v-if="cutType === 4" class="answer answer-subjective">
             <div
               class="text"
+              :class="UISetting.font"
               :style="
                 UISetting.fontColor
                   ? `${windowColor()}; color:${UISetting.fontColor}`
@@ -346,6 +374,7 @@
             <input
               type="text"
               class="input-text"
+              :class="UISetting.font"
               placeholder="주관식 답변을 입력해주세요"
               :value="PREVIEW.data.answer"
               :style="windowColor()"
@@ -387,7 +416,6 @@
           </div>
         </div>
         <div v-if="PREVIEW && MAKER_GNB === 5" class="preview-con preview-img">
-
           <div v-if="MAKER_GNB === 5" class="dialogue svg-window">
             <svg width="100%" height="150">
               <rect
@@ -410,7 +438,9 @@
                     width="calc(90% + 10px)"
                     height="130"
                     fill="black"
-                    :rx="Number(UISetting.round) / 2 + Number(UISetting.border) / 2"
+                    :rx="
+                      Number(UISetting.round) / 2 + Number(UISetting.border) / 2
+                    "
                   />
                 </mask>
               </defs>
@@ -440,10 +470,13 @@
                     };border-radius:${Math.round(
                       Number(UISetting.button.round) / 2
                     )}px;
-                    border:${UISetting.button.border}px solid ${UISetting.button.strokeColor}`
+                    border:${UISetting.button.border}px solid ${
+                      UISetting.button.strokeColor
+                    }`
                   : ''
               "
-              >이름</span>
+              >이름</span
+            >
             <!-- <svg class="name" width="120" height="55">
               <rect
                 width="100"
@@ -476,7 +509,8 @@
                     )}px`
                   : ''
               "
-              >이름</span>
+              >이름</span
+            >
             <p
               class="text"
               :class="UISetting.font"
@@ -732,7 +766,8 @@ export default {
 </script>
 
 <style lang="scss">
-.svg-button, .svg-window {
+.svg-button,
+.svg-window {
   position: relative;
   left: -10px;
   top: -10px;
@@ -755,17 +790,17 @@ export default {
     position: absolute;
   }
 }
-.svg-window{
-  height:50px;
-  .text{
-    width:calc(100% - 25px);
+.svg-window {
+  height: 50px;
+  .text {
+    width: calc(100% - 25px);
   }
-  &.dialogue{
-    top:unset;
+  &.dialogue {
+    top: unset;
     bottom: 40px;
     left: 5px;
     width: 90%;
-    .name{
+    .name {
       width: 120px;
       left: 24px;
       top: 13px;
@@ -774,13 +809,13 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size:1.5rem;
+      font-size: 1.5rem;
     }
-    .text{
-      font-size:1.4rem;
+    .text {
+      font-size: 1.4rem;
       justify-content: flex-start;
-      left:45px;
-      top:55px;
+      left: 45px;
+      top: 55px;
       align-items: flex-start;
     }
   }
