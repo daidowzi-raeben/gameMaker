@@ -396,8 +396,15 @@
               :class="UISetting.font"
               :style="
                 UISetting.mainColor
-                  ? `background:${UISetting.mainColor};color:${UISetting.mainFontColor}`
-                  : ''
+                  ? `background:${UISetting.mainColor};color:${
+                      UISetting.mainFontColor
+                    };border-radius:${Math.round(
+                      Number(UISetting.button.round) / 2
+                    )}px;
+                    border:${UISetting.button.border}px solid ${
+                      UISetting.button.strokeColor
+                    }`
+                  : 'background:#000'
               "
               >{{ PREVIEW.data.cr }}</span
             >
@@ -548,7 +555,22 @@
             width="100%"
             height="100%"
           />
-          <p class="name" :class="UISetting.font">
+          <p
+            class="name"
+            :class="UISetting.font"
+            :style="
+              UISetting.mainColor
+                ? `background:${UISetting.mainColor};color:${
+                    UISetting.mainFontColor
+                  };border-radius:${Math.round(
+                    Number(UISetting.button.round) / 2
+                  )}px;
+                    border:${UISetting.button.border}px solid ${
+                    UISetting.button.strokeColor
+                  }`
+                : 'background:#000'
+            "
+          >
             {{ PREVIEW_PROFILE.name ? PREVIEW_PROFILE.name : '인물이름' }}
           </p>
           <div class="character">
