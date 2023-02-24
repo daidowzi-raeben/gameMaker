@@ -116,11 +116,11 @@
                   v-model="colorPicker.button.round"
                   placeholder="선택안함"
                 >
-                  <el-option :label="'선택안함'" :value="'0'"></el-option>
-                  <el-option :label="'약간 둥글게'" :value="'10'"></el-option>
-                  <el-option :label="'둥글게'" :value="'20'"></el-option>
-                  <el-option :label="'더 둥글게'" :value="'40'"></el-option>
-                  <el-option :label="'아주 둥글게'" :value="'100'"></el-option>
+                  <el-option :label="'선택안함'" :value="0"></el-option>
+                  <el-option :label="'약간 둥글게'" :value="10"></el-option>
+                  <el-option :label="'둥글게'" :value="20"></el-option>
+                  <el-option :label="'더 둥글게'" :value="40"></el-option>
+                  <el-option :label="'아주 둥글게'" :value="100"></el-option>
                 </el-select>
               </div>
               <div class="input-wrap">
@@ -132,10 +132,10 @@
                   <el-option :value="'0'" :label="'선택안함'"
                     >선택안함</el-option
                   >
-                  <el-option :value="'1'" :label="'더 얇게'">더 얇게</el-option>
-                  <el-option :value="'2'" :label="'얇게'">얇게</el-option>
-                  <el-option :value="'4'" :label="'굵게'">굵게</el-option>
-                  <el-option :value="'10'" :label="'아주 굵게'"
+                  <el-option :value="1" :label="'더 얇게'">더 얇게</el-option>
+                  <el-option :value="2" :label="'얇게'">얇게</el-option>
+                  <el-option :value="4" :label="'굵게'">굵게</el-option>
+                  <el-option :value="10" :label="'아주 굵게'"
                     >아주 굵게</el-option
                   >
                 </el-select>
@@ -287,11 +287,11 @@
                   :value="colorPicker.round"
                   @change="onChangeThemeSet($event, 'round')"
                 >
-                  <el-option :value="'0'" :label="'선택안함'"></el-option>
-                  <el-option :value="'10'" :label="'약간 둥글게'"></el-option>
-                  <el-option :value="'20'" :label="'둥글게'"></el-option>
-                  <el-option :value="'40'" :label="'더 둥글게'"></el-option>
-                  <el-option :value="'100'" :label="'아주 둥글게'"></el-option>
+                  <el-option :value="0" :label="'선택안함'"></el-option>
+                  <el-option :value="10" :label="'약간 둥글게'"></el-option>
+                  <el-option :value="20" :label="'둥글게'"></el-option>
+                  <el-option :value="40" :label="'더 둥글게'"></el-option>
+                  <el-option :value="100" :label="'아주 둥글게'"></el-option>
                 </el-select>
               </div>
               <div class="input-wrap">
@@ -301,11 +301,11 @@
                   :value="colorPicker.border"
                   @change="onChangeThemeSet($event, 'border')"
                 >
-                  <el-option :value="'0'" :label="'선택안함'"></el-option>
-                  <el-option :value="'1'" :label="'더 얇게'"> </el-option>
-                  <el-option :value="'2'" :label="'얇게'"></el-option>
-                  <el-option :value="'4'" :label="'굵게'"></el-option>
-                  <el-option :value="'10'" :label="'아주 굵게'"> </el-option>
+                  <el-option :value="0" :label="'선택안함'"></el-option>
+                  <el-option :value="1" :label="'더 얇게'"> </el-option>
+                  <el-option :value="2" :label="'얇게'"></el-option>
+                  <el-option :value="4" :label="'굵게'"></el-option>
+                  <el-option :value="10" :label="'아주 굵게'"> </el-option>
                 </el-select>
               </div>
             </div>
