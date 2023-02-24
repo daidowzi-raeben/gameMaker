@@ -309,12 +309,10 @@
                 <label class="input-label">아이콘</label>
                 <select
                   class="input-select"
-                  :value="colorPicker.icon"
                   @change="onChangeThemeSet($event, 'icon')"
                 >
-                  <option :value="''">기본</option>
-                  <option value="icon1">흰색</option>
                   <option value="icon2">검은색</option>
+                  <option value="icon1">흰색</option>
                   <!-- <option value="icon3">아이콘3</option> -->
                 </select>
               </div>

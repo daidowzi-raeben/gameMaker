@@ -67,20 +67,20 @@
                   <mask id="Mask">
                     <rect width="100%" height="100%" fill="white" />
                     <rect
-                      x="5"
-                      y="5"
+                      :x="Number(UISetting.button.border) / 2 + 5"
+                      :y="Number(UISetting.button.border) / 2 + 5"
                       width="185"
                       height="51"
                       fill="black"
-                      :rx="UISetting.button.round"
+                      :rx="Number(UISetting.button.round) + Number(UISetting.button.border) / 2"
                     />
                   </mask>
                 </defs>
                 <rect
                   width="180"
                   height="46"
-                  :x="Number(UISetting.button.x) + 10"
-                  :y="Number(UISetting.button.y) + 10"
+                  :x="Number(UISetting.button.x) + Number(UISetting.button.border) + 10"
+                  :y="Number(UISetting.button.y) + Number(UISetting.button.border) + 10"
                   :fill="UISetting.button.shadowColor"
                   :rx="UISetting.button.round"
                   mask="url(#Mask)"
@@ -116,7 +116,7 @@
                         width="185"
                         height="51"
                         fill="black"
-                        :rx="UISetting.button.round"
+                        :rx="Number(UISetting.button.round) + Number(UISetting.button.border) / 2"
                       />
                     </mask>
                   </defs>
@@ -177,7 +177,51 @@
             </button> -->
           </div>
 
-          <div v-if="MAKER_GNB === 5" class="answer answer-multiple">
+          <div v-if="MAKER_GNB === 5" :key="`button${i}`" class="answer answer-multiple svg-window">
+            <svg width="280" height="80">
+              <rect
+                width="250"
+                height="50"
+                x="10"
+                y="10"
+                :fill="UISetting.windowColor"
+                :rx="UISetting.round"
+                :stroke="UISetting.strokeColor"
+                :stroke-width="UISetting.border"
+              />
+
+              <defs>
+                <mask id="Mask2">
+                  <rect width="100%" height="100%" fill="white" />
+                  <rect
+                    :x="Number(UISetting.border) / 2"
+                    :y="Number(UISetting.border) / 2"
+                    width="260"
+                    height="60"
+                    fill="black"
+                    :rx="Number(UISetting.round) + Number(UISetting.border) / 2"
+                  />
+                </mask>
+              </defs>
+              <rect
+                width="250"
+                height="50"
+                :x="Number(UISetting.x) + Number(UISetting.border) + 10"
+                :y="Number(UISetting.y) + Number(UISetting.border) + 10"
+                :fill="UISetting.shadowColor"
+                :rx="UISetting.round"
+                mask="url(#Mask2)"
+              />
+            </svg>
+            <div
+              :class="`text ${UISetting.font}`"
+              :style="`color:${UISetting.fontColor}`"
+            >
+              객/주관식 창 미리보기
+            </div>
+          </div>
+
+          <!-- <div v-if="MAKER_GNB === 5" class="answer answer-multiple">
             <button
               type="button"
               class="btn"
@@ -190,7 +234,7 @@
             >
               객/주관식 창 미리보기
             </button>
-          </div>
+          </div> -->
           <div
             v-if="MAKER_GNB !== 5"
             class="preview-intro--copy"
@@ -612,7 +656,7 @@ export default {
 </script>
 
 <style lang="scss">
-.svg-button {
+.svg-button, .svg-window {
   position: relative;
   left: -10px;
   top: -10px;
@@ -633,10 +677,12 @@ export default {
   }
   svg {
     position: absolute;
-    // &:last-child {
-    //   left: 10px;
-    //   top: 10px;
-    // }
+  }
+}
+.svg-window{
+  height:50px;
+  .text{
+    width:calc(100% - 10px);
   }
 }
 .ani-vibration {
