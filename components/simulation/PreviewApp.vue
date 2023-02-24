@@ -57,9 +57,13 @@
                   height="46"
                   x="10"
                   y="10"
-                  :fill="UISetting.mainColor"
-                  :rx="UISetting.button.round"
-                  :stroke="UISetting.button.strokeColor"
+                  :fill="UISetting.mainColor ? UISetting.mainColor : '#eee'"
+                  :rx="UISetting.button.round ? UISetting.button.round : '#eee'"
+                  :stroke="
+                    UISetting.button.strokeColor
+                      ? UISetting.button.strokeColor
+                      : '#eee'
+                  "
                   :stroke-width="UISetting.button.border"
                 />
 
@@ -92,7 +96,11 @@
                     Number(UISetting.button.border) / 2 +
                     9
                   "
-                  :fill="UISetting.button.shadowColor"
+                  :fill="
+                    UISetting.button.shadowColor
+                      ? UISetting.button.shadowColor
+                      : '#eee'
+                  "
                   :rx="UISetting.button.round"
                   mask="url(#Mask)"
                 />
@@ -112,7 +120,7 @@
                     height="46"
                     x="10"
                     y="10"
-                    :fill="UISetting.mainColor"
+                    :fill="UISetting.mainColor ? UISetting.mainColor : '#eee'"
                     :rx="UISetting.button.round"
                     :stroke="UISetting.button.strokeColor"
                     :stroke-width="UISetting.button.border"
@@ -206,7 +214,7 @@
                 height="50"
                 x="10"
                 y="10"
-                :fill="UISetting.windowColor"
+                :fill="UISetting.windowColor ? UISetting.windowColor : '#eee'"
                 :rx="Number(UISetting.round) / 2"
                 :stroke="UISetting.strokeColor"
                 :stroke-width="UISetting.border"
@@ -232,7 +240,7 @@
                 height="50"
                 :x="Number(UISetting.x) + Number(UISetting.border) / 2 + 9"
                 :y="Number(UISetting.y) + Number(UISetting.border) / 2 + 9"
-                :fill="UISetting.shadowColor"
+                :fill="UISetting.shadowColor ? UISetting.shadowColor : '#eee'"
                 :rx="Number(UISetting.round) / 2"
                 mask="url(#Mask2)"
               />
@@ -423,7 +431,7 @@
                 height="120"
                 x="10"
                 y="10"
-                :fill="UISetting.windowColor"
+                :fill="UISetting.windowColor ? UISetting.windowColor : '#eee'"
                 :rx="Number(UISetting.round) / 2"
                 :stroke="UISetting.strokeColor"
                 :stroke-width="UISetting.border"
@@ -473,7 +481,7 @@
                     border:${UISetting.button.border}px solid ${
                       UISetting.button.strokeColor
                     }`
-                  : ''
+                  : 'background:#000'
               "
               >이름</span
             >

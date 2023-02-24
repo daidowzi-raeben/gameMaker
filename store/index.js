@@ -124,7 +124,7 @@ const createStore = () => {
                 position: '',
                 bg: '',
                 ver: '',
-                dim: 'dim-light',
+                dim: '',
             },
             PREVIEW_PROFILE: {
                 name: '',
