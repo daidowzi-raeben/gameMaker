@@ -979,7 +979,7 @@ const createStore = () => {
                             return
                         }
                         if (params.type === 'join') {
-                            return alert('로그인 후 이용 가능합니다.')
+                            return alert('가입이 완료되었습니다. 로그인 후 이용 가능합니다.')
                         }
                     })
                     .catch((res) => {
