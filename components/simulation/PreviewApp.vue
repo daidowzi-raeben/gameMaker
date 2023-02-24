@@ -766,7 +766,11 @@ export default {
         style += `border-radius:${this.UISetting.round}px;`
       }
       if (this.UISetting.shadowColor) {
-        style += `box-shadow: ${this.UISetting.x}px ${this.UISetting.y}px 0 ${this.UISetting.shadowColor};`
+        style += `box-shadow: ${
+          Number(this.UISetting.x) + Number(this.UISetting.border)
+        }px ${Number(this.UISetting.y) + Number(this.UISetting.border)}px 0 ${
+          this.UISetting.shadowColor
+        };`
       }
       // style += `box-shadow:
       // ${this.UISetting.round ? this.UISetting.round : 0}
