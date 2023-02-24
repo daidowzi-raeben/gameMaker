@@ -112,37 +112,60 @@
             <div class="input-select--list">
               <div class="input-wrap">
                 <label class="input-label">모서리</label>
-                <select
-                  class="input-select"
-                  :value="colorPicker.button.round"
-                  @change="onChangeThemeSet($event, 'roundButton')"
+                <el-select
+                  v-model="colorPicker.button.round"
+                  placeholder="선택안함"
                 >
-                  <option :value="0">선택안함</option>
-                  <option :value="10">약간 둥글게</option>
-                  <option :value="20">둥글게</option>
-                  <option :value="40">더 둥글게</option>
-                  <option :value="100">아주 둥글게</option>
-                </select>
+                  <el-option :label="'선택안함'" :value="'0'"></el-option>
+                  <el-option :label="'약간 둥글게'" :value="'10'"></el-option>
+                  <el-option :label="'둥글게'" :value="'20'"></el-option>
+                  <el-option :label="'더 둥글게'" :value="'40'"></el-option>
+                  <el-option :label="'아주 둥글게'" :value="'100'"></el-option>
+                </el-select>
               </div>
               <div class="input-wrap">
                 <label class="input-label">선굵기</label>
-                <select
-                  class="input-select"
-                  :value="colorPicker.button.border"
-                  @change="onChangeThemeSet($event, 'borderButton')"
+                <el-select
+                  v-model="colorPicker.button.border"
+                  placeholder="선택안함"
                 >
-                  <option :value="0">선택안함</option>
-                  <option :value="1">더 얇게</option>
-                  <option :value="2">얇게</option>
-                  <option :value="4">굵게</option>
-                  <option :value="10">아주 굵게</option>
-                </select>
+                  <el-option :value="'0'" :label="'선택안함'"
+                    >선택안함</el-option
+                  >
+                  <el-option :value="'1'" :label="'더 얇게'">더 얇게</el-option>
+                  <el-option :value="'2'" :label="'얇게'">얇게</el-option>
+                  <el-option :value="'4'" :label="'굵게'">굵게</el-option>
+                  <el-option :value="'10'" :label="'아주 굵게'"
+                    >아주 굵게</el-option
+                  >
+                </el-select>
               </div>
             </div>
             <div class="input-select--list">
               <div class="input-wrap">
                 <label class="input-label">그림자</label>
-                <select
+
+                <el-select
+                  :value="`${colorPicker.button.x}|${colorPicker.button.y}`"
+                  placeholder="선택안함"
+                  @change="onChangeThemeSet($event, 'shadowButton')"
+                >
+                  <el-option :value="'0|0'" :label="'선택안함'"
+                    >선택안함</el-option
+                  >
+                  <el-option :value="'3|3'" :label="'약간 멀리'"
+                    >약간 멀리</el-option
+                  >
+                  <el-option :value="'5|5'" :label="'멀리'">멀리</el-option>
+                  <el-option :value="'8|8'" :label="'더 멀리'"
+                    >더 멀리</el-option
+                  >
+                  <el-option :value="'10|10'" :label="'아주 멀리'">
+                    아주 멀리
+                  </el-option>
+                </el-select>
+
+                <!-- <select
                   class="input-select"
                   :value="`${colorPicker.button.x}|${colorPicker.button.y}`"
                   @change="onChangeThemeSet($event, 'shadowButton')"
@@ -152,7 +175,7 @@
                   <option value="5|5">멀리</option>
                   <option value="8|8">더 멀리</option>
                   <option value="10|10">아주 멀리</option>
-                </select>
+                </select> -->
               </div>
             </div>
 
@@ -258,47 +281,49 @@
             <div class="input-select--list">
               <div class="input-wrap">
                 <label class="input-label">모서리</label>
-                <select
-                  class="input-select"
+
+                <el-select
+                  placeholder="선택안함"
                   :value="colorPicker.round"
                   @change="onChangeThemeSet($event, 'round')"
                 >
-                  <option :value="0">선택안함</option>
-                  <option :value="10">약간 둥글게</option>
-                  <option :value="20">둥글게</option>
-                  <option :value="40">더 둥글게</option>
-                  <option :value="100">아주 둥글게</option>
-                </select>
+                  <el-option :value="'0'" :label="'선택안함'"></el-option>
+                  <el-option :value="'10'" :label="'약간 둥글게'"></el-option>
+                  <el-option :value="'20'" :label="'둥글게'"></el-option>
+                  <el-option :value="'40'" :label="'더 둥글게'"></el-option>
+                  <el-option :value="'100'" :label="'아주 둥글게'"></el-option>
+                </el-select>
               </div>
               <div class="input-wrap">
                 <label class="input-label">선굵기</label>
-                <select
-                  class="input-select"
+                <el-select
+                  placeholder="선택안함"
                   :value="colorPicker.border"
                   @change="onChangeThemeSet($event, 'border')"
                 >
-                  <option :value="0">선택안함</option>
-                  <option :value="1">더 얇게</option>
-                  <option :value="2">얇게</option>
-                  <option :value="4">굵게</option>
-                  <option :value="10">아주 굵게</option>
-                </select>
+                  <el-option :value="'0'" :label="'선택안함'"></el-option>
+                  <el-option :value="'1'" :label="'더 얇게'"> </el-option>
+                  <el-option :value="'2'" :label="'얇게'"></el-option>
+                  <el-option :value="'4'" :label="'굵게'"></el-option>
+                  <el-option :value="'10'" :label="'아주 굵게'"> </el-option>
+                </el-select>
               </div>
             </div>
             <div class="input-select--list">
               <div class="input-wrap">
                 <label class="input-label">그림자</label>
-                <select
-                  class="input-select"
+
+                <el-select
+                  placeholder="선택안함"
                   :value="`${colorPicker.x}|${colorPicker.y}`"
                   @change="onChangeThemeSet($event, 'shadow')"
                 >
-                  <option :value="'0|0'">선택안함</option>
-                  <option value="3|3">약간 멀리</option>
-                  <option value="5|5">멀리</option>
-                  <option value="8|8">더 멀리</option>
-                  <option value="10|10">아주 멀리</option>
-                </select>
+                  <el-option :value="'0|0'" :label="'선택안함'"></el-option>
+                  <el-option :value="'3|3'" :label="'약간 멀리'"> </el-option>
+                  <el-option :value="'5|5'" :label="'멀리'"></el-option>
+                  <el-option :value="'8|8'" :label="'더 멀리'"> </el-option>
+                  <el-option :value="'10|10'" :label="'아주 멀리'"> </el-option>
+                </el-select>
               </div>
             </div>
 
@@ -307,27 +332,33 @@
             <div class="input-select--list">
               <div class="input-wrap">
                 <label class="input-label">아이콘</label>
-                <select
-                  class="input-select"
+
+                <el-select
+                  placeholder="선택안함"
+                  :value="colorPicker.icon"
                   @change="onChangeThemeSet($event, 'icon')"
                 >
-                  <option value="icon2">검은색</option>
-                  <option value="icon1">흰색</option>
-                  <!-- <option value="icon3">아이콘3</option> -->
-                </select>
+                  <el-option :value="'icon2'" :label="'검은색'"></el-option>
+                  <el-option :value="'icon1'" :label="'흰색'"></el-option>
+                </el-select>
               </div>
 
               <div class="input-wrap">
                 <label class="input-label">글씨체</label>
-                <select
-                  class="input-select"
+
+                <el-select
+                  placeholder="선택안함"
                   :value="colorPicker.font"
                   @change="onChangeThemeSet($event, 'font')"
                 >
-                  <option v-for="(v, i) in fontStyle" :key="i" :value="v.value">
-                    {{ v.name }}
-                  </option>
-                </select>
+                  <el-option
+                    v-for="(v, i) in fontStyle"
+                    :key="i"
+                    :value="v.value"
+                    :label="v.name"
+                  >
+                  </el-option>
+                </el-select>
               </div>
             </div>
             <!-- <div class="input-select--list mb-5">
@@ -516,25 +547,23 @@ export default {
       this.isShowColorPickerName = ''
     },
     onChangeThemeSet(e, type) {
-      console.log(e.value)
-      if (type === 'round') this.colorPicker.round = e.target.value
-      if (type === 'font') this.colorPicker.font = e.target.value
-      if (type === 'icon') this.colorPicker.icon = e.target.value
-      if (type === 'border') this.colorPicker.border = e.target.value
-      if (type === 'fontSize') this.colorPicker.fontSize = e.target.value
+      if (type === 'round') this.colorPicker.round = e
+      if (type === 'font') this.colorPicker.font = e
+      if (type === 'icon') this.colorPicker.icon = e
+      if (type === 'border') this.colorPicker.border = e
+      if (type === 'fontSize') this.colorPicker.fontSize = e
       if (type === 'shadow') {
         console.log(e)
-        this.colorPicker.x = e.target.value.split('|')[0]
-        this.colorPicker.y = e.target.value.split('|')[1]
+        this.colorPicker.x = e.split('|')[0]
+        this.colorPicker.y = e.split('|')[1]
       }
 
-      if (type === 'roundButton') this.colorPicker.button.round = e.target.value
-      if (type === 'borderButton')
-        this.colorPicker.button.border = e.target.value
+      if (type === 'roundButton') this.colorPicker.button.round = e
+      if (type === 'borderButton') this.colorPicker.button.border = e
       if (type === 'shadowButton') {
         console.log(e)
-        this.colorPicker.button.x = e.target.value.split('|')[0]
-        this.colorPicker.button.y = e.target.value.split('|')[1]
+        this.colorPicker.button.x = e.split('|')[0]
+        this.colorPicker.button.y = e.split('|')[1]
       }
     },
     onSave() {
