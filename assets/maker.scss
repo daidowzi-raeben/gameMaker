@@ -2549,10 +2549,12 @@
         background: rgba(255, 255, 255, .8);
         margin-bottom: 15px;
         font-size: 1.4rem;
-        padding: 15px;
+        padding: 0 15px 15px;
         line-height: 1.5;
         box-shadow: 0 8px 0 rgba(0, 0, 0, .5);
         border-radius: 10px;
+        white-space: pre-line;
+        max-height: 100px;
       }
 
       .input-text {

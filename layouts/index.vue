@@ -49,7 +49,7 @@
             >로그아웃</a
           >
           <nuxt-link to="/project-manager" class="btn btn-primary"
-            >프로젝트</nuxt-link
+            >내 프로젝트</nuxt-link
           >
         </div>
       </div>
