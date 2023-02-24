@@ -1422,10 +1422,10 @@ export default {
         // this.paramsPreview.questions = {
         //   text: ['', '', ''],
         // }
-        this.paramsPreview.questions.text_1 = this.questionsText.text_1
+        this.paramsPreview.questions.text_1 = this.PREVIEW.data.questions.text_1
 
-        this.paramsPreview.questions.text_2 = this.questionsText.text_2
-        this.paramsPreview.questions.text_3 = this.questionsText.text_3
+        this.paramsPreview.questions.text_2 = this.PREVIEW.data.questions.text_2
+        this.paramsPreview.questions.text_3 = this.PREVIEW.data.questions.text_3
       }
       if (this.cutType === 4) {
         this.paramsPreview.text = ''

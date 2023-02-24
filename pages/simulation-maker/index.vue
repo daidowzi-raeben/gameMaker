@@ -30,7 +30,7 @@
         <SetupInsert v-if="MAKER_GNB === 7" />
       </div>
 
-      <div class="maker-left--capacity">
+      <!-- <div class="maker-left--capacity">
         <p class="num">
           <strong>18.5MB</strong>
           / 50MB
@@ -38,7 +38,7 @@
         <div class="bar-wrap">
           <span class="bar" style="width:20%;"></span>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- <div class="maker-wrap">
       <CutInsert
