@@ -20,9 +20,7 @@
         <div class="dim"></div>
         <div class="left">
           <div class="header-logo">
-            <nuxt-link to="/"
-              >MAKER KOO</nuxt-link
-            >
+            <nuxt-link to="/">MAKER KOO</nuxt-link>
           </div>
           <ul class="header-menu">
             <li class="header-menu--item">
@@ -31,13 +29,15 @@
             <li class="header-menu--item">
               <nuxt-link to="info-page">소개</nuxt-link>
             </li>
-            <li class="header-menu--item">
-              <nuxt-link to="/store">스토어</nuxt-link>
+            <li class="header-menu--item" onclick="alert('준비중입니다')">
+              스토어
             </li>
-            <li class="header-menu--item">
-              <nuxt-link to="">이용방법</nuxt-link>
+            <li class="header-menu--item" onclick="alert('준비중입니다')">
+              이용방법
             </li>
-            <li class="header-menu--item"><nuxt-link to="">금액</nuxt-link></li>
+            <li class="header-menu--item" onclick="alert('준비중입니다')">
+              금액
+            </li>
           </ul>
         </div>
         <div v-if="!isLogin" class="right">
@@ -77,9 +77,21 @@
           </div>
         </div>
         <div class="right">
-          <a href="http://project-koo.tistory.com" target="_blank" class="btn sns-1"></a>
-          <a href="https://twitter.com/2023_koo" target="_blank" class="btn sns-2"></a>
-          <a href="https://instagram.com/project_koo" target="_blank" class="btn sns-3"></a>
+          <a
+            href="http://project-koo.tistory.com"
+            target="_blank"
+            class="btn sns-1"
+          ></a>
+          <a
+            href="https://twitter.com/2023_koo"
+            target="_blank"
+            class="btn sns-2"
+          ></a>
+          <a
+            href="https://instagram.com/project_koo"
+            target="_blank"
+            class="btn sns-3"
+          ></a>
         </div>
       </div>
     </div>
