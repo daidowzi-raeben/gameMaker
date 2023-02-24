@@ -129,9 +129,7 @@
                   v-model="colorPicker.button.border"
                   placeholder="선택안함"
                 >
-                  <el-option :value="'0'" :label="'선택안함'"
-                    >선택안함</el-option
-                  >
+                  <el-option :value="0" :label="'선택안함'">선택안함</el-option>
                   <el-option :value="1" :label="'더 얇게'">더 얇게</el-option>
                   <el-option :value="2" :label="'얇게'">얇게</el-option>
                   <el-option :value="4" :label="'굵게'">굵게</el-option>
