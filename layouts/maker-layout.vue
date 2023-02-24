@@ -140,12 +140,17 @@ export default {
       this.activeMenu = e
     },
     loadingText() {
-      const text = [
-        '시나리오 펼치는중',
-        '챕터 펼치는중',
-        '컷을 불러오는 중',
-        '노력하는 중',
-      ]
+      let text = []
+      if (this.activeMenu === 6) {
+        text = ['노력하는 중', '노력하는 중', '노력하는 중', '노력하는 중']
+      } else {
+        text = [
+          '시나리오 펼치는중',
+          '챕터 펼치는중',
+          '컷을 불러오는 중',
+          '노력하는 중',
+        ]
+      }
       return text[Math.floor(Math.random() * 4)] + '...'
     },
   },
