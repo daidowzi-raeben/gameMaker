@@ -50,7 +50,7 @@
             />
           </div>
           <div class="preview-intro--menu">
-            <div v-if="MAKER_GNB === 5" :key="`button${i}`" class="svg-button">
+            <div v-if="MAKER_GNB === 5" class="svg-button">
               <svg width="220" height="80">
                 <rect
                   width="180"
