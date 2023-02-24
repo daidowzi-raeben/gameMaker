@@ -404,7 +404,7 @@
                     border:${UISetting.button.border}px solid ${
                       UISetting.button.strokeColor
                     }`
-                  : 'background:#000'
+                  : 'background:#000;color:#fff'
               "
               >{{ PREVIEW.data.cr }}</span
             >
@@ -488,7 +488,7 @@
                     border:${UISetting.button.border}px solid ${
                       UISetting.button.strokeColor
                     }`
-                  : 'background:#000'
+                  : 'background:#000;color:#fff'
               "
               >이름</span
             >
@@ -522,7 +522,7 @@
                     };border-radius:${Math.round(
                       Number(UISetting.button.round) / 2
                     )}px`
-                  : ''
+                  : 'background:#eee;color:#fff'
               "
               >이름</span
             >
@@ -568,7 +568,7 @@
                     border:${UISetting.button.border}px solid ${
                     UISetting.button.strokeColor
                   }`
-                : 'background:#000'
+                : 'background:#000;color:#fff'
             "
           >
             {{ PREVIEW_PROFILE.name ? PREVIEW_PROFILE.name : '인물이름' }}
