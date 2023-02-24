@@ -108,11 +108,11 @@
                   />
 
                   <defs>
-                    <mask id="Mask">
+                    <mask id="Mask1_1">
                       <rect width="100%" height="100%" fill="white" />
                       <rect
-                        x="5"
-                        y="5"
+                        :x="Number(UISetting.button.border) / 2 + 5"
+                        :y="Number(UISetting.button.border) / 2 + 5"
                         width="185"
                         height="51"
                         fill="black"
@@ -127,7 +127,7 @@
                     :y="Number(UISetting.button.y) + Number(UISetting.button.border) / 2 + 9"
                     :fill="UISetting.button.shadowColor"
                     :rx="UISetting.button.round"
-                    mask="url(#Mask)"
+                    mask="url(#Mask1_1)"
                   />
                 </svg>
                 <div
