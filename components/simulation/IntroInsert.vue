@@ -238,6 +238,7 @@ export default {
     },
   },
   mounted() {
+    this.MUTATIONS_LOGO_IMG('')
     this.$nextTick(() => {
       this.paramsInit.user_idx = kooLogin('user_idx')
       this.paramsInit.type = 'introList'
@@ -265,6 +266,7 @@ export default {
       'MUTATIONS_ASSETS_INIT',
       'MUTATIONS_AXIOS_POST_INIT',
       'MUTATIONS_INTRO',
+      'MUTATIONS_LOGO_IMG',
       'MUTATIONS_INTRO_COPYRIGHT',
       'MUTATIONS_ASSETS_BG',
       'MUTATIONS_CONTENT_CODE',
