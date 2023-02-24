@@ -60,7 +60,7 @@
     <div class="footer">
       <div class="footer-wrap">
         <div class="left">
-          <div class="name">하나피아</div>
+          <!-- <div class="name">하나피아</div>
           <div class="info">
             <span>02-1234-5678</span>
             <span>projectkoo@projectkoo.com</span>
@@ -71,15 +71,15 @@
           <div class="info">
             <span>189-87-00172</span>
             <span>제2019-서울영등포-0298호</span>
-          </div>
+          </div> -->
           <div class="copy">
             Copyright (c) 2023 TEAM Project Koo Allrights reseved.
           </div>
         </div>
         <div class="right">
-          <button type="button" class="btn sns-1"></button>
-          <button type="button" class="btn sns-2"></button>
-          <button type="button" class="btn sns-3"></button>
+          <a href="http://project-koo.tistory.com" target="_blank" class="btn sns-1"></a>
+          <a href="https://twitter.com/2023_koo" target="_blank" class="btn sns-2"></a>
+          <a href="https://instagram.com/project_koo" target="_blank" class="btn sns-3"></a>
         </div>
       </div>
     </div>

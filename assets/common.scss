@@ -526,7 +526,7 @@ button:disabled{
 
 .main {
   &-wrap{
-    height: calc(100vh - 232px);
+    height: calc(100vh - 142px);
     position:relative;
     overflow: hidden;
     .dot-circle{
@@ -1685,7 +1685,8 @@ button:disabled{
         color:#fff;
         font-family: 'NanumSquareNeo', sans-serif;
         font-size:1.2rem;
-        margin-top:20px;
+        // margin-top:20px;
+        margin-top:5px;
       }
     }
     .right{
@@ -1702,7 +1703,10 @@ button:disabled{
         }
         &.sns{
           &-1{
-            background-image: url(../static/images/icon/sns2.svg);
+            background-image: url(../static/images/icon/sns4.svg);
+            width:26px;
+            height:21px;
+            background-size:26px;
           }
           &-2{
             background-image: url(../static/images/icon/sns3.svg);
