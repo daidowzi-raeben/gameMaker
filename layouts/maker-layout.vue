@@ -79,7 +79,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN', 'LOADING', 'SCENE_CODE', 'MAKER_GNB', 'alertSave']),
+    ...mapState([
+      'LOGIN',
+      'LOADING',
+      'SCENE_CODE',
+      'MAKER_GNB',
+      'alertSave',
+      'PROJECT_ID',
+    ]),
   },
   watch: {
     LOGIN: {
@@ -118,6 +125,7 @@ export default {
       'MUTATIONS_MAKER_GNB',
       'MUTATIONS_ASSETS_INIT',
       'MUTATIONS_LOADING',
+      'PROJECT_ID',
     ]),
 
     // 페이지 이탈 경고
@@ -133,7 +141,8 @@ export default {
         return alert('준비 중입니다!')
       }
       if (e === 10) {
-        return alert('3월 1일 15시에 오픈됩니다!!')
+        window.open(`/preview?projectKey=${this.PROJECT_ID}`)
+        // return alert('3월 1일 15시에 오픈됩니다!!')
       }
       this.MUTATIONS_ASSETS_INIT()
       this.MUTATIONS_MAKER_GNB(e)
