@@ -295,6 +295,11 @@
           ></button>
         </div>
         <div v-if="PREVIEW && MAKER_GNB === 1" class="preview-con preview-img">
+          <div class="input-name" :class="UISetting.font">
+            플레이어의 이름을 입력해주세요.
+            <input type="text" class="input-text" />
+            <button type="button" class="button sm" :style="`background:${UISetting.mainColor};border:${UISetting.button.border}px solid ${UISetting.button.strokeColor}`">확인</button>
+          </div>
           <img
             v-if="PREVIEW.img.bg"
             :src="onLoadAssetsImage(PREVIEW.img.bg, 'bg')"
@@ -555,7 +560,7 @@
             width="100%"
             height="100%"
           />
-          <p
+          <!-- <p
             class="name"
             :class="UISetting.font"
             :style="
@@ -570,6 +575,10 @@
                   }`
                 : 'background:#000;color:#fff'
             "
+          > -->
+          <p
+            class="name"
+            :class="UISetting.font"
           >
             {{ PREVIEW_PROFILE.name ? PREVIEW_PROFILE.name : '인물이름' }}
           </p>
@@ -593,20 +602,11 @@
               }}
             </p>
           </div>
-          <!-- <ul class="face-list">
-            <li class="face-list--item">
+          <ul class="face-list">
+            <li v-for="faceList in 10" :key="faceList" class="face-list--item">
               <img src="https://i.imgur.com/TNnVehQ.png" alt="" />
             </li>
-            <li class="face-list--item">
-              <img src="https://i.imgur.com/Fya1jHk.png" alt="" />
-            </li>
-            <li class="face-list--item">
-              <img src="https://i.imgur.com/W6z9by0.png" alt="" />
-            </li>
-            <li class="face-list--item">
-              <img src="https://i.imgur.com/m14VXCI.png" alt="" />
-            </li>
-          </ul> -->
+          </ul>
         </div>
         <img src="~/static/images/mockup.png" alt="" class="preview-mockup" />
       </div>
