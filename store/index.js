@@ -311,6 +311,10 @@ const createStore = () => {
             MUTATIONS_PREVIEW_POINT(state, payload) {
                 state.PREVIEW.data.point = payload
             },
+            MUTATIONS_PREVIEW_POINT_ANSWER(state, payload) {
+                console.log(payload)
+                state.PREVIEW.data.questionsPoint[0].point = payload
+            },
             MUTATIONS_PREVIEW_TIMER(state, payload) {
                 state.PREVIEW.data.questionsTimer = payload
             },
@@ -323,8 +327,41 @@ const createStore = () => {
             MUTATIONS_PREVIEW_END_TYPE(state, payload) {
                 // state.PREVIEW.data.endType = payload
             },
-            MUTATIONS_PREVIEW_QUESTIONS_POINT(state, payload) {
-                state.PREVIEW.data.questionsPoint = payload
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_1(state, payload) {
+                state.PREVIEW.data.questionsPoint[0].point = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_2(state, payload) {
+                state.PREVIEW.data.questionsPoint[1].point = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_3(state, payload) {
+                state.PREVIEW.data.questionsPoint[2].point = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_1(state, payload) {
+                state.PREVIEW.data.questionsPoint[0].pointCr = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_2(state, payload) {
+                state.PREVIEW.data.questionsPoint[1].pointCr = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_3(state, payload) {
+                state.PREVIEW.data.questionsPoint[2].pointCr = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_1(state, payload) {
+                state.PREVIEW.data.questionsPoint[0].pointType = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_2(state, payload) {
+                state.PREVIEW.data.questionsPoint[1].pointType = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_3(state, payload) {
+                state.PREVIEW.data.questionsPoint[2].pointType = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_1(state, payload) {
+                state.PREVIEW.data.questionsPoint[0].nextBtn = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_2(state, payload) {
+                state.PREVIEW.data.questionsPoint[1].nextBtn = payload
+            },
+            MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_3(state, payload) {
+                state.PREVIEW.data.questionsPoint[2].nextBtn = payload
             },
             MUTATIONS_AXIOS_GET_PROJECT_DETAIL(state, payload) {
                 // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))

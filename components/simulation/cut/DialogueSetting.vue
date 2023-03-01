@@ -933,12 +933,19 @@
               <select v-else disabled class="input-select">
                 <option>캐릭터 없음</option>
               </select>
-              <input type="number" class="input-number" min="1" max="100" />
+              <input
+                type="number"
+                class="input-number"
+                min="1"
+                max="100"
+                :value="PREVIEW.data.questionsPoint[0].point"
+                @change="dataPointUpdate('answerPoint', $event)"
+              />
               <span class="text">정답 시 포인트</span>
               <select
                 class="input-select"
-                :value="PREVIEW.data.questionsPoint[1].pointType"
-                @change="dataPointUpdate('pointType1', $event)"
+                :value="PREVIEW.data.questionsPoint[0].pointType"
+                @change="dataPointUpdate('pointType0', $event)"
               >
                 <option :value="null">선택</option>
                 <option value="P">증가</option>
@@ -1160,6 +1167,19 @@ export default {
       'MUTATIONS_PREVIEW_END_TYPE',
       'MUTATIONS_CONTENT_CODE',
       'MUTATIONS_CUT_PUSH_DATA',
+      'MUTATIONS_PREVIEW_POINT_ANSWER',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_1',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_2',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_3',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_1',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_2',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_3',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_1',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_2',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_3',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_1',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_2',
+      'MUTATIONS_PREVIEW_QUESTIONS_POINT_3',
     ]),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onClickCutAdd() {
@@ -1307,7 +1327,7 @@ export default {
       this.update()
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)
-      this.MUTATIONS_CUT_LIST_FIRST()
+      // this.MUTATIONS_CUT_LIST_FIRST()
       // this.MUTATIONS_CHAPTER_DEATILE_INIT()
       this.cutListShow = true
     },
@@ -1321,23 +1341,54 @@ export default {
     },
     dataPointUpdate(type, e) {
       console.log(type, e.target.value)
-      if (type === 'point') this.MUTATIONS_PREVIEW_POINT(e.target.value)
-      if (type === 'pointCr') this.MUTATIONS_PREVIEW_POINT_CR(e.target.value)
+      if (type === 'answerPoint') {
+        return this.MUTATIONS_PREVIEW_POINT_ANSWER(e.target.value)
+      }
+      if (type === 'point') return this.MUTATIONS_PREVIEW_POINT(e.target.value)
+      if (type === 'pointCr')
+        return this.MUTATIONS_PREVIEW_POINT_CR(e.target.value)
       if (type === 'pointType')
-        this.MUTATIONS_PREVIEW_POINT_TYPE(e.target.value)
-      if (type === 'endType') this.MUTATIONS_PREVIEW_END_TYPE(e.target.value)
+        return this.MUTATIONS_PREVIEW_POINT_TYPE(e.target.value)
+      if (type === 'endType')
+        return this.MUTATIONS_PREVIEW_END_TYPE(e.target.value)
+
+      if (type === 'point0')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_1(e.target.value)
+      if (type === 'point1')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_2(e.target.value)
+      if (type === 'point2')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_3(e.target.value)
+      if (type === 'pointCr0')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_1(e.target.value)
+      if (type === 'pointCr1')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_2(e.target.value)
+      if (type === 'pointCr2')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_3(e.target.value)
+      if (type === 'pointType0')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_1(e.target.value)
+      if (type === 'pointType1')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_2(e.target.value)
+      if (type === 'pointType2')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_3(e.target.value)
+      if (type === 'nextBtn0')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_1(e.target.value)
+      if (type === 'nextBtn1')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_2(e.target.value)
+      if (type === 'nextBtn2')
+        return this.MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_3(e.target.value)
 
       if (
         type !== 'point' &&
+        type !== 'answerPoint' &&
         type !== 'pointCr' &&
         type !== 'pointType' &&
         type !== 'endType'
       ) {
         console.log('ARRAY')
-        const typeParam = type.substr(0, type.length - 1)
-        this.questionsPoint[type.substr(-1)][typeParam] = e.target.value
-        console.log(type.substr(-1), this.questionsPoint, typeParam)
-        this.MUTATIONS_PREVIEW_QUESTIONS_POINT(this.questionsPoint)
+        // const typeParam = type.substr(0, type.length - 1)
+        // this.questionsPoint[type.substr(-1)][typeParam] = e.target.value
+        // console.log(type.substr(-1), this.questionsPoint, typeParam)
+        // this.MUTATIONS_PREVIEW_QUESTIONS_POINT(this.questionsPoint)
       }
     },
     onInputDataQuestions(array, e) {

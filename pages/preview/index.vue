@@ -169,6 +169,7 @@
                         : windowColor()
                     "
                     placeholder="주관식 답변을 입력해주세요"
+                    @keyup.enter="onClickSubjectiveQuestion"
                   />
                   <button
                     type="button"
@@ -182,7 +183,6 @@
                         : windowColor()
                     "
                     @click="onClickSubjectiveQuestion"
-                    @keyup.enter="onClickSubjectiveQuestion"
                   >
                     입력
                   </button>
@@ -569,7 +569,7 @@ export default {
 
             this.$refs.displayIntro.style = 'display:block'
             this.loading = false
-          }, 3000)
+          }, 1000)
         }
       },
       immediate: true,
@@ -847,7 +847,7 @@ export default {
         return
       }
       if (this.inApp.cutType === 4) {
-        console.log('주관식')
+        console.log('주관식', this.inApp.answer)
       }
     },
     audioBgm(soundUrl, s, c) {
@@ -939,19 +939,59 @@ export default {
     },
     // 주관식
     onClickSubjectiveQuestion() {
-      console.log(this.answer, '주관식 처리')
+      console.log(
+        this.answer,
+        this.inApp.questionsPoint[0].nextBtn,
+        '주관식 처리'
+      )
+      // this.updateGame(this.inApp.questionsPoint[e].nextBtn)
 
-      for (let i = 0; i < this.gamePoint.length; i++) {
-        if (this.gamePoint[i].name === this.inApp.pointCr) {
-          if (this.inApp.pointType === 'P') {
-            this.gamePoint[i].point =
-              Number(this.gamePoint[i].point) + Number(this.inApp.point)
-          } else {
-            this.gamePoint[i].point =
-              Number(this.gamePoint[i].point) - Number(this.inApp.point)
-          }
+      if (this.inApp.answer === this.answer) {
+        // return console.log('정답', this.inApp)
+        if (this.inApp.questionsPoint[0].pointType === 'P') {
+          console.log('포인트 증가')
+          //  this.gamePoint[i].point =
+          //                 Number(this.gamePoint[i].point) + Number(this.inApp.point)
+        } else {
+          console.log('포인트 감소')
+        }
+        if (this.inApp.questionsPoint[0].nextBtn) {
+          // this.inApp =
+          //   this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].cuts[
+          //     'cut' + this.inApp.questionsPoint[0].nextBtn
+          //   ].list
+          console.log('********************************')
+          return this.updateGame(this.inApp.questionsPoint[0].nextBtn)
         }
       }
+
+      // for (let i = 0; i < this.gamePoint.length; i++) {
+      //   if (this.gamePoint[i].name === this.inApp.pointCr) {
+      //     if (this.inApp.answer === this.answer) {
+      //       console.log(
+      //         '정답',
+      //         this.answer,
+      //         this.inApp.questionsPoint[0].nextBtn
+      //       )
+      //       if (this.inApp.pointType === 'P') {
+      //         this.gamePoint[i].point =
+      //           Number(this.gamePoint[i].point) + Number(this.inApp.point)
+      //       } else {
+      //         this.gamePoint[i].point =
+      //           Number(this.gamePoint[i].point) - Number(this.inApp.point)
+      //       }
+      //       if (this.inApp.questionsPoint[0].nextBtn) {
+      //         this.inApp =
+      //           this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].cuts[
+      //             'cut' + this.inApp.questionsPoint[0].nextBtn
+      //           ].list
+      //         console.log('********************************')
+      //         return this.updateGame()
+      //       }
+      //     }
+      //   }
+      // }
+
       console.log(this.gamePoint)
       this.nextGame()
     },

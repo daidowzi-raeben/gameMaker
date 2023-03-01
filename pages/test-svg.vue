@@ -1,52 +1,39 @@
 <template>
   <div>
     <div class="svg-button">
-      <svg id="img" width="200" height="60">
-        <svg width="200" height="60">
-          <rect
-            width="180"
-            height="46"
-            x="0"
-            y="0"
-            rx="10"
-            stroke-width="0"
-            fill="rgba(255, 200, 35, 1)"
-            stroke="rgba(251, 251, 251, 1)"
-          ></rect>
-          <text
-            text-anchor="middle"
-            alignment-baseline="middle"
-            transform="translate(100, 35)"
-            font-size="16px"
-            class="font-nanumNeo"
-          >
-            시작하기
-          </text>
-        </svg>
-        <svg width="200" height="60">
-          <defs>
-            <mask id="Mask">
-              <rect width="100%" height="100%" fill="white"></rect>
-              <rect
-                x="-5"
-                y="-5"
-                width="185"
-                height="51"
-                fill="black"
-                rx="10"
-              ></rect>
-            </mask>
-          </defs>
-          <rect
-            width="180"
-            height="46"
-            x="5"
-            y="5"
-            rx="10"
-            mask="url(#Mask)"
-            fill="red"
-          ></rect>
-        </svg>
+      <svg id="img" width="100%" height="150">
+        <rect
+          width="90%"
+          height="120"
+          x="10"
+          y="10"
+          fill="rgba(255, 255, 255, 0.86)"
+          rx="10"
+          stroke="rgba(255, 255, 255, 0.5)"
+          stroke-width="0"
+        ></rect>
+        <defs>
+          <mask id="Mask3">
+            <rect width="100%" height="100%" fill="white"></rect>
+            <rect
+              x="0"
+              y="0"
+              width="calc(90% + 10px)"
+              height="130"
+              fill="black"
+              rx="10"
+            ></rect>
+          </mask>
+        </defs>
+        <rect
+          width="90%"
+          height="120"
+          x="14"
+          y="14"
+          fill="rgba(16, 16, 16, 0.3)"
+          rx="10"
+          mask="url(#Mask3)"
+        ></rect>
       </svg>
     </div>
     <div style="margin-top: 100px" @click="download">다운</div>

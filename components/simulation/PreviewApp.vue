@@ -295,11 +295,11 @@
           ></button>
         </div>
         <div v-if="PREVIEW && MAKER_GNB === 1" class="preview-con preview-img">
-          <div class="input-name" :class="UISetting.font">
+          <!-- <div class="input-name" :class="UISetting.font">
             플레이어의 이름을 입력해주세요.
             <input type="text" class="input-text" />
             <button type="button" class="button sm" :style="`background:${UISetting.mainColor};border:${UISetting.button.border}px solid ${UISetting.button.strokeColor}`">확인</button>
-          </div>
+          </div> -->
           <img
             v-if="PREVIEW.img.bg"
             :src="onLoadAssetsImage(PREVIEW.img.bg, 'bg')"
@@ -576,10 +576,7 @@
                 : 'background:#000;color:#fff'
             "
           > -->
-          <p
-            class="name"
-            :class="UISetting.font"
-          >
+          <p class="name" :class="UISetting.font">
             {{ PREVIEW_PROFILE.name ? PREVIEW_PROFILE.name : '인물이름' }}
           </p>
           <div class="character">
