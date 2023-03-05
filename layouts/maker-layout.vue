@@ -125,7 +125,6 @@ export default {
       'MUTATIONS_MAKER_GNB',
       'MUTATIONS_ASSETS_INIT',
       'MUTATIONS_LOADING',
-      'PROJECT_ID',
     ]),
 
     // 페이지 이탈 경고
@@ -137,7 +136,7 @@ export default {
     //   console.log(e)
     // },
     onClickGnbTo(e) {
-      if (e === 3 || e === 7 || e === 9) {
+      if (e === 7 || e === 9) {
         return alert('준비 중입니다!')
       }
       if (e === 10) {

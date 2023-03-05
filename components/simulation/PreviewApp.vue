@@ -599,9 +599,16 @@
               }}
             </p>
           </div>
-          <ul class="face-list">
-            <li v-for="faceList in 10" :key="faceList" class="face-list--item">
-              <img src="https://i.imgur.com/TNnVehQ.png" alt="" />
+          <ul v-if="ASSETS && ASSETS.crList" class="face-list">
+            <!-- {{
+              ASSETS
+            }} -->
+            <li
+              v-for="(v, i) in ASSETS.crList"
+              :key="i"
+              class="face-list--item"
+            >
+              <img :src="onLoadAssetsImage(v.h_img, 'cr')" alt="" />
             </li>
           </ul>
         </div>
@@ -699,6 +706,8 @@ export default {
       'CROP_IMAGE',
       'SCENE_INDEX',
       'LOGO_IMG',
+      'ASSETS',
+      'MY_NAME',
     ]),
   },
   watch: {

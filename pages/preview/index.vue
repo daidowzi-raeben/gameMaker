@@ -80,7 +80,7 @@
               <button
                 type="button"
                 class="footer-preview-blank"
-                onclick="alert('곧 오픈합니다!')"
+                onclick="window.open('http://projectkoo.com')"
               >
                 프로젝트 쿠 바로가기
               </button>
@@ -576,6 +576,24 @@ export default {
     },
   },
   mounted() {
+    // 이머전시
+    const frm = new FormData()
+    frm.append(`type`, 'config')
+    frm.append('apiKey', process.env.API_KEY)
+
+    this.$axios
+      .post(process.env.VUE_APP_API, frm, {})
+      .then((res) => {
+        console.log('emergency', res.data.emergency)
+        if (res.data.emergency === '1') {
+          this.$router.push('/')
+          return alert('점검중입니다')
+        }
+      })
+      .catch((res) => {
+        console.log('AXIOS FALSE', res)
+      })
+
     // console.log(appData)
     navigator.userAgent.includes('iPhone OS 16') === true
       ? (this.isSafari = 'safari')

@@ -16,6 +16,7 @@ const createStore = () => {
     return new Store({
         state: {
             LOGO_IMG: '',
+            MY_NAME: '',
             JOIN_ID: null,
             JOIN_NAME: null,
             IN_APP_GAME: [{}],

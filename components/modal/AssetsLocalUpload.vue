@@ -15,9 +15,15 @@
               {{ uploadPreview }}
             </span>
             <span v-else class="text-center" style="line-height: 20px"
-              >이곳을 클릭해서 에셋을 등록해 보세요<br />이미지는 2000*4000
-              의<br />
-              사이즈가 가장 적합합니다</span
+              >이곳을 클릭해서 에셋을 등록해 보세요<br />
+              <span v-if="assetsType === 'S'">
+                mp3 확장자만 <br />
+                업로드 가능합니다
+              </span>
+              <span v-else>
+                이미지는 2000*4000 의<br />
+                사이즈가 가장 적합합니다
+              </span></span
             >
             <div
               v-if="uploadPreview !== '' && assetsType !== 'S'"
