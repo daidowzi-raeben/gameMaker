@@ -207,7 +207,7 @@
                 <div class="preview-intro--logo">
                   <img
                     :src="
-                      onLoadAssetsImage(IN_APP_GAME.intro.data.logo, 'logo')
+                      onLoadAssetsImage(IN_APP_GAME.intro.introLogo, 'logo')
                     "
                     alt="logo"
                   />
@@ -1014,6 +1014,9 @@ export default {
       this.nextGame()
     },
     onLoadAssetsImage(v, f) {
+      if (f === 'logo') {
+        return `${process.env.VUE_APP_IMAGE}/${f}/${v}.png`
+      }
       return `${process.env.VUE_APP_IMAGE}/${f}/${v}`
     },
     innerHeight() {
