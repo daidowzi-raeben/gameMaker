@@ -59,6 +59,7 @@
                 <el-color-picker
                   v-model="colorPicker.mainColor"
                   show-alpha
+                  @active-change="onChangeColorPicker($event, 'mainColor')"
                 ></el-color-picker>
                 <label class="label">메인색상</label>
                 <!-- <div
@@ -83,6 +84,7 @@
                 <el-color-picker
                   v-model="colorPicker.mainFontColor"
                   show-alpha
+                  @active-change="onChangeColorPicker($event, 'mainFontColor')"
                 ></el-color-picker>
                 <label class="label">메인글씨색상</label>
 
@@ -98,6 +100,9 @@
                 <el-color-picker
                   v-model="colorPicker.button.strokeColor"
                   show-alpha
+                  @active-change="
+                    onChangeColorPicker($event, 'button.strokeColor')
+                  "
                 ></el-color-picker>
                 <label class="label">메인외곽선</label>
               </div>
@@ -105,6 +110,9 @@
                 <el-color-picker
                   v-model="colorPicker.button.shadowColor"
                   show-alpha
+                  @active-change="
+                    onChangeColorPicker($event, 'button.shadowColor')
+                  "
                 ></el-color-picker>
                 <label class="label">메인그림자</label>
               </div>
@@ -193,6 +201,7 @@
                 <el-color-picker
                   v-model="colorPicker.windowColor"
                   show-alpha
+                  @active-change="onChangeColorPicker($event, 'windowColor')"
                 ></el-color-picker>
                 <label class="label">메인색상</label>
                 <!-- <div
@@ -217,6 +226,7 @@
                 <el-color-picker
                   v-model="colorPicker.fontColor"
                   show-alpha
+                  @active-change="onChangeColorPicker($event, 'fontColor')"
                 ></el-color-picker>
                 <label class="label">글자</label>
                 <!-- <div
@@ -241,6 +251,7 @@
                 <el-color-picker
                   v-model="colorPicker.strokeColor"
                   show-alpha
+                  @active-change="onChangeColorPicker($event, 'strokeColor')"
                 ></el-color-picker>
                 <label class="label">외곽선</label>
                 <!-- <div
@@ -265,6 +276,7 @@
                 <el-color-picker
                   v-model="colorPicker.shadowColor"
                   show-alpha
+                  @active-change="onChangeColorPicker($event, 'shadowColor')"
                 ></el-color-picker>
                 <label class="label">그림자</label>
                 <!-- <div
@@ -570,6 +582,43 @@ export default {
         title: '저장되었습니다.',
         message: h('i', { style: 'color: teal' }, '멋진 UI를 만들어 보아요!'),
       })
+    },
+    onChangeColorPicker(v, t) {
+      if (t === 'mainColor') {
+        this.colorPicker.mainColor = v
+        return
+      }
+      if (t === 'mainFontColor') {
+        this.colorPicker.mainFontColor = v
+        return
+      }
+      if (t === 'button.strokeColor') {
+        this.colorPicker.button.strokeColor = v
+        return
+      }
+      if (t === 'button.shadowColor') {
+        this.colorPicker.button.shadowColor = v
+        return
+      }
+
+      if (t === 'windowColor') {
+        this.colorPicker.windowColor = v
+        return
+      }
+      if (t === 'fontColor') {
+        this.colorPicker.fontColor = v
+        return
+      }
+      if (t === 'strokeColor') {
+        this.colorPicker.strokeColor = v
+        return
+      }
+      if (t === 'shadowColor') {
+        this.colorPicker.shadowColor = v
+        return
+      }
+
+      return console.log('COLOR')
     },
   },
 }
