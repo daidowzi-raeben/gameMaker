@@ -22,6 +22,32 @@
     </div>
     <div class="column-2">
       <div v-if="PREVIEW" class="preview">
+        <div v-if="MAKER_GNB === 7" class="setting-box">
+          <div class="setting-box--row">
+            <label class="label">배경음</label>
+            range
+          </div>
+          <div class="setting-box--row">
+            <label class="label">효과음</label>
+            range
+          </div>
+          <div class="setting-box--row">
+            <label class="label">푸시알림</label>
+            switch
+          </div>
+          <div class="setting-box--row">
+            <label class="label">진동효과</label>
+            switch
+          </div>
+          <div class="setting-box--row">
+            <button type="button" class="button">도움주신분</button>
+            <button type="button" class="button">데이터초기화</button>
+            <button type="button" class="button">로그인</button>
+          </div>
+          <div class="setting-box--row">
+            <button type="button" class="button">확인</button>
+          </div>
+        </div>
         <!-- dim-light, dim-dark, dim-blur, diagonal, diagonal-r, copy-left, copy-right 클래스 추가로 구분. intro만있으면 기본 중앙정렬 -->
         <div
           v-if="MAKER_GNB === 2 || MAKER_GNB === 5"

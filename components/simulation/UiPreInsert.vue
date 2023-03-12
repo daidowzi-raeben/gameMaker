@@ -628,7 +628,7 @@ export default {
 .radio-wrap {
   margin: 20px 0;
   border-radius: 8px;
-  .input-radio {
+  .input-radio, .input-check {
     margin-right: 20px;
   }
 }

@@ -1905,6 +1905,13 @@
   width: 369px;
   height: 750px;
 
+  .setting-box{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+  }
+
   &-wrap {
     height: 100vh;
     overflow: hidden;
@@ -2816,6 +2823,7 @@
     .text {
       font-size: 1.4rem;
       margin-left: 5px;
+      margin-top:-1.5px;
 
       &.col-green {
         color: #108C7D;
@@ -3006,7 +3014,7 @@
     .input-check {
       .text {
         font-size: 1.3rem;
-        margin-top: -1px;
+        margin-top: -1.5px;
       }
     }
 

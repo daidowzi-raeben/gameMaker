@@ -7,6 +7,7 @@
       <CharacterList v-if="MAKER_GNB === 4" />
       <UIList v-if="MAKER_GNB === 5" />
       <AssetsList v-if="MAKER_GNB === 6" />
+      <SettingList v-if="MAKER_GNB === 7" />
       <div class="maker-right">
         <CutList v-if="MAKER_GNB === 1 || MAKER_GNB === 3" />
         <PreviewApp :cropImage="cropImage" />
@@ -61,6 +62,7 @@ import CutList from '~/components/simulation/CutList.vue'
 import EndingList from '~/components/simulation/EndingList.vue'
 import AssetsList from '~/components/simulation/AssetsList.vue'
 import IntroList from '~/components/simulation/IntroList.vue'
+import SettingList from '~/components/simulation/SettingList.vue'
 import UIList from '~/components/simulation/UIList.vue'
 import CharacterList from '~/components/simulation/CharacterList.vue'
 import CutInsert from '~/components/simulation/CutInsert.vue'
@@ -78,6 +80,7 @@ export default {
     CutList,
     EndingList,
     IntroList,
+    SettingList,
     AssetsList,
     UIList,
     CharacterList,

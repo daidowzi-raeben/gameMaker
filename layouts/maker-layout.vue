@@ -136,9 +136,6 @@ export default {
     //   console.log(e)
     // },
     onClickGnbTo(e) {
-      if (e === 7 || e === 9) {
-        return alert('준비 중입니다!')
-      }
       if (e === 10) {
         window.open(`/preview?projectKey=${this.PROJECT_ID}`)
         // return alert('3월 1일 15시에 오픈됩니다!!')
