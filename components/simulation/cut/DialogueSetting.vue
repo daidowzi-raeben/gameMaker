@@ -1427,6 +1427,7 @@ export default {
       this.paramsPreview.cr2 = this.PREVIEW.img.cr2
       this.paramsPreview.crName = this.PREVIEW.data.cr
       this.paramsPreview.effect = this.PREVIEW.data.effect
+      this.paramsPreview.effectApp = this.PREVIEW.data.effectApp
       this.paramsPreview.effect2 = this.PREVIEW.data.effect2
       this.paramsPreview.point = this.PREVIEW.data.point
       this.paramsPreview.pointCr = this.PREVIEW.data.pointCr

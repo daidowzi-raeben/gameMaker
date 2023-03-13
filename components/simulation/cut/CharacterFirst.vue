@@ -44,6 +44,16 @@
             />
             <span class="check-text">아래에서</span>
           </label>
+          <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
+            <input
+              type="checkbox"
+              :checked="
+                PREVIEW.data.effectApp === 'app-vibration' ? true : false
+              "
+              @change="onClickEffect('app-vibration')"
+            />
+            <span class="check-text">앱 진동</span>
+          </label>
         </div>
       </div>
       <div class="setting-info">
@@ -172,12 +182,17 @@ export default {
       // this.MUTATIONS_CONTENT_CODE(3)
     },
     onClickEffect(type) {
-      this.PREVIEW.data.effect === type
-        ? this.MUTATIONS_ASSETS_EFFECT('')
-        : (this.PREVIEW.data.effect = type)
+      if (type !== 'app-vibration') {
+        this.PREVIEW.data.effect === type
+          ? this.MUTATIONS_ASSETS_EFFECT('')
+          : (this.PREVIEW.data.effect = type)
+      }
       switch (type) {
         case 'ani-vibration':
           this.MUTATIONS_ASSETS_EFFECT('ani-vibration')
+          break
+        case 'app-vibration':
+          this.MUTATIONS_ASSETS_EFFECT('app-vibration')
           break
         case 'ani-fade':
           this.MUTATIONS_ASSETS_EFFECT('ani-fade')

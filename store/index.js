@@ -113,6 +113,7 @@ const createStore = () => {
                     answer: '',
                     cr: '',
                     effect: '',
+                    effectApp: '',
                     effect2: '',
                     connect: '',
                     code: '',
@@ -491,6 +492,7 @@ const createStore = () => {
                 state.PREVIEW.img.cr2 = ''
                 state.PREVIEW.data.cr = ''
                 state.PREVIEW.data.effect = ''
+                state.PREVIEW.data.effectApp = ''
                 state.PREVIEW.data.effect2 = ''
                 state.PREVIEW.data.text = ''
                 state.SCENE_CODE = ''
@@ -568,7 +570,11 @@ const createStore = () => {
             },
             // 효과
             MUTATIONS_ASSETS_EFFECT(state, payload) {
-                state.PREVIEW.data.effect = payload
+                if (payload === 'app-vibration') {
+                    state.PREVIEW.data.effectApp = payload
+                } else {
+                    state.PREVIEW.data.effect = payload
+                }
             },
             // 효과
             MUTATIONS_ASSETS_EFFECT2(state, payload) {
@@ -643,6 +649,7 @@ const createStore = () => {
                     state.PREVIEW.img.cr2 = state.CUT_LIST.jsonData[0].cr2
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[0].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[0].effect
+                    state.PREVIEW.data.effectApp = state.CUT_LIST.jsonData[0].effectApp
                     state.PREVIEW.data.effect2 = state.CUT_LIST.jsonData[0].effect2
                     state.PREVIEW.data.sr = state.CUT_LIST.jsonData[0].sr
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[0].text.replaceAll(
@@ -684,6 +691,7 @@ const createStore = () => {
                     state.PREVIEW.img.cr2 = ''
                     state.PREVIEW.data.cr = ''
                     state.PREVIEW.data.effect = ''
+                    state.PREVIEW.data.effectApp = ''
                     state.PREVIEW.data.effect2 = ''
                     state.PREVIEW.data.sr = ''
                     state.PREVIEW.data.text = ''
@@ -735,6 +743,7 @@ const createStore = () => {
                     state.PREVIEW.img.cr2 = state.CUT_LIST.jsonData[payload].cr2
                     state.PREVIEW.data.cr = state.CUT_LIST.jsonData[payload].crName
                     state.PREVIEW.data.effect = state.CUT_LIST.jsonData[payload].effect
+                    state.PREVIEW.data.effectApp = state.CUT_LIST.jsonData[payload].effectApp
                     state.PREVIEW.data.effect2 = state.CUT_LIST.jsonData[payload].effect2
                     state.PREVIEW.data.sr = state.CUT_LIST.jsonData[payload].sr
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[

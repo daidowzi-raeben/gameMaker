@@ -35,17 +35,6 @@
         <div class="setting-logo">
           <div class="setting-tit">로고 등록</div>
           <div class="input-wrap">
-            <!-- <select
-              class="input-select"
-              :value="PREVIEW_INTRO.position"
-              @change="onIntroData('position', $event)"
-            >
-              <option :value="null">CENTER</option>
-              <option value="TOP">TOP</option>
-              <option value="BOTTOM">BOTTOM</option>
-              <option value="LEFT">LEFT</option>
-              <option value="RIGHT">RIGHT</option>
-            </select> -->
             <input
               type="text"
               class="input-text"
@@ -66,6 +55,33 @@
               v-if="isFileInsert === true"
               class="btn delete"
               @click="onClickFileDelete"
+              >이미지 삭제</span
+            >
+          </div>
+          <div class="setting-tit">배경음 등록</div>
+          <div class="input-wrap">
+            <input
+              type="text"
+              class="input-text"
+              :value="fileInsertName2"
+              readonly
+            />
+            <label class="input-file">
+              <input
+                id="bgmFile"
+                ref="bgmFile"
+                type="file"
+                accept="sound/mp3"
+                @change="onChangeFileInput2"
+              />
+              <span v-if="isFileInsert2 === false" class="btn"
+                >배경음 등록</span
+              >
+            </label>
+            <span
+              v-if="isFileInsert === true"
+              class="btn delete"
+              @click="onClickFileDelete2"
               >이미지 삭제</span
             >
           </div>
@@ -157,6 +173,8 @@ export default {
       rightContentShow: false,
       isFileInsert: false,
       fileInsertName: '',
+      isFileInsert2: false,
+      fileInsertName2: '',
       intro: {},
       paramsInit: {},
       params: {},
@@ -295,11 +313,31 @@ export default {
 
       console.log(URL.createObjectURL(e.target.files[0]))
     },
+    onChangeFileInput2(e) {
+      const mp = e.target.files[0].name.split('.')
+      this.soundFile = e.target.files[0]
+      // e.target.files[0].name.substr(0,mp)
+      console.log(mp[mp.length - 1], e.target.files[0].name)
+      this.ext = mp[mp.length - 1]
+      if (this.ext !== 'mp3') {
+        e.target.files = null
+        return alert('mp3 확장자만 업로드가 가능합니다')
+      }
+      this.isFileInsert2 = true
+      this.fileInsertName2 = e.target.files[0].name
+
+      console.log(URL.createObjectURL(e.target.files[0]))
+    },
     onClickFileDelete() {
       this.isFileInsert = false
       this.fileInsertName = ''
       this.$refs.logoFile.value = ''
       this.MUTATIONS_LOGO_IMG('')
+    },
+    onClickFileDelete2() {
+      this.isFileInsert2 = false
+      this.fileInsertName2 = ''
+      this.$refs.logoFile.value = ''
     },
     onIntroData(v, e) {
       if (v === 'copyright') {
@@ -320,6 +358,8 @@ export default {
       const frm = new FormData()
       const photoFile = document.getElementById('logoFile')
       frm.append('logoFile', photoFile.files[0])
+      const bgmFile = document.getElementById('bgmFile')
+      frm.append('bgmFile', bgmFile.files[0])
       frm.append('type', 'introInsert')
       frm.append('secretKey', this.PROJECT_ID)
       frm.append('previewData', JSON.stringify(this.intro))

@@ -42,6 +42,14 @@
         />
         <span class="check-text">아래에서</span>
       </label>
+      <label v-if="MAKER_GNB === 1 || MAKER_GNB === 3" class="input-check">
+        <input
+          type="checkbox"
+          :checked="PREVIEW.data.effect === 'ani-bottom' ? true : false"
+          @change="onClickEffect('app-vibration')"
+        />
+        <span class="check-text">앱 진동</span>
+      </label>
     </div>
     <div v-if="ASSETS" class="setting-scen--list">
       <label class="label">배경</label>
@@ -168,7 +176,7 @@ export default {
             slidesPerView: 6,
             slidesPerGroup: 6,
           },
-        }
+        },
       },
     }
   },
