@@ -4,9 +4,14 @@
       <div>
         <div>
           <select v-model="params.user_idx" class="input-select">
+            <option :value="5">쿠쿠쿠쿠쿠</option>
             <option v-for="(item, i) in selectName" :key="i" :value="i + 31">
               {{ item }}
             </option>
+          </select>
+          <select v-model="params.mode" class="input-select">
+            <option :value="'C'">인물</option>
+            <option :value="'B'">배경</option>
           </select>
           <br />
           <br />
@@ -74,6 +79,7 @@ export default {
         subName: [],
         user_idx: 31,
         discount: 0,
+        mode: 'C',
       },
       imgUrl: '',
       // 32 53
@@ -131,6 +137,9 @@ export default {
       frm.append('apiKey', process.env.API_KEY)
       frm.append('user_idx', this.params.user_idx)
       frm.append('gas_name', this.params.mainName)
+      frm.append('price', this.params.price)
+      frm.append('mode', this.params.mode)
+      frm.append('discount', this.params.discount)
 
       frm.append('national_2000', this.$refs.national_2000.files[0])
 
