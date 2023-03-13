@@ -269,7 +269,9 @@ const createStore = () => {
                 state.PREVIEW_INTRO = payload
             },
             MUTATIONS_STORE_CRLIST(state, payload) {
-                state.ASSETS_STORE.crList = payload
+                state.ASSETS_STORE.crList = payload.cr
+                state.ASSETS_STORE.bgList = payload.bg
+                state.ASSETS_STORE.srList = payload.sr
             },
             MUTATIONS_STORE_DETAIL(state, payload) {
                 state.ASSETS_STORE.detail = payload
