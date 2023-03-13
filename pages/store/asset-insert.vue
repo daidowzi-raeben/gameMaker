@@ -12,6 +12,7 @@
           <br />
         </div>
         <div>가격 : <input v-model="params.price" /></div>
+        <div>할인판매가격 : <input v-model="params.discount" /></div>
         <div>에셋 이름 : <input v-model="params.mainName" /></div>
         대표_2000 :
         <input ref="national_2000" type="file" @change="onChangeNational" />
@@ -72,6 +73,7 @@ export default {
         mainName: '',
         subName: [],
         user_idx: 31,
+        discount: 0,
       },
       imgUrl: '',
       // 32 53
