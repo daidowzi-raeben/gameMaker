@@ -1268,7 +1268,7 @@ button:disabled{
       font-size: 2.5rem;
       color: $textCol1;
       padding-right: 30px;
-      background: url(~/static/images/icon/arrow_right.svg)no-repeat 100% 70%;
+      background: url(~/static/images/icon/arrow_right.svg)no-repeat 100% 65%;
       transition: color .3s;
       position: relative;
       z-index: 10;
@@ -1310,6 +1310,7 @@ button:disabled{
         position: relative;
         height: 320px;
         background-color: #F4F5F7;
+        cursor: pointer;
         img {
           width: 100%;
           position: absolute;
@@ -1422,6 +1423,17 @@ button:disabled{
                 background: url(~/static/images/icon/cart.svg)no-repeat center;
               }
             }
+          }
+        }
+      }
+      &.temp-type{
+        display:flex;
+        flex-wrap: wrap;
+        .card-list--item{
+          width:calc(20% - 16px);
+          margin: 0 20px 20px 0;
+          &:nth-child(5n){
+            margin-right:0;
           }
         }
       }
@@ -1831,7 +1843,18 @@ button:disabled{
 }
 
 .store{
-  background-color:#F4F5F7;
+  position:relative;
+  &:before{
+    content:"";
+    display:block;
+    width:100vw;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background-color:#F4F5F7;
+    z-index: -1;
+  }
   &-wrap{
     max-width: $pc;
     margin: 0 auto;
@@ -2029,12 +2052,14 @@ button:disabled{
         flex-wrap: wrap;
         .img-wrap{
           flex:1;
-          min-width:calc(50% - 20px);
+          width:30%;
+          min-width: 30%;
+          max-width: calc(33% - 20px);
           background-color:#fff;
           border-radius: 10px;
-          margin-bottom:40px;
-          &:nth-child(2n){
-            margin-left:40px;
+          margin:40px 40px 0 0;
+          &:nth-child(3n){
+            margin-right: 0;
           }
           img{
             width:100%;

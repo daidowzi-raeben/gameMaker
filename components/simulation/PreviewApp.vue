@@ -22,30 +22,35 @@
     </div>
     <div class="column-2">
       <div v-if="PREVIEW" class="preview">
-        <div v-if="MAKER_GNB === 7" class="setting-box">
+        <div v-if="MAKER_GNB === 7" class="setting-box" :style="windowColor()">
           <div class="setting-box--row">
-            <label class="label">배경음</label>
-            range
+            <label class="label" :class="UISetting.font" :style="`color:${UISetting.fontColor}`">배경음</label>
+            <el-slider v-model="rangeValue1" :show-tooltip="false"></el-slider>
           </div>
           <div class="setting-box--row">
-            <label class="label">효과음</label>
-            range
+            <label class="label" :class="UISetting.font" :style="`color:${UISetting.fontColor}`">효과음</label>
+            <el-slider v-model="rangeValue2" :show-tooltip="false"></el-slider>
           </div>
-          <div class="setting-box--row">
-            <label class="label">푸시알림</label>
-            switch
+          <div class="setting-box--row btns" :class="UISetting.font" :style="`color:${UISetting.fontColor}`">
+            <button type="button" class="button underline">도움주신분</button>
+            <button type="button" class="button underline">데이터초기화</button>
+            <button type="button" class="button underline">로그인</button>
           </div>
-          <div class="setting-box--row">
-            <label class="label">진동효과</label>
-            switch
-          </div>
-          <div class="setting-box--row">
-            <button type="button" class="button">도움주신분</button>
-            <button type="button" class="button">데이터초기화</button>
-            <button type="button" class="button">로그인</button>
-          </div>
-          <div class="setting-box--row">
-            <button type="button" class="button">확인</button>
+          <div class="setting-box--row bottom">
+            <button type="button" class="button md"
+              :class="UISetting.font"
+              :style="
+                UISetting.mainColor
+                  ? `background:${UISetting.mainColor};color:${
+                      UISetting.mainFontColor
+                    };border-radius:${Math.round(
+                      Number(UISetting.button.round) / 2
+                    )}px;
+                    border:${UISetting.button.border}px solid ${
+                      UISetting.button.strokeColor
+                    }`
+                  : 'background:#000;color:#fff'
+              ">확인</button>
           </div>
         </div>
         <!-- dim-light, dim-dark, dim-blur, diagonal, diagonal-r, copy-left, copy-right 클래스 추가로 구분. intro만있으면 기본 중앙정렬 -->
@@ -712,6 +717,8 @@ export default {
       sceneData: [],
       params: {},
       paramsDelete: {},
+      rangeValue1: 50,
+      rangeValue2: 50
     }
   },
   computed: {

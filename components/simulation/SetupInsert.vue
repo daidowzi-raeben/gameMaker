@@ -58,13 +58,13 @@
             <label class="label">서브 색상</label>
           </div>
         </div>
-        <div class="input-wrap">
+        <!-- <div class="input-wrap">
           <label class="input-label">모서리 둥글기</label>
           <el-select>
             <el-option>없음</el-option>
             <el-option>있음</el-option>
           </el-select>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

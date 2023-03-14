@@ -1910,6 +1910,36 @@
     left:50%;
     top:50%;
     transform:translate(-50%, -50%);
+    background-color:#eee;
+    padding:20px 25px;
+    width:75%;
+    &--row{
+      display:flex;
+      align-items: center;
+      width:100%;
+      .label{
+        width:100px;
+      }
+      .el-slider{
+        width:calc(100% - 100px);
+      }
+      .underline{
+        padding:0;
+        margin:0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        font-size:1.3rem;
+      }
+      &.btns{
+        justify-content: space-between;
+        margin:15px 0 25px;
+      }
+      &.bottom{
+        display: flex;
+        justify-content: center;
+        margin-bottom:5px;
+      }
+    }
   }
 
   &-wrap {
