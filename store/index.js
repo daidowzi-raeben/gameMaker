@@ -15,6 +15,7 @@ Vue.use(Vuex)
 const createStore = () => {
     return new Store({
         state: {
+            ENDING_CODE: null,
             LOGO_IMG: '',
             MY_NAME: '',
             JOIN_ID: null,
@@ -181,6 +182,7 @@ const createStore = () => {
             MAKER_GNB: 6,
             ASSETS: [],
             ASSETSMY: [],
+            ENDING_INDEX: null,
             SCENE_INDEX: null,
             CHAPTER_INDEX: null,
             CHAPTER_LIST: [],
@@ -434,8 +436,14 @@ const createStore = () => {
             MUTATIONS_SCENE_CODE(state, payload) {
                 state.SCENE_CODE = payload
             },
+            MUTATIONS_ENDING_CODE(state, payload) {
+                state.ENDING_CODE = payload
+            },
             MUTATIONS_SCENE_INDEX(state, payload) {
                 state.SCENE_INDEX = payload
+            },
+            MUTATIONS_ENDING_INDEX(state, payload) {
+                state.ENDING_INDEX = payload
             },
             MUTATIONS_CHAPTER_INDEX(state, payload) {
                 state.CHAPTER_INDEX = payload
@@ -630,6 +638,11 @@ const createStore = () => {
                 } else {
                     state.CONTENT_CODE = 1
                 }
+                // state.CUT_CODE = 0
+            },
+            // 컷 리스트 초기화
+            MUTATIONS_CUT_LIST_INIT(state, payload) {
+                state.CUT_LIST = payload
                 // state.CUT_CODE = 0
             },
             MUTATIONS_CUT_LIST_GET_DATA(state, payload) {
@@ -852,7 +865,7 @@ const createStore = () => {
                         //     return;
                         // }
                         if (params.type === 'scenarioDetail') {
-                            console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL')
+                            console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', res.data)
                             commit('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', res.data)
                             return
                         }

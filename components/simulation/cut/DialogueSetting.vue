@@ -24,6 +24,7 @@
           나레이션
         </button>
         <button
+          v-if="isEndign === 'N'"
           type="button"
           class="tab-list--btn"
           :class="{ active: cutType === 3 }"
@@ -32,6 +33,7 @@
           객관식
         </button>
         <button
+          v-if="isEndign === 'N'"
           type="button"
           class="tab-list--btn"
           :class="{ active: cutType === 4 }"
@@ -151,6 +153,7 @@
         ></textarea>
         <div class="insert-set">
           <button
+            v-if="isEndign === 'N'"
             v-show="!pointSettingShow && !scenarioSettingShow"
             type="button"
             class="btn point"
@@ -245,6 +248,7 @@
             </button>
           </div>
           <button
+            v-if="isEndign === 'N'"
             v-show="!pointSettingShow && !scenarioSettingShow"
             type="button"
             class="btn scenario"
@@ -999,6 +1003,12 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
+  props: {
+    isEndign: {
+      type: String,
+      default: 'N',
+    },
+  },
   data() {
     return {
       params: {},
@@ -1098,6 +1108,7 @@ export default {
       'LOADING',
       'SCENE_DATA',
       'SCENE_CODE',
+      'ENDING_CODE',
       'SCENE_INDEX',
       'CHAPTER_INDEX',
       'ASSETS',
@@ -1126,8 +1137,12 @@ export default {
     //     })
     //   })
     // })
-    if (this.SCENE_CODE) {
-      this.paramsList.gc_timestamp = this.SCENE_CODE
+    if (this.SCENE_CODE || this.ENDING_CODE) {
+      if (this.isEndign === 'Y') {
+        this.paramsList.gc_timestamp = this.ENDING_CODE
+      } else {
+        this.paramsList.gc_timestamp = this.SCENE_CODE
+      }
       this.paramsList.type = 'cutList'
       this.paramsList.secretKey = this.PROJECT_ID
       this.paramsList.user_idx = kooLogin('user_idx')
@@ -1255,7 +1270,11 @@ export default {
       this.params.secretKey = this.PROJECT_ID
       this.params.user_idx = kooLogin('user_idx')
       this.params.apiKey = process.env.API_KEY
-      this.params.s_code = this.SCENE_CODE
+      if (this.isEndign === 'Y') {
+        this.params.s_code = this.ENDING_CODE
+      } else {
+        this.params.s_code = this.SCENE_CODE
+      }
       this.update()
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)
@@ -1291,7 +1310,11 @@ export default {
       this.params.secretKey = this.PROJECT_ID
       this.params.user_idx = kooLogin('user_idx')
       this.params.apiKey = process.env.API_KEY
-      this.params.s_code = this.SCENE_CODE
+      if (this.isEndign === 'Y') {
+        this.params.s_code = this.ENDING_CODE
+      } else {
+        this.params.s_code = this.SCENE_CODE
+      }
       this.update()
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)
@@ -1323,7 +1346,11 @@ export default {
       this.params.secretKey = this.PROJECT_ID
       this.params.user_idx = kooLogin('user_idx')
       this.params.apiKey = process.env.API_KEY
-      this.params.s_code = this.SCENE_CODE
+      if (this.isEndign === 'Y') {
+        this.params.s_code = this.ENDING_CODE
+      } else {
+        this.params.s_code = this.SCENE_CODE
+      }
       this.update()
       console.log('onSubmitCutData', this.params)
       this.ACTION_AXIOS_GET(this.params)
@@ -1420,8 +1447,17 @@ export default {
     },
     update() {
       this.MUTATIONS_LOADING_INIT()
+      if (this.isEndign === 'Y') {
+        this.params.ending = 'Y'
+      } else {
+        this.params.ending = null
+      }
       this.paramsPreview.cutType = this.cutType
-      this.paramsPreview.code = this.SCENE_CODE
+      if (this.isEndign === 'Y') {
+        this.paramsPreview.code = this.ENDING_CODE
+      } else {
+        this.paramsPreview.code = this.SCENE_CODE
+      }
       this.paramsPreview.bg = this.PREVIEW.img.bg
       this.paramsPreview.cr = this.PREVIEW.img.cr
       this.paramsPreview.cr2 = this.PREVIEW.img.cr2

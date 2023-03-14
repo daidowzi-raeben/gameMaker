@@ -4,7 +4,10 @@
     class="preview-wrap"
     :class="{ bottomnone: MAKER_GNB === 5 }"
   >
-    <div v-if="MAKER_GNB === 1 && CUT_LIST.jsonData" class="preview-tit">
+    <div
+      v-if="(MAKER_GNB === 1 || MAKER_GNB === 3) && CUT_LIST.jsonData"
+      class="preview-tit"
+    >
       시나리오 <span class="highlight"> {{ SCENE_INDEX + 1 }}</span> 챕터
       <span class="highlight">{{ CHAPTER_INDEX + 1 }}</span> 컷
       <span class="highlight">{{ CUT_LIST.jsonData.length - CUT_CODE }}</span>
@@ -24,20 +27,36 @@
       <div v-if="PREVIEW" class="preview">
         <div v-if="MAKER_GNB === 7" class="setting-box" :style="windowColor()">
           <div class="setting-box--row">
-            <label class="label" :class="UISetting.font" :style="`color:${UISetting.fontColor}`">배경음</label>
+            <label
+              class="label"
+              :class="UISetting.font"
+              :style="`color:${UISetting.fontColor}`"
+              >배경음</label
+            >
             <el-slider v-model="rangeValue1" :show-tooltip="false"></el-slider>
           </div>
           <div class="setting-box--row">
-            <label class="label" :class="UISetting.font" :style="`color:${UISetting.fontColor}`">효과음</label>
+            <label
+              class="label"
+              :class="UISetting.font"
+              :style="`color:${UISetting.fontColor}`"
+              >효과음</label
+            >
             <el-slider v-model="rangeValue2" :show-tooltip="false"></el-slider>
           </div>
-          <div class="setting-box--row btns" :class="UISetting.font" :style="`color:${UISetting.fontColor}`">
+          <div
+            class="setting-box--row btns"
+            :class="UISetting.font"
+            :style="`color:${UISetting.fontColor}`"
+          >
             <button type="button" class="button underline">도움주신분</button>
             <button type="button" class="button underline">데이터초기화</button>
             <button type="button" class="button underline">로그인</button>
           </div>
           <div class="setting-box--row bottom">
-            <button type="button" class="button md"
+            <button
+              type="button"
+              class="button md"
               :class="UISetting.font"
               :style="
                 UISetting.mainColor
@@ -50,7 +69,10 @@
                       UISetting.button.strokeColor
                     }`
                   : 'background:#000;color:#fff'
-              ">확인</button>
+              "
+            >
+              확인
+            </button>
           </div>
         </div>
         <!-- dim-light, dim-dark, dim-blur, diagonal, diagonal-r, copy-left, copy-right 클래스 추가로 구분. intro만있으면 기본 중앙정렬 -->
@@ -310,7 +332,12 @@
           </div>
         </div>
         <div
-          v-if="MAKER_GNB === 1 || MAKER_GNB === 4 || MAKER_GNB === 5"
+          v-if="
+            MAKER_GNB === 1 ||
+            MAKER_GNB === 4 ||
+            MAKER_GNB === 5 ||
+            MAKER_GNB === 3
+          "
           class="preview-con icon"
           :style="`background:${UISetting.mainColor};border:${UISetting.button.border}px solid ${UISetting.button.strokeColor}`"
         >
@@ -325,7 +352,10 @@
             :class="{ wh: UISetting.icon === 'icon1' }"
           ></button>
         </div>
-        <div v-if="PREVIEW && MAKER_GNB === 1" class="preview-con preview-img">
+        <div
+          v-if="PREVIEW && (MAKER_GNB === 1 || MAKER_GNB === 3)"
+          class="preview-con preview-img"
+        >
           <!-- <div class="input-name" :class="UISetting.font">
             플레이어의 이름을 입력해주세요.
             <input type="text" class="input-text" />
@@ -645,7 +675,11 @@
         </div>
         <img src="~/static/images/mockup.png" alt="" class="preview-mockup" />
       </div>
-      <div v-if="MAKER_GNB === 1" ref="buttonNav" class="buttons">
+      <div
+        v-if="MAKER_GNB === 1 || MAKER_GNB === 3"
+        ref="buttonNav"
+        class="buttons"
+      >
         <el-tooltip class="item" effect="dark" content="배경" placement="top">
           <button
             type="button"
@@ -693,7 +727,10 @@
         </el-tooltip>
       </div>
     </div>
-    <div class="preview-save" :class="{ left: MAKER_GNB === 1 }">
+    <div
+      class="preview-save"
+      :class="{ left: MAKER_GNB === 1 || MAKER_GNB === 3 }"
+    >
       마지막 저장
       <span v-if="SAVE_DATETIME" class="time">{{
         SAVE_DATETIME | moment('YY.MM.DD HH:mm:ss')
@@ -718,7 +755,7 @@ export default {
       params: {},
       paramsDelete: {},
       rangeValue1: 50,
-      rangeValue2: 50
+      rangeValue2: 50,
     }
   },
   computed: {

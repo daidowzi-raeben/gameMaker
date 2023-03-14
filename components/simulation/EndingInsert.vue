@@ -1,118 +1,110 @@
 <template>
   <div class="insert">
+    <div v-if="!ENDING_CODE" class="insert-dim">엔딩 챕터를 선택하세요</div>
     <div class="setting">
-      <div class="setting-con setting-terms">
-        <div class="setting-tit">조건 설정</div>
-        <div class="input-wrap mt-3">
-          <span class="text">캐릭터</span>
-          <el-select v-model="value" class="m-2" placeholder="선택안함" >
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
-        </div>
-        <div class="input-wrap">
-          <span class="text red">포인트</span>
-          <el-input-number :min="1" :max="100" :disabled="value === ''" />
-          <span class="text">이상</span>
-          <span class="text blue">포인트</span>
-          <el-input-number :min="1" :max="100" :disabled="value === ''" />
-          <span class="text">이하</span>
-        </div>
-      </div>
+      <transition name="el-fade-in-linear">
+        <BackgroundAssets v-if="CONTENT_CODE === 1" :isEndign="'Y'" />
+        <CharacterFirst v-if="CONTENT_CODE === 2" :isEndign="'Y'" />
+        <CharacterSecond v-if="CONTENT_CODE === 3" :isEndign="'Y'" />
+        <SoundAssets v-if="CONTENT_CODE === 4" :isEndign="'Y'" />
+        <DialogueSetting v-if="CONTENT_CODE === 5" :isEndign="'Y'" />
+      </transition>
     </div>
     <div class="right" :class="{ fold: rightContentShow === true }">
-      <button type="button" class="btn-fold" :class="{ active: rightContentShow === true }" @click="onClickRightContentShow()"></button>
-    </div>
-    <div v-show="false" class="cut" :class="{ fold: cutListShow === false }">
-      <div class="cut-tit">
-        <span class="scenario">엔딩 리스트</span>
-        <button
-          type="button"
-          class="fold-btn"
-          @click="cutListShow = !cutListShow"
-        >
-          <span v-if="cutListShow" class="text">접기</span>
-          <span v-else class="text">펼치기</span>
-        </button>
-      </div>
-      <swiper
-        v-show-slide="cutListShow"
-        :options="swiperOptionCutList"
-        class="cut-list"
-      >
-        <swiper-slide v-for="(v, i) in 20" :key="i" class="cut-list--item type2">
-          <span v-if="i === 0" class="active-sign"></span>
-          <div class="image-list">
-            <img src="https://lwi.nexon.com/maplestory/mobile/29E0ECE19C0FD827/media/thumb_03.jpg" alt="" />
-            <div class="image-list--top">
-              <strong class="name">이지안</strong>
-              <span class="text">호감도 10 이상 10 이하</span>
-            </div>
-            <div class="image-list--con">
-              안녕? 대사를 치면 여기에도 미리보기 노출이 될거에요 width는 작업해
-              보고 잡을 예정이고 여긴 줄바꿈이 없어요 시나리오 1장 글시는 5차
-              제한으로 ... 처리! 여긴 최대 4줄까지 출력 안녕? 대사를 치면 여기에도
-              미리보기 노출이 될거에요 width는 작업해 보고 잡을 예정이고 여긴
-              줄바꿈이 없어요 시나리오 1장 글시는 5차 제한으로 ... 처리! 여긴 최대
-              4줄까지 출력
-            </div>
-          </div>
-        </swiper-slide>
-        <div slot="button-prev" class="swiper-button-prev"></div>
-        <div slot="button-next" class="swiper-button-next"></div>
-      </swiper>
+      <button
+        type="button"
+        class="btn-fold"
+        :class="{ active: rightContentShow === true }"
+        @click="onClickRightContentShow()"
+      ></button>
     </div>
   </div>
 </template>
 
 <script>
+// SCENE_DATA
+import { mapState, mapMutations, mapActions } from 'vuex'
+import BackgroundAssets from '~/components/simulation/cut/BackgroundAssets.vue'
+import CharacterFirst from '~/components/simulation/cut/CharacterFirst.vue'
+import CharacterSecond from '~/components/simulation/cut/CharacterSecond.vue'
+import DialogueSetting from '~/components/simulation/cut/DialogueSetting.vue'
+import SoundAssets from '~/components/simulation/cut/SoundAssets.vue'
+import { kooLogin } from '~/config/util'
 export default {
   components: {
+    BackgroundAssets,
+    CharacterFirst,
+    CharacterSecond,
+    DialogueSetting,
+    SoundAssets,
   },
   data() {
     return {
+      params: {},
+      paramsPreview: {},
+      paramsList: {},
       rightContentShow: false,
-      isFileInsert: false,
-      fileInsertName: '',
-      cutListShow: false,
-      swiperOptionCutList: {
-        loop: false,
-        slidesPerView: 4,
-        slidesPerGroup: 4,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      },
-      options:[{
-        value: '',
-        label: '선택안함',
-      },{
-        value: '이지안',
-        label: '이지안',
-      }],
-      value: '',
+      settingType: 5,
+      paramsInit: {},
     }
   },
+  computed: {
+    ...mapState([
+      'LOGIN',
+      'LOADING',
+      'SCENE_DATA',
+      'ENDING_CODE',
+      'SCENE_INDEX',
+      'CHAPTER_INDEX',
+      'ASSETS',
+      'SCENE_DATA_CHARACTER',
+      'PREVIEW',
+      'PROJECT_ID',
+      'CUT_LIST',
+      'cutType',
+      'CUT_CODE',
+      'CONTENT_CODE',
+    ]),
+  },
+  // watch: {
+  //   tempInputData: {
+  //     handler(value) {
+  //       console.log('===========> watch tempInputData', value)
+  //     },
+  //     immediate: true,
+  //   },
+  // },
+  mounted() {
+    // cutList
+
+    if (this.SCENE_CODE) {
+      this.paramsList.gc_timestamp = this.SCENE_CODE
+      this.paramsList.type = 'cutList'
+      this.paramsList.secretKey = this.PROJECT_ID
+      this.paramsList.user_idx = kooLogin('user_idx')
+      this.paramsList.apiKey = process.env.API_KEY
+      console.log(this.SCENE_CODE)
+    }
+    this.$nextTick(() => {
+      this.paramsInit.user_idx = kooLogin('user_idx')
+      this.paramsInit.type = 'uiList'
+      this.paramsInit.secretKey = this.PROJECT_ID
+      this.paramsInit.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.paramsInit)
+    })
+  },
   methods: {
+    ...mapActions(['ACTION_AXIOS_GET']),
+    ...mapMutations(['MUTATIONS_CONTENT_CODE']),
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
     },
-    onChangeFileInput(e){
-      this.isFileInsert = true
-      this.fileInsertName = e.target.files[0].name
-    },
-    onClickFileDelete(){
-      this.isFileInsert = false
-      this.fileInsertName = ''
-      this.$refs.logoFile.value = ''
-    }
-  }
+  },
 }
 </script>
 
-<style></style>
+<style scoped>
+.v-move {
+  transition: all 1s;
+}
+</style>

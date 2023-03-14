@@ -125,6 +125,7 @@ export default {
       'MUTATIONS_MAKER_GNB',
       'MUTATIONS_ASSETS_INIT',
       'MUTATIONS_LOADING',
+      'MUTATIONS_CUT_LIST_INIT',
     ]),
 
     // 페이지 이탈 경고
@@ -140,6 +141,7 @@ export default {
         window.open(`/preview?projectKey=${this.PROJECT_ID}`)
         // return alert('3월 1일 15시에 오픈됩니다!!')
       }
+      this.MUTATIONS_CUT_LIST_INIT([])
       this.MUTATIONS_ASSETS_INIT()
       this.MUTATIONS_MAKER_GNB(e)
       this.activeMenu = e
