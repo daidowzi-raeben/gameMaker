@@ -10,10 +10,17 @@
         :title="scenarioList.tit"
       >
         <span :ref="`scenarioTitle${index}`" class="scenario-tit">
-          <span class="text"
-            >{{ scenarioList.tit }} {{ scenarioList.cr }} {{ scenarioList.pd }}
-            {{ scenarioList.pu }}</span
-          >
+          <span class="text ending-list">
+            <span class="ending-list--tit">
+              {{ scenarioList.tit }}
+            </span>
+            <span class="ending-list--cr">[ {{ scenarioList.cr }} ]</span> 
+            <span class="ending-list--pt">
+              포인트
+              <span class="red">{{ scenarioList.pu }}</span>이상
+              <span class="blue">{{ scenarioList.pd }}</span>이하
+            </span>
+          </span>
           <button
             type="button"
             class="scenario-modi"
@@ -123,33 +130,39 @@
     ></button>
 
     <el-dialog title="" width="800px" :visible.sync="endingAdd">
-      <div class="input-wrap">
-        <label class="input-label">엔딩 제목</label>
-        <input v-model="endingTitle.title" class="input-text" />
+      <div class="ending-input">
+        <div class="ending-input--row">
+            <label class="input-label">엔딩 제목</label>
+            <input v-model="endingTitle.title" class="input-text wd-100" />
+        </div>
+          
+        <div class="ending-input--row">
+            <label class="input-label">인물</label>
+            <el-select v-model="endingTitle.cr" placeholder="선택안함">
+              <el-option
+                v-for="(d, s) in SCENE_DATA_CHARACTER.jsonData"
+                :key="s"
+                :value="d.name"
+                :label="d.name"
+              ></el-option>
+            </el-select>
+        </div>
+
+        <div class="ending-input--row num">
+            <label class="input-label">포인트 설정</label>
+            <el-input-number v-model="endingTitle.pu" :min="1" :max="100"></el-input-number>
+            <span class="text">포인트 이상</span>
+            <el-input-number v-model="endingTitle.pd" :min="1" :max="100"></el-input-number>
+            <span class="text">포인트 이하</span>
+        </div>
       </div>
-      <div class="input-wrap">
-        <label class="input-label">인물</label>
-        <el-select v-model="endingTitle.cr" placeholder="선택안함">
-          <el-option
-            v-for="(d, s) in SCENE_DATA_CHARACTER.jsonData"
-            :key="s"
-            :value="d.name"
-            :label="d.name"
-          ></el-option>
-        </el-select>
-      </div>
-      <div class="input-wrap">
-        <label class="input-label">포인트 설정</label>
-        <input v-model="endingTitle.pu" class="input-text" />포인트 이상
-        <input v-model="endingTitle.pd" class="input-text" /> 포인트 이하
-      </div>
-      <div class="text-center">
+      <div class="text-center mt-5">
         <button
           type="button"
-          class="button btn-primary"
+          class="button md btn-primary"
           @click="onClickScenarioAdd"
         >
-          저장
+          생성
         </button>
       </div>
     </el-dialog>

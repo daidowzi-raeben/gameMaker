@@ -384,7 +384,7 @@
         background: url(~/static/images/icon/delete.svg)no-repeat center;
         position: absolute;
         right: 17px;
-        top: 10px;
+        top: calc(50% - 8px);
         opacity: 0;
       }
 
@@ -3192,6 +3192,59 @@
     img{
       width:100%;
       height: auto;
+    }
+  }
+}
+
+.ending{
+  &-input{
+    margin:20px;
+    &--row{
+      display:flex;
+      align-items: center;
+      margin:10px 0;
+      .input-label{
+        min-width: 100px;
+      }
+      &.num .el-input__inner{
+        width:100% !important;
+      }
+      .text{
+        margin:0 10px;
+      }
+      .wd-100{
+        width:100%;
+      }
+    }
+  }
+  &-list{
+    display:flex !important;
+    flex-wrap: wrap;
+    margin:5px 0;
+    &--tit{
+      width:100%;
+      color:#fff;
+      text-overflow: ellipsis;
+      overflow:hidden;
+      margin-bottom:5px;
+    }
+    &--cr{
+      color:#fff;
+      margin-bottom:5px;
+    }
+    &--pt{
+      color:#fff;
+      letter-spacing: -0.5px;
+      .red{
+        color:$colPinkHover;
+        font-weight: 600;
+        margin:0 2px;
+      }
+      .blue{
+        color:$colBlueHover;
+        font-weight: 600;
+        margin:0 2px;
+      }
     }
   }
 }
