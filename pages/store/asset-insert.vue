@@ -19,6 +19,14 @@
         <div>가격 : <input v-model="params.price" /></div>
         <div>할인판매가격 : <input v-model="params.discount" /></div>
         <div>에셋 이름 : <input v-model="params.mainName" /></div>
+        <div>
+          에셋 설명 :<br />
+          <textarea
+            v-model="params.memo"
+            style="height: 150px; border: 1px solid #000; width: 500px"
+          ></textarea>
+        </div>
+        <div>에셋 태그 : <input v-model="params.tag" /></div>
         대표_2000 :
         <input ref="national_2000" type="file" @change="onChangeNational" />
         <br />
@@ -80,6 +88,8 @@ export default {
         user_idx: 31,
         discount: 0,
         mode: 'C',
+        memo: '',
+        tag: '',
       },
       imgUrl: '',
       // 32 53
@@ -138,7 +148,9 @@ export default {
       frm.append('user_idx', this.params.user_idx)
       frm.append('gas_name', this.params.mainName)
       frm.append('price', this.params.price)
-      frm.append('mode', this.params.mode)
+      frm.append('memo', this.params.memo)
+      frm.append('price', this.params.tag)
+      frm.append('tag', this.params.mode)
       frm.append('discount', this.params.discount)
 
       frm.append('national_2000', this.$refs.national_2000.files[0])
