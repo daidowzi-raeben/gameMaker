@@ -191,7 +191,8 @@ const createStore = () => {
             SAVE_DATETIME: null,
             ASSETS_STORE: {
                 crList: [],
-                detail: {},
+                detail: [],
+                detailMain: {}
             },
             ASSETS_EMOTION: {},
             TEST: '',
@@ -276,7 +277,8 @@ const createStore = () => {
                 state.ASSETS_STORE.srList = payload.sr
             },
             MUTATIONS_STORE_DETAIL(state, payload) {
-                state.ASSETS_STORE.detail = payload
+                state.ASSETS_STORE.detail = payload.detail
+                state.ASSETS_STORE.detailMain = payload.detail[0]
             },
             MUTATIONS_IN_APP_ICON(state, payload) {
                 state.IN_APP_ICON = payload

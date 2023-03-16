@@ -36,60 +36,101 @@
         <button type="button" class="button btn-primary">장바구니</button>
       </div>
     </div> -->
-
       <div class="store-top">
         <div class="store-top--left">
           <div class="img-wrap">
-            <img src="https://i.imgur.com/sDJ0R7M.png" alt="" />
+            <img
+              v-if="!previewImage"
+              :src="onLoadAssetsImage(ASSETS_STORE.detailMain.path, 400)"
+              alt=""
+            />
+            <img v-else :src="onLoadAssetsImage(previewImage, 400)" alt="" />
           </div>
           <el-scrollbar>
             <ul class="img-list">
-              <li v-for="i in 10" :key="i" class="img-list--item">
-                <button type="button" class="btn" :class="{ active: i === 1 }">
-                  <img src="https://i.imgur.com/sDJ0R7M.png" alt="" />
+              <li
+                v-for="(v, i) in ASSETS_STORE.detail"
+                :key="i"
+                class="img-list--item"
+              >
+                <button
+                  type="button"
+                  class="btn"
+                  :class="{ active: i === 1 }"
+                  @click="onClickActivePreview(v.path)"
+                >
+                  <img :src="onLoadAssetsImage(v.path, 400)" alt="" />
                 </button>
               </li>
             </ul>
           </el-scrollbar>
         </div>
         <div class="store-top--right">
-          <div class="category">
+          <div v-if="ASSETS_STORE.detail" class="category">
             <span class="badge">판타지</span>
             <span class="badge">서양</span>
           </div>
-          <div class="tit">
-            판타지 핑뚝 여자 캐릭터 제목은 총 두줄까지 표시됩니다 글자수 제한을
-            하나요 그럼?
+          <div v-if="ASSETS_STORE.detail && ASSETS_STORE.detail[0]" class="tit">
+            {{ ASSETS_STORE.detailMain.gas_name }}
           </div>
           <div class="price">
-            <div class="top">6,500원</div>
+            <div v-if="ASSETS_STORE.detailMain.price === 'F'" class="top">
+              0원
+            </div>
+            <div v-else class="top">
+              {{ ASSETS_STORE.detailMain.price | comma }}원
+            </div>
             <div class="bottom">
-              <span class="per">10%</span>
-              <span class="num">5,000</span>
+              <span v-if="ASSETS_STORE.detailMain.price !== 'F'" class="per">
+                {{
+                  100 -
+                  (ASSETS_STORE.detailMain.discount /
+                    ASSETS_STORE.detailMain.price) *
+                    100
+                }}
+                %</span
+              >
+              <span v-else class="per">무료</span>
+              <span v-if="ASSETS_STORE.detailMain.price === 'F'" class="num"
+                >0</span
+              >
+              <span v-else class="num">{{
+                ASSETS_STORE.detailMain.discount | comma
+              }}</span>
               <span class="won">원</span>
             </div>
           </div>
           <ul class="info-list">
             <li class="info-list--item">
               <label class="label">제작자</label>
-              <span class="text">쟈몽</span>
+              <span class="text">{{ ASSETS_STORE.detailMain.maker_name }}</span>
             </li>
             <li class="info-list--item">
               <label class="label">구성</label>
-              <span class="text">무표정, 웃음, 분노, 슬픔</span>
+              <span class="text">
+                <span v-for="(v, i) in ASSETS_STORE.detail" :key="i">
+                  {{ v.gas_discription }}
+                </span>
+              </span>
             </li>
             <li class="info-list--item">
               <label class="label">해시태그</label>
               <div class="hash">
-                <span class="text">해시</span>
-                <span class="text">태그</span>
-                <span v-for="i in 20" :key="i" class="text">들어가는곳</span>
+                <span class="text">
+                  {{ ASSETS_STORE.detailMain.tag }}
+                </span>
               </div>
             </li>
           </ul>
           <div class="intro">
-            <label class="label">쟈몽님의 한마디</label>
-            <div class="text">한마디가 들어갑니다.</div>
+            <label class="label">에셋 설명</label>
+            <div class="text">
+              {{
+                ASSETS_STORE.detailMain.memo
+                  ? ASSETS_STORE.detailMain.memo
+                  : '작성된 설명이 없습니다.'
+              }}
+            </div>
           </div>
           <div class="button-wrap">
             <button type="button" class="btn btn-blue">구매하기</button>
@@ -108,8 +149,12 @@
         </div>
         <div class="store-con--section">
           <div class="images">
-            <div v-for="i in 4" :key="i" class="img-wrap">
-              <img src="https://i.imgur.com/sDJ0R7M.png" alt="" />
+            <div
+              v-for="(v, i) in ASSETS_STORE.detail"
+              :key="i"
+              class="img-wrap"
+            >
+              <img :src="onLoadAssetsImage(v.path, 400)" alt="" />
             </div>
           </div>
         </div>
@@ -180,6 +225,7 @@ export default {
       params: {},
       value1: null,
       value2: 4,
+      previewImage: '',
     }
   },
   computed: {
@@ -219,6 +265,12 @@ export default {
       this.params.asId = this.$route.query.asId
       this.params.user_idx = this.$cookies.get('user_idx')
       this.ACTION_AXIOS_GET(this.params)
+    },
+    onLoadAssetsImage(v, size) {
+      return `${process.env.VUE_APP_IMAGE}/cr/${size}/${v}`
+    },
+    onClickActivePreview(v) {
+      this.previewImage = v
     },
   },
 }
