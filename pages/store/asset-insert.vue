@@ -149,8 +149,8 @@ export default {
       frm.append('gas_name', this.params.mainName)
       frm.append('price', this.params.price)
       frm.append('memo', this.params.memo)
-      frm.append('price', this.params.tag)
-      frm.append('tag', this.params.mode)
+      frm.append('tag', this.params.tag)
+      frm.append('mode', this.params.mode)
       frm.append('discount', this.params.discount)
 
       frm.append('national_2000', this.$refs.national_2000.files[0])
@@ -176,6 +176,7 @@ export default {
         })
         .then((res) => {
           console.log(res)
+          alert('완료')
         })
         .catch((res) => {
           console.log('AXIOS FALSE', res)
