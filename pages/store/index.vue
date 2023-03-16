@@ -15,7 +15,7 @@
       </div>
       <div class="card-wrap">
         <!-- <div class="card-tit"><nuxt-link to="">무료 에셋</nuxt-link></div> -->
-        <div class="card-tit"><nuxt-link to="">무료 캐릭터 에셋</nuxt-link></div>
+        <div class="card-tit"><nuxt-link to=""> 캐릭터 에셋</nuxt-link></div>
         <!-- <swiper :options="swiperOptionCol7" class="card-list asset">
           <swiper-slide
             v-for="(v, i) in ASSETS_STORE.crList"
@@ -75,6 +75,68 @@
           </div>
         </div>
       </div>
+      <div class="card-wrap">
+        <!-- <div class="card-tit"><nuxt-link to="">무료 에셋</nuxt-link></div> -->
+        <div class="card-tit"><nuxt-link to=""> 배경 에셋</nuxt-link></div>
+        <!-- <swiper :options="swiperOptionCol7" class="card-list asset">
+          <swiper-slide
+            v-for="(v, i) in ASSETS_STORE.crList"
+            :key="i"
+            class="card-list--item character"
+          >
+            <div @click="onClickAssetsDetail(v.code)">
+              <img :src="onImageLoad(v.path)" alt="" />
+              <label class="like">
+                <input type="checkbox" :checked="i === 1" />
+                <span class="icon"></span>
+              </label>
+              <div class="info">
+                <div class="category">
+                  {{ v.kind === 'C' ? 'CHARACTER' : 'BACKGROUND' }}
+                </div>
+                <div class="text">{{ v.gas_name }}</div>
+                <div class="bottom">
+                  <span v-if="v.price !== 'F'" class="price">12,300</span>
+                  <span v-else class="price free">FREE</span>
+                  <label class="cart">
+                    <input type="checkbox" :checked="i === 1" />
+                    <span class="icon"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper> -->
+        <div class="card-list asset temp-type">
+          <div
+            v-for="(v, i) in ASSETS_STORE.bgList"
+            :key="i"
+            class="card-list--item character"
+          >
+            <div @click="onClickAssetsDetail(v.code)">
+              <img :src="onImageLoadBg(v.path)" alt="" />
+              <label class="like">
+                <input type="checkbox" :checked="i === 1" />
+                <span class="icon"></span>
+              </label>
+              <div class="info">
+                <div class="category">
+                  {{ v.kind === 'C' ? 'CHARACTER' : 'BACKGROUND' }}
+                </div>
+                <div class="text">{{ v.gas_name }}</div>
+                <div class="bottom">
+                  <span v-if="v.price !== 'F'" class="price">12,300</span>
+                  <span v-else class="price free">FREE</span>
+                  <label class="cart">
+                    <input type="checkbox" :checked="i === 1" />
+                    <span class="icon"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- <div class="card-wrap">
         <div class="card-tit"><nuxt-link to="">테마 에셋</nuxt-link></div>
         <swiper :options="swiperOptionCol5" class="card-list theme">
@@ -90,11 +152,11 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
-import ProjectCreate from '~/components/modal/ProjectCreate'
+// import ProjectCreate from '~/components/modal/ProjectCreate'
 export default {
   name: 'StoreIndex',
   components: {
-    ProjectCreate,
+    // ProjectCreate,
   },
   layout: 'index',
   data() {
@@ -152,6 +214,9 @@ export default {
     // ------------------------ EVENT
     onImageLoad(v) {
       return `${process.env.VUE_APP_IMAGE}/cr/${v}`
+    },
+    onImageLoadBg(v) {
+      return `${process.env.VUE_APP_IMAGE}/bg/${v}`
     },
     onChangeScene({ target }) {
       console.log(target.value)

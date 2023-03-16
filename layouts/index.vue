@@ -27,10 +27,10 @@
               <nuxt-link to="/">메이커 쿠</nuxt-link>
             </li>
             <li class="header-menu--item">
-              <nuxt-link to="info-page">소개</nuxt-link>
+              <nuxt-link to="/info-page">소개</nuxt-link>
             </li>
-            <li class="header-menu--item" onclick="alert('준비중입니다')">
-              스토어
+            <li class="header-menu--item">
+              <nuxt-link to="/store">스토어</nuxt-link>
             </li>
             <li class="header-menu--item" onclick="alert('준비중입니다')">
               이용방법

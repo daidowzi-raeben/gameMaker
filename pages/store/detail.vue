@@ -41,10 +41,26 @@
           <div class="img-wrap">
             <img
               v-if="!previewImage"
-              :src="onLoadAssetsImage(ASSETS_STORE.detailMain.path, 400)"
+              :src="
+                onLoadAssetsImage(
+                  ASSETS_STORE.detailMain.path,
+                  400,
+                  ASSETS_STORE.detailMain.kind
+                )
+              "
               alt=""
             />
-            <img v-else :src="onLoadAssetsImage(previewImage, 400)" alt="" />
+            <img
+              v-else
+              :src="
+                onLoadAssetsImage(
+                  previewImage,
+                  400,
+                  ASSETS_STORE.detailMain.kind
+                )
+              "
+              alt=""
+            />
           </div>
           <el-scrollbar>
             <ul class="img-list">
@@ -59,7 +75,7 @@
                   :class="{ active: i === 1 }"
                   @click="onClickActivePreview(v.path)"
                 >
-                  <img :src="onLoadAssetsImage(v.path, 400)" alt="" />
+                  <img :src="onLoadAssetsImage(v.path, 400, v.kind)" alt="" />
                 </button>
               </li>
             </ul>
@@ -154,7 +170,7 @@
               :key="i"
               class="img-wrap"
             >
-              <img :src="onLoadAssetsImage(v.path, 400)" alt="" />
+              <img :src="onLoadAssetsImage(v.path, 400, v.kind)" alt="" />
             </div>
           </div>
         </div>
@@ -266,8 +282,12 @@ export default {
       this.params.user_idx = this.$cookies.get('user_idx')
       this.ACTION_AXIOS_GET(this.params)
     },
-    onLoadAssetsImage(v, size) {
-      return `${process.env.VUE_APP_IMAGE}/cr/${size}/${v}`
+    onLoadAssetsImage(v, size, mode) {
+      if (mode === 'C') {
+        return `${process.env.VUE_APP_IMAGE}/cr/${size}/${v}`
+      } else {
+        return `${process.env.VUE_APP_IMAGE}/bg/${size}/${v}`
+      }
     },
     onClickActivePreview(v) {
       this.previewImage = v
