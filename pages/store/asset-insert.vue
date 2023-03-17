@@ -51,8 +51,7 @@
       <button type="button" @click="addImage++">ADD</button>
       <div v-for="(i, key) in addImage" :key="i">
         <div :ref="`addImage${key}`">
-          이름 :
-          <input :ref="`subName${key}`" type="text" /><br />
+          이름 {{ key }} : <input :ref="`subName${key}`" type="text" /><br />
           <!-- :readonly="i < 4 ? true : false" -->
           업로드_2000 :
           <input :ref="`files_2000${key}`" type="file" />
@@ -180,6 +179,7 @@ export default {
           frm.append(`subName[]`, e[1][0].value)
         }
       })
+
       this.$axios
         .post(process.env.VUE_APP_ASSETS_API, frm, {
           header: {
