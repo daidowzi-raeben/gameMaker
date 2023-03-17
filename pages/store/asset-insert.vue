@@ -9,7 +9,11 @@
               {{ item }}
             </option>
           </select>
-          <select v-model="params.mode" class="input-select">
+          <select
+            v-model="params.mode"
+            class="input-select"
+            @change="onChangeModa"
+          >
             <option :value="'C'">인물</option>
             <option :value="'B'">배경</option>
           </select>
@@ -19,6 +23,7 @@
         <div>가격 : <input v-model="params.price" /></div>
         <div>할인판매가격 : <input v-model="params.discount" /></div>
         <div>에셋 이름 : <input v-model="params.mainName" /></div>
+        <div>에셋 표정 : <input v-model="params.mainDis" /></div>
         <div>
           에셋 설명 :<br />
           <textarea
@@ -90,6 +95,7 @@ export default {
         mode: 'C',
         memo: '',
         tag: '',
+        mainDis: '무표정',
       },
       imgUrl: '',
       // 32 53
@@ -139,6 +145,10 @@ export default {
       if (e === 2) return '화난표정'
       if (e === 3) return '슬픈표정'
     },
+    onChangeModa({ target }) {
+      if (target.value === 'C') this.params.mainDis = '무표정'
+      if (target.value === 'B') this.params.mainDis = ''
+    },
     onSubmit() {
       // URL.createObjectURL(target.files[0])
       const frm = new FormData()
@@ -152,6 +162,7 @@ export default {
       frm.append('tag', this.params.tag)
       frm.append('mode', this.params.mode)
       frm.append('discount', this.params.discount)
+      frm.append('mainDis', this.params.mainDis)
 
       frm.append('national_2000', this.$refs.national_2000.files[0])
 
