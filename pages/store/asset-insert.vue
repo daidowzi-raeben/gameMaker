@@ -52,7 +52,7 @@
       <div v-for="(i, key) in addImage" :key="i">
         <div :ref="`addImage${key}`">
           이름 :
-          <input :ref="`subName${key}`" type="text" :value="onValue(i)" /><br />
+          <input :ref="`subName${key}`" type="text" /><br />
           <!-- :readonly="i < 4 ? true : false" -->
           업로드_2000 :
           <input :ref="`files_2000${key}`" type="file" />
@@ -123,6 +123,7 @@ export default {
         '성은이는 만극하지 않아요',
         '한결',
       ],
+      emotion: ['웃는표정', '화난표정', '슬픈표정'],
     }
   },
   computed: {
