@@ -122,6 +122,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'IndexPage',
   layout: 'index',
@@ -136,14 +137,17 @@ export default {
       isMainPageActive: 1,
     }
   },
+  computed: {
+    ...mapGetters(['GETTER_LOADING_INIT']),
+  },
   mounted() {
     let timer
-    const funcs = (e)=>{
+    const funcs = (e) => {
       if (!timer) {
-        timer = setTimeout(()=> {
-          timer = null;
+        timer = setTimeout(() => {
+          timer = null
           this.onMouseWheelEvent(e)
-        }, 200);
+        }, 200)
       }
       // if (debouncer) clearTimeout(debouncer)
       // debouncer = setTimeout(()=> {
@@ -151,7 +155,10 @@ export default {
       //   debouncer = null
       // }, 100)
     }
-    document.addEventListener('wheel', (e)=>funcs(e))
+    this.$nextTick(() => {
+      this.MUTATIONS_LOADING()
+    })
+    document.addEventListener('wheel', (e) => funcs(e))
     document.querySelector('#__layout').style.backgroundColor = '#e7f0fa'
     document.querySelector('.header').style.backgroundColor = 'transparent'
   },
@@ -161,6 +168,7 @@ export default {
     document.querySelector('.header').style.backgroundColor = ''
   },
   methods: {
+    ...mapMutations(['MUTATIONS_LOADING']),
     onMouseWheelEvent(e) {
       if (e.deltaY > 0) {
         if (this.isMainPageActive < 5) this.isMainPageActive++

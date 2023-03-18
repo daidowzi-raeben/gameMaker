@@ -32,8 +32,8 @@
         <p class="sub">내가 만드는 첫번째 어플리케이션</p>
       </div>
       <p class="main-top--sub" data-aos="fade-up" data-aos-duration="1000">
-        MAKER KOO는 내가 상상하고 원하던 스토리를 쉽게 앱으로 제작하여 출시할
-        수 있습니다.<br />
+        MAKER KOO는 내가 상상하고 원하던 스토리를 쉽게 앱으로 제작하여 출시할 수
+        있습니다.<br />
         다양한 경험을 지금 시작하세요.
       </p>
       <div class="main-top--app" data-aos="fade-up" data-aos-duration="1000">
@@ -67,7 +67,12 @@
           </div>
         </div>
       </div>
-      <div class="main-section--right" data-aos="fade" data-aos-duration="1000" data-aos-easing="linear">
+      <div
+        class="main-section--right"
+        data-aos="fade"
+        data-aos-duration="1000"
+        data-aos-easing="linear"
+      >
         <div class="img-wrap">
           <img src="../static/images/main_img4.png" alt="" />
         </div>
@@ -136,7 +141,12 @@
           </div>
         </div>
       </div>
-      <div class="main-section--right" data-aos="fade" data-aos-duration="1000" data-aos-easing="linear">
+      <div
+        class="main-section--right"
+        data-aos="fade"
+        data-aos-duration="1000"
+        data-aos-easing="linear"
+      >
         <div class="img-wrap">
           <img src="../static/images/main_img3.png" alt="" />
         </div>
@@ -154,11 +164,35 @@
             data-aos="fade-right"
             data-aos-duration="1000"
           >
-            <img class="sampleImage sampleImage1" src="../static/images/main_sample1.png" alt="" />
-            <img class="sampleImage sampleImage2" style="display:none" src="../static/images/main_sample2.png" alt="" />
-            <img class="sampleImage sampleImage3" style="display:none" src="../static/images/main_sample3.png" alt="" />
-            <img class="sampleImage sampleImage4" style="display:none" src="../static/images/main_sample4.png" alt="" />
-            <img class="sampleImage sampleImage5" style="display:none" src="../static/images/main_sample5.png" alt="" />
+            <img
+              class="sampleImage sampleImage1"
+              src="../static/images/main_sample1.png"
+              alt=""
+            />
+            <img
+              class="sampleImage sampleImage2"
+              style="display: none"
+              src="../static/images/main_sample2.png"
+              alt=""
+            />
+            <img
+              class="sampleImage sampleImage3"
+              style="display: none"
+              src="../static/images/main_sample3.png"
+              alt=""
+            />
+            <img
+              class="sampleImage sampleImage4"
+              style="display: none"
+              src="../static/images/main_sample4.png"
+              alt=""
+            />
+            <img
+              class="sampleImage sampleImage5"
+              style="display: none"
+              src="../static/images/main_sample5.png"
+              alt=""
+            />
           </div>
           <div class="right" data-aos="fade-left" data-aos-duration="1000">
             <button
@@ -215,7 +249,7 @@
 <script>
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-
+import { mapMutations } from 'vuex'
 export default {
   layout: 'index',
   data() {
@@ -225,16 +259,20 @@ export default {
   },
   mounted() {
     AOS.init({
-      disable: function () {
-        var desktop = 1000;
-        return window.innerWidth < desktop;
-      }
+      disable() {
+        const desktop = 1000
+        return window.innerWidth < desktop
+      },
+    })
+    this.$nextTick(() => {
+      this.MUTATIONS_LOADING()
     })
   },
   methods: {
-    sampleImageNone(){
-      const sampleImages = document.querySelectorAll(".sampleImage");
-      sampleImages.forEach(function(userItem) {
+    ...mapMutations(['MUTATIONS_LOADING']),
+    sampleImageNone() {
+      const sampleImages = document.querySelectorAll('.sampleImage')
+      sampleImages.forEach(function (userItem) {
         userItem.style.display = 'none'
       })
     },
@@ -242,22 +280,22 @@ export default {
       const nodes = [...e.target.parentElement.children]
       const index = nodes.indexOf(e.target)
       this.sampleImageNone()
-      switch(index){
-        case 0 :
+      switch (index) {
+        case 0:
           document.querySelector('.sampleImage1').style.display = 'block'
-        break
-        case 2 :
+          break
+        case 2:
           document.querySelector('.sampleImage2').style.display = 'block'
-        break
-        case 4 :
+          break
+        case 4:
           document.querySelector('.sampleImage3').style.display = 'block'
-        break
-        case 6 :
+          break
+        case 6:
           document.querySelector('.sampleImage4').style.display = 'block'
-        break
-        case 8 :
+          break
+        case 8:
           document.querySelector('.sampleImage5').style.display = 'block'
-        break
+          break
       }
       document.querySelector('.btn.tit.active').classList.remove('active')
       e.target.classList.add('active')

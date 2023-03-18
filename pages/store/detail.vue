@@ -351,6 +351,9 @@ export default {
       this.previewImage = v
     },
     onClickLikeHit() {
+      if (!this.$cookies.get('user_idx')) {
+        return alert('로그인 후 이용 가능합니다')
+      }
       this.params.type = 'assetsLikeHit'
       this.params.apiKey = process.env.API_KEY
       this.params.asId = this.$route.query.asId
