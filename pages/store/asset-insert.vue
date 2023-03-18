@@ -5,7 +5,7 @@
         <div>
           <select v-model="params.user_idx" class="input-select">
             <option :value="5">쿠쿠쿠쿠쿠</option>
-            <option v-for="(item, i) in selectName" :key="i" :value="i + 31">
+            <option v-for="(item, i) in selectName" :key="i" :value="i + 32">
               {{ item }}
             </option>
           </select>
@@ -89,7 +89,7 @@ export default {
       params: {
         mainName: '',
         subName: [],
-        user_idx: 31,
+        user_idx: 32,
         discount: 0,
         mode: 'C',
         memo: '',
