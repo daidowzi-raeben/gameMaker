@@ -19,7 +19,7 @@
           개인정보
         </button>
       </div>
-      <div class="tab-con el-scrollbar">
+      <div class="tab-con type1 el-scrollbar">
         <div
           v-show="activeTab === 0"
           class="detail el-scrollbar__wrap el-scrollbar__wrap--hidden-default"
