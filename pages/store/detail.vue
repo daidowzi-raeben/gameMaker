@@ -105,7 +105,7 @@
             <div class="bottom">
               <span
                 v-if="
-                  ASSETS_STORE.detailMain.price !== 'F' &&
+                  ASSETS_STORE.detailMain.price !== 'F' ||
                   !ASSETS_STORE.detailMain.price === '0'
                 "
                 class="per"
