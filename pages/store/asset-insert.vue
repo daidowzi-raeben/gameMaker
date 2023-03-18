@@ -51,7 +51,7 @@
       <button type="button" @click="addImage++">ADD</button>
       <div v-for="(i, key) in addImage" :key="i">
         <div :ref="`addImage${key}`">
-          이름 {{ key }} : <input :ref="`subName${key}`" type="text" /><br />
+          이름 {{ key }} : <input :id="`subName${key}`" type="text" /><br />
           <!-- :readonly="i < 4 ? true : false" -->
           업로드_2000 :
           <input :ref="`files_2000${key}`" type="file" />
@@ -172,13 +172,20 @@ export default {
           frm.append(`subFiles_2000[]`, e[1][0].files[0])
         }
       })
-
-      Object.entries(this.$refs).forEach((e, i) => {
-        if (e[0].includes('subName') === true && e[1][0].value) {
-          console.log(e, i, e[1][0].value)
-          frm.append(`subName[]`, e[1][0].value)
-        }
-      })
+      for (let i = 0; i < this.addImage; i++) {
+        frm.append(`subName[]`, document.getElementById(`subName${i}`).value)
+        console.log(document.getElementById(`subName${i}`).value)
+      }
+      // Object.entries(this.$refs).forEach((e, i) => {
+      //   if (e[0].includes('subName') === true && e[1][0].value) {
+      //     console.log('=======>', e[1][0])
+      //   }
+      //   return
+      //   if (e[0].includes('subName') === true && e[1][0].value) {
+      //     console.log(e, i, e[1][0].value)
+      //     frm.append(`subName[]`, e[1][0].value)
+      //   }
+      // })
 
       this.$axios
         .post(process.env.VUE_APP_ASSETS_API, frm, {
