@@ -47,6 +47,7 @@
         </div>
         <div v-if="!isLogin" class="right">
           <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link>
+          <nuxt-link to="/" class="btn btn-login">장바구니</nuxt-link>
           <nuxt-link to="/join" class="btn btn-primary">회원가입</nuxt-link>
         </div>
         <div v-if="isLogin" class="right">

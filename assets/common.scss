@@ -1815,6 +1815,7 @@ button:disabled{
 
 .el-loading-mask{
   z-index: 9999 !important;
+  position:fixed !important;
 }
 
 .el-dialog{
@@ -1966,13 +1967,24 @@ button:disabled{
             min-width:100px;
             display:inline-block;
           }
+          .text{
+            word-break: keep-all;
+          }
+          .text span{
+            &:after{
+              content:",";
+            }
+            &:last-child:after{
+              content:"";
+            }
+          }
           .hash{
             .text{
               margin-right:3px;
               white-space: nowrap;
-              &:before{
-                content:"#";
-              }
+              // &:before{
+              //   content:"#";
+              // }
             }
           }
         }
@@ -1991,6 +2003,8 @@ button:disabled{
           line-height: 1.5;
           word-break: keep-all;
           height:200px;
+          white-space: pre-line;
+          padding-top:0;
         }
       }
       .button-wrap{

@@ -75,10 +75,10 @@
                 <div class="bottom">
                   <span v-if="v.price !== 'F'" class="price">12,300</span>
                   <span v-else class="price free">FREE</span>
-                  <label class="cart">
+                  <!-- <label class="cart">
                     <input type="checkbox" :checked="i === 1" />
                     <span class="icon"></span>
-                  </label>
+                  </label> -->
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@
           <div
             v-for="(v, i) in ASSETS_STORE.bgList"
             :key="i"
-            class="card-list--item character"
+            class="card-list--item"
           >
             <div>
               <img
@@ -141,10 +141,10 @@
                 <div class="bottom">
                   <span v-if="v.price !== 'F'" class="price">12,300</span>
                   <span v-else class="price free">FREE</span>
-                  <label class="cart">
+                  <!-- <label class="cart">
                     <input type="checkbox" :checked="i === 1" />
                     <span class="icon"></span>
-                  </label>
+                  </label> -->
                 </div>
               </div>
             </div>
