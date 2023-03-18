@@ -6,6 +6,21 @@ import ASEETS_STORE from './modules/assetsStore.js'
 import JOIN_STORE from './modules/joinStore.js'
 
 Vue.use(Vuex)
+const instance = axios.create();
+instance.interceptors.request.use(
+    function (config) {
+        console.log('=============요청전==========')
+        // 요청 성공 직전 호출됩니다.
+        // axios 설정값을 넣습니다. (사용자 정의 설정도 추가 가능)
+        return config;
+    },
+    function (error) {
+        // 요청 에러 직전 호출됩니다.
+        return Promise.reject(error);
+    }
+);
+
+
 // const apiUrl = {
 //   apiMain: '/student.php?type=main&smt_idx=1&sms_idx=1',
 // }
@@ -192,7 +207,9 @@ const createStore = () => {
             ASSETS_STORE: {
                 crList: [],
                 detail: [],
-                detailMain: {}
+                detailMain: {},
+                is_assets: {},
+                like: {}
             },
             ASSETS_EMOTION: {},
             TEST: '',
@@ -278,6 +295,8 @@ const createStore = () => {
             },
             MUTATIONS_STORE_DETAIL(state, payload) {
                 state.ASSETS_STORE.detail = payload.detail
+                state.ASSETS_STORE.is_assets = payload.is_assets
+                state.ASSETS_STORE.like = payload.like
                 state.ASSETS_STORE.detailMain = payload.detail[0]
             },
             MUTATIONS_IN_APP_ICON(state, payload) {
@@ -831,6 +850,8 @@ const createStore = () => {
                     })
             },
             ACTION_AXIOS_GET({ commit }, params) {
+                console.log('로딩시작===========')
+                commit('MUTATIONS_LOADING_INIT', true)
                 console.log('ACTION_AXIOS_GET', params)
                 axios
                     .get(process.env.VUE_APP_API, { params })
@@ -842,6 +863,11 @@ const createStore = () => {
                         console.log('ACTION_AXIOS_GET', res, params)
                         if (params.type === 'project') {
                             commit('MUTATIONS_AXIOS_GET_PROJECT', res.data)
+                            return
+                        }
+                        if (params.type === 'assetsBuy') {
+                            commit('MUTATIONS_STORE_DETAIL', res.data)
+                            alert('추가되었습니다.')
                             return
                         }
                         if (params.type === 'develop') {
@@ -924,6 +950,15 @@ const createStore = () => {
                         if (params.type === 'introList') {
                             console.log('MUTATIONS_PREVIEW_INTRO', res.data)
                             commit('MUTATIONS_PREVIEW_INTRO', res.data)
+                            return
+                        }
+                        if (params.type === 'assetsLikeHit') {
+                            console.log('assetsLikeHit', res.data)
+                            commit('MUTATIONS_STORE_DETAIL', res.data)
+                            return
+                        }
+                        if (params.type === 'assetsLikeHitList') {
+                            console.log('assetsLikeHit', res.data)
                             return
                         }
 

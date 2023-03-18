@@ -4,8 +4,14 @@
       <div class="top-search">
         <div class="top-search--tit">Asset Store</div>
         <div class="search-wrap">
-          <input type="text" class="input" placeholder="에셋을 검색해 보세요" />
-          <button type="button" class="search-btn"></button>
+          <input
+            v-model="params.str"
+            type="text"
+            class="input"
+            placeholder="에셋을 검색해 보세요"
+            @keyup.enter="onLoad"
+          />
+          <button type="button" class="search-btn" @click="onLoad"></button>
         </div>
         <ul class="hash-list">
           <li v-for="(v, i) in 5" :key="i" class="hash-list--item">
@@ -51,13 +57,17 @@
             :key="i"
             class="card-list--item character"
           >
-            <div @click="onClickAssetsDetail(v.code)">
-              <img :src="onImageLoad(v.path)" alt="" />
+            <div>
+              <img
+                :src="onImageLoad(v.path)"
+                alt=""
+                @click="onClickAssetsDetail(v.code)"
+              />
               <label class="like">
-                <input type="checkbox" :checked="i === 1" />
-                <span class="icon"></span>
+                <input type="checkbox" :checked="v.is_like ? true : false" />
+                <span class="icon" @click="onClickLike(v.code)"></span>
               </label>
-              <div class="info">
+              <div class="info" @click="onClickAssetsDetail(v.code)">
                 <div class="category">
                   {{ v.kind === 'C' ? 'CHARACTER' : 'BACKGROUND' }}
                 </div>
@@ -113,13 +123,17 @@
             :key="i"
             class="card-list--item character"
           >
-            <div @click="onClickAssetsDetail(v.code)">
-              <img :src="onImageLoadBg(v.path)" alt="" />
+            <div>
+              <img
+                :src="onImageLoadBg(v.path)"
+                alt=""
+                @click="onClickAssetsDetail(v.code)"
+              />
               <label class="like">
-                <input type="checkbox" :checked="i === 1" />
-                <span class="icon"></span>
+                <input type="checkbox" :checked="v.is_like ? true : false" />
+                <span class="icon" @click="onClickLike(v.code)"></span>
               </label>
-              <div class="info">
+              <div class="info" @click="onClickAssetsDetail(v.code)">
                 <div class="category">
                   {{ v.kind === 'C' ? 'CHARACTER' : 'BACKGROUND' }}
                 </div>
@@ -161,6 +175,7 @@ export default {
   layout: 'index',
   data() {
     return {
+      paramsLike: {},
       params: {},
       swiperOptionCol5: {
         loop: false,
@@ -199,11 +214,7 @@ export default {
   },
   mounted() {
     this.MUTATIONS_AXIOS_POST_INIT()
-    this.params.type = 'assetsList'
-    this.params.mode = 'cr'
-    this.params.apiKey = process.env.API_KEY
-    // this.params.user_idx = this.$cookies.get('user_idx')
-    this.ACTION_AXIOS_GET(this.params)
+    this.onLoad()
   },
   beforeDestroy() {},
   methods: {
@@ -243,6 +254,29 @@ export default {
     onClickAssetsDetail(e) {
       console.log(e)
       this.$router.push(`/store/detail?asId=${e}`)
+    },
+    onLoad() {
+      if (this.$cookies.get('user_idx')) {
+        this.params.user_idx = this.$cookies.get('user_idx')
+      }
+      this.params.type = 'assetsList'
+      this.params.mode = 'cr'
+      this.params.apiKey = process.env.API_KEY
+      // this.params.user_idx = this.$cookies.get('user_idx')
+      this.ACTION_AXIOS_GET(this.params)
+    },
+    onClickLike(v) {
+      if (!this.$cookies.get('user_idx')) {
+        return alert('로그인 후 이용 가능합니다')
+      }
+      this.paramsLike.asId = v
+      this.paramsLike.type = 'assetsLikeHitList'
+      this.paramsLike.mode = 'cr'
+      this.paramsLike.apiKey = process.env.API_KEY
+      this.paramsLike.user_idx = this.$cookies.get('user_idx')
+      // this.params.user_idx = this.$cookies.get('user_idx')
+      console.log('paramsLike', this.paramsLike)
+      this.ACTION_AXIOS_GET(this.paramsLike)
     },
   },
 }

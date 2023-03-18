@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div
+    v-loading="LOADING"
+    :element-loading-text="loadingText()"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
     <!-- <div class="commingSoon">
       <img src="~/static/images/soon.png" />
     </div> -->
@@ -111,7 +116,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['LOGIN']),
+    ...mapState(['LOGIN', 'LOADING']),
   },
   watch: {
     LOGIN: {
@@ -135,6 +140,20 @@ export default {
       this.$cookies.set('user_idx', '', 0)
       this.isLogin = ''
       this.$router.push('/sign-in')
+    },
+    loadingText() {
+      let text = []
+      if (this.activeMenu === 6) {
+        text = ['노력하는 중', '노력하는 중', '노력하는 중', '노력하는 중']
+      } else {
+        text = [
+          '시나리오 펼치는중',
+          '챕터 펼치는중',
+          '컷을 불러오는 중',
+          '노력하는 중',
+        ]
+      }
+      return text[Math.floor(Math.random() * 4)] + '...'
     },
   },
 }

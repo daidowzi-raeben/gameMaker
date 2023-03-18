@@ -29,7 +29,7 @@
         <button
           type="button"
           class="button btn-primary"
-          @click="onClickButAssets"
+          @click="onClickBuyAssets"
         >
           구매하기
         </button>
@@ -90,14 +90,26 @@
             {{ ASSETS_STORE.detailMain.gas_name }}
           </div>
           <div class="price">
-            <div v-if="ASSETS_STORE.detailMain.price === 'F'" class="top">
+            <div
+              v-if="
+                ASSETS_STORE.detailMain.price === 'F' ||
+                ASSETS_STORE.detailMain.price === '0'
+              "
+              class="top"
+            >
               0원
             </div>
             <div v-else class="top">
               {{ ASSETS_STORE.detailMain.price | comma }}원
             </div>
             <div class="bottom">
-              <span v-if="ASSETS_STORE.detailMain.price !== 'F'" class="per">
+              <span
+                v-if="
+                  ASSETS_STORE.detailMain.price !== 'F' &&
+                  !ASSETS_STORE.detailMain.price === '0'
+                "
+                class="per"
+              >
                 {{
                   100 -
                   (ASSETS_STORE.detailMain.discount /
@@ -149,9 +161,39 @@
             </div>
           </div>
           <div class="button-wrap">
-            <button type="button" class="btn btn-blue">구매하기</button>
-            <button type="button" class="btn like"></button>
-            <button type="button" class="btn like active"></button>
+            <button
+              v-if="ASSETS_STORE.is_assets && ASSETS_STORE.is_assets.idx"
+              type="button"
+              class="btn btn-blue"
+              disabled
+            >
+              이미 구매된 에셋
+            </button>
+            <button
+              v-else
+              type="button"
+              class="btn btn-blue"
+              @click="onClickBuyAssets"
+            >
+              {{
+                ASSETS_STORE.detailMain.price === 'F' ||
+                ASSETS_STORE.detailMain.price === '0'
+                  ? '추가하기'
+                  : '장바구니 담기'
+              }}
+            </button>
+            <button
+              v-if="ASSETS_STORE.like && ASSETS_STORE.like.idx"
+              type="button"
+              class="btn like active"
+              @click="onClickLikeHit"
+            ></button>
+            <button
+              v-else
+              type="button"
+              class="btn like"
+              @click="onClickLikeHit"
+            ></button>
           </div>
         </div>
       </div>
@@ -271,16 +313,32 @@ export default {
     onChangeDel(e, key) {
       console.log(this.$refs[`addImage${key}`][0].remove())
     },
-    onClickButAssets() {
+    onClickBuyAssets() {
       if (!this.$cookies.get('user_idx')) {
         return alert('로그인 후 이용 가능합니다')
       }
-      console.log('구매하기')
-      this.params.type = 'assetsBuy'
-      this.params.apiKey = process.env.API_KEY
-      this.params.asId = this.$route.query.asId
-      this.params.user_idx = this.$cookies.get('user_idx')
-      this.ACTION_AXIOS_GET(this.params)
+      if (
+        this.ASSETS_STORE.detailMain.price === 'F' ||
+        this.ASSETS_STORE.detailMain.price === '0'
+      ) {
+        if (confirm('무료에셋을 추가하시겠습니까?')) {
+          this.params.type = 'assetsBuy'
+          this.params.apiKey = process.env.API_KEY
+          this.params.asId = this.$route.query.asId
+          this.params.user_idx = this.$cookies.get('user_idx')
+          this.ACTION_AXIOS_GET(this.params)
+          return
+        }
+      }
+      if (confirm('장바구니에 추가 하시겠습니까?')) {
+        console.log('구매하기')
+        alert('')
+        // this.params.type = 'assetsBuy'
+        // this.params.apiKey = process.env.API_KEY
+        // this.params.asId = this.$route.query.asId
+        // this.params.user_idx = this.$cookies.get('user_idx')
+        // this.ACTION_AXIOS_GET(this.params)
+      }
     },
     onLoadAssetsImage(v, size, mode) {
       if (mode === 'C') {
@@ -291,6 +349,13 @@ export default {
     },
     onClickActivePreview(v) {
       this.previewImage = v
+    },
+    onClickLikeHit() {
+      this.params.type = 'assetsLikeHit'
+      this.params.apiKey = process.env.API_KEY
+      this.params.asId = this.$route.query.asId
+      this.params.user_idx = this.$cookies.get('user_idx')
+      this.ACTION_AXIOS_GET(this.params)
     },
   },
 }
