@@ -155,9 +155,13 @@ export default {
       //   debouncer = null
       // }, 100)
     }
-    this.$nextTick(() => {
-      this.MUTATIONS_LOADING()
-    })
+    // setTimeout(() => {
+    //   this.$nextTick(() => {
+    //     this.MUTATIONS_LOADING()
+    //     console.log('index')
+    //   })
+    // }, 500)
+
     document.addEventListener('wheel', (e) => funcs(e))
     document.querySelector('#__layout').style.backgroundColor = '#e7f0fa'
     document.querySelector('.header').style.backgroundColor = 'transparent'

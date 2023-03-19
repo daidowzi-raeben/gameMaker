@@ -106,7 +106,7 @@
 
 <script>
 // MUTATIONS_LOGIN
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
   name: 'IndexLayout',
@@ -123,6 +123,7 @@ export default {
     LOGIN: {
       handler(value) {
         console.log(value.result)
+        this.MUTATIONS_LOADING(false)
         if (value.result === 'TRUE') {
           this.isLogin = value.login
         }
@@ -130,9 +131,15 @@ export default {
     },
   },
   mounted() {
+    this.MUTATIONS_LOADING(false)
     this.isLogin = kooLogin('user_idx')
+    // setTimeout(() => {
+    //   this.MUTATIONS_LOADING(false)
+    //   console.log('layout')
+    // }, 2000)
   },
   methods: {
+    ...mapMutations(['MUTATIONS_LOADING']),
     onMenuActive() {
       this.isMenuActive = !this.isMenuActive
     },
