@@ -2481,6 +2481,36 @@ button:disabled {
     height: auto;
   }
 
+  .txt {
+    &-red {
+      color: #FF0000;
+    }
+  }
+
+  button:disabled {
+    font-size: 14px;
+    font-weight: normal;
+    color: #ddd;
+    background-color: transparent;
+    border: 1px solid #ddd;
+  }
+
+  .button {
+    &.btn-white {
+      font-size: 14px;
+      font-weight: normal;
+      border: 1px solid #ddd;
+    }
+
+    &.btn-disabled {
+      font-size: 14px;
+      font-weight: normal;
+      color: #ddd;
+      border: 1px solid #ddd;
+      background-color: #fff !important;
+    }
+  }
+
   .tab {
     width: 100%;
     height: 100%;
@@ -2594,11 +2624,7 @@ button:disabled {
               bottom: 0;
               right: 0;
 
-              &.btn-white {
-                font-size: 14px;
-                font-weight: 500;
-                border: 1px solid #ddd;
-              }
+
             }
 
             .info {
@@ -2651,6 +2677,10 @@ button:disabled {
               select {
                 width: 100%;
                 margin: 10px 0;
+              }
+
+              .input-text {
+                
               }
             }
 
@@ -2889,5 +2919,110 @@ button:disabled {
         padding: 15px 20px;
       }
     }
+  }
+
+  .table {
+    caption {
+      visibility: hidden;
+      right: 99999999px;
+    }
+
+    tbody {
+      td {
+        &.txt-left {
+          text-align: left;
+        }
+      }
+    }
+
+    tr {
+      border-bottom: 1px solid #ddd;
+
+      th,
+      td {
+        text-align: center;
+        font-size: 14px;
+        font-weight: normal;
+        padding: 20px 0;
+        &.disabled {
+          color: #ccc;
+        }
+      }
+    }
+
+
+  }
+  @media (max-width: 800px) {
+    .table-buy {
+      colgroup {
+        display: none;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody {
+        border-top: 1px solid #222;
+        border-left: none;
+        border-right: none;
+
+        tr {
+          display: block;
+          padding-top: 15px;
+          position: relative;
+          &.buy {
+
+            td {
+
+              &:first-child::before {
+                content: "구매일시";
+              }
+
+              &:nth-child(2)::before {
+                content: "조회";
+              }
+
+              &:nth-child(3)::before {
+                content: "신청상태";
+              }
+
+              &:nth-child(4)::before {
+                content: "신청구분";
+              }
+
+              &:last-child::before {
+                content: "취소일";
+              }
+            }
+          }
+
+          td {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            border: 0;
+            height: auto;
+            margin-bottom: 15px;
+            padding: 0 0 0 10px !important;
+            text-align: left;
+            font-size: 16px;
+
+            &:before {
+              display: inline-block;
+              width: 100px;
+              font-size: 15px;
+              letter-spacing: -0.6px;
+              color: #888;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+
   }
 }

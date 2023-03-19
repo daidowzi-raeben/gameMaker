@@ -302,8 +302,7 @@
 
                 <input
                   type="text"
-                  class="input-text"
-                  value="원"
+                  class="input-text price"
                 />
               </li>
               <li class="list-input">
