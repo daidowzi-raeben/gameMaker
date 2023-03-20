@@ -2747,6 +2747,7 @@ button:disabled {
       }
 
       &-right {
+        z-index: 99;
         .box-buy {
           height: 100%;
           .btn-buy {
@@ -2760,7 +2761,7 @@ button:disabled {
             -ms-transform: translate(-50%, -0%);
             transform: translate(-50%, -0%);
             border-radius: 0;
-            z-index: 10;
+            z-index: 99;
           }
           
         }
@@ -2931,7 +2932,9 @@ button:disabled {
       visibility: hidden;
       right: 99999999px;
     }
-
+    thead {
+      border-bottom: 1px solid #ddd;
+    }
     tbody {
       td {
         &.txt-left {
