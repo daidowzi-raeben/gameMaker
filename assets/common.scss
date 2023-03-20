@@ -2992,19 +2992,19 @@ button:disabled {
               }
 
               &:nth-child(2)::before {
-                content: "조회";
+                content: "상품명";
               }
 
               &:nth-child(3)::before {
-                content: "신청상태";
+                content: "금액";
               }
 
               &:nth-child(4)::before {
-                content: "신청구분";
+                content: "상태";
               }
 
               &:last-child::before {
-                content: "취소일";
+                content: "관리";
               }
             }
           }
