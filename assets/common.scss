@@ -2738,7 +2738,7 @@ button:disabled {
           .item-txt {
             .tit {
               &-cart {
-                height: 50px;
+                height: 45px;
               }
             }
           }
@@ -2869,6 +2869,7 @@ button:disabled {
           @media (max-width: 500px) {
             .tit {
               height: 65px;
+              font-size: 1.8rem;
             }
 
             .info {
