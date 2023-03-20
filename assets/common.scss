@@ -2539,6 +2539,7 @@ button:disabled {
       &--btn {
         font-size: 2rem;
         margin-right: 30px;
+        transition:none;
 
         &.active {
           padding-bottom: 5px;
@@ -2554,10 +2555,6 @@ button:disabled {
       padding: 20px 25px;
       background-color: #fff;
       border-radius: 10px;
-
-      &.type1 {
-        height: 769px;
-      }
 
       .detail {
         p {
@@ -2640,7 +2637,9 @@ button:disabled {
     }
 
     &-right {
-
+      height: fit-content;
+      position: sticky;
+      top: 130px;
       .box-buy {
         position: relative;
         min-width: 300px;
@@ -2943,6 +2942,9 @@ button:disabled {
 
     tr {
       border-bottom: 1px solid #ddd;
+      &:last-child{
+        border-bottom:none;
+      }
 
       th,
       td {
