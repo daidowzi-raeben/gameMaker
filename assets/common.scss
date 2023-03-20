@@ -2640,6 +2640,7 @@ button:disabled {
     }
 
     &-right {
+
       .box-buy {
         position: relative;
         min-width: 300px;
@@ -2716,9 +2717,13 @@ button:disabled {
           -ms-transform: translate(-50%, -5%);
           transform: translate(-50%, -5%);
         }
+        &--mo {
+          display: none;
+        }
       }
 
     }
+    
 
     @media (max-width: 768px) {
       display: block;
@@ -2731,23 +2736,20 @@ button:disabled {
           .item-check {
             margin-right: 10px;
           }
+          .item-txt {
+            .tit {
+              &-cart {
+                height: 50px;
+              }
+            }
+          }
         }
 
       }
 
       &-right {
-        visibility: hidden;
-
         .box-buy {
-          min-width: 0;
-          width: 0;
-          height: 0;
-          padding: 0;
-
-          &--list {
-            padding: 0;
-          }
-
+          height: 100%;
           .btn-buy {
             position: fixed;
             visibility: visible !important;
@@ -2761,6 +2763,7 @@ button:disabled {
             border-radius: 0;
             z-index: 10;
           }
+          
         }
       }
 
@@ -2865,7 +2868,6 @@ button:disabled {
 
           @media (max-width: 500px) {
             .tit {
-              font-size: 1.8rem;
               height: 65px;
             }
 

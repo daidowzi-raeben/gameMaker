@@ -284,12 +284,13 @@
                   <label class="label">총 상품가격</label>
                   <div class="detail"><span>5,000</span><span>원</span></div>
                 </div>
-                
               </li>
               <li>
                 <div class="list-wrap">
                   <label class="label">할인가격</label>
-                  <div class="detail red"><span>4,500</span><span>원</span></div>
+                  <div class="detail red">
+                    <span>4,500</span><span>원</span>
+                  </div>
                 </div>
               </li>
             </ol>
@@ -300,10 +301,7 @@
                   <div class="detail red"><span>0</span><span>원</span></div>
                 </div>
 
-                <input
-                  type="text"
-                  class="input-text price"
-                />
+                <input type="text" class="input-text price" />
               </li>
               <li class="list-input">
                 <div class="list-wrap">
@@ -321,34 +319,34 @@
                   <label class="label">신용/체크카드</label>
                 </div>
 
-                <select
-                class="input-select"
-              >
-                <option value="">선택</option>
-                <option value="">국민카드</option>
-                <option value="">신한카드</option>
-              </select>
+                <select class="input-select">
+                  <option value="">선택</option>
+                  <option value="">국민카드</option>
+                  <option value="">신한카드</option>
+                </select>
               </li>
             </ol>
             <ol class="box-buy--list">
               <li>
                 <div class="list-wrap">
                   <label class="label">총 에셋</label>
-                  <div class="detail"><span class="total">2</span><span>개</span></div>
+                  <div class="detail">
+                    <span class="total">2</span><span>개</span>
+                  </div>
                 </div>
-                
               </li>
               <li>
                 <div class="list-wrap">
                   <label class="label">총 결제금액</label>
-                  <div class="detail"><span class="total">4,500</span><span>원</span></div>
+                  <div class="detail">
+                    <span class="total">4,500</span><span>원</span>
+                  </div>
                 </div>
               </li>
             </ol>
             <button type="button" class="btn-buy lg">구매하기</button>
           </div>
         </div>
-        
       </div>
     </div>
   </div>
