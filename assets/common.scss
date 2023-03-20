@@ -1993,6 +1993,9 @@ button:disabled {
   &-nanumNeo {
     font-family: 'NanumSquareNeo', sans-serif;
   }
+  &-baloo {
+    font-family: 'Baloo', sans-serif;
+  }
 }
 
 .el-loading-spinner i {
@@ -2692,6 +2695,7 @@ button:disabled {
               }
 
               .total {
+                font-family: 'Baloo', sans-serif;
                 font-size: 4rem;
                 font-weight: 500;
               }
