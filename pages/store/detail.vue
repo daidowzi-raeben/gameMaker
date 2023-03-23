@@ -70,7 +70,7 @@
                 class="img-list--item"
               >
                 <label class="btn" @click="onClickActivePreview(v.path)">
-                  <input type="radio" name="imgRadio" />
+                  <input type="radio" name="imgRadio" :checked="i === 0  ? true : false" />
                   <div class="btn-img--wrap">
                     <img :src="onLoadAssetsImage(v.path, 400, v.kind)" alt="" />
                   </div>
