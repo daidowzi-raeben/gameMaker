@@ -11,11 +11,8 @@
           이용약관
         </button>
       </div>
-      <div class="tab-con type1 el-scrollbar">
-        <div
-          v-show="activeTab === 0"
-          class="detail el-scrollbar__wrap el-scrollbar__wrap--hidden-default"
-        >
+      <div class="tab-con type1">
+        <div v-show="activeTab === 0" class="detail">
           <p>서비스 이용약관</p>
           <p><strong>제1조(목적)</strong></p>
           <p>
@@ -686,6 +683,9 @@
           <p><strong>제1조(시행일)</strong></p>
           <p>본 약관은 2023.03.18부터 시행됩니다.</p>
         </div>
+      </div>
+      <div class="el-backtop" >
+        <i class="el-icon-caret-top"></i>
       </div>
     </div>
   </div>

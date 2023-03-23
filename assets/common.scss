@@ -2543,7 +2543,6 @@ button:disabled {
 
 //마이페이지
 .mypage-wrap {
-  height: calc(100vh - 80px);
   background-color: $colGrayBg;
 
   &.type2 {
@@ -2968,7 +2967,7 @@ button:disabled {
   }
 
   @media (max-width: 800px) {
-    height: calc(100vh - 60px);
+    
 
     .tab {
       padding: 30px 15px;
@@ -3096,4 +3095,8 @@ button:disabled {
       }
     }
   }
+}
+.el-backtop {
+  right: 40px; 
+  bottom: 40px;
 }
