@@ -148,11 +148,14 @@ export default {
       this.isMenuActive = !this.isMenuActive
     },
     onClickLogout() {
+      document.cookie = 'user_name=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'
+      document.cookie = 'user_idx=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'
       this.$cookies.set('user_name', '', 0)
       this.$cookies.set('user_idx', '', 0)
       this.isLogin = ''
       this.$router.push('/sign-in')
     },
+
     loadingText() {
       let text = []
       if (this.activeMenu === 6) {
