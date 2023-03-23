@@ -47,12 +47,14 @@
         </div>
         <div v-if="!isLogin" class="right">
           <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link>
-          <nuxt-link to="/" class="btn btn-login">장바구니</nuxt-link>
           <nuxt-link to="/join" class="btn btn-primary">회원가입</nuxt-link>
         </div>
         <div v-if="isLogin" class="right">
           <a href="#_self" class="btn btn-login" @click.prevent="onClickLogout"
             >로그아웃</a
+          >
+          <nuxt-link to="/mypage/cart-detail" class="btn btn-login"
+            >장바구니</nuxt-link
           >
           <nuxt-link to="/project-manager" class="btn btn-primary"
             >내 프로젝트</nuxt-link
@@ -154,12 +156,13 @@ export default {
       if (this.activeMenu === 6) {
         text = ['노력하는 중', '노력하는 중', '노력하는 중', '노력하는 중']
       } else {
-        text = [
-          '시나리오 펼치는중',
-          '챕터 펼치는중',
-          '컷을 불러오는 중',
-          '노력하는 중',
-        ]
+        // text = [
+        //   '시나리오 펼치는중',
+        //   '챕터 펼치는중',
+        //   '컷을 불러오는 중',
+        //   '노력하는 중',
+        // ]
+        text = ['노력하는 중', '노력하는 중', '노력하는 중', '노력하는 중']
       }
       return text[Math.floor(Math.random() * 4)] + '...'
     },

@@ -928,12 +928,13 @@ export default {
       console.log(this.displayPreview)
     },
     loadingText() {
-      const text = [
-        '시나리오 펼치는중',
-        '챕터 펼치는중',
-        '컷을 불러오는 중',
-        '노력하는 중',
-      ]
+      // const text = [
+      //   '시나리오 펼치는중',
+      //   '챕터 펼치는중',
+      //   '컷을 불러오는 중',
+      //   '노력하는 중',
+      // ]
+      const text = ['노력하는 중', '노력하는 중', '노력하는 중', '노력하는 중']
       return text[Math.floor(Math.random() * 4)] + '...'
     },
     windowColor() {
