@@ -9,9 +9,13 @@
             type="text"
             class="input"
             placeholder="에셋을 검색해 보세요"
-            @keyup.enter="onLoad"
+            @keyup.enter="onLoad(params.str)"
           />
-          <button type="button" class="search-btn" @click="onLoad"></button>
+          <button
+            type="button"
+            class="search-btn"
+            @click="onLoad(params.str)"
+          ></button>
         </div>
         <ul class="hash-list">
           <li class="hash-list--item">

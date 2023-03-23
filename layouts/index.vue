@@ -38,7 +38,9 @@
               <nuxt-link to="/store">스토어</nuxt-link>
             </li>
             <li class="header-menu--item" onclick="alert('준비중입니다')">
-              이용방법
+              <nuxt-link to="https://project-koo.tistory.com/4" target="_blank"
+                >이용방법</nuxt-link
+              >
             </li>
             <li class="header-menu--item" onclick="alert('준비중입니다')">
               금액
