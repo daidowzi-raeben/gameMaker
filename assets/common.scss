@@ -1903,7 +1903,7 @@ button:disabled {
   &-wrap {
     max-width: $pc;
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 30px 0 40px 0;
     font-weight: 300;
     font-size: 1.6rem;
     display: flex;
@@ -1928,21 +1928,21 @@ button:disabled {
       .copy {
         color: #fff;
         font-family: 'NanumSquareNeo', sans-serif;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         // margin-top:20px;
         margin-top: 5px;
       }
       .term {
         color: #fff;
         font-family: 'NanumSquareNeo', sans-serif;
-        font-size: 1.3rem;
-        margin: 0 5px 5px 0;
+        font-size: 1.5rem;
+        margin: 0 8px 20px 0;
         &::before {
           content: "";
           display: inline-block;
           width: 1px;
           height: 13px;
-          margin-right: 9px;
+          margin-right: 12px;
           margin-bottom: -3px;
           background-color: $textCol2;
         }
