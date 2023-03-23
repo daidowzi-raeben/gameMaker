@@ -113,7 +113,7 @@
                 <img
                   :src="onLoadAssetsImage(v.path)"
                   alt=""
-                  @click="onClickEmotionAssets(v.timestemp)"
+                  @click="onClickEmotionAssets(v.timestemp, v.path)"
                 />
               </div>
             </el-popover>
@@ -196,8 +196,9 @@ export default {
     onLoadAssetsImage(v) {
       return `${process.env.VUE_APP_IMAGE}/cr/${v}`
     },
-    onClickEmotionAssets(v) {
+    onClickEmotionAssets(v, path) {
       console.log('onClickEmotionAssets', v)
+      this.MUTATIONS_ASSETS_CR2(path)
       this.paramsEmotion.type = 'assetsProjectEmotion'
       this.paramsEmotion.user_idx = kooLogin('user_idx')
       this.paramsEmotion.secretKey = this.PROJECT_ID

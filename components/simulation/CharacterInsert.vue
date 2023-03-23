@@ -294,8 +294,10 @@ export default {
       this.MUTATIONS_PROFILE_NAME(target.value)
     },
     onSubmit() {
-      if (!this.characterData.name || !this.characterData.profile) {
-        return alert('이름과 소개를 입력해 주세요')
+      if (!this.PREVIEW_PROFILE.discription && !this.PREVIEW_PROFILE.name) {
+        if (!this.characterData.name || !this.characterData.profile) {
+          return alert('이름과 소개를 입력해 주세요')
+        }
       }
       this.MUTATIONS_LOADING_INIT()
       const frm = new FormData()
