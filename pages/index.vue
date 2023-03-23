@@ -186,30 +186,32 @@ export default {
     },
     onChangeMainPage(page) {
       const changeBackground = document.querySelector('#__layout')
-      const swiper = document.querySelector('.main-image--list').swiper
-      switch (page) {
-        case 1:
-          changeBackground.style.backgroundColor = '#e7f0fa'
-          swiper.slideTo(page + 3)
-          break
-        case 2:
-          changeBackground.style.backgroundColor = '#dff1ec'
-          swiper.slideTo(page + 2)
-          break
-        case 3:
-          changeBackground.style.backgroundColor = '#fef3c9'
-          swiper.slideTo(page + 2)
-          break
-        case 4:
-          changeBackground.style.backgroundColor = '#fce3df'
-          swiper.slideTo(page + 2)
-          break
-        case 5:
-          changeBackground.style.backgroundColor = '#f5f0ff'
-          swiper.slideTo(page + 2)
-          break
+      if(document.querySelector('.main-image--list') !== null){
+        const swiper = document.querySelector('.main-image--list').swiper
+        switch (page) {
+          case 1:
+            changeBackground.style.backgroundColor = '#e7f0fa'
+            swiper.slideTo(page + 3)
+            break
+          case 2:
+            changeBackground.style.backgroundColor = '#dff1ec'
+            swiper.slideTo(page + 2)
+            break
+          case 3:
+            changeBackground.style.backgroundColor = '#fef3c9'
+            swiper.slideTo(page + 2)
+            break
+          case 4:
+            changeBackground.style.backgroundColor = '#fce3df'
+            swiper.slideTo(page + 2)
+            break
+          case 5:
+            changeBackground.style.backgroundColor = '#f5f0ff'
+            swiper.slideTo(page + 2)
+            break
+        }
+        this.isMainPageActive = page
       }
-      this.isMainPageActive = page
     },
   },
 }
