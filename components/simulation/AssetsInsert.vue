@@ -6,13 +6,13 @@
           인물
 
           <div class="right">
-            <!-- <button
+            <button
               type="button"
               class="button md btn-blue"
               @click="onClickLoadAssets('cr')"
             >
               구매한 에셋 불러오기
-            </button> -->
+            </button>
             <button
               type="button"
               class="button md btn-primary"
@@ -48,13 +48,13 @@
         <div class="setting-tit mt-5">
           배경
           <div class="right">
-            <!-- <button
+            <button
               type="button"
               class="button md btn-blue"
               @click="onClickLoadAssets('bg')"
             >
-              구매한 에셋 불러오기
-            </button> -->
+              구매한 배경 에셋 불러오기
+            </button>
             <button
               type="button"
               class="button md btn-primary"
@@ -87,13 +87,13 @@
         <div class="setting-tit mt-5">
           사운드
           <div class="right">
-            <!-- <button
+            <button
               type="button"
               class="button md btn-blue"
               @click="onClickLoadAssets('sr')"
             >
               구매한 에셋 불러오기
-            </button> -->
+            </button>
             <button
               type="button"
               class="button md btn-primary"
@@ -171,7 +171,7 @@
             </li>
           </ul>
           <ul
-            v-else-if="ASSETSMY && ASSETSMY.cr && params.mode === 'bg'"
+            v-else-if="ASSETSMY && ASSETSMY.bg && params.mode === 'bg'"
             class="thumbnail-list"
           >
             <li
@@ -182,7 +182,7 @@
               <label class="thumbnail-check">
                 <input type="checkbox" name="assetsImage[]" :value="v.idx" />
                 <span class="box"></span>
-                <img :src="onLoadAssetsImage(v.path)" />
+                <img :src="onLoadAssetsImageBg(v.path)" />
               </label>
             </li>
           </ul>

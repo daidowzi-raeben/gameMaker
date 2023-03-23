@@ -105,8 +105,8 @@
             <div class="bottom">
               <span
                 v-if="
-                  ASSETS_STORE.detailMain.price !== 'F' ||
-                  !ASSETS_STORE.detailMain.price === '0'
+                  ASSETS_STORE.detailMain.price !== 'F' &&
+                  ASSETS_STORE.detailMain.price !== '0'
                 "
                 class="per"
               >
@@ -314,6 +314,19 @@ export default {
       console.log(this.$refs[`addImage${key}`][0].remove())
     },
     onClickBuyAssets() {
+      if (
+        this.$cookies.get('user_idx') ===
+        'ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d'
+      ) {
+        if (confirm('관리자용 에셋을 추가하시겠습니까?')) {
+          this.params.type = 'assetsBuy'
+          this.params.apiKey = process.env.API_KEY
+          this.params.asId = this.$route.query.asId
+          this.params.user_idx = this.$cookies.get('user_idx')
+          this.ACTION_AXIOS_GET(this.params)
+          return
+        }
+      }
       if (!this.$cookies.get('user_idx')) {
         return alert('로그인 후 이용 가능합니다')
       }
@@ -327,18 +340,18 @@ export default {
           this.params.asId = this.$route.query.asId
           this.params.user_idx = this.$cookies.get('user_idx')
           this.ACTION_AXIOS_GET(this.params)
-          return
         }
+      } else {
+        return alert('정식오픈 후 구매가 가능합니다')
       }
-      if (confirm('장바구니에 추가 하시겠습니까?')) {
-        console.log('구매하기')
-        alert('')
-        // this.params.type = 'assetsBuy'
-        // this.params.apiKey = process.env.API_KEY
-        // this.params.asId = this.$route.query.asId
-        // this.params.user_idx = this.$cookies.get('user_idx')
-        // this.ACTION_AXIOS_GET(this.params)
-      }
+      // if (confirm('장바구니에 추가 하시겠습니까?')) {
+      //   return
+      //   // this.params.type = 'assetsBuy'
+      //   // this.params.apiKey = process.env.API_KEY
+      //   // this.params.asId = this.$route.query.asId
+      //   // this.params.user_idx = this.$cookies.get('user_idx')
+      //   // this.ACTION_AXIOS_GET(this.params)
+      // }
     },
     onLoadAssetsImage(v, size, mode) {
       if (mode === 'C') {

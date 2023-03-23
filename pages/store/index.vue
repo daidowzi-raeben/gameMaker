@@ -73,7 +73,13 @@
                 </div>
                 <div class="text">{{ v.gas_name }}</div>
                 <div class="bottom">
-                  <span v-if="v.price !== 'F'" class="price">12,300</span>
+                  <span v-if="v.price !== 'F' && v.price !== '0'" class="price">
+                    {{
+                      v.discount && v.discount !== '0'
+                        ? v.discount
+                        : v.price | comma
+                    }}
+                  </span>
                   <span v-else class="price free">FREE</span>
                   <!-- <label class="cart">
                     <input type="checkbox" :checked="i === 1" />
@@ -139,7 +145,13 @@
                 </div>
                 <div class="text">{{ v.gas_name }}</div>
                 <div class="bottom">
-                  <span v-if="v.price !== 'F'" class="price">12,300</span>
+                  <span v-if="v.price !== 'F' && v.price !== '0'" class="price">
+                    {{
+                      v.discount && v.discount !== '0'
+                        ? v.discount
+                        : v.price | comma
+                    }}
+                  </span>
                   <span v-else class="price free">FREE</span>
                   <!-- <label class="cart">
                     <input type="checkbox" :checked="i === 1" />
