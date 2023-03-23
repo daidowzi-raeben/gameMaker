@@ -69,14 +69,20 @@
                 :key="i"
                 class="img-list--item"
               >
-                <button
+                <label class="btn" @click="onClickActivePreview(v.path)">
+                  <input type="radio" name="imgRadio" />
+                  <div class="btn-img--wrap">
+                    <img :src="onLoadAssetsImage(v.path, 400, v.kind)" alt="" />
+                  </div>
+                </label>
+                <!-- <button
                   type="button"
                   class="btn"
                   :class="{ active: i === 1 }"
                   @click="onClickActivePreview(v.path)"
                 >
                   <img :src="onLoadAssetsImage(v.path, 400, v.kind)" alt="" />
-                </button>
+                </button> -->
               </li>
             </ul>
           </el-scrollbar>
@@ -200,10 +206,10 @@
       <div class="store-con">
         <div class="store-con--menu">
           <button type="button" class="btn active">상품정보</button>
-          <button type="button" class="btn">제작자 컨텐츠</button>
+          <!-- <button type="button" class="btn">제작자 컨텐츠</button>
           <button type="button" class="btn">관련에셋</button>
           <button type="button" class="btn">응원글</button>
-          <button type="button" class="btn">추가요청</button>
+          <button type="button" class="btn">추가요청</button> -->
         </div>
         <div class="store-con--section">
           <div class="images">
