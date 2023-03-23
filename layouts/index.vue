@@ -47,12 +47,14 @@
         </div>
         <div v-if="!isLogin" class="right">
           <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link>
-          <nuxt-link to="/" class="btn btn-login">장바구니</nuxt-link>
           <nuxt-link to="/join" class="btn btn-primary">회원가입</nuxt-link>
         </div>
         <div v-if="isLogin" class="right">
           <a href="#_self" class="btn btn-login" @click.prevent="onClickLogout"
             >로그아웃</a
+          >
+          <nuxt-link to="/mypage/cart-detail" class="btn btn-login"
+            >장바구니</nuxt-link
           >
           <nuxt-link to="/project-manager" class="btn btn-primary"
             >내 프로젝트</nuxt-link
