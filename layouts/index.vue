@@ -82,6 +82,8 @@
             <span>189-87-00172</span>
             <span>제2019-서울영등포-0298호</span>
           </div> -->
+          <nuxt-link to="/mypage/term-use" class="term">이용약관</nuxt-link>
+          <nuxt-link to="/mypage/term-personal" class="term">개인정보</nuxt-link>
           <div class="copy">
             Copyright (c) 2023 TEAM Project Koo Allrights reseved.
           </div>

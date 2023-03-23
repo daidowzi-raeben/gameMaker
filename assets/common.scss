@@ -1908,9 +1908,8 @@ button:disabled {
     font-size: 1.6rem;
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
     .left {
-
       .name,
       .info span {
         font-size: 1.6rem;
@@ -1933,8 +1932,27 @@ button:disabled {
         // margin-top:20px;
         margin-top: 5px;
       }
+      .term {
+        color: #fff;
+        font-family: 'NanumSquareNeo', sans-serif;
+        font-size: 1.3rem;
+        margin: 0 5px 5px 0;
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 1px;
+          height: 13px;
+          margin-right: 9px;
+          margin-bottom: -3px;
+          background-color: $textCol2;
+        }
+        &:first-child {
+          &::before {
+            display: none;
+          }
+        }
+      }
     }
-
     .right {
       .btn {
         width: 20px;
