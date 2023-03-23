@@ -3152,6 +3152,7 @@
 
     .thumbnail-check {
       cursor: pointer;
+      display:flex;
 
       input[type=checkbox] {
         appearance: none;
