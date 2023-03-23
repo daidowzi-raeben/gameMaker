@@ -12,7 +12,7 @@
         </button>
       </div>
       <div class="tab-con type1">
-        <div v-show="activeTab === 0" class="detail" style="display: none;">
+        <div v-show="activeTab === 0" class="detail" style="display: none">
           <div class="tui-editor-contents">
             <p>개인정보처리방침</p>
             <p><strong>제1조(목적)</strong></p>
@@ -133,9 +133,7 @@
               있습니다.
             </p>
             <p><strong>제9조(개인정보 수집 방법)</strong></p>
-            <p>
-              회사는 다음과 같은 방법으로 이용자의 개인정보를 수집합니다.
-            </p>
+            <p>회사는 다음과 같은 방법으로 이용자의 개인정보를 수집합니다.</p>
 
             <ol>
               <li>
@@ -143,9 +141,7 @@
               </li>
             </ol>
             <p><strong>제10조(개인정보의 이용)</strong></p>
-            <p>
-              회사는 개인정보를 다음 각 호의 경우에 이용합니다.
-            </p>
+            <p>회사는 개인정보를 다음 각 호의 경우에 이용합니다.</p>
 
             <ol>
               <li>공지사항의 전달 등 회사의 운영에 필요한 경우</li>
@@ -539,15 +535,13 @@
                 </ol>
               </li>
             </ol>
-            <p>
-              부칙
-            </p>
+            <p>부칙</p>
             <p>제1조 본 방침은 2023.03.18부터 시행됩니다.</p>
           </div>
         </div>
       </div>
       <div class="el-backtop">
-        <i class="el-icon-caret-top"></i>
+        <i class="el-icon-caret-top" @click="onClickScrollTop"></i>
       </div>
     </div>
   </div>
@@ -560,6 +554,11 @@ export default {
     return {
       activeTab: 0,
     }
+  },
+  methods: {
+    onClickScrollTop() {
+      window.scrollTo(0, 0)
+    },
   },
 }
 </script>

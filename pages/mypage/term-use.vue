@@ -21,9 +21,7 @@
             기타 필요한 사항을 규정함을 목적으로 합니다.
           </p>
           <p><strong>제2조(정의)</strong></p>
-          <p>
-            이 약관에서 사용하는 주요 용어의 정의는 다음과 같습니다.
-          </p>
+          <p>이 약관에서 사용하는 주요 용어의 정의는 다음과 같습니다.</p>
 
           <ol>
             <li>
@@ -133,9 +131,7 @@
             </li>
           </ol>
           <p><strong>제6조(이용계약의 체결)</strong></p>
-          <p>
-            이용계약은 다음의 경우에 체결됩니다.
-          </p>
+          <p>이용계약은 다음의 경우에 체결됩니다.</p>
 
           <ol>
             <li>
@@ -684,8 +680,8 @@
           <p>본 약관은 2023.03.18부터 시행됩니다.</p>
         </div>
       </div>
-      <div class="el-backtop" >
-        <i class="el-icon-caret-top"></i>
+      <div class="el-backtop">
+        <i class="el-icon-caret-top" @click="onClickScrollTop"></i>
       </div>
     </div>
   </div>
@@ -698,6 +694,11 @@ export default {
     return {
       activeTab: 0,
     }
+  },
+  methods: {
+    onClickScrollTop() {
+      window.scrollTo(0, 0)
+    },
   },
 }
 </script>
