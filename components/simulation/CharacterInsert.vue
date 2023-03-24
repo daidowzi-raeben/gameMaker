@@ -237,6 +237,15 @@ export default {
       },
       immediate: true,
     },
+    SCENE_DATA_CHARACTER: {
+      handler(value) {
+        this.params.type = 'assetsProject'
+        this.params.user_idx = kooLogin('user_idx')
+        this.params.secretKey = this.PROJECT_ID
+        this.params.apiKey = process.env.API_KEY
+        this.ACTION_AXIOS_GET(this.params)
+      },
+    },
     colorPicker: {
       handler(value) {
         console.log('watch', value)

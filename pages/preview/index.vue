@@ -428,6 +428,12 @@
                     <button type="button" class="btn picture">사진</button>
                   </div>
 
+                  <p class="댁알">
+                    <img
+                      :src="`https://api.school-os.net/game/upload/cr/${IN_APP_GAME.profileList[cIndex].h_img}`"
+                      alt=""
+                    />
+                  </p>
                   <p class="name">
                     {{ IN_APP_GAME.profileList[cIndex].name }}
                   </p>
