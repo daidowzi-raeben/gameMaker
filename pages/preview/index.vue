@@ -7,9 +7,7 @@
     class="preview-wrap"
   >
     <div v-if="user_idx === IN_APP_GAME.userIdx">
-      {{ s }}
-      {{ c }}
-      {{ t }}
+      {{ srPlay }}
       <br />
       현재 포인트
       <span v-for="(v, i) in gamePoint" :key="i" style="margin-left: 20px">
@@ -266,16 +264,17 @@
                     type="button"
                     class="btn"
                     :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
+                    @click="onclickDisplayShow('displayProfile')"
                   >
                     등장인물
                   </button>
-                  <button
+                  <!-- <button
                     type="button"
                     class="btn"
                     :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
                   >
                     갤러리
-                  </button>
+                  </button> -->
                 </div>
                 <div class="preview-intro--copy">
                   {{ IN_APP_GAME.intro.data.copyright }}
@@ -403,83 +402,64 @@
                 </div>
               </div>
               <!-- 등장인물화면 -->
+
               <div
+                v-if="IN_APP_GAME.profileList"
                 v-show="displayPreview"
                 ref="displayProfile"
-                class="preview-con preview-profile"
               >
-                <div class="preview-profile--top">
-                  <button
-                    type="button"
-                    class="btn back"
-                    @click="onclickDisplayShow('displayIntro')"
-                  >
-                    뒤로
-                  </button>
-                  <div class="title">등장인물</div>
-                </div>
-                <ul class="preview-profile--list">
-                  <li
-                    class="item"
-                    @click="onclickDisplayShow('displayProfileDetail')"
-                    style="background-color: #ffda72"
-                  >
-                    <div class="img-wrap">
-                      <img src="https://imgur.com/Xs5xsVU.png" alt="" />
-                    </div>
-                    <div class="name">쟈몽</div>
-                  </li>
-                  <li
-                    class="item"
-                    @click="onclickDisplayShow('displayProfileDetail')"
-                    style="background-color: #e38542"
-                  >
-                    <div class="img-wrap">
-                      <img src="https://imgur.com/HzC0LCW.png" alt="" />
-                    </div>
-                    <div class="name">북극산꽁치</div>
-                  </li>
-                </ul>
-              </div>
-              <div
-                v-show="displayPreview"
-                ref="displayProfileDetail"
-                class="preview-con preview-profile detail"
-              >
-                <div class="btn-wrap">
-                  <button
-                    type="button"
-                    class="btn close"
-                    @click="onclickDisplayShow('displayProfile')"
-                  >
-                    닫기
-                  </button>
-                  <button type="button" class="btn picture">사진</button>
-                </div>
+                <div
+                  class="preview-con preview-profile detail"
+                  :style="
+                    IN_APP_GAME.profileList[cIndex].bg
+                      ? `background:url(https://api.school-os.net/game/upload/bg/1200/${IN_APP_GAME.profileList[cIndex].bg})`
+                      : `background: ${IN_APP_GAME.profileList[cIndex].background}`
+                  "
+                >
+                  <div class="btn-wrap">
+                    <button
+                      type="button"
+                      class="btn close"
+                      @click="onclickDisplayShow('displayIntro')"
+                    >
+                      닫기
+                    </button>
+                    <button type="button" class="btn picture">사진</button>
+                  </div>
 
-                <p class="name">{{ inApp.crName }}</p>
-                <div class="character">
-                  <img src="https://imgur.com/Xs5xsVU.png" alt="" />
-                </div>
-                <div class="profile">
-                  <p class="con">
-                    <span v-for="i in 10" :key="i">{{ inApp.text }}</span>
+                  <p class="name">
+                    {{ IN_APP_GAME.profileList[cIndex].name }}
                   </p>
+                  <div class="character">
+                    <img
+                      :src="`https://api.school-os.net/game/upload/cr/1200/${IN_APP_GAME.profileList[cIndex].cr}`"
+                      alt=""
+                    />
+                  </div>
+                  <div class="profile">
+                    <p class="con">
+                      <span>{{
+                        IN_APP_GAME.profileList[cIndex].profile.replaceAll(
+                          '||n',
+                          '\n'
+                        )
+                      }}</span>
+                    </p>
+                  </div>
+                  <ul v-if="IN_APP_GAME.profileList" class="face-list">
+                    <li
+                      v-for="(v, i) in IN_APP_GAME.profileList"
+                      :key="i"
+                      class="face-list--item"
+                      @click="cIndex = i"
+                    >
+                      <img
+                        :src="`https://api.school-os.net/game/upload/cr/${v.h_img}`"
+                        alt=""
+                      />
+                    </li>
+                  </ul>
                 </div>
-                <ul class="face-list">
-                  <li class="face-list--item">
-                    <img src="https://i.imgur.com/TNnVehQ.png" alt="" />
-                  </li>
-                  <li class="face-list--item">
-                    <img src="https://i.imgur.com/Fya1jHk.png" alt="" />
-                  </li>
-                  <li class="face-list--item">
-                    <img src="https://i.imgur.com/W6z9by0.png" alt="" />
-                  </li>
-                  <li class="face-list--item">
-                    <img src="https://i.imgur.com/m14VXCI.png" alt="" />
-                  </li>
-                </ul>
               </div>
               <img
                 src="~/static/images/mockup.png"
@@ -513,6 +493,7 @@ export default {
       s: 0,
       c: 0,
       t: 0,
+      cIndex: 0,
       answer: '',
       isEnding: false,
       gamePoint: [],
@@ -1114,7 +1095,7 @@ export default {
           break
         case 'displayProfile':
           this.$refs.displayIntro.style = 'display:none'
-          this.$refs.displayProfileDetail.style = 'display:none'
+          // this.$refs.displayProfileDetail.style = 'display:none'
           this.$refs.displayProfile.style = 'display:block'
           break
         case 'displayProfileDetail':
