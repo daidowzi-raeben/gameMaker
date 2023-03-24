@@ -249,6 +249,7 @@
                     type="button"
                     class="btn"
                     :style="`box-shadow: ${IN_APP_GAME.uiSet.button.x}px ${IN_APP_GAME.uiSet.button.y}px 0 ${IN_APP_GAME.uiSet.button.shadowColor}; outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor}; border-radius:${IN_APP_GAME.uiSet.button.round}px`"
+                    onclick="alert('정식오픈 후 지원됩니다.')"
                   >
                     불러오기
                   </button>
