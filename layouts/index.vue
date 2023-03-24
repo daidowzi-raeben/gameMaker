@@ -37,9 +37,9 @@
             <li class="header-menu--item">
               <nuxt-link to="/store">스토어</nuxt-link>
             </li>
-            <li class="header-menu--item" onclick="alert('준비중입니다')">
-              <nuxt-link to="https://project-koo.tistory.com/4" target="_blank"
-                >이용방법</nuxt-link
+            <li class="header-menu--item">
+              <a href="https://project-koo.tistory.com/4" target="_blank"
+                >이용방법</a
               >
             </li>
             <li class="header-menu--item" onclick="alert('준비중입니다')">
@@ -83,7 +83,9 @@
             <span>제2019-서울영등포-0298호</span>
           </div> -->
           <nuxt-link to="/mypage/term-use" class="term">이용약관</nuxt-link>
-          <nuxt-link to="/mypage/term-personal" class="term">개인정보</nuxt-link>
+          <nuxt-link to="/mypage/term-personal" class="term"
+            >개인정보</nuxt-link
+          >
           <div class="copy">
             Copyright (c) 2023 TEAM Project Koo Allrights reseved.
           </div>

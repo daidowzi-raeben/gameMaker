@@ -6,6 +6,29 @@
     element-loading-background="rgba(0, 0, 0, 0.8)"
     class="preview-wrap"
   >
+    <div v-if="user_idx === IN_APP_GAME.userIdx">
+      {{ s }}
+      {{ c }}
+      {{ t }}
+      <br />
+      현재 포인트
+      <span v-for="(v, i) in gamePoint" :key="i" style="margin-left: 20px">
+        {{ v.name }} / {{ v.point }}
+        <br />
+      </span>
+      <!-- <span
+        v-if="
+          IN_APP_GAME.scenarioList &&
+          IN_APP_GAME.scenarioList.length > 0 &&
+          IN_APP_GAME.scenarioList[s].chapters &&
+          IN_APP_GAME.scenarioList[s].chapters.length > 0 &&
+          IN_APP_GAME.scenarioList[s].chapters[c].cuts &&
+          IN_APP_GAME.scenarioList[s].chapters[c].cuts.length > 0
+        "
+      >
+        {{ IN_APP_GAME.scenarioList[s].chapters[c].cuts[initBtn] }}</span
+      > -->
+    </div>
     <div id="preview">
       <div class="app">
         <div class="app-title">
@@ -19,12 +42,11 @@
               나만의 스토리형 게임
             </div>
             <div class="title" style="line-height: 30px">
-              메이커 쿠로 만든 우리의 첫 게임, <br />
-              메이커 쿠를 소개합니다!
+              {{ IN_APP_GAME.projectTitle }}
             </div>
             <dl class="list">
               <dt>제작자</dt>
-              <dd>프로젝트 쿠 부선장</dd>
+              <dd>{{ IN_APP_GAME.projectUser }}</dd>
             </dl>
             <dl class="list">
               <dt>공유하기</dt>
@@ -196,7 +218,11 @@
                 "
                 ref="displayIntro"
                 class="preview-con preview-intro"
-                :class="IN_APP_GAME.intro.data.dim"
+                :class="[
+                  IN_APP_GAME.intro.data.dim,
+                  IN_APP_GAME.intro.data.copyrightPosition,
+                  IN_APP_GAME.intro.data.position,
+                ]"
               >
                 <div class="preview-intro--background">
                   <img
@@ -261,7 +287,9 @@
                 v-show="displayPreview"
                 ref="displayGame"
                 class="preview-con preview-img"
-                @click="nextGame(isLoading)"
+                @click="
+                  isEnding === false ? nextGame(isLoading) : nextEndingGame()
+                "
               >
                 <!-- 로딩화면 -->
                 <div ref="loadingChater" class="loading-chapter">
@@ -475,8 +503,10 @@ export default {
   name: 'PreviewIndex',
   data() {
     return {
+      user_idx: '',
       isLoading: false,
       inAllStart: false,
+      lastGame: false,
       loading: true,
       game: [],
       isSafari: '',
@@ -537,6 +567,7 @@ export default {
       paramsList: {},
       sharUrl: 'projectkoo.com',
       srPlay: [],
+      introAudio: null,
     }
   },
   head: {
@@ -565,6 +596,18 @@ export default {
               ]
             })
 
+            // 인트로 배경음
+            if (this.IN_APP_GAME.intro.introBgm) {
+              console.log(
+                'this.IN_APP_GAME.intro.introBgm',
+                this.IN_APP_GAME.intro.introBgm
+              )
+              this.introAudio = new Audio(
+                `${process.env.VUE_APP_IMAGE}/logo/${this.IN_APP_GAME.intro.introBgm}.mp3`
+              )
+              this.introAudio.loop = true
+              // this.introAudio.play()
+            }
             // this.updateGame()
 
             this.$refs.displayIntro.style = 'display:block'
@@ -610,6 +653,10 @@ export default {
 
     this.setScreenSize()
     window.addEventListener('resize', () => this.setScreenSize())
+
+    this.$nextTick(() => {
+      this.user_idx = kooLogin('user_idx')
+    })
   },
   destroyed() {
     window.removeEventListener('resize', () => this.setScreenSize())
@@ -659,6 +706,40 @@ export default {
         ],
       })
     },
+    nextEndingGame() {
+      if (this.lastGame === false) {
+        // console.log(this.s, this.IN_APP_GAME.endingList[this.s].chapters)
+        this.t++
+        // console.log(this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].length)
+        // 컷 구분
+        // console.log(this.s, this.c, this.t, `CUT${this.inApp.connect}`)
+        console.log(
+          'this.IN_APP_GAME.endingList[this.s].chapters.length',
+          this.IN_APP_GAME.endingList[this.s].chapters.length
+        )
+        console.log(
+          'this.IN_APP_GAME.endingList[this.s].chapters[this.c].initBtn.length',
+          this.IN_APP_GAME.endingList[this.s].chapters[this.c].initBtn.length
+        )
+
+        if (
+          this.IN_APP_GAME.endingList[this.s].chapters[this.c].initBtn
+            .length === this.t
+        ) {
+          console.log('챕터 끝')
+          this.t = 0
+          this.c++
+          console.log('chpter length', this.initBtn)
+          if (this.IN_APP_GAME.endingList[this.s].chapters.length === this.c) {
+            this.lastGame = true
+            return alert('크레딧')
+          }
+        }
+        this.updateEndingGame()
+      } else {
+        return alert('크레딧')
+      }
+    },
     // http://localhost:9001/preview?projectKey=45a53c85a1ed65946772808cec29efc597504ba5a59747e3825813b0f7e9e6d9
     nextGame(e) {
       if (this.isLoading === true) {
@@ -706,6 +787,34 @@ export default {
             console.log('시나리오 끝')
             if (this.IN_APP_GAME.scenarioList.length === this.s) {
               this.isEnding = true
+              for (let i = 0; i < this.IN_APP_GAME.endingList.length; i++) {
+                // 이름
+
+                for (let p = 0; p < this.gamePoint.length; p++) {
+                  console.log(
+                    this.IN_APP_GAME.endingList[i].cr,
+                    this.gamePoint[p].name
+                  )
+                  if (
+                    this.gamePoint[p].name === this.IN_APP_GAME.endingList[i].cr
+                  ) {
+                    if (
+                      this.IN_APP_GAME.endingList[i].pu <=
+                        this.gamePoint[p].point &&
+                      this.IN_APP_GAME.endingList[i].pd >=
+                        this.gamePoint[p].point
+                    ) {
+                      this.s = i
+                      this.c = 0
+                      this.t = 0
+                      break
+                    } else {
+                      this.s = 0
+                    }
+                  }
+                }
+              }
+              this.updateEndingGame()
               return console.log('ending')
             }
           }
@@ -725,9 +834,10 @@ export default {
           this.inApp.pointType
         )
       } else {
-        console.log('엔딩')
+        console.log('엔딩시작')
       }
     },
+
     onClickQuestions(e) {
       this.isLoading = false
       // questionsText
@@ -868,6 +978,94 @@ export default {
         console.log('주관식', this.inApp.answer)
       }
     },
+    updateEndingGame(e) {
+      // 챕터 로딩
+      console.log(this.IN_APP_GAME, this.displayPreview, '------------')
+      if (this.t === 0) {
+        if (this.inAllStart === true) {
+          this.srPlay.forEach((element) => {
+            console.log(element.pause())
+          })
+          // bgm 재생
+          const soundUrl = `${process.env.VUE_APP_IMAGE}/bgm/${
+            this.IN_APP_GAME.endingList[this.s].chapters[this.c].bgm
+          }`
+          // this.audioBgm(soundUrl).puase()
+          this.audioBgm(soundUrl, this.s + 1, this.c + 1)
+          this.srPlay[this.s + 1 + this.c + 1].play()
+          console.log('=========BGM START===========')
+        }
+
+        this.$refs.loadingChater.classList.add('active')
+        console.log(
+          this.IN_APP_GAME.endingList[this.s].scenarioTitle,
+          this.IN_APP_GAME.endingList[this.s].chapters[this.c].title
+        )
+        document.getElementById('ST').innerText =
+          this.IN_APP_GAME.endingList[this.s].scenarioTitle
+        document.getElementById('CT').innerText =
+          this.IN_APP_GAME.endingList[this.s].chapters[this.c].title
+        this.isLoading = true
+        setTimeout(() => {
+          this.$refs.loadingChater.classList.remove('active')
+          // this.$refs.loadingChater.style = 'display:none'
+          this.isLoading = false
+        }, 3000)
+      }
+      this.initBtn =
+        this.IN_APP_GAME.endingList[this.s].chapters[this.c].initBtn[this.t]
+      if (e && e !== null) {
+        console.log('객관식')
+        // this.isLoading = true
+        for (
+          let b = 0;
+          b <
+          this.IN_APP_GAME.endingList[this.s].chapters[this.c].initBtn.length;
+          b++
+        ) {
+          if (
+            this.IN_APP_GAME.endingList[this.s].chapters[this.c].initBtn[b] ===
+            `cut${e}`
+          ) {
+            console.log('========멈춰==========')
+            this.t = b
+          }
+          console.log(
+            this.IN_APP_GAME.endingList[this.s].chapters[this.c].initBtn[b]
+          )
+        }
+        this.inApp =
+          this.IN_APP_GAME.endingList[this.s].chapters[this.c].cuts[
+            'cut' + e
+          ].list
+      } else {
+        console.log('객관식패스')
+        this.inApp =
+          this.IN_APP_GAME.endingList[this.s].chapters[this.c].cuts[
+            this.initBtn
+          ].list
+      }
+      console.log(this.cutType, '=============================')
+      this.cutType = this.inApp.cutType
+      if (this.inApp.sr) {
+        const s = new Audio(`${process.env.VUE_APP_IMAGE}/sr/${this.inApp.sr}`)
+        s.play()
+      }
+      if (this.inApp.cutType === 1) {
+        console.log('대사')
+      }
+      if (this.inApp.cutType === 2) {
+        console.log('나레이션')
+      }
+      if (this.inApp.cutType === 3) {
+        this.isLoading = true
+        console.log('객관식', e)
+        return
+      }
+      if (this.inApp.cutType === 4) {
+        console.log('주관식', this.inApp.answer)
+      }
+    },
     audioBgm(soundUrl, s, c) {
       this.srPlay[s + c] = new Audio(soundUrl)
       // s.stop()
@@ -877,7 +1075,7 @@ export default {
       // }, 4000)
       return this.srPlay
     },
-
+    introAutio() {},
     pointUpdate(name, point, type) {
       if (name && point && type) {
         this.gamePoint.forEach((e, i) => {
@@ -911,6 +1109,7 @@ export default {
           this.$refs.displayIntro.style = 'display:none'
           this.$refs.displayGame.style = 'display:block'
           this.inAllStart = true
+          this.introAudio.pause()
           this.updateGame()
           break
         case 'displayProfile':
@@ -969,6 +1168,15 @@ export default {
         // return console.log('정답', this.inApp)
         if (this.inApp.questionsPoint[0].pointType === 'P') {
           console.log('포인트 증가')
+          for (let i = 0; i < this.gamePoint.length; i++) {
+            if (
+              this.gamePoint[i].name === this.inApp.questionsPoint[0].pointCr
+            ) {
+              this.gamePoint[i].point =
+                Number(this.gamePoint[i].point) +
+                Number(this.inApp.questionsPoint[0].point)
+            }
+          }
           //  this.gamePoint[i].point =
           //                 Number(this.gamePoint[i].point) + Number(this.inApp.point)
         } else {

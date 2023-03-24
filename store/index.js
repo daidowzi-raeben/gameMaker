@@ -141,6 +141,7 @@ const createStore = () => {
                 logo: '',
                 position: '',
                 bg: '',
+                bgm: '',
                 ver: '',
                 dim: '',
             },
@@ -578,6 +579,7 @@ const createStore = () => {
                 }
 
                 state.PREVIEW_INTRO.logo = payload.logo
+                state.PREVIEW_INTRO.bgm = payload.bgm
             },
             // 배경
             MUTATIONS_ASSETS_BG(state, payload) {

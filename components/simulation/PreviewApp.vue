@@ -451,7 +451,7 @@
               :class="UISetting.font"
               placeholder="주관식 답변을 입력해주세요"
               :value="PREVIEW.data.answer"
-              :style="windowColor()"
+              :style="`${windowColor()}; color:${UISetting.fontColor}`"
               readonly
             />
           </div>

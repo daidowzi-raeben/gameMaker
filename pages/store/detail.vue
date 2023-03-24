@@ -226,51 +226,53 @@
             </div>
           </div>
         </div>
-        <div class="store-con--section">제작자컨텐츠</div>
-        <div class="store-con--section">관련에셋</div>
-        <div class="store-con--section">
-          <div class="comment">
-            <div class="left">
-              <div class="star">
-                <strong class="num">4.1</strong>
-              </div>
-            </div>
-            <div class="right">
-              <el-rate v-model="value1"></el-rate>
-              <div class="comment-write">
-                <textarea class="input-textarea" rows="3"></textarea>
-                <button type="button" class="btn btn-blue">작성하기</button>
-              </div>
-            </div>
-          </div>
-          <ul class="comment-list">
-            <li v-for="i in 5" :key="i" class="comment-list--item">
+        <div v-if="false">
+          <div class="store-con--section">제작자컨텐츠</div>
+          <div class="store-con--section">관련에셋</div>
+          <div class="store-con--section">
+            <div class="comment">
               <div class="left">
-                <div class="img-wrap">
-                  <img src="" alt="" />
+                <div class="star">
+                  <strong class="num">4.1</strong>
                 </div>
-                <div class="name">진진자라</div>
               </div>
               <div class="right">
-                <el-rate v-model="value2" disabled></el-rate>
-                <div class="text">
-                  예쁜 분홍색이 머리색 얘기가 아니라 옷 얘기였구나
-                </div>
-                <div v-if="i === 2" class="re">
-                  <div class="top">쟈몽님의 답변</div>
-                  <div class="text">답변 내용입니다.</div>
+                <el-rate v-model="value1"></el-rate>
+                <div class="comment-write">
+                  <textarea class="input-textarea" rows="3"></textarea>
+                  <button type="button" class="btn btn-blue">작성하기</button>
                 </div>
               </div>
-            </li>
-          </ul>
-        </div>
-        <div class="store-con--section">
-          <div class="guide">
-            쟈몽님에게 추가 표정 및 에셋을 요청할 수 있습니다.
+            </div>
+            <ul class="comment-list">
+              <li v-for="i in 5" :key="i" class="comment-list--item">
+                <div class="left">
+                  <div class="img-wrap">
+                    <img src="" alt="" />
+                  </div>
+                  <div class="name">진진자라</div>
+                </div>
+                <div class="right">
+                  <el-rate v-model="value2" disabled></el-rate>
+                  <div class="text">
+                    예쁜 분홍색이 머리색 얘기가 아니라 옷 얘기였구나
+                  </div>
+                  <div v-if="i === 2" class="re">
+                    <div class="top">쟈몽님의 답변</div>
+                    <div class="text">답변 내용입니다.</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
-          <div class="comment-write">
-            <textarea class="input-textarea" rows="3"></textarea>
-            <button type="button" class="btn btn-blue">작성하기</button>
+          <div class="store-con--section">
+            <div class="guide">
+              쟈몽님에게 추가 표정 및 에셋을 요청할 수 있습니다.
+            </div>
+            <div class="comment-write">
+              <textarea class="input-textarea" rows="3"></textarea>
+              <button type="button" class="btn btn-blue">작성하기</button>
+            </div>
           </div>
         </div>
       </div>

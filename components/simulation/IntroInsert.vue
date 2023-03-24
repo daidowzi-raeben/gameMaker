@@ -3,7 +3,6 @@
     <div class="setting">
       <div class="setting-con">
         <div class="setting-tit">배경화면 설정</div>
-
         <el-scrollbar>
           <div class="thumbnail-list--wrap type2">
             <ul class="thumbnail-list">
@@ -79,10 +78,10 @@
               >
             </label>
             <span
-              v-if="isFileInsert === true"
+              v-if="fileInsertName2 === true"
               class="btn delete"
               @click="onClickFileDelete2"
-              >이미지 삭제</span
+              >배경음 삭제</span
             >
           </div>
         </div>
@@ -251,6 +250,7 @@ export default {
       handler(value) {
         this.intro = value
         this.fileInsertName = value.logo
+        this.fileInsertName2 = value.bgm
       },
       immediate: true,
     },

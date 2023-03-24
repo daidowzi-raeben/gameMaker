@@ -151,7 +151,7 @@
           :value="PREVIEW.data.subjectiveQuestion"
           @input="onInputDataSubjectiveQuestion"
         ></textarea>
-        <div class="insert-set">
+        <div v-if="cutType !== 4" class="insert-set">
           <button
             v-if="isEndign === 'N'"
             v-show="!pointSettingShow && !scenarioSettingShow"

@@ -543,7 +543,7 @@ export default {
       ) {
         return alert('모든 정보를 입력해 주세요')
       }
-      if (this.endingTitle.pd > this.endingTitle.pu) {
+      if (this.endingTitle.pd < this.endingTitle.pu) {
         return alert('우측 포인트는 좌측 포인트보다 높을 수 없습니다.')
       }
       const time = Date.now()
@@ -704,6 +704,7 @@ export default {
           this.popsModalVisible = false
           this.soundParams = {}
           this.isContentAllCheck = false
+          this.uploadPreview = null
         })
         .catch((res) => {
           console.log('AXIOS FALSE', res)
