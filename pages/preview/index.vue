@@ -7,25 +7,10 @@
     class="preview-wrap"
   >
     <div v-if="user_idx === IN_APP_GAME.userIdx">
-      {{ srPlay }}
-      <br />
       현재 포인트
       <span v-for="(v, i) in gamePoint" :key="i" style="margin-left: 20px">
         {{ v.name }} / {{ v.point }}
-        <br />
       </span>
-      <!-- <span
-        v-if="
-          IN_APP_GAME.scenarioList &&
-          IN_APP_GAME.scenarioList.length > 0 &&
-          IN_APP_GAME.scenarioList[s].chapters &&
-          IN_APP_GAME.scenarioList[s].chapters.length > 0 &&
-          IN_APP_GAME.scenarioList[s].chapters[c].cuts &&
-          IN_APP_GAME.scenarioList[s].chapters[c].cuts.length > 0
-        "
-      >
-        {{ IN_APP_GAME.scenarioList[s].chapters[c].cuts[initBtn] }}</span
-      > -->
     </div>
     <div id="preview">
       <div class="app">
