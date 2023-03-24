@@ -873,6 +873,11 @@ const createStore = () => {
                             return
                         }
                         if (params.type === 'develop') {
+                            if (!res.data.endingList) {
+                                alert('존재하지 않는 프로젝트 입니다.')
+                                location.href = 'http://projectkoo.com'
+                                return
+                            }
                             commit('MUTATIONS_AXIOS_GET_DEVELOP', res.data)
                             return
                         }
