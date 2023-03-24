@@ -9,13 +9,26 @@
             type="text"
             class="input"
             placeholder="에셋을 검색해 보세요"
-            @keyup.enter="onLoad"
+            @keyup.enter="onLoad(params.str)"
           />
-          <button type="button" class="search-btn" @click="onLoad"></button>
+          <button
+            type="button"
+            class="search-btn"
+            @click="onLoad(params.str)"
+          ></button>
         </div>
         <ul class="hash-list">
-          <li v-for="(v, i) in 5" :key="i" class="hash-list--item">
-            <nuxt-link to="">인물</nuxt-link>
+          <li class="hash-list--item">
+            <a href="" @click.prevent="onLoad('학원')">학원 </a>
+          </li>
+          <li class="hash-list--item">
+            <a href="" @click.prevent="onLoad('일상물')">일상물 </a>
+          </li>
+          <li class="hash-list--item">
+            <a href="" @click.prevent="onLoad('동양')">동양 </a>
+          </li>
+          <li class="hash-list--item">
+            <a href="" @click.prevent="onLoad('서양')">서양 </a>
           </li>
         </ul>
       </div>
@@ -73,7 +86,13 @@
                 </div>
                 <div class="text">{{ v.gas_name }}</div>
                 <div class="bottom">
-                  <span v-if="v.price !== 'F'" class="price">12,300</span>
+                  <span v-if="v.price !== 'F' && v.price !== '0'" class="price">
+                    {{
+                      v.discount && v.discount !== '0'
+                        ? v.discount
+                        : v.price | comma
+                    }}
+                  </span>
                   <span v-else class="price free">FREE</span>
                   <!-- <label class="cart">
                     <input type="checkbox" :checked="i === 1" />
@@ -139,7 +158,13 @@
                 </div>
                 <div class="text">{{ v.gas_name }}</div>
                 <div class="bottom">
-                  <span v-if="v.price !== 'F'" class="price">12,300</span>
+                  <span v-if="v.price !== 'F' && v.price !== '0'" class="price">
+                    {{
+                      v.discount && v.discount !== '0'
+                        ? v.discount
+                        : v.price | comma
+                    }}
+                  </span>
                   <span v-else class="price free">FREE</span>
                   <!-- <label class="cart">
                     <input type="checkbox" :checked="i === 1" />
@@ -255,13 +280,16 @@ export default {
       console.log(e)
       this.$router.push(`/store/detail?asId=${e}`)
     },
-    onLoad() {
+    onLoad(v) {
       if (this.$cookies.get('user_idx')) {
         this.params.user_idx = this.$cookies.get('user_idx')
       }
       this.params.type = 'assetsList'
       this.params.mode = 'cr'
       this.params.apiKey = process.env.API_KEY
+      if (v) {
+        this.params.str = v
+      }
       // this.params.user_idx = this.$cookies.get('user_idx')
       this.ACTION_AXIOS_GET(this.params)
     },

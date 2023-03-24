@@ -775,6 +775,7 @@ export default {
       'CHAPTER_INDEX',
       'CROP_IMAGE',
       'SCENE_INDEX',
+      'ENDING_CODE',
       'LOGO_IMG',
       'ASSETS',
       'MY_NAME',
@@ -861,14 +862,25 @@ export default {
       return `${process.env.VUE_APP_IMAGE}/${f}/${v}`
     },
     onClickCutDelete(v) {
+      // return console.log(
+      //   this.CUT_LIST.idx[this.CUT_CODE],
+      //   this.CUT_CODE,
+      //   this.MAKER_GNB
+      // )
       this.MUTATIONS_LOADING_INIT()
+      if (this.MAKER_GNB === 3) {
+        this.paramsDelete.s_code = this.ENDING_CODE
+        this.paramsDelete.ending = 'Y'
+      } else {
+        this.paramsDelete.s_code = this.SCENE_CODE
+      }
       this.paramsDelete.type = 'cutDelete'
       this.paramsDelete.idx = this.CUT_LIST.idx[this.CUT_CODE]
       this.paramsDelete.secretKey = this.PROJECT_ID
       this.paramsDelete.user_idx = kooLogin('user_idx')
       this.paramsDelete.apiKey = process.env.API_KEY
-      this.paramsDelete.s_code = this.SCENE_CODE
-      console.log(this.paramsDelete)
+
+      console.log('paramsDelete', this.paramsDelete)
       this.ACTION_AXIOS_GET(this.paramsDelete)
     },
   },

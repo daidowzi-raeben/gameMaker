@@ -14,11 +14,12 @@
             <span class="ending-list--tit">
               {{ scenarioList.tit }}
             </span>
-            <span class="ending-list--cr">[ {{ scenarioList.cr }} ]</span> 
+            <span class="ending-list--cr">[ {{ scenarioList.cr }} ]</span>
             <span class="ending-list--pt">
               포인트
-              <span class="red">{{ scenarioList.pu }}</span>이상
-              <span class="blue">{{ scenarioList.pd }}</span>이하
+              <span class="red">{{ scenarioList.pu }}</span
+              >이상 <span class="blue">{{ scenarioList.pd }}</span
+              >이하
             </span>
           </span>
           <button
@@ -132,28 +133,40 @@
     <el-dialog title="" width="800px" :visible.sync="endingAdd">
       <div class="ending-input">
         <div class="ending-input--row">
-            <label class="input-label">엔딩 제목</label>
-            <input v-model="endingTitle.title" class="input-text wd-100" />
+          <label class="input-label">엔딩 제목</label>
+          <input
+            v-model="endingTitle.title"
+            maxlength="20"
+            class="input-text wd-100"
+          />
         </div>
-          
+
         <div class="ending-input--row">
-            <label class="input-label">인물</label>
-            <el-select v-model="endingTitle.cr" placeholder="선택안함">
-              <el-option
-                v-for="(d, s) in SCENE_DATA_CHARACTER.jsonData"
-                :key="s"
-                :value="d.name"
-                :label="d.name"
-              ></el-option>
-            </el-select>
+          <label class="input-label">인물</label>
+          <el-select v-model="endingTitle.cr" placeholder="선택안함">
+            <el-option
+              v-for="(d, s) in SCENE_DATA_CHARACTER.jsonData"
+              :key="s"
+              :value="d.name"
+              :label="d.name"
+            ></el-option>
+          </el-select>
         </div>
 
         <div class="ending-input--row num">
-            <label class="input-label">포인트 설정</label>
-            <el-input-number v-model="endingTitle.pu" :min="1" :max="100"></el-input-number>
-            <span class="text">포인트 이상</span>
-            <el-input-number v-model="endingTitle.pd" :min="1" :max="100"></el-input-number>
-            <span class="text">포인트 이하</span>
+          <label class="input-label">포인트 설정</label>
+          <el-input-number
+            v-model="endingTitle.pu"
+            :min="1"
+            :max="100"
+          ></el-input-number>
+          <span class="text">포인트 이상</span>
+          <el-input-number
+            v-model="endingTitle.pd"
+            :min="1"
+            :max="100"
+          ></el-input-number>
+          <span class="text">포인트 이하</span>
         </div>
       </div>
       <div class="text-center mt-5">
@@ -529,6 +542,9 @@ export default {
         !this.endingTitle.pd
       ) {
         return alert('모든 정보를 입력해 주세요')
+      }
+      if (this.endingTitle.pd > this.endingTitle.pu) {
+        return alert('우측 포인트는 좌측 포인트보다 높을 수 없습니다.')
       }
       const time = Date.now()
       // user_idx: kooLogin('user_idx')

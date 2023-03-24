@@ -38,7 +38,9 @@
               <nuxt-link to="/store">스토어</nuxt-link>
             </li>
             <li class="header-menu--item" onclick="alert('준비중입니다')">
-              이용방법
+              <nuxt-link to="https://project-koo.tistory.com/4" target="_blank"
+                >이용방법</nuxt-link
+              >
             </li>
             <li class="header-menu--item" onclick="alert('준비중입니다')">
               금액
@@ -47,12 +49,14 @@
         </div>
         <div v-if="!isLogin" class="right">
           <nuxt-link to="/sign-in" class="btn btn-login">로그인</nuxt-link>
-          <nuxt-link to="/" class="btn btn-login">장바구니</nuxt-link>
           <nuxt-link to="/join" class="btn btn-primary">회원가입</nuxt-link>
         </div>
         <div v-if="isLogin" class="right">
           <a href="#_self" class="btn btn-login" @click.prevent="onClickLogout"
             >로그아웃</a
+          >
+          <nuxt-link to="/mypage/cart-detail" class="btn btn-login"
+            >장바구니</nuxt-link
           >
           <nuxt-link to="/project-manager" class="btn btn-primary"
             >내 프로젝트</nuxt-link
@@ -78,6 +82,8 @@
             <span>189-87-00172</span>
             <span>제2019-서울영등포-0298호</span>
           </div> -->
+          <nuxt-link to="/mypage/term-use" class="term">이용약관</nuxt-link>
+          <nuxt-link to="/mypage/term-personal" class="term">개인정보</nuxt-link>
           <div class="copy">
             Copyright (c) 2023 TEAM Project Koo Allrights reseved.
           </div>
@@ -144,22 +150,26 @@ export default {
       this.isMenuActive = !this.isMenuActive
     },
     onClickLogout() {
+      document.cookie = 'user_name=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'
+      document.cookie = 'user_idx=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'
       this.$cookies.set('user_name', '', 0)
       this.$cookies.set('user_idx', '', 0)
       this.isLogin = ''
       this.$router.push('/sign-in')
     },
+
     loadingText() {
       let text = []
       if (this.activeMenu === 6) {
         text = ['노력하는 중', '노력하는 중', '노력하는 중', '노력하는 중']
       } else {
-        text = [
-          '시나리오 펼치는중',
-          '챕터 펼치는중',
-          '컷을 불러오는 중',
-          '노력하는 중',
-        ]
+        // text = [
+        //   '시나리오 펼치는중',
+        //   '챕터 펼치는중',
+        //   '컷을 불러오는 중',
+        //   '노력하는 중',
+        // ]
+        text = ['노력하는 중', '노력하는 중', '노력하는 중', '노력하는 중']
       }
       return text[Math.floor(Math.random() * 4)] + '...'
     },
