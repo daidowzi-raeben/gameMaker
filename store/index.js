@@ -401,6 +401,22 @@ const createStore = () => {
                 state.CHAPTER_DEATILE = payload.jsonData[state.CHAPTER_DEATILE_IDX - 1]
                 // state.CHAPTER_DEATILE.head = payload.h_img[state.CHAPTER_DEATILE_IDX - 1];
             },
+            MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_INIT(state, payload) {
+                // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
+                console.log('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_INIT')
+                setTimeout(() => {
+
+                    state.PREVIEW_PROFILE = {
+                        name: '',
+                        background: '',
+                        discription: '',
+                        open: '',
+                        backgroundChk: null,
+                    }
+                    state.PREVIEW.img.bg = ''
+                    state.PREVIEW.img.cr = ''
+                });
+            },
             MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL(state, payload) {
                 // console.log('MUTATIONS_AXIOS_GET_PROJECT_DETAIL', JSON.parse(payload))
                 state.SCENE_DATA_CHARACTER = payload
@@ -1042,7 +1058,7 @@ const createStore = () => {
                         }
                         if (params.type === 'characterInsert') {
                             commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
-                            // commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
+                            commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_INIT', res.data)
                             return
                         }
                         commit('MUTATIONS_AXIOS_POST_SUCCESS', res.data)
@@ -1071,6 +1087,10 @@ const createStore = () => {
 
                         console.log('MUTATIONS_AXIOS_POST_SUCCESS', res, params)
                         commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
+                        if (!params.mode) {
+                            commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_INIT', null)
+
+                        }
                         // commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
 
                         // commit('MUTATIONS_AXIOS_POST_SUCCESS', res.data)
