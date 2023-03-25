@@ -883,17 +883,23 @@ export default {
       if (this.t === 0) {
         if (this.inAllStart === true) {
           this.srPlay.forEach((element) => {
-            console.log(element.pause())
+            if (element) {
+              console.log(element.pause())
+            }
           })
-          // bgm 재생
-          const soundUrl = `${process.env.VUE_APP_IMAGE}/bgm/${
-            this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].bgm
-          }`
-          // this.audioBgm(soundUrl).puase()
-          this.audioBgm(soundUrl, this.s + 1, this.c + 1)
-          this.srPlay[this.s + 1 + this.c + 1].play()
-          console.log('=========BGM START===========')
+          if (this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].bgm) {
+            // bgm 재생
+            const soundUrl = `${process.env.VUE_APP_IMAGE}/bgm/${
+              this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].bgm
+            }`
+            // this.audioBgm(soundUrl).puase()
+            this.audioBgm(soundUrl, this.s + 1, this.c + 1)
+            this.srPlay[this.s + 1 + this.c + 1].play()
+            console.log('=========BGM START===========')
+          }
         }
+
+        console.log('**********통과1**********')
 
         this.$refs.loadingChater.classList.add('active')
         console.log(
@@ -911,8 +917,17 @@ export default {
           this.isLoading = false
         }, 3000)
       }
-      this.initBtn =
+
+      if (
+        this.IN_APP_GAME.scenarioList[this.s] &&
+        this.IN_APP_GAME.scenarioList[this.s].chapters[this.c] &&
         this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
+      ) {
+        this.initBtn =
+          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
+      } else {
+        return console.log('================END============')
+      }
       if (e && e !== null) {
         console.log('객관식')
         // this.isLoading = true
@@ -1147,11 +1162,11 @@ export default {
     },
     // 주관식
     onClickSubjectiveQuestion() {
-      console.log(
-        this.answer,
-        this.inApp.questionsPoint[0].nextBtn,
-        '주관식 처리'
-      )
+      // console.log(
+      //   this.answer,
+      //   this.inApp.questionsPoint[0].nextBtn,
+      //   '주관식 처리'
+      // )
       // this.updateGame(this.inApp.questionsPoint[e].nextBtn)
 
       if (this.inApp.answer === this.answer) {
@@ -1178,7 +1193,7 @@ export default {
           //     'cut' + this.inApp.questionsPoint[0].nextBtn
           //   ].list
           console.log('********************************')
-          return this.updateGame(this.inApp.questionsPoint[0].nextBtn)
+          this.updateGame(this.inApp.questionsPoint[0].nextBtn)
         }
       }
 
