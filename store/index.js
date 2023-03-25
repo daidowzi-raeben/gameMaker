@@ -934,10 +934,37 @@ const createStore = () => {
                         }
                         if (params.type === 'develop') {
                             if (!res.data.endingList) {
-                                alert('존재하지 않는 프로젝트 입니다.')
+                                alert('엔딩이 설정되지 않은 프로젝트 입니다.')
                                 location.href = 'http://projectkoo.com'
                                 return
                             }
+                            if (!res.data.intro && !res.data.intro.data) {
+                                alert('인트로가 설정되지 않은 프로젝트 입니다.')
+                                location.href = 'http://projectkoo.com'
+                                return
+                            }
+                            if (!res.data.profileList) {
+                                alert('인물이 설정되지 않은 프로젝트 입니다.')
+                                location.href = 'http://projectkoo.com'
+                                return
+                            }
+                            if (!res.data.scenarioList && !res.data.scenarioList.sort) {
+                                alert('시나리오가 설정되지 않은 프로젝트 입니다.')
+                                location.href = 'http://projectkoo.com'
+                                return
+                            }
+                            if (res.data.scenarioList && res.data.scenarioList.sort.length === 0) {
+                                alert('시나리오가 설정되지 않은 프로젝트 입니다.')
+                                location.href = 'http://projectkoo.com'
+                                return
+                            }
+                            if (!res.data.uiSet && !res.data.uiSet.icon) {
+                                alert('UI가 설정되지 않은 프로젝트 입니다.')
+                                location.href = 'http://projectkoo.com'
+                                return
+                            }
+
+
                             commit('MUTATIONS_AXIOS_GET_DEVELOP', res.data)
                             return
                         }
