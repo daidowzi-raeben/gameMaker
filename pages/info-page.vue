@@ -235,8 +235,12 @@
               직접 만들어서 친구들에게 공유해요!
             </div>
             <div class="mt-5">
-              <button type="button" class="button xlg btn-primary">
-                지금 시작하기
+              <button
+                type="button"
+                class="button xlg btn-primary"
+                @click="onClickStartBtn"
+              >
+                지금 시작하기{{ LOGIN }}
               </button>
             </div>
           </div>
@@ -249,13 +253,16 @@
 <script>
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 export default {
   layout: 'index',
   data() {
     return {
       // isImageActive: 1,
     }
+  },
+  computed: {
+    ...mapState(['LOGIN']),
   },
   mounted() {
     AOS.init({
@@ -299,6 +306,13 @@ export default {
       }
       document.querySelector('.btn.tit.active').classList.remove('active')
       e.target.classList.add('active')
+    },
+    onClickStartBtn() {
+      if (this.$cookies.get('user_idx')) {
+        this.$router.push('/project-manager')
+      } else {
+        this.$router.push('/sign-in')
+      }
     },
   },
 }
