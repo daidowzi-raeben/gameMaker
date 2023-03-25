@@ -51,13 +51,14 @@
             <dl class="list">
               <dt>도움주신분</dt>
               <dd style="line-height: 20px">
-                예원예술대학교 객원교수 장영섭<br />
-                푸슬, 팡, 유령선, 노넴, 물개말이,<br />
-                킨, 북극산꽁치, BUT, 예제, 신아, <br />
-                말랑, 쟈몽, Bbreaad, 김자반,<br />
-                몰라, 진진자라, 이자기, 꽃깔콘, <br />
-                모차, 웅녀, 성은이는 만극하지<br />
-                않아요, 한결
+                에셋제작<br />
+                장진님, 푸슬님, 팡님, 유령선님, 노넴님, 물개말이님,
+                킨님, 북극산꽁치님, BUT님, 예제님, 신아님,
+                말랑님, 쟈몽님, Bbreaad님, 김자반님,
+                몰라님, 진진자라님, 이자기님, 꽃깔콘님,
+                모차님, 웅녀님, 성은이는 만극하지않아요님, 한결님, <br /><br />
+                후원<br />
+                청월적일님, 안민영님, 사내님, woduddl****님, 김승돈님, 유흥원님, 임수묵님, 황수연님, 임새별님, ga0맨님, 최승용님, 형욱님, nike2335님, 나님, 허다솜님, 박람람님, PICKISS님, 박세영님, 장영섭님, ㅈㅎ님, J보경님, nona님, viva****님, 곤돌라님, 곰곰님, K님, 검은발가락님, 정윤님
                 <!-- <textarea readonly style="width: 100%">
 
 
@@ -396,26 +397,36 @@
                       : `background: ${IN_APP_GAME.profileList[cIndex].background}`
                   "
                 >
-                  <div class="btn-wrap">
+                  <div class="preview-con icon">
                     <button
+                      type="button"
+                      class="btn back"
+                      @click="onclickDisplayShow('displayIntro')"
+                    ></button>
+                    <button
+                      type="button"
+                      class="btn camera"
+                    ></button>
+                    <!-- <button
                       type="button"
                       class="btn close"
                       @click="onclickDisplayShow('displayIntro')"
                     >
                       닫기
                     </button>
-                    <button type="button" class="btn picture">사진</button>
+                    <button type="button" class="btn picture">사진</button> -->
                   </div>
 
-                  <p class="댁알">
+
+                  <p class="name">
+                    {{ IN_APP_GAME.profileList[cIndex].name }}
+                  </p>
+                  <div class="character head">
                     <img
                       :src="`https://api.school-os.net/game/upload/cr/${IN_APP_GAME.profileList[cIndex].h_img}`"
                       alt=""
                     />
-                  </p>
-                  <p class="name">
-                    {{ IN_APP_GAME.profileList[cIndex].name }}
-                  </p>
+                  </div>
                   <div class="character">
                     <img
                       :src="`https://api.school-os.net/game/upload/cr/1200/${IN_APP_GAME.profileList[cIndex].cr}`"
