@@ -169,9 +169,10 @@
             <select
               v-if="SCENE_DATA_CHARACTER && SCENE_DATA_CHARACTER.jsonData"
               class="input-select"
+              :value="PREVIEW.data.pointCr"
               @change="dataPointUpdate('pointCr', $event)"
             >
-              <option :value="null">인물선택</option>
+              <option :value="''">인물선택</option>
               <option
                 v-for="(v, i) in SCENE_DATA_CHARACTER.jsonData"
                 :key="'SCENE_DATA_CHARACTER' + i"
@@ -185,14 +186,16 @@
             <input
               type="number"
               class="input-number"
+              :value="PREVIEW.data.point"
               @input="dataPointUpdate('point', $event)"
             />
             <span class="text">포인트</span>
             <select
               class="input-select"
+              :value="PREVIEW.data.pointType"
               @change="dataPointUpdate('pointType', $event)"
             >
-              <option :value="null">선택</option>
+              <option :value="''">선택</option>
               <option value="P">이상일때</option>
               <option value="P">이하일때</option>
             </select>
@@ -1320,6 +1323,22 @@ export default {
       this.ACTION_AXIOS_GET(this.params)
       // this.MUTATIONS_CHAPTER_DEATILE_INIT()
       this.cutListShow = true
+      // this.MUTATIONS_PREVIEW_POINT(null)
+      // this.MUTATIONS_PREVIEW_POINT_CR(null)
+      // this.MUTATIONS_PREVIEW_POINT_TYPE(null)
+      // this.MUTATIONS_PREVIEW_END_TYPE(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_1(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_2(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_3(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_1(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_2(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_CR_3(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_1(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_2(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_TYPE_3(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_1(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_2(null)
+      // this.MUTATIONS_PREVIEW_QUESTIONS_POINT_BTN_3(null)
     },
     onSubmitCutDataUpdate() {
       // this.paramsPreview.cutType = this.cutType
@@ -1526,6 +1545,26 @@ export default {
           text_3: '',
         }
       }
+      this.questionsPoint = [
+        {
+          pointType: null,
+          pointCr: null,
+          point: null,
+          nextBtn: null,
+        },
+        {
+          pointType: null,
+          pointCr: null,
+          point: null,
+          nextBtn: null,
+        },
+        {
+          pointType: null,
+          pointCr: null,
+          point: null,
+          nextBtn: null,
+        },
+      ]
       this.params.previewData = JSON.stringify(this.paramsPreview)
       setTimeout(() => {
         this.onSave()

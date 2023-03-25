@@ -661,7 +661,26 @@ const createStore = () => {
                 } else {
                     state.CONTENT_CODE = 1
                 }
+
+
+
+
+
                 // state.CUT_CODE = 0
+            },
+            // 데이터초기화
+            MUTATION_TEXT_INIT(state, payload) {
+                setTimeout(() => {
+                    state.PREVIEW.data.pointCr = ''
+                    state.PREVIEW.data.point = ''
+                    state.PREVIEW.data.pointType = ''
+                    state.PREVIEW.data.text = ''
+                    state.PREVIEW.data.questions.text_1 = ''
+                    state.PREVIEW.data.questions.text_2 = ''
+                    state.PREVIEW.data.questions.text_3 = ''
+                    state.PREVIEW.data.subjectiveQuestion = ''
+                    state.PREVIEW.data.answer = ''
+                },);
             },
             // 컷 리스트 초기화
             MUTATIONS_CUT_LIST_INIT(state, payload) {
@@ -784,6 +803,9 @@ const createStore = () => {
                     state.PREVIEW.data.effectApp = state.CUT_LIST.jsonData[payload].effectApp
                     state.PREVIEW.data.effect2 = state.CUT_LIST.jsonData[payload].effect2
                     state.PREVIEW.data.sr = state.CUT_LIST.jsonData[payload].sr
+                    state.PREVIEW.data.pointCr = state.CUT_LIST.jsonData[payload].pointCr
+                    state.PREVIEW.data.point = state.CUT_LIST.jsonData[payload].point
+                    state.PREVIEW.data.pointType = state.CUT_LIST.jsonData[payload].pointType
                     state.PREVIEW.data.text = state.CUT_LIST.jsonData[
                         payload
                     ].text.replaceAll('||n', '\n')
@@ -853,7 +875,7 @@ const createStore = () => {
             },
             ACTION_AXIOS_GET({ commit }, params) {
                 console.log('로딩시작===========')
-                commit('MUTATIONS_LOADING_INIT', true)
+                // commit('MUTATIONS_LOADING_INIT', true)
                 console.log('ACTION_AXIOS_GET', params)
                 axios
                     .get(process.env.VUE_APP_API, { params })
@@ -922,6 +944,8 @@ const createStore = () => {
 
                             console.log('MUTATIONS_CUT_LIST_GET_DATA', res.data)
                             commit('MUTATIONS_CUT_LIST_GET_DATA', res.data)
+                            commit('MUTATION_TEXT_INIT', null)
+
 
                             return
                         }
@@ -932,6 +956,7 @@ const createStore = () => {
                         if (params.type === 'cutList') {
                             console.log('MUTATIONS_CUT_LIST_GET_DATA', res.data)
                             commit('MUTATIONS_CUT_LIST_GET_DATA', res.data)
+                            commit('MUTATION_TEXT_INIT', null)
                             return
                         }
                         if (params.type === 'assetsMyList') {
