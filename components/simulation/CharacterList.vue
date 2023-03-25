@@ -206,6 +206,7 @@ export default {
       this.MUTATIONS_SCENE_DATA_CHARACTER_RELOAD(this.scenarioLists)
     },
     onClickScenarioAdd() {
+      this.onAdd()
       // user_idx: kooLogin('user_idx')
       console.log(kooLogin('user_idx'))
       Object.entries(document.getElementsByName('chapterTitle')).forEach(
@@ -261,6 +262,17 @@ export default {
       } else {
         return false
       }
+    },
+    onAdd() {
+      const h = this.$createElement
+      this.$notify({
+        title: '인물을 추가해 보세요.',
+        message: h(
+          'i',
+          { style: 'color: teal' },
+          '프로필을 설정하여 인물을 생성할 수 있습니다.'
+        ),
+      })
     },
   },
 }

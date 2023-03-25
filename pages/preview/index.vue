@@ -720,12 +720,12 @@ export default {
           console.log('chpter length', this.initBtn)
           if (this.IN_APP_GAME.endingList[this.s].chapters.length === this.c) {
             this.lastGame = true
-            return alert('크레딧')
+            return alert('크레딧은 정식오픈 후 제공됩니다.')
           }
         }
         this.updateEndingGame()
       } else {
-        return alert('크레딧')
+        return alert('크레딧은 정식오픈 후 제공됩니다.')
       }
     },
     // http://localhost:9001/preview?projectKey=45a53c85a1ed65946772808cec29efc597504ba5a59747e3825813b0f7e9e6d9

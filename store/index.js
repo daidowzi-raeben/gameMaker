@@ -174,7 +174,7 @@ const createStore = () => {
                 x: 0,
                 y: 0,
                 font: '',
-                icon: '',
+                icon: 'icon2',
                 fontSize: '',
                 button: {
                     strokeColor: null,

@@ -138,7 +138,7 @@ export default {
     // },
     onClickGnbTo(e) {
       if (e === 10) {
-        window.open(`/preview?projectKey=${this.PROJECT_ID}`)
+        return window.open(`/preview?projectKey=${this.PROJECT_ID}`)
         // return alert('3월 1일 15시에 오픈됩니다!!')
       }
       this.MUTATIONS_CUT_LIST_INIT([])
