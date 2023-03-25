@@ -118,7 +118,7 @@
               인증번호 확인
             </button>
           </div> -->
-        <div class="login-input">
+        <!-- <div class="login-input">
           <label class="label">가입코드</label>
           <input
             v-model="login.code"
@@ -127,7 +127,7 @@
             autocomplete="off"
             required
           />
-        </div>
+        </div> -->
         <button
           v-if="login.pw === login.pw2 && login.id && login.name && login.code"
           class="login-button"
@@ -178,7 +178,7 @@ export default {
       const frm = new FormData()
 
       frm.append('type', 'code')
-      frm.append('code', this.login.code)
+      // frm.append('code', this.login.code)
       this.$axios
         .post(process.env.VUE_APP_API, frm, {
           header: {
