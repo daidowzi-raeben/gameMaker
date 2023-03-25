@@ -6,12 +6,6 @@
     element-loading-background="rgba(0, 0, 0, 0.8)"
     class="preview-wrap"
   >
-    <div v-if="user_idx === IN_APP_GAME.userIdx">
-      현재 포인트
-      <span v-for="(v, i) in gamePoint" :key="i" style="margin-left: 20px">
-        {{ v.name }} / {{ v.point }}
-      </span>
-    </div>
     <div id="preview">
       <div class="app">
         <div class="app-title">
@@ -460,6 +454,12 @@
               />
             </div>
             <!-- <div class="ad"></div> -->
+          </div>
+          <div v-if="user_idx === IN_APP_GAME.userIdx" class="app-device--debug">
+            현재 포인트 <span class="grey">(확인용으로, 제작자에게만 표시됩니다.)</span><br />
+            <span v-for="(v, i) in gamePoint" :key="i">
+              {{ v.name }} / {{ v.point }}
+            </span>
           </div>
         </div>
       </div>

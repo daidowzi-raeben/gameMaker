@@ -427,7 +427,7 @@ export default {
         border: 0,
         x: 0,
         y: 0,
-        icon: '',
+        icon: 'icon2',
         fontSize: '',
         button: {
           strokeColor: null,

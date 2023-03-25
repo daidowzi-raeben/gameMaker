@@ -114,10 +114,20 @@
           <div slot="button-next" class="swiper-button-next"></div> -->
         </div>
         <div v-else>
-          <div class="text-center">
-            <h2 style="color: #66c7bb !important; margin-top: 100px">
-              지금, [추가하기]를 눌러 첫 프로젝트를 만들어 보세요
-            </h2>
+          <div class="content-none">
+            <div class="icon"></div>
+            <div class="text">
+              만들어진 프로젝트가 없어요.<br /><br />
+              지금,
+              <button
+                type="button"
+                class="button btn-primary md btn-add"
+                @click="popsModalVisible = true"
+              >
+                추가하기
+              </button>
+              를 눌러 첫 프로젝트를 만들어 보세요.
+            </div>
           </div>
         </div>
       </div>

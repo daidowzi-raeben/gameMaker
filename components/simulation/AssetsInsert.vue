@@ -53,7 +53,7 @@
               class="button md btn-blue"
               @click="onClickLoadAssets('bg')"
             >
-              구매한 배경 에셋 불러오기
+              구매한 에셋 불러오기
             </button>
             <button
               type="button"

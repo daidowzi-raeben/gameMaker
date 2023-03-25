@@ -544,7 +544,7 @@ export default {
         return alert('모든 정보를 입력해 주세요')
       }
       if (this.endingTitle.pd < this.endingTitle.pu) {
-        return alert('우측 포인트는 좌측 포인트보다 높을 수 없습니다.')
+        return alert('왼쪽의 포인트는 오른쪽의 포인트보다 높을 수 없습니다.')
       }
       const time = Date.now()
       // user_idx: kooLogin('user_idx')
