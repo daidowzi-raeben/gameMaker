@@ -396,13 +396,13 @@
                       : `background: ${IN_APP_GAME.profileList[cIndex].background}`
                   "
                 >
-                  <div class="preview-con icon">
+                  <div class="preview-con icon type2" :style="`outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor};`">
                     <button
                       type="button"
                       class="btn back"
                       @click="onclickDisplayShow('displayIntro')"
                     ></button>
-                    <button type="button" class="btn camera"></button>
+                    <button type="button" class="btn camera" onclick="alert('준비중입니다')"></button>
                     <!-- <button
                       type="button"
                       class="btn close"
@@ -429,7 +429,7 @@
                     />
                   </div>
                   <div class="profile">
-                    <p class="con">
+                    <p class="con type2">
                       <span>{{
                         IN_APP_GAME.profileList[cIndex].profile.replaceAll(
                           '||n',
