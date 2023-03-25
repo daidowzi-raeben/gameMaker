@@ -45,8 +45,8 @@
                 >이용방법</a
               >
             </li>
-            <li class="header-menu--item" onclick="alert('준비중입니다')">
-              금액
+            <li class="header-menu--item" >
+              <button type="button" class="btn" onclick="alert('준비중입니다')">금액</button>
             </li>
           </ul>
         </div>

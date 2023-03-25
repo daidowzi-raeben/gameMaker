@@ -463,7 +463,7 @@ button:disabled {
     &--item {
       margin-left: 100px;
 
-      a {
+      a, .btn {
         font-family: 'NanumSquareNeo', sans-serif;
         font-size: 1.6rem;
         color: $textCol1 !important;
@@ -567,7 +567,7 @@ button:disabled {
 
 .main {
   &-wrap {
-    height: calc(100vh - 142px);
+    height: calc(100vh - 206px);
     position: relative;
     overflow: hidden;
 
@@ -2118,6 +2118,7 @@ button:disabled {
 
 .store {
   position: relative;
+  padding:0 20px;
 
   &:before {
     content: '';
@@ -2574,6 +2575,29 @@ button:disabled {
       .guide {
         margin: 50px 0 20px;
         font-size: 1.6rem;
+      }
+    }
+  }
+  @media (max-width: 1000px) {
+    &-wrap{
+      padding:50px 0;
+    }
+    &-top{
+      margin-bottom:50px;
+      &--left{
+        display:none;
+      }
+    }
+    &-con{
+      &--section{
+        .images{
+          display:block;
+          .img-wrap{
+            width:100%;
+            max-width: 100%;
+            margin:0 0 20px 0;
+          }
+        }
       }
     }
   }

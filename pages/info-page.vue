@@ -240,7 +240,7 @@
                 class="button xlg btn-primary"
                 @click="onClickStartBtn"
               >
-                지금 시작하기{{ LOGIN }}
+                지금 시작하기
               </button>
             </div>
           </div>

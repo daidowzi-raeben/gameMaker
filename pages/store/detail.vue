@@ -92,10 +92,10 @@
           </el-scrollbar>
         </div>
         <div class="store-top--right">
-          <div v-if="ASSETS_STORE.detail" class="category">
+          <!-- <div v-if="ASSETS_STORE.detail" class="category">
             <span class="badge">판타지</span>
             <span class="badge">서양</span>
-          </div>
+          </div> -->
           <div v-if="ASSETS_STORE.detail && ASSETS_STORE.detail[0]" class="tit">
             {{ ASSETS_STORE.detailMain.gas_name }}
           </div>

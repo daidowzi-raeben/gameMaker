@@ -4,7 +4,7 @@
       <div class="setting bottom-none">
         <div class="setting-con setting-color">
           <div class="setting-tit">UI 설정</div>
-          <div class="setting-info">나만의 설명</div>
+          <div class="setting-info">원하는 UI를 직접 설정해 보세요.</div>
           <div class="radio-wrap">
             <!-- <label class="input-radio">
               <input
