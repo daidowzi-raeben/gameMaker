@@ -18,7 +18,7 @@
               코딩없이 누구나 클릭만으로 만드는<br />
               나만의 스토리형 게임
             </div>
-            <div class="title" style="line-height: 30px">
+            <div class="title" style="line-height: 30px;">
               {{ IN_APP_GAME.projectTitle }}
             </div>
             <dl class="list">
@@ -50,7 +50,7 @@
             </dl>
             <dl class="list">
               <dt>도움주신분</dt>
-              <dd style="line-height: 20px">
+              <dd style="line-height: 20px;">
                 에셋제작<br />
                 장진님, 푸슬님, 팡님, 유령선님, 노넴님, 물개말이님, 킨님,
                 북극산꽁치님, BUT님, 예제님, 신아님, 말랑님, 쟈몽님, Bbreaad님,
@@ -468,9 +468,11 @@
             현재 포인트
             <span class="grey">(확인용으로, 제작자에게만 표시됩니다.)</span
             ><br />
-            <span v-for="(v, i) in gamePoint" :key="i">
-              {{ v.name }} / {{ v.point }}
-            </span>
+            <ul>
+              <li v-for="(v, i) in gamePoint" :key="i">
+                {{ v.name }} / {{ v.point }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -903,16 +905,18 @@ export default {
           this.IN_APP_GAME.scenarioList[this.s].scenarioTitle,
           this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
         )
-        document.getElementById('ST').innerText =
-          this.IN_APP_GAME.scenarioList[this.s].scenarioTitle
-        document.getElementById('CT').innerText =
-          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].title
+        document.getElementById('ST').innerText = this.IN_APP_GAME.scenarioList[
+          this.s
+        ].scenarioTitle
+        document.getElementById('CT').innerText = this.IN_APP_GAME.scenarioList[
+          this.s
+        ].chapters[this.c].title
         this.isLoading = true
         setTimeout(() => {
           this.$refs.loadingChater.classList.remove('active')
           // this.$refs.loadingChater.style = 'display:none'
           this.isLoading = false
-        }, 3000)
+        }, 30000000000)
       }
 
       if (
@@ -920,8 +924,9 @@ export default {
         this.IN_APP_GAME.scenarioList[this.s].chapters[this.c] &&
         this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
       ) {
-        this.initBtn =
-          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
+        this.initBtn = this.IN_APP_GAME.scenarioList[this.s].chapters[
+          this.c
+        ].initBtn[this.t]
       } else {
         return console.log('================END============')
       }
@@ -946,16 +951,14 @@ export default {
             this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[b]
           )
         }
-        this.inApp =
-          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].cuts[
-            'cut' + e
-          ].list
+        this.inApp = this.IN_APP_GAME.scenarioList[this.s].chapters[
+          this.c
+        ].cuts['cut' + e].list
       } else {
         console.log('객관식패스')
-        this.inApp =
-          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].cuts[
-            this.initBtn
-          ].list
+        this.inApp = this.IN_APP_GAME.scenarioList[this.s].chapters[
+          this.c
+        ].cuts[this.initBtn].list
       }
 
       console.log(
@@ -1005,10 +1008,12 @@ export default {
           this.IN_APP_GAME.endingList[this.s].scenarioTitle,
           this.IN_APP_GAME.endingList[this.s].chapters[this.c].title
         )
-        document.getElementById('ST').innerText =
-          this.IN_APP_GAME.endingList[this.s].scenarioTitle
-        document.getElementById('CT').innerText =
-          this.IN_APP_GAME.endingList[this.s].chapters[this.c].title
+        document.getElementById('ST').innerText = this.IN_APP_GAME.endingList[
+          this.s
+        ].scenarioTitle
+        document.getElementById('CT').innerText = this.IN_APP_GAME.endingList[
+          this.s
+        ].chapters[this.c].title
         this.isLoading = true
         setTimeout(() => {
           this.$refs.loadingChater.classList.remove('active')
@@ -1016,8 +1021,9 @@ export default {
           this.isLoading = false
         }, 3000)
       }
-      this.initBtn =
-        this.IN_APP_GAME.endingList[this.s].chapters[this.c].initBtn[this.t]
+      this.initBtn = this.IN_APP_GAME.endingList[this.s].chapters[
+        this.c
+      ].initBtn[this.t]
       if (e && e !== null) {
         console.log('객관식')
         // this.isLoading = true
@@ -1038,16 +1044,14 @@ export default {
             this.IN_APP_GAME.endingList[this.s].chapters[this.c].initBtn[b]
           )
         }
-        this.inApp =
-          this.IN_APP_GAME.endingList[this.s].chapters[this.c].cuts[
-            'cut' + e
-          ].list
+        this.inApp = this.IN_APP_GAME.endingList[this.s].chapters[this.c].cuts[
+          'cut' + e
+        ].list
       } else {
         console.log('객관식패스')
-        this.inApp =
-          this.IN_APP_GAME.endingList[this.s].chapters[this.c].cuts[
-            this.initBtn
-          ].list
+        this.inApp = this.IN_APP_GAME.endingList[this.s].chapters[this.c].cuts[
+          this.initBtn
+        ].list
       }
       console.log(this.cutType, '=============================')
       this.cutType = this.inApp.cutType
