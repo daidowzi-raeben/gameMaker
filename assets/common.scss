@@ -1952,6 +1952,11 @@ button:disabled {
           }
         }
       }
+      @media (max-width: 768px) {
+        .term {
+          font-size: 1.2rem;
+        }
+      }
     }
     .right {
       .btn {
@@ -2643,8 +2648,6 @@ button:disabled {
         p {
           margin: 10px 0;
           line-height: normal;
-          font-size: 1.2rem;
-
           strong {
             margin-top: 20px;
           }
@@ -2657,7 +2660,6 @@ button:disabled {
           li {
             line-height: 1.8;
             word-break: keep-all;
-            font-size: 1.2rem;
           }
         }
       }
