@@ -441,14 +441,13 @@ export default {
       this.colorPicker = value
     },
     onChangeCropImage({ coordinates, canvas }) {
-      // this.coordinates = coordinates
+      // this.coordinates = coordinatesx
       // You able to do different manipulations at a canvas
       // but there we just get a cropped image, that can be used
       // as src for <img/> to preview result
       // this.$emit('onChangeCropImage', canvas.toDataURL())
       this.thumb = canvas.toDataURL()
       this.MUTATIONS_CROP_IMAGE(this.thumb)
-      this.thumb = ''
     },
     onClickThumb(v) {
       fetch(
