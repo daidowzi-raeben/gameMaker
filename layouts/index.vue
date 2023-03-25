@@ -24,21 +24,24 @@
         </button>
         <div class="dim"></div>
         <div class="left">
-          <div class="header-logo">
+          <div class="header-logo" @click="onMenuActive">
             <nuxt-link to="/">MAKER KOO</nuxt-link>
           </div>
           <ul class="header-menu">
-            <li class="header-menu--item">
+            <li class="header-menu--item" @click="onMenuActive">
               <nuxt-link to="/">메이커 쿠</nuxt-link>
             </li>
-            <li class="header-menu--item">
+            <li class="header-menu--item" @click="onMenuActive">
               <nuxt-link to="/info-page">소개</nuxt-link>
             </li>
-            <li class="header-menu--item">
+            <li class="header-menu--item" @click="onMenuActive">
               <nuxt-link to="/store">스토어</nuxt-link>
             </li>
             <li class="header-menu--item">
-              <a href="https://project-koo.tistory.com/4" target="_blank"
+              <a
+                href="https://project-koo.tistory.com/4"
+                target="_blank"
+                @click="isMenuActive = false"
                 >이용방법</a
               >
             </li>
@@ -149,7 +152,9 @@ export default {
   methods: {
     ...mapMutations(['MUTATIONS_LOADING']),
     onMenuActive() {
-      this.isMenuActive = !this.isMenuActive
+      this.isMenuActive === true
+        ? (this.isMenuActive = false)
+        : (this.isMenuActive = true)
     },
     onClickLogout() {
       document.cookie = 'user_name=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'
