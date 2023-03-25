@@ -52,13 +52,16 @@
               <dt>도움주신분</dt>
               <dd style="line-height: 20px">
                 에셋제작<br />
-                장진님, 푸슬님, 팡님, 유령선님, 노넴님, 물개말이님,
-                킨님, 북극산꽁치님, BUT님, 예제님, 신아님,
-                말랑님, 쟈몽님, Bbreaad님, 김자반님,
-                몰라님, 진진자라님, 이자기님, 꽃깔콘님,
-                모차님, 웅녀님, 성은이는 만극하지않아요님, 한결님, <br /><br />
+                장진님, 푸슬님, 팡님, 유령선님, 노넴님, 물개말이님, 킨님,
+                북극산꽁치님, BUT님, 예제님, 신아님, 말랑님, 쟈몽님, Bbreaad님,
+                김자반님, 몰라님, 진진자라님, 이자기님, 꽃깔콘님, 모차님,
+                웅녀님, 성은이는 만극하지않아요님, 한결님, <br /><br />
                 후원<br />
-                청월적일님, 안민영님, 사내님, woduddl****님, 김승돈님, 유흥원님, 임수묵님, 황수연님, 임새별님, ga0맨님, 최승용님, 형욱님, nike2335님, 나님, 허다솜님, 박람람님, PICKISS님, 박세영님, 장영섭님, ㅈㅎ님, J보경님, nona님, viva****님, 곤돌라님, 곰곰님, K님, 검은발가락님, 정윤님
+                청월적일님, 안민영님, 사내님, woduddl****님, 김승돈님, 유흥원님,
+                임수묵님, 황수연님, 임새별님, ga0맨님, 최승용님, 형욱님,
+                nike2335님, 나님, 허다솜님, 박람람님, PICKISS님, 박세영님,
+                장영섭님, ㅈㅎ님, J보경님, nona님, viva****님, 곤돌라님, 곰곰님,
+                K님, 검은발가락님, 정윤님
                 <!-- <textarea readonly style="width: 100%">
 
 
@@ -403,10 +406,7 @@
                       class="btn back"
                       @click="onclickDisplayShow('displayIntro')"
                     ></button>
-                    <button
-                      type="button"
-                      class="btn camera"
-                    ></button>
+                    <button type="button" class="btn camera"></button>
                     <!-- <button
                       type="button"
                       class="btn close"
@@ -416,7 +416,6 @@
                     </button>
                     <button type="button" class="btn picture">사진</button> -->
                   </div>
-
 
                   <p class="name">
                     {{ IN_APP_GAME.profileList[cIndex].name }}
@@ -466,8 +465,13 @@
             </div>
             <!-- <div class="ad"></div> -->
           </div>
-          <div v-if="user_idx === IN_APP_GAME.userIdx" class="app-device--debug">
-            현재 포인트 <span class="grey">(확인용으로, 제작자에게만 표시됩니다.)</span><br />
+          <div
+            v-if="user_idx === IN_APP_GAME.userIdx"
+            class="app-device--debug"
+          >
+            현재 포인트
+            <span class="grey">(확인용으로, 제작자에게만 표시됩니다.)</span
+            ><br />
             <span v-for="(v, i) in gamePoint" :key="i">
               {{ v.name }} / {{ v.point }}
             </span>
@@ -590,7 +594,7 @@ export default {
                 `${process.env.VUE_APP_IMAGE}/logo/${this.IN_APP_GAME.intro.introBgm}.mp3`
               )
               this.introAudio.loop = true
-              // this.introAudio.play()
+              this.introAudio.play()
             }
             // this.updateGame()
 
@@ -1093,7 +1097,9 @@ export default {
           this.$refs.displayIntro.style = 'display:none'
           this.$refs.displayGame.style = 'display:block'
           this.inAllStart = true
-          this.introAudio.pause()
+          if (this.introAudio) {
+            this.introAudio.pause()
+          }
           this.updateGame()
           break
         case 'displayProfile':
