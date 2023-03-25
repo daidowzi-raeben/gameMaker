@@ -413,6 +413,7 @@ const createStore = () => {
                         open: '',
                         backgroundChk: null,
                     }
+                    state.PREVIEW.img.head = ''
                     state.PREVIEW.img.bg = ''
                     state.PREVIEW.img.cr = ''
                 });
@@ -1058,7 +1059,7 @@ const createStore = () => {
                         }
                         if (params.type === 'characterInsert') {
                             commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
-                            commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_INIT', res.data)
+                            // commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_INIT', res.data)
                             return
                         }
                         commit('MUTATIONS_AXIOS_POST_SUCCESS', res.data)
@@ -1087,10 +1088,34 @@ const createStore = () => {
 
                         console.log('MUTATIONS_AXIOS_POST_SUCCESS', res, params)
                         commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
-                        if (!params.mode) {
-                            commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_INIT', null)
 
-                        }
+                        commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_INIT', null)
+
+
+                        // commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
+
+                        // commit('MUTATIONS_AXIOS_POST_SUCCESS', res.data)
+                        // console.log('SUCCESS')
+                    })
+                    .catch((res) => {
+                        console.error('ACTION_AXIOS_POST', res)
+                    })
+            },
+            ACTION_AXIOS_POST_PROFILE2({ commit }, params, isType) {
+                console.log('ACTION_AXIOS_POST_PARAMS', params, isType)
+                axios
+                    .post(process.env.VUE_APP_API, params, {
+                        header: {
+                            'Context-Type': 'multipart/form-data',
+                        },
+                    })
+                    .then((res) => {
+                        setTimeout(() => {
+                            commit('MUTATIONS_LOADING', false)
+                        }, 1000)
+
+                        console.log('MUTATIONS_AXIOS_POST_SUCCESS', res, params)
+                        commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
                         // commit('MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER', res.data)
 
                         // commit('MUTATIONS_AXIOS_POST_SUCCESS', res.data)

@@ -279,7 +279,11 @@ export default {
       'MUTATIONS_PROFILE_COLOR_PICKER',
       'MUTATIONS_CROP_IMAGE',
     ]),
-    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST_PROFILE']),
+    ...mapActions([
+      'ACTION_AXIOS_GET',
+      'ACTION_AXIOS_POST_PROFILE',
+      'ACTION_AXIOS_POST_PROFILE2',
+    ]),
 
     onClickRightContentShow() {
       this.rightContentShow = !this.rightContentShow
@@ -376,7 +380,11 @@ export default {
       //   '\n',
       //   '||n'
       // )
-      this.ACTION_AXIOS_POST_PROFILE(frm)
+      if (this.CHAPTER_DEATILE_IDX) {
+        this.ACTION_AXIOS_POST_PROFILE2(frm)
+      } else {
+        this.ACTION_AXIOS_POST_PROFILE(frm)
+      }
       this.onSave()
 
       // this.MUTATIONS_ASSETS_INIT()
@@ -440,6 +448,7 @@ export default {
       // this.$emit('onChangeCropImage', canvas.toDataURL())
       this.thumb = canvas.toDataURL()
       this.MUTATIONS_CROP_IMAGE(this.thumb)
+      this.thumb = ''
     },
     onClickThumb(v) {
       fetch(
