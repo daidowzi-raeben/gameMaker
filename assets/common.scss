@@ -418,7 +418,9 @@ button:disabled {
         background: #fff;
         line-height: 3;
         padding-bottom: 20px;
-
+        a:last-child {
+          display: none;
+        }
         .btn {
           margin-left: 0;
         }
@@ -1050,6 +1052,9 @@ button:disabled {
             .con {
               font-size: 1.4rem;
               text-align: center;
+            }
+            .btn-primary {
+              display: none;
             }
           }
         }

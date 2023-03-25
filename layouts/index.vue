@@ -55,9 +55,9 @@
           <a href="#_self" class="btn btn-login" @click.prevent="onClickLogout"
             >로그아웃</a
           >
-          <nuxt-link to="/mypage/cart-detail" class="btn btn-login"
+          <!-- <nuxt-link to="/mypage/cart-detail" class="btn btn-login"
             >장바구니</nuxt-link
-          >
+          > -->
           <nuxt-link to="/project-manager" class="btn btn-primary"
             >내 프로젝트</nuxt-link
           >
