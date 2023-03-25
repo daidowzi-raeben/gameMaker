@@ -418,6 +418,7 @@ export default {
     checkMove(e) {
       console.log('Future index: ' + e.draggedContext.futureIndex)
     },
+
     // 챕터 이동
     onClickChapterTo(e, i, i2) {
       this.MUTATIONS_LOADING_INIT()
@@ -584,9 +585,8 @@ export default {
         this.PROJECT_ID + this.soundIndex.s + this.soundIndex.c + '.' + this.ext
 
       console.log(fileName, this.scenarioLists)
-      this.scenarioLists[this.soundIndex.s].chapters[
-        this.soundIndex.c
-      ].bgm = fileName
+      this.scenarioLists[this.soundIndex.s].chapters[this.soundIndex.c].bgm =
+        fileName
 
       const frm = new FormData()
 
