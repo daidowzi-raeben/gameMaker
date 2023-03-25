@@ -129,7 +129,7 @@
           />
         </div> -->
         <button
-          v-if="login.pw === login.pw2 && login.id && login.name && login.code"
+          v-if="login.pw === login.pw2 && login.id && login.name"
           class="login-button"
           @click.prevent="onSubmit"
         >
@@ -178,28 +178,34 @@ export default {
       const frm = new FormData()
 
       frm.append('type', 'code')
-      // frm.append('code', this.login.code)
-      this.$axios
-        .post(process.env.VUE_APP_API, frm, {
-          header: {
-            'Context-Type': 'multipart/form-data',
-          },
-        })
-        .then((res) => {
-          console.log(res)
-          if (res.data === 'SUCCESS') {
-            this.login.apiKey = process.env.API_KEY
-            this.login.type = 'join'
-            this.JOIN_ACTION_AXIOS_GET(this.login)
-            this.$router.push('/sign-in')
-          } else {
-            alert('잘못된 코드 입니다')
-          }
-        })
-        .catch((res) => {
-          console.log('AXIOS FALSE', res)
-          alert('등록에 실패하였습니다. 관리자에게 문의해 주세요.')
-        })
+      frm.append('code', this.login.code)
+
+      this.login.apiKey = process.env.API_KEY
+      this.login.type = 'join'
+      this.JOIN_ACTION_AXIOS_GET(this.login)
+      this.$router.push('/sign-in')
+
+      // this.$axios
+      //   .post(process.env.VUE_APP_API, frm, {
+      //     header: {
+      //       'Context-Type': 'multipart/form-data',
+      //     },
+      //   })
+      //   .then((res) => {
+      //     console.log(res)
+      //     if (res.data === 'SUCCESS') {
+      //       this.login.apiKey = process.env.API_KEY
+      //       this.login.type = 'join'
+      //       this.JOIN_ACTION_AXIOS_GET(this.login)
+      //       this.$router.push('/sign-in')
+      //     } else {
+      //       alert('잘못된 코드 입니다')
+      //     }
+      //   })
+      //   .catch((res) => {
+      //     console.log('AXIOS FALSE', res)
+      //     alert('등록에 실패하였습니다. 관리자에게 문의해 주세요.')
+      //   })
     },
     onClickIdChk() {
       const regex =
