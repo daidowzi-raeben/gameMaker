@@ -357,17 +357,13 @@
                   >
                     {{
                       IN_APP_GAME.scenarioList[s].chapters[c].cuts[
-                        IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t - 1]
+                        IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t]
                       ].list.text
                         ? IN_APP_GAME.scenarioList[s].chapters[c].cuts[
-                            IN_APP_GAME.scenarioList[s].chapters[c].initBtn[
-                              t - 1
-                            ]
+                            IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t]
                           ].list.text.replaceAll('||n', '\n')
                         : IN_APP_GAME.scenarioList[s].chapters[c].cuts[
-                            IN_APP_GAME.scenarioList[s].chapters[c].initBtn[
-                              t - 1
-                            ]
+                            IN_APP_GAME.scenarioList[s].chapters[c].initBtn[t]
                           ].list.narration.replaceAll('||n', '\n')
                     }}
                   </p>
@@ -505,7 +501,7 @@ export default {
       isEnding: false,
       gamePoint: [],
       gamePointCr: {},
-      cutType: '',
+      cutType: 0,
       initBtn: '',
       nextBtn: '',
       profile: [],
@@ -880,6 +876,7 @@ export default {
     updateGame(e) {
       // 챕터 로딩
       console.log(this.IN_APP_GAME, this.displayPreview, '------------')
+
       if (this.t === 0) {
         if (this.inAllStart === true) {
           this.srPlay.forEach((element) => {
@@ -960,7 +957,12 @@ export default {
             this.initBtn
           ].list
       }
-      console.log(this.cutType, '=============================')
+
+      console.log(
+        this.cutType,
+        '=============================',
+        this.inApp.cutType
+      )
       this.cutType = this.inApp.cutType
       if (this.inApp.sr) {
         const s = new Audio(`${process.env.VUE_APP_IMAGE}/sr/${this.inApp.sr}`)
@@ -973,9 +975,8 @@ export default {
         console.log('나레이션')
       }
       if (this.inApp.cutType === 3) {
-        this.isLoading = true
+        // this.isLoading = true
         console.log('객관식', e)
-        return
       }
       if (this.inApp.cutType === 4) {
         console.log('주관식', this.inApp.answer)
