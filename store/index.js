@@ -416,6 +416,7 @@ const createStore = () => {
                     state.PREVIEW.img.head = ''
                     state.PREVIEW.img.bg = ''
                     state.PREVIEW.img.cr = ''
+                    state.CROP_IMAGE = ''
                 });
             },
             MUTATIONS_AXIOS_GET_SCENE_DATA_CHARACTER_DETAIL(state, payload) {
@@ -697,7 +698,27 @@ const createStore = () => {
                     state.PREVIEW.data.questions.text_3 = ''
                     state.PREVIEW.data.subjectiveQuestion = ''
                     state.PREVIEW.data.answer = ''
-                },);
+                    state.PREVIEW.data.questionsPoint = [
+                        {
+                            pointType: null,
+                            pointCr: null,
+                            point: null,
+                            nextBtn: null,
+                        },
+                        {
+                            pointType: null,
+                            pointCr: null,
+                            point: null,
+                            nextBtn: null,
+                        },
+                        {
+                            pointType: null,
+                            pointCr: null,
+                            point: null,
+                            nextBtn: null,
+                        },
+                    ]
+                }, 300);
             },
             // 컷 리스트 초기화
             MUTATIONS_CUT_LIST_INIT(state, payload) {
