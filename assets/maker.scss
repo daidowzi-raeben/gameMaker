@@ -230,6 +230,9 @@
       }
 
       &--debug{
+        position: absolute;
+        right: 0;
+        top: 20px;
         width:369px;
         margin-top:20px;
         text-align: center;
