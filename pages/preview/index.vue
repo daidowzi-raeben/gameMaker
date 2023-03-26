@@ -396,13 +396,20 @@
                       : `background: ${IN_APP_GAME.profileList[cIndex].background}`
                   "
                 >
-                  <div class="preview-con icon type2" :style="`outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor};`">
+                  <div
+                    class="preview-con icon type2"
+                    :style="`outline : ${IN_APP_GAME.uiSet.button.border}px solid ${IN_APP_GAME.uiSet.button.strokeColor}; background:${IN_APP_GAME.uiSet.mainColor}; color:${IN_APP_GAME.uiSet.mainFontColor};`"
+                  >
                     <button
                       type="button"
                       class="btn back"
                       @click="onclickDisplayShow('displayIntro')"
                     ></button>
-                    <button type="button" class="btn camera" onclick="alert('준비중입니다')"></button>
+                    <button
+                      type="button"
+                      class="btn camera"
+                      onclick="alert('준비중입니다')"
+                    ></button>
                     <!-- <button
                       type="button"
                       class="btn close"
@@ -589,7 +596,7 @@ export default {
                 this.IN_APP_GAME.intro.introBgm
               )
               this.introAudio = new Audio(
-                `${process.env.VUE_APP_IMAGE}/logo/${this.IN_APP_GAME.intro.introBgm}.mp3`
+                `${process.env.VUE_APP_IMAGE}/logo/${this.IN_APP_GAME.intro.introBgm}`
               )
               this.introAudio.loop = true
               this.introAudio.play()
@@ -810,7 +817,11 @@ export default {
           this.inApp.questionsPoint[e] &&
           this.inApp.questionsPoint[e].nextBtn
         ) {
-          this.updateGame(this.inApp.questionsPoint[e].nextBtn)
+          console.log(
+            '넥스트버튼 있음 ===============',
+            this.inApp.questionsPoint[e].nextBtn
+          )
+          return this.updateGame(this.inApp.questionsPoint[e].nextBtn)
         } else {
           this.updateGame()
         }
@@ -917,16 +928,8 @@ export default {
         }, 3000)
       }
 
-      if (
-        this.IN_APP_GAME.scenarioList[this.s] &&
-        this.IN_APP_GAME.scenarioList[this.s].chapters[this.c] &&
+      this.initBtn =
         this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
-      ) {
-        this.initBtn =
-          this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[this.t]
-      } else {
-        return console.log('================END============')
-      }
       if (e && e !== null) {
         console.log('객관식')
         // this.isLoading = true
@@ -943,6 +946,7 @@ export default {
           ) {
             console.log('========멈춰==========')
             this.t = b
+            break
           }
           console.log(
             this.IN_APP_GAME.scenarioList[this.s].chapters[this.c].initBtn[b]
@@ -1232,7 +1236,7 @@ export default {
     },
     onLoadAssetsImage(v, f) {
       if (f === 'logo') {
-        return `${process.env.VUE_APP_IMAGE}/${f}/${v}.png`
+        return `${process.env.VUE_APP_IMAGE}/${f}/${v}`
       }
       return `${process.env.VUE_APP_IMAGE}/${f}/${v}`
     },

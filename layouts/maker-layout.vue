@@ -115,30 +115,30 @@ export default {
       this.$router.push('/sign-in')
     }
 
-    setTimeout(() => {
-      const frm = new FormData()
-      frm.append('type', 'projectChk')
-      frm.append('user_idx', kooLogin('user_idx'))
-      frm.append('secretKey', this.PROJECT_ID)
-      frm.append('apiKey', process.env.API_KEY)
-      console.log('===================', frm)
-      this.$axios
-        .post(process.env.VUE_APP_API, frm, {
-          header: {
-            'Context-Type': 'multipart/form-data',
-          },
-        })
-        .then((res) => {
-          console.log('===================', res)
-          if (res.data === 'ERROR') {
-            alert('잘못된 프로젝트 코드 입니다.')
-            this.$router.push('/')
-          }
-        })
-        .catch((res) => {
-          console.log('AXIOS FALSE', res)
-        })
-    })
+    // setTimeout(() => {
+    //   const frm = new FormData()
+    //   frm.append('type', 'projectChk')
+    //   frm.append('user_idx', kooLogin('user_idx'))
+    //   frm.append('secretKey', this.PROJECT_ID)
+    //   frm.append('apiKey', process.env.API_KEY)
+    //   console.log('===================', frm)
+    //   this.$axios
+    //     .post(process.env.VUE_APP_API, frm, {
+    //       header: {
+    //         'Context-Type': 'multipart/form-data',
+    //       },
+    //     })
+    //     .then((res) => {
+    //       console.log('===================', res)
+    //       if (res.data === 'ERROR') {
+    //         alert('잘못된 프로젝트 코드 입니다.')
+    //         this.$router.push('/')
+    //       }
+    //     })
+    //     .catch((res) => {
+    //       console.log('AXIOS FALSE', res)
+    //     })
+    // })
 
     // fdacfa91187dda475c6e06ed3649e5e579e7db4942b097d7d382beb11a584ea0
 
