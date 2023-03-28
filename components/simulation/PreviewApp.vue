@@ -924,7 +924,7 @@ export default {
     width: 90%;
     .name {
       width: 120px;
-      left: 23px;
+      left: 25px;
       top: 13px;
       height: 40px;
       padding: 0;
