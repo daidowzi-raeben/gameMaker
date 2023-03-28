@@ -567,7 +567,7 @@ button:disabled {
 
 .main {
   &-wrap {
-    height: calc(100vh - 206px);
+    height: calc(100vh - 228px);
     position: relative;
     overflow: hidden;
 
@@ -1930,12 +1930,14 @@ button:disabled {
         font-size: 1.2rem;
       }
 
-      .copy {
+      .copy, .mail {
         color: #fff;
         font-family: 'NanumSquareNeo', sans-serif;
         font-size: 1.3rem;
-        // margin-top:20px;
         margin-top: 5px;
+      }
+      .mail{
+        margin-bottom:10px;
       }
       .term {
         color: #fff;
@@ -2022,7 +2024,7 @@ button:disabled {
         right: unset;
         top: unset;
         text-align: center;
-        margin-top: 10px;
+        margin-top: 20px;
 
         .btn {
           margin: 0 10px;

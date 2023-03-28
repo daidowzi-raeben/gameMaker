@@ -89,6 +89,9 @@
           <nuxt-link to="/mypage/term-personal" class="term"
             >개인정보</nuxt-link
           >
+          <div class="mail">
+            Mail : project.koo.2023@gmail.com
+          </div>
           <div class="copy">
             Copyright (c) 2023 TEAM Project Koo Allrights reseved.
           </div>
