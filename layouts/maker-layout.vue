@@ -29,8 +29,18 @@
           </button>
         </li>
         <li class="item">
-          <button type="button" class="icon icon-9" @click="onClickGnbTo(9)">
-            <span class="icon-txt">저장하기</span>
+          <button type="button" class="icon">
+            <span class="icon-txt">배포요청</span>
+          </button>
+        </li>
+        <li class="item">
+          <button type="button" class="icon">
+            <span class="icon-txt">프로젝트 리스트</span>
+          </button>
+        </li>
+        <li class="item">
+          <button type="button" class="icon">
+            <span class="icon-txt">제작 가이드</span>
           </button>
         </li>
       </ul>
