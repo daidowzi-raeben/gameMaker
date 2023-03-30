@@ -3361,3 +3361,198 @@ button:disabled {
     color:#d6d6d6;
   }
 }
+
+.mgt {
+  .badge {
+    color: #fff;
+    display: inline-block;
+    padding: 0.3em 0.4em;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    margin-left: 5px;
+    &-warning {
+      background-color: $colEleWarning;
+      color: #212529;
+    }
+  }
+  &-admin {
+    border: 1px solid #eee;
+    .left {
+      width: 250px;
+      .gnb {
+        width: 100%;
+        z-index: 2;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        width: 250px;
+        color: #fffffc;
+        background: #2a3f54;
+        padding: 20px;
+        overflow-y: auto;
+        >h1 {
+          border-bottom: 1px solid #455b72;
+          height: 45px;
+          line-height: 1.2;
+          margin-bottom: 0.5rem;
+          font-size: 20px;
+          color: #fff;
+          cursor: pointer;
+        }
+        .el-menu {
+          background-color: #2a3f54;
+          border-right: none;
+          .el-submenu {
+            &__title {
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-align: center;
+                  -ms-flex-align: center;
+                      align-items: center;
+              height: 45px;
+              line-height: 45px;
+              color: #fff;
+              padding: 10px;
+              border-radius: 5px;
+              font-size: 16px;
+              padding: 10px;
+              border-radius: 5px;
+              font-size: 16px;
+              &:hover {
+                background-color: transparent;
+              }
+            }
+            ul {
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-orient: vertical;
+              -webkit-box-direction: normal;
+                  -ms-flex-direction: column;
+                      flex-direction: column;
+              li.el-menu-item {
+                height: 30px;
+                margin-top: 0;
+                color: #fff;
+                padding-left: 55px!important;
+                font-size: 14px;
+                line-height: 30px;
+                cursor: pointer;
+                &:hover {
+                  background-color: #546985;
+                  border-radius: 5px;
+                }
+              }
+            }
+            
+          }
+        }
+      }
+    }
+    .right {
+      padding-left: 250px;
+      min-height: 100vh;
+      .container {
+        padding: 20px;
+        width: 100%;
+        .content {
+          margin-bottom: 40px;
+          .tit {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                    justify-content: space-between;
+            margin: 20px 0;
+            &-txt {
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              h4 {
+                position: relative;
+                color: $colEleInfo;
+                cursor: pointer;
+                font-size: 24px;
+                margin: 0 0 8px;
+                margin-left: 20px;
+                &:first-child {
+                  margin-left: 0;
+                }
+                &::after {
+                  position: absolute;
+                  background: #ddd;
+                  width: 100%;
+                  height: 2px;
+                  bottom: -3px;
+                  left: 0;
+                  content: "";
+                }
+                
+                &.is_active {
+                  color: $colElePrimary;
+                  &::after {
+                    background: $colElePrimary;
+                  }
+                }
+              }
+              
+            }
+            &-btn {
+              &__primary {
+                background-color: $colElePrimary;
+                border-color: $colElePrimary;
+              }
+              &__success {
+                background-color: $colEleSuccess;
+                border-color: $colEleSuccess;
+              }
+              
+            }
+            .el-button {
+              color: #fff;
+              &:hover,
+              &:focus {
+                color: #fff;
+              }
+
+            }
+          }
+          .table-mgt {
+            width: 100%;
+            display: table;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+            colgroup {
+              width: 100%;
+            }
+            tr {
+              border-bottom: 1px solid #ddd;
+              th,td {
+                border-right: 1px solid #ddd;
+                padding: 10px 15px;
+                &:last-child {
+                  border-right: none;
+                }
+              }
+              th {
+                background-color: #eee;
+                font-weight: normal;
+                text-align: center;
+              }
+              &:last-child {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
