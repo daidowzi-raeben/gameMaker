@@ -57,7 +57,7 @@
           <nuxt-link to="/join" class="btn btn-primary">회원가입</nuxt-link>
         </div>
         <div v-if="isLogin" class="right">
-          베이직 ~ 23.04.01
+          <!-- 베이직 ~ 23.04.01 -->
           <a
             href="#_self"
             class="btn btn-login"
