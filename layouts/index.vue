@@ -45,8 +45,10 @@
                 >이용방법</a
               >
             </li>
-            <li class="header-menu--item" >
-              <button type="button" class="btn" onclick="alert('준비중입니다')">금액</button>
+            <li class="header-menu--item">
+              <button type="button" class="btn" onclick="alert('준비중입니다')">
+                금액
+              </button>
             </li>
           </ul>
         </div>
@@ -55,6 +57,13 @@
           <nuxt-link to="/join" class="btn btn-primary">회원가입</nuxt-link>
         </div>
         <div v-if="isLogin" class="right">
+          베이직 ~ 23.04.01
+          <a
+            href="#_self"
+            class="btn btn-login"
+            @click.prevent="isGiftOpen = true"
+            >선물신청</a
+          >
           <a href="#_self" class="btn btn-login" @click.prevent="onClickLogout"
             >로그아웃</a
           >
@@ -89,9 +98,7 @@
           <nuxt-link to="/mypage/term-personal" class="term"
             >개인정보</nuxt-link
           >
-          <div class="mail">
-            Mail : project.koo.2023@gmail.com
-          </div>
+          <div class="mail">Mail : project.koo.2023@gmail.com</div>
           <div class="copy">
             Copyright (c) 2023 TEAM Project Koo Allrights reseved.
           </div>
@@ -115,19 +122,106 @@
         </div>
       </div>
     </div>
+    <div>
+      <!-- <el-dialog title="" width="800px" :visible.sync="popsModalVisible"> -->
+      <el-dialog title="" width="800px" :visible.sync="isGiftOpen">
+        <div>
+          <h2>텀블벅 후원 선물 신청</h2>
+        </div>
+        <div>
+          <span>후원자 이름</span>
+          <input
+            v-model="gift.name"
+            type="text"
+            placeholder="후원 시 닉네임을 입력해 주세요"
+          />
+        </div>
+        <div>
+          <span>선물 선택</span>
+          <el-select v-model="gift.value" placeholder="선택안함">
+            <el-option
+              v-for="(v, i) in gift.list"
+              :key="i"
+              :label="`${v.price
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 - ${v.name}`"
+              :value="v.idx"
+            ></el-option>
+          </el-select>
+        </div>
+        <div class="text-center">
+          <button class="button md btn-primary" @click="onClickGiftSubmit">
+            선물 신청하기
+          </button>
+        </div>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
 <script>
 // MUTATIONS_LOGIN
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import { kooLogin } from '~/config/util'
 export default {
   name: 'IndexLayout',
   data() {
     return {
       isMenuActive: false,
+      isGiftOpen: false,
       isLogin: '',
+      gift: {
+        name: '',
+        value: 1,
+        list: [
+          {
+            idx: 1,
+            price: 3000,
+            name: '랜덤에셋 1개',
+          },
+          {
+            idx: 2,
+            price: 5000,
+            name: '선택에셋 1개',
+          },
+          {
+            idx: 3,
+            price: 10000,
+            name: '랜덤에셋 1개, 선택에셋 1개',
+          },
+          {
+            idx: 4,
+            price: 20000,
+            name: '랜덤에셋 2개, 선택에셋 2개, 베이직 1달',
+          },
+          {
+            idx: 5,
+            price: 30000,
+            name: '랜덤에셋 3개, 선택에셋 3개, 베이직 2달',
+          },
+          {
+            idx: 6,
+            price: 50000,
+            name: '랜덤에셋 3개, 선택에셋 5개, 베이직 3달',
+          },
+          {
+            idx: 7,
+            price: 80000,
+            name: '선택에셋 10개, 프로 1달',
+          },
+          {
+            idx: 8,
+            price: 300000,
+            name: '에셋제작권, 선택에셋 5개, 프로 2달',
+          },
+          {
+            idx: 9,
+            price: 500000,
+            name: '에셋제작권 2개, 선택에셋 10개, 프로 3달',
+          },
+        ],
+      },
+      params: {},
     }
   },
   computed: {
@@ -154,6 +248,7 @@ export default {
   },
   methods: {
     ...mapMutations(['MUTATIONS_LOADING']),
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
     onMenuActive() {
       this.isMenuActive === true
         ? (this.isMenuActive = false)
@@ -182,6 +277,18 @@ export default {
         text = ['노력하는 중', '노력하는 중', '노력하는 중', '노력하는 중']
       }
       return text[Math.floor(Math.random() * 4)] + '...'
+    },
+    onClickGiftSubmit() {
+      if (!this.gift.name) {
+        return alert('후원자의 이름을 입력하세요')
+      }
+      this.params.name = this.gift.name
+      this.params.gift = this.gift.list[this.gift.value - 1].idx
+      this.params.type = 'giftApply'
+      this.params.secretKey = this.PROJECT_ID
+      this.params.user_idx = kooLogin('user_idx')
+      this.params.apiKey = process.env.API_KEY
+      this.ACTION_AXIOS_GET(this.params)
     },
   },
 }

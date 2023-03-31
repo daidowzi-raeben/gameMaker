@@ -30,6 +30,8 @@ instance.interceptors.request.use(
 const createStore = () => {
     return new Store({
         state: {
+            RAND_ASSETS: {},
+            RAND_ASSETS_INT: {},
             ENDING_CODE: null,
             LOGO_IMG: '',
             MY_NAME: '',
@@ -881,6 +883,12 @@ const createStore = () => {
             JOIN_MUTATIONS_AXIOS_GET_NAME(state, payLoad) {
                 state.JOIN_NAME = payLoad
             },
+            MUTATIONS_AXIOS_GET_RAND_ASSETS(state, payLoad) {
+                state.RAND_ASSETS = payLoad
+            },
+            MUTATIONS_AXIOS_GET_RAND_ASSETS_INT(state, payLoad) {
+                state.RAND_ASSETS_INT = payLoad
+            },
         },
         actions: {
             ACTION_AXIOS_LOGIN({ commit }, params) {
@@ -923,6 +931,20 @@ const createStore = () => {
                             commit('MUTATIONS_LOADING', false)
                         }, 1000)
                         console.log('ACTION_AXIOS_GET', res, params)
+                        if (params.type === 'randAssets') {
+                            commit('MUTATIONS_AXIOS_GET_RAND_ASSETS', res.data)
+                            return
+                        }
+                        if (params.type === 'randAssetsInsert') {
+                            commit('MUTATIONS_AXIOS_GET_RAND_ASSETS_INT', res.data)
+                            return
+                        }
+                        if (params.type === 'giftApply') {
+                            console.log(res)
+                            alert('접수되었습니다. 영업일 기준 2일 내에 선물이 지급됩니다.')
+                            // location.href = 'http://projectkoo.com'
+                            return
+                        }
                         if (params.type === 'project') {
                             commit('MUTATIONS_AXIOS_GET_PROJECT', res.data)
                             return
