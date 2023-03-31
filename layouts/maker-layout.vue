@@ -24,21 +24,21 @@
       </ul>
       <ul class="maker-header--menu right">
         <li class="item">
-          <button type="button" class="icon icon-8" @click="onClickGnbTo(10)">
+          <button type="button" class="icon icon-8" @click="onClickGnbTo(11)">
             <span class="icon-txt">미리보기</span>
           </button>
         </li>
         <li class="item">
-          <button type="button" class="icon">
+          <button type="button" class="icon icon-12">
             <span class="icon-txt">제작 가이드</span>
           </button>
         </li>
         <li class="item">
-          <button type="button" class="icon">
+          <button type="button" class="icon icon-11">
             <span class="icon-txt">프로젝트 리스트</span>
           </button>
         </li>
-        
+
         <!-- <li class="item">
           <button type="button" class="icon icon-2">
             <span class="icon-txt">배포요청</span>
@@ -82,7 +82,7 @@ export default {
         { code: 6, menu: '에셋관리' },
         { code: 5, menu: 'UI설정' },
         { code: 4, menu: '인물설정' },
-        { code: 2, menu: '인트로' },
+        { code: 10, menu: '인트로' },
         { code: 1, menu: '스토리' },
         { code: 3, menu: '엔딩' },
         { code: 7, menu: '프로젝트설정' },
