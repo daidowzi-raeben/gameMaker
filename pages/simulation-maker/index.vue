@@ -20,7 +20,7 @@
           @myLoadFocus="myLoadFocus"
           @myLoadEffect="myLoadEffect"
         />
-        <IntroInsert v-if="MAKER_GNB === 2" />
+        <IntroInsert v-if="MAKER_GNB === 10" />
         <EndingInsert v-if="MAKER_GNB === 3" />
         <CharacterInsert
           v-if="MAKER_GNB === 4"
