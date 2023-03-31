@@ -30,11 +30,6 @@
         </li>
         <li class="item">
           <button type="button" class="icon">
-            <span class="icon-txt">배포요청</span>
-          </button>
-        </li>
-        <li class="item">
-          <button type="button" class="icon">
             <span class="icon-txt">프로젝트 리스트</span>
           </button>
         </li>
@@ -43,6 +38,11 @@
             <span class="icon-txt">제작 가이드</span>
           </button>
         </li>
+        <!-- <li class="item">
+          <button type="button" class="icon icon-2">
+            <span class="icon-txt">배포요청</span>
+          </button>
+        </li> -->
       </ul>
       <!-- <nuxt-link to="">나가기</nuxt-link>
       <button v-b-modal.ScenarioInsert type="button">모달</button> -->
