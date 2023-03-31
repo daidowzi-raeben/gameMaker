@@ -6,8 +6,9 @@
         RAND_ASSETS_INT.assetsList &&
         RAND_ASSETS_INT.assetsList[0]
       "
-      class="text-center"
+      class="text-center text-guide"
     >
+    <p>카드를 골라주세요!</p>
       남은횟수
       <strong>{{
         Number(RAND_ASSETS_INT.assetsList[0].event) -
@@ -164,10 +165,12 @@ export default {
 }
 
 .front {
-  background: #66c7bb !important;
+  background: #d1ebe8 !important;
   font-size: 20px;
   h1 {
-    color: #fff;
+    color: #66c7bb;
+    font-size:36px;
+    font-weight: 600;
   }
 }
 
@@ -176,10 +179,68 @@ export default {
 }
 
 .flip {
+  cursor: pointer;
+
+  .front{
+    border-radius: 10px;
+    &:hover{
+        animation: bounce_top 1s infinite linear;
+        @keyframes bounce_top {
+            0% {
+                top: 0;
+            }
+
+            20% {
+                top: -5px;
+            }
+
+            50% {
+                top: -10px;
+            }
+
+            70% {
+                top: -5px;
+            }
+
+            100% {
+                top: 0;
+            }
+        }
+    }
+  }
   &.active {
     .card {
       transform: rotateY(180deg);
     }
+    .back{
+      overflow:hidden;
+      display:flex;
+      align-items: flex-start;
+      border-radius: 10px;
+      border:2px solid #66c7bb;
+      img{
+        width:100% !important;
+        height:auto !important;
+      }
+    }
   }
 }
+
+.text-guide{
+  font-size:20px;
+  font-weight: 500;
+  strong{
+    color:#f66;
+    font-size:30px;
+  }
+  p{
+    font-size:16px;
+    margin-bottom:5px;
+  }
+}
+
+.assetsList{
+  margin-bottom:30px;
+}
+
 </style>
