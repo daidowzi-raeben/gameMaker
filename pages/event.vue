@@ -8,7 +8,7 @@
       "
       class="text-center text-guide"
     >
-    <p>카드를 골라주세요!</p>
+      <p>카드를 골라주세요!</p>
       남은횟수
       <strong>{{
         Number(RAND_ASSETS_INT.assetsList[0].event) -
@@ -97,25 +97,27 @@ export default {
       if (isBuy) {
         return
       }
-      let imgPath
-      if (kind === 'C') {
-        imgPath = 'https://api.school-os.net/game/upload/cr/400/' + path
-      } else {
-        imgPath = 'https://api.school-os.net/game/upload/bg/400/' + path
+      if (confirm('카드를 선택하시겠습니까?')) {
+        let imgPath
+        if (kind === 'C') {
+          imgPath = 'https://api.school-os.net/game/upload/cr/400/' + path
+        } else {
+          imgPath = 'https://api.school-os.net/game/upload/bg/400/' + path
+        }
+        console.log(assetIdx)
+
+        const targetClass = document.querySelectorAll('.flip')[i]
+        document.querySelectorAll('.back img')[i].setAttribute('src', imgPath)
+        targetClass.classList.add('active')
+
+        this.paramsInsert.type = 'randAssetsInsert'
+        this.paramsInsert.secretKey = this.PROJECT_ID
+        this.paramsInsert.user_idx = kooLogin('user_idx')
+        this.paramsInsert.idx = assetIdx
+        this.paramsInsert.apiKey = process.env.API_KEY
+        console.log('paramsInsert', this.paramsInsert)
+        this.ACTION_AXIOS_GET(this.paramsInsert)
       }
-      console.log(assetIdx)
-
-      const targetClass = document.querySelectorAll('.flip')[i]
-      document.querySelectorAll('.back img')[i].setAttribute('src', imgPath)
-      targetClass.classList.add('active')
-
-      this.paramsInsert.type = 'randAssetsInsert'
-      this.paramsInsert.secretKey = this.PROJECT_ID
-      this.paramsInsert.user_idx = kooLogin('user_idx')
-      this.paramsInsert.idx = assetIdx
-      this.paramsInsert.apiKey = process.env.API_KEY
-      console.log('paramsInsert', this.paramsInsert)
-      this.ACTION_AXIOS_GET(this.paramsInsert)
     },
   },
 }
@@ -169,7 +171,7 @@ export default {
   font-size: 20px;
   h1 {
     color: #66c7bb;
-    font-size:36px;
+    font-size: 36px;
     font-weight: 600;
   }
 }
@@ -181,66 +183,65 @@ export default {
 .flip {
   cursor: pointer;
 
-  .front{
+  .front {
     border-radius: 10px;
-    &:hover{
-        animation: bounce_top 1s infinite linear;
-        @keyframes bounce_top {
-            0% {
-                top: 0;
-            }
-
-            20% {
-                top: -5px;
-            }
-
-            50% {
-                top: -10px;
-            }
-
-            70% {
-                top: -5px;
-            }
-
-            100% {
-                top: 0;
-            }
+    &:hover {
+      animation: bounce_top 1s infinite linear;
+      @keyframes bounce_top {
+        0% {
+          top: 0;
         }
+
+        20% {
+          top: -5px;
+        }
+
+        50% {
+          top: -10px;
+        }
+
+        70% {
+          top: -5px;
+        }
+
+        100% {
+          top: 0;
+        }
+      }
     }
   }
   &.active {
     .card {
       transform: rotateY(180deg);
     }
-    .back{
-      overflow:hidden;
-      display:flex;
+    .back {
+      overflow: hidden;
+      display: flex;
       align-items: flex-start;
       border-radius: 10px;
-      border:2px solid #66c7bb;
-      img{
-        width:100% !important;
-        height:auto !important;
+      border: 2px solid #66c7bb;
+      img {
+        width: 100% !important;
+        height: auto !important;
       }
     }
   }
 }
 
-.text-guide{
-  font-size:20px;
+.text-guide {
+  font-size: 20px;
   font-weight: 500;
-  strong{
-    color:#f66;
-    font-size:30px;
+  strong {
+    color: #f66;
+    font-size: 30px;
   }
-  p{
-    font-size:16px;
-    margin-bottom:5px;
+  p {
+    font-size: 16px;
+    margin-bottom: 5px;
   }
 }
 
-.assetsList{
-  margin-bottom:30px;
+.assetsList {
+  margin-bottom: 30px;
 }
-
 </style>
