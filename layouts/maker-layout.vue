@@ -30,14 +30,15 @@
         </li>
         <li class="item">
           <button type="button" class="icon">
-            <span class="icon-txt">프로젝트 리스트</span>
+            <span class="icon-txt">제작 가이드</span>
           </button>
         </li>
         <li class="item">
           <button type="button" class="icon">
-            <span class="icon-txt">제작 가이드</span>
+            <span class="icon-txt">프로젝트 리스트</span>
           </button>
         </li>
+        
         <!-- <li class="item">
           <button type="button" class="icon icon-2">
             <span class="icon-txt">배포요청</span>
