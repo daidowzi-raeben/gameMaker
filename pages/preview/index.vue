@@ -326,11 +326,14 @@
                     v-if="cutType === 1"
                     class="name"
                     :class="IN_APP_GAME.uiSet.font"
-                    :style="
-                      IN_APP_GAME.uiSet && IN_APP_GAME.uiSet.mainColor
-                        ? `background:${IN_APP_GAME.uiSet.mainColor};color:${IN_APP_GAME.uiSet.mainFontColor}`
-                        : ''
-                    "
+                    :style="`background:${IN_APP_GAME.uiSet.mainColor};color:${
+                      IN_APP_GAME.uiSet.mainFontColor
+                    };border-radius:${Math.round(
+                      Number(IN_APP_GAME.uiSet.button.round) / 2
+                    )}px;
+                    border:${IN_APP_GAME.uiSet.button.border}px solid ${
+                      IN_APP_GAME.uiSet.button.strokeColor
+                    }`"
                     >{{ inApp.crName }}</span
                   >
                   <p
