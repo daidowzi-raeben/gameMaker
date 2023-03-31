@@ -124,37 +124,42 @@
     </div>
     <div>
       <!-- <el-dialog title="" width="800px" :visible.sync="popsModalVisible"> -->
-      <el-dialog title="" width="800px" :visible.sync="isGiftOpen">
-        <div>
-          <h2>텀블벅 후원 선물 신청</h2>
-        </div>
-        <div>
-          <span>후원자 이름</span>
-          <input
-            v-model="gift.name"
-            type="text"
-            placeholder="후원 시 닉네임을 입력해 주세요"
-          />
-        </div>
-        <div>
-          <span>선물 선택</span>
-          <el-select v-model="gift.value" placeholder="선택안함">
-            <el-option
-              v-for="(v, i) in gift.list"
-              :key="i"
-              :label="`${v.price
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 - ${v.name}`"
-              :value="v.idx"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="text-center">
-          <button class="button md btn-primary" @click="onClickGiftSubmit">
-            선물 신청하기
-          </button>
-        </div>
-      </el-dialog>
+      <div class="modal-request">
+        <el-dialog title="" :visible.sync="isGiftOpen">
+          <div class="modal-container">
+            <div class="tit">
+              <h2>텀블벅 후원 선물 신청</h2>
+            </div>
+            <div class="main">
+              <span class="main-tit">후원자 이름</span>
+              <input
+                v-model="gift.name"
+                type="text"
+                placeholder="후원 시 닉네임을 입력해 주세요"
+                class="input"
+              />
+            </div>
+            <div class="main">
+              <span class="main-tit">선물 선택</span>
+              <el-select v-model="gift.value" placeholder="선택안함">
+                <el-option
+                  v-for="(v, i) in gift.list"
+                  :key="i"
+                  :label="`${v.price
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 - ${v.name}`"
+                  :value="v.idx"
+                ></el-option>
+              </el-select>
+            </div>
+            <div class="text-center btn-modal">
+              <button class="button md btn-primary" @click="onClickGiftSubmit">
+                선물 신청하기
+              </button>
+            </div>
+          </div>
+        </el-dialog>
+      </div>
     </div>
   </div>
 </template>

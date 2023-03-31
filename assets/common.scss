@@ -3556,3 +3556,83 @@ button:disabled {
     }
   }
 }
+
+//선물신청 모달
+.modal-request {
+  .el-dialog__headerbtn {
+    top: 27px;
+    right: 15px;
+  }
+  .el-dialog__wrapper {
+    padding: 0 15px;
+    .modal-container {
+      .el-dialog {
+        max-width: 800px;
+        width: 100%!important;
+      }
+      .tit {
+        padding-bottom: 20px;
+        border-bottom: 1px solid $colPrimary;
+        h2 {
+          font-size: 20px;
+          font-weight: 500;
+        }
+      }
+      .main {
+        margin: 20px 0;
+        &-tit {
+          display: inline-block;
+          width: 100px;
+        }
+        .input {
+          width: 250px;
+          border-radius: 4px;
+          border: 1px solid #c0c4cc;
+          box-sizing: border-box;
+          color: #606266;
+          display: inline-block;
+          font-size: inherit;
+          height: 40px;
+          line-height: 40px;
+          outline: none;
+          padding: 0 15px;
+          transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      
+          &:focus {
+            outline: 1px solid $colPrimary;
+          }
+      
+          &::placeholder {
+            color: #ccc;
+            font-weight: 300;
+          }
+        }
+        .el-select {
+          width: 350px;
+          >.el-input {
+            width: 100%;
+            .el-input__inner {
+              width: 100%!important;
+            }
+          }
+          
+        }
+      }
+      
+    }
+  }
+  @media (max-width: 500px) {
+    .el-dialog__wrapper {
+      .modal-container {
+        .main {
+          margin: 20px 0;
+          display: flex;
+          align-items: center;
+          .el-select {
+            width: 250px;
+          }
+        }
+      }
+    }
+  }
+}
