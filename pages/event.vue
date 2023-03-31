@@ -140,6 +140,11 @@ export default {
   position: relative;
   perspective: 1100px;
   margin: 10px;
+  @media (max-width:600px) {
+    min-width: 150px;
+    width: 95%;
+    height: 250px;
+  }
 }
 
 .card {
