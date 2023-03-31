@@ -3,7 +3,7 @@
     <div class="maker-wrap">
       <ScenarioList v-if="MAKER_GNB === 1" />
       <EndingList v-if="MAKER_GNB === 3" />
-      <IntroList v-if="MAKER_GNB === 2" />
+      <IntroList v-if="MAKER_GNB === 10" />
       <CharacterList v-if="MAKER_GNB === 4" />
       <UIList v-if="MAKER_GNB === 5" />
       <AssetsList v-if="MAKER_GNB === 6" />
