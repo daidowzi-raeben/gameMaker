@@ -29,12 +29,16 @@
           </button>
         </li>
         <li class="item">
-          <button type="button" class="icon icon-12">
+          <button type="button" class="icon icon-12" @click="onClickOpenGuid">
             <span class="icon-txt">제작 가이드</span>
           </button>
         </li>
         <li class="item">
-          <button type="button" class="icon icon-11">
+          <button
+            type="button"
+            class="icon icon-11"
+            @click="$router.push('/project-manager')"
+          >
             <span class="icon-txt">프로젝트 리스트</span>
           </button>
         </li>
@@ -176,7 +180,7 @@ export default {
     //   console.log(e)
     // },
     onClickGnbTo(e) {
-      if (e === 10) {
+      if (e === 11) {
         return window.open(`/preview?projectKey=${this.PROJECT_ID}`)
         // return alert('3월 1일 15시에 오픈됩니다!!')
       }
@@ -199,6 +203,9 @@ export default {
         text = ['노력하는 중', '노력하는 중', '노력하는 중', '노력하는 중']
       }
       return text[Math.floor(Math.random() * 4)] + '...'
+    },
+    onClickOpenGuid() {
+      window.open('https://project-koo.tistory.com/4')
     },
   },
 }
