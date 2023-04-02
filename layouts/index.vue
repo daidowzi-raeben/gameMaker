@@ -197,7 +197,7 @@ export default {
           {
             idx: 3,
             price: 10000,
-            name: '랜덤에셋 2개, 선택에셋 1개',
+            name: '랜덤에셋 1개, 선택에셋 2개',
           },
           {
             idx: 4,
