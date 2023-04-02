@@ -10,7 +10,8 @@
                 ><i class="el-icon-setting"></i>환경설정
                 <span class="badge badge-warning">999</span>
               </template>
-              <el-menu-item index="1-1">에셋관리
+              <el-menu-item index="1-1"
+                >에셋관리
                 <span class="badge badge-warning">99</span>
               </el-menu-item>
               <el-menu-item index="1-2">사용자관리</el-menu-item>
@@ -60,33 +61,19 @@
                 <col style="width: auto" />
               </colgroup>
               <tr>
-                <th>출석번호</th>
-                <th>이름</th>
-                <th>출결사항</th>
-                <th>출결사항</th>
-                <th>특이사항</th>
+                <th>이메일</th>
+                <th>닉네임</th>
+                <th>생년월일</th>
+                <th>가입일</th>
               </tr>
-              <tr>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-              </tr>
-              <tr>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-              </tr>
-              <tr>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-                <td>내용이 들어갑니다</td>
-              </tr>
+              <tbody v-if="ADMIN && ADMIN.MEMBERS && ADMIN.MEMBERS.members">
+                <tr v-for="(v, i) in ADMIN.MEMBERS.members" :key="i">
+                  <td>{{ v.user_id }}</td>
+                  <td>{{ v.user_name }}</td>
+                  <td>{{ v.year }}.{{ v.month }}</td>
+                  <td>{{ v.datetime }}</td>
+                </tr>
+              </tbody>
             </div>
           </div>
         </section>
@@ -95,6 +82,35 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { mapState, mapActions } from 'vuex'
+import { kooLogin } from '~/config/util'
+export default {
+  data() {
+    return {
+      params: {},
+    }
+  },
+  computed: {
+    ...mapState(['ADMIN']),
+  },
+  mounted() {
+    if (
+      kooLogin('user_idx') !==
+      'ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d'
+    ) {
+      this.$router.push('/sign-in')
+    }
+
+    this.params.type = 'members'
+    this.params.apiKey = process.env.API_KEY
+    this.params.user_idx = this.$cookies.get('user_idx')
+    this.ADMIN_ACTION_AXIOS_GET(this.params)
+  },
+  methods: {
+    ...mapActions(['ADMIN_ACTION_AXIOS_GET']),
+  },
+}
+</script>
 
 <style lang="scss"></style>

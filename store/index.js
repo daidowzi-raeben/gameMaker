@@ -30,6 +30,9 @@ instance.interceptors.request.use(
 const createStore = () => {
     return new Store({
         state: {
+            ADMIN: {
+                MEMBERS: {}
+            },
             RAND_ASSETS: {},
             RAND_ASSETS_INT: {},
             ENDING_CODE: null,
@@ -889,6 +892,9 @@ const createStore = () => {
             MUTATIONS_AXIOS_GET_RAND_ASSETS_INT(state, payLoad) {
                 state.RAND_ASSETS_INT = payLoad
             },
+            ADMIN_MUTATIONS_AXIOS_GET_MEMBERS(state, payLoad) {
+                state.ADMIN.MEMBERS = payLoad
+            },
         },
         actions: {
             ACTION_AXIOS_LOGIN({ commit }, params) {
@@ -1227,6 +1233,23 @@ const createStore = () => {
                         if (params.type === 'join') {
                             return alert('가입이 완료되었습니다. 로그인 후 이용 가능합니다.')
                         }
+                    })
+                    .catch((res) => {
+                        console.error('JOIN_ACTION_AXIOS_GET', res)
+                    })
+            },
+            ADMIN_ACTION_AXIOS_GET({ commit }, params) {
+                console.log('ACTION_AXIOS_GET_ADMIN', params, process.env.VUE_APP_API_ADMIN)
+                axios
+                    .get(process.env.VUE_APP_API_ADMIN, { params })
+                    .then((res) => {
+                        if (params.type === 'members') {
+                            commit('ADMIN_MUTATIONS_AXIOS_GET_MEMBERS', res.data)
+                            console.log('ADMIN_MUTATIONS_AXIOS_GET_MEMBERS', res.data)
+                            return
+                        }
+
+                        console.log('ADMIN')
                     })
                     .catch((res) => {
                         console.error('JOIN_ACTION_AXIOS_GET', res)
