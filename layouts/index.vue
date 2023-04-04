@@ -45,10 +45,8 @@
                 >이용방법</a
               >
             </li>
-            <li class="header-menu--item">
-              <button type="button" class="btn" onclick="alert('준비중입니다')">
-                금액
-              </button>
+            <li class="header-menu--item" @click="onMenuActive">
+              <nuxt-link to="/price">금액</nuxt-link>
             </li>
           </ul>
         </div>
