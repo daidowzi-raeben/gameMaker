@@ -1121,6 +1121,7 @@ export default {
       'CUT_LIST',
       'cutType',
       'CUT_CODE',
+      'PROJECT_LOGIN',
     ]),
   },
   // watch: {
@@ -1262,6 +1263,30 @@ export default {
       this.MUTATIONS_ASSETS_DATA_NARRATION(target.value)
     },
     onSubmitCutDataAdd() {
+      let listInt = 30
+      if (this.PROJECT_LOGIN.login.buy_project === 'P') {
+        listInt = 1000000
+      }
+      if (this.PROJECT_LOGIN.login.buy_project === 'B') {
+        listInt = 60
+      }
+      console.log(listInt, this.CUT_LIST.idx.length)
+      if (
+        this.CUT_LIST.idx &&
+        this.CUT_LIST.idx.length > 0 &&
+        listInt === this.CUT_LIST.idx.length
+      ) {
+        if (
+          confirm(
+            '챕터가 초과되면 이용권 구매 전에 빌드신청이 불가능 합니다. 추가하시겠습니까?'
+          )
+        ) {
+          console.log('추가')
+        } else {
+          return
+        }
+      }
+
       this.rowIdx = this.CUT_LIST.idx
       // rowIdx.reverse()
       this.rowIdx.splice(this.CUT_CODE, 0, '@@')
@@ -1284,6 +1309,29 @@ export default {
       this.cutListShow = true
     },
     onSubmitCutData() {
+      let listInt = 30
+      if (this.PROJECT_LOGIN.login.buy_project === 'P') {
+        listInt = 1000000
+      }
+      if (this.PROJECT_LOGIN.login.buy_project === 'B') {
+        listInt = 60
+      }
+      // console.log(listInt, this.scenarioList.chapters[idx].length)
+      if (
+        this.CUT_LIST.idx &&
+        this.CUT_LIST.idx.length > 0 &&
+        listInt === this.CUT_LIST.idx.length
+      ) {
+        if (
+          confirm(
+            '챕터가 초과되면 이용권 구매 전에 빌드신청이 불가능 합니다. 추가하시겠습니까?'
+          )
+        ) {
+          console.log('추가')
+        } else {
+          return
+        }
+      }
       // this.paramsPreview.cutType = this.cutType
       // this.paramsPreview.code = this.SCENE_CODE
       // this.paramsPreview.bg = this.PREVIEW.img.bg

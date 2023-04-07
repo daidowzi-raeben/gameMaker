@@ -64,6 +64,11 @@
                   <label class="label">챕터</label>
                   <span class="num">{{ onLoadStory(v.json_data, 'C') }}</span>
                 </li>
+                <li class="state-list--item">
+                  <label class="label">{{
+                    v.isView === 'N' ? '비공개 프로젝트' : '공개 프로젝트'
+                  }}</label>
+                </li>
                 <!-- <li class="state-list--item">
                   <label class="label">스토리</label>
                   <span class="num">20-30</span>

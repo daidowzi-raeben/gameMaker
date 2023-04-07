@@ -70,7 +70,7 @@
         <el-dialog title="" :visible.sync="IS_APPLY">
           <div class="modal-container">
             <div class="tit">
-              <h2>배포요청 (현재 버전 : ver.001)</h2>
+              <h2>배포요청 (현재 버전 : ver.1)</h2>
             </div>
             <div style="margin-top: 10px">
               <p>배포요청 스토어에 등록할 수 있는 빌드 파일이 제공됩니다.</p>
@@ -155,7 +155,7 @@ export default {
         { code: 10, menu: '인트로' },
         { code: 1, menu: '스토리' },
         { code: 3, menu: '엔딩' },
-        { code: 7, menu: '프로젝트설정' },
+        // { code: 7, menu: '프로젝트설정' },
       ],
       params: {},
     }
@@ -169,18 +169,19 @@ export default {
       'alertSave',
       'PROJECT_ID',
       'IS_APPLY',
+      'PROJECT_LOGIN',
     ]),
   },
   watch: {
-    LOGIN: {
-      handler(value) {
-        console.log(value)
-        console.log('SUCCESS')
-        this.MUTATIONS_LOADING()
-        // 로그인 성공 시 페이지 이동
-      },
-      immediate: true,
-    },
+    // LOGIN: {
+    //   handler(value) {
+    //     console.log(value)
+    //     console.log('SUCCESS')
+    //     this.MUTATIONS_LOADING()
+    //     // 로그인 성공 시 페이지 이동
+    //   },
+    //   immediate: true,
+    // },
   },
   mounted() {
     // 로그인 체크
@@ -192,7 +193,12 @@ export default {
       },
     ]
     if (kooLogin('user_idx') && kooLogin('user_name')) {
-      this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
+      // this.MUTATIONS_LOGIN_CHECK(this.stateLogin)
+      const frm = new FormData()
+      frm.append('type', 'login')
+      frm.append('user_idx', kooLogin('user_idx'))
+      frm.append('apiKey', process.env.API_KEY)
+      this.ACTION_AXIOS_LOGIN(frm)
     } else {
       this.$router.push('/sign-in')
     }
@@ -238,7 +244,7 @@ export default {
       'MUTATIONS_CUT_LIST_INIT',
       'MUTATIONS_AXIOS_GET_IS_APPLY',
     ]),
-    ...mapActions(['ACTION_AXIOS_GET']),
+    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_LOGIN']),
     onClickApply() {
       this.MUTATIONS_LOADING(true)
       this.params.type = 'develop'

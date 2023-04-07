@@ -360,6 +360,7 @@ export default {
       'PROJECT_ID',
       'SCENE_DATA_INIT',
       'SCENE_CODE',
+      'PROJECT_LOGIN',
     ]),
     draggingInfo() {
       return this.dragging ? 'under drag' : ''
@@ -464,6 +465,25 @@ export default {
       this.MUTATIONS_SCENE_DATA_RELOAD(this.scenarioLists)
     },
     onClickScenarioAdd() {
+      let listInt = 3
+      if (this.PROJECT_LOGIN.login.buy_project === 'P') {
+        listInt = 1000000
+      }
+      if (this.PROJECT_LOGIN.login.buy_project === 'B') {
+        listInt = 10
+      }
+      console.log(listInt, this.SCENE_DATA.length)
+      if (listInt === this.SCENE_DATA.length) {
+        if (
+          confirm(
+            '시나리오가 초과되면 이용권 구매 전에 빌드신청이 불가능 합니다. 추가하시겠습니까?'
+          )
+        ) {
+          console.log('추가')
+        } else {
+          return
+        }
+      }
       const time = Date.now()
       // user_idx: kooLogin('user_idx')
       console.log(kooLogin('user_idx'))
@@ -482,6 +502,25 @@ export default {
       this.MUTATIONS_SCENE_DATA(this.scenarioLists)
     },
     onClickChapterAdd(idx) {
+      let listInt = 10
+      if (this.PROJECT_LOGIN.login.buy_project === 'P') {
+        listInt = 1000000
+      }
+      if (this.PROJECT_LOGIN.login.buy_project === 'B') {
+        listInt = 20
+      }
+      // console.log(listInt, this.scenarioList.chapters[idx].length)
+      if (listInt === this.SCENE_DATA[idx].chapters.length) {
+        if (
+          confirm(
+            '챕터가 초과되면 이용권 구매 전에 빌드신청이 불가능 합니다. 추가하시겠습니까?'
+          )
+        ) {
+          console.log('추가')
+        } else {
+          return
+        }
+      }
       const time = Date.now()
       this.scenarioLists[idx].chapters = [
         ...this.scenarioLists[idx].chapters,

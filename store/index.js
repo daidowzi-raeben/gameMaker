@@ -35,6 +35,7 @@ const createStore = () => {
                 MEMBERS: {}
             },
             RAND_ASSETS: {},
+            PROJECT_LOGIN: {},
             RAND_ASSETS_INT: {},
             ENDING_CODE: null,
             LOGO_IMG: '',
@@ -325,7 +326,9 @@ const createStore = () => {
             },
             // 로그인
             MUTATIONS_LOGIN(state, payload) {
+                console.log('MUTATIONS_LOGIN ========', payload)
                 state.LOGIN = payload
+                state.PROJECT_LOGIN = payload
             },
             MUTATIONS_LOGIN_CHECK(state, payload) {
                 console.log('MUTATIONS_LOGIN_CHECK', payload)
@@ -966,6 +969,15 @@ const createStore = () => {
                             return
                         }
                         if (params.type === 'develop') {
+                            if (res.data.isView === 'N' && this.$cookies.get('user_idx') !== res.data.userIdx) {
+                                alert('비공개 프로젝트 입니다.')
+                                if (params.chk === 'c') {
+                                    commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                } else {
+                                    location.href = 'http://projectkoo.com'
+                                }
+                                return
+                            }
                             if (res.data && res.data.endingList.length === 0) {
                                 alert('엔딩이 설정되지 않은 프로젝트 입니다.')
                                 if (params.chk === 'c') {
@@ -1026,6 +1038,11 @@ const createStore = () => {
                             return
                         }
                         if (params.type === 'developTest') {
+                            if (res.data.isView === 'N') {
+                                alert('비공개 프로젝트 입니다.')
+                                commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                return
+                            }
                             if (res.data.endingList && res.data.endingList.length === 0) {
                                 alert('엔딩이 설정되지 않은 프로젝트 입니다.')
                                 commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
