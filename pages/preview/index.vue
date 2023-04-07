@@ -42,9 +42,9 @@
                       class="kakao"
                     />
                   </li>
-                  <li>
+                  <!-- <li>
                     <img src="@/static/images/preview/reply-fill_share.png" />
-                  </li>
+                  </li> -->
                 </ul>
               </dd>
             </dl>
