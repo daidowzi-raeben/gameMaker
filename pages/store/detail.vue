@@ -176,7 +176,9 @@
                 ASSETS_STORE &&
                 ASSETS_STORE.coupon &&
                 ASSETS_STORE.coupon.idx &&
-                !ASSETS_STORE.is_assets
+                !ASSETS_STORE.is_assets &&
+                ASSETS_STORE.detailMain.price !== 'F' &&
+                ASSETS_STORE.detailMain.price !== '0'
               "
               type="button"
               class="btn btn-blue"
