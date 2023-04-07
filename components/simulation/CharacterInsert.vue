@@ -15,9 +15,46 @@
                 :key="i"
                 class="thumbnail-list--item"
                 :class="{ active: PREVIEW.img.cr === v.path }"
-                @click="onClickCrImage(v.path)"
               >
-                <img v-if="v.path" :src="onLoadAssetsImage(v.path)" alt="" />
+                <el-popover
+                  v-model="visible[i]"
+                  placement="right"
+                  trigger="click"
+                >
+                  <div class="character-face">
+                    <el-scrollbar>
+                      <ul
+                        v-if="ASSETS_EMOTION && ASSETS_EMOTION.emotion"
+                        class="character-face--list"
+                      >
+                        <li
+                          v-for="(e, p) in ASSETS_EMOTION.emotion"
+                          :key="p"
+                          class="item"
+                          :class="{ active: e.path === PREVIEW.img.cr }"
+                          @click="onClickCrImage(e.path)"
+                        >
+                          {{ e.gas_discription }}
+                        </li>
+                      </ul>
+                    </el-scrollbar>
+                    <button
+                      type="button"
+                      class="button sm btn-grey"
+                      @click="visible = []"
+                    >
+                      닫기
+                    </button>
+                  </div>
+                  <div class="img-wrap" slot="reference">
+                    <img
+                      :src="onLoadAssetsImage(v.path)"
+                      alt=""
+                      @click="onClickEmotionAssets(v.timestemp, v.path)"
+                    />
+                  </div>
+                </el-popover>
+                <!-- <img v-if="v.path" :src="onLoadAssetsImage(v.path)" alt="" /> -->
               </li>
             </ul>
           </div>
@@ -33,11 +70,48 @@
               <li
                 v-for="(v, i) in ASSETS.bg"
                 :key="i"
-                class="thumbnail-list--item background"
+                class="thumbnail-list--item"
                 :class="{ active: PREVIEW.img.bg === v.path }"
-                @click="onClickBgImage(v.path)"
               >
-                <img v-if="v.path" :src="onLoadAssetsImageBg(v.path)" alt="" />
+                <el-popover
+                  v-model="visibleBg[i]"
+                  placement="right"
+                  trigger="click"
+                >
+                  <div class="character-face">
+                    <el-scrollbar>
+                      <ul
+                        v-if="ASSETS_EMOTION && ASSETS_EMOTION.emotion"
+                        class="character-face--list"
+                      >
+                        <li
+                          v-for="(e, p) in ASSETS_EMOTION.emotion"
+                          :key="p"
+                          class="item"
+                          :class="{ active: e.path === PREVIEW.img.bg }"
+                          @click="onClickBgImage(e.path)"
+                        >
+                          {{ e.gas_discription }}
+                        </li>
+                      </ul>
+                    </el-scrollbar>
+                    <button
+                      type="button"
+                      class="button sm btn-grey"
+                      @click="visibleBg = []"
+                    >
+                      닫기
+                    </button>
+                  </div>
+                  <div class="img-wrap" slot="reference">
+                    <img
+                      :src="onLoadAssetsImageBg(v.path)"
+                      alt=""
+                      @click="onClickEmotionAssetsBg(v.timestemp, v.path)"
+                    />
+                  </div>
+                </el-popover>
+                <!-- <img v-if="v.path" :src="onLoadAssetsImage(v.path)" alt="" /> -->
               </li>
             </ul>
           </div>
@@ -207,6 +281,9 @@ export default {
       params: {},
       img: '',
       thumb: '',
+      visible: [],
+      visibleBg: [],
+      paramsEmotion: {},
     }
   },
   PREVIEW: {
@@ -227,6 +304,7 @@ export default {
       'SCENE_DATA_CHARACTER',
       'PREVIEW_PROFILE',
       'CROP_IMAGE',
+      'ASSETS_EMOTION',
     ]),
   },
   watch: {
@@ -458,6 +536,26 @@ export default {
           console.log('========', text)
           this.img = text
         })
+    },
+    onClickEmotionAssets(v, path) {
+      console.log('onClickEmotionAssets', v)
+      this.MUTATIONS_ASSETS_CR(path)
+      this.paramsEmotion.type = 'assetsProjectEmotion'
+      this.paramsEmotion.user_idx = kooLogin('user_idx')
+      this.paramsEmotion.secretKey = this.PROJECT_ID
+      this.paramsEmotion.apiKey = process.env.API_KEY
+      this.paramsEmotion.timestemp = v
+      this.ACTION_AXIOS_GET(this.paramsEmotion)
+    },
+    onClickEmotionAssetsBg(v, path) {
+      console.log('onClickEmotionAssets', v)
+      this.MUTATIONS_ASSETS_BG(path)
+      this.paramsEmotion.type = 'assetsProjectEmotion'
+      this.paramsEmotion.user_idx = kooLogin('user_idx')
+      this.paramsEmotion.secretKey = this.PROJECT_ID
+      this.paramsEmotion.apiKey = process.env.API_KEY
+      this.paramsEmotion.timestemp = v
+      this.ACTION_AXIOS_GET(this.paramsEmotion)
     },
   },
 }
