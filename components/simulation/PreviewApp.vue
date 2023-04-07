@@ -77,7 +77,7 @@
         </div>
         <!-- dim-light, dim-dark, dim-blur, diagonal, diagonal-r, copy-left, copy-right 클래스 추가로 구분. intro만있으면 기본 중앙정렬 -->
         <div
-          v-if="MAKER_GNB === 2 || MAKER_GNB === 5"
+          v-if="MAKER_GNB === 10 || MAKER_GNB === 5"
           class="preview-con preview-intro"
           :class="[
             PREVIEW_INTRO.dim,
@@ -91,7 +91,7 @@
               alt="background"
             />
           </div>
-          <div v-if="MAKER_GNB === 2" class="preview-intro--logo">
+          <div v-if="MAKER_GNB === 10" class="preview-intro--logo">
             <img
               v-if="!PREVIEW_INTRO.logo && !LOGO_IMG"
               src="~/static/images/logo.svg"
@@ -165,7 +165,7 @@
                 버튼 미리보기
               </div>
             </div>
-            <template v-if="MAKER_GNB === 2">
+            <template v-if="MAKER_GNB === 10">
               <div v-for="i in 4" :key="`button${i}`" class="svg-button">
                 <svg width="220" height="80">
                   <rect

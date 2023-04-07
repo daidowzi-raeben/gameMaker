@@ -147,7 +147,7 @@
               <label class="label">구성</label>
               <span class="text">
                 <span v-for="(v, i) in ASSETS_STORE.detail" :key="i">
-                  {{ v.gas_discription }}
+                  {{ '#' + v.gas_discription }}
                 </span>
               </span>
             </li>
@@ -171,6 +171,26 @@
             </div>
           </div>
           <div class="button-wrap">
+            <button
+              v-if="
+                ASSETS_STORE &&
+                ASSETS_STORE.coupon &&
+                ASSETS_STORE.coupon.idx &&
+                !ASSETS_STORE.is_assets
+              "
+              type="button"
+              class="btn btn-blue"
+              style="margin-right: 10px"
+              :disabled="
+                ASSETS_STORE.coupon.buy_int === ASSETS_STORE.coupon.total_int
+              "
+              @click="onClickBuyAssetsCoupon"
+            >
+              쿠폰구매 ({{
+                Number(ASSETS_STORE.coupon.total_int) -
+                Number(ASSETS_STORE.coupon.buy_int)
+              }}/{{ ASSETS_STORE.coupon.total_int }})
+            </button>
             <button
               v-if="ASSETS_STORE.is_assets && ASSETS_STORE.is_assets.idx"
               type="button"
@@ -325,6 +345,21 @@ export default {
     onChangeDel(e, key) {
       console.log(this.$refs[`addImage${key}`][0].remove())
     },
+    onClickBuyAssetsCoupon() {
+      if (
+        this.ASSETS_STORE.coupon.buy_int >= this.ASSETS_STORE.coupon.total_int
+      ) {
+        return alert('사용가능한 쿠폰이 없습니다.')
+      }
+      if (confirm('에셋 쿠폰을 사용하시겠습니까?')) {
+        this.params.type = 'assetsBuy'
+        this.params.isCoupon = 'Y'
+        this.params.apiKey = process.env.API_KEY
+        this.params.asId = this.$route.query.asId
+        this.params.user_idx = this.$cookies.get('user_idx')
+        this.ACTION_AXIOS_GET(this.params)
+      }
+    },
     onClickBuyAssets() {
       if (
         this.$cookies.get('user_idx') ===
@@ -332,6 +367,7 @@ export default {
       ) {
         if (confirm('관리자용 에셋을 추가하시겠습니까?')) {
           this.params.type = 'assetsBuy'
+          this.params.isCoupon = 'N'
           this.params.apiKey = process.env.API_KEY
           this.params.asId = this.$route.query.asId
           this.params.user_idx = this.$cookies.get('user_idx')
@@ -348,13 +384,14 @@ export default {
       ) {
         if (confirm('무료에셋을 추가하시겠습니까?')) {
           this.params.type = 'assetsBuy'
+          this.params.isCoupon = 'N'
           this.params.apiKey = process.env.API_KEY
           this.params.asId = this.$route.query.asId
           this.params.user_idx = this.$cookies.get('user_idx')
           this.ACTION_AXIOS_GET(this.params)
         }
       } else {
-        return alert('정식오픈 후 구매가 가능합니다')
+        return alert('결제 준비 중 입니다.')
       }
       // if (confirm('장바구니에 추가 하시겠습니까?')) {
       //   return

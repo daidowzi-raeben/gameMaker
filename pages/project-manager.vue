@@ -7,7 +7,7 @@
           <button
             type="button"
             class="button btn-primary md btn-add"
-            @click="popsModalVisible = true"
+            @click="onClickProjectMaker"
           >
             추가하기
           </button>
@@ -122,7 +122,7 @@
               <button
                 type="button"
                 class="button btn-primary md btn-add"
-                @click="popsModalVisible = true"
+                @click="onClickProjectMaker"
               >
                 추가하기
               </button>
@@ -270,6 +270,10 @@ export default {
     },
   },
   mounted() {
+    if (!this.$cookies.get('user_idx')) {
+      alert('로그인 후 이용가능합니다.')
+      this.$router.push('/sign-in')
+    }
     this.MUTATIONS_AXIOS_POST_INIT()
     this.params.type = 'project'
     this.params.apiKey = process.env.API_KEY
@@ -285,6 +289,9 @@ export default {
     // ------------------------ EVENT
     onChangeScene({ target }) {
       console.log(target.value)
+    },
+    onClickProjectMaker() {
+      this.popsModalVisible = true
     },
     // 프로젝트 이동
     onClickGotoProject(e) {

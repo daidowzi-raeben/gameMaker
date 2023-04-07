@@ -30,6 +30,7 @@ instance.interceptors.request.use(
 const createStore = () => {
     return new Store({
         state: {
+            IS_APPLY: false,
             ADMIN: {
                 MEMBERS: {}
             },
@@ -250,6 +251,9 @@ const createStore = () => {
             MUTATIONS_INTRO_DIM(state, payload) {
                 state.PREVIEW_INTRO.dim = payload
             },
+            MUTATIONS_AXIOS_GET_IS_APPLY(state, payload) {
+                state.IS_APPLY = payload
+            },
             MUTATIONS_CROP_IMAGE(state, payload) {
                 state.CROP_IMAGE = payload
             },
@@ -304,6 +308,7 @@ const createStore = () => {
                 state.ASSETS_STORE.is_assets = payload.is_assets
                 state.ASSETS_STORE.like = payload.like
                 state.ASSETS_STORE.detailMain = payload.detail[0]
+                state.ASSETS_STORE.coupon = payload.coupon
             },
             MUTATIONS_IN_APP_ICON(state, payload) {
                 state.IN_APP_ICON = payload
@@ -961,39 +966,98 @@ const createStore = () => {
                             return
                         }
                         if (params.type === 'develop') {
-                            if (!res.data.endingList) {
+                            if (res.data && res.data.endingList.length === 0) {
                                 alert('엔딩이 설정되지 않은 프로젝트 입니다.')
-                                location.href = 'http://projectkoo.com'
+                                if (params.chk === 'c') {
+                                    commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                } else {
+                                    location.href = 'http://projectkoo.com'
+                                }
                                 return
                             }
-                            if (!res.data.intro && !res.data.intro.data) {
+                            if (res.data && !res.data.intro && !res.data.intro.data) {
                                 alert('인트로가 설정되지 않은 프로젝트 입니다.')
-                                location.href = 'http://projectkoo.com'
+                                if (params.chk === 'c') {
+                                    commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                } else {
+                                    location.href = 'http://projectkoo.com'
+                                }
                                 return
                             }
-                            if (!res.data.profileList) {
+                            if (res.data && !res.data.profileList) {
                                 alert('인물이 설정되지 않은 프로젝트 입니다.')
-                                location.href = 'http://projectkoo.com'
+                                if (params.chk === 'c') {
+                                    commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                } else {
+                                    location.href = 'http://projectkoo.com'
+                                }
                                 return
                             }
-                            if (!res.data.scenarioList && !res.data.scenarioList.sort) {
+                            if (res.data && !res.data.scenarioList && !res.data.scenarioList.sort) {
                                 alert('시나리오가 설정되지 않은 프로젝트 입니다.')
-                                location.href = 'http://projectkoo.com'
+                                if (params.chk === 'c') {
+                                    commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                } else {
+                                    location.href = 'http://projectkoo.com'
+                                }
                                 return
                             }
                             if (res.data.scenarioList && res.data.scenarioList.sort.length === 0) {
                                 alert('시나리오가 설정되지 않은 프로젝트 입니다.')
-                                location.href = 'http://projectkoo.com'
+                                if (params.chk === 'c') {
+                                    commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                } else {
+                                    location.href = 'http://projectkoo.com'
+                                }
                                 return
                             }
                             if (!res.data.uiSet && !res.data.uiSet.icon) {
                                 alert('UI가 설정되지 않은 프로젝트 입니다.')
-                                location.href = 'http://projectkoo.com'
+                                if (params.chk === 'c') {
+                                    commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                } else {
+                                    location.href = 'http://projectkoo.com'
+                                }
                                 return
                             }
 
 
                             commit('MUTATIONS_AXIOS_GET_DEVELOP', res.data)
+                            return
+                        }
+                        if (params.type === 'developTest') {
+                            if (res.data.endingList && res.data.endingList.length === 0) {
+                                alert('엔딩이 설정되지 않은 프로젝트 입니다.')
+                                commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                return
+                            }
+                            if (!res.data.intro && !res.data.intro.data) {
+                                alert('인트로가 설정되지 않은 프로젝트 입니다.')
+                                commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                return
+                            }
+                            if (!res.data.profileList) {
+                                alert('인물이 설정되지 않은 프로젝트 입니다.')
+                                commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                return
+                            }
+                            if (!res.data.scenarioList && !res.data.scenarioList.sort) {
+                                alert('시나리오가 설정되지 않은 프로젝트 입니다.')
+                                commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                return
+                            }
+                            if (res.data.scenarioList && res.data.scenarioList.sort.length === 0) {
+                                alert('시나리오가 설정되지 않은 프로젝트 입니다.')
+                                commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                return
+                            }
+                            if (!res.data.uiSet && !res.data.uiSet.icon) {
+                                alert('UI가 설정되지 않은 프로젝트 입니다.')
+                                commit('MUTATIONS_AXIOS_GET_IS_APPLY', false)
+                                return
+                            }
+
+                            commit('MUTATIONS_AXIOS_GET_IS_APPLY', true)
                             return
                         }
                         if (params.type === 'assetsProject') {
@@ -1083,6 +1147,11 @@ const createStore = () => {
                             return
                         }
                         if (params.type === 'assetsLikeHitList') {
+                            console.log('assetsLikeHit', res.data)
+                            return
+                        }
+                        if (params.type === 'buildApply') {
+                            alert('배포요청이 완료되었습니다.')
                             console.log('assetsLikeHit', res.data)
                             return
                         }

@@ -25,7 +25,11 @@
               <span class="name" @click="onClickSrData(v.path)">{{
                 v.gas_name
               }}</span>
-              <button type="button" class="btn" @click="onClickSrPlay(v.path)">
+              <button
+                type="button"
+                class="btn"
+                @click="onClickSrPlay(v.path, i)"
+              >
                 미리듣기
               </button>
               <!-- <img v-if="v.path" :src="v.path" alt="" /> -->
@@ -44,6 +48,7 @@ export default {
   data() {
     return {
       params: {},
+      soundPlay: [],
     }
   },
   computed: {
@@ -77,12 +82,24 @@ export default {
       console.log(e)
       this.MUTATIONS_ASSETS_SOUND(e)
       // this.MUTATIONS_CONTENT_CODE(5)
+      if (!e) {
+        this.soundPlay.forEach((element) => {
+          console.log(element.pause())
+        })
+      }
     },
-    onClickSrPlay(e) {
+    onClickSrPlay(e, i) {
       console.log(e)
       if (e) {
-        const audio = new Audio(`${process.env.VUE_APP_IMAGE}/sr/${e}`)
-        audio.play()
+        this.soundPlay.forEach((element) => {
+          console.log(element.pause())
+        })
+        this.soundPlay[i] = new Audio(`${process.env.VUE_APP_IMAGE}/sr/${e}`)
+        this.soundPlay[i].play()
+      } else {
+        this.soundPlay.forEach((element) => {
+          console.log(element.pause())
+        })
       }
     },
     onLoadAssetsSr(v) {

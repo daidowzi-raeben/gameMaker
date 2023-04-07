@@ -55,7 +55,25 @@
           <nuxt-link to="/join" class="btn btn-primary">회원가입</nuxt-link>
         </div>
         <div v-if="isLogin" class="right">
-          <!-- 베이직 ~ 23.04.01 -->
+          {{
+            LOGIN && LOGIN.login && LOGIN.login.buy_project === 'P'
+              ? '프로 ~'
+              : ''
+          }}
+          {{
+            LOGIN && LOGIN.login && LOGIN.login.buy_project === 'B'
+              ? '베이직 ~'
+              : ''
+          }}
+
+          {{
+            LOGIN &&
+            LOGIN.login &&
+            LOGIN.login.buy_project &&
+            LOGIN.login.end_date
+              ? LOGIN.login.end_date
+              : '' | moment('YY.MM.DD')
+          }}
           <a
             href="#_self"
             class="btn btn-login"
@@ -65,6 +83,7 @@
           <a href="#_self" class="btn btn-login" @click.prevent="onClickLogout"
             >로그아웃</a
           >
+          <nuxt-link to="/event" class="btn btn-primary">에셋 뽑기</nuxt-link>
           <!-- <nuxt-link to="/mypage/cart-detail" class="btn btn-login"
             >장바구니</nuxt-link
           > -->
@@ -249,6 +268,13 @@ export default {
   mounted() {
     this.MUTATIONS_LOADING(false)
     this.isLogin = kooLogin('user_idx')
+    if (this.isLogin) {
+      const frm = new FormData()
+      frm.append('type', 'login')
+      frm.append('user_idx', this.isLogin)
+      frm.append('apiKey', process.env.API_KEY)
+      this.ACTION_AXIOS_LOGIN(frm)
+    }
     // setTimeout(() => {
     //   this.MUTATIONS_LOADING(false)
     //   console.log('layout')
@@ -256,7 +282,11 @@ export default {
   },
   methods: {
     ...mapMutations(['MUTATIONS_LOADING']),
-    ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
+    ...mapActions([
+      'ACTION_AXIOS_GET',
+      'ACTION_AXIOS_POST',
+      'ACTION_AXIOS_LOGIN',
+    ]),
     onMenuActive() {
       this.isMenuActive === true
         ? (this.isMenuActive = false)
