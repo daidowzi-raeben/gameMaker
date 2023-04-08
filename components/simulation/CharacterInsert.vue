@@ -390,6 +390,9 @@ export default {
           return alert('이름과 소개를 입력해 주세요')
         }
       }
+      if (!this.PREVIEW_PROFILE.discription && !this.characterData.profile) {
+        return alert('소개를 입력해 주세요')
+      }
       this.MUTATIONS_LOADING_INIT()
       const frm = new FormData()
       if (this.SCENE_DATA_CHARACTER.jsonData) {
