@@ -463,6 +463,55 @@
                   </ul>
                 </div>
               </div>
+
+              <!-- 엔딩크레딧 -->
+
+              <div
+                class="preview-con preview-credit"
+              >
+                <div class="scroll">
+                  <div class="preview-credit--tit">게임이름</div>
+                  <div class="preview-credit--tit">게임 제작자</div>
+                  <div class="preview-credit--name">
+                    <span>김이름</span>
+                  </div>
+                  <div class="preview-credit--tit">에셋 제작자</div>
+                  <div class="preview-credit--name">
+                    <span>김이름</span>
+                    <span>박이름</span>
+                    <span>최이름</span>
+                    <span>이이름</span>
+                    <span>김이름</span>
+                    <span>박이름</span>
+                    <span>최이름</span>
+                    <span>이이름</span>
+                    <span>김이름</span>
+                    <span>박이름</span>
+                    <span>최이름</span>
+                    <span>이이름</span>
+                    <span>김이름</span>
+                    <span>박이름</span>
+                    <span>최이름</span>
+                    <span>이이름</span>
+                    <span>김이름</span>
+                    <span>박이름</span>
+                    <span>최이름</span>
+                    <span>이이름</span>
+                    <span>김이름</span>
+                    <span>박이름</span>
+                    <span>최이름</span>
+                    <span>이이름</span>
+                    <span>김이름</span>
+                    <span>박이름</span>
+                    <span>최이름</span>
+                    <span>이이름</span>
+                    <span>김이름</span>
+                    <span>박이름</span>
+                    <span>최이름</span>
+                    <span>이이름</span>
+                  </div>
+                </div>
+              </div>
               <img
                 src="~/static/images/mockup.png"
                 alt="mockup"

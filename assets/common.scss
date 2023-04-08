@@ -2375,6 +2375,7 @@ button:disabled {
           }
 
           &.like {
+            min-width: 50px;
             width: 50px;
             height: 50px;
             background-image: url(../static/images/icon/heart_line.svg);
@@ -2390,6 +2391,11 @@ button:disabled {
               background-image: url(../static/images/icon/heart_fill.svg);
               border-color: #dc4c4c;
             }
+          }
+        }
+        @media (max-width: 800px) {
+          .btn{
+            width:50%;
           }
         }
       }
