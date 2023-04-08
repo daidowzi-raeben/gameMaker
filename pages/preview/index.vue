@@ -473,7 +473,11 @@
               </div>
 
               <!-- 엔딩크레딧 -->
-
+              <div
+                v-if="lastGame"
+                id="creditStart"
+                class="preview-con preview-credit fade-out-display"
+              ></div>
               <div
                 id="displayCreadit"
                 class="preview-con preview-credit"
@@ -494,9 +498,9 @@
                     id="scrollCredit"
                     class="preview-credit--name"
                   >
-                    <span v-for="(v, i) in IN_APP_GAME.credits" :key="i"
-                      >{{ v }} {{ i }}</span
-                    >
+                    <span v-for="(v, i) in IN_APP_GAME.credits" :key="i">{{
+                      v
+                    }}</span>
                     <div style="height: 200px"></div>
                     <span>감사합니다</span>
                     <div style="height: 1500px"></div>
@@ -795,13 +799,36 @@ export default {
           console.log('chpter length', this.initBtn)
           if (this.IN_APP_GAME.endingList[this.s].chapters.length === this.c) {
             this.lastGame = true
-            this.onLoadFinish()
+            this.$nextTick(() => {
+              document
+                .getElementById('creditStart')
+                .classList.add('fade-in-display')
+              setTimeout(() => {
+                document
+                  .getElementById('creditStart')
+                  .classList.remove('fade-in-display')
+                this.onLoadFinish()
+                this.lastGame = false
+              }, 5000)
+            })
             return
           }
         }
         this.updateEndingGame()
       } else {
-        this.onLoadFinish()
+        this.lastGame = true
+        this.$nextTick(() => {
+          document
+            .getElementById('creditStart')
+            .classList.add('fade-in-display')
+          setTimeout(() => {
+            document
+              .getElementById('creditStart')
+              .classList.remove('fade-in-display')
+            this.onLoadFinish()
+            this.lastGame = false
+          }, 5000)
+        })
         return
       }
     },
@@ -1324,4 +1351,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.fade-out-display {
+  opacity: 0;
+  // transition: 0.3s;
+}
+.fade-in-display {
+  opacity: 1;
+  transition: 2s;
+}
+</style>
