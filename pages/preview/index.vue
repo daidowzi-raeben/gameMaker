@@ -108,75 +108,16 @@
       >
         {{ gamePoint }}
       </div> -->
-              <div
-                v-if="cutType === 3 || cutType === 4"
-                class="preview-con answer-dim"
-              ></div>
-              <div v-if="cutType === 3" class="answer answer-multiple">
-                <button
-                  v-if="inApp.questions.text_1"
-                  type="button"
-                  class="btn"
-                  :class="IN_APP_GAME.uiSet.font"
-                  :style="
-                    IN_APP_GAME.uiSet.fontColor
-                      ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
-                      : windowColor()
-                  "
-                  @click="onClickQuestions(0)"
-                >
-                  {{ inApp.questions.text_1 }}
-                </button>
-                <button
-                  v-if="inApp.questions.text_2"
-                  type="button"
-                  class="btn"
-                  :class="IN_APP_GAME.uiSet.font"
-                  :style="
-                    IN_APP_GAME.uiSet.fontColor
-                      ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
-                      : windowColor()
-                  "
-                  @click="onClickQuestions(1)"
-                >
-                  {{ inApp.questions.text_2 }}
-                </button>
-                <button
-                  v-if="inApp.questions.text_3"
-                  type="button"
-                  class="btn"
-                  :class="IN_APP_GAME.uiSet.font"
-                  :style="
-                    IN_APP_GAME.uiSet.fontColor
-                      ? `${windowColor()}; color:${IN_APP_GAME.uiSet.fontColor}`
-                      : windowColor()
-                  "
-                  @click="onClickQuestions(2)"
-                >
-                  {{ inApp.questions.text_3 }}
-                </button>
-              </div>
-              <div v-if="cutType === 4" class="answer answer-subjective">
-                <div class="text">{{ inApp.subjectiveQuestion }}</div>
-                <div class="input-wrap">
-                  <input
-                    v-model="answer"
-                    type="text"
-                    class="input-text"
-                    :class="IN_APP_GAME.uiSet.font"
-                    :style="
-                      IN_APP_GAME.uiSet.fontColor
-                        ? `${windowColor()}; color:${
-                            IN_APP_GAME.uiSet.fontColor
-                          }`
-                        : windowColor()
-                    "
-                    placeholder="주관식 답변을 입력해주세요"
-                    @keyup.enter="onClickSubjectiveQuestion"
-                  />
+              <div id="notDisplay">
+                <div
+                  v-if="cutType === 3 || cutType === 4"
+                  class="preview-con answer-dim"
+                ></div>
+                <div v-if="cutType === 3" class="answer answer-multiple">
                   <button
+                    v-if="inApp.questions.text_1"
                     type="button"
-                    class="button"
+                    class="btn"
                     :class="IN_APP_GAME.uiSet.font"
                     :style="
                       IN_APP_GAME.uiSet.fontColor
@@ -185,10 +126,77 @@
                           }`
                         : windowColor()
                     "
-                    @click="onClickSubjectiveQuestion"
+                    @click="onClickQuestions(0)"
                   >
-                    입력
+                    {{ inApp.questions.text_1 }}
                   </button>
+                  <button
+                    v-if="inApp.questions.text_2"
+                    type="button"
+                    class="btn"
+                    :class="IN_APP_GAME.uiSet.font"
+                    :style="
+                      IN_APP_GAME.uiSet.fontColor
+                        ? `${windowColor()}; color:${
+                            IN_APP_GAME.uiSet.fontColor
+                          }`
+                        : windowColor()
+                    "
+                    @click="onClickQuestions(1)"
+                  >
+                    {{ inApp.questions.text_2 }}
+                  </button>
+                  <button
+                    v-if="inApp.questions.text_3"
+                    type="button"
+                    class="btn"
+                    :class="IN_APP_GAME.uiSet.font"
+                    :style="
+                      IN_APP_GAME.uiSet.fontColor
+                        ? `${windowColor()}; color:${
+                            IN_APP_GAME.uiSet.fontColor
+                          }`
+                        : windowColor()
+                    "
+                    @click="onClickQuestions(2)"
+                  >
+                    {{ inApp.questions.text_3 }}
+                  </button>
+                </div>
+                <div v-if="cutType === 4" class="answer answer-subjective">
+                  <div class="text">{{ inApp.subjectiveQuestion }}</div>
+                  <div class="input-wrap">
+                    <input
+                      v-model="answer"
+                      type="text"
+                      class="input-text"
+                      :class="IN_APP_GAME.uiSet.font"
+                      :style="
+                        IN_APP_GAME.uiSet.fontColor
+                          ? `${windowColor()}; color:${
+                              IN_APP_GAME.uiSet.fontColor
+                            }`
+                          : windowColor()
+                      "
+                      placeholder="주관식 답변을 입력해주세요"
+                      @keyup.enter="onClickSubjectiveQuestion"
+                    />
+                    <button
+                      type="button"
+                      class="button"
+                      :class="IN_APP_GAME.uiSet.font"
+                      :style="
+                        IN_APP_GAME.uiSet.fontColor
+                          ? `${windowColor()}; color:${
+                              IN_APP_GAME.uiSet.fontColor
+                            }`
+                          : windowColor()
+                      "
+                      @click="onClickSubjectiveQuestion"
+                    >
+                      입력
+                    </button>
+                  </div>
                 </div>
               </div>
               <!-- 인트로화면 -->
@@ -467,48 +475,31 @@
               <!-- 엔딩크레딧 -->
 
               <div
+                id="displayCreadit"
                 class="preview-con preview-credit"
+                style="display: none"
               >
-                <div class="scroll">
-                  <div class="preview-credit--tit">게임이름</div>
+                <div id="offsetScroll" class="scroll">
+                  <div style="height: 200px"></div>
+                  <div class="preview-credit--tit">
+                    {{ IN_APP_GAME.projectTitle }}
+                  </div>
                   <div class="preview-credit--tit">게임 제작자</div>
                   <div class="preview-credit--name">
-                    <span>김이름</span>
+                    <span>{{ IN_APP_GAME.projectUser }}</span>
                   </div>
                   <div class="preview-credit--tit">에셋 제작자</div>
-                  <div class="preview-credit--name">
-                    <span>김이름</span>
-                    <span>박이름</span>
-                    <span>최이름</span>
-                    <span>이이름</span>
-                    <span>김이름</span>
-                    <span>박이름</span>
-                    <span>최이름</span>
-                    <span>이이름</span>
-                    <span>김이름</span>
-                    <span>박이름</span>
-                    <span>최이름</span>
-                    <span>이이름</span>
-                    <span>김이름</span>
-                    <span>박이름</span>
-                    <span>최이름</span>
-                    <span>이이름</span>
-                    <span>김이름</span>
-                    <span>박이름</span>
-                    <span>최이름</span>
-                    <span>이이름</span>
-                    <span>김이름</span>
-                    <span>박이름</span>
-                    <span>최이름</span>
-                    <span>이이름</span>
-                    <span>김이름</span>
-                    <span>박이름</span>
-                    <span>최이름</span>
-                    <span>이이름</span>
-                    <span>김이름</span>
-                    <span>박이름</span>
-                    <span>최이름</span>
-                    <span>이이름</span>
+                  <div
+                    v-if="IN_APP_GAME.credits"
+                    id="scrollCredit"
+                    class="preview-credit--name"
+                  >
+                    <span v-for="(v, i) in IN_APP_GAME.credits" :key="i"
+                      >{{ v }} {{ i }}</span
+                    >
+                    <div style="height: 200px"></div>
+                    <span>감사합니다</span>
+                    <div style="height: 1500px"></div>
                   </div>
                 </div>
               </div>
@@ -549,6 +540,7 @@ export default {
     return {
       user_idx: '',
       isLoading: false,
+      offsetScroll: false,
       inAllStart: false,
       lastGame: false,
       loading: true,
@@ -709,6 +701,32 @@ export default {
   methods: {
     ...mapMutations(['MUTATIONS_PROJECT']),
     ...mapActions(['ACTION_AXIOS_GET', 'ACTION_AXIOS_POST']),
+
+    onLoadFinish() {
+      this.offsetScroll = true
+
+      this.$nextTick(() => {
+        const scrollWarp = document.getElementById('offsetScroll')
+        document.getElementById('displayCreadit').style = 'display:block'
+        const endTime = scrollWarp.offsetHeight
+        let scrollTop = 0
+        console.log('************크래딧 시작', scrollTop)
+        setTimeout(() => {
+          setInterval(() => {
+            console.log('스크롤')
+            scrollTop = scrollTop + 1
+            scrollWarp.scrollTo(0, scrollTop)
+            if (endTime < scrollTop) {
+              setTimeout(function () {
+                location.reload()
+              }, 3000)
+              console.log('==============================================')
+            }
+          }, 40)
+        }, 2000)
+        console.log('=========>', scrollWarp)
+      })
+    },
     // 모바일 높이
     setScreenSize() {
       const vh = window.innerHeight * 0.01
@@ -777,12 +795,14 @@ export default {
           console.log('chpter length', this.initBtn)
           if (this.IN_APP_GAME.endingList[this.s].chapters.length === this.c) {
             this.lastGame = true
-            return alert('크레딧은 정식오픈 후 제공됩니다.')
+            this.onLoadFinish()
+            return
           }
         }
         this.updateEndingGame()
       } else {
-        return alert('크레딧은 정식오픈 후 제공됩니다.')
+        this.onLoadFinish()
+        return
       }
     },
     // http://localhost:9001/preview?projectKey=45a53c85a1ed65946772808cec29efc597504ba5a59747e3825813b0f7e9e6d9
@@ -944,6 +964,10 @@ export default {
 
       if (this.t === 0) {
         if (this.inAllStart === true) {
+          document.getElementById('notDisplay').style = 'display:none'
+          setTimeout(() => {
+            document.getElementById('notDisplay').style = 'display:block'
+          }, 3000)
           this.srPlay.forEach((element) => {
             if (element) {
               console.log(element.pause())
