@@ -409,13 +409,13 @@ export default {
         }
       } else {
         for (let i = 0; i < this.characterLength; i++) {
-          // if (
-          //   this.SCENE_DATA_CHARACTER.jsonData[i].name ===
-          //   this.characterData.name
-          // ) {
-          //   this.onErrorMsg()
-          //   return this.MUTATIONS_LOADING()
-          // }
+          if (
+            this.SCENE_DATA_CHARACTER.jsonData[i].name ===
+            this.characterData.name
+          ) {
+            this.onErrorMsg()
+            return this.MUTATIONS_LOADING()
+          }
         }
       }
 
