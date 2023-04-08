@@ -197,6 +197,7 @@ export default {
       const frm = new FormData()
       frm.append('type', 'login')
       frm.append('user_idx', kooLogin('user_idx'))
+      frm.append('secretKey', this.PROJECT_ID)
       frm.append('apiKey', process.env.API_KEY)
       this.ACTION_AXIOS_LOGIN(frm)
     } else {
