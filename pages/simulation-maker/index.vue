@@ -32,6 +32,11 @@
       </div>
 
       <div class="maker-left--capacity">
+        <p v-if="LOGIN.login && LOGIN.login.is_pay" class="num">
+          {{ LOGIN.login.is_pay.substr(0, 1) === 'B' ? '베이직' : '프로' }}
+          {{ LOGIN.login.is_pay.substr(1) }}달 이용권
+          <span class="button btn-blue" style="font-size: 12px">사용 전</span>
+        </p>
         <p class="num">ver <strong>0.1</strong></p>
         <!-- <p class="num">
           <strong>18.5MB</strong>
